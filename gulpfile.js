@@ -77,6 +77,12 @@ gulp.task('clean:dist', function() {
 });
 
 
+// Clean Assets
+gulp.task('clean:assets', function() {
+  return del(config.assetsDev);
+});
+
+
 
 
 /* SASS
@@ -97,7 +103,7 @@ gulp.task('sass:dev', function() {
 
 
 // Sass Distribution
-gulp.task('sass:dist', function() {
+gulp.task('sass:dist', ['clean:dist'], function() {
   return gulp.src(config.sassInput)
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(autoprefixer())
@@ -126,7 +132,7 @@ gulp.task('js:dev', function() {
 
 
 // JavaScript Production
-gulp.task('js:dist', function() {
+gulp.task('js:dist', ['clean:dist'], function() {
   return gulp.src(config.jsInput)
     .pipe(concat('script.js'))
     .pipe(jshint())
@@ -143,21 +149,15 @@ gulp.task('js:dist', function() {
  * ========================================================================== */
 
 
-// Remove Assets folder
-gulp.task('assets:clean', function() {
-  return del(config.assetsDev);
-});
-
-
 // Assets Development
-gulp.task('assets:dev', ['assets:clean'], function() {
+gulp.task('assets:dev', ['clean:assets'], function() {
   return gulp.src(config.assetsInput)
     .pipe(gulp.dest(config.assetsDev));
 });
 
 
 // Assets Distribution
-gulp.task('assets:dist', function() {
+gulp.task('assets:dist', ['clean:dist'], function() {
   return gulp.src(config.assetsInput)
     .pipe(gulp.dest(config.assetsDist));
 });
@@ -170,9 +170,7 @@ gulp.task('assets:dist', function() {
  * ========================================================================== */
 
 
-gulp.task('distribution', ['clean:dist'], function() {
-  gulp.run('sass:dist');
-});
+gulp.task('distribution', ['sass:dist', 'js:dist', 'assets:dist']);
 
 
 
