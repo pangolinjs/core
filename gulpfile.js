@@ -52,7 +52,7 @@ var config = {
   jsDist:      path.dist + 'js',
 
   // Assets
-  assetsInput: path.src  + 'assets',
+  assetsInput: path.src  + 'assets/**/*',
   assestWatch: path.src  + 'assets/**/*',
   assetsDev:   path.dev  + 'assets',
   assetsDist:  path.dist + 'assets'
@@ -139,4 +139,25 @@ gulp.task('js:dist', function() {
     .pipe(jshint.reporter(stylish))
     .pipe(uglify())
     .pipe(gulp.dest(config.jsDist));
+});
+
+
+
+
+/* ASSETS
+ * Copy assets (e.g. img or fonts)
+ * ========================================================================== */
+
+
+// Assets Development
+gulp.task('assets:dev', ['assets:clean'], function() {
+  return gulp.src(config.assetsInput)
+    .pipe(gulp.dest(config.assetsDev));
+});
+
+
+// Assets Distribution
+gulp.task('assets:dist', function() {
+  return gulp.src(config.assetsInput)
+    .pipe(gulp.dest(config.assetsDist));
 });
