@@ -179,6 +179,7 @@ gulp.task('distribution', ['clean:dist'], function() {
 
 /* DEFAULT
  * Run alle the *:dev tasks and watch
+ * Outputs fancy messages to console
  * ========================================================================== */
 
 
