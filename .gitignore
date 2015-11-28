@@ -1,6 +1,6 @@
 # OS specific stuff
-Thumbs.db
-.DS_Store
+**/Thumbs.db
+**/.DS_Store
 
 # Logs
 logs
@@ -19,3 +19,7 @@ build/Release
 
 # Dependency directory
 node_modules
+
+# Ignore dev and dist directories
+dev
+dist

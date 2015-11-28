@@ -1,0 +1,43 @@
+{
+  "name": "styleguide",
+  "version": "0.0.1",
+  "description": "Boilerplate for styleguide driven front end development.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MVSde/styleguide.git"
+  },
+  "keywords": [
+    "styleguide",
+    "boilerplate",
+    "html",
+    "css",
+    "sass",
+    "scss",
+    "node",
+    "npm",
+    "front",
+    "end"
+  ],
+  "author": "Fynn Becker",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/MVSde/styleguide/issues"
+  },
+  "homepage": "https://github.com/MVSde/styleguide#readme",
+  "devDependencies": {
+    "del": "^2.1.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.1.0"
+  }
+}
