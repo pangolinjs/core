@@ -1,5 +1,50 @@
-$branding: red;
+/*!
+ * FYNN BECKER WebDesign
+ *
+ * Uses Bootstrap v3 Grid System
+ * More information: http://getbootstrap.com/css/#grid
+*/
 
-html {
-  color: $branding;
-}
+
+/* MAIN SASS FILE
+ *
+ * Do not put style defintions in this file!
+ * ========================================================================== */
+
+
+// VARIABLES
+@import 'base/variables';
+
+
+// FUNCTIONS
+@import 'functions/colors';
+
+
+// MIXINS
+@import 'mixins/border-radius';
+@import 'mixins/clearfix';
+@import 'mixins/grid';
+@import 'mixins/grid-framework';
+@import 'mixins/image';
+@import 'mixins/opacity';
+@import 'mixins/tab-focus';
+@import 'mixins/text-hide';
+
+
+// Base
+@import 'base/normalize';
+// Activate print style if needed
+// @import 'base/print';
+@import 'base/scaffolding';
+@import 'base/typography';
+@import 'base/utilities';
+
+
+// LAYOUT
+@import 'layout/grid';
+@import 'layout/embed-responsive';
+
+
+// COMPONENTS
+@import 'components/buttons';
+@import 'components/forms';
