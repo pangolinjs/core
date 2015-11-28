@@ -72,3 +72,37 @@ gulp.task('clean:dev', function() {
 gulp.task('clean:dist', function() {
   return del(path.dist);
 });
+
+
+// Clean Assets
+gulp.task('clean:assets', function() {
+  return del(config.assetsDev);
+});
+
+
+
+
+/* SASS
+============================================================================= */
+
+
+// Sass Development
+gulp.task('sass:dev', function() {
+  return gulp.src(config.sassInput)
+    .pipe(sourcemaps.init())
+      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+      .pipe(autoprefixer())
+      .pipe(rename('style.css'))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(config.sassDev));
+});
+
+
+// Sass Distribution
+gulp.task('sass:dist', function() {
+  return gulp.src(config.sassInput)
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(autoprefixer())
+    .pipe(rename('style.css'))
+    .pipe(gulp.dest(config.sassDist));
+})
