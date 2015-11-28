@@ -55,3 +55,20 @@ var config = {
   assetsDev:   path.dev  + 'assets',
   assetsDist:  path.dist + 'assets'
 }
+
+
+
+
+/* CLEAN
+============================================================================= */
+
+// Clean Development
+gulp.task('clean:dev', function() {
+  return del(path.dev);
+});
+
+
+// Clean Distribution
+gulp.task('clean:dist', function() {
+  return del(path.dist);
+});
