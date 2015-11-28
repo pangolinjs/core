@@ -9,6 +9,7 @@
 var del          = require('del');
 var gulp         = require('gulp');
 var rename       = require('gulp-rename');
+var concat       = require('gulp-concat');
 
 // CSS/Sass
 var sass         = require('gulp-sass');
@@ -44,7 +45,8 @@ var config = {
   sassDist:    path.dist + 'css',
 
   // JavaScript
-  jsInput:     path.src  + 'js/main.js',
+  //jsInput:     path.src  + 'js/main.js',
+  jsInput:     path.src  + 'js/**/*.js',
   jsWatch:     path.src  + 'js/**/*.js',
   jsDev:       path.dev  + 'js',
   jsDist:      path.dist + 'js',
@@ -107,4 +109,34 @@ gulp.task('sass:dist', function() {
     .pipe(autoprefixer())
     .pipe(rename('style.css'))
     .pipe(gulp.dest(config.sassDist));
+});
+
+
+
+
+/* JAVASCRIPT
+ * Lint javscript
+ * ========================================================================== */
+
+
+// JavaScript Development
+gulp.task('js:dev', function() {
+  return gulp.src(config.jsInput)
+    .pipe(sourcemaps.init())
+      .pipe(concat('script.js'))
+      .pipe(jshint())
+      .pipe(jshint.reporter(stylish))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(config.jsDev));
+});
+
+
+// JavaScript Production
+gulp.task('js:dist', function() {
+  return gulp.src(config.jsInput)
+    .pipe(concat('script.js'))
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(uglify())
+    .pipe(gulp.dest(config.jsDist));
 });
