@@ -12,7 +12,6 @@ var gutil        = require('gulp-util');
 var rename       = require('gulp-rename');
 var watchr       = require('watchr');
 var concat       = require('gulp-concat');
-var colors       = require('colors');
 
 // CSS/Sass
 var sass         = require('gulp-sass');
@@ -178,9 +177,17 @@ gulp.task('distribution', ['sass:dist', 'js:dist', 'assets:dist']);
 
 
 /* DEFAULT
- * Run alle the *:dev tasks and watch
- * Outputs fancy messages to console
+ * Run all *:dev tasks and watch for add/change/delete
+ *
+ * Until gulp.watch becomes somewhat useful
+ * we utilize Watchr (https://github.com/bevry/watchr)
  * ========================================================================== */
+
+
+// Capitalize first string letter
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 
 gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
@@ -189,9 +196,12 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
     paths: [config.sassWatch],
     catchupDelay: 500,
     listeners: {
+      error: function(err) {
+        gutil.log('An error occured: '.red, err)
+      },
       change: function(changeType, filePath) {
         console.log('');
-        gutil.log(changeType + ': ' + filePath.magenta);
+        gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
         gulp.start('sass:dev');
       }
     }
@@ -202,9 +212,12 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
     paths: [config.jsWatch],
     catchupDelay: 500,
     listeners: {
+      error: function(err) {
+        gutil.log('An error occured: '.red, err)
+      },
       change: function(changeType, filePath) {
         console.log('');
-        gutil.log(changeType + ': ' + filePath.magenta);
+        gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
         gulp.start('js:dev');
       }
     }
@@ -215,9 +228,12 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
     paths: [config.assetsWatch],
     catchupDelay: 500,
     listeners: {
+      error: function(err) {
+        gutil.log('An error occured: '.red, err)
+      },
       change: function(changeType, filePath) {
         console.log('');
-        gutil.log(changeType + ': ' + filePath.magenta);
+        gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
         gulp.start('assets:dev');
       }
     }

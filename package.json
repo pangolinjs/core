@@ -1,6 +1,6 @@
 {
   "name": "styleguide",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Boilerplate for styleguide driven front end development.",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,6 @@
   },
   "homepage": "https://github.com/MVSde/styleguide#readme",
   "devDependencies": {
-    "colors": "^1.1.2",
     "del": "^2.1.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
