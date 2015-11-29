@@ -186,18 +186,21 @@ gulp.task('distribution', ['sass:dist', 'js:dist', 'assets:dist']);
 gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
   // Watch Sass
   watch(config.sassWatch, function(event) {
+    console.log('\n');
     gutil.log(event.path.magenta);
     gulp.start('sass:dev');
   });
 
   // Watch Javascript
-  watch(config.jsWatch, function() {
+  watch(config.jsWatch, function(event) {
+    console.log('\n');
     gutil.log(event.path.magenta);
     gulp.start('js:dev');
   });
 
   // Watch Assets
-  watch(config.assetsWatch, function() {
+  watch(config.assetsWatch, function(event) {
+    console.log('\n');
     gutil.log(event.path.magenta);
     gulp.start('assets:dev');
   });
