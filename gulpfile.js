@@ -10,7 +10,6 @@ var del          = require('del');
 var gulp         = require('gulp');
 var gutil        = require('gulp-util');
 var rename       = require('gulp-rename');
-var watch        = require('gulp-watch');
 var watchr       = require('watchr');
 var concat       = require('gulp-concat');
 var colors       = require('colors');
@@ -44,19 +43,19 @@ var path = {
 var config = {
   // Sass
   sassInput:   path.src  + 'css/main.scss',
-  sassWatch:   path.src  + 'css/**/*.scss',
+  sassWatch:   path.src  + 'css',
   sassDev:     path.dev  + 'css',
   sassDist:    path.dist + 'css',
 
   // JavaScript
   jsInput:     path.src  + 'js/**/*.js',
-  jsWatch:     path.src  + 'js/**/*.js',
+  jsWatch:     path.src  + 'js',
   jsDev:       path.dev  + 'js',
   jsDist:      path.dist + 'js',
 
   // Assets
-  assetsInput: path.src  + 'assets/**/*',
-  assetsWatch: path.src  + 'assets/**/*.*',
+  assetsInput: [path.src  + 'assets/**/*', '!' + path.src + 'assets/**/.gitkeep'],
+  assetsWatch: path.src  + 'assets',
   assetsDev:   path.dev  + 'assets',
   assetsDist:  path.dist + 'assets'
 }
@@ -187,7 +186,7 @@ gulp.task('distribution', ['sass:dist', 'js:dist', 'assets:dist']);
 gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
   // Watch Sass
   watchr.watch({
-    paths: ['src/css'],
+    paths: [config.sassWatch],
     catchupDelay: 500,
     listeners: {
       change: function(changeType, filePath) {
@@ -200,7 +199,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
 
   // Watch JavaScript
   watchr.watch({
-    paths: ['src/js'],
+    paths: [config.jsWatch],
     catchupDelay: 500,
     listeners: {
       change: function(changeType, filePath) {
@@ -213,7 +212,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
 
   // Watch Assets
   watchr.watch({
-    paths: ['src/assets'],
+    paths: [config.assetsWatch],
     catchupDelay: 500,
     listeners: {
       change: function(changeType, filePath) {
