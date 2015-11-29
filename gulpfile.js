@@ -9,6 +9,7 @@
 var del          = require('del');
 var gulp         = require('gulp');
 var rename       = require('gulp-rename');
+var watch        = require('gulp-watch');
 var concat       = require('gulp-concat');
 var colors       = require('colors');
 
