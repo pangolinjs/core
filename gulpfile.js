@@ -188,6 +188,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
   // Watch Sass
   watchr.watch({
     paths: ['src/css'],
+    catchupDelay: 500,
     listeners: {
       change: function(changeType, filePath) {
         console.log('');
@@ -200,6 +201,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
   // Watch JavaScript
   watchr.watch({
     paths: ['src/js'],
+    catchupDelay: 500,
     listeners: {
       change: function(changeType, filePath) {
         console.log('');
@@ -212,6 +214,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
   // Watch Assets
   watchr.watch({
     paths: ['src/assets'],
+    catchupDelay: 500,
     listeners: {
       change: function(changeType, filePath) {
         console.log('');
