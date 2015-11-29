@@ -8,6 +8,7 @@
 // Base
 var del          = require('del');
 var gulp         = require('gulp');
+var gutil        = require('gulp-util');
 var rename       = require('gulp-rename');
 var watch        = require('gulp-watch');
 var concat       = require('gulp-concat');
@@ -93,13 +94,13 @@ gulp.task('clean:assets', function() {
 
 // Sass Development
 gulp.task('sass:dev', function() {
-  return gulp.src(config.sassInput)
+  gulp.src(config.sassInput)
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
       .pipe(autoprefixer())
       .pipe(rename('style.css'))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(config.sassDev));
+    .pipe(gulp.dest(config.sassDev))
 });
 
 
@@ -183,41 +184,21 @@ gulp.task('distribution', ['sass:dist', 'js:dist', 'assets:dist']);
 
 
 gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
-  var watchSass   = gulp.watch(config.sassWatch, ['sass:dev']);
-  var watchJS     = gulp.watch(config.jsWatch, ['js:dev']);
-  var watchAssets = gulp.watch(config.assetsWatch, ['assets:dev']);
-
-  /**
-   * Return the current time with fancy formatting
-   */
-  var outputTime = function() {
-    var date = new Date();
-    var time = ('0' + date.getUTCHours()).slice(-2) + ':' +
-               ('0' + date.getUTCMinutes()).slice(-2) + ':' +
-               ('0' + date.getUTCSeconds()).slice(-2);
-
-    return '\n[' + time.gray + '] ';
-  };
-
-  /**
-   * Return a message based on input
-   */
-  var outputMsg = function(event) {
-    return 'File ' + event.path.magenta + ' was ' + event.type;
-  };
-
-  // Sass Notification
-  watchSass.on('change', function(e) {
-    console.log(outputTime() + outputMsg(e));
+  // Watch Sass
+  watch(config.sassWatch, function(event) {
+    gutil.log(event.path.magenta);
+    gulp.start('sass:dev');
   });
 
-  // JS Notification
-  watchJS.on('change', function(e) {
-    console.log(outputTime() + outputMsg(e));
+  // Watch Javascript
+  watch(config.jsWatch, function() {
+    gutil.log(event.path.magenta);
+    gulp.start('js:dev');
   });
 
-  // Assets Notification
-  watchAssets.on('change', function(e) {
-    console.log(outputTime() + outputMsg(e));
+  // Watch Assets
+  watch(config.assetsWatch, function() {
+    gutil.log(event.path.magenta);
+    gulp.start('assets:dev');
   });
 });
