@@ -11,6 +11,7 @@ var gulp         = require('gulp');
 var gutil        = require('gulp-util');
 var rename       = require('gulp-rename');
 var watch        = require('gulp-watch');
+var watchr       = require('watchr');
 var concat       = require('gulp-concat');
 var colors       = require('colors');
 
@@ -185,23 +186,38 @@ gulp.task('distribution', ['sass:dist', 'js:dist', 'assets:dist']);
 
 gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
   // Watch Sass
-  watch(config.sassWatch, function(event) {
-    console.log('\n');
-    gutil.log(event.path.magenta);
-    gulp.start('sass:dev');
+  watchr.watch({
+    paths: ['src/css'],
+    listeners: {
+      change: function(changeType, filePath) {
+        console.log('');
+        gutil.log(changeType + ': ' + filePath.magenta);
+        gulp.start('sass:dev');
+      }
+    }
   });
 
-  // Watch Javascript
-  watch(config.jsWatch, function(event) {
-    console.log('\n');
-    gutil.log(event.path.magenta);
-    gulp.start('js:dev');
+  // Watch JavaScript
+  watchr.watch({
+    paths: ['src/js'],
+    listeners: {
+      change: function(changeType, filePath) {
+        console.log('');
+        gutil.log(changeType + ': ' + filePath.magenta);
+        gulp.start('js:dev');
+      }
+    }
   });
 
   // Watch Assets
-  watch(config.assetsWatch, function(event) {
-    console.log('\n');
-    gutil.log(event.path.magenta);
-    gulp.start('assets:dev');
+  watchr.watch({
+    paths: ['src/assets'],
+    listeners: {
+      change: function(changeType, filePath) {
+        console.log('');
+        gutil.log(changeType + ': ' + filePath.magenta);
+        gulp.start('assets:dev');
+      }
+    }
   });
 });
