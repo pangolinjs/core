@@ -12,6 +12,7 @@ var gutil        = require('gulp-util');
 var rename       = require('gulp-rename');
 var watchr       = require('watchr');
 var concat       = require('gulp-concat');
+var browserSync  = require('browser-sync');
 
 // CSS/Sass
 var sass         = require('gulp-sass');
@@ -52,8 +53,14 @@ var config = {
   jsDev:       path.dev  + 'js',
   jsDist:      path.dist + 'js',
 
+  // HTML
+  htmlInput:   path.src  + 'html/**/*.html',
+  htmlWatch:   path.src  + 'html',
+  htmlDev:     path.dev,
+  htmlDist:    path.dist,
+
   // Assets
-  assetsInput: [path.src  + 'assets/**/*', '!' + path.src + 'assets/**/.gitkeep'],
+  assetsInput: [path.src + 'assets/**/*', '!' + path.src + 'assets/**/.gitkeep'],
   assetsWatch: path.src  + 'assets',
   assetsDev:   path.dev  + 'assets',
   assetsDist:  path.dist + 'assets'
@@ -75,6 +82,12 @@ gulp.task('clean:dev', function() {
 // Clean Distribution
 gulp.task('clean:dist', function() {
   return del(path.dist);
+});
+
+
+// Clean HTML
+gulp.task('clean:html', function() {
+  return del(config.htmlDev + '**/*.html');
 });
 
 
@@ -100,6 +113,7 @@ gulp.task('sass:dev', function() {
       .pipe(rename('style.css'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.sassDev))
+    .pipe(browserSync.reload({stream: true}));
 });
 
 
@@ -128,7 +142,8 @@ gulp.task('js:dev', function() {
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(config.jsDev));
+    .pipe(gulp.dest(config.jsDev))
+    .pipe(browserSync.reload({stream: true}));
 });
 
 
@@ -145,6 +160,21 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 
+/* HTML
+ * Copy HTML files
+ * ========================================================================== */
+
+
+// HTML Development
+gulp.task('html:dev', ['clean:html'], function() {
+  return gulp.src(config.htmlInput)
+    .pipe(gulp.dest(config.htmlDev))
+    .pipe(browserSync.reload({stream: true}));
+});
+
+
+
+
 /* ASSETS
  * Copy assets (e.g. img or fonts)
  * ========================================================================== */
@@ -153,7 +183,8 @@ gulp.task('js:dist', ['clean:dist'], function() {
 // Assets Development
 gulp.task('assets:dev', ['clean:assets'], function() {
   return gulp.src(config.assetsInput)
-    .pipe(gulp.dest(config.assetsDev));
+    .pipe(gulp.dest(config.assetsDev))
+    .pipe(browserSync.reload({stream: true}));
 });
 
 
@@ -176,6 +207,23 @@ gulp.task('distribution', ['sass:dist', 'js:dist', 'assets:dist']);
 
 
 
+/* BROWSERSYNC
+ * Open web server for cross device development
+ * and auto-reload of CSS/JS/HTML
+ * ========================================================================== */
+
+
+gulp.task('browserSync', function() {
+  browserSync({
+    server: {
+      baseDir: path.dev
+    },
+  });
+});
+
+
+
+
 /* DEFAULT
  * Run all *:dev tasks and watch for add/change/delete
  *
@@ -190,7 +238,7 @@ function capitalize(string) {
 }
 
 
-gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
+gulp.task('default', ['sass:dev', 'js:dev', 'html:dev', 'assets:dev', 'browserSync'], function() {
   // Watch Sass
   watchr.watch({
     paths: [config.sassWatch],
@@ -219,6 +267,22 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assets:dev'], function() {
         console.log('');
         gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
         gulp.start('js:dev');
+      }
+    }
+  });
+
+  // Watch HTML
+  watchr.watch({
+    paths: [config.htmlWatch],
+    catchupDelay: 500,
+    listeners: {
+      error: function(err) {
+        gutil.log('An error occured: '.red, err)
+      },
+      change: function(changeType, filePath) {
+        console.log('');
+        gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
+        gulp.start('html:dev');
       }
     }
   });
