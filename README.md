@@ -1,5 +1,5 @@
 # Front-End Styleguide
-Boilerplate for styleguide driven front end development.
+Boilerplate for front-end development with Sass, JavaScript and HTML.
 Uses the [Gulp] (http://gulpjs.com/) task runner to compile Sass files and lint JavaScript.
 
 `dev` and `dist` folders are not included with git.
