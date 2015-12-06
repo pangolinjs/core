@@ -58,9 +58,9 @@ var config = {
   jsDist:      path.dist + 'js',
 
   // Handlebars
-  hbTemplates: path.src  + 'html/templates/*.hbs',
-  hbPages:     path.src  + 'html/pages/*.hbs',
-  hbPartials:  path.src  + 'html/partials/*.hbs',
+  hbTemplates: path.src  + 'html/templates',
+  hbPages:     path.src  + 'html/pages',
+  hbPartials:  path.src  + 'html/partials',
   hbWatch:     path.src  + 'html',
   hbDev:       path.dev,
   hbDist:      path.dist,
@@ -93,7 +93,7 @@ gulp.task('clean:dist', function() {
 
 // Clean HTML
 gulp.task('clean:html', function() {
-  return del(config.htmlDev + '**/*.html');
+  return del(config.hbDev + '**/*.html');
 });
 
 
@@ -167,30 +167,36 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 /* HANDLEBARS
- * Pre-compile Handlebars files
+ * Pre-compile Handlebars files into HTML
  * ========================================================================== */
 
 
 // Handlebars Development
 gulp.task('handlebars:dev', ['clean:html'], function() {
-  var file = fs.readFileSync('src/html/pages/index.hbs', 'utf8');
-  var fileTitle = file.substring(0, file.indexOf('\n---') - 1);
-  var fileContent = file.substring(file.indexOf('\n---') + 5);
-
-
-  var templateData = {
-    title: fileTitle
-  };
-  var options = {
-    partials: {
-      body: fileContent
+  fs.readdir(config.hbPages, function(err, fileList) {
+    if (err) {
+     gutil.log('An error occured: '.red, err);
     }
-  };
 
-  return gulp.src('src/html/templates/pages.hbs')
-    .pipe(handlebars(templateData, options))
-    .pipe(rename('index.html'))
-    .pipe(gulp.dest(config.hbDev));
+    fileList.forEach(function(fileName) {
+      var file = fs.readFileSync(config.hbPages + '/' + fileName, 'utf8');
+
+      var templateData = {
+        'html-title': file.substring(0, file.indexOf('\n---') - 1)
+      };
+      var options = {
+        partials: {
+          'html-body': file.substring(file.indexOf('\n---') + 6)
+        },
+        batch: [config.hbPartials]
+      };
+
+      return gulp.src('src/html/templates/pages.hbs')
+        .pipe(handlebars(templateData, options))
+        .pipe(rename(fileName + '.html'))
+        .pipe(gulp.dest(config.hbDev));
+    });
+  });
 });
 
 
