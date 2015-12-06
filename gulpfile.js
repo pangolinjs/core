@@ -6,6 +6,7 @@
 
 
 // Base
+var fs           = require('fs');
 var del          = require('del');
 var gulp         = require('gulp');
 var gutil        = require('gulp-util');
@@ -23,6 +24,9 @@ var autoprefixer = require('gulp-autoprefixer');
 var uglify       = require('gulp-uglify');
 var jshint       = require('gulp-jshint');
 var stylish      = require('jshint-stylish');
+
+// Handlebars
+var handlebars   = require('gulp-compile-handlebars');
 
 
 
@@ -53,11 +57,13 @@ var config = {
   jsDev:       path.dev  + 'js',
   jsDist:      path.dist + 'js',
 
-  // HTML
-  htmlInput:   path.src  + 'html/**/*.html',
-  htmlWatch:   path.src  + 'html',
-  htmlDev:     path.dev,
-  htmlDist:    path.dist,
+  // Handlebars
+  hbTemplates: path.src  + 'html/templates/*.hbs',
+  hbPages:     path.src  + 'html/pages/*.hbs',
+  hbPartials:  path.src  + 'html/partials/*.hbs',
+  hbWatch:     path.src  + 'html',
+  hbDev:       path.dev,
+  hbDist:      path.dist,
 
   // Assets
   assetsInput: [path.src + 'assets/**/*', '!' + path.src + 'assets/**/.gitkeep'],
@@ -160,16 +166,37 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 
-/* HTML
- * Copy HTML files
+/* HANDLEBARS
+ * Pre-compile Handlebars files
  * ========================================================================== */
 
 
-// HTML Development
-gulp.task('html:dev', ['clean:html'], function() {
-  return gulp.src(config.htmlInput)
-    .pipe(gulp.dest(config.htmlDev))
-    .pipe(browserSync.reload({stream: true}));
+// Handlebars Development
+gulp.task('handlebars:dev', ['clean:html'], function() {
+  var file = fs.readFileSync('src/html/pages/index.hbs', 'utf8');
+  var fileTitle = file.substring(0, file.indexOf('\n---') - 1);
+  var fileContent = file.substring(file.indexOf('\n---') + 5);
+
+
+  var templateData = {
+    title: fileTitle
+  };
+  var options = {
+    partials: {
+      body: fileContent
+    }
+  };
+
+  return gulp.src('src/html/templates/pages.hbs')
+    .pipe(handlebars(templateData, options))
+    .pipe(rename('index.html'))
+    .pipe(gulp.dest(config.hbDev));
+});
+
+
+// Handlebars Distribution
+gulp.task('handlebars:dist', ['clean:dist'], function() {
+
 });
 
 
@@ -202,7 +229,7 @@ gulp.task('assets:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-gulp.task('distribution', ['sass:dist', 'js:dist', 'assets:dist']);
+gulp.task('distribution', ['sass:dist', 'js:dist', 'handlebars:dist', 'assets:dist']);
 
 
 
@@ -238,7 +265,7 @@ function capitalize(string) {
 }
 
 
-gulp.task('default', ['sass:dev', 'js:dev', 'html:dev', 'assets:dev', 'browserSync'], function() {
+gulp.task('default', ['sass:dev', 'js:dev', 'handlebars:dev', 'assets:dev', 'browserSync'], function() {
   // Watch Sass
   watchr.watch({
     paths: [config.sassWatch],
@@ -271,9 +298,9 @@ gulp.task('default', ['sass:dev', 'js:dev', 'html:dev', 'assets:dev', 'browserSy
     }
   });
 
-  // Watch HTML
+  // Watch Handlebars
   watchr.watch({
-    paths: [config.htmlWatch],
+    paths: [config.hbWatch],
     catchupDelay: 500,
     listeners: {
       error: function(err) {
@@ -282,7 +309,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'html:dev', 'assets:dev', 'browserSy
       change: function(changeType, filePath) {
         console.log('');
         gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        gulp.start('html:dev');
+        gulp.start('handlebars:dev');
       }
     }
   });
