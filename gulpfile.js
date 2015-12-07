@@ -172,30 +172,33 @@ gulp.task('js:dist', ['clean:dist'], function() {
  * Pre-compile Handlebars files into HTML
  * ========================================================================== */
 
+// Set up Layouts and Partials
 assemble.layouts(config.assemLayout);
 assemble.partials(config.assemInc);
 
+// Assemble Development Pages
 gulp.task('assemble:dev:pages', ['clean:html'], function() {
-  return gulp.src(config.assemPages)
-    .pipe(gulpAssemble(assemble))
+  return assemble.src(config.assemPages)
     .pipe(rename({extname: '.html'}))
-    .pipe(gulp.dest(config.assemDev));
+    .pipe(assemble.dest(config.assemDev));
 });
 
-gulp.task('assemble:dev:components', ['assemble:dev:pages'], function() {
-  return gulp.src(config.assemComp)
-    .pipe(gulpAssemble(assemble))
+// Assemble Development Components
+gulp.task('assemble:dev:components', ['clean:html'], function() {
+  return assemble.src(config.assemComp)
     .pipe(rename({extname: '.html'}))
-    .pipe(gulp.dest(config.assemDev + '/components'));
+    .pipe(assemble.dest(config.assemDev + '/components'));
 });
 
 // Assemble Development
-gulp.task('assemble:dev', ['assemble:dev:components']);
+gulp.task('assemble:dev', ['assemble:dev:pages', 'assemble:dev:components']);
 
 
 // Assemble Distribution
 gulp.task('assemble:dist', ['clean:dist'], function() {
-
+  return assemble.src(config.assemPages)
+    .pipe(rename({extname: '.html'}))
+    .pipe(assemble.dest(config.assemDist));
 });
 
 
