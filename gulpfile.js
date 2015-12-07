@@ -61,7 +61,7 @@ var config = {
   // Assemble
   assemLayout: path.src  + 'html/layouts/*.hbs',
   assemPages:  path.src  + 'html/pages/*.hbs',
-  assemInc:    path.src  + 'html/includes/*.hbs',
+  assemInc:    path.src  + 'html/includes/**/*.hbs',
   assemComp:   path.src  + 'html/components/*.hbs',
   assemWatch:  path.src  + 'html',
   assemDev:    path.dev,
@@ -175,12 +175,22 @@ gulp.task('js:dist', ['clean:dist'], function() {
 assemble.layouts(config.assemLayout);
 assemble.partials(config.assemInc);
 
-// Assemble Development
-gulp.task('assemble:dev', ['clean:html'], function() {
+gulp.task('assemble:dev:pages', ['clean:html'], function() {
   return gulp.src(config.assemPages)
     .pipe(gulpAssemble(assemble))
+    .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest(config.assemDev));
 });
+
+gulp.task('assemble:dev:components', ['assemble:dev:pages'], function() {
+  return gulp.src(config.assemComp)
+    .pipe(gulpAssemble(assemble))
+    .pipe(rename({extname: '.html'}))
+    .pipe(gulp.dest(config.assemDev + '/components'));
+});
+
+// Assemble Development
+gulp.task('assemble:dev', ['assemble:dev:components']);
 
 
 // Assemble Distribution
