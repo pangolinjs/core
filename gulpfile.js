@@ -25,8 +25,9 @@ var uglify       = require('gulp-uglify');
 var jshint       = require('gulp-jshint');
 var stylish      = require('jshint-stylish');
 
-// Handlebars
-var handlebars   = require('gulp-compile-handlebars');
+// Assemble
+var assemble     = require('assemble');
+var gulpAssemble = require('gulp-assemble');
 
 
 
@@ -57,13 +58,14 @@ var config = {
   jsDev:       path.dev  + 'js',
   jsDist:      path.dist + 'js',
 
-  // Handlebars
-  hbTemplates: path.src  + 'html/templates',
-  hbPages:     path.src  + 'html/pages',
-  hbPartials:  path.src  + 'html/partials',
-  hbWatch:     path.src  + 'html',
-  hbDev:       path.dev,
-  hbDist:      path.dist,
+  // Assemble
+  assemLayout: path.src  + 'html/layouts/*.hbs',
+  assemPages:  path.src  + 'html/pages/*.hbs',
+  assemInc:    path.src  + 'html/includes/*.hbs',
+  assemComp:   path.src  + 'html/components/*.hbs',
+  assemWatch:  path.src  + 'html',
+  assemDev:    path.dev,
+  assemDist:   path.dist,
 
   // Assets
   assetsInput: [path.src + 'assets/**/*', '!' + path.src + 'assets/**/.gitkeep'],
@@ -93,7 +95,7 @@ gulp.task('clean:dist', function() {
 
 // Clean HTML
 gulp.task('clean:html', function() {
-  return del(config.hbDev + '**/*.html');
+  return del(config.assemDev + '/**/*.html');
 });
 
 
@@ -166,42 +168,23 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 
-/* HANDLEBARS
+/* ASSEMBLE
  * Pre-compile Handlebars files into HTML
  * ========================================================================== */
 
+assemble.layouts(config.assemLayout);
+assemble.partials(config.assemInc);
 
-// Handlebars Development
-gulp.task('handlebars:dev', ['clean:html'], function() {
-  fs.readdir(config.hbPages, function(err, fileList) {
-    if (err) {
-     gutil.log('An error occured: '.red, err);
-    }
-
-    fileList.forEach(function(fileName) {
-      var file = fs.readFileSync(config.hbPages + '/' + fileName, 'utf8');
-
-      var templateData = {
-        'html-title': file.substring(0, file.indexOf('\n---') - 1)
-      };
-      var options = {
-        partials: {
-          'html-body': file.substring(file.indexOf('\n---') + 6)
-        },
-        batch: [config.hbPartials]
-      };
-
-      return gulp.src('src/html/templates/pages.hbs')
-        .pipe(handlebars(templateData, options))
-        .pipe(rename(fileName + '.html'))
-        .pipe(gulp.dest(config.hbDev));
-    });
-  });
+// Assemble Development
+gulp.task('assemble:dev', ['clean:html'], function() {
+  return gulp.src(config.assemPages)
+    .pipe(gulpAssemble(assemble))
+    .pipe(gulp.dest(config.assemDev));
 });
 
 
-// Handlebars Distribution
-gulp.task('handlebars:dist', ['clean:dist'], function() {
+// Assemble Distribution
+gulp.task('assemble:dist', ['clean:dist'], function() {
 
 });
 
@@ -235,7 +218,7 @@ gulp.task('assets:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-gulp.task('distribution', ['sass:dist', 'js:dist', 'handlebars:dist', 'assets:dist']);
+gulp.task('distribution', ['sass:dist', 'js:dist', 'assemble:dist', 'assets:dist']);
 
 
 
@@ -271,7 +254,7 @@ function capitalize(string) {
 }
 
 
-gulp.task('default', ['sass:dev', 'js:dev', 'handlebars:dev', 'assets:dev', 'browserSync'], function() {
+gulp.task('default', ['sass:dev', 'js:dev', 'assemble:dev', 'assets:dev', 'browserSync'], function() {
   // Watch Sass
   watchr.watch({
     paths: [config.sassWatch],
