@@ -181,7 +181,8 @@ gulp.task('assemble:dev', ['clean:html'], function() {
   return gulp.src([config.htmlPages, config.htmlComps])
     .pipe(gulpAssemble(assemble))
     .pipe(rename({extname: '.html'}))
-    .pipe(gulp.dest(config.htmlDev));
+    .pipe(gulp.dest(config.htmlDev))
+    .pipe(browserSync.stream());
 });
 
 
