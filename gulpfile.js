@@ -306,7 +306,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assemble:dev', 'assets:dev'], funct
 
   // Watch HTML
   watchr.watch({
-    paths: [config.assemWatch],
+    paths: [config.htmlWatch],
     catchupDelay: 500,
     listeners: {
       error: function(err) {
