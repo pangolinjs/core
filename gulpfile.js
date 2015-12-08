@@ -95,7 +95,7 @@ gulp.task('clean:dist', function() {
 
 // Clean HTML
 gulp.task('clean:html', function() {
-  return del(config.htmlDev + '/**/*.html');
+  return del(config.htmlDev + '/*.html');
 });
 
 
@@ -176,22 +176,13 @@ gulp.task('js:dist', ['clean:dist'], function() {
 assemble.layouts(config.htmlLayouts);
 assemble.partials(config.htmlIncls);
 
-// Assemble Development Pages
-gulp.task('assemble:dev:pages', ['clean:html'], function() {
-  return assemble.src(config.htmlPages)
-    .pipe(rename({extname: '.html'}))
-    .pipe(assemble.dest(config.htmlDev));
-});
-
-// Assemble Development Components
-gulp.task('assemble:dev:components', ['clean:html'], function() {
-  return assemble.src(config.htmlComps)
-    .pipe(rename({extname: '.html'}))
-    .pipe(assemble.dest(config.htmlDev + '/components'));
-});
-
 // Assemble Development
-gulp.task('assemble:dev', ['assemble:dev:pages', 'assemble:dev:components'], browserSync.reload);
+gulp.task('assemble:dev', ['clean:html'], function() {
+  return gulp.src([config.htmlPages, config.htmlComps])
+    .pipe(gulpAssemble(assemble))
+    .pipe(rename({extname: '.html'}))
+    .pipe(gulp.dest(config.htmlDev));
+});
 
 
 // Assemble Distribution
