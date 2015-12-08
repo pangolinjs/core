@@ -95,7 +95,7 @@ gulp.task('clean:dist', function() {
 
 // Clean HTML
 gulp.task('clean:html', function() {
-  return del(config.assemDev + '/**/*.html');
+  return del(config.htmlDev + '/**/*.html');
 });
 
 
