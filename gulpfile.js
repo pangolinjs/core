@@ -58,14 +58,14 @@ var config = {
   jsDev:       path.dev  + 'js',
   jsDist:      path.dist + 'js',
 
-  // Assemble
-  assemLayout: path.src  + 'html/layouts/*.hbs',
-  assemPages:  path.src  + 'html/pages/*.hbs',
-  assemInc:    path.src  + 'html/includes/**/*.hbs',
-  assemComp:   path.src  + 'html/components/*.hbs',
-  assemWatch:  path.src  + 'html',
-  assemDev:    path.dev,
-  assemDist:   path.dist,
+  // HTML
+  htmlPages:   path.src  + 'html/pages/*.hbs',
+  htmlComps:   path.src  + 'html/components/*.hbs',
+  htmlLayouts: path.src  + 'html/layouts/*.hbs',
+  htmlIncls:   path.src  + 'html/includes/**/*.hbs',
+  htmlWatch:   path.src  + 'html',
+  htmlDev:     path.dev,
+  htmlDist:    path.dist,
 
   // Assets
   assetsInput: [path.src + 'assets/**/*', '!' + path.src + 'assets/**/.gitkeep'],
@@ -121,7 +121,7 @@ gulp.task('sass:dev', function() {
       .pipe(rename('style.css'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.sassDev))
-    .pipe(browserSync.reload({stream: true}));
+    .pipe(browserSync.stream());
 });
 
 
@@ -151,7 +151,7 @@ gulp.task('js:dev', function() {
       .pipe(jshint.reporter(stylish))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.jsDev))
-    .pipe(browserSync.reload({stream: true}));
+    .pipe(browserSync.stream());
 });
 
 
@@ -173,32 +173,32 @@ gulp.task('js:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 // Set up Layouts and Partials
-assemble.layouts(config.assemLayout);
-assemble.partials(config.assemInc);
+assemble.layouts(config.htmlLayouts);
+assemble.partials(config.htmlIncls);
 
 // Assemble Development Pages
 gulp.task('assemble:dev:pages', ['clean:html'], function() {
-  return assemble.src(config.assemPages)
+  return assemble.src(config.htmlPages)
     .pipe(rename({extname: '.html'}))
-    .pipe(assemble.dest(config.assemDev));
+    .pipe(assemble.dest(config.htmlDev));
 });
 
 // Assemble Development Components
 gulp.task('assemble:dev:components', ['clean:html'], function() {
-  return assemble.src(config.assemComp)
+  return assemble.src(config.htmlComps)
     .pipe(rename({extname: '.html'}))
-    .pipe(assemble.dest(config.assemDev + '/components'));
+    .pipe(assemble.dest(config.htmlDev + '/components'));
 });
 
 // Assemble Development
-gulp.task('assemble:dev', ['assemble:dev:pages', 'assemble:dev:components']);
+gulp.task('assemble:dev', ['assemble:dev:pages', 'assemble:dev:components'], browserSync.reload);
 
 
 // Assemble Distribution
 gulp.task('assemble:dist', ['clean:dist'], function() {
-  return assemble.src(config.assemPages)
+  return assemble.src(config.htmlPages)
     .pipe(rename({extname: '.html'}))
-    .pipe(assemble.dest(config.assemDist));
+    .pipe(assemble.dest(config.htmlDist));
 });
 
 
@@ -256,8 +256,8 @@ gulp.task('browserSync', function() {
 /* DEFAULT
  * Run all *:dev tasks and watch for add/change/delete
  *
- * Until gulp.watch becomes somewhat useful
- * we utilize Watchr (https://github.com/bevry/watchr)
+ * Until gulp.watch becomes somewhat useful we utilize Watchr:
+ * (https://github.com/bevry/watchr)
  * ========================================================================== */
 
 
@@ -267,7 +267,11 @@ function capitalize(string) {
 }
 
 
-gulp.task('default', ['sass:dev', 'js:dev', 'assemble:dev', 'assets:dev', 'browserSync'], function() {
+gulp.task('default', ['sass:dev', 'js:dev', 'assemble:dev', 'assets:dev'], function() {
+
+  // Start BrowserSync after initial tasks finished
+  gulp.start('browserSync');
+
   // Watch Sass
   watchr.watch({
     paths: [config.sassWatch],
@@ -300,9 +304,9 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assemble:dev', 'assets:dev', 'brows
     }
   });
 
-  // Watch Handlebars
+  // Watch HTML
   watchr.watch({
-    paths: [config.hbWatch],
+    paths: [config.assemWatch],
     catchupDelay: 500,
     listeners: {
       error: function(err) {
@@ -311,7 +315,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assemble:dev', 'assets:dev', 'brows
       change: function(changeType, filePath) {
         console.log('');
         gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        gulp.start('handlebars:dev');
+        gulp.start('assemble:dev');
       }
     }
   });
