@@ -175,12 +175,13 @@ gulp.task('js:dist', ['clean:dist'], function() {
  * Pre-compile Handlebars files into HTML
  * ========================================================================== */
 
-// Set up Layouts and Partials
-assemble.layouts(config.htmlLayouts);
-assemble.partials(config.htmlIncls);
 
 // Assemble Development
 gulp.task('assemble:dev', ['clean:html'], function() {
+  // Set up Layouts and Partials
+  assemble.layouts(config.htmlLayouts);
+  assemble.partials(config.htmlIncls);
+
   return gulp.src([config.htmlPages, config.htmlComps])
     .pipe(gulpAssemble(assemble))
     .pipe(rename({extname: '.html'}))
