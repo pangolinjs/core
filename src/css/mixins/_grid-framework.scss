@@ -4,6 +4,8 @@
 // any value of `$grid-columns`.
 // =============================================================================
 
+
+
 // [converter] This is defined recursively in LESS, but Sass supports real loops
 @mixin make-grid-columns($i: 1, $list: ".col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}") {
   @for $i from (1 + 1) through $grid-columns {
@@ -18,6 +20,7 @@
     padding-right: floor(($grid-gutter-width / 2));
   }
 }
+
 
 
 // [converter] This is defined recursively in LESS, but Sass supports real loops
@@ -64,12 +67,15 @@
   }
 }
 
+
+
 // [converter] This is defined recursively in LESS, but Sass supports real loops
 @mixin loop-grid-columns($columns, $class, $type) {
   @for $i from 0 through $columns {
     @include calc-grid-column($i, $class, $type);
   }
 }
+
 
 
 // Create grid for specific class
