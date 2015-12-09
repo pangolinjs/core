@@ -29,6 +29,9 @@ var stylish      = require('jshint-stylish');
 var assemble     = require('assemble');
 var gulpAssemble = require('gulp-assemble');
 
+// Assets
+var imagemin     = require('gulp-imagemin');
+
 
 
 
@@ -212,6 +215,11 @@ gulp.task('assets:dev', ['clean:assets'], function() {
 // Assets Distribution
 gulp.task('assets:dist', ['clean:dist'], function() {
   return gulp.src(config.assetsInput)
+    .pipe(imagemin({
+      progressive: true,
+      interlaced: true,
+      multipass: true
+    }))
     .pipe(gulp.dest(config.assetsDist));
 });
 
