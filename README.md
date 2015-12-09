@@ -31,6 +31,13 @@ The working directories `dev` and `dist` are not included with git. They will be
 ### Sass
 Located in `src/css`.
 
+*Sass* is a CSS-Preprocessor supporting variables, nesting and mixins - among many other features.
+For a complete documentation jump to the [Sass Basics](http://sass-lang.com/guide).
+
+Another great feature is `@import`. Importing other Sass files concatenates all of these files into one large Stylesheet.
+
+This styleguide splits the CSS into small parts. This ensures a far better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [Handlebars-Section](#handlebars) for detailed information about componentization.
+
 ### JavaScript
 Located in `src/js`.
 
