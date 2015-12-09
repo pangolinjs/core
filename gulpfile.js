@@ -245,8 +245,10 @@ gulp.task('distribution', ['sass:dist', 'js:dist', 'assemble:dist', 'assets:dist
 gulp.task('browserSync', function() {
   browserSync({
     server: {
-      baseDir: path.dev
+      baseDir: config.htmlDev
     },
+    logPrefix: 'BrowserSync',
+    scrollElements: ['*']
   });
 });
 
