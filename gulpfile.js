@@ -192,6 +192,10 @@ gulp.task('assemble:dev', ['clean:html'], function() {
 
 // Assemble Distribution
 gulp.task('assemble:dist', ['clean:dist'], function() {
+  // Set up Layouts and Partials
+  assemble.layouts(config.htmlLayouts);
+  assemble.partials(config.htmlIncls);
+
   return assemble.src(config.htmlPages)
     .pipe(rename({extname: '.html'}))
     .pipe(assemble.dest(config.htmlDist));
