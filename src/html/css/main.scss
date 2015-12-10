@@ -1,0 +1,115 @@
+/*
+ * FYNN BECKER WebDesign
+ */
+
+// DOCS SASS FILE
+//
+// Docs specific styles
+// ===========================================================================
+
+
+// Breakpoints
+$screen-sm: 700px;
+$screen-lg: 1200px;
+
+$padding:    30px;
+$padding-sm: ($padding / 2);
+$padding-lg: ($padding * 2);
+
+// Colors
+$primary-color:   rgb(0, 100, 200);
+$secondary-color: rgb(100, 100, 100);
+$border-color:    rgb(220, 220, 220);
+
+
+// Docs Header
+.docs__header {
+  max-width: $screen-lg;
+  margin: 0 auto $padding-sm;
+  padding: $padding-sm;
+  border-bottom: 1px solid $border-color;
+  text-align: center;
+
+  @media (min-width: $screen-sm) {
+    margin-bottom: $padding-lg;
+    padding: $padding;
+  }
+}
+
+  .docs__title {
+    margin: 0 0 10px;
+    font-size: 24px;
+    font-weight: 100;
+    color: $primary-color;
+
+    @media (min-width: $screen-sm) {
+      margin: 0 0 15px;
+      font-size: 36px;
+    }
+  }
+
+  .docs__description {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 100;
+    color: $secondary-color;
+
+    @media (min-width: $screen-sm) {
+      font-size: 18px;
+    }
+  }
+
+
+// Docs Body
+.docs__body {
+  max-width: $screen-lg;
+  margin: 0 auto;
+}
+
+
+// Docs Article
+.docs__article {
+  margin-bottom: $padding-lg;
+}
+
+  .docs__article__header {
+    padding: $padding-sm;
+
+    @media (min-width: $screen-sm) {
+      padding: $padding;
+    }
+  }
+
+  .docs__article__title {
+    font-size: 20px;
+    font-weight: 100;
+    color: $primary-color;
+
+    @media (min-width: $screen-sm) {
+      font-size: 24px;
+    }
+  }
+
+  .docs__article__description {
+    font-size: 14px;
+    font-weight: 100;
+    color: $secondary-color;
+
+    @media (min-width: $screen-sm) {
+      font-size: 16px;
+    }
+  }
+
+  .docs__article__body {
+    padding: $padding-sm;
+    border-top:    1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+
+    @media (min-width: $screen-sm) {
+      padding: $padding;
+    }
+
+    @media (min-width: $screen-lg) {
+      border: 1px solid $border-color;
+    }
+  }

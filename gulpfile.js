@@ -66,6 +66,7 @@ var config = {
   htmlComps:   path.src  + 'html/components/*.hbs',
   htmlLayouts: path.src  + 'html/layouts/*.hbs',
   htmlIncls:   path.src  + 'html/includes/**/*.hbs',
+  htmlSass:    path.src  + 'html/css/main.scss',
   htmlWatch:   path.src  + 'html',
   htmlDev:     path.dev,
   htmlDist:    path.dist,
@@ -128,6 +129,16 @@ gulp.task('sass:dev', function() {
 });
 
 
+// Sass Docs
+gulp.task('sass:docs', function() {
+  gulp.src(config.htmlSass)
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+    .pipe(autoprefixer())
+    .pipe(rename('docs.css'))
+    .pipe(gulp.dest(config.sassDev));
+});
+
+
 // Sass Distribution
 gulp.task('sass:dist', ['clean:dist'], function() {
   return gulp.src(config.sassInput)
@@ -177,7 +188,7 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 // Assemble Development
-gulp.task('assemble:dev', ['clean:html'], function() {
+gulp.task('assemble:dev', ['clean:html', 'sass:docs'], function() {
   // Set up Layouts and Partials
   assemble.layouts(config.htmlLayouts);
   assemble.partials(config.htmlIncls);

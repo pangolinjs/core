@@ -9,7 +9,7 @@
     <!-- Styleguide Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
+  <body class="docs">
     <!-- Docs Header -->
     <header class="docs__header">
       <h1 class="docs__title">{{title}}</h1>
@@ -17,7 +17,9 @@
     </header>
 
     <!-- Component Body -->
-    {% body %}
+    <main class="docs__body">
+      {% body %}
+    </main>
 
     <!-- Styleguide Scripts -->
     <script src="js/script.js"></script>
