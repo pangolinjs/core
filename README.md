@@ -1,6 +1,6 @@
 # Front-End Styleguide
-Front-end development styleguide with Sass, JavaScript and Handlebars.
-Uses the [Gulp](http://gulpjs.com/) task runner to compile Sass files, lint JavaScript and create static HTML files from Handlebars files.
+Front-end development styleguide with Sass, JavaScript and Nunjucks.
+Uses the [Gulp](http://gulpjs.com/) task runner to compile Sass files, lint JavaScript and create static HTML files from Nunjucks files.
 
 
 ## Contents
@@ -9,7 +9,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile Sass files, lint Java
 3. [Usage](#usage)
   1. [Sass](#sass)
   2. [JavaScript](#javascript)
-  3. [Handlebars](#handlebars)
+  3. [Nunjucks](#nunjucks)
 
 
 ## Dependencies
@@ -36,11 +36,11 @@ For a complete documentation jump to the [Sass Basics](http://sass-lang.com/guid
 
 Another great feature is `@import`. Importing other Sass files concatenates all of these files into one large Stylesheet.
 
-This styleguide splits the CSS into small parts. This ensures a far better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [Handlebars-Section](#handlebars) for detailed information about componentization.
+This styleguide splits the CSS into small parts. This ensures a far better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [Nunjucks-Section](#nunjucks) for detailed information about componentization.
 
 ### JavaScript
 Located in `src/js`.
 
 
-### Handlebars
+### Nunjucks
 Located in `src/html`.
