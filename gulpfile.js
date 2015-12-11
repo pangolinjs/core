@@ -77,6 +77,12 @@ var config = {
 }
 
 
+var streamError = function(error) {
+  gutil.log(gutil.colors.red(error.toString()));
+  this.emit('end');
+};
+
+
 
 
 /* CLEAN
@@ -191,7 +197,7 @@ gulp.task('nunjucks:dev', ['clean:html', 'sass:docs'], function() {
   njRender.nunjucks.configure([config.htmlTempl], {watch: false});
 
   return gulp.src([config.htmlPages, config.htmlComps])
-    .pipe(njRender())
+    .pipe(njRender({pages: config.htmlPages}).on('error', streamError))
     .pipe(gulp.dest(config.htmlDev))
     .pipe(browserSync.stream());
 });
@@ -286,7 +292,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'nunjucks:dev', 'assets:dev'], funct
     catchupDelay: 500,
     listeners: {
       error: function(err) {
-        gutil.log('An error occured: '.red, err)
+        gutil.log(gutil.colors.red('An error occured: '), err)
       },
       change: function(changeType, filePath) {
         console.log('');
@@ -302,7 +308,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'nunjucks:dev', 'assets:dev'], funct
     catchupDelay: 500,
     listeners: {
       error: function(err) {
-        gutil.log('An error occured: '.red, err)
+        gutil.log(gutil.colors.red('An error occured: '), err)
       },
       change: function(changeType, filePath) {
         console.log('');
@@ -318,7 +324,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'nunjucks:dev', 'assets:dev'], funct
     catchupDelay: 500,
     listeners: {
       error: function(err) {
-        gutil.log('An error occured: '.red, err)
+        gutil.log(gutil.colors.red('An error occured: '), err)
       },
       change: function(changeType, filePath) {
         console.log('');
@@ -334,7 +340,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'nunjucks:dev', 'assets:dev'], funct
     catchupDelay: 500,
     listeners: {
       error: function(err) {
-        gutil.log('An error occured: '.red, err)
+        gutil.log(gutil.colors.red('An error occured: '), err)
       },
       change: function(changeType, filePath) {
         console.log('');
