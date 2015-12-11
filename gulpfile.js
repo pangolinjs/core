@@ -77,9 +77,18 @@ var config = {
 }
 
 
+// Don't unpipe on error
 var streamError = function(error) {
   gutil.log(gutil.colors.red(error.toString()));
   this.emit('end');
+};
+
+
+// Search string in array and replace
+var replaceInArray = function(array, search, insert) {
+  for (var i = 0; i < array.length; i++) {
+    array[i] = array[i].replace(search, insert);
+  }
 };
 
 
@@ -196,8 +205,16 @@ gulp.task('nunjucks:dev', ['clean:html', 'sass:docs'], function() {
   // Configure Nunjucks
   njRender.nunjucks.configure([config.htmlTempl], {watch: false});
 
+  // Get all pages
+  var pageList = fs.readdirSync('src/html/pages');
+  var compList = fs.readdirSync('src/html/components');
+
+  // Replace extension
+  replaceInArray(pageList, '.nunjucks', '.html');
+  replaceInArray(compList, '.nunjucks', '.html');
+
   return gulp.src([config.htmlPages, config.htmlComps])
-    .pipe(njRender({pages: config.htmlPages}).on('error', streamError))
+    .pipe(njRender({pageList: pageList, compList: compList}).on('error', streamError))
     .pipe(gulp.dest(config.htmlDev))
     .pipe(browserSync.stream());
 });
