@@ -8,6 +8,12 @@
 // ===========================================================================
 
 
+
+
+// Variables
+// =====================================
+
+
 // Breakpoints
 $screen-sm: 700px;
 $screen-lg: 1200px;
@@ -15,6 +21,7 @@ $screen-lg: 1200px;
 $padding:    30px;
 $padding-sm: ($padding / 2);
 $padding-lg: ($padding * 2);
+$padding-xl: ($padding * 3);
 
 // Colors
 $primary-color:   rgb(0, 100, 200);
@@ -22,16 +29,21 @@ $secondary-color: rgb(100, 100, 100);
 $border-color:    rgb(220, 220, 220);
 
 
+
+
 // Docs Header
+// =====================================
+
+
 .docs__header {
   max-width: $screen-lg;
-  margin: 0 auto $padding-sm;
+  margin: $padding-sm auto $padding-lg;
   padding: $padding-sm;
   border-bottom: 1px solid $border-color;
   text-align: center;
 
   @media (min-width: $screen-sm) {
-    margin-bottom: $padding-lg;
+    margin: $padding auto $padding-xl;
     padding: $padding;
   }
 }
@@ -60,16 +72,30 @@ $border-color:    rgb(220, 220, 220);
   }
 
 
+
+
 // Docs Body
+// =====================================
+
+
 .docs__body {
   max-width: $screen-lg;
   margin: 0 auto;
 }
 
 
+
+
 // Docs Article
+// =====================================
+
+
 .docs__article {
   margin-bottom: $padding-lg;
+
+  @media (min-width: $screen-sm) {
+    margin-bottom: $padding-xl;
+  }
 }
 
   .docs__article__header {
@@ -81,6 +107,7 @@ $border-color:    rgb(220, 220, 220);
   }
 
   .docs__article__title {
+    margin: 0 0 10px;
     font-size: 20px;
     font-weight: 100;
     color: $primary-color;
@@ -91,6 +118,7 @@ $border-color:    rgb(220, 220, 220);
   }
 
   .docs__article__description {
+    margin: 0 0 10px;
     font-size: 14px;
     font-weight: 100;
     color: $secondary-color;
