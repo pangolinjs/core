@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{title}}</title>
+    <title>{{ page_title }}</title>
     <!-- Styleguide Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    {% body %}
+    {% block page_body %} {% endblock %}
 
     <!-- Styleguide Scripts -->
     <script src="js/script.js"></script>

@@ -25,9 +25,8 @@ var uglify       = require('gulp-uglify');
 var jshint       = require('gulp-jshint');
 var stylish      = require('jshint-stylish');
 
-// Assemble
-var assemble     = require('assemble');
-var gulpAssemble = require('gulp-assemble');
+// Nunjucks
+var njRender     = require('gulp-nunjucks-render');
 
 // Assets
 var imagemin     = require('gulp-imagemin');
@@ -62,10 +61,9 @@ var config = {
   jsDist:      path.dist + 'js',
 
   // HTML
-  htmlPages:   path.src  + 'html/pages/*.hbs',
-  htmlComps:   path.src  + 'html/components/*.hbs',
-  htmlLayouts: path.src  + 'html/layouts/*.hbs',
-  htmlIncls:   path.src  + 'html/includes/**/*.hbs',
+  htmlPages:   path.src  + 'html/pages/*.nunjucks',
+  htmlComps:   path.src  + 'html/components/*.nunjucks',
+  htmlTempl:   path.src  + 'html/templates/',
   htmlSass:    path.src  + 'html/css/main.scss',
   htmlWatch:   path.src  + 'html',
   htmlDev:     path.dev,
@@ -182,34 +180,26 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 
-/* ASSEMBLE
- * Pre-compile Handlebars files into HTML
+/* NUNJUCKS
+ * Pre-compile Nunjucks files into HTML
  * ========================================================================== */
 
 
-// Assemble Development
-gulp.task('assemble:dev', ['clean:html', 'sass:docs'], function() {
-  // Set up Layouts and Partials
-  assemble.layouts(config.htmlLayouts);
-  assemble.partials(config.htmlIncls);
+// Nunjucks Development
+gulp.task('nunjucks:dev', ['clean:html', 'sass:docs'], function() {
+  // Configure Nunjucks
+  njRender.nunjucks.configure([config.htmlTempl], {watch: false});
 
   return gulp.src([config.htmlPages, config.htmlComps])
-    .pipe(gulpAssemble(assemble))
-    .pipe(rename({extname: '.html'}))
+    .pipe(njRender())
     .pipe(gulp.dest(config.htmlDev))
     .pipe(browserSync.stream());
 });
 
 
-// Assemble Distribution
-gulp.task('assemble:dist', ['clean:dist'], function() {
-  // Set up Layouts and Partials
-  assemble.layouts(config.htmlLayouts);
-  assemble.partials(config.htmlIncls);
+// Nunjucks Distribution
+gulp.task('nunjucks:dist', ['clean:dist'], function() {
 
-  return assemble.src(config.htmlPages)
-    .pipe(rename({extname: '.html'}))
-    .pipe(assemble.dest(config.htmlDist));
 });
 
 
@@ -247,7 +237,7 @@ gulp.task('assets:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-gulp.task('distribution', ['sass:dist', 'js:dist', 'assemble:dist', 'assets:dist']);
+gulp.task('distribution', ['sass:dist', 'js:dist', 'nunjucks:dist', 'assets:dist']);
 
 
 
@@ -285,7 +275,7 @@ function capitalize(string) {
 }
 
 
-gulp.task('default', ['sass:dev', 'js:dev', 'assemble:dev', 'assets:dev'], function() {
+gulp.task('default', ['sass:dev', 'js:dev', 'nunjucks:dev', 'assets:dev'], function() {
 
   // Start BrowserSync after initial tasks finished
   gulp.start('browserSync');
@@ -333,7 +323,7 @@ gulp.task('default', ['sass:dev', 'js:dev', 'assemble:dev', 'assets:dev'], funct
       change: function(changeType, filePath) {
         console.log('');
         gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        gulp.start('assemble:dev');
+        gulp.start('nunjucks:dev');
       }
     }
   });

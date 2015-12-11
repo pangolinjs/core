@@ -1,10 +1,10 @@
----
-title: Frontpage
-layout: pages
----
+{% set page_title = "Frontpage" %}
+{% extends "pages.nunjucks" %}
 
+{% block page_body %}
 <h1>This is your Frontpage</h1>
 
 <p>It's the first page (index.html) the visitor of your site will see.</p>
 <p>Use the 'pages'-directory to create the final web sites.</p>
 <p>Ideally these pages will be composed of 'includes'.</p>
+{% endblock %}
