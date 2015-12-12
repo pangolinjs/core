@@ -19,6 +19,7 @@ $screen-sm: 700px;
 $screen-lg: 1200px;
 
 $padding:    30px;
+$padding-xs: ($padding / 3);
 $padding-sm: ($padding / 2);
 $padding-lg: ($padding * 2);
 $padding-xl: ($padding * 3);
@@ -26,6 +27,7 @@ $padding-xl: ($padding * 3);
 // Colors
 $primary-color:   rgb(0, 100, 200);
 $secondary-color: rgb(100, 100, 100);
+$text-color:      rgb(255, 255, 255);
 $border-color:    rgb(220, 220, 220);
 
 
@@ -36,16 +38,90 @@ $border-color:    rgb(220, 220, 220);
 
 
 .docs__nav {
+  position: fixed;
+  top: 0;
+  left: -200px;
+  height: 100%;
+  transition: left .2s ease-in;
 
+  &.js--docs__nav--open {
+    left: 0;
+    transition: left .2s ease-out;
+  }
 }
 
-  .docs__nav__item {
+  .docs__nav__btn {
+    position: absolute;
+    right: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: $primary-color;
+    border: none;
 
+    &:hover,
+    &:focus,
+    .js--docs__nav--open & {
+      background-color: darken($primary-color, 15%);
+    }
+
+    .docs__nav__btn__icon {
+      display: block;
+      width:  75%;
+      height: 2px;
+      margin: auto;
+      background-color: $text-color;
+
+      &::before,
+      &::after {
+        display: block;
+        position: relative;
+        height: 2px;
+        background-color: $text-color;
+        content: " ";
+      }
+
+      &::before {
+        top: -8px;
+      }
+
+      &::after {
+        top: 6px;
+      }
+    }
   }
 
-  .docs__nav__title {
-
+  .docs__nav__list {
+    height: 100%;
+    width: 200px;
+    margin: -$padding 0;
+    padding: 0;
+    background: darken($primary-color, 15%);
   }
+
+    .docs__nav__title {
+      display: block;
+      margin: $padding 0 0;
+      padding: 0 $padding;
+      border-bottom: 1px solid $primary-color;
+      font-size: 80%;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 50px;
+      text-transform: uppercase;
+      color: lighten($primary-color, 30%);
+    }
+
+    .docs__nav__link {
+      display: block;
+      padding: $padding-xs $padding;
+      text-decoration: none;
+      color: $text-color;
+
+      &:hover,
+      &:focus {
+        background-color: $primary-color;
+      }
+    }
 
 
 
