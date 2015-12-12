@@ -10,19 +10,7 @@
   <body>
 
   {# Docs Menu #}
-  {%- if docsMenu %}
-    <ul class="docs__nav">
-      <li class="docs__nav__title">Pages</li>
-    {%- for page in pageList %}
-      <li class="docs__nav__item"><a href="{{ page }}">{{ page }}</a></li>
-    {%- endfor %}
-
-      <li class="docs__nav__title">Components</li>
-    {%- for comp in compList %}
-      <li class="docs__nav__item"><a href="components/{{ comp }}">{{ comp }}</a></li>
-    {% endfor -%}
-    </ul>
-  {%- endif %}
+  {%- include "includes/docs/menu.nunjucks" -%}
 
     {# Page Body #}
     {%- block page_body %} {% endblock %}
