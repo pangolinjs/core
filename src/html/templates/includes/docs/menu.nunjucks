@@ -7,7 +7,7 @@
 
     <li class="docs__nav__title">Components</li>
   {%- for comp in compList %}
-    <li class="docs__nav__item"><a href="components/{{ comp }}">{{ comp }}</a></li>
+    <li class="docs__nav__item"><a href="{{ comp }}">{{ comp }}</a></li>
   {% endfor -%}
   </ul>
 {%- endif %}

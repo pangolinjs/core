@@ -201,7 +201,7 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 // Configure Nunjucks
-njRender.nunjucks.configure([config.htmlTempl], {watch: false});
+njRender.nunjucks.configure([config.htmlTempl], {noCache: true, watch: false});
 
 var nunjucks = function(input, dest, menu) {
   // Get all pages
@@ -218,8 +218,7 @@ var nunjucks = function(input, dest, menu) {
       pageList: pageList,
       compList: compList
     }).on('error', streamError))
-    .pipe(gulp.dest(dest))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest(dest));
 };
 
 
@@ -229,12 +228,12 @@ gulp.task('nunjucks:pages', ['clean:html', 'sass:docs'], function() {
 
 
 gulp.task('nunjucks:components', ['clean:html', 'sass:docs'], function() {
-  nunjucks(config.htmlComps, config.htmlDev + '/components', true);
+  nunjucks(config.htmlComps, config.htmlDev, true);
 });
 
 
 // Nunjucks Development
-gulp.task('nunjucks:dev', ['nunjucks:pages', 'nunjucks:components']);
+gulp.task('nunjucks:dev', ['nunjucks:pages', 'nunjucks:components'], browserSync.reload);
 
 
 // Nunjucks Distribution
@@ -294,7 +293,8 @@ gulp.task('browserSync', function() {
       baseDir: config.htmlDev
     },
     logPrefix: 'BrowserSync',
-    scrollElements: ['*']
+    scrollElements: ['*'],
+    reloadDelay: 200
   });
 });
 
