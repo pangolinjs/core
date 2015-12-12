@@ -200,10 +200,10 @@ gulp.task('js:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-// Configure Nunjucks
-njRender.nunjucks.configure([config.htmlTempl], {noCache: true, watch: false});
+var nunjucks = function(input, dest, nav) {
+  // Configure Nunjucks
+  njRender.nunjucks.configure([config.htmlTempl], {noCache: true, watch: false});
 
-var nunjucks = function(input, dest, menu) {
   // Get all pages
   var pageList = fs.readdirSync('src/html/pages');
   var compList = fs.readdirSync('src/html/components');
@@ -214,7 +214,7 @@ var nunjucks = function(input, dest, menu) {
 
   return gulp.src(input)
     .pipe(njRender({
-      docsMenu: menu,
+      docsNav: nav,
       pageList: pageList,
       compList: compList
     }).on('error', streamError))

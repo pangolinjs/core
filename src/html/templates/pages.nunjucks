@@ -9,8 +9,8 @@
   </head>
   <body>
 
-  {# Docs Menu #}
-  {%- include "includes/docs/menu.nunjucks" -%}
+  {# Docs Nav #}
+  {%- include "includes/docs/nav.nunjucks" -%}
 
     {# Page Body #}
     {%- block page_body %} {% endblock %}

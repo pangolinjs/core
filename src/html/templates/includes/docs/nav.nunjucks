@@ -1,4 +1,4 @@
-{%- if docsMenu %}
+{%- if docsNav %}
   <ul class="docs__nav">
     <li class="docs__nav__title">Pages</li>
   {%- for page in pageList %}
