@@ -112,7 +112,7 @@ gulp.task('clean:dist', function() {
 
 // Clean HTML
 gulp.task('clean:html', function() {
-  return del(config.htmlDev + '/*.html');
+  return del(config.htmlDev + '/**/*.html');
 });
 
 
@@ -200,11 +200,10 @@ gulp.task('js:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-// Nunjucks Development
-gulp.task('nunjucks:dev', ['clean:html', 'sass:docs'], function() {
-  // Configure Nunjucks
-  njRender.nunjucks.configure([config.htmlTempl], {watch: false});
+// Configure Nunjucks
+njRender.nunjucks.configure([config.htmlTempl], {watch: false});
 
+var nunjucks = function(input, dest, menu) {
   // Get all pages
   var pageList = fs.readdirSync('src/html/pages');
   var compList = fs.readdirSync('src/html/components');
@@ -213,16 +212,34 @@ gulp.task('nunjucks:dev', ['clean:html', 'sass:docs'], function() {
   replaceInArray(pageList, '.nunjucks', '.html');
   replaceInArray(compList, '.nunjucks', '.html');
 
-  return gulp.src([config.htmlPages, config.htmlComps])
-    .pipe(njRender({pageList: pageList, compList: compList}).on('error', streamError))
-    .pipe(gulp.dest(config.htmlDev))
+  return gulp.src(input)
+    .pipe(njRender({
+      docsMenu: menu,
+      pageList: pageList,
+      compList: compList
+    }).on('error', streamError))
+    .pipe(gulp.dest(dest))
     .pipe(browserSync.stream());
+};
+
+
+gulp.task('nunjucks:pages', ['clean:html', 'sass:docs'], function() {
+  nunjucks(config.htmlPages, config.htmlDev, true);
 });
+
+
+gulp.task('nunjucks:components', ['clean:html', 'sass:docs'], function() {
+  nunjucks(config.htmlComps, config.htmlDev + '/components', true);
+});
+
+
+// Nunjucks Development
+gulp.task('nunjucks:dev', ['nunjucks:pages', 'nunjucks:components']);
 
 
 // Nunjucks Distribution
 gulp.task('nunjucks:dist', ['clean:dist'], function() {
-
+  nunjucks(config.htmlPages, config.htmlDist, false);
 });
 
 

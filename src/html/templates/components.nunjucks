@@ -4,33 +4,40 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ page_title }}</title>
-    <!-- Docs Stylesheet -->
+    {# Docs Stylesheet #}
     <link rel="stylesheet" href="css/docs.css">
-    <!-- Styleguide Stylesheet -->
+    {# Styleguide Stylesheet #}
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body class="docs">
-    <!-- Docs Header -->
+
+  {# Docs Menu #}
+  {%- if docsMenu %}
+    <ul class="docs__nav">
+      <li class="docs__nav__title">Pages</li>
+    {%- for page in pageList %}
+      <li class="docs__nav__item"><a href="{{ page }}">{{ page }}</a></li>
+    {%- endfor %}
+
+      <li class="docs__nav__title">Components</li>
+    {%- for comp in compList %}
+      <li class="docs__nav__item"><a href="components/{{ comp }}">{{ comp }}</a></li>
+    {% endfor -%}
+    </ul>
+  {%- endif %}
+
+    {# Docs Header #}
     <header class="docs__header">
       <h1 class="docs__title">{{ page_title }}</h1>
       <p class="docs__description">{{ description }}</p>
-
-      <ul class="docs__nav">
-      {% for page in pageList %}
-        <li>{{ page }}</li>
-      {% endfor %}
-      {% for comp in compList %}
-        <li>{{ comp }}</li>
-      {% endfor %}
-      </ul>
     </header>
 
-    <!-- Component Body -->
+    {# Component Body #}
     <main class="docs__body">
       {% block page_body %} {% endblock %}
     </main>
 
-    <!-- Styleguide Scripts -->
+    {# Styleguide Scripts #}
     <script src="js/script.js"></script>
   </body>
 </html>
