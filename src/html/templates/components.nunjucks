@@ -9,7 +9,7 @@
     {# Styleguide Stylesheet #}
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body class="docs">
+  <body>
 
   {# Docs Nav #}
   {%- include "includes/docs/nav.nunjucks" -%}
