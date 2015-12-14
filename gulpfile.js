@@ -51,6 +51,7 @@ var path = {
 var config = {
   // Sass
   sassInput:   path.src  + 'css/main.scss',
+  sassLint:    ['src/css/**/*.scss', '!src/css/base/_normalize.scss', '!src/css/base/_print.scss'],
   sassWatch:   path.src  + 'css',
   sassDev:     path.dev  + 'css',
   sassDist:    path.dist + 'css',
@@ -132,7 +133,7 @@ gulp.task('clean:assets', function() {
 
 // Sass Lint
 gulp.task('sass:lint', function() {
-  gulp.src(['src/css/**/*.scss', '!src/css/base/_normalize.scss', '!src/css/base/_print.scss'])
+  gulp.src(config.sassLint)
     .pipe(sassLint())
     .pipe(sassLint.format());
 });
