@@ -17,6 +17,7 @@ var browserSync  = require('browser-sync');
 
 // CSS/Sass
 var sass         = require('gulp-sass');
+var sassLint     = require('gulp-sass-lint');
 var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 
@@ -128,6 +129,13 @@ gulp.task('clean:assets', function() {
  * Compile Sass code into CSS
  * ========================================================================== */
 
+
+// Sass Lint
+gulp.task('sass:lint', function() {
+  gulp.src(['src/css/**/*.scss', '!src/css/base/_normalize.scss', '!src/css/base/_print.scss'])
+    .pipe(sassLint())
+    .pipe(sassLint.format());
+});
 
 // Sass Development
 gulp.task('sass:dev', function() {
