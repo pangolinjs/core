@@ -45,7 +45,7 @@ The function `@import` concatenates all Sass files into one large stylesheet. Se
 Located in `src/js`.<br>
 Output to `dev/js` or `dist/js`.
 
-Documentation following.
+All JavaScript files will be concatenated so you can split the code into smaller components.
 
 
 ### Nunjucks
@@ -109,11 +109,10 @@ The content has to be enclosed by `{% block page_body %}` and `{% endblock %}`. 
 #### CSS
 The components pages and the development menu use some styling.
 
-This is located in `src/html/css/main.scss`.
+All styles are located in one `main.scss` file in `src/html/css`.
 
-The style definitions do not interfere with your CSS located in `src/css` as long as the following classes are not used:
-
-<small>*These classes are subject to change and will be prefixed anytime soon(ish).*</small>
+The style definitions do not interfere with your CSS located in `src/css` as long as the following classes are not used:<br>
+<sub>*These classes are subject to change and will be prefixed anytime soon(ish).*</sub>
 
 * docs__header
 * docs__title

@@ -1,6 +1,6 @@
 {
   "name": "styleguide",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Boilerplate for styleguide driven front end development.",
   "main": "index.js",
   "scripts": {
