@@ -1,7 +1,7 @@
 {
   "name": "styleguide",
   "version": "0.6.0",
-  "description": "Boilerplate for styleguide driven front end development.",
+  "description": "Front-end development styleguide with Sass, JavaScript and Nunjucks.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,15 +12,16 @@
   },
   "keywords": [
     "styleguide",
-    "boilerplate",
     "html",
+    "nunjucks",
+    "template",
     "css",
     "sass",
     "scss",
-    "node",
-    "npm",
-    "front",
-    "end"
+    "javascript",
+    "js",
+    "front end",
+    "front-end"
   ],
   "author": "Fynn Becker",
   "license": "GPL-2.0",
