@@ -19,7 +19,8 @@ Uses the [Gulp](http://gulpjs.com/) task runner to lint and compile [Sass](http:
 ## Installation
 1. Get the [latest release](https://github.com/MVSde/styleguide/releases/latest).
 2. Run `npm install` to download Node Modules.
-3. Install global Gulp with `npm install -g gulp`. This step is required to get CLI access to gulp.
+3. To update previously downloaded Node Modules run `npm update`.
+4. Install global Gulp with `npm install -g gulp`. This step is required to get CLI access to gulp.
 
 
 ## Usage
