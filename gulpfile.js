@@ -55,6 +55,7 @@ var config = {
   sassWatch:   path.src  + 'css',
   sassDev:     path.dev  + 'css',
   sassDist:    path.dist + 'css',
+  sassPrefix:  ['last 2 versions'],
 
   // JavaScript
   jsInput:     path.src  + 'js/**/*.js',
@@ -139,11 +140,11 @@ gulp.task('sass:lint', function() {
 });
 
 // Sass Development
-gulp.task('sass:dev', function() {
+gulp.task('sass:dev', ['sass:lint'], function() {
   gulp.src(config.sassInput)
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-      .pipe(autoprefixer())
+      .pipe(autoprefixer(config.sassPrefix))
       .pipe(rename('style.css'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.sassDev))
@@ -155,17 +156,17 @@ gulp.task('sass:dev', function() {
 gulp.task('sass:docs', function() {
   gulp.src(config.htmlSass)
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-    .pipe(autoprefixer())
+    .pipe(autoprefixer(config.sassPrefix))
     .pipe(rename('docs.css'))
     .pipe(gulp.dest(config.sassDev));
 });
 
 
 // Sass Distribution
-gulp.task('sass:dist', ['clean:dist'], function() {
+gulp.task('sass:dist', ['clean:dist', 'sass:lint'], function() {
   return gulp.src(config.sassInput)
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(autoprefixer())
+    .pipe(autoprefixer(config.sassPrefix))
     .pipe(rename('style.css'))
     .pipe(gulp.dest(config.sassDist));
 });

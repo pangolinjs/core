@@ -7,20 +7,20 @@
 
 // Centered container element
 @mixin container-fixed($gutter: $grid-gutter-width) {
+  @include clearfix;
   margin-right: auto;
   margin-left: auto;
   padding-left:  ($gutter / 2);
   padding-right: ($gutter / 2);
-  @include clearfix;
 }
 
 
 
 // Creates a wrapper for a series of columns
 @mixin make-row($gutter: $grid-gutter-width) {
+  @include clearfix;
   margin-left:  ceil(($gutter / -2));
   margin-right: floor(($gutter / -2));
-  @include clearfix;
 }
 
 
