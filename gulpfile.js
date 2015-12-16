@@ -17,7 +17,6 @@ var browserSync  = require('browser-sync');
 
 // CSS/Sass
 var sass         = require('gulp-sass');
-var sassLint     = require('gulp-sass-lint');
 var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 
@@ -51,7 +50,6 @@ var path = {
 var config = {
   // Sass
   sassInput:   path.src  + 'css/main.scss',
-  sassLint:    ['src/css/**/*.scss', '!src/css/base/_normalize.scss', '!src/css/base/_print.scss'],
   sassWatch:   path.src  + 'css',
   sassDev:     path.dev  + 'css',
   sassDist:    path.dist + 'css',
@@ -132,15 +130,8 @@ gulp.task('clean:assets', function() {
  * ========================================================================== */
 
 
-// Sass Lint
-gulp.task('sass:lint', function() {
-  gulp.src(config.sassLint)
-    .pipe(sassLint())
-    .pipe(sassLint.format());
-});
-
 // Sass Development
-gulp.task('sass:dev', ['sass:lint'], function() {
+gulp.task('sass:dev', function() {
   gulp.src(config.sassInput)
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
@@ -163,7 +154,7 @@ gulp.task('sass:docs', function() {
 
 
 // Sass Distribution
-gulp.task('sass:dist', ['clean:dist', 'sass:lint'], function() {
+gulp.task('sass:dist', ['clean:dist'], function() {
   return gulp.src(config.sassInput)
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(autoprefixer(config.sassPrefix))
