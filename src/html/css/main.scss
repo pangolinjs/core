@@ -43,6 +43,7 @@ $border-color:    rgb(220, 220, 220);
   left: -200px;
   height: 100%;
   transition: left .2s ease-in;
+  z-index: 9999;
 
   &.js--docs__nav--open {
     left: 0;
