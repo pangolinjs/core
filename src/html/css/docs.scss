@@ -189,6 +189,13 @@ $border-color:    rgb(220, 220, 220);
 .docs__article {
   margin-bottom: $padding-lg;
 
+  &::after {
+    content: ' ';
+    display: table;
+    clear: both;
+    line-height: 0;
+  }
+
   @media (min-width: $screen-sm) {
     margin-bottom: $padding-xl;
   }
