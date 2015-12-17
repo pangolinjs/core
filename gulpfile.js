@@ -129,10 +129,9 @@ gulp.task('clean:assets', function() {
  * Compile Sass code into CSS
  * ========================================================================== */
 
-
-// Sass Development
-gulp.task('sass:dev', function() {
-  gulp.src(config.sassInput)
+// Sass Development Function
+var sassDev = function() {
+  return gulp.src(config.sassInput)
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
       .pipe(autoprefixer(config.sassPrefix))
@@ -140,12 +139,17 @@ gulp.task('sass:dev', function() {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.sassDev))
     .pipe(browserSync.stream());
+};
+
+// Sass Development Task
+gulp.task('sass:dev', function() {
+  sassDev();
 });
 
 
 // Sass Docs
 gulp.task('sass:docs', function() {
-  gulp.src(config.htmlSass)
+  return gulp.src(config.htmlSass)
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
       .pipe(autoprefixer(config.sassPrefix))
@@ -170,17 +174,21 @@ gulp.task('sass:dist', ['clean:dist'], function() {
  * Lint javscript
  * ========================================================================== */
 
-
-// JavaScript Development
-gulp.task('js:dev', function() {
+// JavaScript Development Function
+var jsDev = function() {
   return gulp.src(config.jsInput)
     .pipe(sourcemaps.init())
       .pipe(concat('script.js'))
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
-    .pipe(sourcemaps.write('./'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.jsDev))
     .pipe(browserSync.stream());
+};
+
+// JavaScript Development Task
+gulp.task('js:dev', function() {
+  jsDev();
 });
 
 
@@ -233,9 +241,16 @@ gulp.task('nunjucks:components', ['clean:html'], function() {
   nunjucks(config.htmlComps, config.htmlDev, true);
 });
 
+// Nunjucks Development Function
+var nunjucksDev = function() {
+  nunjucks(config.htmlPages, config.htmlDev, true);
+  nunjucks(config.htmlComps, config.htmlDev, true);
+};
 
-// Nunjucks Development
-gulp.task('nunjucks:dev', ['nunjucks:pages', 'nunjucks:components'], browserSync.reload);
+// Nunjucks Development Task
+gulp.task('nunjucks:dev', ['clean:html'], function() {
+  nunjucksDev();
+});
 
 
 // Nunjucks Distribution
@@ -336,9 +351,7 @@ gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets
       change: function(changeType, filePath) {
         console.log('');
         gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        // Deprecated 'gulp.start'
-        // Replace with function form of gulp tasks
-        gulp.start('sass:dev');
+        sassDev();
       }
     }
   });
@@ -354,9 +367,7 @@ gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets
       change: function(changeType, filePath) {
         console.log('');
         gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        // Deprecated 'gulp.start'
-        // Replace with function form of gulp tasks
-        gulp.start('js:dev');
+        jsDev();
       }
     }
   });
@@ -372,9 +383,8 @@ gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets
       change: function(changeType, filePath) {
         console.log('');
         gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        // Deprecated 'gulp.start'
-        // Replace with function form of gulp tasks
-        gulp.start('nunjucks:dev');
+        nunjucksDev();
+        browserSync.reload;
       }
     }
   });
