@@ -189,13 +189,6 @@ $border-color:    rgb(220, 220, 220);
 .docs__article {
   margin-bottom: $padding-lg;
 
-  &::after {
-    content: ' ';
-    display: table;
-    clear: both;
-    line-height: 0;
-  }
-
   @media (min-width: $screen-sm) {
     margin-bottom: $padding-xl;
   }
@@ -235,6 +228,13 @@ $border-color:    rgb(220, 220, 220);
     padding: $padding-sm;
     border-top:    1px solid $border-color;
     border-bottom: 1px solid $border-color;
+
+    &::after {
+      content: ' ';
+      display: table;
+      clear: both;
+      line-height: 0;
+    }
 
     @media (min-width: $screen-sm) {
       padding: $padding;
