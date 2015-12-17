@@ -137,7 +137,7 @@ gulp.task('sass:dev', function() {
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
       .pipe(autoprefixer(config.sassPrefix))
       .pipe(rename('style.css'))
-    .pipe(sourcemaps.write('./'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.sassDev))
     .pipe(browserSync.stream());
 });
