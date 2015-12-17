@@ -1,6 +1,6 @@
 # Front-End Styleguide
 Front-end development styleguide with Sass, JavaScript and Nunjucks.
-Uses the [Gulp](http://gulpjs.com/) task runner to lint and compile [Sass](http://sass-lang.com/) files, [lint JavaScript](http://jshint.com/) and create static HTML files from [Nunjucks](https://mozilla.github.io/nunjucks/) files.
+Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint JavaScript](http://jshint.com/) and create static HTML files from [Nunjucks](https://mozilla.github.io/nunjucks/) files.
 
 
 ## Contents
@@ -38,8 +38,6 @@ Output to `dev/css` or `dist/css`.
 For a complete documentation jump to the [Sass Basics](http://sass-lang.com/guide).
 
 This styleguide splits the CSS into small parts. This ensures a far better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [Nunjucks-Section](#nunjucks) for detailed information about componentization.
-
-All Sass files are linted on compilation. Change the linting options to your preferences in the `.sass-lint.yml` file according to the [documentation](https://github.com/sasstools/sass-lint/tree/develop/docs/rules).
 
 The function `@import` concatenates all Sass files into one large stylesheet. See `src/css/main.scss` for more information.
 
