@@ -65,7 +65,7 @@ var config = {
   htmlPages:   path.src  + 'html/pages/*.nunjucks',
   htmlComps:   path.src  + 'html/components/*.nunjucks',
   htmlTempl:   path.src  + 'html/templates/',
-  htmlSass:    path.src  + 'html/css/main.scss',
+  htmlSass:    path.src  + 'html/css/docs.scss',
   htmlWatch:   path.src  + 'html',
   htmlDev:     path.dev,
   htmlDist:    path.dist,
@@ -146,9 +146,10 @@ gulp.task('sass:dev', function() {
 // Sass Docs
 gulp.task('sass:docs', function() {
   gulp.src(config.htmlSass)
-    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-    .pipe(autoprefixer(config.sassPrefix))
-    .pipe(rename('docs.css'))
+    .pipe(sourcemaps.init())
+      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+      .pipe(autoprefixer(config.sassPrefix))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.sassDev));
 });
 
@@ -223,12 +224,12 @@ var nunjucks = function(input, dest, nav) {
 };
 
 
-gulp.task('nunjucks:pages', ['clean:html', 'sass:docs'], function() {
+gulp.task('nunjucks:pages', ['clean:html'], function() {
   nunjucks(config.htmlPages, config.htmlDev, true);
 });
 
 
-gulp.task('nunjucks:components', ['clean:html', 'sass:docs'], function() {
+gulp.task('nunjucks:components', ['clean:html'], function() {
   nunjucks(config.htmlComps, config.htmlDev, true);
 });
 
@@ -316,9 +317,12 @@ function capitalize(string) {
 }
 
 
-gulp.task('default', ['sass:dev', 'js:dev', 'nunjucks:dev', 'assets:dev'], function() {
+gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets:dev'], function() {
 
   // Start BrowserSync after initial tasks finished
+  //
+  // Deprecated 'gulp.start'
+  // Replace with function form of gulp tasks
   gulp.start('browserSync');
 
   // Watch Sass
