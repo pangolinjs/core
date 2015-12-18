@@ -13,6 +13,7 @@ var gutil        = require('gulp-util');
 var rename       = require('gulp-rename');
 var watchr       = require('watchr');
 var concat       = require('gulp-concat');
+var chokidar     = require('chokidar');
 var browserSync  = require('browser-sync');
 
 // CSS/Sass
@@ -268,6 +269,7 @@ gulp.task('nunjucks:dist', ['clean:dist'], function() {
 
 // Assets Development Function
 var assetsDev = function() {
+  del(config.assetsDev);
   return gulp.src(config.assetsInput)
     .pipe(gulp.dest(config.assetsDev))
     .pipe(browserSync.stream());
@@ -407,5 +409,12 @@ gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets
         assetsDev();
       }
     }
+  });
+});
+
+gulp.task('watch:test', function() {
+  chokidar.watch('src/assets/**/*', {ignored: /[\/\\]\./}).on('all', function(event, path) {
+    gutil.log(event, path);
+    assetsDev();
   });
 });
