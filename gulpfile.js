@@ -228,7 +228,8 @@ var nunjucks = function(input, dest, nav) {
       pageList: pageList,
       compList: compList
     }).on('error', streamError))
-    .pipe(gulp.dest(dest));
+    .pipe(gulp.dest(dest))
+    .pipe(browserSync.stream());
 };
 
 
@@ -384,7 +385,6 @@ gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets
         console.log('');
         gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
         nunjucksDev();
-        browserSync.reload;
       }
     }
   });

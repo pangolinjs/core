@@ -11,8 +11,8 @@
   </head>
   <body>
 
-  {# Docs Nav #}
-  {%- include "includes/docs/nav.nunjucks" -%}
+    {# Docs Nav #}
+    {%- include "includes/docs/nav.nunjucks" -%}
 
     {# Docs Header #}
     <header class="docs__header">

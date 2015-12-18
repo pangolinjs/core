@@ -13,8 +13,8 @@
   </head>
   <body>
 
-  {# Docs Nav #}
-  {%- include "includes/docs/nav.nunjucks" -%}
+    {# Docs Nav #}
+    {%- include "includes/docs/nav.nunjucks" -%}
 
     {# Page Body #}
     {%- block page_body %} {% endblock %}
