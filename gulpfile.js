@@ -71,7 +71,7 @@ var config = {
   htmlDist:    path.dist,
 
   // Assets
-  assetsInput: [path.src + 'assets/**/*', '!' + path.src + 'assets/**/.gitkeep'],
+  assetsInput: path.src  + 'assets/**/*',
   assetsWatch: path.src  + 'assets',
   assetsDev:   path.dev  + 'assets',
   assetsDist:  path.dist + 'assets'
@@ -266,12 +266,16 @@ gulp.task('nunjucks:dist', ['clean:dist'], function() {
  * Copy assets (e.g. img or fonts)
  * ========================================================================== */
 
+// Assets Development Function
+var assetsDev = function() {
+  return gulp.src(config.assetsInput)
+    .pipe(gulp.dest(config.assetsDev))
+    .pipe(browserSync.stream());
+};
 
 // Assets Development
 gulp.task('assets:dev', ['clean:assets'], function() {
-  return gulp.src(config.assetsInput)
-    .pipe(gulp.dest(config.assetsDev))
-    .pipe(browserSync.reload({stream: true}));
+  assetsDev();
 });
 
 
@@ -400,9 +404,7 @@ gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets
       change: function(changeType, filePath) {
         console.log('');
         gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        // Deprecated 'gulp.start'
-        // Replace with function form of gulp tasks
-        gulp.start('assets:dev');
+        assetsDev();
       }
     }
   });
