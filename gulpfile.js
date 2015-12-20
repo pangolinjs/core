@@ -109,10 +109,13 @@ var replaceInArray = function(array, search, insert) {
 // Log messages
 var log = {
   heading: function(message) {
-    console.log('\n' + gutil.colors.inverse(message));
+    console.log('\n' + gutil.colors.inverse(message.toUpperCase()));
   },
   activity: function(message) {
-    gutil.log(gutil.colors.bold(message));
+    gutil.log(message);
+  },
+  empty: function() {
+    console.log('');
   }
 }
 
@@ -144,10 +147,10 @@ gulp.task('clean:dist', function() {
 
 
 // Sass Development Function
-var sassDev = function() {
-  log.heading('Sass Development');
+var sassDev = function(event) {
+  log.heading('Compile Sass');
 
-  log.activity('Compile Sass to CSS');
+  log.activity('Starting...');
   gulp.src(paths.css.src + '**/*.scss')
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
@@ -156,7 +159,7 @@ var sassDev = function() {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css.dev))
     .pipe(browserSync.stream());
-  log.activity('Finished compiling');
+  log.activity('Finished.');
 };
 
 
@@ -166,16 +169,19 @@ gulp.task('sass:dev', function() {
 });
 
 
-// Sass Docs
-gulp.task('sass:docs', function() {
-  return gulp.src(paths.html.css + '**/*.scss')
+var sassDocs = function() {
+  log.heading('Compile Sass Docs');
+
+  log.activity('Starting...');
+  gulp.src(paths.html.css + '**/*.scss')
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
       .pipe(autoprefixer(config.sass.autoprefixer))
       .pipe(rename('docs.css'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css.dev));
-});
+  log.activity('Finished.');
+};
 
 
 // Sass Distribution
@@ -197,9 +203,9 @@ gulp.task('sass:dist', ['clean:dist'], function() {
 
 // JavaScript Development Function
 var jsDev = function() {
-  log.heading('JavaScript Development');
+  log.heading('Concat JavaScript');
 
-  log.activity('Concat JavaScript files');
+  log.activity('Starting...');
   gulp.src(paths.js.src + '*.js')
     .pipe(sourcemaps.init())
       .pipe(concat('script.js'))
@@ -208,7 +214,7 @@ var jsDev = function() {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.js.dev))
     .pipe(browserSync.stream());
-  log.activity('Finshed concatenating');
+  log.activity('Finshed.');
 };
 
 
@@ -262,16 +268,16 @@ var nunjucks = function(input, dest, nav) {
 
 // Nunjucks Development Function
 var nunjucksDev = function() {
-  log.heading('Nunjucks Development');
+  log.heading('Compile Nunjucks');
 
-  log.activity('Clean dev/*.html');
+  log.activity('Start cleaning...');
   del.sync(basePaths.dev + '*.html');
   log.activity('Finished cleaning');
 
-  log.activity('Compiling Nunjucks to HTML');
+  log.activity('Start compiling...');
   nunjucks(paths.html.pages,      paths.html.dev, true);
   nunjucks(paths.html.components, paths.html.dev, true);
-  log.activity('Finished compiling');
+  log.activity('Finished compiling.');
 };
 
 
@@ -347,6 +353,8 @@ gulp.task('distribution', ['sass:dist', 'js:dist', 'nunjucks:dist', 'assets:dist
 
 
 var startBrowserSync = function() {
+  log.heading('Starting BrowserSync');
+
   browserSync({
     server: {
       baseDir: paths.html.dev
@@ -368,7 +376,13 @@ var startBrowserSync = function() {
  * ========================================================================== */
 
 
-gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets:dev'], function() {
+gulp.task('default', ['clean:dev'], function() {
+
+  // Run initial task queue
+  sassDev();
+  sassDocs();
+  jsDev();
+  nunjucksDev();
 
   // Start BrowserSync after initial tasks finished
   startBrowserSync();
@@ -392,5 +406,7 @@ gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets
   watch(paths.assets.src + '**/*', function() {
     assetsDev();
   });
+
+  log.empty();
 });
 
