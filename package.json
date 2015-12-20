@@ -1,6 +1,6 @@
 {
   "name": "styleguide",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Front-end development styleguide with Sass, JavaScript and Nunjucks.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:MVSde/styleguide.git"
+    "url": "https://github.com/MVSde/styleguide.git"
   },
   "keywords": [
     "styleguide",

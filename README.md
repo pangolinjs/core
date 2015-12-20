@@ -1,3 +1,7 @@
+<p align="center">
+  <img height="450" width="50" src="https://raw.githubusercontent.com/mvsde/styleguide/master/src/assets/img/styleguide-logo.svg">
+</p>
+
 # Front-End Styleguide
 Front-end development styleguide with Sass, JavaScript and Nunjucks.
 Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint JavaScript](http://jshint.com/) and create static HTML files from [Nunjucks](https://mozilla.github.io/nunjucks/) files.
@@ -10,6 +14,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
   1. [Sass](#sass)
   2. [JavaScript](#javascript)
   3. [Nunjucks](#nunjucks)
+  4. [Assets](#assets)
 
 
 ## Dependencies
@@ -124,3 +129,10 @@ The style definitions do not interfere with your CSS located in `src/css` as lon
   * docs\__article__title
   * docs\__article__description
   * docs\__article__body
+
+
+### Assets
+Located in `src/assets`.<br>
+Output to `dev/assets` or `dist/assets`.
+
+All files and folders placed in `src/assets` will be copied to `dev/assets` or `dist/assets`. The distribution task compresses images.
