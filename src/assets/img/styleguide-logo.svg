@@ -5,11 +5,38 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg2"
    viewBox="0 0 932.87864 103.6377"
    height="29.248861mm"
-   width="263.27908mm">
+   width="263.27908mm"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="styleguide-logo.svg"
+   inkscape:export-filename="D:\Git\styleguide\src\assets\img\styleguide-logo.png"
+   inkscape:export-xdpi="86.840996"
+   inkscape:export-ydpi="86.840996">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     id="namedview33"
+     showgrid="false"
+     inkscape:zoom="1.5007311"
+     inkscape:cx="-88.808183"
+     inkscape:cy="-16.715195"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
   <defs
      id="defs4" />
   <metadata
@@ -20,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -45,8 +72,9 @@
          d="m 375,520.13 48.20625,-27.91125 c 12.69,20.72375 29.1825,35.9475 58.36125,35.9475 24.53125,0 40.17375,-12.26475 40.17375,-29.18125 0,-20.29875 -16.06875,-27.48875 -43.135,-39.32625 l -14.7975,-6.3475 c -42.715,-18.18125 -71.05,-41.0175 -71.05,-89.2275 0,-44.40375 33.83125,-78.2375 86.695,-78.2375 37.6375,0 64.7025,13.11125 84.15375,47.36625 l -46.09625,29.60125 c -10.15,-18.1825 -21.1425,-25.37125 -38.0575,-25.37125 -17.33875,0 -28.335,10.995 -28.335,25.37125 0,17.7625 10.99625,24.9525 36.3675,35.94875 l 14.8,6.3425 c 50.325,21.56875 78.66,43.5575 78.66,93.03375 0,53.2875 -41.86625,82.465 -98.11,82.465 -54.97625,0 -90.5,-26.2175 -107.83625,-60.47375" />
     </g>
     <path
-       d="m 113.68252,29.612343 -2.22556,11.127826 45.29323,0 -1.41353,7.187969 -45.32332,0 -2.19548,11.127814 45.29323,0 -2.52631,12.691738 -18.25564,6.045114 -15.81955,-6.045114 1.08271,-5.50377 -11.12782,0 -2.64662,13.353391 26.16542,10.015032 30.16541,-10.015032 4,-20.09023 0.81203,-4.030072 5.14286,-25.864666 z"
-       id="path3356" />
+       d="m 117.68252,29.612343 -2.22556,11.127826 45.29323,0 -1.41353,7.187969 -45.32332,0 -2.19548,11.127814 45.29323,0 -2.52631,12.691738 -18.25564,6.045114 -15.81955,-6.045114 1.08271,-5.50377 -11.12782,0 -2.64662,13.353391 26.16542,10.015032 30.16541,-10.015032 4,-20.09023 0.81203,-4.030072 5.14286,-25.864666 z"
+       id="path3356"
+       inkscape:connector-curvature="0" />
     <g
        id="text3389"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:125px;line-height:125%;font-family:Jura;-inkscape-font-specification:'Jura, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1">

@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="450" width="50" src="https://raw.githubusercontent.com/mvsde/styleguide/master/src/assets/img/styleguide-logo.svg">
+  <img width="450" height="50" src="https://raw.githubusercontent.com/mvsde/styleguide/master/src/assets/img/styleguide-logo.png">
 </p>
 
 # Front-End Styleguide
