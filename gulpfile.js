@@ -413,9 +413,14 @@ gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets
 });
 
 gulp.task('watch:test', function(cb) {
+  del.sync('dev/assets/**');
+  gulp.src(config.assetsInput)
+    .pipe(gulp.dest(config.assetsDev))
+    .pipe(browserSync.stream())
+
   watch('src/assets/**/*', function() {
-    del(config.assetsDev);
-    return gulp.src(config.assetsInput)
+    del.sync('dev/assets/**');
+    gulp.src(config.assetsInput)
       .pipe(gulp.dest(config.assetsDev))
       .pipe(browserSync.stream())
       .on('end', cb);
