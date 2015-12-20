@@ -10,10 +10,9 @@ var fs           = require('fs');
 var del          = require('del');
 var gulp         = require('gulp');
 var gutil        = require('gulp-util');
-var rename       = require('gulp-rename');
-var watchr       = require('watchr');
-var concat       = require('gulp-concat');
 var watch        = require('gulp-watch');
+var rename       = require('gulp-rename');
+var concat       = require('gulp-concat');
 var browserSync  = require('browser-sync');
 
 // CSS/Sass
@@ -35,48 +34,61 @@ var imagemin     = require('gulp-imagemin');
 
 
 
-/* CONFIGURATION
+/* PATHS & CONFIGURATION
  * ========================================================================== */
 
 
-// Directories
-var path = {
+// Base folders
+var basePaths = {
   src:  'src/',
   dev:  'dev/',
   dist: 'dist/'
 }
 
 
-// Variables
-var config = {
-  // Sass
-  sassInput:   path.src  + 'css/main.scss',
-  sassWatch:   path.src  + 'css',
-  sassDev:     path.dev  + 'css',
-  sassDist:    path.dist + 'css',
-  sassPrefix:  ['last 2 versions'],
-
-  // JavaScript
-  jsInput:     path.src  + 'js/**/*.js',
-  jsWatch:     path.src  + 'js',
-  jsDev:       path.dev  + 'js',
-  jsDist:      path.dist + 'js',
-
-  // HTML
-  htmlPages:   path.src  + 'html/pages/*.nunjucks',
-  htmlComps:   path.src  + 'html/components/*.nunjucks',
-  htmlTempl:   path.src  + 'html/templates/',
-  htmlSass:    path.src  + 'html/css/docs.scss',
-  htmlWatch:   path.src  + 'html',
-  htmlDev:     path.dev,
-  htmlDist:    path.dist,
-
-  // Assets
-  assetsInput: path.src  + 'assets/**/*',
-  assetsWatch: path.src  + 'assets',
-  assetsDev:   path.dev  + 'assets',
-  assetsDist:  path.dist + 'assets'
+// Task specific folders
+var paths = {
+  css: {
+    src:        basePaths.src  + 'css/',
+    dev:        basePaths.dev  + 'css/',
+    dist:       basePaths.dist + 'css/'
+  },
+  js: {
+    src:        basePaths.src  + 'js/',
+    dev:        basePaths.dev  + 'js/',
+    dist:       basePaths.dist + 'js/'
+  },
+  html: {
+    src:        basePaths.src  + 'html/',
+    pages:      basePaths.src  + 'html/pages/*.nunjucks',
+    components: basePaths.src  + 'html/components/*.nunjucks',
+    templates:  basePaths.src  + 'html/templates/',
+    css:        basePaths.src  + 'html/css/',
+    dev:        basePaths.dev,
+    dist:       basePaths.dist
+  },
+  assets: {
+    src:        basePaths.src  + 'assets/',
+    dev:        basePaths.dev  + 'assets/',
+    dist:       basePaths.dist + 'assets/'
+  }
 }
+
+
+// Config
+var config = {
+  sass: {
+    autoprefixer: {
+      browsers: ['last 2 versions']
+    }
+  }
+}
+
+
+
+
+/* Custom Functions
+ * ========================================================================== */
 
 
 // Don't unpipe on error
@@ -94,33 +106,33 @@ var replaceInArray = function(array, search, insert) {
 };
 
 
+// Log messages
+var log = {
+  heading: function(message) {
+    console.log('\n' + gutil.colors.inverse(message));
+  },
+  activity: function(message) {
+    gutil.log(gutil.colors.bold(message));
+  }
+}
+
+
 
 
 /* CLEAN
  * Delete directories
  * ========================================================================== */
 
+
 // Clean Development
 gulp.task('clean:dev', function() {
-  return del(path.dev);
+  return del(basePaths.dev);
 });
 
 
 // Clean Distribution
 gulp.task('clean:dist', function() {
-  return del(path.dist);
-});
-
-
-// Clean HTML
-gulp.task('clean:html', function() {
-  return del(config.htmlDev + '/**/*.html');
-});
-
-
-// Clean Assets
-gulp.task('clean:assets', function() {
-  return del(config.assetsDev);
+  return del(basePaths.dist);
 });
 
 
@@ -130,42 +142,49 @@ gulp.task('clean:assets', function() {
  * Compile Sass code into CSS
  * ========================================================================== */
 
+
 // Sass Development Function
 var sassDev = function() {
-  return gulp.src(config.sassInput)
+  log.heading('Sass Development');
+
+  log.activity('Compile Sass to CSS');
+  gulp.src(paths.css.src + '**/*.scss')
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-      .pipe(autoprefixer(config.sassPrefix))
+      .pipe(autoprefixer(config.sass.autoprefixer))
       .pipe(rename('style.css'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(config.sassDev))
+    .pipe(gulp.dest(paths.css.dev))
     .pipe(browserSync.stream());
+  log.activity('Finished compiling');
 };
+
 
 // Sass Development Task
 gulp.task('sass:dev', function() {
-  sassDev();
+  return sassDev();
 });
 
 
 // Sass Docs
 gulp.task('sass:docs', function() {
-  return gulp.src(config.htmlSass)
+  return gulp.src(paths.html.css + '**/*.scss')
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-      .pipe(autoprefixer(config.sassPrefix))
+      .pipe(autoprefixer(config.sass.autoprefixer))
+      .pipe(rename('docs.css'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(config.sassDev));
+    .pipe(gulp.dest(paths.css.dev));
 });
 
 
 // Sass Distribution
 gulp.task('sass:dist', ['clean:dist'], function() {
-  return gulp.src(config.sassInput)
+  return gulp.src(paths.css.src + '**/*.scss')
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(autoprefixer(config.sassPrefix))
+    .pipe(autoprefixer(config.sass.autoprefixer))
     .pipe(rename('style.css'))
-    .pipe(gulp.dest(config.sassDist));
+    .pipe(gulp.dest(paths.css.dist));
 });
 
 
@@ -175,32 +194,38 @@ gulp.task('sass:dist', ['clean:dist'], function() {
  * Lint javscript
  * ========================================================================== */
 
+
 // JavaScript Development Function
 var jsDev = function() {
-  return gulp.src(config.jsInput)
+  log.heading('JavaScript Development');
+
+  log.activity('Concat JavaScript files');
+  gulp.src(paths.js.src + '*.js')
     .pipe(sourcemaps.init())
       .pipe(concat('script.js'))
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(config.jsDev))
+    .pipe(gulp.dest(paths.js.dev))
     .pipe(browserSync.stream());
+  log.activity('Finshed concatenating');
 };
+
 
 // JavaScript Development Task
 gulp.task('js:dev', function() {
-  jsDev();
+  return jsDev();
 });
 
 
 // JavaScript Production
 gulp.task('js:dist', ['clean:dist'], function() {
-  return gulp.src(config.jsInput)
+  return gulp.src(paths.js.src + '*.js')
     .pipe(concat('script.js'))
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
     .pipe(uglify())
-    .pipe(gulp.dest(config.jsDist));
+    .pipe(gulp.dest(paths.js.dist));
 });
 
 
@@ -211,9 +236,10 @@ gulp.task('js:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
+// Nunjucks Function
 var nunjucks = function(input, dest, nav) {
   // Configure Nunjucks
-  njRender.nunjucks.configure([config.htmlTempl], {noCache: true, watch: false});
+  njRender.nunjucks.configure([paths.html.templates], {noCache: true, watch: false});
 
   // Get all pages
   var pageList = fs.readdirSync('src/html/pages');
@@ -234,30 +260,30 @@ var nunjucks = function(input, dest, nav) {
 };
 
 
-gulp.task('nunjucks:pages', ['clean:html'], function() {
-  nunjucks(config.htmlPages, config.htmlDev, true);
-});
-
-
-gulp.task('nunjucks:components', ['clean:html'], function() {
-  nunjucks(config.htmlComps, config.htmlDev, true);
-});
-
 // Nunjucks Development Function
 var nunjucksDev = function() {
-  nunjucks(config.htmlPages, config.htmlDev, true);
-  nunjucks(config.htmlComps, config.htmlDev, true);
+  log.heading('Nunjucks Development');
+
+  log.activity('Clean dev/*.html');
+  del.sync(basePaths.dev + '*.html');
+  log.activity('Finished cleaning');
+
+  log.activity('Compiling Nunjucks to HTML');
+  nunjucks(paths.html.pages,      paths.html.dev, true);
+  nunjucks(paths.html.components, paths.html.dev, true);
+  log.activity('Finished compiling');
 };
 
+
 // Nunjucks Development Task
-gulp.task('nunjucks:dev', ['clean:html'], function() {
+gulp.task('nunjucks:dev', function() {
   nunjucksDev();
 });
 
 
 // Nunjucks Distribution
 gulp.task('nunjucks:dist', ['clean:dist'], function() {
-  nunjucks(config.htmlPages, config.htmlDist, false);
+  nunjucks(paths.html.pages, paths.html.dist, false);
 });
 
 
@@ -267,29 +293,38 @@ gulp.task('nunjucks:dist', ['clean:dist'], function() {
  * Copy assets (e.g. img or fonts)
  * ========================================================================== */
 
+
 // Assets Development Function
 var assetsDev = function() {
-  del(config.assetsDev);
-  return gulp.src(config.assetsInput)
-    .pipe(gulp.dest(config.assetsDev))
+  log.heading('Assets Development');
+
+  log.activity('Clean dev/assets');
+  del.sync(paths.assets.dev + '**');
+  log.activity('Finished cleaning');
+
+  log.activity('Copy src/assets to dev/assets');
+  gulp.src(paths.assets.src + '**')
+    .pipe(gulp.dest(paths.assets.dev))
     .pipe(browserSync.stream());
+  log.activity('Finished copying');
 };
 
+
 // Assets Development
-gulp.task('assets:dev', ['clean:assets'], function() {
-  assetsDev();
+gulp.task('assets:dev', function() {
+  return assetsDev();
 });
 
 
 // Assets Distribution
 gulp.task('assets:dist', ['clean:dist'], function() {
-  return gulp.src(config.assetsInput)
+  return gulp.src(paths.assets.src + '**')
     .pipe(imagemin({
       progressive: true,
       interlaced: true,
       multipass: true
     }))
-    .pipe(gulp.dest(config.assetsDist));
+    .pipe(gulp.dest(paths.assets.dev));
 });
 
 
@@ -311,16 +346,16 @@ gulp.task('distribution', ['sass:dist', 'js:dist', 'nunjucks:dist', 'assets:dist
  * ========================================================================== */
 
 
-gulp.task('browserSync', function() {
+var startBrowserSync = function() {
   browserSync({
     server: {
-      baseDir: config.htmlDev
+      baseDir: paths.html.dev
     },
     logPrefix: 'BrowserSync',
     scrollElements: ['*'],
     reloadDelay: 200
   });
-});
+}
 
 
 
@@ -333,96 +368,29 @@ gulp.task('browserSync', function() {
  * ========================================================================== */
 
 
-// Capitalize first string letter
-function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-
 gulp.task('default', ['sass:dev', 'sass:docs', 'js:dev', 'nunjucks:dev', 'assets:dev'], function() {
 
   // Start BrowserSync after initial tasks finished
-  //
-  // Deprecated 'gulp.start'
-  // Replace with function form of gulp tasks
-  gulp.start('browserSync');
+  startBrowserSync();
 
   // Watch Sass
-  watchr.watch({
-    paths: [config.sassWatch],
-    catchupDelay: 500,
-    listeners: {
-      error: function(err) {
-        gutil.log(gutil.colors.red('An error occured: '), err)
-      },
-      change: function(changeType, filePath) {
-        console.log('');
-        gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        sassDev();
-      }
-    }
+  watch(paths.css.src + '**/*.scss', function() {
+    sassDev();
   });
 
   // Watch JavaScript
-  watchr.watch({
-    paths: [config.jsWatch],
-    catchupDelay: 500,
-    listeners: {
-      error: function(err) {
-        gutil.log(gutil.colors.red('An error occured: '), err)
-      },
-      change: function(changeType, filePath) {
-        console.log('');
-        gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        jsDev();
-      }
-    }
+  watch(paths.js.src + '*.js', function() {
+    jsDev();
   });
 
-  // Watch HTML
-  watchr.watch({
-    paths: [config.htmlWatch],
-    catchupDelay: 500,
-    listeners: {
-      error: function(err) {
-        gutil.log(gutil.colors.red('An error occured: '), err)
-      },
-      change: function(changeType, filePath) {
-        console.log('');
-        gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        nunjucksDev();
-      }
-    }
+  // Watch JavaScript
+  watch(paths.html.src + '**/*.nunjucks', function() {
+    nunjucksDev();
   });
 
   // Watch Assets
-  watchr.watch({
-    paths: [config.assetsWatch],
-    catchupDelay: 500,
-    listeners: {
-      error: function(err) {
-        gutil.log(gutil.colors.red('An error occured: '), err)
-      },
-      change: function(changeType, filePath) {
-        console.log('');
-        gutil.log(capitalize(changeType), gutil.colors.magenta(filePath));
-        assetsDev();
-      }
-    }
+  watch(paths.assets.src + '**/*', function() {
+    assetsDev();
   });
 });
 
-gulp.task('watch:test', function(cb) {
-  del.sync('dev/assets/**');
-  gulp.src(config.assetsInput)
-    .pipe(gulp.dest(config.assetsDev))
-    .pipe(browserSync.stream())
-
-  watch('src/assets/**/*', function() {
-    del.sync('dev/assets/**');
-    gulp.src(config.assetsInput)
-      .pipe(gulp.dest(config.assetsDev))
-      .pipe(browserSync.stream())
-      .on('end', cb);
-  });
-});

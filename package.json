@@ -45,7 +45,6 @@
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
     "jshint": "^2.8.0",
-    "jshint-stylish": "^2.1.0",
-    "watchr": "^2.4.13"
+    "jshint-stylish": "^2.1.0"
   }
 }
