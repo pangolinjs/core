@@ -1,18 +1,13 @@
-{%- if docsNav %}
 <nav class="docs__nav" id="docs-nav">
   <button class="docs__nav__btn" id="docs-button">
     <span class="docs__nav__btn__icon"></span>
   </button>
   <ul class="docs__nav__list">
     <li><span class="docs__nav__title">Pages</span></li>
-  {%- for page in pageList %}
-    <li><a href="{{ page }}" class="docs__nav__link">{{ page }}</a></li>
-  {%- endfor %}
+    <li><a href="" class="docs__nav__link"></a></li>
 
     <li><span class="docs__nav__title">Components</span></li>
-  {%- for comp in compList %}
-    <li><a href="{{ comp }}" class="docs__nav__link">{{ comp }}</a></li>
-  {% endfor -%}
+    <li><a href="" class="docs__nav__link"></a></li>
 
     <li><span class="docs__nav__title">Settings</span></li>
     <li><a href="http://localhost:3001" class="docs__nav__link">BrowserSync</a></li>
@@ -27,4 +22,3 @@
     docsNav.classList.toggle('js--docs__nav--open');
   };
 </script>
-{%- endif %}

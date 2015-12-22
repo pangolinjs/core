@@ -3,29 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ page_title }}</title>
-    {# Docs Stylesheet #}
+    <title>{{ title }}</title>
+    <!-- Docs Stylesheet -->
     <link rel="stylesheet" href="css/docs.css">
-    {# Styleguide Stylesheet #}
+    <!-- Styleguide Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
 
-    {# Docs Nav #}
-    {%- include "includes/docs/nav.nunjucks" -%}
+    <!-- Docs Nav -->
+    {{> docs-nav }}
 
-    {# Docs Header #}
+    <!-- Docs Header -->
     <header class="docs__header">
-      <h1 class="docs__title">{{ page_title }}</h1>
+      <h1 class="docs__title">{{ title }}</h1>
       <p class="docs__description">{{ description }}</p>
     </header>
 
-    {# Component Body #}
+    <!-- Component Body -->
     <main class="docs__body">
-      {% block page_body %} {% endblock %}
+      {% body %}
     </main>
 
-    {# Styleguide Scripts #}
+    <!-- Styleguide Scripts -->
     <script src="js/script.js"></script>
   </body>
 </html>

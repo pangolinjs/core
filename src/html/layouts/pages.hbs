@@ -3,23 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ page_title }}</title>
-  {%- if docsNav %}
-    {# Docs Stylesheet #}
+    <title>{{ title }}</title>
+    <!-- Docs Stylesheet -->
     <link rel="stylesheet" href="css/docs.css">
-  {%- endif %}
-    {# Styleguide Stylesheet #}
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
 
-    {# Docs Nav #}
-    {%- include "includes/docs/nav.nunjucks" -%}
+    <!-- Docs Nav -->
+    {{> docs-nav }}
 
-    {# Page Body #}
-    {%- block page_body %} {% endblock %}
+    <!-- Body -->
+    {% body %}
 
-    {# Styleguide Scripts #}
+    <!-- Scripts -->
     <script src="js/script.js"></script>
   </body>
 </html>

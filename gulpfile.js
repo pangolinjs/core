@@ -25,8 +25,8 @@ var uglify       = require('gulp-uglify');
 var jshint       = require('gulp-jshint');
 var stylish      = require('jshint-stylish');
 
-// Nunjucks
-var njRender     = require('gulp-nunjucks-render');
+// Assemble
+var assemble     = require('assemble');
 
 // Assets
 var imagemin     = require('gulp-imagemin');
@@ -228,8 +228,6 @@ gulp.task('js:dev', function() {
 gulp.task('js:dist', ['clean:dist'], function() {
   return gulp.src(paths.js.src + '*.js')
     .pipe(concat('script.js'))
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish))
     .pipe(uglify())
     .pipe(gulp.dest(paths.js.dist));
 });
@@ -237,59 +235,36 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 
-/* NUNJUCKS
- * Pre-compile Nunjucks files into HTML
+/* Assemble
+ * Pre-compile Handlebars files into HTML
  * ========================================================================== */
 
 
-// Nunjucks Function
-var nunjucks = function(input, dest, nav) {
-  // Configure Nunjucks
-  njRender.nunjucks.configure([paths.html.templates], {noCache: true, watch: false});
+assemble.layouts('src/html/layouts/*.hbs');
+assemble.partials('src/html/partials/*.hbs');
 
-  // Get all pages
-  var pageList = fs.readdirSync('src/html/pages');
-  var compList = fs.readdirSync('src/html/components');
 
-  // Replace extension
-  replaceInArray(pageList, '.nunjucks', '.html');
-  replaceInArray(compList, '.nunjucks', '.html');
-
-  return gulp.src(input)
-    .pipe(njRender({
-      docsNav: nav,
-      pageList: pageList,
-      compList: compList
-    }).on('error', streamError))
-    .pipe(gulp.dest(dest))
-    .pipe(browserSync.stream());
+var assemblePages = function() {
+  assemble.src('src/html/pages/*.hbs')
+    .pipe(assemble.dest('dev'));
 };
 
+var assembleComponents = function() {
+  assemble.src('src/html/components/*.hbs')
+    .pipe(assemble.dest('dev'));
+};
 
-// Nunjucks Development Function
-var nunjucksDev = function() {
-  log.heading('Compile Nunjucks');
+gulp.task('assemble:dev', function() {
+  log.heading('Assemble Development');
 
-  log.activity('Start cleaning...');
-  del.sync(basePaths.dev + '*.html');
+  log.activity('Clean dev/*.html');
+  del.sync('dev/*.html');
   log.activity('Finished cleaning');
 
-  log.activity('Start compiling...');
-  nunjucks(paths.html.pages,      paths.html.dev, true);
-  nunjucks(paths.html.components, paths.html.dev, true);
+  log.activity('Compile Handlebars...');
+  assemblePages();
+  //assembleComponents();
   log.activity('Finished compiling.');
-};
-
-
-// Nunjucks Development Task
-gulp.task('nunjucks:dev', function() {
-  nunjucksDev();
-});
-
-
-// Nunjucks Distribution
-gulp.task('nunjucks:dist', ['clean:dist'], function() {
-  nunjucks(paths.html.pages, paths.html.dist, false);
 });
 
 
@@ -308,11 +283,11 @@ var assetsDev = function() {
   del.sync(paths.assets.dev + '**');
   log.activity('Finished cleaning');
 
-  log.activity('Copy src/assets to dev/assets');
+  log.activity('Copy src/assets to dev/assets...');
   gulp.src(paths.assets.src + '**')
     .pipe(gulp.dest(paths.assets.dev))
     .pipe(browserSync.stream());
-  log.activity('Finished copying');
+  log.activity('Finished copying.');
 };
 
 
@@ -336,19 +311,19 @@ gulp.task('assets:dist', ['clean:dist'], function() {
 
 
 
-/* DISTRIBUTION
- * Run alle the *:dist tasks
+/* Production
+ * Generate production ready files.
  * ========================================================================== */
 
 
-gulp.task('distribution', ['sass:dist', 'js:dist', 'nunjucks:dist', 'assets:dist']);
+gulp.task('production', ['sass:dist', 'js:dist', 'assets:dist']);
 
 
 
 
 /* BROWSERSYNC
  * Open web server for cross device development
- * and auto-reload of CSS/JS/HTML
+ * and auto-reload of CSS/JS/HTML.
  * ========================================================================== */
 
 
@@ -369,7 +344,7 @@ var startBrowserSync = function() {
 
 
 /* DEFAULT
- * Run all *:dev tasks and watch for add/change/delete
+ * Run all *:dev tasks and watch for add/change/delete.
  *
  * Until gulp.watch becomes somewhat useful we utilize Watchr:
  * (https://github.com/bevry/watchr)
@@ -382,7 +357,6 @@ gulp.task('default', ['clean:dev'], function() {
   sassDev();
   sassDocs();
   jsDev();
-  nunjucksDev();
 
   // Start BrowserSync after initial tasks finished
   startBrowserSync();
@@ -397,9 +371,8 @@ gulp.task('default', ['clean:dev'], function() {
     jsDev();
   });
 
-  // Watch JavaScript
+  // Watch HTML
   watch(paths.html.src + '**/*.nunjucks', function() {
-    nunjucksDev();
   });
 
   // Watch Assets
