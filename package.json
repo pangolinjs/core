@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/MVSde/styleguide#readme",
   "dependencies": {
+    "assemble": "^0.6.2",
     "del": "^2.1.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
@@ -41,7 +42,7 @@
     "gulp-util": "^3.0.7"
   },
   "devDependencies": {
-    "assemble": "^0.6.1",
+    "assemble": "^0.6.2",
     "browser-sync": "^2.10.0",
     "del": "^2.1.0",
     "gulp": "^3.9.0",
