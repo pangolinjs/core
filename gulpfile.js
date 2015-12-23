@@ -240,12 +240,14 @@ gulp.task('js:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-assemble.layouts('src/html/layouts/*.hbs');
-assemble.partials('src/html/partials/*.hbs');
+
 
 
 var assemblePages = function() {
-  assemble.src('src/html/pages/*.hbs')
+  assemble.layouts('src/html/layouts/*.hbs');
+  assemble.partials('src/html/partials/*.hbs');
+
+  assemble.src(['src/html/pages/*.hbs', 'src/html/components/*.hbs'])
     .pipe(assemble.dest('dev'));
 };
 

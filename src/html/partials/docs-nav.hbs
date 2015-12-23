@@ -14,6 +14,12 @@
   </ul>
 </nav>
 
+<ul>
+  {{#each pages}}
+    <li><a href="#">{{page.dest}}</a></li>
+  {{/each}}
+</ul>
+
 <script>
   var docsNavBtn  = document.getElementById('docs-button');
   var docsNav = document.getElementById('docs-nav');
