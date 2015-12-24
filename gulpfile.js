@@ -244,29 +244,44 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 var assemblePages = function() {
-  assemble.layouts('src/html/layouts/*.hbs');
-  assemble.partials('src/html/partials/*.hbs');
+  var assPages = assemble();
 
-  assemble.src(['src/html/pages/*.hbs', 'src/html/components/*.hbs'])
-    .pipe(assemble.dest('dev'));
+  assPages.src('src/html/pages/*.hbs')
+    .pipe(assPages.renderFile())
+    .pipe(assPages.dest('dev'));
 };
 
 var assembleComponents = function() {
-  assemble.src('src/html/components/*.hbs')
-    .pipe(assemble.dest('dev'));
+  var assComponents = assemble();
+
+  assComponents.src('src/html/components/*.hbs')
+    .pipe(assComponents.renderFile())
+    .pipe(assComponents.dest('dev/components'));
 };
 
 gulp.task('assemble:dev', function() {
   log.heading('Assemble Development');
 
+  //assemble.layouts('src/html/layouts/*.hbs');
+  //assemble.partials('src/html/partials/*.hbs');
+
   log.activity('Clean dev/*.html');
-  del.sync('dev/*.html');
+  del.sync('dev');
   log.activity('Finished cleaning');
 
   log.activity('Compile Handlebars...');
   assemblePages();
-  //assembleComponents();
+  assembleComponents();
   log.activity('Finished compiling.');
+});
+
+
+gulp.task('assemble:test', ['clean:dev'], function() {
+  assemble.layouts('src/html/layouts/*.hbs');
+  assemble.partials('src/html/partials/*.hbs');
+
+  return assemble.src(['src/html/pages/*.hbs', 'src/html/components/*.hbs'])
+    .pipe(assemble.dest('dev'));
 });
 
 
