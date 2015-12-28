@@ -2,9 +2,12 @@
 title: Frontpage
 layout: pages
 ---
+{{#extend "layout.pages"}}
+  {{#content "content"}}
+    <h1>This is your Frontpage</h1>
 
-<h1>This is your Frontpage</h1>
-
-<p>It's the first page (index.html) the visitor of your site will see.</p>
-<p>Use the 'pages'-directory to create the final web sites.</p>
-<p>Ideally these pages will be composed of 'includes'.</p>
+    <p>It's the first page (index.html) the visitor of your site will see.</p>
+    <p>Use the 'pages'-directory to create the final web sites.</p>
+    <p>Ideally these pages will be composed of 'includes'.</p>
+  {{/content}}
+{{/extend}}

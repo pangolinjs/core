@@ -1,33 +1,35 @@
 ---
 title: Example Component
 description: This is a short description for the component.
-layout: components
 ---
+{{#extend "layout.components"}}
+  {{#content "content"}}
+    <article class="docs__article">
+      <header class="docs__article__header">
+        <h2 class="docs__article__title">Documentation file for a component</h2>
+        <p class="docs__article__description">You can wrap components or variations thereof in awesome boxes with headings and descriptions.</p>
+      </header>
 
-<article class="docs__article">
-  <header class="docs__article__header">
-    <h2 class="docs__article__title">Documentation file for a component</h2>
-    <p class="docs__article__description">You can wrap components or variations thereof in awesome boxes with headings and descriptions.</p>
-  </header>
+      <div class="docs__article__body">
+        <p>You can write your component in this file. But it is recommended to build elements as includes for greater reusability of your code.</p>
 
-  <div class="docs__article__body">
-    <p>You can write your component in this file. But it is recommended to build elements as includes for greater reusability of your code.</p>
+        <p>Includes will be loaded from the <code>src/html/templates</code> folder:</p>
+        {{> "include.example"}}
 
-    <p>Includes will be loaded from the <code>src/html/templates</code> folder:</p>
-    {{> "partial"}}
+      </div>
+    </article>
 
-  </div>
-</article>
+    <article class="docs__article">
+      <header class="docs__article__header">
+        <h2 class="docs__article__title">A variation of this component</h2>
+        <p class="docs__article__description">This can have a description aswell.</p>
+      </header>
 
-<article class="docs__article">
-  <header class="docs__article__header">
-    <h2 class="docs__article__title">A variation of this component</h2>
-    <p class="docs__article__description">This can have a description aswell.</p>
-  </header>
+      <div class="docs__article__body">
+        <p>For better file organization you can add a namespace to your includes:</p>
+        {{> "include.namespace.example" }}
 
-  <div class="docs__article__body">
-    <p>For better file organization you can add a namespace to your includes:</p>
-    {{> "namespace.example" }}
-
-  </div>
-</article>
+      </div>
+    </article>
+  {{/content}}
+{{/extend}}

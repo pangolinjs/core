@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ title }}</title>
+    <title>{{ file.meta.title }}</title>
     <!-- Docs Stylesheet -->
     <link rel="stylesheet" href="css/docs.css">
     <!-- Styleguide Stylesheet -->
@@ -12,17 +12,17 @@
   <body>
 
     <!-- Docs Nav -->
-    {{> docs-nav }}
+    {{> "docs-nav"}}
 
     <!-- Docs Header -->
     <header class="docs__header">
-      <h1 class="docs__title">{{ title }}</h1>
-      <p class="docs__description">{{ description }}</p>
+      <h1 class="docs__title">{{ file.meta.title }}</h1>
+      <p class="docs__description">{{ file.meta.description }}</p>
     </header>
 
     <!-- Component Body -->
     <main class="docs__body">
-      {% body %}
+      {{{block "content"}}}
     </main>
 
     <!-- Styleguide Scripts -->

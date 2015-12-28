@@ -25,8 +25,10 @@ var uglify       = require('gulp-uglify');
 var jshint       = require('gulp-jshint');
 var stylish      = require('jshint-stylish');
 
-// Assemble
-var assemble     = require('assemble');
+// Handelbars
+var hb           = require('gulp-hb');
+var hbLayouts    = require('handlebars-layouts');
+var frontMatter  = require('gulp-front-matter');
 
 // Assets
 var imagemin     = require('gulp-imagemin');
@@ -235,30 +237,33 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 
-/* Assemble
+/* Handlebars
  * Pre-compile Handlebars files into HTML
  * ========================================================================== */
 
 
-var assembleHandelbars = function(source, destination) {
-  assemble.src(source)
-    .pipe(assemble.dest(destination));
+var compileHandlebars = function(source, destination) {
+  return gulp.src(source)
+    .pipe(frontMatter({property: 'meta'}))
+    .pipe(hb({
+      debug: true,
+      helpers: 'node_modules/handlebars-layouts/index.js',
+      partials: 'src/html/partials/*.hbs'
+    }))
+    .pipe(gulp.dest(destination));
 };
 
 
-gulp.task('assemble:dev', function() {
-  log.heading('Assemble Development');
+gulp.task('handlebars:dev', function() {
+  log.heading('Handlebars Development');
 
-  assemble.layouts('src/html/layouts/*.hbs');
-  assemble.partials('src/html/partials/*.hbs');
-
-  log.activity('Clean dev/*.html');
+  log.activity('Clean dev/**/*.html');
   del.sync('dev/**/*.html');
   log.activity('Finished cleaning');
 
   log.activity('Compile Handlebars...');
-  assembleHandelbars('src/html/pages/*.hbs', 'dev');
-  assembleHandelbars('src/html/components/*.hbs', 'dev/components');
+  compileHandlebars('src/html/pages/*.hbs', 'dev');
+  compileHandlebars('src/html/components/*.hbs', 'dev/components');
   log.activity('Finished compiling.');
 });
 
