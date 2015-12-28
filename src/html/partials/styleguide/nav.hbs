@@ -14,6 +14,11 @@
   </ul>
 </nav>
 
+{{#each file.nav.root.siblings}}
+  <a href="{{href}}">{{title}}</a>
+{{/each}}
+
+
 <script>
   var docsNavBtn  = document.getElementById('docs-button');
   var docsNav = document.getElementById('docs-nav');

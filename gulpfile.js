@@ -27,8 +27,8 @@ var stylish      = require('jshint-stylish');
 
 // Handelbars
 var hb           = require('gulp-hb');
-var hbLayouts    = 'node_modules/handlebars-layouts/index.js';
 var frontMatter  = require('gulp-front-matter');
+var nav          = require('gulp-nav');
 
 // Assets
 var imagemin     = require('gulp-imagemin');
@@ -245,9 +245,9 @@ gulp.task('js:dist', ['clean:dist'], function() {
 var compileHandlebars = function(source, destination) {
   return gulp.src(source)
     .pipe(frontMatter({property: 'meta'}))
+    .pipe(nav())
     .pipe(hb({
-      debug: true,
-      helpers: hbLayouts,
+      helpers: 'node_modules/handlebars-layouts/index.js',
       partials: paths.html.partials
     }))
     .pipe(rename({extname: '.html'}))
@@ -263,8 +263,7 @@ gulp.task('handlebars:dev', function() {
   log.activity('Finished cleaning');
 
   log.activity('Compile Handlebars...');
-  compileHandlebars(paths.html.pages,      paths.html.dev);
-  compileHandlebars(paths.html.components, paths.html.dev + 'components');
+  compileHandlebars(paths.html.pages, paths.html.dev);
   log.activity('Finished compiling.');
 });
 
