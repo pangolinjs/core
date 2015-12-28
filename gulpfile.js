@@ -27,7 +27,7 @@ var stylish      = require('jshint-stylish');
 
 // Handelbars
 var hb           = require('gulp-hb');
-var hbLayouts    = require('handlebars-layouts');
+var hbLayouts    = 'node_modules/handlebars-layouts/index.js';
 var frontMatter  = require('gulp-front-matter');
 
 // Assets
@@ -62,9 +62,9 @@ var paths = {
   },
   html: {
     src:        basePaths.src  + 'html/',
-    pages:      basePaths.src  + 'html/pages/*.nunjucks',
-    components: basePaths.src  + 'html/components/*.nunjucks',
-    templates:  basePaths.src  + 'html/templates/',
+    pages:      basePaths.src  + 'html/pages/**/*.hbs',
+    components: basePaths.src  + 'html/components/**/*.hbs',
+    partials:   basePaths.src  + 'html/partials/**/*.hbs',
     css:        basePaths.src  + 'html/css/',
     dev:        basePaths.dev,
     dist:       basePaths.dist
@@ -247,9 +247,10 @@ var compileHandlebars = function(source, destination) {
     .pipe(frontMatter({property: 'meta'}))
     .pipe(hb({
       debug: true,
-      helpers: 'node_modules/handlebars-layouts/index.js',
-      partials: 'src/html/partials/*.hbs'
+      helpers: hbLayouts,
+      partials: paths.html.partials
     }))
+    .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest(destination));
 };
 
@@ -262,8 +263,8 @@ gulp.task('handlebars:dev', function() {
   log.activity('Finished cleaning');
 
   log.activity('Compile Handlebars...');
-  compileHandlebars('src/html/pages/*.hbs', 'dev');
-  compileHandlebars('src/html/components/*.hbs', 'dev/components');
+  compileHandlebars(paths.html.pages,      paths.html.dev);
+  compileHandlebars(paths.html.components, paths.html.dev + 'components');
   log.activity('Finished compiling.');
 });
 
