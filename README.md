@@ -4,7 +4,7 @@
 
 # Front-End Styleguide
 Front-end development styleguide with Sass, JavaScript and Nunjucks.
-Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint JavaScript](http://jshint.com/) and create static HTML files from [Nunjucks](https://mozilla.github.io/nunjucks/) files.
+Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint JavaScript](http://jshint.com/) and create static HTML files from [Handlebars](http://handlebarsjs.com/) files.
 
 
 ## Contents
@@ -13,7 +13,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 3. [Usage](#usage)
   1. [Sass](#sass)
   2. [JavaScript](#javascript)
-  3. [Nunjucks](#nunjucks)
+  3. [Handlebars](#handlebars)
   4. [Assets](#assets)
 
 
@@ -54,32 +54,26 @@ Output to `dev/js` or `dist/js`.
 All JavaScript files will be concatenated so you can split the code into smaller components.
 
 
-### Nunjucks
+### Handlebars
 Located in `src/html`.<br>
 Output to `dev` or `dist`.
 
-*Nunjucks* is an HTML templating engine for JavaScript. Gulp creates static HTML files from Nunjucks files.
+*Handlebars* is an HTML templating engine based on JavaScript. Gulp creates static HTML files from Handlebars files.
 
-#### Templates
-Templates determine the overall structure of the HTML document. They contain the `<head>` area, scripts and styles.
+#### Layouts
+Layouts determine the overall structure of the HTML document. They contain the `<head>` area, scripts and styles.
 
-Templates are located in `src/html/templates`.
-
-A basic template contains `{{ page_title }}` to render a title and `{% block page_body %} {% endblock %}` to render the actual content.
+Layouts are located in `src/html/partials/layouts`.
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{ page_title }}</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>{{file.meta.title}}</title>
   </head>
   <body>
-
-    {% block page_body %} {% endblock %}
-
-    <script src="js/script.js"></script>
+    {{{block "content"}}}
   </body>
 </html>
 ```
@@ -87,10 +81,9 @@ A basic template contains `{{ page_title }}` to render a title and `{% block pag
 #### Includes
 These files can be included in all other files (even in other includes). The process is comparable to PHP's *include*.
 
-Includes are located in `src/html/templates/includes`. They can be organized in sub-folders.<br>
-The Nunjucks renderer accesses them relative to the `templates` folder.
+Includes are located in `src/html/partials/includes`. The Handlebars renderer accesses them relative to the `partials` folder.
 
-The syntax `{% include "includes/example.nunjucks" %}` includes the file `example.nunjucks`.
+The syntax `{{> "includes/example" }}` includes the file `src/html/partials/includes/example.hbs`.
 
 #### Pages and Components
 Pages are the actual web pages displayed by the browser.<br>
@@ -99,23 +92,24 @@ The `default` gulp task injects a flyout menu into pages and components for easi
 
 Pages are located in `src/html/pages`, components in `src/html/components`.
 
-To use a template you have to use `{% set page_title = "Title" %}` to set a title and `{% extends "template.nunjucks" %}` to define the template.
-
-The content has to be enclosed by `{% block page_body %}` and `{% endblock %}`. This tells the renderer what to inject into the template body.
+The YAML front matter between `---` contains general information like the page title and description. This will be used primarily by layouts.
 
 ```html
-{% set page_title = "Title" %}
-{% extends "template.nunjucks" %}
-
-{% block page_body %}
-<p>This content will be injected into the template</p>
-{% endblock %}
+---
+title: Example
+description: Only used for components.
+---
+{{#extend "layouts/components"}}
+  {{#content "content"}}
+    <p>This will be injected into the layout.</p>
+  {{/content}}
+{{/extend}}
 ```
 
-#### CSS
+#### Styleguide CSS
 The components pages and the development menu use some styling.
 
-All styles are located in one `main.scss` file in `src/html/css`.
+All styles are located in `src/html/css/docs.scss`.
 
 The style definitions do not interfere with your CSS located in `src/css` as long as the following classes are not used:<br>
 <sub>*These classes are subject to change and will be prefixed anytime soon(ish).*</sub>
