@@ -280,13 +280,6 @@ var compileHandlebars = function(source, destination, nav) {
 
 // Handlebars Development Function
 var handlebarsDev = function() {
-  compileHandlebars(paths.html.pages, paths.html.dev, true);
-  compileHandlebars(paths.html.components, paths.html.dev + 'components', true);
-};
-
-
-// Handlebars Development Task
-gulp.task('handlebars:dev', function() {
   log.heading('Handlebars Development');
 
   log.activity('Clean dev/**/*.html');
@@ -294,8 +287,15 @@ gulp.task('handlebars:dev', function() {
   log.activity('Finished cleaning');
 
   log.activity('Compile Handlebars...');
-  handlebarsDev();
+  compileHandlebars(paths.html.pages, paths.html.dev, true);
+  compileHandlebars(paths.html.components, paths.html.dev + 'components', true);
   log.activity('Finished compiling.');
+};
+
+
+// Handlebars Development Task
+gulp.task('handlebars:dev', function() {
+  return handlebarsDev();
 });
 
 
@@ -409,6 +409,7 @@ gulp.task('default', ['clean:dev'], function() {
   // Watch HTML
   watch(paths.html.src + '**/*.hbs', function() {
     handlebarsDev();
+    browserSync.reload();
   });
 
   // Watch Assets
@@ -416,6 +417,7 @@ gulp.task('default', ['clean:dev'], function() {
     assetsDev();
   });
 
+  // Add empty line for cleaner console log
   log.empty();
 });
 
