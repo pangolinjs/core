@@ -1,7 +1,7 @@
 {
   "name": "styleguide",
-  "version": "0.7.0",
-  "description": "Front-end development styleguide with Sass, JavaScript and Nunjucks.",
+  "version": "0.8.0",
+  "description": "Front-end development styleguide with Sass, JavaScript and Handlebars.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
