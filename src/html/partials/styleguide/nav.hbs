@@ -1,30 +1,30 @@
 {{#if displayNav}}
-<nav class="docs__nav" id="docs-nav">
-  <button class="docs__nav__btn" id="docs-button">
-    <span class="docs__nav__btn__icon"></span>
+<nav class="sg-nav" id="sg-nav">
+  <button class="sg-nav__btn" id="sg-nav__btn">
+    <span class="sg-nav__icon"></span>
   </button>
-  <ul class="docs__nav__list">
-    <li><span class="docs__nav__title">Pages</span></li>
+  <ul class="sg-nav__list">
+    <li><span class="sg-nav__title">Pages</span></li>
     {{#each navItems.pages}}
-    <li><a href="{{../root}}{{href}}" class="docs__nav__link">{{title}}</a></li>
+    <li><a href="{{../root}}{{href}}" class="sg-nav__link">{{title}}</a></li>
     {{/each}}
 
-    <li><span class="docs__nav__title">Components</span></li>
+    <li><span class="sg-nav__title">Components</span></li>
     {{#each navItems.components}}
-    <li><a href="{{../root}}{{href}}" class="docs__nav__link">{{title}}</a></li>
+    <li><a href="{{../root}}{{href}}" class="sg-nav__link">{{title}}</a></li>
     {{/each}}
 
-    <li><span class="docs__nav__title">Settings</span></li>
-    <li><a href="http://localhost:3001" class="docs__nav__link">BrowserSync</a></li>
+    <li><span class="sg-nav__title">Settings</span></li>
+    <li><a href="http://localhost:3001" class="sg-nav__link">BrowserSync</a></li>
   </ul>
 </nav>
 
 <script>
-  var docsNavBtn  = document.getElementById('docs-button');
-  var docsNav = document.getElementById('docs-nav');
+  var docsNavBtn  = document.getElementById('sg-nav__btn');
+  var docsNav = document.getElementById('sg-nav');
 
   docsNavBtn.onclick = function() {
-    docsNav.classList.toggle('js--docs__nav--open');
+    docsNav.classList.toggle('sg-nav--open');
   };
 </script>
 {{/if}}

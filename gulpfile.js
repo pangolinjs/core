@@ -61,8 +61,8 @@ var paths = {
   },
   html: {
     src:        basePaths.src  + 'html/',
-    pages:      basePaths.src  + 'html/pages/*.hbs',
-    components: basePaths.src  + 'html/components/*.hbs',
+    pages:      basePaths.src  + 'html/pages/',
+    components: basePaths.src  + 'html/components/',
     partials:   basePaths.src  + 'html/partials/**/*.hbs',
     css:        basePaths.src  + 'html/css/',
     dev:        basePaths.dev,
@@ -171,14 +171,13 @@ gulp.task('sass:dev', function() {
 
 
 var sassDocs = function() {
-  log.heading('Compile Sass Docs');
+  log.heading('Compile Styleguide CSS');
 
   log.activity('Starting...');
-  gulp.src(paths.html.css + '**/*.scss')
+  gulp.src(paths.html.css + 'sg.scss')
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
       .pipe(autoprefixer(config.sass.autoprefixer))
-      .pipe(rename('docs.css'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css.dev));
   log.activity('Finished.');
@@ -243,8 +242,8 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 // Handlebars Function
 var compileHandlebars = function(source, destination, nav) {
-  var pageList      = fs.readdirSync('src/html/pages');
-  var componentList = fs.readdirSync('src/html/components');
+  var pageList      = fs.readdirSync(paths.html.pages);
+  var componentList = fs.readdirSync(paths.html.components);
 
   replaceInArray(pageList,      '.hbs', '.html');
   replaceInArray(componentList, '.hbs', '.html');
@@ -283,12 +282,12 @@ var handlebarsDev = function() {
   log.heading('Handlebars Development');
 
   log.activity('Clean dev/**/*.html');
-  del.sync('dev/**/*.html');
+  del.sync(paths.html.dev + '**/*.html');
   log.activity('Finished cleaning');
 
   log.activity('Compile Handlebars...');
-  compileHandlebars(paths.html.pages, paths.html.dev, true);
-  compileHandlebars(paths.html.components, paths.html.dev + 'components', true);
+  compileHandlebars(paths.html.pages + '*.hbs', paths.html.dev, true);
+  compileHandlebars(paths.html.components + '*.hbs', paths.html.dev + 'components', true);
   log.activity('Finished compiling.');
 };
 

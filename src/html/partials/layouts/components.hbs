@@ -4,28 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{file.meta.title}}</title>
-    <!-- Docs Stylesheet -->
-    <link rel="stylesheet" href="../css/docs.css">
-    <!-- Styleguide Stylesheet -->
+    <!-- Styleguide CSS -->
+    <link rel="stylesheet" href="../css/sg.css">
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="../css/style.css">
   </head>
   <body>
 
-    <!-- Docs Nav -->
+    <!-- Styleguide Nav -->
     {{> "styleguide/nav" root="../"}}
 
-    <!-- Docs Header -->
-    <header class="docs__header">
-      <h1 class="docs__title">{{file.meta.title}}</h1>
-      <p class="docs__description">{{file.meta.description}}</p>
+    <header class="sg-header">
+      <h1 class="sg-header__title">{{file.meta.title}}</h1>
+      <p class="sg-header__description">{{file.meta.description}}</p>
     </header>
 
-    <!-- Component Body -->
-    <main class="docs__body">
+    <!-- Body -->
+    <main class="sg-body">
       {{{block "content"}}}
     </main>
 
-    <!-- Styleguide Scripts -->
+    <!-- Scripts -->
     <script src="../js/script.js"></script>
   </body>
 </html>

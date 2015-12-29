@@ -2,9 +2,9 @@
  * FYNN BECKER WebDesign
  */
 
-// DOCS SASS FILE
+// STYLEGUIDE SASS FILE
 //
-// Docs specific styles
+// Some styles for development
 // =============================================================================
 
 
@@ -37,7 +37,7 @@ $border-color:    rgb(220, 220, 220);
 // =====================================
 
 
-.docs__nav {
+.sg-nav {
   position: fixed;
   top: 0;
   left: -200px;
@@ -45,13 +45,13 @@ $border-color:    rgb(220, 220, 220);
   transition: left .2s ease-in;
   z-index: 9999;
 
-  &.js--docs__nav--open {
+  &.sg-nav--open {
     left: 0;
     transition: left .2s ease-out;
   }
 }
 
-  .docs__nav__btn {
+  .sg-nav__btn {
     position: absolute;
     right: -50px;
     width: 50px;
@@ -61,11 +61,12 @@ $border-color:    rgb(220, 220, 220);
 
     &:hover,
     &:focus,
-    .js--docs__nav--open & {
+    .sg-nav--open & {
       background-color: darken($primary-color, 15%);
     }
+  }
 
-    .docs__nav__btn__icon {
+    .sg-nav__icon {
       display: block;
       width:  75%;
       height: 2px;
@@ -89,9 +90,8 @@ $border-color:    rgb(220, 220, 220);
         top: 6px;
       }
     }
-  }
 
-  .docs__nav__list {
+  .sg-nav__list {
     height: 100%;
     width: 200px;
     margin: -$padding 0;
@@ -99,7 +99,7 @@ $border-color:    rgb(220, 220, 220);
     background: darken($primary-color, 15%);
   }
 
-    .docs__nav__title {
+    .sg-nav__title {
       display: block;
       margin: $padding 0 0;
       padding: 0 $padding;
@@ -112,7 +112,7 @@ $border-color:    rgb(220, 220, 220);
       color: lighten($primary-color, 30%);
     }
 
-    .docs__nav__link {
+    .sg-nav__link {
       display: block;
       padding: $padding-xs $padding;
       text-decoration: none;
@@ -131,7 +131,7 @@ $border-color:    rgb(220, 220, 220);
 // =====================================
 
 
-.docs__header {
+.sg-header {
   max-width: $screen-lg;
   margin: $padding-sm auto $padding-lg;
   padding: $padding-sm;
@@ -144,7 +144,7 @@ $border-color:    rgb(220, 220, 220);
   }
 }
 
-  .docs__title {
+  .sg-header__title {
     margin: 0 0 10px;
     font-size: 24px;
     font-weight: 100;
@@ -156,7 +156,7 @@ $border-color:    rgb(220, 220, 220);
     }
   }
 
-  .docs__description {
+  .sg-header__description {
     margin: 0;
     font-size: 14px;
     font-weight: 100;
@@ -174,7 +174,7 @@ $border-color:    rgb(220, 220, 220);
 // =====================================
 
 
-.docs__body {
+.sg-body {
   max-width: $screen-lg;
   margin: 0 auto;
 }
@@ -186,7 +186,7 @@ $border-color:    rgb(220, 220, 220);
 // =====================================
 
 
-.docs__article {
+.sg-article {
   margin-bottom: $padding-lg;
 
   @media (min-width: $screen-sm) {
@@ -194,7 +194,7 @@ $border-color:    rgb(220, 220, 220);
   }
 }
 
-  .docs__article__header {
+  .sg-article__header {
     padding: $padding-sm;
 
     @media (min-width: $screen-sm) {
@@ -202,29 +202,29 @@ $border-color:    rgb(220, 220, 220);
     }
   }
 
-  .docs__article__title {
-    margin: 0 0 10px;
-    font-size: 20px;
-    font-weight: 100;
-    color: $primary-color;
+    .sg-article__title {
+      margin: 0 0 10px;
+      font-size: 20px;
+      font-weight: 100;
+      color: $primary-color;
 
-    @media (min-width: $screen-sm) {
-      font-size: 24px;
+      @media (min-width: $screen-sm) {
+        font-size: 24px;
+      }
     }
-  }
 
-  .docs__article__description {
-    margin: 0 0 10px;
-    font-size: 14px;
-    font-weight: 100;
-    color: $secondary-color;
+    .sg-article__description {
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 100;
+      color: $secondary-color;
 
-    @media (min-width: $screen-sm) {
-      font-size: 16px;
+      @media (min-width: $screen-sm) {
+        font-size: 16px;
+      }
     }
-  }
 
-  .docs__article__body {
+  .sg-article__body {
     padding: $padding-sm;
     border-top:    1px solid $border-color;
     border-bottom: 1px solid $border-color;

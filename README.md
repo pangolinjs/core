@@ -111,18 +111,24 @@ The components pages and the development menu use some styling.
 
 All styles are located in `src/html/css/docs.scss`.
 
-The style definitions do not interfere with your CSS located in `src/css` as long as the following classes are not used:<br>
-<sub>*These classes are subject to change and will be prefixed anytime soon(ish).*</sub>
+The style definitions do not interfere with your CSS located in `src/css` as long as the following selectors are not used:<br>
 
-* docs__header
-* docs__title
-* docs__description
-* docs__body
-* docs__article
-  * docs\__article__header
-  * docs\__article__title
-  * docs\__article__description
-  * docs\__article__body
+* .sg-nav
+* .sg-nav--open
+  * .sg-nav__btn
+    * .sg-nav__icon
+  * .sg-nav__list
+    * .sg-nav__title
+    * .sg-nav__link
+* .sg-header
+  * .sg-header__title
+  * .sg-header__description
+* .sg-body
+* .sg-article
+  * .sg-article__header
+    * .sg-article__title
+    * .sg-article__description
+  * .sg-article__body
 
 
 ### Assets
