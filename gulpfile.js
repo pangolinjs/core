@@ -28,7 +28,6 @@ var stylish      = require('jshint-stylish');
 // Handelbars
 var hb           = require('gulp-hb');
 var frontMatter  = require('gulp-front-matter');
-var nav          = require('gulp-nav');
 
 // Assets
 var imagemin     = require('gulp-imagemin');
@@ -62,8 +61,8 @@ var paths = {
   },
   html: {
     src:        basePaths.src  + 'html/',
-    pages:      basePaths.src  + 'html/pages/**/*.hbs',
-    components: basePaths.src  + 'html/components/**/*.hbs',
+    pages:      basePaths.src  + 'html/pages/*.hbs',
+    components: basePaths.src  + 'html/components/*.hbs',
     partials:   basePaths.src  + 'html/partials/**/*.hbs',
     css:        basePaths.src  + 'html/css/',
     dev:        basePaths.dev,
@@ -101,9 +100,9 @@ var streamError = function(error) {
 
 
 // Search string in array and replace
-var replaceInArray = function(array, search, insert) {
+var replaceInArray = function(array, searchFor, replaceWith) {
   for (var i = 0; i < array.length; i++) {
-    array[i] = array[i].replace(search, insert);
+    array[i] = array[i].replace(searchFor, replaceWith);
   }
 };
 
@@ -242,11 +241,35 @@ gulp.task('js:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-var compileHandlebars = function(source, destination) {
+// Handlebars Function
+var compileHandlebars = function(source, destination, nav) {
+  var pageList      = fs.readdirSync('src/html/pages');
+  var componentList = fs.readdirSync('src/html/components');
+
+  replaceInArray(pageList,      '.hbs', '.html');
+  replaceInArray(componentList, '.hbs', '.html');
+
+  var pages = [];
+  var components = [];
+
+  for (var i = 0, item; item = pageList[i++];) {
+    pages.push({title: item, href: item});
+  }
+
+  for (var i = 0, item; item = componentList[i++];) {
+    components.push({title: item, href: 'components/' + item});
+  }
+
   return gulp.src(source)
     .pipe(frontMatter({property: 'meta'}))
-    .pipe(nav())
     .pipe(hb({
+      data: {
+        displayNav: nav,
+        navItems: {
+          pages: pages,
+          components: components
+        }
+      },
       helpers: 'node_modules/handlebars-layouts/index.js',
       partials: paths.html.partials
     }))
@@ -255,6 +278,14 @@ var compileHandlebars = function(source, destination) {
 };
 
 
+// Handlebars Development Function
+var handlebarsDev = function() {
+  compileHandlebars(paths.html.pages, paths.html.dev, true);
+  compileHandlebars(paths.html.components, paths.html.dev + 'components', true);
+};
+
+
+// Handlebars Development Task
 gulp.task('handlebars:dev', function() {
   log.heading('Handlebars Development');
 
@@ -263,8 +294,14 @@ gulp.task('handlebars:dev', function() {
   log.activity('Finished cleaning');
 
   log.activity('Compile Handlebars...');
-  compileHandlebars(paths.html.pages, paths.html.dev);
+  handlebarsDev();
   log.activity('Finished compiling.');
+});
+
+
+// Handlebars Production Task
+gulp.task('handlebars:dist', ['clean:dist'], function() {
+  compileHandlebars(paths.html.pages, paths.html.dist, false);
 });
 
 
@@ -316,7 +353,7 @@ gulp.task('assets:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-gulp.task('production', ['sass:dist', 'js:dist', 'assets:dist']);
+gulp.task('production', ['sass:dist', 'js:dist', 'handlebars:dist', 'assets:dist']);
 
 
 
@@ -345,18 +382,16 @@ var startBrowserSync = function() {
 
 /* DEFAULT
  * Run all *:dev tasks and watch for add/change/delete.
- *
- * Until gulp.watch becomes somewhat useful we utilize Watchr:
- * (https://github.com/bevry/watchr)
  * ========================================================================== */
 
 
 gulp.task('default', ['clean:dev'], function() {
-
   // Run initial task queue
   sassDev();
   sassDocs();
   jsDev();
+  handlebarsDev();
+  assetsDev();
 
   // Start BrowserSync after initial tasks finished
   startBrowserSync();
@@ -372,7 +407,8 @@ gulp.task('default', ['clean:dev'], function() {
   });
 
   // Watch HTML
-  watch(paths.html.src + '**/*.nunjucks', function() {
+  watch(paths.html.src + '**/*.hbs', function() {
+    handlebarsDev();
   });
 
   // Watch Assets

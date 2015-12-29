@@ -1,23 +1,23 @@
+{{#if displayNav}}
 <nav class="docs__nav" id="docs-nav">
   <button class="docs__nav__btn" id="docs-button">
     <span class="docs__nav__btn__icon"></span>
   </button>
   <ul class="docs__nav__list">
     <li><span class="docs__nav__title">Pages</span></li>
-    <li><a href="" class="docs__nav__link"></a></li>
+    {{#each navItems.pages}}
+    <li><a href="{{../root}}{{href}}" class="docs__nav__link">{{title}}</a></li>
+    {{/each}}
 
     <li><span class="docs__nav__title">Components</span></li>
-    <li><a href="" class="docs__nav__link"></a></li>
+    {{#each navItems.components}}
+    <li><a href="{{../root}}{{href}}" class="docs__nav__link">{{title}}</a></li>
+    {{/each}}
 
     <li><span class="docs__nav__title">Settings</span></li>
     <li><a href="http://localhost:3001" class="docs__nav__link">BrowserSync</a></li>
   </ul>
 </nav>
-
-{{#each file.nav.root.siblings}}
-  <a href="{{href}}">{{title}}</a>
-{{/each}}
-
 
 <script>
   var docsNavBtn  = document.getElementById('docs-button');
@@ -27,3 +27,4 @@
     docsNav.classList.toggle('js--docs__nav--open');
   };
 </script>
+{{/if}}

@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{file.meta.title}}</title>
     <!-- Docs Stylesheet -->
-    <link rel="stylesheet" href="css/docs.css">
+    <link rel="stylesheet" href="../css/docs.css">
     <!-- Styleguide Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
   </head>
   <body>
 
     <!-- Docs Nav -->
-    {{> "styleguide/nav"}}
+    {{> "styleguide/nav" root="../"}}
 
     <!-- Docs Header -->
     <header class="docs__header">
@@ -26,6 +26,6 @@
     </main>
 
     <!-- Styleguide Scripts -->
-    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>
