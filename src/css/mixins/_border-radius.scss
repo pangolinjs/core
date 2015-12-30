@@ -2,22 +2,29 @@
 // =============================================================================
 
 
-
+/// Generates `border-top-right-radius` and `border-top-left-radius`.
+/// @param {number} $radius - Radius for top borders
 @mixin border-top-radius($radius) {
   border-top-right-radius: $radius;
   border-top-left-radius: $radius;
 }
 
+/// Generates `border-bottom-right-radius` and `border-top-right-radius`.
+/// @param {number} $radius - Radius for right borders
 @mixin border-right-radius($radius) {
   border-bottom-right-radius: $radius;
   border-top-right-radius: $radius;
 }
 
+/// Generates `border-bottom-right-radius` and `border-bottom-left-radius`.
+/// @param {number} $radius - Radius for bottom borders
 @mixin border-bottom-radius($radius) {
   border-bottom-right-radius: $radius;
   border-bottom-left-radius: $radius;
 }
 
+/// Generates `border-bottom-left-radius` and `border-top-left-radius`.
+/// @param {number} $radius - Radius for left borders
 @mixin border-left-radius($radius) {
   border-bottom-left-radius: $radius;
   border-top-left-radius: $radius;

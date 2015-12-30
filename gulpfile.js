@@ -19,6 +19,7 @@ var browserSync  = require('browser-sync');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
+var sassDoc      = require('sassdoc');
 
 // JavaScript
 var uglify       = require('gulp-uglify');
@@ -81,6 +82,10 @@ var config = {
   sass: {
     autoprefixer: {
       browsers: ['last 2 versions']
+    },
+    doc: {
+      dest: paths.css.dev + 'doc',
+      basePath: 'https://github.com/MVSde/styleguide/tree/master/src/css'
     }
   }
 }
@@ -153,10 +158,11 @@ var sassDev = function(event) {
 
   log.activity('Starting...');
   gulp.src(paths.css.src + '**/*.scss')
+    .pipe(sassDoc(config.sass.doc))
     .pipe(sourcemaps.init())
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
       .pipe(autoprefixer(config.sass.autoprefixer))
-      .pipe(rename('style.css'))
+      .pipe(rename('styles.css'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css.dev))
     .pipe(browserSync.stream());
@@ -170,7 +176,7 @@ gulp.task('sass:dev', function() {
 });
 
 
-var sassDocs = function() {
+var sassStyleguide = function() {
   log.heading('Compile Styleguide CSS');
 
   log.activity('Starting...');
@@ -189,7 +195,7 @@ gulp.task('sass:dist', ['clean:dist'], function() {
   return gulp.src(paths.css.src + '**/*.scss')
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(autoprefixer(config.sass.autoprefixer))
-    .pipe(rename('style.css'))
+    .pipe(rename('styles.css'))
     .pipe(gulp.dest(paths.css.dist));
 });
 
@@ -208,7 +214,7 @@ var jsDev = function() {
   log.activity('Starting...');
   gulp.src(paths.js.src + '*.js')
     .pipe(sourcemaps.init())
-      .pipe(concat('script.js'))
+      .pipe(concat('scripts.js'))
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
     .pipe(sourcemaps.write())
@@ -227,7 +233,7 @@ gulp.task('js:dev', function() {
 // JavaScript Production
 gulp.task('js:dist', ['clean:dist'], function() {
   return gulp.src(paths.js.src + '*.js')
-    .pipe(concat('script.js'))
+    .pipe(concat('scripts.js'))
     .pipe(uglify())
     .pipe(gulp.dest(paths.js.dist));
 });
@@ -262,6 +268,7 @@ var compileHandlebars = function(source, destination, nav) {
   return gulp.src(source)
     .pipe(frontMatter({property: 'meta'}))
     .pipe(hb({
+      bustCache: true,
       data: {
         displayNav: nav,
         navItems: {
@@ -387,7 +394,7 @@ var startBrowserSync = function() {
 gulp.task('default', ['clean:dev'], function() {
   // Run initial task queue
   sassDev();
-  sassDocs();
+  sassStyleguide();
   jsDev();
   handlebarsDev();
   assetsDev();
