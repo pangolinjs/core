@@ -8,18 +8,19 @@
 // Base
 var fs           = require('fs');
 var del          = require('del');
+
+// Gulp
 var gulp         = require('gulp');
 var gutil        = require('gulp-util');
 var watch        = require('gulp-watch');
 var rename       = require('gulp-rename');
 var concat       = require('gulp-concat');
-var browserSync  = require('browser-sync');
+var plumber      = require('gulp-plumber');
 
 // CSS/Sass
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
-var sassDoc      = require('sassdoc');
 
 // JavaScript
 var uglify       = require('gulp-uglify');
@@ -32,6 +33,9 @@ var frontMatter  = require('gulp-front-matter');
 
 // Assets
 var imagemin     = require('gulp-imagemin');
+
+// BrowserSync
+var browserSync  = require('browser-sync');
 
 
 
@@ -50,16 +54,21 @@ var basePaths = {
 
 // Task specific folders
 var paths = {
+  // CSS
   css: {
     src:        basePaths.src  + 'css/',
     dev:        basePaths.dev  + 'css/',
     dist:       basePaths.dist + 'css/'
   },
+
+  // JavaScript
   js: {
     src:        basePaths.src  + 'js/',
     dev:        basePaths.dev  + 'js/',
     dist:       basePaths.dist + 'js/'
   },
+
+  // HTML
   html: {
     src:        basePaths.src  + 'html/',
     pages:      basePaths.src  + 'html/pages/',
@@ -69,6 +78,8 @@ var paths = {
     dev:        basePaths.dev,
     dist:       basePaths.dist
   },
+
+  // Assets
   assets: {
     src:        basePaths.src  + 'assets/',
     dev:        basePaths.dev  + 'assets/',
@@ -79,13 +90,46 @@ var paths = {
 
 // Config
 var config = {
-  sass: {
+  // CSS
+  css: {
+    dev: {
+      outputStyle: 'expanded'
+    },
+    dist: {
+      outputStyle: 'compressed'
+    },
     autoprefixer: {
       browsers: ['last 2 versions']
+    }
+  },
+
+  // HTML
+  html: {
+    hb: function(data) {
+      var options = {
+        bustCache: true,
+        data: data,
+        helpers: 'node_modules/handlebars-layouts/index.js',
+        partials: paths.html.partials
+      };
+      return options;
     },
-    doc: {
-      dest: paths.css.dev + 'doc',
-      basePath: 'https://github.com/MVSde/styleguide/tree/master/src/css'
+    browserSync: {
+      server: {
+        baseDir: paths.html.dev
+      },
+      logPrefix: 'BrowserSync',
+      scrollElements: ['*'],
+      reloadDelay: 200
+    }
+  },
+
+  // Assets
+  assets: {
+    imagemin: {
+      progressive: true,
+      interlaced: true,
+      multipass: true
     }
   }
 }
@@ -95,13 +139,6 @@ var config = {
 
 /* Custom Functions
  * ========================================================================== */
-
-
-// Don't unpipe on error
-var streamError = function(error) {
-  gutil.log(gutil.colors.red(error.toString()));
-  this.emit('end');
-};
 
 
 // Search string in array and replace
@@ -158,10 +195,9 @@ var sassDev = function(event) {
 
   log.activity('Starting...');
   gulp.src(paths.css.src + '**/*.scss')
-    .pipe(sassDoc(config.sass.doc))
     .pipe(sourcemaps.init())
-      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-      .pipe(autoprefixer(config.sass.autoprefixer))
+      .pipe(sass(config.css.dev).on('error', sass.logError))
+      .pipe(autoprefixer(config.css.autoprefixer))
       .pipe(rename('styles.css'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.css.dev))
@@ -181,8 +217,8 @@ var sassStyleguide = function() {
 
   log.activity('Starting...');
   gulp.src(paths.html.css + 'sg.scss')
-    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-    .pipe(autoprefixer(config.sass.autoprefixer))
+    .pipe(sass(config.css.dev).on('error', sass.logError))
+    .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(gulp.dest(paths.css.dev));
   log.activity('Finished.');
 };
@@ -191,8 +227,8 @@ var sassStyleguide = function() {
 // Sass Distribution
 gulp.task('sass:dist', ['clean:dist'], function() {
   return gulp.src(paths.css.src + '**/*.scss')
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(autoprefixer(config.sass.autoprefixer))
+    .pipe(sass(config.css.dist).on('error', sass.logError))
+    .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(rename('styles.css'))
     .pipe(gulp.dest(paths.css.dist));
 });
@@ -263,20 +299,19 @@ var compileHandlebars = function(source, destination, nav) {
     components.push({title: item, href: 'components/' + item});
   }
 
+  var hbConfig = config.html.hb({
+    displayNav: nav,
+    navItems: {
+      pages: pages,
+      components: components
+    }
+  });
+
   return gulp.src(source)
     .pipe(frontMatter({property: 'meta'}))
-    .pipe(hb({
-      bustCache: true,
-      data: {
-        displayNav: nav,
-        navItems: {
-          pages: pages,
-          components: components
-        }
-      },
-      helpers: 'node_modules/handlebars-layouts/index.js',
-      partials: paths.html.partials
-    }))
+    .pipe(plumber())
+    .pipe(hb(hbConfig))
+    .pipe(plumber.stop())
     .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest(destination));
 };
@@ -291,7 +326,7 @@ var handlebarsDev = function() {
   log.activity('Finished cleaning');
 
   log.activity('Compile Handlebars...');
-  compileHandlebars(paths.html.pages + '*.hbs', paths.html.dev, true);
+  compileHandlebars(paths.html.pages      + '*.hbs', paths.html.dev,                true);
   compileHandlebars(paths.html.components + '*.hbs', paths.html.dev + 'components', true);
   log.activity('Finished compiling.');
 };
@@ -341,11 +376,7 @@ gulp.task('assets:dev', function() {
 // Assets Distribution
 gulp.task('assets:dist', ['clean:dist'], function() {
   return gulp.src(paths.assets.src + '**')
-    .pipe(imagemin({
-      progressive: true,
-      interlaced: true,
-      multipass: true
-    }))
+    .pipe(imagemin(config.assets.imagemin))
     .pipe(gulp.dest(paths.assets.dev));
 });
 
@@ -371,14 +402,7 @@ gulp.task('production', ['sass:dist', 'js:dist', 'handlebars:dist', 'assets:dist
 var startBrowserSync = function() {
   log.heading('Starting BrowserSync');
 
-  browserSync({
-    server: {
-      baseDir: paths.html.dev
-    },
-    logPrefix: 'BrowserSync',
-    scrollElements: ['*'],
-    reloadDelay: 200
-  });
+  browserSync(config.html.browserSync);
 }
 
 
