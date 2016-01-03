@@ -3,7 +3,7 @@
 </p>
 
 # Front-End Styleguide
-Front-end development styleguide with Sass, JavaScript and Nunjucks.
+Front-end development styleguide with Sass, JavaScript and Handlebars.
 Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint JavaScript](http://jshint.com/) and create static HTML files from [Handlebars](http://handlebarsjs.com/) files.
 
 
@@ -42,7 +42,7 @@ Output to `dev/css` or `dist/css`.
 *Sass* is a CSS-Preprocessor supporting variables, nesting and mixins - among many other features.
 For a complete documentation jump to the [Sass Basics](http://sass-lang.com/guide).
 
-This styleguide splits the CSS into small parts. This ensures a far better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [Nunjucks-Section](#nunjucks) for detailed information about componentization.
+This styleguide splits the CSS into small parts. This ensures a far better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [Handlebars-Section](#handlebars) for the HTML-side of componentization.
 
 The function `@import` concatenates all Sass files into one large stylesheet. See `src/css/main.scss` for more information.
 
