@@ -163,9 +163,9 @@ var sassDev = function(event) {
       .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
       .pipe(autoprefixer(config.sass.autoprefixer))
       .pipe(rename('styles.css'))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.css.dev))
-    .pipe(browserSync.stream());
+    .pipe(browserSync.stream({match: '**/*.css'}));
   log.activity('Finished.');
 };
 
@@ -181,10 +181,8 @@ var sassStyleguide = function() {
 
   log.activity('Starting...');
   gulp.src(paths.html.css + 'sg.scss')
-    .pipe(sourcemaps.init())
-      .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-      .pipe(autoprefixer(config.sass.autoprefixer))
-    .pipe(sourcemaps.write())
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+    .pipe(autoprefixer(config.sass.autoprefixer))
     .pipe(gulp.dest(paths.css.dev));
   log.activity('Finished.');
 };
@@ -217,9 +215,9 @@ var jsDev = function() {
       .pipe(concat('scripts.js'))
       .pipe(jshint())
       .pipe(jshint.reporter(stylish))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js.dev))
-    .pipe(browserSync.stream());
+    .pipe(browserSync.stream({match: '**/*.js'}));
   log.activity('Finshed.');
 };
 
