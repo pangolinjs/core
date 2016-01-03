@@ -141,6 +141,13 @@ var config = {
  * ========================================================================== */
 
 
+// Plumber Error Handler
+var onError = function(err) {
+  gutil.log(gutil.colors.red('Error in file ' + err.fileName + ' in line ' + err.lineNumber + ':'));
+  console.log(err.message);
+  this.emit('end');
+};
+
 // Search string in array and replace
 var replaceInArray = function(array, searchFor, replaceWith) {
   for (var i = 0; i < array.length; i++) {
@@ -213,7 +220,7 @@ gulp.task('sass:dev', function() {
 
 
 var sassStyleguide = function() {
-  log.heading('Compile Styleguide CSS');
+  log.heading('Compile Styleguide Sass');
 
   log.activity('Starting...');
   gulp.src(paths.html.css + 'sg.scss')
@@ -309,7 +316,7 @@ var compileHandlebars = function(source, destination, nav) {
 
   return gulp.src(source)
     .pipe(frontMatter({property: 'meta'}))
-    .pipe(plumber())
+    .pipe(plumber({errorHandler: onError}))
     .pipe(hb(hbConfig))
     .pipe(plumber.stop())
     .pipe(rename({extname: '.html'}))
@@ -342,11 +349,11 @@ var deleteHTML = function() {
 var handlebarsDev = function() {
   log.heading('Handlebars Development');
 
-  log.activity('Clean dev/**/*.html');
+  log.activity('Cleaning HTML...');
   deleteHTML();
-  log.activity('Finished cleaning');
+  log.activity('Finished cleaning.');
 
-  log.activity('Compile Handlebars...');
+  log.activity('Compiling Handlebars...');
   compileHandlebars(paths.html.pages      + '*.hbs', paths.html.dev,                true);
   compileHandlebars(paths.html.components + '*.hbs', paths.html.dev + 'components', true);
   log.activity('Finished compiling.');
@@ -376,11 +383,11 @@ gulp.task('handlebars:dist', ['clean:dist'], function() {
 var assetsDev = function() {
   log.heading('Assets Development');
 
-  log.activity('Clean dev/assets');
+  log.activity('Cleaning assets...');
   del.sync(paths.assets.dev + '**');
-  log.activity('Finished cleaning');
+  log.activity('Finished cleaning.');
 
-  log.activity('Copy src/assets to dev/assets...');
+  log.activity('Copying assets...');
   gulp.src(paths.assets.src + '**')
     .pipe(gulp.dest(paths.assets.dev))
     .pipe(browserSync.stream());
