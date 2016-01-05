@@ -19,6 +19,7 @@ var plumber      = require('gulp-plumber');
 
 // CSS/Sass
 var sass         = require('gulp-sass');
+var bless        = require('gulp-bless');
 var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 
@@ -196,8 +197,19 @@ gulp.task('clean:dist', function() {
  * ========================================================================== */
 
 
+// Split CSS for Internet Explorer
+var sassBless = function(path, fileName) {
+  gulp.src(path + fileName + '.css')
+    .pipe(rename(fileName + '.splitted.css'))
+    .pipe(bless({
+      log: true
+    }))
+    .pipe(gulp.dest(path));
+};
+
+
 // Sass Development Function
-var sassDev = function(event) {
+var sassDev = function() {
   log.heading('Compile Sass');
 
   log.activity('Starting...');
@@ -209,6 +221,7 @@ var sassDev = function(event) {
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.css.dev))
     .pipe(browserSync.stream({match: '**/*.css'}));
+  sassBless(paths.css.dev, 'styles');
   log.activity('Finished.');
 };
 
