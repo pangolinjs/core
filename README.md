@@ -46,6 +46,8 @@ This styleguide splits the CSS into small parts. This ensures a far better organ
 
 The function `@import` concatenates all Sass files into one large stylesheet. See `src/css/main.scss` for more information.
 
+Internet Explorer versions 6 to 9 have a limit on the amount of selectors used in one stylesheet. If this limit is reached, [Bless](http://blesscss.com/) generates an Internet Explorer specific splitted stylesheet. This does not affect any other browser.
+
 
 ### JavaScript
 Located in `src/js`.<br>
