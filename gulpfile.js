@@ -418,7 +418,7 @@ gulp.task('assets:dev', function() {
 gulp.task('assets:dist', ['clean:dist'], function() {
   return gulp.src(paths.assets.src + '**')
     .pipe(imagemin(config.assets.imagemin))
-    .pipe(gulp.dest(paths.assets.dev));
+    .pipe(gulp.dest(paths.assets.dist));
 });
 
 
