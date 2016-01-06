@@ -244,6 +244,12 @@ var sassStyleguide = function() {
 };
 
 
+// Sass Styleguide Task
+gulp.task('sass:sg', function() {
+  return sassStyleguide();
+});
+
+
 // Sass Distribution
 gulp.task('sass:dist', ['clean:dist'], function() {
   return gulp.src(paths.css.src + '**/*.scss')
