@@ -1,6 +1,6 @@
 {
   "name": "styleguide",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Front-end development styleguide with Sass, JavaScript and Handlebars.",
   "main": "index.js",
   "scripts": {

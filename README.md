@@ -11,10 +11,11 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 1. [Dependencies](#dependencies)
 2. [Installation](#installation)
 3. [Usage](#usage)
-  1. [Sass](#sass)
-  2. [JavaScript](#javascript)
-  3. [Handlebars](#handlebars)
-  4. [Assets](#assets)
+  1. [Tasks](#tasks)
+  2. [Sass](#sass)
+  3. [JavaScript](#javascript)
+  4. [Handlebars](#handlebars)
+  5. [Assets](#assets)
 
 
 ## Dependencies
@@ -29,8 +30,17 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 
 
 ## Usage
+
+### Tasks
+These are the main Gulp tasks:
 * Run `gulp` to start the default task. This task watches for file changes. All generated files are placed in `dev`.
 * Run `gulp distribution` to create prduction ready resources. This task minifys CSS and JavaScript files and compresses images. All genereated files will be placed in `dist`.
+
+There are more tasks available for standalone execution:
+* `sass:dev` and `sass:dist` for Sass compilation.
+* `js:dev` and `js:dist` for JavaScript concatenation and linting.
+* `handlebars:dev` and `handlebars:dist` for static HTML file generation.
+* `assets:dev` and `assets:dist` for assets copying and image minification.
 
 The generated folders `dev` and `dist` are not included with Git.
 
@@ -44,7 +54,9 @@ For a complete documentation jump to the [Sass Basics](http://sass-lang.com/guid
 
 This styleguide splits the CSS into small parts. This ensures a far better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [Handlebars-Section](#handlebars) for the HTML-side of componentization.
 
-The function `@import` concatenates all Sass files into one large stylesheet. See `src/css/main.scss` for more information.
+The function `@import` places the corresponding file in the main Sass file. The final output is one large CSS file to minimize requests. See `src/css/main.scss` for more information.
+
+The development task generates sourcemaps.
 
 Internet Explorer versions 6 to 9 have a limit on the amount of selectors used in one stylesheet. If this limit is reached, [Bless](http://blesscss.com/) generates an Internet Explorer specific splitted stylesheet. This does not affect any other browser.
 
@@ -54,6 +66,9 @@ Located in `src/js`.<br>
 Output to `dev/js` or `dist/js`.
 
 All JavaScript files will be concatenated so you can split the code into smaller components.
+
+The development task runs JSHint and generates sourcemaps.
+The production task uglifies the source.
 
 
 ### Handlebars
@@ -81,20 +96,21 @@ Layouts are located in `src/html/partials/layouts`.
 ```
 
 #### Includes
-These files can be included in all other files (even in other includes). The process is comparable to PHP's *include*.
+These files can be included in all other files (even in other includes). The process is comparable to PHP's `include`.
 
-Includes are located in `src/html/partials/includes`. The Handlebars renderer accesses them relative to the `partials` folder.
+Includes are located in `src/html/partials/includes`. The Handlebars renderer accesses them relative to the `src/html/partials` folder.
 
 The syntax `{{> "includes/example" }}` includes the file `src/html/partials/includes/example.hbs`.
 
 #### Pages and Components
 Pages are the actual web pages displayed by the browser.<br>
-Components are reference pages for smaller UI parts. The gulp task `production` will not render them.<br>
+Components are reference pages for smaller UI parts. The gulp task `production` will not render them.
+
 The `default` gulp task injects a flyout menu into pages and components for easier navigation during development.
 
 Pages are located in `src/html/pages`, components in `src/html/components`.
 
-The YAML front matter between `---` contains general information like the page title and description. This will be used primarily by layouts.
+The YAML front matter between `---` contains general information like the page title and description. This will be used primarily by layouts. You can add additional information, which can be accessed via `{{file.meta.key}}`. Replace `key` with the name from the front matter.
 
 ```html
 ---
@@ -111,7 +127,7 @@ description: Only used for components.
 #### Styleguide CSS
 The components pages and the development menu use some styling.
 
-All styles are located in `src/html/css/docs.scss`.
+All styles are located in `src/html/css/sg.scss`.
 
 The style definitions do not interfere with your CSS located in `src/css` as long as the following selectors are not used:<br>
 
@@ -137,4 +153,4 @@ The style definitions do not interfere with your CSS located in `src/css` as lon
 Located in `src/assets`.<br>
 Output to `dev/assets` or `dist/assets`.
 
-All files and folders placed in `src/assets` will be copied to `dev/assets` or `dist/assets`. The distribution task compresses images.
+All files and folders placed in `src/assets` will be copied to `dev/assets` or `dist/assets`. The distribution task minifies images with a lossless compressor.
