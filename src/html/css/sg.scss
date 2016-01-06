@@ -28,7 +28,7 @@ $border-color:    rgb(220, 220, 220);
 
 // Transition and Animation speed
 $speed-menu:     0.2s;
-$speed-menu-btn: 0.4s;
+$speed-menu-btn: 0.2s;
 
 
 
@@ -40,14 +40,14 @@ $speed-menu-btn: 0.4s;
 .sg-nav {
   position: fixed;
   top: 0;
-  left: -200px;
+  transform: translate3d(-200px, 0, 0);
   height: 100%;
-  transition: left $speed-menu ease;
+  transition: transform $speed-menu ease;
   z-index: 9999;
 
   &.sg-nav--open {
-    left: 0;
-    transition: left $speed-menu ease;
+    transform: translate3d(0, 0, 0);
+    transition: transform $speed-menu ease;
   }
 }
 
@@ -97,15 +97,15 @@ $speed-menu-btn: 0.4s;
       }
 
       .sg-nav--open & {
-        animation: sg-nav__icon-animation $speed-menu-btn;
+        animation: sg-nav__icon-animation $speed-menu-btn linear $speed-menu;
         animation-fill-mode: forwards;
 
         &::before {
-          animation: sg-nav__icon-top-animation $speed-menu-btn;
+          animation: sg-nav__icon-top-animation $speed-menu-btn linear $speed-menu;
           animation-fill-mode: forwards;
         }
         &::after {
-          animation: sg-nav__icon-bottom-animation $speed-menu-btn;
+          animation: sg-nav__icon-bottom-animation $speed-menu-btn linear $speed-menu;
           animation-fill-mode: forwards;
         }
       }
