@@ -65,10 +65,20 @@ Internet Explorer versions 6 to 9 have a limit on the amount of selectors used i
 Located in `src/js`.<br>
 Output to `dev/js` or `dist/js`.
 
-All JavaScript files will be concatenated so you can split the code into smaller components.
+The Gulp plugin [gulp-include](https://github.com/wiledal/gulp-include) works similar to the `@import` function used by Sass.
+
+With the syntax `//=include relative/path/to/file.js` smaller JavaScript components can be included into the *main.js*. The path may contain globbing for example `//=include components/**/*.js`.
+
+`require` only includes once. This is useful to include all files from a folder but one specific file first:
+```
+//=require libraries/jquery.js
+//=require libraries/*.js
+```
 
 The development task runs JSHint and generates sourcemaps.
 The production task uglifies the source.
+
+jQuery 2.1.4 is included with this styleguide but it can be easily replaced with another library or removed completely. All 3rd-party stuff should be placed inside the folder `src/js/libraries`. JSHint ignores files in this folder to prevent error spamming.
 
 
 ### Handlebars

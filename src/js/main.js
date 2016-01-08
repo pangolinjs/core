@@ -1,6 +1,12 @@
-/**
- * This is the default JavaScript file for small functions.
- * Use separate files for larger scripts.
- *
- * All scripts in the js/ folder will be concatenated in alphabetical order.
-============================================================================= */
+// MAIN JAVSCRIPT FILE
+//
+// Include modules in this main file with the following syntax:
+// '//=include relative/path/to/file.js'
+// =============================================================================
+
+// Libraries
+//=require libraries/jquery-2.1.4.js
+//=require libraries/*.js
+
+// Components
+//=include components/_example.js

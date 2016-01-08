@@ -14,7 +14,7 @@ var gulp         = require('gulp');
 var gutil        = require('gulp-util');
 var watch        = require('gulp-watch');
 var rename       = require('gulp-rename');
-var concat       = require('gulp-concat');
+var include      = require('gulp-include');
 var plumber      = require('gulp-plumber');
 
 // CSS/Sass
@@ -269,14 +269,17 @@ gulp.task('sass:dist', ['clean:dist'], function() {
 
 // JavaScript Development Function
 var jsDev = function() {
-  log.heading('Concat JavaScript');
+  log.heading('Generate JavaScript');
 
   log.activity('Starting...');
-  gulp.src(paths.js.src + '*.js')
+  gulp.src([paths.js.src + '**/*.js', '!' + paths.js.src + 'libraries/**/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish));
+
+  gulp.src(paths.js.src + 'main.js')
     .pipe(sourcemaps.init())
-      .pipe(concat('scripts.js'))
-      .pipe(jshint())
-      .pipe(jshint.reporter(stylish))
+      .pipe(include())
+      .pipe(rename('scripts.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js.dev))
     .pipe(browserSync.stream({match: '**/*.js'}));
@@ -292,9 +295,10 @@ gulp.task('js:dev', function() {
 
 // JavaScript Production
 gulp.task('js:dist', ['clean:dist'], function() {
-  return gulp.src(paths.js.src + '*.js')
-    .pipe(concat('scripts.js'))
+  return gulp.src(paths.js.src + 'main.js')
+    .pipe(include())
     .pipe(uglify())
+    .pipe(rename('scripts.js'))
     .pipe(gulp.dest(paths.js.dist));
 });
 
@@ -477,7 +481,7 @@ gulp.task('default', ['clean:dev'], function() {
   });
 
   // Watch JavaScript
-  watch(paths.js.src + '*.js', function() {
+  watch(paths.js.src + '**/*.js', function() {
     jsDev();
   });
 
