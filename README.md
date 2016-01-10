@@ -87,6 +87,8 @@ Output to `dev` or `dist`.
 
 *Handlebars* is an HTML templating engine based on JavaScript. Gulp creates static HTML files from Handlebars files.
 
+Hierarchic organisation with subfolders is supported. The output reflects the input file tree.
+
 #### Layouts
 Layouts determine the overall structure of the HTML document. They contain the `<head>` area, scripts and styles.
 
