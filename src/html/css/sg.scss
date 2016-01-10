@@ -21,10 +21,10 @@ $padding-lg: ($padding * 2);
 $padding-xl: ($padding * 3);
 
 // Colors
-$primary-color:   rgb(0, 100, 200);
-$secondary-color: rgb(100, 100, 100);
-$text-color:      rgb(255, 255, 255);
-$border-color:    rgb(220, 220, 220);
+$color-primary:   rgb(0, 100, 200);
+$color-secondary: rgb(100, 100, 100);
+$color-text:      rgb(255, 255, 255);
+$color-border:    rgb(220, 220, 220);
 
 // Transition and Animation speed
 $speed-menu:     0.2s;
@@ -40,7 +40,7 @@ $speed-menu-btn: 0.2s;
 .sg-nav {
   position: fixed;
   top: 0;
-  transform: translate3d(-200px, 0, 0);
+  transform: translate3d(-100%, 0, 0);
   height: 100%;
   transition: transform $speed-menu ease;
   z-index: 9999;
@@ -56,7 +56,7 @@ $speed-menu-btn: 0.2s;
     right: -50px;
     width: 50px;
     height: 50px;
-    background-color: $primary-color;
+    background-color: $color-primary;
     border: none;
 
     &:focus {
@@ -66,7 +66,7 @@ $speed-menu-btn: 0.2s;
     &:hover,
     &:focus,
     .sg-nav--open & {
-      background-color: darken($primary-color, 15%);
+      background-color: darken($color-primary, 15%);
     }
   }
 
@@ -76,7 +76,8 @@ $speed-menu-btn: 0.2s;
       width:  75%;
       height: 2px;
       margin: auto;
-      background-color: $text-color;
+      background-color: $color-text;
+      transition: background-color 0s linear ($speed-menu / 2);
 
       &::before,
       &::after {
@@ -84,99 +85,70 @@ $speed-menu-btn: 0.2s;
         position: absolute;
         width: 100%;
         height: 2px;
-        background-color: $text-color;
+        background-color: $color-text;
         content: " ";
       }
 
       &::before {
         bottom: 8px;
+        transition: bottom $speed-menu-btn linear ($speed-menu / 2),
+                    transform $speed-menu-btn linear;
       }
 
       &::after {
         top: 8px;
+        transition: top $speed-menu-btn linear ($speed-menu / 2),
+                    transform $speed-menu-btn linear;
       }
 
       .sg-nav--open & {
-        animation: sg-nav__icon-animation $speed-menu-btn linear $speed-menu;
-        animation-fill-mode: forwards;
+        background-color: transparent;
 
         &::before {
-          animation: sg-nav__icon-top-animation $speed-menu-btn linear $speed-menu;
-          animation-fill-mode: forwards;
+          bottom: 0;
+          transform: rotate(45deg);
+          transition: bottom $speed-menu-btn linear,
+                      transform $speed-menu-btn linear ($speed-menu / 2);
         }
+
         &::after {
-          animation: sg-nav__icon-bottom-animation $speed-menu-btn linear $speed-menu;
-          animation-fill-mode: forwards;
+          top: 0;
+          transform: rotate(-45deg);
+          transition: top $speed-menu-btn linear,
+                      transform $speed-menu-btn linear ($speed-menu / 2);
         }
-      }
-    }
-
-    @keyframes sg-nav__icon-animation {
-      0% {}
-      50% {
-      }
-      51% {
-        background-color: transparent;
-      }
-      100% {
-        background-color: transparent;
-      }
-    }
-
-    @keyframes sg-nav__icon-top-animation {
-      0% {}
-      50% {
-        bottom: 0;
-        transform: rotate(0deg);
-      }
-      100% {
-        bottom: 0;
-        transform: rotate(45deg);
-      }
-    }
-
-    @keyframes sg-nav__icon-bottom-animation {
-      0% {}
-      50% {
-        top: 0;
-        transform: rotate(0deg);
-      }
-      100% {
-        top: 0;
-        transform: rotate(-45deg);
       }
     }
 
   .sg-nav__list {
     height: 100%;
-    width: 200px;
     margin: -$padding 0;
     padding: 0;
-    background: darken($primary-color, 15%);
+    background: darken($color-primary, 15%);
   }
 
     .sg-nav__title {
       display: block;
       margin: $padding 0 0;
       padding: 0 $padding;
-      border-bottom: 1px solid $primary-color;
+      border-bottom: 1px solid $color-primary;
       font-size: 80%;
       font-weight: 700;
       letter-spacing: 1px;
       line-height: 50px;
       text-transform: uppercase;
-      color: lighten($primary-color, 30%);
+      color: lighten($color-primary, 30%);
     }
 
     .sg-nav__link {
       display: block;
       padding: $padding-xs $padding;
       text-decoration: none;
-      color: $text-color;
+      color: $color-text;
 
       &:hover,
       &:focus {
-        background-color: $primary-color;
+        background-color: $color-primary;
       }
     }
 
@@ -191,7 +163,7 @@ $speed-menu-btn: 0.2s;
   max-width: $screen-lg;
   margin: $padding-sm auto $padding-lg;
   padding: $padding-sm;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $color-border;
   text-align: center;
 
   @media (min-width: $screen-sm) {
@@ -204,7 +176,7 @@ $speed-menu-btn: 0.2s;
     margin: 0 0 10px;
     font-size: 24px;
     font-weight: 100;
-    color: $primary-color;
+    color: $color-primary;
 
     @media (min-width: $screen-sm) {
       margin: 0 0 15px;
@@ -216,7 +188,7 @@ $speed-menu-btn: 0.2s;
     margin: 0;
     font-size: 14px;
     font-weight: 100;
-    color: $secondary-color;
+    color: $color-secondary;
 
     @media (min-width: $screen-sm) {
       font-size: 18px;
@@ -262,7 +234,7 @@ $speed-menu-btn: 0.2s;
       margin: 0 0 10px;
       font-size: 20px;
       font-weight: 100;
-      color: $primary-color;
+      color: $color-primary;
 
       @media (min-width: $screen-sm) {
         font-size: 24px;
@@ -273,7 +245,7 @@ $speed-menu-btn: 0.2s;
       margin: 0 0 10px;
       font-size: 14px;
       font-weight: 100;
-      color: $secondary-color;
+      color: $color-secondary;
 
       @media (min-width: $screen-sm) {
         font-size: 16px;
@@ -282,8 +254,8 @@ $speed-menu-btn: 0.2s;
 
   .sg-article__body {
     padding: $padding-sm;
-    border-top:    1px solid $border-color;
-    border-bottom: 1px solid $border-color;
+    border-top:    1px solid $color-border;
+    border-bottom: 1px solid $color-border;
 
     &::after {
       content: ' ';
@@ -297,6 +269,6 @@ $speed-menu-btn: 0.2s;
     }
 
     @media (min-width: $screen-lg) {
-      border: 1px solid $border-color;
+      border: 1px solid $color-border;
     }
   }
