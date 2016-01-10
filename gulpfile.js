@@ -150,6 +150,14 @@ var onError = function(err) {
   this.emit('end');
 };
 
+
+// Capitalize first string letter
+var capitalizeFirstLetter = function(inputString) {
+  var newString = inputString[0].toUpperCase() + inputString.slice(1);
+  return newString;
+};
+
+
 // Search string in array and replace
 var replaceInArray = function(array, searchFor, replaceWith) {
   for (var i = 0; i < array.length; i++) {
@@ -166,8 +174,9 @@ var log = {
   activity: function(message) {
     gutil.log(message);
   },
-  empty: function() {
-    console.log('');
+  change: function(message) {
+    console.log('\n');
+    gutil.log(capitalizeFirstLetter(message.event) + ': ' + gutil.colors.magenta(message.path));
   }
 }
 
@@ -457,6 +466,7 @@ gulp.task('production', ['sass:dist', 'js:dist', 'handlebars:dist', 'assets:dist
 var startBrowserSync = function() {
   log.heading('Starting BrowserSync');
 
+  log.activity('Waiting for BrowserSync...')
   browserSync(config.html.browserSync);
 }
 
@@ -480,27 +490,40 @@ gulp.task('default', ['clean:dev'], function() {
   startBrowserSync();
 
   // Watch Sass
-  watch(paths.css.src + '**/*.scss', function() {
+  watch(paths.css.src + '**/*.scss', function(file) {
+    log.change(file);
+
     sassDev();
+
+    log.activity('Watching...');
   });
 
   // Watch JavaScript
-  watch(paths.js.src + '**/*.js', function() {
+  watch(paths.js.src + '**/*.js', function(file) {
+    log.change(file);
+
     jsDev();
+
+    log.activity('Watching...');
   });
 
   // Watch HTML
-  watch(paths.html.src + '**/*.hbs', function() {
+  watch(paths.html.src + '**/*.hbs', function(file) {
+    log.change(file);
+
     handlebarsDev();
     browserSync.reload();
+
+    log.activity('Watching...');
   });
 
   // Watch Assets
-  watch(paths.assets.src + '**/*', function() {
-    assetsDev();
-  });
+  watch(paths.assets.src + '**/*', function(file) {
+    log.change(file);
 
-  // Add empty line for cleaner console log
-  log.empty();
+    assetsDev();
+
+    log.activity('Watching...');
+  });
 });
 
