@@ -7,6 +7,7 @@
 
 // Base
 var fs           = require('fs');
+var glob         = require('glob');
 var del          = require('del');
 
 // Gulp
@@ -312,13 +313,16 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 // Handlebars Function
 var compileHandlebars = function(source, destination, nav) {
-  var pageList      = fs.readdirSync(paths.html.pages);
-  var componentList = fs.readdirSync(paths.html.components);
+  var pageList      = glob.sync(paths.html.pages      + '**/*.hbs');
+  var componentList = glob.sync(paths.html.components + '**/*.hbs');
 
-  replaceInArray(pageList,      '.hbs', '.html');
+  replaceInArray(pageList, '.hbs', '.html');
+  replaceInArray(pageList, paths.html.pages, '');
+
   replaceInArray(componentList, '.hbs', '.html');
+  replaceInArray(componentList, paths.html.components, '');
 
-  var pages = [];
+  var pages      = [];
   var components = [];
 
   for (var i = 0, item; item = pageList[i++];) {
@@ -377,8 +381,8 @@ var handlebarsDev = function() {
   log.activity('Finished cleaning.');
 
   log.activity('Compiling Handlebars...');
-  compileHandlebars(paths.html.pages      + '*.hbs', paths.html.dev,                true);
-  compileHandlebars(paths.html.components + '*.hbs', paths.html.dev + 'components', true);
+  compileHandlebars(paths.html.pages      + '**/*.hbs', paths.html.dev,                true);
+  compileHandlebars(paths.html.components + '**/*.hbs', paths.html.dev + 'components', true);
   log.activity('Finished compiling.');
 };
 
