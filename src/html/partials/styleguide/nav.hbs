@@ -6,12 +6,12 @@
   <ul class="sg-nav__list">
     <li><span class="sg-nav__title">Pages</span></li>
     {{#each navItems.pages}}
-    <li><a href="{{../root}}{{href}}" class="sg-nav__link">{{title}}</a></li>
+    <li><a href="/{{href}}" class="sg-nav__link">{{title}}</a></li>
     {{/each}}
 
     <li><span class="sg-nav__title">Components</span></li>
     {{#each navItems.components}}
-    <li><a href="{{../root}}{{href}}" class="sg-nav__link">{{title}}</a></li>
+    <li><a href="/{{href}}" class="sg-nav__link">{{title}}</a></li>
     {{/each}}
 
     <li><span class="sg-nav__title">Settings</span></li>
