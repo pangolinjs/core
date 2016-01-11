@@ -6,7 +6,6 @@
 
 
 // Base
-var fs           = require('fs');
 var glob         = require('glob');
 var del          = require('del');
 
@@ -102,6 +101,9 @@ var config = {
     },
     autoprefixer: {
       browsers: ['last 2 versions']
+    },
+    bless: {
+      log: true
     }
   },
 
@@ -211,9 +213,7 @@ gulp.task('clean:dist', function() {
 var sassBless = function(path, fileName) {
   gulp.src(path + fileName + '.css')
     .pipe(rename(fileName + '.splitted.css'))
-    .pipe(bless({
-      log: true
-    }))
+    .pipe(bless(config.css.bless))
     .pipe(gulp.dest(path));
 };
 
