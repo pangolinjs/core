@@ -360,33 +360,12 @@ var compileHandlebars = function(source, destination, nav) {
 };
 
 
-var deleteHTML = function() {
-  var pageList      = fs.readdirSync(paths.html.pages);
-  var componentList = fs.readdirSync(paths.html.components);
-
-  replaceInArray(pageList,      '.hbs', '.html');
-  replaceInArray(componentList, '.hbs', '.html');
-
-  var pattern = [paths.html.dev + '**/*.html'];
-
-  for (var i = 0, item; item = pageList[i++];) {
-    pattern.push('!' + paths.html.dev + item);
-  }
-
-  for (var i = 0, item; item = componentList[i++];) {
-    pattern.push('!' + paths.html.dev + 'components/' + item);
-  }
-
-  return del.sync(pattern);
-};
-
-
 // Handlebars Development Function
 var handlebarsDev = function() {
   log.heading('Handlebars Development');
 
   log.activity('Cleaning HTML...');
-  deleteHTML();
+  del.sync(paths.html.dev + '**/*.html');
   log.activity('Finished cleaning.');
 
   log.activity('Compiling Handlebars...');
