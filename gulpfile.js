@@ -222,11 +222,11 @@ var sassDev = function() {
       .pipe(rename('styles.css'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.css.dev))
+    .pipe(browserSync.stream({match: '**/*.css'}))
       .pipe(filter('styles.css'))
       .pipe(bless(config.css.bless))
       .pipe(rename('styles.splitted.css'))
-      .pipe(gulp.dest(paths.css.dev))
-    .pipe(browserSync.stream({match: 'styles.css'}));
+      .pipe(gulp.dest(paths.css.dev));
   log.activity('Finished.');
 };
 
