@@ -14,6 +14,7 @@ var gulp         = require('gulp');
 var gutil        = require('gulp-util');
 var watch        = require('gulp-watch');
 var rename       = require('gulp-rename');
+var filter       = require('gulp-filter');
 var include      = require('gulp-include');
 var plumber      = require('gulp-plumber');
 
@@ -209,15 +210,6 @@ gulp.task('clean:dist', function() {
  * ========================================================================== */
 
 
-// Split CSS for Internet Explorer
-var sassBless = function(path, fileName) {
-  gulp.src(path + fileName + '.css')
-    .pipe(rename(fileName + '.splitted.css'))
-    .pipe(bless(config.css.bless))
-    .pipe(gulp.dest(path));
-};
-
-
 // Sass Development Function
 var sassDev = function() {
   log.heading('Compile Sass');
@@ -230,8 +222,11 @@ var sassDev = function() {
       .pipe(rename('styles.css'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.css.dev))
-    .pipe(browserSync.stream({match: '**/*.css'}));
-  sassBless(paths.css.dev, 'styles');
+      .pipe(filter('styles.css'))
+      .pipe(bless(config.css.bless))
+      .pipe(rename('styles.splitted.css'))
+      .pipe(gulp.dest(paths.css.dev))
+    .pipe(browserSync.stream({match: 'styles.css'}));
   log.activity('Finished.');
 };
 
@@ -266,7 +261,11 @@ gulp.task('sass:dist', ['clean:dist'], function() {
     .pipe(sass(config.css.dist).on('error', sass.logError))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(rename('styles.css'))
-    .pipe(gulp.dest(paths.css.dist));
+    .pipe(gulp.dest(paths.css.dist))
+      .pipe(filter('styles.css'))
+      .pipe(bless(config.css.bless))
+      .pipe(rename('styles.splitted.css'))
+      .pipe(gulp.dest(paths.css.dist));
 });
 
 
