@@ -404,8 +404,7 @@ var assetsDev = function() {
 
   log.activity('Copying assets...');
   gulp.src(paths.assets.src + '**')
-    .pipe(gulp.dest(paths.assets.dev))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest(paths.assets.dev));
   log.activity('Finished copying.');
 };
 
@@ -501,6 +500,7 @@ gulp.task('default', ['clean:dev'], function() {
     log.change(file);
 
     assetsDev();
+    browserSync.reload();
 
     log.activity('Watching...');
   });
