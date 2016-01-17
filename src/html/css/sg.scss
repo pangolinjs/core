@@ -11,8 +11,8 @@
 
 
 // Breakpoints
-$screen-sm: 700px;
-$screen-lg: 1200px;
+$screen-sm: 800px;
+$screen-lg: 1400px;
 
 $padding:    30px;
 $padding-xs: ($padding / 3);
@@ -271,4 +271,8 @@ $speed-menu-btn: 0.2s;
     @media (min-width: $screen-lg) {
       border: 1px solid $color-border;
     }
+  }
+
+  .sg-article__body--dark {
+    background-color: $color-secondary;
   }
