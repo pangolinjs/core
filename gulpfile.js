@@ -368,7 +368,7 @@ var handlebarsDev = function() {
   log.activity('Finished cleaning.');
 
   log.activity('Compiling Handlebars...');
-  compileHandlebars(paths.html.pages      + '**/*.hbs', paths.html.dev,                true);
+  compileHandlebars(paths.html.pages + '**/*.hbs', paths.html.dev, true);
   compileHandlebars(paths.html.components + '**/*.hbs', paths.html.dev + 'components', true);
   log.activity('Finished compiling.');
 };
@@ -382,7 +382,7 @@ gulp.task('handlebars:dev', function() {
 
 // Handlebars Production Task
 gulp.task('handlebars:dist', ['clean:dist'], function() {
-  compileHandlebars(paths.html.pages, paths.html.dist, false);
+  compileHandlebars(paths.html.pages + '**/*.hbs', paths.html.dist, false);
 });
 
 
@@ -420,6 +420,16 @@ gulp.task('assets:dist', ['clean:dist'], function() {
     .pipe(imagemin(config.assets.imagemin))
     .pipe(gulp.dest(paths.assets.dist));
 });
+
+
+
+
+/* Development
+ * Generate development files.
+ * ========================================================================== */
+
+
+gulp.task('development', ['sass:dev', 'js:dev', 'handlebars:dev', 'assets:dev']);
 
 
 
