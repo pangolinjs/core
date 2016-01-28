@@ -8,6 +8,7 @@
 // Base
 var glob         = require('glob');
 var del          = require('del');
+var pack         = require('./package.json');
 
 // Gulp
 var gulp         = require('gulp');
@@ -92,6 +93,8 @@ var paths = {
 
 // Config
 var config = {
+  version: pack.version.replace(/\./g, ''),
+
   // CSS
   css: {
     dev: {
@@ -342,6 +345,7 @@ var compileHandlebars = function(source, destination, nav) {
   }
 
   var hbConfig = config.html.hb({
+    version: config.version,
     displayNav: nav,
     navItems: {
       pages: pages,
@@ -514,4 +518,3 @@ gulp.task('default', ['clean:dev'], function() {
     log.activity('Watching...');
   });
 });
-

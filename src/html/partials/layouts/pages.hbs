@@ -4,25 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{file.meta.title}}</title>
+
     {{#if displayNav}}
     <!-- Styleguide CSS -->
     <link rel="stylesheet" href="/css/sg.css">
     {{/if}}
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="/css/styles.css">
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="/css/styles.splitted.css">
+
+    <!--[if !IE]><!-->
+    <link rel="stylesheet" href="/css/styles.css?ver={{version}}">
+    <!--<![endif]-->
+    <!--[if IE]>
+    <link rel="stylesheet" href="/css/styles.splitted.css?ver={{version}}">
     <![endif]-->
   </head>
   <body>
 
+    {{#if displayNav}}
     <!-- Styleguide Nav -->
     {{> "styleguide/nav"}}
+    {{/if}}
 
-    <!-- Body -->
     {{{block "content"}}}
 
-    <!-- Scripts -->
-    <script src="/js/scripts.js"></script>
+    <script src="/js/scripts.js?ver={{version}}"></script>
   </body>
 </html>

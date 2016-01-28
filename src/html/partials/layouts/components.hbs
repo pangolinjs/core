@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{file.meta.title}}</title>
+
     <!-- Styleguide CSS -->
     <link rel="stylesheet" href="/css/sg.css">
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="/css/styles.css">
+
+    <!--[if !IE]><!-->
+    <link rel="stylesheet" href="/css/styles.css?ver={{version}}">
+    <!--<![endif]-->
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="/css/styles.splitted.css">
+    <link rel="stylesheet" href="/css/styles.splitted.css?ver={{version}}">
     <![endif]-->
   </head>
   <body>
@@ -22,12 +25,10 @@
       <p class="sg-header__description">{{file.meta.description}}</p>
     </header>
 
-    <!-- Body -->
     <main class="sg-body">
       {{{block "content"}}}
     </main>
 
-    <!-- Scripts -->
-    <script src="/js/scripts.js"></script>
+    <script src="/js/scripts.js?ver={{version}}"></script>
   </body>
 </html>
