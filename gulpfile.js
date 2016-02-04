@@ -427,7 +427,7 @@ var assetsDev = function() {
 
   log.activity('Copying assets...');
   gulp.src(paths.assets.src + '**')
-    .pipe(responsive(config.assets.responsive.images, config.assets.responsive.options))
+    //.pipe(responsive(config.assets.responsive.images, config.assets.responsive.options))
     .pipe(gulp.dest(paths.assets.dev));
   log.activity('Finished copying.');
 };
