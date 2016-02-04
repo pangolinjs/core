@@ -36,7 +36,6 @@ var frontMatter  = require('gulp-front-matter');
 
 // Assets
 var imagemin     = require('gulp-imagemin');
-var responsive   = require('gulp-responsive');
 
 // BrowserSync
 var browserSync  = require('browser-sync');
@@ -139,25 +138,6 @@ var config = {
       progressive: true,
       interlaced: true,
       multipass: true
-    },
-    responsive: {
-      images: {
-        '*': [{
-          width: '100%',
-          rename: {suffix: '@3x'}
-        }, {
-          width: '50%',
-          rename: {suffix: '@2x'}
-        }, {
-          width: '33.33333333333%',
-          rename: {suffix: '@1x'}
-        }]
-      },
-      options: {
-        quality: 100,
-        withMetadata: false,
-        interpolation: 'nohalo'
-      }
     }
   }
 }
@@ -427,7 +407,6 @@ var assetsDev = function() {
 
   log.activity('Copying assets...');
   gulp.src(paths.assets.src + '**')
-    //.pipe(responsive(config.assets.responsive.images, config.assets.responsive.options))
     .pipe(gulp.dest(paths.assets.dev));
   log.activity('Finished copying.');
 };
