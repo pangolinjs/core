@@ -25,9 +25,10 @@
 // MIXINS
 @import 'mixins/border-radius';
 @import 'mixins/clearfix';
-@import 'mixins/grid';
 @import 'mixins/grid-framework';
+@import 'mixins/grid';
 @import 'mixins/image';
+@import 'mixins/responsive-visibility';
 @import 'mixins/tab-focus';
 @import 'mixins/text-hide';
 
@@ -42,7 +43,8 @@
 
 // LAYOUT
 @import 'layout/grid';
-@import 'layout/embed-responsive';
+@import 'layout/responsive-embed';
+@import 'layout/responsive-utilities';
 
 
 // COMPONENTS
