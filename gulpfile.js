@@ -93,7 +93,7 @@ var paths = {
 
 // Config
 var config = {
-  version: pack.version.replace(/\./g, ''),
+  version: pack.version,
 
   // CSS
   css: {
@@ -345,7 +345,7 @@ var compileHandlebars = function(source, destination, nav) {
   }
 
   var hbConfig = config.html.hb({
-    version: config.version,
+    version: (config.version.replace(/\./g, '') * Math.random()).toString(10).replace(/\./g, ''),
     displayNav: nav,
     navItems: {
       pages: pages,
