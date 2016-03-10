@@ -1,28 +1,39 @@
-<nav class="sg-nav" id="sg-nav">
-  <button class="sg-nav__btn" id="sg-nav__btn">
-    <span class="sg-nav__icon"></span>
-  </button>
+<nav class="sg-nav">
   <ul class="sg-nav__list">
-    <li><span class="sg-nav__title">Pages</span></li>
-    {{#each navItems.pages}}
-    <li><a href="/{{href}}" class="sg-nav__link">{{title}}</a></li>
-    {{/each}}
+    <li class="sg-nav__item">
+      <div class="sg-nav__title">Pages</div>
+      <ul class="sg-nav__sub-list">
+        {{#each navItems.pages}}
+        <li class="sg-nav__sub-item"><a href="/{{href}}" class="sg-nav__link">{{title}}</a></li>
+        {{/each}}
+      </ul>
+    </li>
 
-    <li><span class="sg-nav__title">Components</span></li>
-    {{#each navItems.components}}
-    <li><a href="/{{href}}" class="sg-nav__link">{{title}}</a></li>
-    {{/each}}
+    <li class="sg-nav__item">
+      <div class="sg-nav__title">Components</div>
+      <ul class="sg-nav__sub-list">
+        {{#each navItems.components}}
+        <li class="sg-nav__sub-item"><a href="/{{href}}" class="sg-nav__link">{{title}}</a></li>
+        {{/each}}
+      </ul>
+    </li>
 
-    <li><span class="sg-nav__title">Settings</span></li>
-    <li><a href="http://localhost:3001" class="sg-nav__link">BrowserSync</a></li>
+    <li class="sg-nav__item">
+      <div class="sg-nav__title">Settings</div>
+      <ul class="sg-nav__sub-list">
+        <li class="sg-nav__sub-item"><a href="http://localhost:3001" class="sg-nav__link">BrowserSync</a></li>
+      </ul>
+    </li>
   </ul>
+
+  <button class="sg-nav__btn">x</button>
 </nav>
 
 <script>
-  var sgNav     = document.getElementById('sg-nav');
-  var sgNavBtn  = document.getElementById('sg-nav__btn');
+  var sgNav    = document.querySelector('.sg-nav');
+  var sgNavBtn = document.querySelector('.sg-nav__btn');
 
   sgNavBtn.onclick = function() {
-    sgNav.classList.toggle('sg-nav--open');
+    sgNav.classList.toggle('sg-nav--hidden');
   };
 </script>

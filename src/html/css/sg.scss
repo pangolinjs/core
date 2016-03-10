@@ -26,10 +26,6 @@ $color-secondary: rgb(100, 100, 100);
 $color-text:      rgb(255, 255, 255);
 $color-border:    rgb(220, 220, 220);
 
-// Transition and Animation speed
-$speed-menu:     0.2s;
-$speed-menu-btn: 0.2s;
-
 
 
 
@@ -38,119 +34,111 @@ $speed-menu-btn: 0.2s;
 
 
 .sg-nav {
-  position: fixed;
-  top: 0;
-  transform: translate3d(-100%, 0, 0);
-  height: 100%;
-  transition: transform $speed-menu ease;
-  z-index: 9999;
+  height: 40px;
+  transition: height 0.2s linear;
 
-  &.sg-nav--open {
-    transform: translate3d(0, 0, 0);
-    transition: transform $speed-menu ease;
+  &::after {
+    content: '';
+    display: table;
+    line-height: 0;
+    clear: both;
   }
 }
 
-  .sg-nav__btn {
-    position: absolute;
-    right: -50px;
-    width: 50px;
-    height: 50px;
-    background-color: $color-primary;
-    border: none;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:hover,
-    &:focus,
-    .sg-nav--open & {
-      background-color: darken($color-primary, 15%);
-    }
-  }
-
-    .sg-nav__icon {
-      position: relative;
-      display: block;
-      width:  75%;
-      height: 2px;
-      margin: auto;
-      background-color: $color-text;
-      transition: background-color 0s linear ($speed-menu / 2);
-
-      &::before,
-      &::after {
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        background-color: $color-text;
-        content: " ";
-      }
-
-      &::before {
-        bottom: 8px;
-        transition: bottom $speed-menu-btn linear ($speed-menu / 2),
-                    transform $speed-menu-btn linear;
-      }
-
-      &::after {
-        top: 8px;
-        transition: top $speed-menu-btn linear ($speed-menu / 2),
-                    transform $speed-menu-btn linear;
-      }
-
-      .sg-nav--open & {
-        background-color: transparent;
-
-        &::before {
-          bottom: 0;
-          transform: rotate(45deg);
-          transition: bottom $speed-menu-btn linear,
-                      transform $speed-menu-btn linear ($speed-menu / 2);
-        }
-
-        &::after {
-          top: 0;
-          transform: rotate(-45deg);
-          transition: top $speed-menu-btn linear,
-                      transform $speed-menu-btn linear ($speed-menu / 2);
-        }
-      }
-    }
+.sg-nav--hidden {
+  height: 0;
+}
 
   .sg-nav__list {
-    height: 100%;
-    margin: -$padding 0;
+    position: fixed;
+    display: flex;
+    height: 40px;
+    top: 0;
+    left: 0;
+    right: 40px;
+    margin: 0;
     padding: 0;
-    background: darken($color-primary, 15%);
+    background-color: $color-secondary;
+    transition: transform 0.2s linear;
+
+    .sg-nav--hidden & {
+      transform: translate3d(0, -40px, 0);
+    }
   }
 
-    .sg-nav__title {
+    .sg-nav__item {
       display: block;
-      margin: $padding 0 0;
-      padding: 0 $padding;
-      border-bottom: 1px solid $color-primary;
-      font-size: 80%;
-      font-weight: 700;
-      letter-spacing: 1px;
-      line-height: 50px;
-      text-transform: uppercase;
-      color: lighten($color-primary, 30%);
-    }
+      width: 30%;
+      height: inherit;
+      margin: 0 15px;
 
-    .sg-nav__link {
-      display: block;
-      padding: $padding-xs $padding;
-      text-decoration: none;
-      color: $color-text;
+      &:hover {
+        background: $color-primary;
+        cursor: pointer;
+      }
 
-      &:hover,
-      &:focus {
-        background-color: $color-primary;
+      @media (min-width: $screen-lg) {
+        width: 20%;
       }
     }
+
+      .sg-nav__title {
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: 100;
+        text-transform: uppercase;
+        color: $color-text;
+      }
+
+      .sg-nav__sub-list {
+        display: none;
+        position: absolute;
+        width: inherit;
+        top: 40px;
+        margin: 0;
+        padding: 0;
+        background-color: $color-border;
+
+        .sg-nav__item:hover & {
+          display: block;
+        }
+      }
+
+        .sg-nav__sub-item {
+          display: block;
+        }
+
+          .sg-nav__link {
+            display: block;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 400;
+            color: $color-secondary;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+              color: $color-text;
+              background: lighten($color-primary, 20%);
+            }
+          }
+
+  .sg-nav__btn {
+    position: fixed;
+    height: 40px;
+    width: 40px;
+    top: 0;
+    right: 0;
+    font-size: 24px;
+    color: $color-text;
+    background: $color-primary;
+    border: none;
+
+    &:hover,
+    &:focus {
+      background: lighten($color-primary, 20%);
+    }
+  }
 
 
 
