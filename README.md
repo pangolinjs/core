@@ -16,6 +16,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 
 ## Dependencies
 * [Node.js with npm](https://nodejs.org/)
+* Use [Node.js 5.x](https://nodejs.org/en/download/stable/) for Windows.
 
 
 ## Installation
