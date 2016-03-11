@@ -51,6 +51,7 @@ $color-border:    rgb(220, 220, 220);
 
   .sg-nav__list {
     position: fixed;
+    z-index: 9999;
     display: flex;
     height: 40px;
     top: 0;
@@ -125,6 +126,7 @@ $color-border:    rgb(220, 220, 220);
 
   .sg-nav__btn {
     position: fixed;
+    z-index: 9999;
     height: 40px;
     width: 40px;
     top: 0;
