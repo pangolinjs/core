@@ -1,7 +1,3 @@
-<p align="center">
-  <img width="450" height="50" src="https://raw.githubusercontent.com/mvsde/styleguide/master/src/assets/img/styleguide-logo.png">
-</p>
-
 # Front-End Styleguide
 Front-end development styleguide with Sass, JavaScript and Handlebars.
 Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint JavaScript](http://jshint.com/) and create static HTML files from [Handlebars](http://handlebarsjs.com/) files.
@@ -34,7 +30,8 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 ### Tasks
 These are the main Gulp tasks:
 * Run `gulp` to start the default task. This task watches for file changes. All generated files are placed in `dev`.
-* Run `gulp distribution` to create prduction ready resources. This task minifys CSS and JavaScript files and compresses images. All genereated files will be placed in `dist`.
+* Run `gulp development` to start the default task without file watching. All generated files are placed in `dev`.
+* Run `gulp production` to create prduction ready resources. This task minifys CSS and JavaScript files and compresses images. All genereated files will be placed in `dist`.
 
 There are more tasks available for standalone execution:
 * `sass:dev` and `sass:dist` for Sass compilation.
@@ -54,11 +51,11 @@ For a complete documentation jump to the [Sass Basics](http://sass-lang.com/guid
 
 This styleguide splits the CSS into small parts. This ensures a far better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [Handlebars-Section](#handlebars) for the HTML-side of componentization.
 
-The function `@import` places the corresponding file in the main Sass file. The final output is one large CSS file to minimize requests. See `src/css/main.scss` for more information.
+The function `@import` includes the corresponding file in the main Sass file. The final output is one large CSS file to minimize requests. See `src/css/main.scss` for more information.
 
 The development task generates sourcemaps.
 
-Internet Explorer versions 6 to 9 have a limit on the amount of selectors used in one stylesheet. If this limit is reached, [Bless](http://blesscss.com/) generates an Internet Explorer specific splitted stylesheet. This does not affect any other browser.
+Internet Explorer versions 6 to 9 have a limit on the amount of selectors used in one stylesheet. If this limit is reached, [Bless](http://blesscss.com/) generates an Internet Explorer specific splitted stylesheet. This does not affect any other browser. Since Microsoft discontinued these old Internet Explorer version, this feature is likely to be removed in a future version of the Styleguide.
 
 
 ### JavaScript
@@ -69,8 +66,9 @@ The Gulp plugin [gulp-include](https://github.com/wiledal/gulp-include) works si
 
 With the syntax `//=include relative/path/to/file.js` smaller JavaScript components can be included into the *main.js*. The path may contain globbing for example `//=include components/**/*.js`.
 
-`require` only includes once. This is useful to include all files from a folder but one specific file first:
-```
+`require` only includes once. This helps to batch-include multiple files but with specific files first or last:
+
+```js
 //=require libraries/jquery.js
 //=require libraries/*.js
 ```
@@ -78,7 +76,7 @@ With the syntax `//=include relative/path/to/file.js` smaller JavaScript compone
 The development task runs JSHint and generates sourcemaps.
 The production task uglifies the source.
 
-jQuery 2.1.4 is included with this styleguide but it can be easily replaced with another library or removed completely. All 3rd-party stuff should be placed inside the folder `src/js/libraries`. JSHint ignores files in this folder to prevent error spamming.
+jQuery 2 is included with this styleguide but it can be easily replaced with another library or removed completely. All 3rd-party stuff should be placed inside the folder `src/js/libraries`. JSHint ignores files in this folder to prevent error spamming.
 
 
 ### Handlebars
@@ -141,25 +139,7 @@ The components pages and the development menu use some styling.
 
 All styles are located in `src/html/css/sg.scss`.
 
-The style definitions do not interfere with your CSS located in `src/css` as long as the following selectors are not used:<br>
-
-* .sg-nav
-* .sg-nav--open
-  * .sg-nav__btn
-    * .sg-nav__icon
-  * .sg-nav__list
-    * .sg-nav__title
-    * .sg-nav__link
-* .sg-header
-  * .sg-header__title
-  * .sg-header__description
-* .sg-body
-* .sg-article
-  * .sg-article__header
-    * .sg-article__title
-    * .sg-article__description
-  * .sg-article__body
-
+The style definitions located in `src/css` use the prefix `sg-` to ensure compatibility with the main stylesheet.
 
 ### Assets
 Located in `src/assets`.<br>
