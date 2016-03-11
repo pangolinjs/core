@@ -65,31 +65,48 @@ $color-border:    rgb(220, 220, 220);
     .sg-nav--hidden & {
       transform: translate3d(0, -40px, 0);
     }
+
+    @media (min-width: $screen-sm) {
+      padding: 0 15px;
+    }
   }
 
     .sg-nav__item {
       display: block;
-      width: 30%;
       height: inherit;
-      margin: 0 15px;
-
-      &:hover {
-        background: $color-primary;
-        cursor: pointer;
-      }
-
-      @media (min-width: $screen-lg) {
-        width: 20%;
-      }
     }
 
-      .sg-nav__title {
-        padding: 12px 20px;
+      .sg-nav__button {
+        display: block;
+        height: 40px;
+        padding: 11px 20px;
         font-size: 16px;
         font-weight: 100;
         text-transform: uppercase;
         color: $color-text;
+        background: none;
+        border: none;
+        outline: none;
+
+        .sg-nav__item:hover &,
+        &.sg-nav__button--active,
+        &:focus {
+          background: lighten($color-primary, 20%);
+        }
       }
+
+        .sg-nav__icon {
+          line-height: 0;
+        }
+
+        .sg-nav__text {
+          display: none;
+          margin-left: 8px;
+
+          @media (min-width: $screen-sm) {
+            display: inline;
+          }
+        }
 
       .sg-nav__sub-list {
         display: none;
@@ -99,10 +116,10 @@ $color-border:    rgb(220, 220, 220);
         margin: 0;
         padding: 0;
         background-color: $color-border;
+      }
 
-        .sg-nav__item:hover & {
-          display: block;
-        }
+      .sg-nav__sub-list--visible {
+        display: block;
       }
 
         .sg-nav__sub-item {
@@ -116,6 +133,7 @@ $color-border:    rgb(220, 220, 220);
             font-weight: 400;
             color: $color-secondary;
             text-decoration: none;
+            outline: none;
 
             &:hover,
             &:focus {
@@ -124,21 +142,34 @@ $color-border:    rgb(220, 220, 220);
             }
           }
 
-  .sg-nav__btn {
+  .sg-nav__hide-btn {
     position: fixed;
     z-index: 9999;
     height: 40px;
     width: 40px;
     top: 0;
     right: 0;
+    padding: 0;
     font-size: 24px;
     color: $color-text;
-    background: $color-primary;
+    background: lighten($color-primary, 20%);
     border: none;
+    outline: none;
 
     &:hover,
     &:focus {
-      background: lighten($color-primary, 20%);
+      background: lighten($color-primary, 10%);
+    }
+
+    &::after {
+      content: '\2715';
+      line-height: 0;
+    }
+  }
+
+  .sg-nav__hide-btn--active {
+    &::after {
+      content: '\2630';
     }
   }
 
@@ -154,7 +185,6 @@ $color-border:    rgb(220, 220, 220);
   margin: $padding-sm auto $padding-lg;
   padding: $padding-sm;
   border-bottom: 1px solid $color-border;
-  text-align: center;
 
   @media (min-width: $screen-sm) {
     margin: $padding auto $padding-xl;
@@ -164,13 +194,13 @@ $color-border:    rgb(220, 220, 220);
 
   .sg-header__title {
     margin: 0 0 10px;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 100;
     color: $color-primary;
 
     @media (min-width: $screen-sm) {
       margin: 0 0 15px;
-      font-size: 36px;
+      font-size: 48px;
     }
   }
 
