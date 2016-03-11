@@ -9,7 +9,9 @@
       </button>
       <ul class="sg-nav__sub-list">
         {{#each navItems.pages}}
-        <li class="sg-nav__sub-item"><a href="/{{href}}" class="sg-nav__link">{{title}}</a></li>
+        <li class="sg-nav__sub-item">
+          <a href="/{{href}}" class="sg-nav__link">{{title}}</a>
+        </li>
         {{/each}}
       </ul>
     </li>
@@ -23,7 +25,9 @@
       </button>
       <ul class="sg-nav__sub-list">
         {{#each navItems.components}}
-        <li class="sg-nav__sub-item"><a href="/{{href}}" class="sg-nav__link">{{title}}</a></li>
+        <li class="sg-nav__sub-item">
+          <a href="/{{href}}" class="sg-nav__link">{{title}}</a>
+        </li>
         {{/each}}
       </ul>
     </li>
@@ -36,7 +40,9 @@
         <span class="sg-nav__text">Settings</span>
       </button>
       <ul class="sg-nav__sub-list">
-        <li class="sg-nav__sub-item"><a href="http://localhost:3001" class="sg-nav__link">BrowserSync</a></li>
+        <li class="sg-nav__sub-item">
+          <a href="http://localhost:3001" class="sg-nav__link" target="_blank">BrowserSync</a>
+        </li>
       </ul>
     </li>
   </ul>
