@@ -96,15 +96,17 @@ $color-border:    rgb(220, 220, 220);
       }
 
         .sg-nav__icon {
-          line-height: 0;
+          height: 100%;
+          fill: currentColor;
         }
 
         .sg-nav__text {
           display: none;
-          margin-left: 8px;
 
           @media (min-width: $screen-sm) {
             display: inline;
+            margin-left: 8px;
+            vertical-align: 3px;
           }
         }
 
@@ -149,7 +151,7 @@ $color-border:    rgb(220, 220, 220);
     width: 40px;
     top: 0;
     right: 0;
-    padding: 0;
+    padding: 5px;
     font-size: 24px;
     color: $color-text;
     background: lighten($color-primary, 20%);
@@ -160,18 +162,27 @@ $color-border:    rgb(220, 220, 220);
     &:focus {
       background: lighten($color-primary, 10%);
     }
-
-    &::after {
-      content: '\2715';
-      line-height: 0;
-    }
   }
 
-  .sg-nav__hide-btn--active {
-    &::after {
-      content: '\2630';
+    .sg-nav__hide-btn-icon {
+      fill: currentColor;
+      height: 28px;
     }
-  }
+
+    .sg-nav__hide-btn-icon--show {
+      display: none;
+
+      .sg-nav__hide-btn--active & {
+        display: inline;
+      }
+    }
+
+    .sg-nav__hide-btn-icon--close {
+      .sg-nav__hide-btn--active & {
+        display: none;
+      }
+    }
+
 
 
 
