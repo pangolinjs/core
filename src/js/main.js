@@ -5,7 +5,7 @@
 // =============================================================================
 
 // Libraries
-//=require libraries/jquery-2.1.4.js
+//=require libraries/jquery-2.x.js
 //=require libraries/*.js
 
 // Components
