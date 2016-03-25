@@ -136,6 +136,17 @@ description: Only used for components.
 {{/extend}}
 ```
 
+### Holder.js
+Use [Holder.js](https://github.com/imsky/holder) to include image placeholders.
+
+This basic HTML generates a grey 300 by 200 pixel big image.
+
+```html
+<img src="" data-src="holder.js/300x200" alt="Image Placeholder">
+```
+
+[More advanced options](https://github.com/imsky/holder#placeholder-options) like color, text and font are available.
+
 #### Styleguide CSS
 The components pages and the development menu use some styling.
 
