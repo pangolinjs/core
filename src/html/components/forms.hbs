@@ -1,0 +1,196 @@
+---
+title: Forms
+description: Users input things. The server gets things.
+---
+{{#extend "layouts/components"}}
+  {{#content "content"}}
+    <article class="sg-article">
+      <header class="sg-article__header">
+        <h2 class="sg-article__title">Buttons</h2>
+        <p class="sg-article__description">Usually they submit forms or trigger JavaScript actions.</p>
+      </header>
+
+      <div class="sg-article__body">
+        <button class="button">Button</button>
+        <input type="submit" value="Input">
+        <a href="#" class="button">Link</a>
+      </div>
+    </article>
+
+    <article class="sg-article">
+      <header class="sg-article__header">
+        <h2 class="sg-article__title">Inputs</h2>
+        <p class="sg-article__description">Text, password, checkbox etc.</p>
+      </header>
+
+      <div class="sg-article__body">
+        <form>
+          <fieldset>
+            <legend>Text inputs</legend>
+
+            <div class="form__group">
+              <label for="text">Text input</label>
+              <input type="text" id="text" class="form__control" placeholder="Text">
+            </div>
+
+            <div class="form__group form__group--disabled">
+              <label for="text-disabled">Text input (disabled)</label>
+              <input type="text" id="text-disabled" class="form__control" placeholder="Text (disabled)" disabled>
+            </div>
+
+            <div class="form__group">
+              <label for="email">E-mail input</label>
+              <input type="email" id="email" class="form__control" placeholder="E-mail">
+            </div>
+
+            <div class="form__group">
+              <label for="password">Password input</label>
+              <input type="password" id="password" class="form__control" placeholder="Password">
+            </div>
+
+            <div class="form__group">
+              <label for="search">Search input</label>
+              <input type="search" id="search" class="form__control" placeholder="Search">
+            </div>
+
+            <div class="form__group">
+              <label for="url">URL input</label>
+              <input type="url" id="url" class="form__control" placeholder="URL">
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Numeric inputs</legend>
+
+            <div class="form__group">
+              <label for="tel">Telephone input</label>
+              <input type="tel" id="tel" class="form__control" placeholder="Telephone">
+            </div>
+
+            <div class="form__group">
+              <label for="number">Number input</label>
+              <input type="number" id="number" class="form__control" placeholder="7">
+            </div>
+
+            <div class="form__group">
+              <label for="date">Date input</label>
+              <input type="date" class="form__control" id="date">
+            </div>
+
+            <div class="form__group">
+              <label for="time">Time input</label>
+              <input type="time" class="form__control" id="time">
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Checkbox</legend>
+
+            <div class="form__group form__group--checkbox">
+              <input type="checkbox" name="checkbox" value="checkbox-1" id="checkbox-1" checked>
+              <label for="checkbox-1">Checkbox #1 (checked)</label>
+            </div>
+
+            <div class="form__group form__group--checkbox">
+              <input type="checkbox" name="checkbox" value="checkbox-2" id="checkbox-2">
+              <label for="checkbox-2">Checkbox #2</label>
+            </div>
+
+            <div class="form__group form__group--disabled form__group--checkbox">
+              <input type="checkbox" name="checkbox" value="checkbox-3" id="checkbox-3" disabled>
+              <label for="checkbox-3">Checkbox #3 (disabled)</label>
+            </div>
+
+            <div class="form__group form__group--checkbox">
+              <input type="checkbox" name="checkbox" value="checkbox-4" id="checkbox-4">
+              <label for="checkbox-4">Checkbox #4</label>
+            </div>
+
+            <div class="form__group form__group--disabled form__group--checkbox">
+              <input type="checkbox" name="checkbox" value="checkbox-5" id="checkbox-5" disabled checked>
+              <label for="checkbox-5">Checkbox #5 (checked, disabled)</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Radio</legend>
+
+            <div class="form__group form__group--radio">
+              <input type="radio" name="radio" value="radio-1" id="radio-1" checked>
+              <label for="radio-1">Radio #1</label>
+            </div>
+
+            <div class="form__group form__group--radio">
+              <input type="radio" name="radio" value="radio-2" id="radio-2">
+              <label for="radio-2">Radio #2</label>
+            </div>
+
+            <div class="form__group form__group--disabled form__group--radio">
+              <input type="radio" name="radio" value="radio-3" id="radio-3" disabled>
+              <label for="radio-3">Radio #3 (disabled)</label>
+            </div>
+
+            <div class="form__group form__group--radio">
+              <input type="radio" name="radio" value="radio-4" id="radio-4">
+              <label for="radio-4">Radio #4</label>
+            </div>
+
+            <div class="form__group form__group--disabled form__group--radio">
+              <input type="radio" name="radio2" value="radio" id="radio3" disabled checked>
+              <label for="radio2">Radio (checked, disabled)</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Select</legend>
+
+            <div class="form__group">
+              <label for="select">Select input</label>
+              <select id="select" class="form__control">
+                <option value="select-1">Option 1</option>
+                <option value="select-2">Option 2</option>
+                <option value="select-3">Option 3</option>
+                <option value="select-4">Option 4</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Color and file inputs</legend>
+
+            <div class="form__group">
+              <label for="color">Color input</label>
+              <input type="color" id="color" class="form__control">
+            </div>
+
+            <div class="form__group">
+              <label for="file">File input</label>
+              <input type="file" id="file" class="form__control">
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </article>
+
+    <article class="sg-article">
+      <header class="sg-article__header">
+        <h2 class="sg-article__title">Textarea</h2>
+        <p class="sg-article__description">Multi-line inputs</p>
+      </header>
+
+      <div class="sg-article__body">
+        <form>
+          <div class="form__group">
+            <label for="textarea">Textarea</label>
+            <textarea id="textarea" class="form__control" placeholder="Textarea"></textarea>
+          </div>
+
+          <div class="form__group form__group--disabled">
+            <label for="textarea-disabled">Textarea (disabled)</label>
+            <textarea id="textarea-disabled" class="form__control" placeholder="Textarea (disabled)" disabled></textarea>
+          </div>
+        </form>
+      </div>
+    </article>
+  {{/content}}
+{{/extend}}
