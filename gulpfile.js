@@ -16,7 +16,7 @@ var gutil        = require('gulp-util');
 var watch        = require('gulp-watch');
 var rename       = require('gulp-rename');
 var filter       = require('gulp-filter');
-var include      = require('gulp-include');
+var concat       = require('gulp-concat');
 var plumber      = require('gulp-plumber');
 
 // CSS/Sass
@@ -221,10 +221,7 @@ var sassDev = function() {
       .pipe(rename('styles.css'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.css.dev))
-    .pipe(browserSync.stream({match: '**/*.css'}))
-      .pipe(filter('styles.css'))
-      .pipe(rename('styles.splitted.css'))
-      .pipe(gulp.dest(paths.css.dev));
+    .pipe(browserSync.stream({match: '**/*.css'}));
   log.activity('Finished.');
 };
 
@@ -259,10 +256,7 @@ gulp.task('sass:dist', ['clean:dist'], function() {
     .pipe(sass(config.css.dist).on('error', sass.logError))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(rename('styles.css'))
-    .pipe(gulp.dest(paths.css.dist))
-      .pipe(filter('styles.css'))
-      .pipe(rename('styles.splitted.css'))
-      .pipe(gulp.dest(paths.css.dist));
+    .pipe(gulp.dest(paths.css.dist));
 });
 
 
@@ -282,10 +276,9 @@ var jsDev = function() {
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 
-  gulp.src(paths.js.src + 'main.js')
+  gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'components/**/*.js'])
     .pipe(sourcemaps.init())
-      .pipe(include())
-      .pipe(rename('scripts.js'))
+      .pipe(concat('scripts.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js.dev))
     .pipe(browserSync.stream({match: '**/*.js'}));
@@ -301,10 +294,9 @@ gulp.task('js:dev', function() {
 
 // JavaScript Production
 gulp.task('js:dist', ['clean:dist'], function() {
-  return gulp.src(paths.js.src + 'main.js')
-    .pipe(include())
+  return gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'components/**/*.js'])
+    .pipe(concat('scripts.js'))
     .pipe(uglify())
-    .pipe(rename('scripts.js'))
     .pipe(gulp.dest(paths.js.dist));
 });
 
