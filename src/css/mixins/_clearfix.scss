@@ -1,4 +1,4 @@
-// CLEARFIX
+// Clearfix
 //
 // For modern browsers
 // 1. The space content is one way to avoid an Opera bug when the
@@ -9,17 +9,13 @@
 //    `:before` to contain the top-margins of child elements.
 //
 // Source: http://nicolasgallagher.com/micro-clearfix-hack/
-// =============================================================================
 
-
-/// A Clearfix - You no, what this is doing...
 @mixin clearfix() {
   &:before,
   &:after {
-    content: ' '; // 1
+    content: " "; // 1
     display: table; // 2
   }
-
   &:after {
     clear: both;
   }
