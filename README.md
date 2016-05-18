@@ -28,7 +28,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 3. Install global Gulp with `npm install -g gulp`. This step is required to get CLI access to gulp.
 
 
-_To update previously downloaded Node Modules run `npm update`._
+*To update previously downloaded Node Modules run `npm update`.*
 
 
 ## Usage
@@ -43,12 +43,12 @@ All generated files are placed in `dev`.
 All genereated files will be placed in `dist`.
 
 There are more tasks available for standalone execution:
-* `sass:dev` and `sass:dist` for Sass compilation.
-* `js:dev` and `js:dist` for JavaScript concatenation and linting.
-* `handlebars:dev` and `handlebars:dist` for static HTML file generation.
-* `assets:dev` and `assets:dist` for assets copying and image minification.
+* `sass-dev` and `sass-dist` for Sass compilation.
+* `js-dev` and `js-dist` for JavaScript concatenation and linting.
+* `html-dev` and `html-dist` for static HTML file generation.
+* `assets-dev` and `assets-dist` for assets copying and image minification.
 
-_The generated folders `dev` and `dist` are not versioned by Git._
+*The generated folders `dev` and `dist` are not versioned by Git.*
 
 
 ### Sass
@@ -61,7 +61,7 @@ This styleguide splits the CSS into small parts. This ensures a far better organ
 
 The function `@import` includes the corresponding file in the main Sass file. The final output is one large CSS file to minimize requests. See `src/css/main.scss` for more information.
 
-_The development task generates sourcemaps._
+*The development task generates sourcemaps.*
 
 
 ### JavaScript
@@ -72,7 +72,7 @@ JavaScript files are concatenated in the following order: first files from `libr
 
 All 3rd-party stuff should be placed inside the folder `src/js/libraries`. JSHint ignores files in this folder to prevent error spamming. jQuery 2 is included with this styleguide but it can be replaced with another library or removed completely.
 
-_The development task runs JSHint and generates sourcemaps. The production task uglifies the source._
+*The development task runs JSHint and generates sourcemaps. The production task uglifies the source.*
 
 
 ### Handlebars
@@ -81,7 +81,7 @@ Output to `dev` or `dist`.
 
 *Handlebars* is an HTML templating engine based on JavaScript. Gulp creates static HTML from Handlebars files.
 
-Hierarchic organisation with subfolders is supported. The output reflects the input file tree.
+Hierarchy with subfolders is supported. The output reflects the input file tree.
 
 
 #### Layouts
@@ -142,7 +142,7 @@ This basic example generates a grey 300 by 200 pixel image.
 <img src="" data-src="holder.js/300x200" alt="Image Placeholder">
 ```
 
-[More advanced options](https://github.com/imsky/holder#placeholder-options) like color, text and font are available.
+*[More advanced options](https://github.com/imsky/holder#placeholder-options) like color, text and font are available.*
 
 
 ### Assets
@@ -153,11 +153,9 @@ All files and folders placed in `src/assets` will be copied to `dev/assets` or `
 
 
 ## Styleguide CSS
-The components pages and the development menu use some styling.
+The components pages and the development menu use some styling. All styles are located in `src/html/css/sg.scss`.
 
-All styles are located in `src/html/css/sg.scss`.
-
-The style definitions located in `src/css` use the prefix `sg-` to ensure compatibility with the main stylesheet.
+*The style definitions located in `src/css` use the prefix `sg-` to ensure compatibility with the main stylesheet.*
 
 
 ## Credits
