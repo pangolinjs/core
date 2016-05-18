@@ -21,7 +21,6 @@ var plumber      = require('gulp-plumber');
 
 // CSS/Sass
 var sass         = require('gulp-sass');
-var bless        = require('gulp-bless');
 var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 
@@ -105,9 +104,6 @@ var config = {
     },
     autoprefixer: {
       browsers: ['last 2 versions']
-    },
-    bless: {
-      log: true
     }
   },
 
@@ -227,7 +223,6 @@ var sassDev = function() {
     .pipe(gulp.dest(paths.css.dev))
     .pipe(browserSync.stream({match: '**/*.css'}))
       .pipe(filter('styles.css'))
-      .pipe(bless(config.css.bless))
       .pipe(rename('styles.splitted.css'))
       .pipe(gulp.dest(paths.css.dev));
   log.activity('Finished.');
@@ -266,7 +261,6 @@ gulp.task('sass:dist', ['clean:dist'], function() {
     .pipe(rename('styles.css'))
     .pipe(gulp.dest(paths.css.dist))
       .pipe(filter('styles.css'))
-      .pipe(bless(config.css.bless))
       .pipe(rename('styles.splitted.css'))
       .pipe(gulp.dest(paths.css.dist));
 });
