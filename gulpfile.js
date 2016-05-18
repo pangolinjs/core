@@ -8,10 +8,12 @@
 // Base
 var glob         = require('glob');
 var del          = require('del');
-var pack         = require('./package.json');
+var packageJSON  = require('./package.json');
 
 // Gulp
 var gulp         = require('gulp');
+
+// Utilities
 var gutil        = require('gulp-util');
 var watch        = require('gulp-watch');
 var rename       = require('gulp-rename');
@@ -92,7 +94,7 @@ var paths = {
 
 // Config
 var config = {
-  version: pack.version,
+  version: packageJSON.version,
 
   // CSS
   css: {
