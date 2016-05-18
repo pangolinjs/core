@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 
 /* NODE MODULES
@@ -15,11 +15,11 @@ var gulp         = require('gulp');
 
 // Utilities
 var gutil        = require('gulp-util');
-var watch        = require('gulp-watch');
 var rename       = require('gulp-rename');
 var filter       = require('gulp-filter');
 var concat       = require('gulp-concat');
 var plumber      = require('gulp-plumber');
+var runSequence  = require('run-sequence');
 
 // CSS/Sass
 var sass         = require('gulp-sass');
@@ -143,64 +143,32 @@ var config = {
 
 
 
-/* Custom Functions
- * ========================================================================== */
-
-
-// Plumber Error Handler
-var onError = function(err) {
-  gutil.log(gutil.colors.red('Error in file ' + err.fileName + ' in line ' + err.lineNumber + ':'));
-  console.log(err.message);
-  this.emit('end');
-};
-
-
-// Capitalize first string letter
-var capitalizeFirstLetter = function(inputString) {
-  var newString = inputString[0].toUpperCase() + inputString.slice(1);
-  return newString;
-};
-
-
-// Search string in array and replace
-var replaceInArray = function(array, searchFor, replaceWith) {
-  for (var i = 0; i < array.length; i++) {
-    array[i] = array[i].replace(searchFor, replaceWith);
-  }
-};
-
-
-// Log messages
-var log = {
-  heading: function(message) {
-    console.log('\n' + gutil.colors.inverse(message.toUpperCase()));
-  },
-  activity: function(message) {
-    gutil.log(message);
-  },
-  change: function(message) {
-    console.log('\n');
-    gutil.log(capitalizeFirstLetter(message.event) + ': ' + gutil.colors.magenta(message.path));
-  }
-}
-
-
-
-
 /* CLEAN
  * Delete directories
  * ========================================================================== */
 
 
 // Clean Development
-gulp.task('clean:dev', function() {
+gulp.task('clean-dev', function() {
   return del(basePaths.dev);
 });
 
 
 // Clean Distribution
-gulp.task('clean:dist', function() {
+gulp.task('clean-dist', function() {
   return del(basePaths.dist);
+});
+
+
+// Clean Dev HTML
+gulp.task('clean-html-dev', function() {
+  return del(paths.html.dev + '**/*.html');
+});
+
+
+// Clean Dev Assets
+gulp.task('clean-assets-dev', function() {
+  return del(paths.assets.dev + '**');
 });
 
 
@@ -211,12 +179,9 @@ gulp.task('clean:dist', function() {
  * ========================================================================== */
 
 
-// Sass Development Function
-var sassDev = function() {
-  log.heading('Compile Sass');
-
-  log.activity('Starting...');
-  gulp.src(paths.css.src + '**/*.scss')
+// CSS Development
+gulp.task('css-dev', function() {
+  return gulp.src(paths.css.src + '**/*.scss')
     .pipe(sourcemaps.init())
       .pipe(sass(config.css.dev).on('error', sass.logError))
       .pipe(autoprefixer(config.css.autoprefixer))
@@ -224,36 +189,24 @@ var sassDev = function() {
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.css.dev))
     .pipe(browserSync.stream({match: '**/*.css'}));
-  log.activity('Finished.');
-};
-
-
-// Sass Development Task
-gulp.task('sass:dev', function() {
-  return sassDev();
 });
 
 
-var sassStyleguide = function() {
-  log.heading('Compile Styleguide Sass');
+// CSS Watch
+gulp.task('css-watch', ['css-dev']);
 
-  log.activity('Starting...');
-  gulp.src(paths.html.css + 'sg.scss')
+
+// CSS Styleguide
+gulp.task('css-sg', function() {
+  return gulp.src(paths.html.css + 'sg.scss')
     .pipe(sass(config.css.dev).on('error', sass.logError))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(gulp.dest(paths.css.dev));
-  log.activity('Finished.');
-};
-
-
-// Sass Styleguide Task
-gulp.task('sass:sg', function() {
-  return sassStyleguide();
 });
 
 
-// Sass Distribution
-gulp.task('sass:dist', ['clean:dist'], function() {
+// CSS Distribution
+gulp.task('css-dist', ['clean-dist'], function() {
   return gulp.src(paths.css.src + '**/*.scss')
     .pipe(sass(config.css.dist).on('error', sass.logError))
     .pipe(autoprefixer(config.css.autoprefixer))
@@ -269,33 +222,35 @@ gulp.task('sass:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-// JavaScript Development Function
-var jsDev = function() {
-  log.heading('Generate JavaScript');
-
-  log.activity('Starting...');
-  gulp.src([paths.js.src + '**/*.js', '!' + paths.js.src + 'libraries/**/*.js'])
+// JavaScript Hint
+gulp.task('js-hint', function() {
+  return gulp.src([paths.js.src + '**/*.js', '!' + paths.js.src + 'libraries/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
+});
 
-  gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'components/**/*.js'])
+
+// JavaScript Concatenation
+gulp.task('js-concat', function() {
+  return gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'components/**/*.js'])
     .pipe(sourcemaps.init())
       .pipe(concat('scripts.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js.dev))
     .pipe(browserSync.stream({match: '**/*.js'}));
-  log.activity('Finshed.');
-};
-
-
-// JavaScript Development Task
-gulp.task('js:dev', function() {
-  return jsDev();
 });
 
 
+// JavaScript Development
+gulp.task('js-dev', ['js-hint', 'js-concat']);
+
+
+// JavaScript Watch
+gulp.task('js-watch', ['js-dev']);
+
+
 // JavaScript Production
-gulp.task('js:dist', ['clean:dist'], function() {
+gulp.task('js-dist', ['clean-dist'], function() {
   return gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'components/**/*.js'])
     .pipe(concat('scripts.js'))
     .pipe(uglify())
@@ -305,9 +260,25 @@ gulp.task('js:dist', ['clean:dist'], function() {
 
 
 
-/* Handlebars
+/* HTML
  * Pre-compile Handlebars files into HTML
  * ========================================================================== */
+
+
+// Search string in array and replace
+var replaceInArray = function(array, searchFor, replaceWith) {
+  for (var i = 0; i < array.length; i++) {
+    array[i] = array[i].replace(searchFor, replaceWith);
+  }
+};
+
+
+// Plumber Error Handler
+var onError = function(err) {
+  gutil.log(gutil.colors.red('Error in file ' + err.fileName + ' in line ' + err.lineNumber + ':'));
+  console.log(err.message);
+  this.emit('end');
+};
 
 
 // Handlebars Function
@@ -351,29 +322,19 @@ var compileHandlebars = function(source, destination, nav) {
 };
 
 
-// Handlebars Development Function
-var handlebarsDev = function() {
-  log.heading('Handlebars Development');
-
-  log.activity('Cleaning HTML...');
-  del.sync(paths.html.dev + '**/*.html');
-  log.activity('Finished cleaning.');
-
-  log.activity('Compiling Handlebars...');
+// HTML Development
+gulp.task('html-dev', ['clean-html-dev'], function() {
   compileHandlebars(paths.html.pages + '**/*.hbs', paths.html.dev, true);
   compileHandlebars(paths.html.components + '**/*.hbs', paths.html.dev + 'components', true);
-  log.activity('Finished compiling.');
-};
-
-
-// Handlebars Development Task
-gulp.task('handlebars:dev', function() {
-  return handlebarsDev();
 });
 
 
-// Handlebars Production Task
-gulp.task('handlebars:dist', ['clean:dist'], function() {
+// HTML Watch
+gulp.task('html-watch', ['html-dev'], browserSync.reload);
+
+
+// HTML Production
+gulp.task('html-dist', ['clean-dist'], function() {
   compileHandlebars(paths.html.pages + '**/*.hbs', paths.html.dist, false);
 });
 
@@ -385,29 +346,19 @@ gulp.task('handlebars:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-// Assets Development Function
-var assetsDev = function() {
-  log.heading('Assets Development');
-
-  log.activity('Cleaning assets...');
-  del.sync(paths.assets.dev + '**');
-  log.activity('Finished cleaning.');
-
-  log.activity('Copying assets...');
-  gulp.src(paths.assets.src + '**')
-    .pipe(gulp.dest(paths.assets.dev));
-  log.activity('Finished copying.');
-};
-
-
 // Assets Development
-gulp.task('assets:dev', function() {
-  return assetsDev();
+gulp.task('assets-dev', ['clean-assets-dev'], function() {
+  return gulp.src(paths.assets.src + '**')
+    .pipe(gulp.dest(paths.assets.dev));
 });
 
 
+// Assets Watch
+gulp.task('assets-watch', ['assets-dev'], browserSync.reload);
+
+
 // Assets Distribution
-gulp.task('assets:dist', ['clean:dist'], function() {
+gulp.task('assets-dist', ['clean-dist'], function() {
   return gulp.src(paths.assets.src + '**')
     .pipe(imagemin(config.assets.imagemin))
     .pipe(gulp.dest(paths.assets.dist));
@@ -421,7 +372,7 @@ gulp.task('assets:dist', ['clean:dist'], function() {
  * ========================================================================== */
 
 
-gulp.task('development', ['sass:dev', 'js:dev', 'handlebars:dev', 'assets:dev']);
+gulp.task('development', ['css-dev', 'js-dev', 'html-dev', 'assets-dev']);
 
 
 
@@ -431,23 +382,7 @@ gulp.task('development', ['sass:dev', 'js:dev', 'handlebars:dev', 'assets:dev'])
  * ========================================================================== */
 
 
-gulp.task('production', ['sass:dist', 'js:dist', 'handlebars:dist', 'assets:dist']);
-
-
-
-
-/* BROWSERSYNC
- * Open web server for cross device development
- * and auto-reload of CSS/JS/HTML.
- * ========================================================================== */
-
-
-var startBrowserSync = function() {
-  log.heading('Starting BrowserSync');
-
-  log.activity('Waiting for BrowserSync...')
-  browserSync(config.html.browserSync);
-}
+gulp.task('production', ['css-dist', 'js-dist', 'html-dist', 'assets-dist']);
 
 
 
@@ -457,52 +392,34 @@ var startBrowserSync = function() {
  * ========================================================================== */
 
 
-gulp.task('default', ['clean:dev'], function() {
+gulp.task('browsersync', function() {
+  browserSync(config.html.browserSync);
+});
+
+
+gulp.task('default', ['clean-dev'], function() {
+  // Log messages
+  var logChange = function(event) {
+    console.log('\n');
+    gutil.log(gutil.colors.magenta(event.path) + ' ' + event.type);
+  }
+
   // Run initial task queue
-  sassDev();
-  sassStyleguide();
-  jsDev();
-  handlebarsDev();
-  assetsDev();
+  runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'assets-dev'], 'browsersync');
 
-  // Start BrowserSync after initial tasks finished
-  startBrowserSync();
-
-  // Watch Sass
-  watch(paths.css.src + '**/*.scss', function(file) {
-    log.change(file);
-
-    sassDev();
-
-    log.activity('Watching...');
-  });
+  // Watch CSS
+  var watchCSS = gulp.watch(paths.css.src + '**/*.scss', ['css-watch']);
+  watchCSS.on('change', logChange);
 
   // Watch JavaScript
-  watch(paths.js.src + '**/*.js', function(file) {
-    log.change(file);
-
-    jsDev();
-
-    log.activity('Watching...');
-  });
+  var watchJS = gulp.watch(paths.js.src + '**/*.js', ['js-watch']);
+  watchJS.on('change', logChange);
 
   // Watch HTML
-  watch(paths.html.src + '**/*.hbs', function(file) {
-    log.change(file);
-
-    handlebarsDev();
-    browserSync.reload();
-
-    log.activity('Watching...');
-  });
+  var watchHTML = gulp.watch(paths.html.src + '**/*.hbs', ['html-watch']);
+  watchHTML.on('change', logChange);
 
   // Watch Assets
-  watch(paths.assets.src + '**/*', function(file) {
-    log.change(file);
-
-    assetsDev();
-    browserSync.reload();
-
-    log.activity('Watching...');
-  });
+  var watchAssets = gulp.watch(paths.assets.src + '**/*', ['assets-watch']);
+  watchAssets.on('change', logChange);
 });
