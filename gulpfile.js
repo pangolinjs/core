@@ -1,6 +1,8 @@
 'use strict';
 
 
+
+
 /* NODE MODULES
  * ========================================================================== */
 
@@ -8,7 +10,6 @@
 // Base
 var glob         = require('glob');
 var del          = require('del');
-var packageJSON  = require('./package.json');
 
 // Gulp
 var gulp         = require('gulp');
@@ -16,9 +17,7 @@ var gulp         = require('gulp');
 // Utilities
 var gutil        = require('gulp-util');
 var rename       = require('gulp-rename');
-var filter       = require('gulp-filter');
 var concat       = require('gulp-concat');
-var plumber      = require('gulp-plumber');
 var runSequence  = require('run-sequence');
 
 // CSS/Sass
@@ -94,8 +93,6 @@ var paths = {
 
 // Config
 var config = {
-  version: packageJSON.version,
-
   // CSS
   css: {
     dev: {
@@ -273,11 +270,11 @@ var replaceInArray = function(array, searchFor, replaceWith) {
 };
 
 
-// Plumber Error Handler
-var onError = function(err) {
-  gutil.log(gutil.colors.red('Error in file ' + err.fileName + ' in line ' + err.lineNumber + ':'));
-  console.log(err.message);
-  this.emit('end');
+// Handle Handlebars error
+var onErrorHandler = function(error) {
+  console.log(gutil.colors.red('Handlebars error'));
+  console.log('File: ' + gutil.colors.underline(error.fileName));
+  console.log('Message: ' + error.message + '\n');
 };
 
 
@@ -304,7 +301,6 @@ var compileHandlebars = function(source, destination, nav) {
   }
 
   var hbConfig = config.html.hb({
-    version: (config.version.replace(/\./g, '') * Math.random()).toString(10).replace(/\./g, ''),
     displayNav: nav,
     navItems: {
       pages: pages,
@@ -314,9 +310,7 @@ var compileHandlebars = function(source, destination, nav) {
 
   return gulp.src(source)
     .pipe(frontMatter({property: 'meta'}))
-    .pipe(plumber({errorHandler: onError}))
-    .pipe(hb(hbConfig))
-    .pipe(plumber.stop())
+    .pipe(hb(hbConfig).on('error', onErrorHandler))
     .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest(destination));
 };
@@ -399,9 +393,9 @@ gulp.task('browsersync', function() {
 
 gulp.task('default', ['clean-dev'], function() {
   // Log messages
-  var logChange = function(event) {
+  var onChangeHandler = function(event) {
     console.log('\n');
-    gutil.log(gutil.colors.magenta(event.path) + ' ' + event.type);
+    gutil.log(gutil.colors.blue(event.path) + ' ' + event.type);
   }
 
   // Run initial task queue
@@ -409,17 +403,17 @@ gulp.task('default', ['clean-dev'], function() {
 
   // Watch CSS
   var watchCSS = gulp.watch(paths.css.src + '**/*.scss', ['css-watch']);
-  watchCSS.on('change', logChange);
+  watchCSS.on('change', onChangeHandler);
 
   // Watch JavaScript
   var watchJS = gulp.watch(paths.js.src + '**/*.js', ['js-watch']);
-  watchJS.on('change', logChange);
+  watchJS.on('change', onChangeHandler);
 
   // Watch HTML
   var watchHTML = gulp.watch(paths.html.src + '**/*.hbs', ['html-watch']);
-  watchHTML.on('change', logChange);
+  watchHTML.on('change', onChangeHandler);
 
   // Watch Assets
   var watchAssets = gulp.watch(paths.assets.src + '**/*', ['assets-watch']);
-  watchAssets.on('change', logChange);
+  watchAssets.on('change', onChangeHandler);
 });
