@@ -10,7 +10,7 @@
       <ul class="sg-nav__sub-list">
         {{#each navItems.pages}}
         <li class="sg-nav__sub-item">
-          <a href="/{{href}}" class="sg-nav__link">{{title}}</a>
+          <a href="{{rel}}{{href}}" class="sg-nav__link">{{title}}</a>
         </li>
         {{/each}}
       </ul>
@@ -26,7 +26,7 @@
       <ul class="sg-nav__sub-list">
         {{#each navItems.components}}
         <li class="sg-nav__sub-item">
-          <a href="/{{href}}" class="sg-nav__link">{{title}}</a>
+          <a href="{{rel}}{{href}}" class="sg-nav__link">{{title}}</a>
         </li>
         {{/each}}
       </ul>

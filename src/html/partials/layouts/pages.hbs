@@ -5,26 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{file.meta.title}}</title>
 
-    {{#if displayNav}}
-    <!-- Styleguide CSS -->
-    <link rel="stylesheet" href="/css/sg.css">
-    {{/if}}
-
-    <link rel="stylesheet" href="/css/styles.css">
+    <!-- CSS -->
+  {{#if displayNav}}
+    <link rel="stylesheet" href="{{rel}}css/sg.css">
+  {{/if}}
+    <link rel="stylesheet" href="{{rel}}css/styles.css">
   </head>
   <body>
 
-    {{#if displayNav}}
+  {{#if displayNav}}
     <!-- Styleguide Nav -->
     {{> "styleguide/nav"}}
-    {{/if}}
+  {{/if}}
 
     {{{block "content"}}}
 
-    {{#if displayNav}}
-    <!-- Include Holder.js -->
+    <!-- JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.3/holder.js"></script>
-    {{/if}}
-    <script src="/js/scripts.js"></script>
+    <script src="{{rel}}js/scripts.js"></script>
   </body>
 </html>

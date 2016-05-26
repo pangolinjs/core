@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{file.meta.title}}</title>
 
-    <!-- Styleguide CSS -->
-    <link rel="stylesheet" href="/css/sg.css">
-
-    <link rel="stylesheet" href="/css/styles.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{rel}}css/sg.css">
+    <link rel="stylesheet" href="{{rel}}css/styles.css">
   </head>
   <body>
 
@@ -24,7 +23,8 @@
       {{{block "content"}}}
     </main>
 
+    <!-- JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.3/holder.js"></script>
-    <script src="/js/scripts.js"></script>
+    <script src="{{rel}}js/scripts.js"></script>
   </body>
 </html>

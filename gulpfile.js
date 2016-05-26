@@ -10,6 +10,7 @@
 // Base
 var glob         = require('glob');
 var del          = require('del');
+var path         = require('path');
 
 // Gulp
 var gulp         = require('gulp');
@@ -108,14 +109,8 @@ var config = {
 
   // HTML
   html: {
-    hb: function(data) {
-      var options = {
-        bustCache: true,
-        data: data,
-        helpers: 'node_modules/handlebars-layouts/index.js',
-        partials: paths.html.partials
-      };
-      return options;
+    hb: {
+      bustCache: true
     },
     browserSync: {
       server: {
@@ -300,17 +295,38 @@ var compileHandlebars = function(source, destination, nav) {
     components.push({title: item, href: 'components/' + item});
   }
 
-  var hbConfig = config.html.hb({
-    displayNav: nav,
-    navItems: {
-      pages: pages,
-      components: components
-    }
-  });
+  var hbStream = hb(config.html.hb)
+    .partials(paths.html.partials)
+    .helpers(require('handlebars-layouts'))
+    .helpers({
+      rel: function(options) {
+        var currentPath = path.dirname(options.data.file.path);
+        var sourcePath  = path.resolve(source);
 
-  return gulp.src(source)
+        var additionalPath = '';
+
+        if (source === paths.html.components) {
+          additionalPath = '../'
+        }
+
+        if (currentPath === sourcePath) {
+          return additionalPath;
+        }
+
+        return additionalPath + path.relative(currentPath, sourcePath) + '/';
+      }
+    })
+    .data({
+      displayNav: nav,
+      navItems: {
+        pages: pages,
+        components: components
+      }
+    });
+
+  return gulp.src(source + '**/*.hbs')
     .pipe(frontMatter({property: 'meta'}))
-    .pipe(hb(hbConfig).on('error', onErrorHandler))
+    .pipe(hbStream.on('error', onErrorHandler))
     .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest(destination));
 };
@@ -318,8 +334,8 @@ var compileHandlebars = function(source, destination, nav) {
 
 // HTML Development
 gulp.task('html-dev', ['clean-html-dev'], function() {
-  compileHandlebars(paths.html.pages + '**/*.hbs', paths.html.dev, true);
-  compileHandlebars(paths.html.components + '**/*.hbs', paths.html.dev + 'components', true);
+  compileHandlebars(paths.html.pages, paths.html.dev, true);
+  compileHandlebars(paths.html.components, paths.html.dev + 'components', true);
 });
 
 
