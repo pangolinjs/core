@@ -12,7 +12,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
   3. [JavaScript](#javascript)
   4. [Handlebars](#handlebars)
   5. [Holder.js](#holderjs)
-  6. [Assets](#assets)
+  6. [Images](#images)
 4. [Styleguide CSS](#styleguide-css)
 5. [Credits](#credits)
 
@@ -145,11 +145,13 @@ This basic example generates a grey 300 by 200 pixel image.
 *[More advanced options](https://github.com/imsky/holder#placeholder-options) like color, text and font are available.*
 
 
-### Assets
-Located in `src/assets`.<br>
-Output to `dev/assets` or `dist/assets`.
+### Images
+Located in `src/img`.<br>
+Output to `dev/img` or `dist/img`.
 
-All files and folders placed in `src/assets` will be copied to `dev/assets` or `dist/assets`. The distribution task minifies images with a lossless compressor.
+All files and folders placed in `src/img` will be copied to `dev/img` or `dist/img`.
+
+*The production task minifies images with a lossless compressor.*
 
 
 ## Styleguide CSS
