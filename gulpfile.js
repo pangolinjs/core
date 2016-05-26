@@ -275,24 +275,27 @@ var onErrorHandler = function(error) {
 
 // Handlebars Function
 var compileHandlebars = function(source, destination, nav) {
-  var pageList      = glob.sync(paths.html.pages      + '**/*.hbs');
-  var componentList = glob.sync(paths.html.components + '**/*.hbs');
+  var pageGlob = glob.sync(paths.html.pages      + '**/*.hbs');
+  var compGlob = glob.sync(paths.html.components + '**/*.hbs');
 
-  replaceInArray(pageList, '.hbs', '.html');
-  replaceInArray(pageList, paths.html.pages, '');
+  replaceInArray(pageGlob, paths.html.pages, '');
+  replaceInArray(compGlob, paths.html.components, '');
 
-  replaceInArray(componentList, '.hbs', '.html');
-  replaceInArray(componentList, paths.html.components, '');
+  var pageList = [];
+  var compList = [];
 
-  var pages      = [];
-  var components = [];
-
-  for (var i = 0, item; item = pageList[i++];) {
-    pages.push({title: item, href: item});
+  for (var i = 0, item; item = pageGlob[i++];) {
+    pageList.push({
+      title: item.replace('.hbs', ''),
+      href:  item.replace('.hbs', '.html')
+    });
   }
 
-  for (var i = 0, item; item = componentList[i++];) {
-    components.push({title: item, href: 'components/' + item});
+  for (var i = 0, item; item = compGlob[i++];) {
+    compList.push({
+      title: item.replace('.hbs', ''),
+      href:  'components/' + item.replace('.hbs', '.html')
+    });
   }
 
   var hbStream = hb(config.html.hb)
@@ -319,8 +322,8 @@ var compileHandlebars = function(source, destination, nav) {
     .data({
       displayNav: nav,
       navItems: {
-        pages: pages,
-        components: components
+        pages: pageList,
+        components: compList
       }
     });
 
