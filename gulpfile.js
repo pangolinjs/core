@@ -348,7 +348,7 @@ gulp.task('html-watch', ['html-dev'], browserSync.reload);
 
 // HTML Production
 gulp.task('html-dist', ['clean-dist'], function() {
-  compileHandlebars(paths.html.pages + '**/*.hbs', paths.html.dist, false);
+  compileHandlebars(paths.html.pages, paths.html.dist, false);
 });
 
 
