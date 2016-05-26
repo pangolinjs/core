@@ -35,7 +35,7 @@ var stylish      = require('jshint-stylish');
 var hb           = require('gulp-hb');
 var frontMatter  = require('gulp-front-matter');
 
-// Assets
+// Images
 var imagemin     = require('gulp-imagemin');
 
 // BrowserSync
@@ -83,11 +83,11 @@ var paths = {
     dist:       basePaths.dist
   },
 
-  // Assets
-  assets: {
-    src:        basePaths.src  + 'assets/',
-    dev:        basePaths.dev  + 'assets/',
-    dist:       basePaths.dist + 'assets/'
+  // Images
+  img: {
+    src:        basePaths.src  + 'img/',
+    dev:        basePaths.dev  + 'img/',
+    dist:       basePaths.dist + 'img/'
   }
 }
 
@@ -122,8 +122,8 @@ var config = {
     }
   },
 
-  // Assets
-  assets: {
+  // Images
+  img: {
     imagemin: {
       progressive: true,
       interlaced: true,
@@ -158,9 +158,9 @@ gulp.task('clean-html-dev', function() {
 });
 
 
-// Clean Dev Assets
-gulp.task('clean-assets-dev', function() {
-  return del(paths.assets.dev + '**');
+// Clean Dev Images
+gulp.task('clean-img-dev', function() {
+  return del(paths.img.dev + '**');
 });
 
 
@@ -351,27 +351,27 @@ gulp.task('html-dist', ['clean-dist'], function() {
 
 
 
-/* ASSETS
- * Copy assets (e.g. img or fonts)
+/* Images
+ * Copy images and compress production files
  * ========================================================================== */
 
 
-// Assets Development
-gulp.task('assets-dev', ['clean-assets-dev'], function() {
-  return gulp.src(paths.assets.src + '**')
-    .pipe(gulp.dest(paths.assets.dev));
+// Images Development
+gulp.task('img-dev', ['clean-img-dev'], function() {
+  return gulp.src(paths.img.src + '**')
+    .pipe(gulp.dest(paths.img.dev));
 });
 
 
-// Assets Watch
-gulp.task('assets-watch', ['assets-dev'], browserSync.reload);
+// Images Watch
+gulp.task('img-watch', ['img-dev'], browserSync.reload);
 
 
-// Assets Distribution
-gulp.task('assets-dist', ['clean-dist'], function() {
-  return gulp.src(paths.assets.src + '**')
-    .pipe(imagemin(config.assets.imagemin))
-    .pipe(gulp.dest(paths.assets.dist));
+// Images Distribution
+gulp.task('img-dist', ['clean-dist'], function() {
+  return gulp.src(paths.img.src + '**')
+    .pipe(imagemin(config.img.imagemin))
+    .pipe(gulp.dest(paths.img.dist));
 });
 
 
@@ -382,7 +382,7 @@ gulp.task('assets-dist', ['clean-dist'], function() {
  * ========================================================================== */
 
 
-gulp.task('development', ['css-dev', 'js-dev', 'html-dev', 'assets-dev']);
+gulp.task('development', ['css-dev', 'js-dev', 'html-dev', 'img-dev']);
 
 
 
@@ -392,7 +392,7 @@ gulp.task('development', ['css-dev', 'js-dev', 'html-dev', 'assets-dev']);
  * ========================================================================== */
 
 
-gulp.task('production', ['css-dist', 'js-dist', 'html-dist', 'assets-dist']);
+gulp.task('production', ['css-dist', 'js-dist', 'html-dist', 'img-dist']);
 
 
 
@@ -415,7 +415,7 @@ gulp.task('default', ['clean-dev'], function() {
   }
 
   // Run initial task queue
-  runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'assets-dev'], 'browsersync');
+  runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev'], 'browsersync');
 
   // Watch CSS
   var watchCSS = gulp.watch(paths.css.src + '**/*.scss', ['css-watch']);
@@ -429,7 +429,7 @@ gulp.task('default', ['clean-dev'], function() {
   var watchHTML = gulp.watch(paths.html.src + '**/*.hbs', ['html-watch']);
   watchHTML.on('change', onChangeHandler);
 
-  // Watch Assets
-  var watchAssets = gulp.watch(paths.assets.src + '**/*', ['assets-watch']);
-  watchAssets.on('change', onChangeHandler);
+  // Watch Images
+  var watchImg = gulp.watch(paths.img.src + '**/*', ['img-watch']);
+  watchImg.on('change', onChangeHandler);
 });
