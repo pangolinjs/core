@@ -401,7 +401,7 @@ gulp.task('production', ['css-dist', 'js-dist', 'html-dist', 'img-dist']);
 
 
 /* DEFAULT
- * Run all *:dev tasks and watch for add/change/delete.
+ * Run all dev tasks and watch for changes.
  * ========================================================================== */
 
 
@@ -411,8 +411,7 @@ gulp.task('browsersync', function() {
 
 
 gulp.task('default', ['clean-dev'], function() {
-  // Log messages
-  var onChangeHandler = function(event) {
+  var onChangeMessage = function(event) {
     console.log('\n');
     gutil.log(gutil.colors.blue(event.path) + ' ' + event.type);
   }
@@ -422,17 +421,17 @@ gulp.task('default', ['clean-dev'], function() {
 
   // Watch CSS
   var watchCSS = gulp.watch(paths.css.src + '**/*.scss', ['css-watch']);
-  watchCSS.on('change', onChangeHandler);
+  watchCSS.on('change', onChangeMessage);
 
   // Watch JavaScript
   var watchJS = gulp.watch(paths.js.src + '**/*.js', ['js-watch']);
-  watchJS.on('change', onChangeHandler);
+  watchJS.on('change', onChangeMessage);
 
   // Watch HTML
   var watchHTML = gulp.watch(paths.html.src + '**/*.hbs', ['html-watch']);
-  watchHTML.on('change', onChangeHandler);
+  watchHTML.on('change', onChangeMessage);
 
   // Watch Images
   var watchImg = gulp.watch(paths.img.src + '**/*', ['img-watch']);
-  watchImg.on('change', onChangeHandler);
+  watchImg.on('change', onChangeMessage);
 });
