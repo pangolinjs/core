@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{file.meta.title}}</title>
+    <title>{{@file.meta.title}}</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{rel}}css/sg.css">
@@ -15,8 +15,8 @@
     {{> "styleguide/nav"}}
 
     <header class="sg-header">
-      <h1 class="sg-header__title">{{file.meta.title}}</h1>
-      <p class="sg-header__description">{{file.meta.description}}</p>
+      <h1 class="sg-header__title">{{@file.meta.title}}</h1>
+      <p class="sg-header__description">{{@file.meta.description}}</p>
     </header>
 
     <main class="sg-body">
