@@ -76,7 +76,7 @@ All 3rd-party stuff should be placed inside the folder `src/js/libraries`. JSHin
 
 
 ### Handlebars
-Located in `src/html`.<br>
+Located in `src/html`.  
 Output to `dev` or `dist`.
 
 *Handlebars* is an HTML templating engine based on JavaScript. Gulp creates static HTML from Handlebars files.
@@ -94,10 +94,10 @@ Layouts are located in `src/html/partials/layouts`.
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{file.meta.title}}</title>
+    <title>{{@file.meta.title}}</title>
   </head>
   <body>
-    {{{block "content"}}}
+    {{{block "body"}}}
   </body>
 </html>
 ```
@@ -112,14 +112,14 @@ The syntax `{{> "includes/example" }}` includes the file `src/html/partials/incl
 
 
 #### Pages and Components
-Pages are the actual web pages displayed by the browser.<br>
+Pages are prototypes for the final web pages.
 Components are reference pages for smaller UI parts. The gulp task `production` will not render them.
 
-The `default` gulp task injects a flyout menu into pages and components for easier navigation during development.
+The `default` gulp task injects a horizontal navigation bar into pages and components for fast file switching.
 
 Pages are located in `src/html/pages`, components in `src/html/components`.
 
-The YAML front matter between `---` contains general information like the page title and description. This will be used primarily by layouts. You can add additional information, which can be accessed via `{{file.meta.key}}`. Replace `key` with the name from the front matter.
+The YAML front matter between the opening `---` and closing `---` contains general information like the page title and description. This will be used primarily by layouts. You can add additional information (arrays and even objects), which can be accessed via `{{@file.meta.key}}`. Replace `key` with the variable name from the front matter.
 
 ```html
 ---
@@ -127,10 +127,20 @@ title: Example
 description: Only used for components.
 ---
 {{#extend "layouts/components"}}
-  {{#content "content"}}
-    <p>This will be injected into the layout.</p>
-  {{/content}}
+{{#content "body"}}
+  <p>This will be injected into the layout.</p>
+{{/content}}
 {{/extend}}
+```
+
+Components may use additional markup with containers for variations.
+
+```html
+{{#embed "layouts/article" title="Some title" description="Some text"}}
+{{#content "body"}}
+  <p>This creates a nicely formatted container with a title and description.</p>
+{{/content}}
+{{/embed}}
 ```
 
 ### Holder.js
@@ -146,7 +156,7 @@ This basic example generates a gray 300 by 200 pixel image.
 
 
 ### Images
-Located in `src/img`.<br>
+Located in `src/img`.  
 Output to `dev/img` or `dist/img`.
 
 All files and folders placed in `src/img` will be copied to `dev/img` or `dist/img`.

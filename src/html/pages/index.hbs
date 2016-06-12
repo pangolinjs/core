@@ -1,15 +1,16 @@
 ---
 title: Frontpage
 ---
+
 {{#extend "layouts/pages"}}
-  {{#content "content"}}
-    <h1>This is your Frontpage</h1>
+{{#content "body"}}
+  <h1>This is your Frontpage</h1>
 
-    <p>It's the first page (index.html) the visitor of your site will see.</p>
-    <p>Use the 'pages'-directory to create prototypes of the final web site.</p>
-    <p>Ideally these pages will be built with resusable components from the 'includes'-folder.</p>
+  <p>It's the first page (index.html) the visitor of your site will see.</p>
+  <p>Use the 'pages'-directory to create prototypes of the final web site.</p>
+  <p>Ideally these pages will be built with resusable components from the 'includes'-folder.</p>
 
-    <h2>Image Placeholder</h2>
-    <img src="" data-src="holder.js/300x200" alt="Image Placeholder">
-  {{/content}}
+  <h2>Image Placeholder</h2>
+  <img src="" data-src="holder.js/300x200" alt="Image Placeholder">
+{{/content}}
 {{/extend}}

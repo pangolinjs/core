@@ -2,145 +2,133 @@
 title: Forms
 description: Users input things. The server gets things.
 ---
+
 {{#extend "layouts/components"}}
-  {{#content "content"}}
-    <article class="sg-article">
-      <header class="sg-article__header">
-        <h2 class="sg-article__title">Buttons</h2>
-        <p class="sg-article__description">Usually they submit forms or trigger JavaScript actions.</p>
-      </header>
+{{#content "body"}}
 
-      <div class="sg-article__body">
-        <button class="button">Button</button>
-        <input type="submit" value="Input">
-        <a href="#" class="button">Link</a>
-      </div>
-    </article>
-
-    <article class="sg-article">
-      <header class="sg-article__header">
-        <h2 class="sg-article__title">Inputs</h2>
-        <p class="sg-article__description">Text, password, checkbox etc.</p>
-      </header>
-
-      <div class="sg-article__body">
-        <form>
-          <fieldset>
-            <legend>Text inputs</legend>
-
-            <label for="text">Text input</label>
-            <input type="text" id="text" placeholder="Text">
-
-            <label for="text-disabled">Text input (disabled)</label>
-            <input type="text" id="text-disabled" placeholder="Text (disabled)" disabled>
-
-            <label for="email">E-mail input</label>
-            <input type="email" id="email" placeholder="E-mail">
-
-            <label for="password">Password input</label>
-            <input type="password" id="password" placeholder="Password">
-
-            <label for="search">Search input</label>
-            <input type="search" id="search" placeholder="Search">
-
-            <label for="url">URL input</label>
-            <input type="url" id="url" placeholder="URL">
-          </fieldset>
-
-          <fieldset>
-            <legend>Numeric inputs</legend>
-
-            <label for="tel">Telephone input</label>
-            <input type="tel" id="tel" placeholder="Telephone">
-
-            <label for="number">Number input</label>
-            <input type="number" id="number" placeholder="7">
-
-            <label for="date">Date input</label>
-            <input type="date" id="date">
-
-            <label for="time">Time input</label>
-            <input type="time" id="time">
-          </fieldset>
-
-          <fieldset>
-            <legend>Checkbox</legend>
-
-            <input type="checkbox" name="checkbox" value="checkbox-1" id="checkbox-1" checked>
-            <label for="checkbox-1">Checkbox #1 (checked)</label>
-
-            <input type="checkbox" name="checkbox" value="checkbox-2" id="checkbox-2">
-            <label for="checkbox-2">Checkbox #2</label>
-
-            <input type="checkbox" name="checkbox" value="checkbox-3" id="checkbox-3" disabled>
-            <label for="checkbox-3">Checkbox #3 (disabled)</label>
-
-            <input type="checkbox" name="checkbox" value="checkbox-4" id="checkbox-4">
-            <label for="checkbox-4">Checkbox #4</label>
-
-            <input type="checkbox" name="checkbox" value="checkbox-5" id="checkbox-5" disabled checked>
-            <label for="checkbox-5">Checkbox #5 (checked, disabled)</label>
-          </fieldset>
-
-          <fieldset>
-            <legend>Radio</legend>
-
-            <input type="radio" name="radio" value="radio-1" id="radio-1" checked>
-            <label for="radio-1">Radio #1</label>
-
-            <input type="radio" name="radio" value="radio-2" id="radio-2">
-            <label for="radio-2">Radio #2</label>
-
-            <input type="radio" name="radio" value="radio-3" id="radio-3" disabled>
-            <label for="radio-3">Radio #3 (disabled)</label>
-
-            <input type="radio" name="radio" value="radio-4" id="radio-4">
-            <label for="radio-4">Radio #4</label>
-
-            <input type="radio" name="radio2" value="radio" id="radio3" disabled checked>
-            <label for="radio2">Radio (checked, disabled)</label>
-          </fieldset>
-
-          <fieldset>
-            <legend>Select</legend>
-
-            <label for="select">Select input</label>
-            <select id="select">
-              <option value="select-1">Option 1</option>
-              <option value="select-2">Option 2</option>
-              <option value="select-3">Option 3</option>
-              <option value="select-4">Option 4</option>
-            </select>
-          </fieldset>
-
-          <fieldset>
-            <legend>Color and file inputs</legend>
-
-            <label for="color">Color input</label>
-            <input type="color" id="color">
-
-            <label for="file">File input</label>
-            <input type="file" id="file">
-          </fieldset>
-        </form>
-      </div>
-    </article>
-
-    <article class="sg-article">
-      <header class="sg-article__header">
-        <h2 class="sg-article__title">Textarea</h2>
-        <p class="sg-article__description">Multi-line inputs</p>
-      </header>
-
-      <div class="sg-article__body">
-        <form>
-          <label for="textarea">Textarea</label>
-          <textarea id="textarea" placeholder="Textarea"></textarea>
-
-          <label for="textarea-disabled">Textarea (disabled)</label>
-          <textarea id="textarea-disabled" placeholder="Textarea (disabled)" disabled></textarea>
-        </form>
-      </div>
-    </article>
+  {{#embed "layouts/article" title="Buttons" description="Usually they submit forms or trigger JavaScript actions."}}
+  {{#content "body"}}
+    <button>Button</button>
+    <input type="submit" value="Input">
+    <a href="#">Link</a>
   {{/content}}
+  {{/embed}}
+
+  {{#embed "layouts/article" title="Text Inputs"}}
+  {{#content "body"}}
+    <label for="text">Text input</label>
+    <input type="text" id="text" placeholder="Text">
+
+    <label for="text-disabled">Text input (disabled)</label>
+    <input type="text" id="text-disabled" placeholder="Text (disabled)" disabled>
+
+    <label for="email">E-mail input</label>
+    <input type="email" id="email" placeholder="E-mail">
+
+    <label for="password">Password input</label>
+    <input type="password" id="password" placeholder="Password">
+
+    <label for="search">Search input</label>
+    <input type="search" id="search" placeholder="Search">
+
+    <label for="url">URL input</label>
+    <input type="url" id="url" placeholder="URL">
+  {{/content}}
+  {{/embed}}
+
+  {{#embed "layouts/article" title="Numeric Inputs"}}
+  {{#content "body"}}
+    <label for="tel">Telephone input</label>
+    <input type="tel" id="tel" placeholder="Telephone">
+
+    <label for="number">Number input</label>
+    <input type="number" id="number" placeholder="7">
+
+    <label for="date">Date input</label>
+    <input type="date" id="date">
+
+    <label for="time">Time input</label>
+    <input type="time" id="time">
+  {{/content}}
+  {{/embed}}
+
+  {{#embed "layouts/article" title="Checkbox"}}
+  {{#content "body"}}
+    <input type="checkbox" name="checkbox" value="checkbox-1" id="checkbox-1" checked>
+    <label for="checkbox-1">Checkbox #1 (checked)</label>
+
+    <input type="checkbox" name="checkbox" value="checkbox-2" id="checkbox-2">
+    <label for="checkbox-2">Checkbox #2</label>
+
+    <input type="checkbox" name="checkbox" value="checkbox-3" id="checkbox-3" disabled>
+    <label for="checkbox-3">Checkbox #3 (disabled)</label>
+
+    <input type="checkbox" name="checkbox" value="checkbox-4" id="checkbox-4">
+    <label for="checkbox-4">Checkbox #4</label>
+
+    <input type="checkbox" name="checkbox" value="checkbox-5" id="checkbox-5" disabled checked>
+    <label for="checkbox-5">Checkbox #5 (checked, disabled)</label>
+  {{/content}}
+  {{/embed}}
+
+  {{#embed "layouts/article" title="Radio"}}
+  {{#content "body"}}
+    <input type="radio" name="radio" value="radio-1" id="radio-1" checked>
+    <label for="radio-1">Radio #1</label>
+
+    <input type="radio" name="radio" value="radio-2" id="radio-2">
+    <label for="radio-2">Radio #2</label>
+
+    <input type="radio" name="radio" value="radio-3" id="radio-3" disabled>
+    <label for="radio-3">Radio #3 (disabled)</label>
+
+    <input type="radio" name="radio" value="radio-4" id="radio-4">
+    <label for="radio-4">Radio #4</label>
+
+    <input type="radio" name="radio2" value="radio" id="radio3" disabled checked>
+    <label for="radio2">Radio (checked, disabled)</label>
+  {{/content}}
+  {{/embed}}
+
+  {{#embed "layouts/article" title="Select"}}
+  {{#content "body"}}
+    <label for="select">Select</label>
+    <select id="select">
+      <option value="select-1">Option 1</option>
+      <option value="select-2">Option 2</option>
+      <option value="select-3">Option 3</option>
+      <option value="select-4">Option 4</option>
+    </select>
+
+    <label for="select">Select (disabled)</label>
+    <select id="select">
+      <option value="select-1">Option 1</option>
+      <option value="select-2">Option 2</option>
+      <option value="select-3">Option 3</option>
+      <option value="select-4">Option 4</option>
+    </select>
+  {{/content}}
+  {{/embed}}
+
+  {{#embed "layouts/article" title="Color and File"}}
+  {{#content "body"}}
+    <label for="color">Color input</label>
+    <input type="color" id="color">
+
+    <label for="file">File input</label>
+    <input type="file" id="file">
+  {{/content}}
+  {{/embed}}
+
+  {{#embed "layouts/article" title="Textarea"}}
+  {{#content "body"}}
+    <label for="textarea">Textarea</label>
+    <textarea id="textarea" placeholder="Textarea"></textarea>
+
+    <label for="textarea-disabled">Textarea (disabled)</label>
+    <textarea id="textarea-disabled" placeholder="Textarea (disabled)" disabled></textarea>
+  {{/content}}
+  {{/embed}}
+
+{{/content}}
 {{/extend}}
