@@ -19,7 +19,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 
 ## Dependencies
 * [Node.js with npm](https://nodejs.org/)
-* Windows: Use [Node.js 6.x.x](https://nodejs.org/en/download/current/) to avoid paths that exceed 260 characters.
+* Windows: Use [Node.js 6](https://nodejs.org/en/download/current/) to avoid paths that exceed 260 characters.
 
 
 ## Installation
@@ -70,7 +70,7 @@ Output to `dev/js` or `dist/js`.
 
 JavaScript files are concatenated in the following order: first files from `libraries`, second files from `components`. Within these folders the order is alphabetical.
 
-All 3rd-party stuff should be placed inside the folder `src/js/libraries`. JSHint ignores files in this folder to prevent error spamming. jQuery 2 is included with this styleguide but it can be replaced with another library or removed completely.
+All 3rd-party stuff should be placed inside the folder `src/js/libraries`. JSHint ignores files in this folder to prevent error spamming. jQuery is included with this styleguide but it can be replaced with another library or removed completely.
 
 *The development task runs JSHint and generates sourcemaps. The production task uglifies the source.*
 
@@ -136,7 +136,7 @@ description: Only used for components.
 ### Holder.js
 Use [Holder.js](https://github.com/imsky/holder) to include image placeholders.
 
-This basic example generates a grey 300 by 200 pixel image.
+This basic example generates a gray 300 by 200 pixel image.
 
 ```html
 <img src="" data-src="holder.js/300x200" alt="Image Placeholder">
