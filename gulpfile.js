@@ -8,6 +8,7 @@
 
 
 // Base
+var fs           = require('fs');
 var glob         = require('glob');
 var del          = require('del');
 var path         = require('path');
@@ -33,7 +34,8 @@ var stylish      = require('jshint-stylish');
 
 // Handelbars
 var hb           = require('gulp-hb');
-var frontMatter  = require('gulp-front-matter');
+var fm           = require('front-matter');
+var gulpFm       = require('gulp-front-matter');
 
 // Images
 var imagemin     = require('gulp-imagemin');
@@ -257,14 +259,6 @@ gulp.task('js-dist', ['clean-dist'], function() {
  * ========================================================================== */
 
 
-// Search string in array and replace
-var replaceInArray = function(array, searchFor, replaceWith) {
-  for (var i = 0; i < array.length; i++) {
-    array[i] = array[i].replace(searchFor, replaceWith);
-  }
-};
-
-
 // Handle Handlebars error
 var onErrorHandler = function(error) {
   console.log(gutil.colors.red('Handlebars error'));
@@ -275,27 +269,34 @@ var onErrorHandler = function(error) {
 
 // Handlebars Function
 var compileHandlebars = function(source, destination, nav) {
-  var pageGlob = glob.sync(paths.html.pages      + '**/*.hbs');
-  var compGlob = glob.sync(paths.html.components + '**/*.hbs');
+  var pages      = [];
+  var components = [];
 
-  replaceInArray(pageGlob, paths.html.pages, '');
-  replaceInArray(compGlob, paths.html.components, '');
+  if (nav) {
+    var pageList      = glob.sync(paths.html.pages      + '**/*.hbs');
+    var componentList = glob.sync(paths.html.components + '**/*.hbs');
 
-  var pageList = [];
-  var compList = [];
+    for (var page of pageList) {
+      var title = fm(fs.readFileSync(page, 'utf8')).attributes.title;
+      var href  = path.relative(paths.html.pages, page).replace('.hbs', '.html');
 
-  for (var i = 0, item; item = pageGlob[i++];) {
-    pageList.push({
-      title: item.replace('.hbs', ''),
-      href:  item.replace('.hbs', '.html')
-    });
-  }
+      if (!title) {
+        title = '(No Title)';
+      }
 
-  for (var i = 0, item; item = compGlob[i++];) {
-    compList.push({
-      title: item.replace('.hbs', ''),
-      href:  'components/' + item.replace('.hbs', '.html')
-    });
+      pages.push({title, href});
+    }
+
+    for (var component of componentList) {
+      var title = fm(fs.readFileSync(component, 'utf8')).attributes.title;
+      var href  = 'components/' + path.relative(paths.html.components, component).replace('.hbs', '.html');
+
+      if (!title) {
+        title = '(No Title)';
+      }
+
+      components.push({title, href});
+    }
   }
 
   var hbStream = hb(config.html.hb)
@@ -321,14 +322,11 @@ var compileHandlebars = function(source, destination, nav) {
     })
     .data({
       displayNav: nav,
-      navItems: {
-        pages: pageList,
-        components: compList
-      }
+      navItems: {pages, components}
     });
 
   return gulp.src(source + '**/*.hbs')
-    .pipe(frontMatter({property: 'meta'}))
+    .pipe(gulpFm({property: 'meta'}))
     .pipe(hbStream.on('error', onErrorHandler))
     .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest(destination));
