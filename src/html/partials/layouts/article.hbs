@@ -1,10 +1,10 @@
 <article class="sg-article">
   <header class="sg-article__header">
-    <h2 class="sg-article__title">{{title}}</h2>
-    <p class="sg-article__description">{{description}}</p>
+    {{#if title}}<h2 class="sg-article__title">{{title}}</h2>{{/if}}
+    {{#if description}}<p class="sg-article__description">{{description}}</p>{{/if}}
   </header>
 
-  <div class="sg-article__body">
+  <div class="sg-article__body sg-article__body--{{#if body-class}}{{body-class}}{{/if}}">
     {{{block "body"}}}
   </div>
 </article>
