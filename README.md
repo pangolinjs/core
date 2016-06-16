@@ -136,12 +136,17 @@ description: Only used for components.
 Components may use additional markup with containers for variations.
 
 ```html
-{{#embed "layouts/article" title="Some title" description="Some text"}}
+{{#embed "layouts/article" title="Some title" description="Some text" body-class="dark"}}
 {{#content "body"}}
   <p>This creates a nicely formatted container with a title and description.</p>
 {{/content}}
 {{/embed}}
 ```
+
+The following attributes are available:
+* `title` sets a heading for the component variation
+* `description` provides additional information
+* `body-class` generates a class prefixed with `sg-article__body--` which can be styled in `sg.scss` (the classes `light` and `dark` are pre-configured to alter the background-color of the component frame)
 
 ### Holder.js
 Use [Holder.js](https://github.com/imsky/holder) to include image placeholders.

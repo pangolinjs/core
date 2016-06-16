@@ -4,7 +4,7 @@
     {{#if description}}<p class="sg-article__description">{{description}}</p>{{/if}}
   </header>
 
-  <div class="sg-article__body sg-article__body--{{#if body-class}}{{body-class}}{{/if}}">
+  <div class="sg-article__body {{#if body-class}}sg-article__body--{{body-class}}{{/if}}">
     {{{block "body"}}}
   </div>
 </article>

@@ -305,6 +305,10 @@ $color-border:    rgb(220, 220, 220);
     }
   }
 
+  .sg-article__body--light {
+    background-color: $color-border;
+  }
+
   .sg-article__body--dark {
     background-color: $color-secondary;
   }
