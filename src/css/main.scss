@@ -45,9 +45,13 @@
 @import 'layout/responsive-utilities';
 
 
-// COMPONENTS
-@import 'components/buttons';
+// BASE COMPONENTS
 @import 'components/forms';
+@import 'components/buttons';
+
+
+// COMPONENTS
+//@import 'components/your-component';
 
 
 // SHAME
