@@ -293,9 +293,12 @@ gulp.task('js-dist', ['clean-dist'], function() {
 
 // Handle Handlebars error
 var handlebarsError = function(error) {
-  console.log(gutil.colors.red('Handlebars error'));
-  console.log('File: ' + gutil.colors.underline(error.fileName));
-  console.log('Message: ' + error.message + '\n');
+  console.log(
+    '\n' + gutil.colors.underline(error.fileName) + '\n'
+    + '  ' + gutil.colors.red('Handlebars error: ')
+    + gutil.colors.blue(error.message.replace(error.fileName + ': ', '')) + '\n'
+  );
+  this.emit('end');
 };
 
 
