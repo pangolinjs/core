@@ -18,6 +18,7 @@ var gulp         = require('gulp');
 
 // Utilities
 var gutil        = require('gulp-util');
+var filter       = require('gulp-filter');
 var rename       = require('gulp-rename');
 var concat       = require('gulp-concat');
 var runSequence  = require('run-sequence');
@@ -28,6 +29,7 @@ var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 
 // JavaScript
+var babel        = require('gulp-babel');
 var uglify       = require('gulp-uglify');
 var jshint       = require('gulp-jshint');
 var stylish      = require('jshint-stylish');
@@ -106,6 +108,13 @@ var config = {
     },
     autoprefixer: {
       browsers: ['last 2 versions']
+    }
+  },
+
+  // JavaScript
+  js: {
+    babel: {
+      presets: ['es2015']
     }
   },
 
@@ -216,18 +225,36 @@ gulp.task('css-dist', ['clean-dist'], function() {
  * ========================================================================== */
 
 
+// Handle Bable error
+var babelError = function(error) {
+  console.log(
+    '\n' + gutil.colors.underline(error.fileName) + '\n'
+    + gutil.colors.gray('  line ' + error.loc.line + '  col ' + error.loc.column)
+    + '  ' + gutil.colors.red('Babel error: ')
+    + gutil.colors.blue(error.message.replace(error.fileName + ': ', '')) + '\n\n'
+    + error.codeFrame + '\n'
+  );
+  this.emit('end');
+};
+
+
 // JavaScript Hint
 gulp.task('js-hint', function() {
-  return gulp.src([paths.js.src + '**/*.js', '!' + paths.js.src + 'libraries/**/*.js'])
+  return gulp.src([paths.js.src + 'functions/**/*.js', paths.js.src + 'components/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });
 
 
 // JavaScript Concatenation
-gulp.task('js-concat', function() {
-  return gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'components/**/*.js'])
+gulp.task('js-process', function() {
+  var excludeLibraries = filter([paths.js.src + 'functions/**/*.js', paths.js.src + 'components/**/*.js'], {restore: true});
+
+  return gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'functions/**/*.js', paths.js.src + 'components/**/*.js'])
     .pipe(sourcemaps.init())
+      .pipe(excludeLibraries)
+        .pipe(babel(config.js.babel).on('error', babelError))
+      .pipe(excludeLibraries.restore)
       .pipe(concat('scripts.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js.dev))
@@ -236,7 +263,7 @@ gulp.task('js-concat', function() {
 
 
 // JavaScript Development
-gulp.task('js-dev', ['js-hint', 'js-concat']);
+gulp.task('js-dev', ['js-hint', 'js-process']);
 
 
 // JavaScript Watch
@@ -245,7 +272,12 @@ gulp.task('js-watch', ['js-dev']);
 
 // JavaScript Production
 gulp.task('js-dist', ['clean-dist'], function() {
-  return gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'components/**/*.js'])
+  var excludeLibraries = filter([paths.js.src + 'functions/**/*.js', paths.js.src + 'components/**/*.js'], {restore: true});
+
+  return gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'functions/**/*.js', paths.js.src + 'components/**/*.js'])
+    .pipe(excludeLibraries)
+      .pipe(babel(config.js.babel))
+    .pipe(excludeLibraries.restore)
     .pipe(concat('scripts.js'))
     .pipe(uglify())
     .pipe(gulp.dest(paths.js.dist));
@@ -260,7 +292,7 @@ gulp.task('js-dist', ['clean-dist'], function() {
 
 
 // Handle Handlebars error
-var onErrorHandler = function(error) {
+var handlebarsError = function(error) {
   console.log(gutil.colors.red('Handlebars error'));
   console.log('File: ' + gutil.colors.underline(error.fileName));
   console.log('Message: ' + error.message + '\n');
@@ -327,7 +359,7 @@ var compileHandlebars = function(source, destination, nav) {
 
   return gulp.src(source + '**/*.hbs')
     .pipe(gulpFm({property: 'meta'}))
-    .pipe(hbStream.on('error', onErrorHandler))
+    .pipe(hbStream.on('error', handlebarsError))
     .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest(destination));
 };

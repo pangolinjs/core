@@ -1,5 +1,9 @@
 /* EXAMPLE
- * A small example JavaScript component.
+ * An example JavaScript component.
 ============================================================================= */
 
-console.log('This is an example!');
+/* globals helloWorld */
+
+
+
+helloWorld('First', 'Second', 'Third');

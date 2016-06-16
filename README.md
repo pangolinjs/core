@@ -68,9 +68,11 @@ The function `@import` includes the corresponding file in the main Sass file. Th
 Located in `src/js`.  
 Output to `dev/js` or `dist/js`.
 
-JavaScript files are concatenated in the following order: first files from `libraries`, second files from `components`. Within these folders the order is alphabetical.
+JavaScript files are concatenated in the following order: first files from `libraries`, then files from `functions` and lastly files from `components`. Within these folders the order is alphabetical.
 
-All 3rd-party stuff should be placed inside the folder `src/js/libraries`. JSHint ignores files in this folder to prevent error spamming. jQuery is included with this styleguide but it can be replaced with another library or removed completely.
+Files from `functions` and `components` are compiled with [Babel](https://babeljs.io/) and the ES2015 preset. JSHint is configured for ES2015 aswell, see `.jshintrc` in the styleguide root for more options.
+
+All 3rd-party stuff should be placed inside the folder `src/js/libraries`. JSHint ignores files in this folder to prevent error spamming. jQuery is included with this styleguide but it can be replaced with other libraries or removed completely.
 
 *The development task runs JSHint and generates sourcemaps. The production task uglifies the source.*
 
