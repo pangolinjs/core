@@ -135,11 +135,12 @@ var config = {
 
   // Images
   img: {
-    imagemin: {
-      progressive: true,
-      interlaced: true,
-      multipass: true
-    }
+    imagemin: [
+      imagemin.gifsicle({interlaced: true}),
+      imagemin.jpegtran({progressive: true}),
+      imagemin.optipng({optimizationLevel: 5}),
+      imagemin.svgo({plugins: [{removeUselessDefs: false}]})
+    ]
   }
 }
 
