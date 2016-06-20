@@ -129,7 +129,19 @@ var config = {
       },
       logPrefix: 'BrowserSync',
       scrollElements: ['*'],
-      reloadDelay: 200
+      reloadDelay: 0,
+      notify: {
+        styles: {
+          height: '40px',
+          right: '40px',
+          padding: '11px 16px',
+          fontSize: '16px',
+          fontWeight: '100',
+          textTransform: 'uppercase',
+          backgroundColor: 'rgb(47, 151, 255)',
+          borderBottomLeftRadius: 'none'
+        }
+      }
     }
   },
 
