@@ -42,8 +42,8 @@ var gulpFm       = require('gulp-front-matter');
 // Images
 var imagemin     = require('gulp-imagemin');
 
-// BrowserSync
-var browserSync  = require('browser-sync');
+// Browsersync
+var browsersync  = require('browser-sync');
 
 
 
@@ -123,13 +123,13 @@ var config = {
     hb: {
       bustCache: true
     },
-    browserSync: {
+    browsersync: {
       server: {
         baseDir: paths.html.dev
       },
-      logPrefix: 'BrowserSync',
+      logPrefix: 'Browsersync',
       scrollElements: ['*'],
-      reloadDelay: 0,
+      reloadDelay: 300,
       notify: {
         styles: {
           height: '40px',
@@ -204,7 +204,7 @@ gulp.task('css-dev', function() {
       .pipe(rename('styles.css'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.css.dev))
-    .pipe(browserSync.stream({match: '**/*.css'}));
+    .pipe(browsersync.stream({match: '**/*.css'}));
 });
 
 
@@ -271,7 +271,7 @@ gulp.task('js-process', function() {
       .pipe(concat('scripts.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js.dev))
-    .pipe(browserSync.stream({match: '**/*.js'}));
+    .pipe(browsersync.stream({match: '**/*.js'}));
 });
 
 
@@ -389,7 +389,7 @@ gulp.task('html-dev', ['clean-html-dev'], function() {
 
 
 // HTML Watch
-gulp.task('html-watch', ['html-dev'], browserSync.reload);
+gulp.task('html-watch', ['html-dev'], browsersync.reload);
 
 
 // HTML Production
@@ -413,7 +413,7 @@ gulp.task('img-dev', ['clean-img-dev'], function() {
 
 
 // Images Watch
-gulp.task('img-watch', ['img-dev'], browserSync.reload);
+gulp.task('img-watch', ['img-dev'], browsersync.reload);
 
 
 // Images Distribution
@@ -452,7 +452,7 @@ gulp.task('production', ['css-dist', 'js-dist', 'html-dist', 'img-dist']);
 
 
 gulp.task('browsersync', function() {
-  browserSync(config.html.browserSync);
+  browsersync(config.html.browsersync);
 });
 
 

@@ -1,6 +1,6 @@
 {
   "name": "styleguide",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Front-end development styleguide with Sass, JavaScript and Handlebars.",
   "author": "Fynn Becker <info@fynn-becker.de>",
   "scripts": {
