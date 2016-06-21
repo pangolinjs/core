@@ -138,7 +138,7 @@ description: Only used for components.
 Components may use additional markup with containers for variations.
 
 ```html
-{{#embed "layouts/article" title="Some title" description="Some text" body-class="dark"}}
+{{#embed "styleguide/article" title="Some title" description="Some text" body-class="dark"}}
 {{#content "body"}}
   <p>This creates a nicely formatted container with a title and description.</p>
 {{/content}}
