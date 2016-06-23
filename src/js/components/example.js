@@ -5,5 +5,5 @@
 /* globals helloWorld */
 
 
-
-helloWorld('First', 'Second', 'Third');
+const names = ['Luke', 'Leia', 'Han'];
+helloWorld(names);

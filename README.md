@@ -1,6 +1,6 @@
 # Front-End Styleguide
 Front-end development styleguide with Sass, JavaScript and Handlebars.
-Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint](http://jshint.com/) and concatenate JavaScript and create static HTML from [Handlebars](http://handlebarsjs.com/).
+Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint](http://eslint.org/) and concatenate JavaScript and create static HTML from [Handlebars](http://handlebarsjs.com/).
 
 
 ## Contents
@@ -70,11 +70,11 @@ Output to `dev/js` or `dist/js`.
 
 JavaScript files are concatenated in the following order: first files from `libraries`, then files from `functions` and lastly files from `components`. Within these folders the order is alphabetical.
 
-Files from `functions` and `components` are compiled with [Babel](https://babeljs.io/) and the ES2015 preset. JSHint is configured for ES2015 aswell, see `.jshintrc` in the styleguide root for more options.
+Files from `functions` and `components` are transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. ESLint is configured for ES2015 aswell, see `gulpfile.js` for more configuration stuff.
 
-All 3rd-party stuff should be placed inside the folder `src/js/libraries`. JSHint ignores files in this folder to prevent error spamming. jQuery is included with this styleguide but it can be replaced with other libraries or removed completely.
+All third-party stuff should be placed inside the folder `src/js/libraries`. ESLint ignores files in this folder to prevent error spamming.
 
-*The development task runs JSHint and generates sourcemaps. The production task uglifies the source.*
+*The development task runs ESLint and generates sourcemaps. The production task uglifies the source.*
 
 
 ### Handlebars

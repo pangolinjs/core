@@ -31,8 +31,7 @@ var autoprefixer = require('gulp-autoprefixer');
 // JavaScript
 var babel        = require('gulp-babel');
 var uglify       = require('gulp-uglify');
-var jshint       = require('gulp-jshint');
-var stylish      = require('jshint-stylish');
+var eslint       = require('gulp-eslint');
 
 // Handelbars
 var hb           = require('gulp-hb');
@@ -113,6 +112,56 @@ var config = {
 
   // JavaScript
   js: {
+    eslint: {
+      extends: 'eslint:recommended',
+      parserOptions: {
+        ecmaVersion: 6
+      },
+      envs: ['browser'],
+      rules: {
+        // Best Practices
+        'block-scoped-var': 'error',
+        'curly': 'error',
+        'eqeqeq': 'error',
+        'no-alert': 'error',
+        'no-empty-function': 'error',
+        'no-extend-native': 'error',
+        'no-floating-decimal': 'error',
+        'no-loop-func': 'error',
+        'no-native-reassign': 'error',
+        'no-self-compare': 'error',
+        'no-warning-comments': 'error',
+        'yoda': 'error',
+
+        // Variables
+        'no-shadow': 'error',
+        'no-shadow-restricted-names': 'error',
+        'no-use-before-define': 'error',
+
+        // Stylistic
+        'array-bracket-spacing': 'error',
+        'block-spacing': 'error',
+        'camelcase': 'error',
+        'comma-spacing': 'error',
+        'computed-property-spacing': 'error',
+        'key-spacing': 'error',
+        'keyword-spacing': 'error',
+        'no-bitwise': 'error',
+        'no-mixed-operators': 'error',
+        'no-spaced-func': 'error',
+        'no-trailing-spaces': 'error',
+        'no-unneeded-ternary': 'error',
+        'no-whitespace-before-property': 'error',
+        'object-property-newline': 'error',
+        'semi': 'error',
+        'semi-spacing': 'error',
+        'space-before-blocks': 'error',
+        'space-before-function-paren': ['error', 'never'],
+        'space-in-parens': 'error',
+        'space-infix-ops': 'error',
+        'space-unary-ops': 'error'
+      }
+    },
     babel: {
       presets: ['es2015']
     }
@@ -251,11 +300,11 @@ var babelError = function(error) {
 };
 
 
-// JavaScript Hint
-gulp.task('js-hint', function() {
+// JavaScript Lint
+gulp.task('js-lint', function() {
   return gulp.src([paths.js.src + 'functions/**/*.js', paths.js.src + 'components/**/*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish));
+    .pipe(eslint(config.js.eslint))
+    .pipe(eslint.format());
 });
 
 
@@ -266,6 +315,7 @@ gulp.task('js-process', function() {
   return gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'functions/**/*.js', paths.js.src + 'components/**/*.js'])
     .pipe(sourcemaps.init())
       .pipe(excludeLibraries)
+        .pipe(concat('scripts.js')) // Let Babel work on the concatenated files
         .pipe(babel(config.js.babel).on('error', babelError))
       .pipe(excludeLibraries.restore)
       .pipe(concat('scripts.js'))
@@ -276,7 +326,7 @@ gulp.task('js-process', function() {
 
 
 // JavaScript Development
-gulp.task('js-dev', ['js-hint', 'js-process']);
+gulp.task('js-dev', ['js-lint', 'js-process']);
 
 
 // JavaScript Watch
@@ -289,6 +339,7 @@ gulp.task('js-dist', ['clean-dist'], function() {
 
   return gulp.src([paths.js.src + 'libraries/**/*.js', paths.js.src + 'functions/**/*.js', paths.js.src + 'components/**/*.js'])
     .pipe(excludeLibraries)
+      .pipe(concat('scripts.js')) // Let Babel work on the concatenated files
       .pipe(babel(config.js.babel))
     .pipe(excludeLibraries.restore)
     .pipe(concat('scripts.js'))
