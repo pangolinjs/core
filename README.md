@@ -1,6 +1,6 @@
 # Front-End Styleguide
 Front-end development styleguide with Sass, JavaScript and Handlebars.
-Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint](http://eslint.org/) and concatenate JavaScript and create static HTML from [Handlebars](http://handlebarsjs.com/).
+Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint](http://eslint.org/) and [transpile](https://babeljs.io/) JavaScript and create static HTML from [Handlebars](http://handlebarsjs.com/) templates.
 
 
 ## Contents
@@ -8,9 +8,9 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 2. [Installation](#installation)
 3. [Usage](#usage)
   1. [Tasks](#tasks)
-  2. [Sass](#sass)
+  2. [CSS](#css)
   3. [JavaScript](#javascript)
-  4. [Handlebars](#handlebars)
+  4. [HTML](#html)
   5. [Images](#images)
 4. [Styleguide CSS](#styleguide-css)
 5. [Credits](#credits)
@@ -26,7 +26,6 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 2. Run `npm install` to download Node Modules.
 3. Install global Gulp with `npm install -g gulp`. This step is required to get CLI access to gulp.
 
-
 *To update previously downloaded Node Modules run `npm update`.*
 
 
@@ -34,31 +33,28 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 
 ### Tasks
 These are the main Gulp tasks:
-* Run `gulp` to start the default task. This task watches for file changes and starts Browsersync.  
-All generated files are placed in `dev`.
-* Run `gulp development` to start the default task without file watching and Browsersync.  
-All generated files are placed in `dev`.
-* Run `gulp production` to create prduction ready files. This task minifys CSS and JavaScript files and compresses images.  
-All genereated files will be placed in `dist`.
+* Run `gulp` to start the default task. This task runs in the background, watches for file changes and starts Browsersync.
+* Run `gulp development` to start the default task without file watching and Browsersync.
+* Run `gulp production` to create prduction ready files. This task minifies CSS, JavaScript and images.
 
 There are more tasks available for standalone execution:
-* `sass-dev` and `sass-dist` for Sass compilation.
+* `css-dev` and `css-dist` for Sass compilation.
 * `js-dev` and `js-dist` for JavaScript concatenation and linting.
 * `html-dev` and `html-dist` for static HTML file generation.
-* `assets-dev` and `assets-dist` for assets copying and image minification.
+* `img-dev` and `img-dist` for image copying and icon sprite generation.
 
 *The generated folders `dev` and `dist` are not versioned by Git.*
 
 
-### Sass
+### CSS
 Located in `src/css`.  
 Output to `dev/css` or `dist/css`.
 
-*Sass* is a CSS-Preprocessor supporting variables, nesting and mixins - among many other features. For a complete documentation jump to the [Sass Basics](http://sass-lang.com/guide).
+*Sass* is a CSS-Preprocessor supporting variables, nesting and mixins - among many other features. For a quick start jump to the [Sass Basics](http://sass-lang.com/guide).
 
-This styleguide splits the CSS into small parts. This ensures a far better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [Handlebars-Section](#handlebars) for the HTML-side of componentization.
+This styleguide splits the CSS into small parts. This ensures a far better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [HTML-Section](#html) for the HTML-side of componentization.
 
-The function `@import` includes the corresponding file in the main Sass file. The final output is one large CSS file to minimize requests. See `src/css/main.scss` for more information.
+The function `@import` includes the corresponding file in the main Sass file. The final output is one large CSS file to minimize browser requests. See `src/css/main.scss` for more information.
 
 *The development task generates sourcemaps.*
 
@@ -67,16 +63,16 @@ The function `@import` includes the corresponding file in the main Sass file. Th
 Located in `src/js`.  
 Output to `dev/js` or `dist/js`.
 
-JavaScript files are concatenated in the following order: first files from `libraries`, then files from `functions` and lastly files from `components`. Within these folders the order is alphabetical.
+JavaScript files are concatenated in the following order: First files from `libraries`, then files from `functions` and lastly files from `components`. Within these folders the order is alphabetical.
 
-Files from `functions` and `components` are transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. ESLint is configured for ES2015 aswell, see `gulpfile.js` for more configuration stuff.
+Files from `functions` and `components` are transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. ESLint is configured for ES2015 aswell, see `gulp/config.js` for more configuration options.
 
 All third-party stuff should be placed inside the folder `src/js/libraries`. ESLint ignores files in this folder to prevent error spamming.
 
 *The development task runs ESLint and generates sourcemaps. The production task uglifies the source.*
 
 
-### Handlebars
+### HTML
 Located in `src/html`.  
 Output to `dev` or `dist`.
 
@@ -90,7 +86,7 @@ Layouts determine the overall structure of the HTML document. They contain the `
 
 Layouts are located in `src/html/partials/layouts`.
 
-```html
+```handlebars
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -104,25 +100,24 @@ Layouts are located in `src/html/partials/layouts`.
 ```
 
 
-#### Includes
-These files can be included in all other files (even in other includes). The process is comparable to PHP's `include`.
+#### Partials
+These files can be included in all other files (even in other partials). The process is comparable to PHP's `include`.
 
-Includes are located in `src/html/partials/includes`. The Handlebars renderer accesses them relative to the `src/html/partials` folder.
+Partials are located in `src/html/partials`.
 
 The syntax `{{> "includes/example" }}` includes the file `src/html/partials/includes/example.hbs`.
 
 
-#### Pages and Components
-Pages are prototypes for the final web pages.
-Components are reference pages for smaller UI parts. The gulp task `production` will not render them.
+#### Components and Pages
+Components are reference pages for smaller UI parts. The gulp task `production` will not render them. Pages are prototypes for the final web pages.
 
-The `default` gulp task injects a horizontal navigation bar into pages and components for fast file switching.
+The `default` gulp task injects a horizontal navigation bar into components and pages HTML files for faster file switching.
 
-Pages are located in `src/html/pages`, components in `src/html/components`.
+components in `src/html/components`, pages are located in `src/html/pages`.
 
-The YAML front matter between the opening `---` and closing `---` contains general information like the page title and description. This will be used primarily by layouts. You can add additional information (arrays and even objects), which can be accessed via `{{@file.meta.key}}`. Replace `key` with the variable name from the front matter.
+The YAML front matter between the opening `---` and closing `---` contains general information like the page title and description. These will be used primarily by layouts. Add additional information (e.g. arrays or even objects), which can be accessed via `{{@file.meta.key}}`. Replace `key` with the variable name from the front matter.
 
-```html
+```handlebars
 ---
 title: Example
 description: Only used for components.
@@ -134,9 +129,9 @@ description: Only used for components.
 {{/extend}}
 ```
 
-Components may use additional markup with containers for variations.
+Components use additional markup with nicely styled containers:
 
-```html
+```handlebars
 {{#embed "styleguide/article" title="Some title" description="Some text" body-class="dark"}}
 {{#content "body"}}
   <p>This creates a nicely formatted container with a title and description.</p>
@@ -164,13 +159,13 @@ Icons can be used within HTML with the following syntax:
 <svg><use xlink:href="{{rel}}img/icons.svg#icon"></svg>
 ```
 
-If you have to support Internet Explorer, please use the [SVG for Everybody](https://github.com/jonathantneal/svg4everybody) polyfill.
+Use the [SVG for Everybody](https://github.com/jonathantneal/svg4everybody) polyfill to support Internet Explorer.
 
 *The production task minifies images with a lossless compressor.*
 
 
 ## Styleguide CSS
-The components pages and the development menu use some styling. All styles are located in `src/html/css/sg.scss`.
+The components HTML files and the development menu use some styling. All styles are located in `src/html/css/sg.scss`.
 
 *The style definitions located in `src/css` use the prefix `sg-` to ensure compatibility with the main stylesheet.*
 
