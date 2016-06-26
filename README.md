@@ -11,15 +11,14 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
   2. [Sass](#sass)
   3. [JavaScript](#javascript)
   4. [Handlebars](#handlebars)
-  5. [Holder.js](#holderjs)
-  6. [Images](#images)
+  5. [Images](#images)
 4. [Styleguide CSS](#styleguide-css)
 5. [Credits](#credits)
 
 
 ## Dependencies
 * [Node.js with npm](https://nodejs.org/)
-* Windows: Use [Node.js 6](https://nodejs.org/en/download/current/) to avoid paths that exceed 260 characters.
+* Tested with Node.js Current. Older versions may work, but there is no guarantee.
 
 
 ## Installation
@@ -150,23 +149,22 @@ The following attributes are available:
 * `description` provides additional information
 * `body-class` generates a class prefixed with `sg-article__body--` which can be styled in `sg.scss` (the classes `light` and `dark` are pre-configured to alter the background-color of the component frame)
 
-### Holder.js
-Use [Holder.js](https://github.com/imsky/holder) to include image placeholders.
-
-This basic example generates a gray 300 by 200 pixel image.
-
-```html
-<img src="" data-src="holder.js/300x200" alt="Image Placeholder">
-```
-
-*[More advanced options](https://github.com/imsky/holder#placeholder-options) like color, text and font are available.*
-
 
 ### Images
 Located in `src/img`.  
 Output to `dev/img` or `dist/img`.
 
 All files and folders placed in `src/img` will be copied to `dev/img` or `dist/img`.
+
+SVG files placed in the `src/img/icons` folder will be transformed into an SVG icon sprite named `icons.svg`. The original icons will *not* be copied to the respective dev or dist folder.
+
+Icons can be used within HTML with the following syntax:
+
+```html
+<svg><use xlink:href="{{rel}}img/icons.svg#icon"></svg>
+```
+
+If you have to support Internet Explorer, please use the [SVG for Everybody](https://github.com/jonathantneal/svg4everybody) polyfill.
 
 *The production task minifies images with a lossless compressor.*
 
