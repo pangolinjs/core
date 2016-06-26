@@ -79,7 +79,7 @@ module.exports = {
     },
     babel: {
       presets: ['es2015'],
-      ignore: `libraries/*.js`
+      ignore: 'libraries/*.js'
     }
   },
 
@@ -113,7 +113,6 @@ module.exports = {
   // Images
   img: {
     svgSpriteDev: {
-      log: 'info',
       mode: {
         symbol: {
           dest: '.',

@@ -86,7 +86,7 @@ gulp.task('clean-img-dev', function() {
 
 // CSS Development
 gulp.task('css-dev', function() {
-  return gulp.src(paths.css.src + '/**/*.scss')
+  return gulp.src(`${paths.css.src}/**/*.scss`)
     .pipe(sourcemaps.init())
       .pipe(sass(config.css.dev).on('error', sass.logError))
       .pipe(autoprefixer(config.css.autoprefixer))
@@ -103,7 +103,7 @@ gulp.task('css-watch', ['css-dev']);
 
 // CSS Styleguide
 gulp.task('css-sg', function() {
-  return gulp.src(paths.html.src + '/css/sg.scss')
+  return gulp.src(`${paths.html.src}/css/sg.scss`)
     .pipe(sass(config.css.dev).on('error', sass.logError))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(gulp.dest(paths.css.dev));
@@ -112,7 +112,7 @@ gulp.task('css-sg', function() {
 
 // CSS Distribution
 gulp.task('css-dist', ['clean-dist'], function() {
-  return gulp.src(paths.css.src + '/**/*.scss')
+  return gulp.src(`${paths.css.src}/**/*.scss`)
     .pipe(sass(config.css.dist).on('error', sass.logError))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(rename('styles.css'))
@@ -128,7 +128,7 @@ gulp.task('css-dist', ['clean-dist'], function() {
 
 
 // Handle Bable error
-var babelError = function(error) {
+let babelError = function(error) {
   console.log(
     '\n' + gutil.colors.underline(error.fileName) + '\n'
     + gutil.colors.gray('  line ' + error.loc.line + '  col ' + error.loc.column)
@@ -142,7 +142,10 @@ var babelError = function(error) {
 
 // JavaScript Lint
 gulp.task('js-lint', function() {
-  return gulp.src([paths.js.src + '/functions/*.js', paths.js.src + '/components/*.js'])
+  return gulp.src([
+    `${paths.js.src}/functions/*.js`,
+    `${paths.js.src}/components/*.js`
+  ])
     .pipe(eslint(config.js.eslint))
     .pipe(eslint.format());
 });
@@ -151,9 +154,9 @@ gulp.task('js-lint', function() {
 // JavaScript Dev
 gulp.task('js-dev', ['js-lint'], function() {
   return gulp.src([
-    paths.js.src + '/libraries/*.js',
-    paths.js.src + '/functions/*.js',
-    paths.js.src + '/components/*.js'
+    `${paths.js.src}/libraries/*.js`,
+    `${paths.js.src}/functions/*.js`,
+    `${paths.js.src}/components/*.js`
   ])
     .pipe(sourcemaps.init())
       .pipe(babel(config.js.babel).on('error', babelError))
@@ -171,9 +174,9 @@ gulp.task('js-watch', ['js-dev']);
 // JavaScript Production
 gulp.task('js-dist', ['clean-dist'], function() {
   return gulp.src([
-    paths.js.src + '/libraries/*.js',
-    paths.js.src + '/functions/*.js',
-    paths.js.src + '/components/*.js'
+    `${paths.js.src}/libraries/*.js`,
+    `${paths.js.src}/functions/*.js`,
+    `${paths.js.src}/components/*.js`
   ])
     .pipe(babel(config.js.babel))
     .pipe(concat('scripts.js'))
@@ -190,7 +193,7 @@ gulp.task('js-dist', ['clean-dist'], function() {
 
 
 // Handle Handlebars error
-var handlebarsError = function(error) {
+let handlebarsError = function(error) {
   console.log(
     '\n' + gutil.colors.underline(error.fileName) + '\n'
     + '  ' + gutil.colors.red('Handlebars error: ')
@@ -201,17 +204,17 @@ var handlebarsError = function(error) {
 
 
 // Handlebars Function
-var compileHandlebars = function(source, destination, nav) {
-  var pages      = [];
-  var components = [];
+let compileHandlebars = function(source, destination, nav) {
+  let pages      = [];
+  let components = [];
 
   if (nav) {
-    var pageList      = glob.sync(paths.html.src + '/pages/**/*.hbs');
-    var componentList = glob.sync(paths.html.src + '/components/**/*.hbs');
+    let pageList      = glob.sync(`${paths.html.src}/pages/**/*.hbs`);
+    let componentList = glob.sync(`${paths.html.src}/components/**/*.hbs`);
 
-    for (var page of pageList) {
-      var title = fm(fs.readFileSync(page, 'utf8')).attributes.title;
-      var href  = path.relative(paths.html.src + '/pages', page).replace('.hbs', '.html');
+    for (let page of pageList) {
+      let title = fm(fs.readFileSync(page, 'utf8')).attributes.title;
+      let href  = path.relative(`${paths.html.src}/pages`, page).replace('.hbs', '.html');
 
       if (!title) {
         title = '(No Title)';
@@ -220,9 +223,9 @@ var compileHandlebars = function(source, destination, nav) {
       pages.push({title, href});
     }
 
-    for (var component of componentList) {
-      var title = fm(fs.readFileSync(component, 'utf8')).attributes.title;
-      var href  = 'components/' + path.relative(paths.html.src + '/components', component).replace('.hbs', '.html');
+    for (let component of componentList) {
+      let title = fm(fs.readFileSync(component, 'utf8')).attributes.title;
+      let href  = 'components/' + path.relative(`${paths.html.src}/components`, component).replace('.hbs', '.html');
 
       if (!title) {
         title = '(No Title)';
@@ -232,17 +235,17 @@ var compileHandlebars = function(source, destination, nav) {
     }
   }
 
-  var hbStream = hb(config.html.hb)
-    .partials(paths.html.src + '/partials/**/*.hbs')
+  let hbStream = hb(config.html.hb)
+    .partials(`${paths.html.src}/partials/**/*.hbs`)
     .helpers(require('handlebars-layouts'))
     .helpers({
       rel: function(options) {
-        var currentPath = path.dirname(options.data.file.path);
-        var sourcePath  = path.resolve(source);
+        let currentPath = path.dirname(options.data.file.path);
+        let sourcePath  = path.resolve(source);
 
-        var additionalPath = '';
+        let additionalPath = '';
 
-        if (source === paths.html.src + '/components') {
+        if (source === `${paths.html.src}/components`) {
           additionalPath = '../'
         }
 
@@ -258,7 +261,7 @@ var compileHandlebars = function(source, destination, nav) {
       navItems: {pages, components}
     });
 
-  return gulp.src(source + '/**/*.hbs')
+  return gulp.src(`${source}/**/*.hbs`)
     .pipe(gulpFm({property: 'meta'}))
     .pipe(hbStream.on('error', handlebarsError))
     .pipe(rename({extname: '.html'}))
@@ -268,8 +271,8 @@ var compileHandlebars = function(source, destination, nav) {
 
 // HTML Development
 gulp.task('html-dev', ['clean-html-dev'], function() {
-  compileHandlebars(paths.html.src + '/pages', paths.html.dev, true);
-  compileHandlebars(paths.html.src + '/components', paths.html.dev + '/components', true);
+  compileHandlebars(`${paths.html.src}/pages`, paths.html.dev, true);
+  compileHandlebars(`${paths.html.src}/components`, `${paths.html.dev}/components`, true);
 });
 
 
@@ -279,7 +282,7 @@ gulp.task('html-watch', ['html-dev'], browsersync.reload);
 
 // HTML Production
 gulp.task('html-dist', ['clean-dist'], function() {
-  compileHandlebars(paths.html.src + '/pages', paths.html.dist, false);
+  compileHandlebars(`${paths.html.src}/pages`, paths.html.dist, false);
 });
 
 
@@ -292,7 +295,11 @@ gulp.task('html-dist', ['clean-dist'], function() {
 
 // Images Dev Copy
 gulp.task('img-dev-copy', ['clean-img-dev'], function() {
-  return gulp.src([`${paths.img.src}/**`, `!${paths.img.src}/icons/**`])
+  return gulp.src([
+    `${paths.img.src}/**`,
+    `!${paths.img.src}/icons`,
+    `!${paths.img.src}/icons/**`
+  ])
     .pipe(gulp.dest(paths.img.dev));
 });
 
@@ -315,7 +322,11 @@ gulp.task('img-watch', ['img-dev'], browsersync.reload);
 
 // Images Dist Copy
 gulp.task('img-dist-copy', ['clean-dist'], function() {
-  return gulp.src([`${paths.img.src}/**`, `!${paths.img.src}/icons/**`])
+  return gulp.src([
+    `${paths.img.src}/**`,
+    `!${paths.img.src}/icons`,
+    `!${paths.img.src}/icons/**`
+  ])
     .pipe(imagemin([
       imagemin.jpegtran(config.img.imagemin.jpg),
       imagemin.optipng(config.img.imagemin.png),
@@ -370,7 +381,7 @@ gulp.task('browsersync', function() {
 
 
 gulp.task('default', ['clean-dev'], function() {
-  var onChangeMessage = function(event) {
+  let onChangeMessage = function(event) {
     console.log('\n');
     gutil.log(gutil.colors.blue(event.path) + ' ' + event.type);
   }
@@ -379,18 +390,18 @@ gulp.task('default', ['clean-dev'], function() {
   runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev'], 'browsersync');
 
   // Watch CSS
-  var watchCSS = gulp.watch(paths.css.src + '/**/*.scss', ['css-watch']);
+  let watchCSS = gulp.watch(`${paths.css.src}/**/*.scss`, ['css-watch']);
   watchCSS.on('change', onChangeMessage);
 
   // Watch JavaScript
-  var watchJS = gulp.watch(paths.js.src + '/**/*.js', ['js-watch']);
+  let watchJS = gulp.watch(`${paths.js.src}/**/*.js`, ['js-watch']);
   watchJS.on('change', onChangeMessage);
 
   // Watch HTML
-  var watchHTML = gulp.watch(paths.html.src + '/**/*.hbs', ['html-watch']);
+  let watchHTML = gulp.watch(`${paths.html.src}/**/*.hbs`, ['html-watch']);
   watchHTML.on('change', onChangeMessage);
 
   // Watch Images
-  var watchImg = gulp.watch(paths.img.src + '/**/*', ['img-watch']);
+  let watchImg = gulp.watch(`${paths.img.src}/**/*`, ['img-watch']);
   watchImg.on('change', onChangeMessage);
 });
