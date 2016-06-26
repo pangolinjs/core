@@ -18,7 +18,6 @@ const gulp         = require('gulp');
 
 // Utilities
 const gutil        = require('gulp-util');
-const filter       = require('gulp-filter');
 const rename       = require('gulp-rename');
 const concat       = require('gulp-concat');
 const runSequence  = require('run-sequence');
@@ -140,15 +139,10 @@ var babelError = function(error) {
   this.emit('end');
 };
 
-var babelFilter = filter([
-  paths.js.src + '/functions/**/*.js',
-  paths.js.src + '/components/**/*.js'
-], {restore: true});
-
 
 // JavaScript Lint
 gulp.task('js-lint', function() {
-  return gulp.src([paths.js.src + '/functions/**/*.js', paths.js.src + '/components/**/*.js'])
+  return gulp.src([paths.js.src + '/functions/*.js', paths.js.src + '/components/*.js'])
     .pipe(eslint(config.js.eslint))
     .pipe(eslint.format());
 });
@@ -157,16 +151,13 @@ gulp.task('js-lint', function() {
 // JavaScript Dev
 gulp.task('js-dev', ['js-lint'], function() {
   return gulp.src([
-    paths.js.src + '/libraries/**/*.js',
-    paths.js.src + '/functions/**/*.js',
-    paths.js.src + '/components/**/*.js'
+    paths.js.src + '/libraries/*.js',
+    paths.js.src + '/functions/*.js',
+    paths.js.src + '/components/*.js'
   ])
     .pipe(sourcemaps.init())
-      .pipe(babelFilter)
-        .pipe(concat('scripts.js')) // Let Babel work on the concatenated files
-        .pipe(babel({presets: ['es2015']}).on('error', babelError))
-      .pipe(babelFilter.restore)
-      .pipe(concat('scripts.js')) // Add libraries files
+      .pipe(babel(config.js.babel).on('error', babelError))
+      .pipe(concat('scripts.js'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js.dev))
     .pipe(browsersync.stream({match: '**/*.js'}));
@@ -180,15 +171,12 @@ gulp.task('js-watch', ['js-dev']);
 // JavaScript Production
 gulp.task('js-dist', ['clean-dist'], function() {
   return gulp.src([
-    paths.js.src + '/libraries/**/*.js',
-    paths.js.src + '/functions/**/*.js',
-    paths.js.src + '/components/**/*.js'
+    paths.js.src + '/libraries/*.js',
+    paths.js.src + '/functions/*.js',
+    paths.js.src + '/components/*.js'
   ])
-    .pipe(babelFilter)
-      .pipe(concat('scripts.js')) // Let Babel work on the concatenated files
-      .pipe(babel(config.js.babel))
-    .pipe(babelFilter.restore)
-    .pipe(concat('scripts.js')) // Add libraries files
+    .pipe(babel(config.js.babel))
+    .pipe(concat('scripts.js'))
     .pipe(uglify())
     .pipe(gulp.dest(paths.js.dist));
 });
