@@ -39,6 +39,7 @@ const fm           = require('front-matter');
 const gulpFm       = require('gulp-front-matter');
 
 // Images
+const svgSprite    = require('gulp-svg-sprite');
 const imagemin     = require('gulp-imagemin');
 
 // Paths & Config
@@ -139,7 +140,7 @@ var babelError = function(error) {
   this.emit('end');
 };
 
-var babelExclude = filter([
+var babelFilter = filter([
   paths.js.src + '/functions/**/*.js',
   paths.js.src + '/components/**/*.js'
 ], {restore: true});
@@ -153,27 +154,23 @@ gulp.task('js-lint', function() {
 });
 
 
-// JavaScript Concatenation
-gulp.task('js-process', function() {
+// JavaScript Dev
+gulp.task('js-dev', ['js-lint'], function() {
   return gulp.src([
     paths.js.src + '/libraries/**/*.js',
     paths.js.src + '/functions/**/*.js',
     paths.js.src + '/components/**/*.js'
   ])
     .pipe(sourcemaps.init())
-      .pipe(babelExclude)
+      .pipe(babelFilter)
         .pipe(concat('scripts.js')) // Let Babel work on the concatenated files
-        .pipe(babel(config.js.babel).on('error', babelError))
-      .pipe(babelExclude.restore)
+        .pipe(babel({presets: ['es2015']}).on('error', babelError))
+      .pipe(babelFilter.restore)
       .pipe(concat('scripts.js')) // Add libraries files
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js.dev))
     .pipe(browsersync.stream({match: '**/*.js'}));
 });
-
-
-// JavaScript Development
-gulp.task('js-dev', ['js-lint', 'js-process']);
 
 
 // JavaScript Watch
@@ -187,10 +184,10 @@ gulp.task('js-dist', ['clean-dist'], function() {
     paths.js.src + '/functions/**/*.js',
     paths.js.src + '/components/**/*.js'
   ])
-    .pipe(babelExclude)
+    .pipe(babelFilter)
       .pipe(concat('scripts.js')) // Let Babel work on the concatenated files
       .pipe(babel(config.js.babel))
-    .pipe(babelExclude.restore)
+    .pipe(babelFilter.restore)
     .pipe(concat('scripts.js')) // Add libraries files
     .pipe(uglify())
     .pipe(gulp.dest(paths.js.dist));
@@ -305,20 +302,32 @@ gulp.task('html-dist', ['clean-dist'], function() {
  * ========================================================================== */
 
 
-// Images Development
-gulp.task('img-dev', ['clean-img-dev'], function() {
-  return gulp.src(paths.img.src + '/**')
+// Images Dev Copy
+gulp.task('img-dev-copy', ['clean-img-dev'], function() {
+  return gulp.src([`${paths.img.src}/**`, `!${paths.img.src}/icons/**`])
     .pipe(gulp.dest(paths.img.dev));
 });
+
+
+// Images Dev Icons
+gulp.task('img-dev-icons', ['clean-img-dev'], function() {
+  return gulp.src(`${paths.img.src}/icons/*.svg`)
+    .pipe(svgSprite(config.img.svgSpriteDev).on('error', function(error) { console.log(error); }))
+    .pipe(gulp.dest(paths.img.dev));
+});
+
+
+// Images Dev
+gulp.task('img-dev', ['img-dev-copy', 'img-dev-icons']);
 
 
 // Images Watch
 gulp.task('img-watch', ['img-dev'], browsersync.reload);
 
 
-// Images Distribution
-gulp.task('img-dist', ['clean-dist'], function() {
-  return gulp.src(paths.img.src + '/**')
+// Images Dist Copy
+gulp.task('img-dist-copy', ['clean-dist'], function() {
+  return gulp.src([`${paths.img.src}/**`, `!${paths.img.src}/icons/**`])
     .pipe(imagemin([
       imagemin.jpegtran(config.img.imagemin.jpg),
       imagemin.optipng(config.img.imagemin.png),
@@ -326,6 +335,18 @@ gulp.task('img-dist', ['clean-dist'], function() {
     ]))
     .pipe(gulp.dest(paths.img.dist));
 });
+
+
+// Images Dist Icons
+gulp.task('img-dist-icons', ['clean-dist'], function() {
+  return gulp.src(`${paths.img.src}/icons/*.svg`)
+    .pipe(svgSprite(config.img.svgSpriteDist).on('error', function(error) { console.log(error); }))
+    .pipe(gulp.dest(paths.img.dist));
+});
+
+
+// Images Distribution
+gulp.task('img-dist', ['img-dist-copy', 'img-dist-icons']);
 
 
 

@@ -111,6 +111,28 @@ module.exports = {
 
   // Images
   img: {
+    svgSpriteDev: {
+      log: 'info',
+      mode: {
+        symbol: {
+          dest: '.',
+          inline: true,
+          sprite: 'icons.svg',
+          example: {
+            dest: 'icons.html'
+          }
+        }
+      }
+    },
+    svgSpriteDist: {
+      mode: {
+        symbol: {
+          dest: '.',
+          inline: true,
+          sprite: 'icons.svg'
+        }
+      }
+    },
     imagemin: {
       jpg: {
         progressive: true
