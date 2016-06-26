@@ -54,25 +54,25 @@ const config       = require('./gulp/config.js');
 
 
 // Clean Development
-gulp.task('clean-dev', function() {
+gulp.task('clean-dev', () => {
   return del(paths.dev);
 });
 
 
 // Clean Distribution
-gulp.task('clean-dist', function() {
+gulp.task('clean-dist', () => {
   return del(paths.dist);
 });
 
 
 // Clean Dev HTML
-gulp.task('clean-html-dev', function() {
+gulp.task('clean-html-dev', () => {
   return del(`${paths.html.dev}/**/*.html`);
 });
 
 
 // Clean Dev Images
-gulp.task('clean-img-dev', function() {
+gulp.task('clean-img-dev', () => {
   return del(`${paths.img.dev}/**`);
 });
 
@@ -85,7 +85,7 @@ gulp.task('clean-img-dev', function() {
 
 
 // CSS Development
-gulp.task('css-dev', function() {
+gulp.task('css-dev', () => {
   return gulp.src(`${paths.css.src}/**/*.scss`)
     .pipe(sourcemaps.init())
       .pipe(sass(config.css.dev).on('error', sass.logError))
@@ -102,7 +102,7 @@ gulp.task('css-watch', ['css-dev']);
 
 
 // CSS Styleguide
-gulp.task('css-sg', function() {
+gulp.task('css-sg', () => {
   return gulp.src(`${paths.html.src}/css/sg.scss`)
     .pipe(sass(config.css.dev).on('error', sass.logError))
     .pipe(autoprefixer(config.css.autoprefixer))
@@ -111,7 +111,7 @@ gulp.task('css-sg', function() {
 
 
 // CSS Distribution
-gulp.task('css-dist', ['clean-dist'], function() {
+gulp.task('css-dist', ['clean-dist'], () => {
   return gulp.src(`${paths.css.src}/**/*.scss`)
     .pipe(sass(config.css.dist).on('error', sass.logError))
     .pipe(autoprefixer(config.css.autoprefixer))
@@ -128,7 +128,7 @@ gulp.task('css-dist', ['clean-dist'], function() {
 
 
 // Handle Bable error
-let babelError = function(error) {
+let babelError = (error) => {
   console.log(
     '\n' + gutil.colors.underline(error.fileName) + '\n'
     + gutil.colors.gray('  line ' + error.loc.line + '  col ' + error.loc.column)
@@ -141,7 +141,7 @@ let babelError = function(error) {
 
 
 // JavaScript Lint
-gulp.task('js-lint', function() {
+gulp.task('js-lint', () => {
   return gulp.src([
     `${paths.js.src}/functions/*.js`,
     `${paths.js.src}/components/*.js`
@@ -152,7 +152,7 @@ gulp.task('js-lint', function() {
 
 
 // JavaScript Dev
-gulp.task('js-dev', ['js-lint'], function() {
+gulp.task('js-dev', ['js-lint'], () => {
   return gulp.src([
     `${paths.js.src}/libraries/*.js`,
     `${paths.js.src}/functions/*.js`,
@@ -172,7 +172,7 @@ gulp.task('js-watch', ['js-dev']);
 
 
 // JavaScript Production
-gulp.task('js-dist', ['clean-dist'], function() {
+gulp.task('js-dist', ['clean-dist'], () => {
   return gulp.src([
     `${paths.js.src}/libraries/*.js`,
     `${paths.js.src}/functions/*.js`,
@@ -193,7 +193,7 @@ gulp.task('js-dist', ['clean-dist'], function() {
 
 
 // Handle Handlebars error
-let handlebarsError = function(error) {
+let handlebarsError = (error) => {
   console.log(
     '\n' + gutil.colors.underline(error.fileName) + '\n'
     + '  ' + gutil.colors.red('Handlebars error: ')
@@ -204,7 +204,7 @@ let handlebarsError = function(error) {
 
 
 // Handlebars Function
-let compileHandlebars = function(source, destination, nav) {
+let compileHandlebars = (source, destination, nav) => {
   let pages      = [];
   let components = [];
 
@@ -239,7 +239,7 @@ let compileHandlebars = function(source, destination, nav) {
     .partials(`${paths.html.src}/partials/**/*.hbs`)
     .helpers(require('handlebars-layouts'))
     .helpers({
-      rel: function(options) {
+      rel: (options) => {
         let currentPath = path.dirname(options.data.file.path);
         let sourcePath  = path.resolve(source);
 
@@ -270,7 +270,7 @@ let compileHandlebars = function(source, destination, nav) {
 
 
 // HTML Development
-gulp.task('html-dev', ['clean-html-dev'], function() {
+gulp.task('html-dev', ['clean-html-dev'], () => {
   compileHandlebars(`${paths.html.src}/pages`, paths.html.dev, true);
   compileHandlebars(`${paths.html.src}/components`, `${paths.html.dev}/components`, true);
 });
@@ -281,7 +281,7 @@ gulp.task('html-watch', ['html-dev'], browsersync.reload);
 
 
 // HTML Production
-gulp.task('html-dist', ['clean-dist'], function() {
+gulp.task('html-dist', ['clean-dist'], () => {
   compileHandlebars(`${paths.html.src}/pages`, paths.html.dist, false);
 });
 
@@ -294,7 +294,7 @@ gulp.task('html-dist', ['clean-dist'], function() {
 
 
 // Images Dev Copy
-gulp.task('img-dev-copy', ['clean-img-dev'], function() {
+gulp.task('img-dev-copy', ['clean-img-dev'], () => {
   return gulp.src([
     `${paths.img.src}/**`,
     `!${paths.img.src}/icons`,
@@ -305,9 +305,9 @@ gulp.task('img-dev-copy', ['clean-img-dev'], function() {
 
 
 // Images Dev Icons
-gulp.task('img-dev-icons', ['clean-img-dev'], function() {
+gulp.task('img-dev-icons', ['clean-img-dev'], () => {
   return gulp.src(`${paths.img.src}/icons/*.svg`)
-    .pipe(svgSprite(config.img.svgSpriteDev).on('error', function(error) { console.log(error); }))
+    .pipe(svgSprite(config.img.svgSpriteDev).on('error', (error) => { console.log(error); }))
     .pipe(gulp.dest(paths.img.dev));
 });
 
@@ -321,7 +321,7 @@ gulp.task('img-watch', ['img-dev'], browsersync.reload);
 
 
 // Images Dist Copy
-gulp.task('img-dist-copy', ['clean-dist'], function() {
+gulp.task('img-dist-copy', ['clean-dist'], () => {
   return gulp.src([
     `${paths.img.src}/**`,
     `!${paths.img.src}/icons`,
@@ -337,9 +337,9 @@ gulp.task('img-dist-copy', ['clean-dist'], function() {
 
 
 // Images Dist Icons
-gulp.task('img-dist-icons', ['clean-dist'], function() {
+gulp.task('img-dist-icons', ['clean-dist'], () => {
   return gulp.src(`${paths.img.src}/icons/*.svg`)
-    .pipe(svgSprite(config.img.svgSpriteDist).on('error', function(error) { console.log(error); }))
+    .pipe(svgSprite(config.img.svgSpriteDist).on('error', (error) => { console.log(error); }))
     .pipe(gulp.dest(paths.img.dist));
 });
 
@@ -375,13 +375,13 @@ gulp.task('production', ['css-dist', 'js-dist', 'html-dist', 'img-dist']);
  * ========================================================================== */
 
 
-gulp.task('browsersync', function() {
+gulp.task('browsersync', () => {
   browsersync(config.html.browsersync);
 });
 
 
-gulp.task('default', ['clean-dev'], function() {
-  let onChangeMessage = function(event) {
+gulp.task('default', ['clean-dev'], () => {
+  let onChangeMessage = (event) => {
     console.log('\n');
     gutil.log(gutil.colors.blue(event.path) + ' ' + event.type);
   }
