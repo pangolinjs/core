@@ -96,16 +96,23 @@ module.exports = {
       scrollElements: ['*'],
       reloadDelay: 300,
       notify: {
-        styles: {
-          height: '40px',
-          right: '40px',
-          padding: '11px 16px',
-          fontSize: '16px',
-          fontWeight: '100',
-          textTransform: 'uppercase',
-          backgroundColor: 'rgb(47, 151, 255)',
-          borderBottomLeftRadius: 'none'
-        }
+        styles: [
+          'display: flex',
+          'align-items: center',
+          'position: fixed',
+          'z-index: 9999',
+          'box-sizing: border-box',
+          'height: 40px',
+          'top: 0',
+          'right: 40px',
+          'padding: 10px 16px',
+          'font-family: Roboto, sans-serif',
+          'font-size: 16px',
+          'font-weight: 100',
+          'text-transform: uppercase',
+          'color: #fff',
+          'background-color: rgb(47, 151, 255)'
+        ]
       }
     }
   },
