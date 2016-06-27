@@ -355,7 +355,7 @@ gulp.task('img-dist', ['img-dist-copy', 'img-dist-icons']);
  * ========================================================================== */
 
 
-gulp.task('development', ['css-dev', 'js-dev', 'html-dev', 'img-dev']);
+gulp.task('development', ['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev']);
 
 
 

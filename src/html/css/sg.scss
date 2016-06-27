@@ -1,18 +1,16 @@
 // STYLEGUIDE SASS FILE
-//
-// Some styles for development
 // =============================================================================
 
 
 
 
-// Variables
+// VARIABLES
 // =====================================
 
 
 // Breakpoints
-$screen-sm: 800px;
-$screen-lg: 1400px;
+$screen-sm:  800px;
+$screen-lg:  1400px;
 
 $padding:    30px;
 $padding-xs: ($padding / 3);
@@ -21,27 +19,41 @@ $padding-lg: ($padding * 2);
 $padding-xl: ($padding * 3);
 
 // Colors
-$color-primary:   rgb(0, 100, 200);
-$color-secondary: rgb(100, 100, 100);
-$color-text:      rgb(255, 255, 255);
-$color-border:    rgb(220, 220, 220);
+$color-blue:  rgb(0, 100, 200);
+$color-gray:  rgb(100, 100, 100);
+$color-alto:  rgb(220, 220, 220);
+$color-white: rgb(255, 255, 255);
 
 
 
 
-// Docs Nav
+// FONT
+// =====================================
+
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400';
+
+
+
+
+// DOCS NAVIGATION
 // =====================================
 
 
 .sg-nav {
-  height: 40px;
-  transition: height 0.2s linear;
+  all: unset;
 
+  display: block;
+  box-sizing: border-box;
+  height: 40px;
+  font-family: 'Roboto', sans-serif;
+
+  &::before,
   &::after {
-    content: '';
-    display: table;
-    line-height: 0;
-    clear: both;
+    all: unset;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 }
 
@@ -50,6 +62,8 @@ $color-border:    rgb(220, 220, 220);
 }
 
   .sg-nav__list {
+    all: unset;
+
     position: fixed;
     z-index: 9999;
     display: flex;
@@ -59,8 +73,12 @@ $color-border:    rgb(220, 220, 220);
     right: 40px;
     margin: 0;
     padding: 0;
-    background-color: $color-secondary;
-    transition: transform 0.2s linear;
+    background-color: $color-gray;
+
+    &::before,
+    &::after {
+      all: unset;
+    }
 
     .sg-nav--hidden & {
       transform: translate3d(0, -40px, 0);
@@ -72,37 +90,60 @@ $color-border:    rgb(220, 220, 220);
   }
 
     .sg-nav__item {
+      all: unset;
+
       display: block;
       height: inherit;
+
+      &::before,
+      &::after {
+        all: unset;
+      }
     }
 
       .sg-nav__button {
         display: block;
         height: 40px;
+        margin: 0;
         padding: 11px 20px;
         font-size: 16px;
         font-weight: 100;
         text-transform: uppercase;
-        color: $color-text;
+        color: $color-white;
         background: none;
         border: none;
         outline: none;
         cursor: pointer;
 
-        .sg-nav__item:hover &,
         &.sg-nav__button--active,
-        &:focus {
-          background: lighten($color-primary, 20%);
+        &:hover,
+        &:focus,
+        &:active {
+          background: lighten($color-blue, 20%);
+        }
+
+        &::before,
+        &::after {
+          all: unset;
         }
       }
 
         .sg-nav__icon {
+          all: unset;
+
           height: 100%;
           fill: currentColor;
         }
 
         .sg-nav__text {
+          all: unset;
+
           display: none;
+
+          &::before,
+          &::after {
+            all: unset;
+          }
 
           @media (min-width: $screen-sm) {
             display: inline;
@@ -112,13 +153,20 @@ $color-border:    rgb(220, 220, 220);
         }
 
       .sg-nav__sub-list {
+        all: unset;
+
         display: none;
         position: absolute;
         width: inherit;
         top: 40px;
         margin: 0;
         padding: 0;
-        background-color: $color-border;
+        background-color: $color-alto;
+
+        &::before,
+        &::after {
+          all: unset;
+        }
       }
 
       .sg-nav__sub-list--visible {
@@ -126,22 +174,37 @@ $color-border:    rgb(220, 220, 220);
       }
 
         .sg-nav__sub-item {
+          all: unset;
+
           display: block;
+
+          &::before,
+          &::after {
+            all: unset;
+          }
         }
 
           .sg-nav__link {
+            all: unset;
+
             display: block;
             padding: 10px 20px;
             font-size: 14px;
             font-weight: 400;
-            color: $color-secondary;
+            color: $color-gray;
             text-decoration: none;
             outline: none;
 
             &:hover,
-            &:focus {
-              color: $color-text;
-              background: lighten($color-primary, 20%);
+            &:focus,
+            &:active {
+              color: $color-white;
+              background: lighten($color-blue, 20%);
+            }
+
+            &::before,
+            &::after {
+              all: unset;
             }
           }
 
@@ -152,21 +215,31 @@ $color-border:    rgb(220, 220, 220);
     width: 40px;
     top: 0;
     right: 0;
+    margin: 0;
     padding: 5px;
     font-size: 24px;
-    color: $color-text;
-    background: lighten($color-primary, 20%);
+    line-height: 1;
+    color: $color-white;
+    background: lighten($color-blue, 20%);
     border: none;
     outline: none;
     cursor: pointer;
 
     &:hover,
-    &:focus {
-      background: lighten($color-primary, 10%);
+    &:focus,
+    &:active {
+      background: lighten($color-blue, 10%);
+    }
+
+    &::before,
+    &::after {
+      all: unset;
     }
   }
 
     .sg-nav__hide-btn-icon {
+      all: unset;
+
       fill: currentColor;
       height: 28px;
     }
@@ -188,8 +261,7 @@ $color-border:    rgb(220, 220, 220);
 
 
 
-
-// Docs Header
+// DOCS HEADER
 // =====================================
 
 
@@ -197,7 +269,8 @@ $color-border:    rgb(220, 220, 220);
   max-width: $screen-lg;
   margin: $padding-sm auto $padding-lg;
   padding: $padding-sm;
-  border-bottom: 1px solid $color-border;
+  border-bottom: 1px solid $color-alto;
+  font-family: 'Roboto', sans-serif;
 
   @media (min-width: $screen-sm) {
     margin: $padding auto $padding-xl;
@@ -209,7 +282,7 @@ $color-border:    rgb(220, 220, 220);
     margin: 0 0 10px;
     font-size: 26px;
     font-weight: 100;
-    color: $color-primary;
+    color: $color-blue;
 
     @media (min-width: $screen-sm) {
       margin: 0 0 15px;
@@ -221,7 +294,7 @@ $color-border:    rgb(220, 220, 220);
     margin: 0;
     font-size: 14px;
     font-weight: 100;
-    color: $color-secondary;
+    color: $color-gray;
 
     @media (min-width: $screen-sm) {
       font-size: 18px;
@@ -231,7 +304,7 @@ $color-border:    rgb(220, 220, 220);
 
 
 
-// Docs Body
+// DOCS BODY
 // =====================================
 
 
@@ -243,7 +316,7 @@ $color-border:    rgb(220, 220, 220);
 
 
 
-// Docs Article
+// DOCS ARTICLE
 // =====================================
 
 
@@ -257,6 +330,7 @@ $color-border:    rgb(220, 220, 220);
 
   .sg-article__header {
     padding: $padding-sm;
+    font-family: 'Roboto', sans-serif;
 
     @media (min-width: $screen-sm) {
       padding: $padding;
@@ -267,7 +341,7 @@ $color-border:    rgb(220, 220, 220);
       margin: 0 0 10px;
       font-size: 20px;
       font-weight: 100;
-      color: $color-primary;
+      color: $color-blue;
 
       @media (min-width: $screen-sm) {
         font-size: 24px;
@@ -278,7 +352,7 @@ $color-border:    rgb(220, 220, 220);
       margin: 0 0 10px;
       font-size: 14px;
       font-weight: 100;
-      color: $color-secondary;
+      color: $color-gray;
 
       @media (min-width: $screen-sm) {
         font-size: 16px;
@@ -287,8 +361,8 @@ $color-border:    rgb(220, 220, 220);
 
   .sg-article__body {
     padding: $padding-sm;
-    border-top:    1px solid $color-border;
-    border-bottom: 1px solid $color-border;
+    border-top:    1px solid $color-alto;
+    border-bottom: 1px solid $color-alto;
 
     &::after {
       content: ' ';
@@ -302,14 +376,16 @@ $color-border:    rgb(220, 220, 220);
     }
 
     @media (min-width: $screen-lg) {
-      border: 1px solid $color-border;
+      border: 1px solid $color-alto;
     }
   }
 
   .sg-article__body--light {
-    background-color: $color-border;
+    background-color: $color-alto;
+    border: none;
   }
 
   .sg-article__body--dark {
-    background-color: $color-secondary;
+    background-color: $color-gray;
+    border: none;
   }
