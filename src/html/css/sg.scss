@@ -105,7 +105,7 @@ $color-white: rgb(255, 255, 255);
         display: block;
         height: 40px;
         margin: 0;
-        padding: 11px 20px;
+        padding: 0 20px;
         font-size: 16px;
         font-weight: 100;
         text-transform: uppercase;
@@ -131,7 +131,9 @@ $color-white: rgb(255, 255, 255);
         .sg-nav__icon {
           all: unset;
 
-          height: 100%;
+          width: 16px;
+          height: 16px;
+          vertical-align: middle;
           fill: currentColor;
         }
 
@@ -148,7 +150,7 @@ $color-white: rgb(255, 255, 255);
           @media (min-width: $screen-sm) {
             display: inline;
             margin-left: 8px;
-            vertical-align: 3px;
+            vertical-align: middle;
           }
         }
 
@@ -194,6 +196,10 @@ $color-white: rgb(255, 255, 255);
             color: $color-gray;
             text-decoration: none;
             outline: none;
+
+            &:visited {
+              color: $color-gray;
+            }
 
             &:hover,
             &:focus,
