@@ -123,7 +123,6 @@ module.exports = {
       mode: {
         symbol: {
           dest: '.',
-          inline: true,
           sprite: 'icons.svg',
           example: {
             dest: 'icons.html'
@@ -135,7 +134,6 @@ module.exports = {
       mode: {
         symbol: {
           dest: '.',
-          inline: true,
           sprite: 'icons.svg'
         }
       }
