@@ -67,7 +67,7 @@ gulp.task('clean-dist', () => {
 
 // Clean Dev HTML
 gulp.task('clean-html-dev', () => {
-  return del(`${paths.html.dev}/**/*.html`);
+  return del([`${paths.html.dev}/**/*.html`, `!${paths.html.dev}/img/icons.html`]);
 });
 
 
