@@ -254,6 +254,22 @@ let compileHandlebars = (source, destination, nav) => {
         }
 
         return additionalPath + path.relative(currentPath, sourcePath) + '/';
+      },
+      // Handlebars concat helper
+      // Credits: http://stackoverflow.com/a/34812062
+      concat: (json) => {
+        var concat = '';
+        var flipArray = [];
+
+        for (let key in json.hash) {
+          flipArray.push(json.hash[key]);
+        }
+
+        for (let i = (flipArray.length - 1); i >= 0; i--) {
+          concat += flipArray[i];
+        }
+
+        return concat;
       }
     })
     .data({
