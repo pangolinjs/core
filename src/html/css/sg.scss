@@ -74,6 +74,7 @@ $color-white: rgb(255, 255, 255);
     margin: 0;
     padding: 0;
     background-color: $color-gray;
+    will-change: transform;
 
     &::before,
     &::after {
@@ -230,6 +231,7 @@ $color-white: rgb(255, 255, 255);
     border: none;
     outline: none;
     cursor: pointer;
+    will-change: transform;
 
     &:hover,
     &:focus,
