@@ -1,11 +1,15 @@
-//
-// Grid system
-// --------------------------------------------------
+/*! GRID SYSTEM
+ *
+ * http://getbootstrap.com/css/#grid
+============================================================================= */
 
 
-// Container widths
+
+// CONTAINER WIDTHS
 //
-// Set the container width, and override it for fixed navbars in media queries.
+// Set the container width, and override
+// for fixed navbars in media queries.
+// =====================================
 
 .container {
   @include container-fixed;
@@ -22,62 +26,84 @@
 }
 
 
-// Fluid container
+
+// FLUID CONTAINER
 //
-// Utilizes the mixin meant for fixed width containers, but without any defined
-// width for fluid, full width layouts.
+// Utilizes the mixin meant for fixed
+// width containers, but without any
+// defined width for fluid, full width
+// layouts.
+// =====================================
 
 .container-fluid {
   @include container-fixed;
 }
 
 
-// Row
+
+// ROW
 //
-// Rows contain and clear the floats of your columns.
+// Rows contain and clear the floats of
+// your columns.
+// =====================================
 
 .row {
   @include make-row;
 }
 
 
-// Columns
+
+// COLUMNS
 //
-// Common styles for small and large grid columns
+// Common styles for small and large
+// grid columns.
+// =====================================
 
 @include make-grid-columns;
 
 
+
 // Extra small grid
 //
-// Columns, offsets, pushes, and pulls for extra small devices like
+// Columns, offsets, pushes, and pulls
+// for extra small devices like
 // smartphones.
+// =====================================
 
 @include make-grid(xs);
 
 
+
 // Small grid
 //
-// Columns, offsets, pushes, and pulls for the small device range, from phones
-// to tablets.
+// Columns, offsets, pushes, and pulls
+// for the small device range, from
+// phones to tablets.
+// =====================================
 
 @media (min-width: $screen-sm-min) {
   @include make-grid(sm);
 }
 
 
+
 // Medium grid
 //
-// Columns, offsets, pushes, and pulls for the desktop device range.
+// Columns, offsets, pushes, and pulls
+// for the desktop device range.
+// =====================================
 
 @media (min-width: $screen-md-min) {
   @include make-grid(md);
 }
 
 
+
 // Large grid
 //
-// Columns, offsets, pushes, and pulls for the large desktop device range.
+// Columns, offsets, pushes, and pulls
+// for the large desktop device range.
+// =====================================
 
 @media (min-width: $screen-lg-min) {
   @include make-grid(lg);

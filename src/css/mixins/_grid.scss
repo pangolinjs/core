@@ -1,6 +1,9 @@
-// Grid system
+// GRID SYSTEM
 //
 // Generate semantic grid columns with these mixins.
+// =============================================================================
+
+
 
 // Centered container element
 @mixin container-fixed($gutter: $grid-gutter-width) {

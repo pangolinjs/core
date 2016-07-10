@@ -1,0 +1,62 @@
+// VARIABLES
+// =============================================================================
+
+
+
+// MEDIA QUERIES BREAKPOINTS
+//
+// Define the breakpoints at which your
+// layout will change, adapting to
+// different screen sizes.
+// =====================================
+
+
+// Small screen / tablet
+$screen-sm-min: 768px;
+
+// Medium screen / desktop
+$screen-md-min: 992px;
+
+// Large screen / wide desktop
+$screen-lg-min: 1200px;
+
+// So media queries don't overlap when required,
+// provide a maximum
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+
+
+
+// GRID SYSTEM
+//
+// Define your custom responsive grid.
+// =====================================
+
+// Number of columns in the grid.
+$grid-columns: 12;
+
+// Padding between columns.
+// Gets divided in half for the left and right.
+$grid-gutter-width: 30px;
+
+
+
+// CONTAINER SIZES
+//
+// Define the maximum width of
+// `.container` for different screen
+// sizes.
+// =====================================
+
+// Small screen / tablet
+// For `$screen-sm-min` and up.
+$container-sm: (720px + $grid-gutter-width);
+
+// Medium screen / desktop
+// For `$screen-md-min` and up.
+$container-md: (940px + $grid-gutter-width);
+
+// Large screen / wide desktop
+// For `$screen-lg-min` and up.
+$container-lg: (1140px + $grid-gutter-width);

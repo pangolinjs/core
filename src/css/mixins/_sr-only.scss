@@ -1,0 +1,31 @@
+// SCREENREADER ONLY TEXT
+//
+// Visually hides element but keeps text readable for screen readers.
+// https://css-tricks.com/places-its-tempting-to-use-display-none-but-dont/
+// =============================================================================
+
+
+
+@mixin sr-only {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+// Show visually hidden element on focus
+@mixin sr-only-focusable {
+  &:active,
+  &:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+  }
+}

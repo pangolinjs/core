@@ -1,6 +1,9 @@
-// Embeds responsive
-//
-// Credit: Nicolas Gallagher and SUIT CSS.
+/* EMBED RESPONSIVE
+ *
+ * Credit: Nicolas Gallagher and SUIT CSS.
+============================================================================= */
+
+
 
 .embed-responsive {
   position: relative;
@@ -9,7 +12,7 @@
   padding: 0;
   overflow: hidden;
 
-  .embed-responsive-item,
+  .embed-responsive__item,
   iframe,
   embed,
   object,
@@ -25,11 +28,11 @@
 }
 
 // Modifier class for 16:9 aspect ratio
-.embed-responsive-16by9 {
+.embed-responsive--16by9 {
   padding-bottom: 56.25%;
 }
 
 // Modifier class for 4:3 aspect ratio
-.embed-responsive-4by3 {
+.embed-responsive--4by3 {
   padding-bottom: 75%;
 }

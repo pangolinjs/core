@@ -1,57 +1,61 @@
-/*!
- * Front-End Development Styleguide
- * by Fynn Becker
+/* FRONT-END DEVELOPMENT STYLEGUIDE
  *
- * Uses Bootstrap v3 Grid System
- * http://getbootstrap.com/css/#grid
+ * by Fynn Becker <info@fynn-becker.de>
 ============================================================================= */
 
-
-
-// MAIN SASS FILE
-//
 // Do not put style definitions in this file!
+// @import styles from other files.
 // =============================================================================
 
 
-// VARIABLES
-@import 'base/variables';
+
+// SETUP
+// =====================================
+
+@import 'setup/normalize';
+@import 'setup/variables';
+
 
 
 // FUNCTIONS
-@import 'functions/colors';
+// =====================================
+
+@import 'functions/svg-url';
+
 
 
 // MIXINS
+// =====================================
+
 @import 'mixins/clearfix';
 @import 'mixins/grid-framework';
 @import 'mixins/grid';
-@import 'mixins/image';
 @import 'mixins/responsive-visibility';
+@import 'mixins/sr-only';
 
 
-// Base
-@import 'base/normalize';
-@import 'base/print';
+
+// BASE
+// =====================================
+
+@import 'base/buttons';
+@import 'base/forms';
 @import 'base/scaffolding';
 @import 'base/typography';
 @import 'base/utilities';
 
 
+
 // LAYOUT
+// =====================================
+
 @import 'layout/grid';
 @import 'layout/responsive-embed';
 @import 'layout/responsive-utilities';
 
 
-// BASE COMPONENTS
-@import 'components/forms';
-@import 'components/buttons';
-
 
 // COMPONENTS
-//@import 'components/your-component';
+// =====================================
 
-
-// SHAME
-@import 'base/shame';
+@import 'components/example';
