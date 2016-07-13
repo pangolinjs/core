@@ -5,7 +5,6 @@
 /* exported helloWorld */
 
 
-
 function helloWorld(names = ['Yoda', 'Obi-Wan']) {
   for (let i = 0; i < names.length; i++) {
     /* eslint no-console: "off" */
