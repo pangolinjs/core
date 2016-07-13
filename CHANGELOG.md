@@ -9,7 +9,7 @@
 - GPU acceleration for Styleguide nav
 - Major CSS moving and juggling and changing
 
-### Updates
+### Updated
 - package.json
 
 ### Added
