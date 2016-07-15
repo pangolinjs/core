@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{#if @file.meta.description}}
+    <meta name="description" content="{{@file.meta.description}}">
+  {{/if}}
     <title>{{@file.meta.title}}</title>
 
     <!-- CSS -->
