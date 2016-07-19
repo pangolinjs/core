@@ -128,7 +128,7 @@ gulp.task('css-dist', ['clean-dist'], () => {
 
 
 // Handle Bable error
-let babelError = (error) => {
+let babelError = function(error) {
   console.log(
     '\n' + gutil.colors.underline(error.fileName) + '\n'
     + gutil.colors.gray('  line ' + error.loc.line + '  col ' + error.loc.column)
@@ -193,7 +193,7 @@ gulp.task('js-dist', ['clean-dist'], () => {
 
 
 // Handle Handlebars error
-let handlebarsError = (error) => {
+let handlebarsError = function(error) {
   console.log(
     '\n' + gutil.colors.underline(error.fileName) + '\n'
     + '  ' + gutil.colors.red('Handlebars error: ')
