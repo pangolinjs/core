@@ -1,7 +1,10 @@
-/* FRONT-END DEVELOPMENT STYLEGUIDE
+/**
+ * FRONT-END STYLEGUIDE
+ * for style guide driven development
  *
  * by Fynn Becker <info@fynn-becker.de>
-============================================================================= */
+ * =============================================================================
+ */
 
 
 
@@ -30,9 +33,6 @@
 // =====================================
 
 @import 'mixins/clearfix';
-@import 'mixins/grid-framework';
-@import 'mixins/grid';
-@import 'mixins/responsive-visibility';
 @import 'mixins/sr-only';
 
 
@@ -40,10 +40,7 @@
 // BASE
 // =====================================
 
-@import 'base/buttons';
-@import 'base/forms';
 @import 'base/scaffolding';
-@import 'base/typography';
 @import 'base/utilities';
 
 
@@ -51,9 +48,7 @@
 // LAYOUT
 // =====================================
 
-@import 'layout/grid';
-@import 'layout/responsive-embed';
-@import 'layout/responsive-utilities';
+@import 'layout/embed-responsive';
 
 
 

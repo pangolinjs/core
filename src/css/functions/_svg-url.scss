@@ -1,5 +1,8 @@
 // SVG URL
 //
+// Generate an CSS excaped SVG for use as a data URI.
+//
+// Source:
 // http://codepen.io/jakob-e/pen/doMoML
 // =============================================================================
 
@@ -29,8 +32,6 @@
   }
   @return url("data:image/svg+xml;charset=utf8,#{$encoded}");
 }
-
-
 
 // Helper function to replace characters in a string
 @function str-replace($string, $search, $replace: '') {
