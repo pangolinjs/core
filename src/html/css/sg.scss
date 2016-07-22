@@ -1,17 +1,19 @@
-// STYLEGUIDE SASS FILE
-// =============================================================================
-
+/* STYLEGUIDE CSS
+ *
+ * Styles specific to the Styleguide navigation and
+ * components title and containers.
+ * ========================================================================== */
 
 
 
 // VARIABLES
-// =====================================
-
+// =========================================================
 
 // Breakpoints
 $screen-sm:  50em; // 800px
 $screen-lg:  85em; // 1360px
 
+// Padding
 $padding:    2em;
 $padding-xs: ($padding / 3);
 $padding-sm: ($padding / 2);
@@ -27,17 +29,16 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// FONT
-// =====================================
+/* FONT
+ * ====================================================== */
 
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,400';
 
 
 
 
-// DOCS NAVIGATION
-// =====================================
-
+/* STYLEGUIDE NAVIGATION
+ * ====================================================== */
 
 .sg-nav {
   all: unset;
@@ -61,217 +62,261 @@ $color-white: rgb(255, 255, 255);
   height: 0;
 }
 
-  .sg-nav__list {
-    all: unset;
-
-    position: fixed;
-    z-index: 9999;
-    display: flex;
-    height: 40px;
-    top: 0;
-    left: 0;
-    right: 40px;
-    margin: 0;
-    padding: 0;
-    background-color: $color-gray;
-    will-change: transform;
-
-    &::before,
-    &::after {
-      all: unset;
-    }
-
-    .sg-nav--hidden & {
-      transform: translate3d(0, -40px, 0);
-    }
-
-    @media (min-width: $screen-sm) {
-      padding: 0 15px;
-    }
-  }
-
-    .sg-nav__item {
-      all: unset;
-
-      display: block;
-      height: inherit;
-
-      &::before,
-      &::after {
-        all: unset;
-      }
-    }
-
-      .sg-nav__button {
-        display: block;
-        height: 40px;
-        margin: 0;
-        padding: 0 20px;
-        font-size: 16px;
-        font-weight: 100;
-        text-transform: uppercase;
-        color: $color-white;
-        background: none;
-        border: none;
-        outline: none;
-        cursor: pointer;
-
-        &.sg-nav__button--active,
-        &:hover,
-        &:focus,
-        &:active {
-          background: lighten($color-blue, 20%);
-        }
-
-        &::before,
-        &::after {
-          all: unset;
-        }
-      }
-
-        .sg-nav__icon {
-          all: unset;
-
-          width: 16px;
-          height: 16px;
-          vertical-align: middle;
-          fill: currentColor;
-        }
-
-        .sg-nav__text {
-          all: unset;
-
-          display: none;
-
-          &::before,
-          &::after {
-            all: unset;
-          }
-
-          @media (min-width: $screen-sm) {
-            display: inline;
-            margin-left: 8px;
-            vertical-align: middle;
-          }
-        }
-
-      .sg-nav__sub-list {
-        all: unset;
-
-        display: none;
-        position: absolute;
-        width: inherit;
-        top: 40px;
-        margin: 0;
-        padding: 0;
-        background-color: $color-alto;
-
-        &::before,
-        &::after {
-          all: unset;
-        }
-      }
-
-      .sg-nav__sub-list--visible {
-        display: block;
-      }
-
-        .sg-nav__sub-item {
-          all: unset;
-
-          display: block;
-
-          &::before,
-          &::after {
-            all: unset;
-          }
-        }
-
-          .sg-nav__link {
-            all: unset;
-
-            display: block;
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: 400;
-            color: $color-gray;
-            text-decoration: none;
-            outline: none;
-
-            &:visited {
-              color: $color-gray;
-            }
-
-            &:hover,
-            &:focus,
-            &:active {
-              color: $color-white;
-              background: lighten($color-blue, 20%);
-            }
-
-            &::before,
-            &::after {
-              all: unset;
-            }
-          }
-
-  .sg-nav__hide-btn {
-    position: fixed;
-    z-index: 9999;
-    height: 40px;
-    width: 40px;
-    top: 0;
-    right: 0;
-    margin: 0;
-    padding: 5px;
-    font-size: 24px;
-    line-height: 1;
-    color: $color-white;
-    background: lighten($color-blue, 20%);
-    border: none;
-    outline: none;
-    cursor: pointer;
-    will-change: transform;
-
-    &:hover,
-    &:focus,
-    &:active {
-      background: lighten($color-blue, 10%);
-    }
-
-    &::before,
-    &::after {
-      all: unset;
-    }
-  }
-
-    .sg-nav__hide-btn-icon {
-      all: unset;
-
-      fill: currentColor;
-      height: 28px;
-    }
-
-    .sg-nav__hide-btn-icon--show {
-      display: none;
-
-      .sg-nav__hide-btn--active & {
-        display: inline;
-      }
-    }
-
-    .sg-nav__hide-btn-icon--close {
-      .sg-nav__hide-btn--active & {
-        display: none;
-      }
-    }
 
 
-
-
-// DOCS HEADER
+// STYLEGUIDE NAV LIST
 // =====================================
 
+.sg-nav__list {
+  all: unset;
+
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  height: 40px;
+  top: 0;
+  left: 0;
+  right: 40px;
+  margin: 0;
+  padding: 0;
+  background-color: $color-gray;
+  will-change: transform;
+
+  &::before,
+  &::after {
+    all: unset;
+  }
+
+  .sg-nav--hidden & {
+    transform: translate3d(0, -40px, 0);
+  }
+
+  @media (min-width: $screen-sm) {
+    padding: 0 15px;
+  }
+}
+
+
+
+// STYLEGUIDE NAV ITEM
+// =====================================
+
+.sg-nav__item {
+  all: unset;
+
+  display: block;
+  height: inherit;
+
+  &::before,
+  &::after {
+    all: unset;
+  }
+}
+
+
+
+// STYLEGUIDE NAV BUTTON
+// =====================================
+
+.sg-nav__button {
+  display: block;
+  height: 40px;
+  margin: 0;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: 100;
+  text-transform: uppercase;
+  color: $color-white;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &.sg-nav__button--active,
+  &:hover,
+  &:focus,
+  &:active {
+    background: lighten($color-blue, 20%);
+  }
+
+  &::before,
+  &::after {
+    all: unset;
+  }
+}
+
+
+
+// STYLEGUIDE NAV ICON
+// =====================================
+
+.sg-nav__icon {
+  all: unset;
+
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  fill: currentColor;
+}
+
+
+
+// STYLEGUIDE NAV TEXT
+// =====================================
+
+.sg-nav__text {
+  all: unset;
+
+  display: none;
+
+  &::before,
+  &::after {
+    all: unset;
+  }
+
+  @media (min-width: $screen-sm) {
+    display: inline;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+}
+
+
+
+// STYLEGUIDE NAV SUBLIST
+// =====================================
+
+.sg-nav__sub-list {
+  all: unset;
+
+  display: none;
+  position: absolute;
+  width: inherit;
+  top: 40px;
+  margin: 0;
+  padding: 0;
+  background-color: $color-alto;
+
+  &::before,
+  &::after {
+    all: unset;
+  }
+}
+
+.sg-nav__sub-list--visible {
+  display: block;
+}
+
+
+
+// STYLEGUIDE NAV SUBITEM
+// =====================================
+
+.sg-nav__sub-item {
+  all: unset;
+
+  display: block;
+
+  &::before,
+  &::after {
+    all: unset;
+  }
+}
+
+
+
+// STYLEGUIDE NAV LINK
+// =====================================
+
+.sg-nav__link {
+  all: unset;
+
+  display: block;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: $color-gray;
+  text-decoration: none;
+  outline: none;
+
+  &:visited {
+    color: $color-gray;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color-white;
+    background: lighten($color-blue, 20%);
+  }
+
+  &::before,
+  &::after {
+    all: unset;
+  }
+}
+
+
+
+// STYLEGUIDE NAV HIDE BUTTON
+// =====================================
+
+.sg-nav__hide-btn {
+  position: fixed;
+  z-index: 9999;
+  height: 40px;
+  width: 40px;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 5px;
+  font-size: 24px;
+  line-height: 1;
+  color: $color-white;
+  background: lighten($color-blue, 20%);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  will-change: transform;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: lighten($color-blue, 10%);
+  }
+
+  &::before,
+  &::after {
+    all: unset;
+  }
+}
+
+.sg-nav__hide-btn-icon {
+  all: unset;
+
+  fill: currentColor;
+  height: 28px;
+}
+
+.sg-nav__hide-btn-icon--show {
+  display: none;
+
+  .sg-nav__hide-btn--active & {
+    display: inline;
+  }
+}
+
+.sg-nav__hide-btn-icon--close {
+  .sg-nav__hide-btn--active & {
+    display: none;
+  }
+}
+
+
+
+
+/* DOCS HEADER
+ * ====================================================== */
 
 .sg-header {
   max-width: $screen-lg;
@@ -286,34 +331,44 @@ $color-white: rgb(255, 255, 255);
   }
 }
 
-  .sg-header__title {
-    margin: 0 0 10px;
-    font-size: 26px;
-    font-weight: 100;
-    color: $color-blue;
-
-    @media (min-width: $screen-sm) {
-      margin: 0 0 15px;
-      font-size: 48px;
-    }
-  }
-
-  .sg-header__description {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 100;
-    color: $color-gray;
-
-    @media (min-width: $screen-sm) {
-      font-size: 18px;
-    }
-  }
 
 
-
-
-// DOCS BODY
+// STYLEGUIDE HEADER TITLE
 // =====================================
+
+.sg-header__title {
+  margin: 0 0 10px;
+  font-size: 26px;
+  font-weight: 100;
+  color: $color-blue;
+
+  @media (min-width: $screen-sm) {
+    margin: 0 0 15px;
+    font-size: 48px;
+  }
+}
+
+
+
+// STYLEGUIDE HEADER DESCRIPTION
+// =====================================
+
+.sg-header__description {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 100;
+  color: $color-gray;
+
+  @media (min-width: $screen-sm) {
+    font-size: 18px;
+  }
+}
+
+
+
+
+/* DOCS BODY
+ * ====================================================== */
 
 
 .sg-body {
@@ -324,8 +379,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// DOCS ARTICLE
-// =====================================
+/* DOCS ARTICLE
+ * ====================================================== */
 
 
 .sg-article {
@@ -336,56 +391,76 @@ $color-white: rgb(255, 255, 255);
   }
 }
 
-  .sg-article__header {
-    padding: $padding-sm;
-    font-family: 'Roboto', sans-serif;
 
-    @media (min-width: $screen-sm) {
-      padding: $padding;
-    }
+
+// STYLEGUIDE ARTICLE HEADER
+// =====================================
+
+.sg-article__header {
+  padding: $padding-sm;
+  font-family: 'Roboto', sans-serif;
+
+  @media (min-width: $screen-sm) {
+    padding: $padding;
+  }
+}
+
+
+
+// STYLEGUIDE ARTICLE TITLE
+// =====================================
+
+.sg-article__title {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 100;
+  color: $color-blue;
+
+  @media (min-width: $screen-sm) {
+    font-size: 24px;
+  }
+}
+
+
+
+// STYLEGUIDE ARTICLE DESCRIPTION
+// =====================================
+
+.sg-article__description {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 100;
+  color: $color-gray;
+
+  @media (min-width: $screen-sm) {
+    font-size: 16px;
+  }
+}
+
+
+
+// STYLEGUIDE ARTICLE BODY
+// =====================================
+
+.sg-article__body {
+  padding: $padding-sm;
+  outline: 1px solid $color-alto;
+
+  &::before,
+  &::after {
+    content: ' ';
+    display: table;
   }
 
-    .sg-article__title {
-      margin: 0 0 10px;
-      font-size: 20px;
-      font-weight: 100;
-      color: $color-blue;
-
-      @media (min-width: $screen-sm) {
-        font-size: 24px;
-      }
-    }
-
-    .sg-article__description {
-      margin: 0 0 10px;
-      font-size: 14px;
-      font-weight: 100;
-      color: $color-gray;
-
-      @media (min-width: $screen-sm) {
-        font-size: 16px;
-      }
-    }
-
-  .sg-article__body {
-    padding: $padding-sm;
-    outline: 1px solid $color-alto;
-
-    &::before,
-    &::after {
-      content: ' ';
-      display: table;
-    }
-
-    &::after {
-      clear: both;
-    }
-
-    @media (min-width: $screen-sm) {
-      padding: $padding;
-    }
+  &::after {
+    clear: both;
   }
 
-  .sg-article__body--bg {
-    outline: none;
+  @media (min-width: $screen-sm) {
+    padding: $padding;
   }
+}
+
+.sg-article__body--bg {
+  outline: none;
+}
