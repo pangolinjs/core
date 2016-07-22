@@ -1,6 +1,6 @@
 # Front-End Styleguide
 Front-end development styleguide with Sass, JavaScript and Handlebars.
-Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/) files, [lint](http://eslint.org/) and [transpile](https://babeljs.io/) JavaScript and create static HTML from [Handlebars](http://handlebarsjs.com/) templates.
+Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-lang.com/), [lint](http://eslint.org/) JavaScript, [transpile](https://babeljs.io/) ES6 Code and create static HTML from [Handlebars](http://handlebarsjs.com/).
 
 
 ## Contents
@@ -18,11 +18,11 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 
 ## Dependencies
 * [Node.js with npm](https://nodejs.org/)
-* Tested with Node.js Current. Older versions may work, but there is no guarantee.
+* Only tested with Node.js Current (v6).
 
 
 ## Installation
-1. Get the [latest Front-End Styleguide release](https://github.com/MVSde/styleguide/releases/latest).
+1. Get the [latest release](https://github.com/MVSde/styleguide/releases/latest).
 2. Run `npm install` to download Node Modules.
 3. Install global Gulp with `npm install -g gulp`. This step is required to get CLI access to gulp.
 

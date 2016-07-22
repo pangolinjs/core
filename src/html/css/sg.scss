@@ -9,10 +9,10 @@
 
 
 // Breakpoints
-$screen-sm:  800px;
-$screen-lg:  1400px;
+$screen-sm:  50em; // 800px
+$screen-lg:  85em; // 1360px
 
-$padding:    30px;
+$padding:    2em;
 $padding-xs: ($padding / 3);
 $padding-sm: ($padding / 2);
 $padding-lg: ($padding * 2);
@@ -369,31 +369,23 @@ $color-white: rgb(255, 255, 255);
 
   .sg-article__body {
     padding: $padding-sm;
-    border-top:    1px solid $color-alto;
-    border-bottom: 1px solid $color-alto;
+    outline: 1px solid $color-alto;
 
+    &::before,
     &::after {
       content: ' ';
       display: table;
+    }
+
+    &::after {
       clear: both;
-      line-height: 0;
     }
 
     @media (min-width: $screen-sm) {
       padding: $padding;
     }
-
-    @media (min-width: $screen-lg) {
-      border: 1px solid $color-alto;
-    }
   }
 
-  .sg-article__body--light {
-    background-color: $color-alto;
-    border: none;
-  }
-
-  .sg-article__body--dark {
-    background-color: $color-gray;
-    border: none;
+  .sg-article__body--bg {
+    outline: none;
   }
