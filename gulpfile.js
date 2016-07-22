@@ -256,7 +256,7 @@ let compileHandlebars = (source, destination, nav) => {
         return additionalPath + path.relative(currentPath, sourcePath) + '/';
       },
       // Handlebars concat helper
-      // Credits: http://stackoverflow.com/a/34812062
+      // Source: http://stackoverflow.com/a/34812062
       concat: (json) => {
         var concat = '';
         var flipArray = [];
@@ -273,6 +273,7 @@ let compileHandlebars = (source, destination, nav) => {
       }
     })
     .data({
+      queryVersion: `?v=${require('./package.json').version}`,
       displayNav: nav,
       navItems: {pages, components}
     });

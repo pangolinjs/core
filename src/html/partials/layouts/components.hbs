@@ -9,8 +9,8 @@
     <title>{{@file.meta.title}}</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{rel}}css/sg.css">
-    <link rel="stylesheet" href="{{rel}}css/styles.css">
+    <link rel="stylesheet" href="{{rel}}css/sg.css{{{queryVersion}}}">
+    <link rel="stylesheet" href="{{rel}}css/styles.css{{{queryVersion}}}">
   </head>
   <body>
 
@@ -27,6 +27,6 @@
     </main>
 
     <!-- JS -->
-    <script src="{{rel}}js/scripts.js"></script>
+    <script defer src="{{rel}}js/scripts.js{{{queryVersion}}}"></script>
   </body>
 </html>

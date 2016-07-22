@@ -10,9 +10,9 @@
 
     <!-- CSS -->
   {{#if displayNav}}
-    <link rel="stylesheet" href="{{rel}}css/sg.css">
+    <link rel="stylesheet" href="{{rel}}css/sg.css{{{queryVersion}}}">
   {{/if}}
-    <link rel="stylesheet" href="{{rel}}css/styles.css">
+    <link rel="stylesheet" href="{{rel}}css/styles.css{{{queryVersion}}}">
   </head>
   <body>
 
@@ -24,6 +24,6 @@
     {{{block "body"}}}
 
     <!-- JS -->
-    <script src="{{rel}}js/scripts.js"></script>
+    <script defer src="{{rel}}js/scripts.js{{{queryVersion}}}"></script>
   </body>
 </html>
