@@ -1,5 +1,4 @@
-/**
- * EMBED RESPONSIVE
+/* EMBED RESPONSIVE
  *
  * For use with media embeds – such as videos, slideshows,
  * or even images – that need to retain a specific aspect
@@ -14,7 +13,7 @@
  * Based on:
  * http://alistapart.com/article/creating-intrinsic-ratios-for-video
  *
- * Credit:
+ * Source:
  * https://suitcss.github.io
  *
  * License:
@@ -29,8 +28,7 @@
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * =============================================================================
- */
+ * ========================================================================== */
 
 
 
@@ -44,10 +42,8 @@
 
 
 
-/**
- * ASPECT RATIO MODIFIERS
- * =========================================================
- */
+/* ASPECT RATIO MODIFIERS
+ * ====================================================== */
 
 .embed-responsive--2by1 {
   padding-bottom: 50%;
@@ -67,12 +63,10 @@
 
 
 
-/**
- * EMBED CONTENT
+/* EMBED CONTENT
  *
  * Fit the content to the aspect ratio.
- * =========================================================
- */
+ * ====================================================== */
 
 .embed-responsive__content {
   bottom: 0;

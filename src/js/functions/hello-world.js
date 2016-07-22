@@ -1,5 +1,9 @@
 /* HELLO WORLD
- * An example JavaScript function.
+ *
+ * Logs `Hello World, <name>` to the console.
+ *
+ * Fallback to awesome Star Wars character names,
+ * if `names` argument is missing.
 ============================================================================= */
 
 /* exported helloWorld */

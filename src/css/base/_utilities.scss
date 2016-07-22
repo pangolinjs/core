@@ -1,16 +1,12 @@
-/**
- * UTILITIES
- * =============================================================================
- */
+/* UTILITIES
+ * ========================================================================== */
 
 
 
-/**
- * SCREENREADER ONLY
+/* SCREENREADER ONLY
  *
  * Only display content to screen readers
- * =========================================================
- */
+ * ====================================================== */
 
 .sr-only {
   @include sr-only;
@@ -22,9 +18,6 @@
  *
  * See:
  * http://www.w3.org/TR/2013/NOTE-WCAG20-TECHS-20130905/G1
- *
- * Credit:
- * HTML5 Boilerplate
  */
 
 .sr-only-focusable {
