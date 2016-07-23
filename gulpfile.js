@@ -274,6 +274,7 @@ let compileHandlebars = (source, destination, nav) => {
     })
     .data({
       version: require('./package.json').version,
+      lang: require('./package.json').lang,
       displayNav: nav,
       navItems: {pages, components}
     });

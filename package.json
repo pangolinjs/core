@@ -3,6 +3,7 @@
   "version": "1.7.0",
   "description": "Front-end development styleguide with Sass, JavaScript and Handlebars.",
   "author": "Fynn Becker <info@fynn-becker.de>",
+  "lang": "en",
   "scripts": {
     "test": "gulp development",
     "start": "gulp"
