@@ -273,7 +273,7 @@ let compileHandlebars = (source, destination, nav) => {
       }
     })
     .data({
-      queryVersion: `?v=${require('./package.json').version}`,
+      version: require('./package.json').version,
       displayNav: nav,
       navItems: {pages, components}
     });
