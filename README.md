@@ -157,7 +157,7 @@ The following attributes are available:
 * `{{displayNav}}`: Returns true for development task.
 
 
-### Images and  Icons
+### Images and Icons
 Located in `src/img`.  
 Output to `dev/img` or `dist/img`.
 
