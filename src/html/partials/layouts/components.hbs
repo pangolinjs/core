@@ -3,10 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  {{#if @file.meta.description}}
-    <meta name="description" content="{{@file.meta.description}}">
-  {{/if}}
-    <title>{{@file.meta.title}}</title>
+    {{#if @file.meta.description~}}<meta name="description" content="{{@file.meta.description}}">{{/if}}
+    {{#if @file.meta.title}}<title>{{@file.meta.title}}</title>{{/if}}
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{rel}}css/sg.css?v={{version}}">
@@ -14,12 +12,11 @@
   </head>
   <body>
 
-    <!-- Styleguide Nav -->
     {{> "styleguide/nav"}}
 
     <header class="sg-header">
-      <h1 class="sg-header__title">{{@file.meta.title}}</h1>
-      <p class="sg-header__description">{{@file.meta.description}}</p>
+      {{#if @file.meta.title}}<h1 class="sg-header__title">{{@file.meta.title}}</h1>{{/if}}
+      {{#if @file.meta.description}}<p class="sg-header__description">{{@file.meta.description}}</p>{{/if}}
     </header>
 
     <main class="sg-body">

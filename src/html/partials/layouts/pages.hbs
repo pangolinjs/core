@@ -3,23 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  {{#if @file.meta.description}}
-    <meta name="description" content="{{@file.meta.description}}">
-  {{/if}}
-    <title>{{@file.meta.title}}</title>
+    {{#if @file.meta.description}}<meta name="description" content="{{@file.meta.description}}">{{/if}}
+    {{#if @file.meta.title}}<title>{{@file.meta.title}}</title>{{/if}}
 
     <!-- CSS -->
-  {{#if displayNav}}
-    <link rel="stylesheet" href="{{rel}}css/sg.css?v={{version}}">
-  {{/if}}
+    {{#if displayNav}}<link rel="stylesheet" href="{{rel}}css/sg.css?v={{version}}">{{/if}}
     <link rel="stylesheet" href="{{rel}}css/styles.css?v={{version}}">
   </head>
   <body>
 
-  {{#if displayNav}}
-    <!-- Styleguide Nav -->
-    {{> "styleguide/nav"}}
-  {{/if}}
+    {{#if displayNav}}{{> "styleguide/nav"}}{{/if}}
 
     {{{block "body"}}}
 
