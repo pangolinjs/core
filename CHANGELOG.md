@@ -2,6 +2,27 @@
 
 
 
+## 1.8.0
+2016-07-24
+
+### Improved
+- README.md
+- Styleguide CSS
+- CSS/JS sectioning comments
+- CSS embed responsive
+
+### Added
+- Re-introduced version number for assets
+- Description meta tag
+
+### Fixed
+- Custom gulp error handlers
+
+### Removed
+- Bootstrap grid
+
+
+
 ## 1.7.0
 2016-07-13
 
