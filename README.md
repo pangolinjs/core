@@ -65,7 +65,7 @@ The function `@import` includes other Sass or CSS files in the main Sass file. T
 Located in `src/js`.  
 Output to `dev/js` or `dist/js`.
 
-JavaScript files are concatenated in the following order: First files from `libraries`, then files from `functions` and lastly files from `components`. Within these folders the order is alphabetical.
+JavaScript files are concatenated in the following order: First files from `libraries`, then files from `functions` and lastly files from `components`. Within these folders the order is alphabetical. Sub-folders are possible aswell.
 
 Files from `functions` and `components` are transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. ESLint is configured for ES2015 aswell, see `gulp/eslint.json` and [ESLint rules documentation](http://eslint.org/docs/rules/) for more options.
 

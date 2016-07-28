@@ -143,8 +143,8 @@ let babelError = function(error) {
 // JavaScript Lint
 gulp.task('js-lint', () => {
   return gulp.src([
-    `${paths.js.src}/functions/*.js`,
-    `${paths.js.src}/components/*.js`
+    `${paths.js.src}/functions/**/*.js`,
+    `${paths.js.src}/components/**/*.js`
   ])
     .pipe(eslint(config.js.eslint))
     .pipe(eslint.format());
@@ -154,9 +154,9 @@ gulp.task('js-lint', () => {
 // JavaScript Dev
 gulp.task('js-dev', ['js-lint'], () => {
   return gulp.src([
-    `${paths.js.src}/libraries/*.js`,
-    `${paths.js.src}/functions/*.js`,
-    `${paths.js.src}/components/*.js`
+    `${paths.js.src}/libraries/**/*.js`,
+    `${paths.js.src}/functions/**/*.js`,
+    `${paths.js.src}/components/**/*.js`
   ])
     .pipe(sourcemaps.init())
       .pipe(babel(config.js.babel).on('error', babelError))
@@ -174,9 +174,9 @@ gulp.task('js-watch', ['js-dev']);
 // JavaScript Production
 gulp.task('js-dist', ['clean-dist'], () => {
   return gulp.src([
-    `${paths.js.src}/libraries/*.js`,
-    `${paths.js.src}/functions/*.js`,
-    `${paths.js.src}/components/*.js`
+    `${paths.js.src}/libraries/**/*.js`,
+    `${paths.js.src}/functions/**/*.js`,
+    `${paths.js.src}/components/**/*.js`
   ])
     .pipe(babel(config.js.babel))
     .pipe(concat('scripts.js'))
