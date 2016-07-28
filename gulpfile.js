@@ -111,7 +111,7 @@ gulp.task('css-sg', () => {
 
 
 // CSS Distribution
-gulp.task('css-dist', ['clean-dist'], () => {
+gulp.task('css-dist', () => {
   return gulp.src(`${paths.css.src}/**/*.scss`)
     .pipe(sass(config.css.dist).on('error', sass.logError))
     .pipe(autoprefixer(config.css.autoprefixer))
@@ -172,7 +172,7 @@ gulp.task('js-watch', ['js-dev']);
 
 
 // JavaScript Production
-gulp.task('js-dist', ['clean-dist'], () => {
+gulp.task('js-dist', () => {
   return gulp.src([
     `${paths.js.src}/libraries/**/*.js`,
     `${paths.js.src}/functions/**/*.js`,
@@ -300,7 +300,7 @@ gulp.task('html-watch', ['html-dev']);
 
 
 // HTML Production
-gulp.task('html-dist', ['clean-dist'], () => {
+gulp.task('html-dist', () => {
   compileHandlebars(`${paths.html.src}/pages`, paths.html.dist, false);
 });
 
@@ -340,7 +340,7 @@ gulp.task('img-watch', ['img-dev'], browsersync.reload);
 
 
 // Images Dist Copy
-gulp.task('img-dist-copy', ['clean-dist'], () => {
+gulp.task('img-dist-copy', () => {
   return gulp.src([
     `${paths.img.src}/**`,
     `!${paths.img.src}/icons`,
@@ -356,7 +356,7 @@ gulp.task('img-dist-copy', ['clean-dist'], () => {
 
 
 // Images Dist Icons
-gulp.task('img-dist-icons', ['clean-dist'], () => {
+gulp.task('img-dist-icons', () => {
   return gulp.src(`${paths.img.src}/icons/*.svg`)
     .pipe(svgSprite(config.img.svgSpriteDist).on('error', (error) => { console.log(error); }))
     .pipe(gulp.dest(paths.img.dist));
@@ -369,12 +369,52 @@ gulp.task('img-dist', ['img-dist-copy', 'img-dist-icons']);
 
 
 
+/* NPM Assets
+ * Copy files from node modules.
+ * ========================================================================== */
+
+let copyNpmAssets = (taskDest) => {
+  let npmAssets = require(`./${paths.src}/npm-assets.js`);
+
+  if (Array.isArray(npmAssets) && npmAssets.length > 0) {
+    for (let asset of npmAssets) {
+      gulp.src(asset.glob)
+        .pipe(gulp.dest(`${taskDest}/${asset.dest}`))
+        .pipe(browsersync.stream());
+    }
+  } else {
+    browsersync.reload();
+  }
+
+  delete require.cache[require.resolve(`./${paths.src}/npm-assets.js`)];
+}
+
+// NPM Assets dev copy
+gulp.task('npmassets-dev', () => {
+  return copyNpmAssets(paths.dev);
+});
+
+
+// NPM Assets watch
+gulp.task('npmassets-watch', ['npmassets-dev']);
+
+
+// NPM Assets dist copy
+gulp.task('npmassets-dist', () => {
+  return copyNpmAssets(paths.dist);
+});
+
+
+
+
 /* Development
  * Generate development files.
  * ========================================================================== */
 
 
-gulp.task('development', ['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev']);
+gulp.task('development', ['clean-dev'], () => {
+  runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev', 'npmassets-dev']);
+});
 
 
 
@@ -384,7 +424,9 @@ gulp.task('development', ['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev'])
  * ========================================================================== */
 
 
-gulp.task('production', ['css-dist', 'js-dist', 'html-dist', 'img-dist']);
+gulp.task('production', ['clean-dist'], () => {
+  runSequence(['css-dist', 'js-dist', 'html-dist', 'img-dist', 'npmassets-dist']);
+});
 
 
 
@@ -402,11 +444,11 @@ gulp.task('browsersync', () => {
 gulp.task('default', ['clean-dev'], () => {
   let onChangeMessage = (event) => {
     console.log('\n');
-    gutil.log(gutil.colors.blue(event.path) + ' ' + event.type);
+    gutil.log(`${gutil.colors.blue(event.path)} ${event.type}`);
   }
 
   // Run initial task queue
-  runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev'], 'browsersync');
+  runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev', 'npmassets-dev'], 'browsersync');
 
   // Watch CSS
   let watchCSS = gulp.watch(`${paths.css.src}/**/*.scss`, ['css-watch']);
@@ -423,4 +465,8 @@ gulp.task('default', ['clean-dev'], () => {
   // Watch Images
   let watchImg = gulp.watch(`${paths.img.src}/**/*`, ['img-watch']);
   watchImg.on('change', onChangeMessage);
+
+  // Watch NPM Assets
+  let watchNpmAssets = gulp.watch(`${paths.src}/npm-assets.js`, ['npmassets-watch']);
+  watchNpmAssets.on('change', onChangeMessage);
 });
