@@ -40,7 +40,6 @@ module.exports = {
       },
       logPrefix: 'Browsersync',
       scrollElements: ['*'],
-      reloadDelay: 300,
       notify: {
         styles: [
           'display: flex',

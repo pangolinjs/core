@@ -283,7 +283,8 @@ let compileHandlebars = (source, destination, nav) => {
     .pipe(gulpFm({property: 'meta'}))
     .pipe(hbStream.on('error', handlebarsError))
     .pipe(rename({extname: '.html'}))
-    .pipe(gulp.dest(destination));
+    .pipe(gulp.dest(destination))
+    .pipe(browsersync.stream());
 };
 
 
@@ -295,7 +296,7 @@ gulp.task('html-dev', ['clean-html-dev'], () => {
 
 
 // HTML Watch
-gulp.task('html-watch', ['html-dev'], browsersync.reload);
+gulp.task('html-watch', ['html-dev']);
 
 
 // HTML Production
