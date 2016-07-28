@@ -2,6 +2,18 @@
 
 
 
+## 1.8.1
+2016-07-28
+
+### Improved
+- More reliable Browsersync HTML reloading
+- gulp.watch for new files and folders
+
+### Added
+- JavaScript subfolders
+
+
+
 ## 1.8.0
 2016-07-24
 
