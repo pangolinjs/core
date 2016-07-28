@@ -15,7 +15,8 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
   4. [HTML](#html)
   5. [Images and Icons](#images-and-icons)
 4. [Styleguide CSS](#styleguide-css)
-5. [Credits](#credits)
+5. [NPM Assets](#npm-assets)
+6. [Credits](#credits)
 
 
 ## Dependencies
@@ -180,6 +181,22 @@ The Styleguide ships with [SVG for Everybody](https://github.com/jonathantneal/s
 The components HTML files and the development menu use some styling. All styles are located in `src/html/css/sg.scss`.
 
 *The style definitions located in `src/css` use the prefix `sg-` to ensure compatibility with the main stylesheet.*
+
+
+## NPM Assets
+Files from node modules can be incorporated into the Styleguide. Simply install the module with `npm install --save-dev module-name` and add file and folder paths to `src/npm-assets.js`.
+
+`npm-assets.js` contains an array of objects. Each object has a `glob` and `dest` key:
+
+* `glob` will be passed to `gulp.src()` and specifies which files will be copied. Refer to the [gulp.src documentation](https://github.com/gulpjs/gulp/blob/master/docs/API.md#globs) for more information regarding globs.
+* `dest` sets the destination for the copy process. The development and production tasks each prefix the destination with their specific output folders (e.g. `dev/js` for development). Base path variables from `gulp/paths.js` can be used (`path.css.base`, `path.js.base`, `path.html.base` and `path.img.base`).
+
+```javascript
+{
+  glob: 'node_modules/svg4everybody/dist/svg4everybody.{js,min.js}',
+  dest: paths.js.base
+}
+```
 
 
 ## Credits

@@ -15,5 +15,5 @@ module.exports = [
   {
     glob: 'node_modules/svg4everybody/dist/svg4everybody.{js,min.js}',
     dest: paths.js.base
-  },
+  }
 ];
