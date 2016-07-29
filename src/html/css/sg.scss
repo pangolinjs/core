@@ -46,6 +46,7 @@ $color-white: rgb(255, 255, 255);
   display: block;
   box-sizing: border-box;
   height: 40px;
+
   font-family: 'Roboto', sans-serif;
 
   &::before,
@@ -53,7 +54,7 @@ $color-white: rgb(255, 255, 255);
     all: unset;
   }
 
-  * {
+  *, *::before, *::after {
     box-sizing: border-box;
   }
 }
@@ -70,16 +71,19 @@ $color-white: rgb(255, 255, 255);
 .sg-nav__list {
   all: unset;
 
-  position: fixed;
-  z-index: 9999;
   display: flex;
+  position: fixed;
+  box-sizing: border-box;
+  z-index: 9999;
   height: 40px;
   top: 0;
   left: 0;
   right: 40px;
   margin: 0;
   padding: 0;
+
   background-color: $color-gray;
+
   will-change: transform;
 
   &::before,
@@ -105,6 +109,7 @@ $color-white: rgb(255, 255, 255);
   all: unset;
 
   display: block;
+  box-sizing: border-box;
   height: inherit;
 
   &::before,
@@ -120,16 +125,21 @@ $color-white: rgb(255, 255, 255);
 
 .sg-nav__button {
   display: block;
+  box-sizing: border-box;
   height: 40px;
   margin: 0;
   padding: 0 20px;
+
   font-size: 16px;
   font-weight: 100;
   text-transform: uppercase;
   color: $color-white;
+
   background: none;
+
   border: none;
   outline: none;
+
   cursor: pointer;
 
   &.sg-nav__button--active,
@@ -153,9 +163,11 @@ $color-white: rgb(255, 255, 255);
 .sg-nav__icon {
   all: unset;
 
+  box-sizing: border-box;
   width: 16px;
   height: 16px;
   vertical-align: middle;
+
   fill: currentColor;
 }
 
@@ -168,6 +180,7 @@ $color-white: rgb(255, 255, 255);
   all: unset;
 
   display: none;
+  box-sizing: border-box;
 
   &::before,
   &::after {
@@ -177,6 +190,7 @@ $color-white: rgb(255, 255, 255);
   @media (min-width: $screen-sm) {
     display: inline;
     margin-left: 8px;
+
     vertical-align: middle;
   }
 }
@@ -191,10 +205,12 @@ $color-white: rgb(255, 255, 255);
 
   display: none;
   position: absolute;
+  box-sizing: border-box;
   width: inherit;
   top: 40px;
   margin: 0;
   padding: 0;
+
   background-color: $color-alto;
 
   &::before,
@@ -216,6 +232,7 @@ $color-white: rgb(255, 255, 255);
   all: unset;
 
   display: block;
+  box-sizing: border-box;
 
   &::before,
   &::after {
@@ -232,11 +249,14 @@ $color-white: rgb(255, 255, 255);
   all: unset;
 
   display: block;
+  box-sizing: border-box;
   padding: 10px 20px;
+
   font-size: 14px;
   font-weight: 400;
   color: $color-gray;
   text-decoration: none;
+
   outline: none;
 
   &:visited {
@@ -262,6 +282,7 @@ $color-white: rgb(255, 255, 255);
 // =====================================
 
 .sg-nav__hide-btn {
+  box-sizing: border-box;
   position: fixed;
   z-index: 9999;
   height: 40px;
@@ -270,13 +291,18 @@ $color-white: rgb(255, 255, 255);
   right: 0;
   margin: 0;
   padding: 5px;
+
   font-size: 24px;
   line-height: 1;
   color: $color-white;
+
   background: lighten($color-blue, 20%);
+
   border: none;
   outline: none;
+
   cursor: pointer;
+
   will-change: transform;
 
   &:hover,
@@ -319,11 +345,17 @@ $color-white: rgb(255, 255, 255);
  * ====================================================== */
 
 .sg-header {
+  all: unset;
+
+  display: block;
+  box-sizing: border-box;
   max-width: $screen-lg;
   margin: $padding-sm auto $padding-lg;
   padding: $padding-sm;
-  border-bottom: 1px solid $color-alto;
+
   font-family: 'Roboto', sans-serif;
+
+  border-bottom: 1px solid $color-alto;
 
   @media (min-width: $screen-sm) {
     margin: $padding auto $padding-xl;
@@ -337,7 +369,11 @@ $color-white: rgb(255, 255, 255);
 // =====================================
 
 .sg-header__title {
+  all: unset;
+
+  display: block;
   margin: 0 0 10px;
+
   font-size: 26px;
   font-weight: 100;
   color: $color-blue;
@@ -354,7 +390,11 @@ $color-white: rgb(255, 255, 255);
 // =====================================
 
 .sg-header__description {
+  all: unset;
+
+  display: block;
   margin: 0;
+
   font-size: 14px;
   font-weight: 100;
   color: $color-gray;
@@ -398,6 +438,7 @@ $color-white: rgb(255, 255, 255);
 
 .sg-article__header {
   padding: $padding-sm;
+
   font-family: 'Roboto', sans-serif;
 
   @media (min-width: $screen-sm) {
@@ -412,6 +453,7 @@ $color-white: rgb(255, 255, 255);
 
 .sg-article__title {
   margin: 0 0 10px;
+
   font-size: 20px;
   font-weight: 100;
   color: $color-blue;
@@ -428,6 +470,7 @@ $color-white: rgb(255, 255, 255);
 
 .sg-article__description {
   margin: 0 0 10px;
+
   font-size: 14px;
   font-weight: 100;
   color: $color-gray;
@@ -444,6 +487,7 @@ $color-white: rgb(255, 255, 255);
 
 .sg-article__body {
   padding: $padding-sm;
+
   outline: 1px solid $color-alto;
 
   &::before,
