@@ -7,12 +7,12 @@
     {{#if @file.meta.title}}<title>{{@file.meta.title}}</title>{{/if}}
 
     <!-- CSS -->
-    {{#if displayNav}}<link rel="stylesheet" href="{{rel}}css/sg.css?v={{version}}">{{/if}}
+    {{#if dev}}<link rel="stylesheet" href="{{rel}}css/sg.css?v={{version}}">{{/if}}
     <link rel="stylesheet" href="{{rel}}css/styles.css?v={{version}}">
   </head>
   <body>
 
-    {{#if displayNav}}{{> "styleguide/nav"}}{{/if}}
+    {{#if dev}}{{> "styleguide/nav"}}{{/if}}
 
     {{{block "body"}}}
 

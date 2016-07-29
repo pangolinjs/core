@@ -204,56 +204,63 @@ let handlebarsError = function(error) {
 
 
 // Handlebars Function
-let compileHandlebars = (source, destination, nav) => {
+let compileHandlebars = (task) => {
+  let pageDir      = `${paths.html.src}/pages/**/*.hbs`;
+  let componentDir = `${paths.html.src}/pages/components/**/*.hbs`;
+
+  // Create gulp.src and gulp.dest variables for the
+  // development and production task
+  let gulpSrc  = pageDir;
+  let gulpDest = paths.html.dev;
+
+  if (task === 'dist') {
+    gulpSrc  = [pageDir, `!${componentDir}`];
+    gulpDest = paths.html.dist;
+  }
+
+  // Generate file lists for Styleguide navigation
   let pages      = [];
   let components = [];
 
-  if (nav) {
-    let pageList      = glob.sync(`${paths.html.src}/pages/**/*.hbs`);
-    let componentList = glob.sync(`${paths.html.src}/components/**/*.hbs`);
+  if (task === 'dev') {
+    let pageList      = glob.sync(pageDir, {ignore: componentDir});
+    let componentList = glob.sync(componentDir);
 
     for (let page of pageList) {
-      let title = fm(fs.readFileSync(page, 'utf8')).attributes.title;
-      let href  = path.relative(`${paths.html.src}/pages`, page).replace('.hbs', '.html');
+      let title    = fm(fs.readFileSync(page, 'utf8')).attributes.title;
+      let filename = path.relative(`${paths.html.src}/pages`, page).replace('.hbs', '.html');
+      let href     = filename;
 
       if (!title) {
-        title = '(No Title)';
+        title = filename;
       }
 
       pages.push({title, href});
     }
 
     for (let component of componentList) {
-      let title = fm(fs.readFileSync(component, 'utf8')).attributes.title;
-      let href  = 'components/' + path.relative(`${paths.html.src}/components`, component).replace('.hbs', '.html');
+      let title    = fm(fs.readFileSync(component, 'utf8')).attributes.title;
+      let filename = path.relative(`${paths.html.src}/pages`, component).replace('.hbs', '.html');
+      let href     = filename;
 
       if (!title) {
-        title = '(No Title)';
+        title = filename;
       }
 
       components.push({title, href});
     }
   }
 
+  // Create Handlebars Stream with partials, helpers and data
   let hbStream = hb(config.html.hb)
     .partials(`${paths.html.src}/partials/**/*.hbs`)
     .helpers(require('handlebars-layouts'))
     .helpers({
       rel: (options) => {
         let currentPath = path.dirname(options.data.file.path);
-        let sourcePath  = path.resolve(source);
+        let sourcePath  = path.resolve(paths.html.src);
 
-        let additionalPath = '';
-
-        if (source === `${paths.html.src}/components`) {
-          additionalPath = '../'
-        }
-
-        if (currentPath === sourcePath) {
-          return additionalPath;
-        }
-
-        return additionalPath + path.relative(currentPath, sourcePath) + '/';
+        return `${path.relative(currentPath, sourcePath)}/`;
       },
       // Handlebars concat helper
       // Source: http://stackoverflow.com/a/34812062
@@ -275,33 +282,31 @@ let compileHandlebars = (source, destination, nav) => {
     .data({
       version: require('./package.json').version,
       lang: require('./package.json').lang,
-      displayNav: nav,
+      dev: task === 'dev' ? true : false,
       navItems: {pages, components}
     });
 
-  return gulp.src(`${source}/**/*.hbs`)
+  return gulp.src(gulpSrc)
     .pipe(gulpFm({property: 'meta'}))
     .pipe(hbStream.on('error', handlebarsError))
     .pipe(rename({extname: '.html'}))
-    .pipe(gulp.dest(destination))
-    .pipe(browsersync.stream());
+    .pipe(gulp.dest(gulpDest));
 };
 
 
 // HTML Development
 gulp.task('html-dev', ['clean-html-dev'], () => {
-  compileHandlebars(`${paths.html.src}/pages`, paths.html.dev, true);
-  compileHandlebars(`${paths.html.src}/components`, `${paths.html.dev}/components`, true);
+  return compileHandlebars('dev');
 });
 
 
 // HTML Watch
-gulp.task('html-watch', ['html-dev']);
+gulp.task('html-watch', ['html-dev'], browsersync.reload);
 
 
 // HTML Production
 gulp.task('html-dist', () => {
-  compileHandlebars(`${paths.html.src}/pages`, paths.html.dist, false);
+  return compileHandlebars('dist');
 });
 
 
