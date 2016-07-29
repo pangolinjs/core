@@ -77,7 +77,7 @@ All third-party stuff should be placed inside the folder `src/js/libraries`. Bab
 
 ### HTML
 Located in `src/html`.  
-Output to `dev` or `dist` for pages and `dev/components` or `dist/components` for components.
+Output to `dev` or `dist`.
 
 *Handlebars* is an HTML templating engine based on JavaScript. Gulp creates static HTML from Handlebars files.
 
@@ -116,7 +116,7 @@ Components are reference pages for smaller UI elements. The gulp task `productio
 
 The `default` gulp task injects a horizontal navigation bar into both components and pages HTML files for easier switching between them and additional settings.
 
-Components are located in `src/html/components`, pages in `src/html/pages`.
+Components are located in `src/html/pages/components`, pages in `src/html/pages`.
 
 The YAML front matter between the opening `---` and closing `---` contains general information like the page title and description. These will be used primarily by layouts and the Styleguide navigation. Add additional information, which can be accessed via `{{@file.meta.key}}`. Replace `key` with the variable name from the front matter.
 
@@ -155,7 +155,7 @@ The following attributes are available:
 * `{{version}}`: Current styleguide version (e.g. "1.7.0").
 * `{{lang}}`: Global project language (e.g. "en").
 * `{{rel}}`: Relative Link to the web page root.
-* `{{displayNav}}`: Returns true for development task.
+* `{{dev}}`: Returns true for development task.
 
 
 ### Images and Icons
