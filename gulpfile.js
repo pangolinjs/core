@@ -266,6 +266,9 @@ let compileHandlebars = (task) => {
 
         return `${path.relative(currentPath, sourcePath)}/`;
       },
+      filepath: (options) => {
+        return path.relative(`${paths.html.src}/pages`, options.data.file.path).replace('.hbs', '.html');
+      },
       // Handlebars concat helper
       // Source: http://stackoverflow.com/a/34812062
       concat: (json) => {

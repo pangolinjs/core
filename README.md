@@ -154,7 +154,8 @@ The following attributes are available:
 * `{{@file.meta.description}}`: Description of the current component or page.
 * `{{version}}`: Current styleguide version (e.g. "1.7.0").
 * `{{lang}}`: Global project language (e.g. "en").
-* `{{rel}}`: Relative Link to the web page root.
+* `{{rel}}`: Relative path to the root (e.g. "../").
+* `{{filepath}}`: Relative path containing the filename of the current page (e.g. "components/header.html").
 * `{{dev}}`: Returns true for development task.
 
 
