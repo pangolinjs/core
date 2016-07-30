@@ -258,7 +258,11 @@ let compileHandlebars = (task) => {
     .helpers({
       rel: (options) => {
         let currentPath = path.dirname(options.data.file.path);
-        let sourcePath  = path.resolve(paths.html.src);
+        let sourcePath  = path.resolve(`${paths.html.src}/pages`);
+
+        if (currentPath === sourcePath) {
+          return '';
+        }
 
         return `${path.relative(currentPath, sourcePath)}/`;
       },
