@@ -118,12 +118,13 @@ The `default` gulp task injects a horizontal navigation bar into both components
 
 Components are located in `src/html/pages/components`, pages in `src/html/pages`.
 
-The YAML front matter between the opening `---` and closing `---` contains general information like the page title and description. These will be used primarily by layouts and the Styleguide navigation. Add additional information, which can be accessed via `{{@file.meta.key}}`. Replace `key` with the variable name from the front matter.
+The YAML front matter between the opening `---` and closing `---` contains general information like the title, description and cetagory. These will be used primarily by layouts and the Styleguide navigation. Add additional information, which can be accessed via `{{@file.meta.key}}`. Replace `key` with the variable name from the front matter.
 
 ```handlebars
 ---
 title: Example
-description: Only used for components.
+description: More detailed than the title
+category: Components
 ---
 {{#extend "layouts/components"}}
 {{#content "body"}}
@@ -132,7 +133,7 @@ description: Only used for components.
 {{/extend}}
 ```
 
-Components use additional markup with nicely styled containers:
+Components may use additional markup with nicely styled containers:
 
 ```handlebars
 {{#embed "styleguide/article" title="Some title" description="Some description text." background="#555"}}
@@ -148,7 +149,7 @@ The following attributes are available:
 * [optional] `background` injects `style="background: value"` into the component.
 
 
-#### Variables
+#### Default Variables
 
 * `{{@file.meta.title}}`: Title of the current component or page.
 * `{{@file.meta.description}}`: Description of the current component or page.
