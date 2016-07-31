@@ -2,6 +2,27 @@
 
 
 
+## 1.9.0
+2016-07-31
+
+### Improved
+- Styleguide CSS
+- Browsersync HTML reloading
+- Changes "front-end" to "front end"
+
+### Updated
+- Normalize.css to v4.2.0
+
+### Added
+- Dynamic Styleguide navigation categories
+- Copy task for node module assets
+- Handlebars {{filepath}} helper
+
+### Fixed
+- Handlebars {{rel}} helper
+
+
+
 ## 1.8.1
 2016-07-28
 
