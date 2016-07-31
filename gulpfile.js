@@ -218,38 +218,33 @@ let compileHandlebars = (task) => {
     gulpDest = paths.html.dist;
   }
 
-  // Generate file lists for Styleguide navigation
-  let pages      = [];
-  let components = [];
 
-  if (task === 'dev') {
-    let pageList      = glob.sync(pageDir, {ignore: componentDir});
-    let componentList = glob.sync(componentDir);
+  // Create navItems object
+  let pages    = glob.sync(pageDir);
+  let navItems = {};
 
-    for (let page of pageList) {
-      let title    = fm(fs.readFileSync(page, 'utf8')).attributes.title;
-      let filename = path.relative(`${paths.html.src}/pages`, page).replace('.hbs', '.html');
-      let href     = filename;
+  for (let page of pages) {
+    let frontMatter = fm(fs.readFileSync(page, 'utf8')).attributes;
+    let url         = path.relative(`${paths.html.src}/pages`, page).replace('.hbs', '.html');
+    let name        = frontMatter.title ? frontMatter.title : url;
+    let category    = frontMatter.category ? frontMatter.category : 'Undefined';
 
-      if (!title) {
-        title = filename;
-      }
+    let pageItem = {
+      name,
+      url
+    };
 
-      pages.push({title, href});
-    }
-
-    for (let component of componentList) {
-      let title    = fm(fs.readFileSync(component, 'utf8')).attributes.title;
-      let filename = path.relative(`${paths.html.src}/pages`, component).replace('.hbs', '.html');
-      let href     = filename;
-
-      if (!title) {
-        title = filename;
-      }
-
-      components.push({title, href});
-    }
+    if (navItems.hasOwnProperty(category)) {
+      navItems[category].pages.push(pageItem);
+    } else {
+      navItems[category] = {
+        name: category,
+        icon: category[0],
+        pages: [pageItem]
+      };
+    };
   }
+
 
   // Create Handlebars Stream with partials, helpers and data
   let hbStream = hb(config.html.hb)
@@ -290,8 +285,9 @@ let compileHandlebars = (task) => {
       version: require('./package.json').version,
       lang: require('./package.json').lang,
       dev: task === 'dev' ? true : false,
-      navItems: {pages, components}
+      navItems: navItems
     });
+
 
   return gulp.src(gulpSrc)
     .pipe(gulpFm({property: 'meta'}))

@@ -32,7 +32,7 @@ $color-white: rgb(255, 255, 255);
 /* FONT
  * ====================================================== */
 
-@import 'https://fonts.googleapis.com/css?family=Roboto:300,400';
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,700';
 
 
 
@@ -73,7 +73,6 @@ $color-white: rgb(255, 255, 255);
 
   display: flex;
   position: fixed;
-  box-sizing: border-box;
   z-index: 9999;
   height: 40px;
   top: 0;
@@ -94,10 +93,6 @@ $color-white: rgb(255, 255, 255);
   .sg-nav--hidden & {
     transform: translate3d(0, -40px, 0);
   }
-
-  @media (min-width: $screen-sm) {
-    padding: 0 15px;
-  }
 }
 
 
@@ -109,7 +104,6 @@ $color-white: rgb(255, 255, 255);
   all: unset;
 
   display: block;
-  box-sizing: border-box;
   height: inherit;
 
   &::before,
@@ -125,13 +119,12 @@ $color-white: rgb(255, 255, 255);
 
 .sg-nav__button {
   display: block;
-  box-sizing: border-box;
   height: 40px;
   margin: 0;
-  padding: 0 20px;
+  padding: 0 12px;
 
   font-size: 16px;
-  font-weight: 100;
+  font-weight: 400;
   text-transform: uppercase;
   color: $color-white;
 
@@ -153,6 +146,10 @@ $color-white: rgb(255, 255, 255);
   &::after {
     all: unset;
   }
+
+  @media (min-width: $screen-sm) {
+    padding: 0 20px;
+  }
 }
 
 
@@ -163,12 +160,18 @@ $color-white: rgb(255, 255, 255);
 .sg-nav__icon {
   all: unset;
 
-  box-sizing: border-box;
-  width: 16px;
-  height: 16px;
-  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
 
-  fill: currentColor;
+  font-weight: 700;
+  color: $color-gray;
+
+  background-color: $color-white;
+
+  border-radius: 50%;
 }
 
 
@@ -180,7 +183,6 @@ $color-white: rgb(255, 255, 255);
   all: unset;
 
   display: none;
-  box-sizing: border-box;
 
   &::before,
   &::after {
@@ -191,7 +193,7 @@ $color-white: rgb(255, 255, 255);
     display: inline;
     margin-left: 8px;
 
-    vertical-align: middle;
+    letter-spacing: 0.01em;
   }
 }
 
@@ -205,7 +207,6 @@ $color-white: rgb(255, 255, 255);
 
   display: none;
   position: absolute;
-  box-sizing: border-box;
   width: inherit;
   top: 40px;
   margin: 0;
@@ -232,7 +233,6 @@ $color-white: rgb(255, 255, 255);
   all: unset;
 
   display: block;
-  box-sizing: border-box;
 
   &::before,
   &::after {
@@ -249,8 +249,7 @@ $color-white: rgb(255, 255, 255);
   all: unset;
 
   display: block;
-  box-sizing: border-box;
-  padding: 10px 20px;
+  padding: 10px 12px;
 
   font-size: 14px;
   font-weight: 400;
@@ -274,6 +273,10 @@ $color-white: rgb(255, 255, 255);
   &::after {
     all: unset;
   }
+
+  @media (min-width: $screen-sm) {
+    padding: 10px 20px;
+  }
 }
 
 
@@ -282,7 +285,6 @@ $color-white: rgb(255, 255, 255);
 // =====================================
 
 .sg-nav__hide-btn {
-  box-sizing: border-box;
   position: fixed;
   z-index: 9999;
   height: 40px;
@@ -357,6 +359,10 @@ $color-white: rgb(255, 255, 255);
 
   border-bottom: 1px solid $color-alto;
 
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   @media (min-width: $screen-sm) {
     margin: $padding auto $padding-xl;
     padding: $padding;
@@ -375,7 +381,7 @@ $color-white: rgb(255, 255, 255);
   margin: 0 0 10px;
 
   font-size: 26px;
-  font-weight: 100;
+  font-weight: 300;
   color: $color-blue;
 
   @media (min-width: $screen-sm) {
@@ -396,7 +402,7 @@ $color-white: rgb(255, 255, 255);
   margin: 0;
 
   font-size: 14px;
-  font-weight: 100;
+  font-weight: 300;
   color: $color-gray;
 
   @media (min-width: $screen-sm) {
