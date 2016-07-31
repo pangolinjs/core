@@ -8,7 +8,7 @@
 ### Improved
 - Styleguide CSS
 - Browsersync HTML reloading
-- Changes "front-end" to "front end"
+- Changed "front-end" to "front end"
 
 ### Updated
 - Normalize.css to v4.2.0
