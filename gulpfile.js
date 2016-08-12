@@ -59,6 +59,12 @@ gulp.task('clean-dev', () => {
 });
 
 
+// Clean Preview
+gulp.task('clean-prev', () => {
+  return del(paths.prev);
+});
+
+
 // Clean Distribution
 gulp.task('clean-dist', () => {
   return del(paths.dist);
@@ -110,7 +116,16 @@ gulp.task('css-sg', () => {
 });
 
 
-// CSS Distribution
+// CSS Preview
+gulp.task('css-prev', () => {
+  return gulp.src(`${paths.css.src}/**/*.scss`)
+    .pipe(sass(config.css.dist).on('error', sass.logError))
+    .pipe(autoprefixer(config.css.autoprefixer))
+    .pipe(rename('styles.css'))
+    .pipe(gulp.dest(paths.css.prev));
+});
+
+// CSS Production
 gulp.task('css-dist', () => {
   return gulp.src(`${paths.css.src}/**/*.scss`)
     .pipe(sass(config.css.dist).on('error', sass.logError))
@@ -171,6 +186,20 @@ gulp.task('js-dev', ['js-lint'], () => {
 gulp.task('js-watch', ['js-dev']);
 
 
+// JavaScript Preview
+gulp.task('js-prev', () => {
+  return gulp.src([
+    `${paths.js.src}/libraries/**/*.js`,
+    `${paths.js.src}/functions/**/*.js`,
+    `${paths.js.src}/components/**/*.js`
+  ])
+    .pipe(babel(config.js.babel))
+    .pipe(concat('scripts.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.js.prev));
+});
+
+
 // JavaScript Production
 gulp.task('js-dist', () => {
   return gulp.src([
@@ -213,9 +242,9 @@ let compileHandlebars = (task) => {
   let gulpSrc  = pageDir;
   let gulpDest = paths.html.dev;
 
-  if (task === 'dist') {
+  if (task === 'preview') {
     gulpSrc  = [pageDir, `!${componentDir}`];
-    gulpDest = paths.html.dist;
+    gulpDest = paths.html.prev;
   }
 
 
@@ -307,9 +336,9 @@ gulp.task('html-dev', ['clean-html-dev'], () => {
 gulp.task('html-watch', ['html-dev'], browsersync.reload);
 
 
-// HTML Production
-gulp.task('html-dist', () => {
-  return compileHandlebars('dist');
+// HTML Preview
+gulp.task('html-prev', () => {
+  return compileHandlebars('preview');
 });
 
 
@@ -347,7 +376,22 @@ gulp.task('img-dev', ['img-dev-copy', 'img-dev-icons']);
 gulp.task('img-watch', ['img-dev'], browsersync.reload);
 
 
-// Images Dist Copy
+// Images Preview Copy
+gulp.task('img-prev-copy', () => {
+  return gulp.src([
+    `${paths.img.src}/**`,
+    `!${paths.img.src}/icons`,
+    `!${paths.img.src}/icons/**`
+  ])
+    .pipe(imagemin([
+      imagemin.jpegtran(config.img.imagemin.jpg),
+      imagemin.optipng(config.img.imagemin.png),
+      imagemin.svgo(config.img.imagemin.svg)
+    ]))
+    .pipe(gulp.dest(paths.img.prev));
+});
+
+// Images Production Copy
 gulp.task('img-dist-copy', () => {
   return gulp.src([
     `${paths.img.src}/**`,
@@ -363,7 +407,14 @@ gulp.task('img-dist-copy', () => {
 });
 
 
-// Images Dist Icons
+// Images Preview Icons
+gulp.task('img-prev-icons', () => {
+  return gulp.src(`${paths.img.src}/icons/*.svg`)
+    .pipe(svgSprite(config.img.svgSpriteDist).on('error', (error) => { console.log(error); }))
+    .pipe(gulp.dest(paths.img.prev));
+});
+
+// Images Production Icons
 gulp.task('img-dist-icons', () => {
   return gulp.src(`${paths.img.src}/icons/*.svg`)
     .pipe(svgSprite(config.img.svgSpriteDist).on('error', (error) => { console.log(error); }))
@@ -371,7 +422,10 @@ gulp.task('img-dist-icons', () => {
 });
 
 
-// Images Distribution
+// Images Preview
+gulp.task('img-prev', ['img-prev-copy', 'img-prev-icons']);
+
+// Images Production
 gulp.task('img-dist', ['img-dist-copy', 'img-dist-icons']);
 
 
@@ -407,7 +461,12 @@ gulp.task('npmassets-dev', () => {
 gulp.task('npmassets-watch', ['npmassets-dev']);
 
 
-// NPM Assets dist copy
+// NPM Assets preview copy
+gulp.task('npmassets-prev', () => {
+  return copyNpmAssets(paths.prev);
+});
+
+// NPM Assets production copy
 gulp.task('npmassets-dist', () => {
   return copyNpmAssets(paths.dist);
 });
@@ -426,6 +485,17 @@ gulp.task('development', ['clean-dev'], () => {
 
 
 
+/* Preview
+ * Generate files for preview.
+ * ========================================================================== */
+
+
+gulp.task('preview', ['clean-prev'], () => {
+  runSequence(['css-prev', 'js-prev', 'html-prev', 'img-prev', 'npmassets-prev']);
+});
+
+
+
 
 /* Production
  * Generate production ready files.
@@ -433,7 +503,7 @@ gulp.task('development', ['clean-dev'], () => {
 
 
 gulp.task('production', ['clean-dist'], () => {
-  runSequence(['css-dist', 'js-dist', 'html-dist', 'img-dist', 'npmassets-dist']);
+  runSequence(['css-dist', 'js-dist', 'img-dist', 'npmassets-dist']);
 });
 
 

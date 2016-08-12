@@ -11,4 +11,5 @@ node_modules
 
 # Dev and Dist folders
 dev
+prev
 dist
