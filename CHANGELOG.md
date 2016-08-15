@@ -2,6 +2,25 @@
 
 
 
+## 1.10.0
+2016-08-15
+
+### Improved
+- Remember Styleguide nav state (with a cookie)
+
+### Updated
+- README.md
+- Dependencies
+
+### Added
+- Preview task (`gulp preview`)
+- svgxuse
+
+### Removed
+- SVG for Everybody
+
+
+
 ## 1.9.0
 2016-07-31
 
