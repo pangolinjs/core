@@ -191,9 +191,9 @@ This styleguide ships with [svgxuse](https://github.com/Keyamoon/svgxuse), a pol
 
 
 ### NPM Assets
-Files from Node modules can be incorporated into the styleguide. Simply install the module with `npm install --save-dev module-name` and add file or folder paths to `src/npm-assets.js`.
+Files from Node modules can be incorporated into the styleguide. Simply install the module with `npm install --save-dev module-name` and add file or folder paths to `src/npmassets.js`.
 
-`npm-assets.js` contains an array of objects. Each object has a `glob` and `dest` key:
+`npmassets.js` contains an array of objects. Each object has a `glob` and `dest` key:
 
 * `glob` will be passed to `gulp.src()` and specifies which files will be copied. Refer to the [gulp.src documentation](https://github.com/gulpjs/gulp/blob/master/docs/API.md#globs) for more information regarding globs.
 * `dest` sets the destination for the copy process. The development, preview and production tasks each prefix the destination with their specific output folders (e.g. `dev/js` for development). Base path variables from `gulp/paths.js` can be used (`path.css.base`, `path.js.base`, `path.html.base` and `path.img.base`).
