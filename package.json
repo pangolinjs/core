@@ -39,5 +39,5 @@
     "run-sequence": "^1.2.1",
     "svgxuse": "^1.1.20"
   },
-  "license": "GPL-3.0"
+  "license": "MIT"
 }
