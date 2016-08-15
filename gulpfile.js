@@ -436,7 +436,7 @@ gulp.task('img-dist', ['img-dist-copy', 'img-dist-icons']);
  * ========================================================================== */
 
 let copyNpmAssets = (taskDest) => {
-  let npmAssets = require(`./${paths.src}/npm-assets.js`);
+  let npmAssets = require(`./${paths.src}/npmassets.js`);
 
   if (Array.isArray(npmAssets) && npmAssets.length > 0) {
     for (let asset of npmAssets) {
@@ -448,7 +448,7 @@ let copyNpmAssets = (taskDest) => {
     browsersync.reload();
   }
 
-  delete require.cache[require.resolve(`./${paths.src}/npm-assets.js`)];
+  delete require.cache[require.resolve(`./${paths.src}/npmassets.js`)];
 }
 
 // NPM Assets dev copy
@@ -545,6 +545,6 @@ gulp.task('default', ['clean-dev'], () => {
   watchImg.on('change', onChangeMessage);
 
   // Watch NPM Assets
-  let watchNpmAssets = gulp.watch(`${paths.src}/npm-assets.js`, ['npmassets-watch']);
+  let watchNpmAssets = gulp.watch(`${paths.src}/npmassets.js`, ['npmassets-watch']);
   watchNpmAssets.on('change', onChangeMessage);
 });

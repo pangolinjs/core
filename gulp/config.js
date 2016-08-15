@@ -38,9 +38,8 @@ module.exports = {
       bustCache: true
     },
     browsersync: {
-      server: {
-        baseDir: paths.html.dev
-      },
+      server: paths.html.dev,
+      startPath: '/index.html',
       logPrefix: 'Browsersync',
       scrollElements: ['*'],
       notify: {
