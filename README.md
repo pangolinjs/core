@@ -20,16 +20,17 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 
 ## Dependencies
 * [Node.js with npm](https://nodejs.org/)
-* Only tested with Node.js Current (v6.x).
+
+*Only tested with Node.js Current (v6.x).*
 
 
 ## Installation
 1. Get the [latest Styleguide release](https://github.com/mvsde/styleguide/releases/latest).
 2. Run `npm install` to download Node modules.
-3. Install global Gulp with `npm install -g gulp-cli`. This step is required to get CLI access to gulp.
+3. Install global Gulp CLI with `npm install -g gulp-cli`. This step is required to get CLI access to gulp.
 
 *Check for outdated Node modules with `npm outdated`.*
-*Update previously downloaded Node modules with `npm update`.*
+*Update Node modules with `npm update`.*
 
 
 ## Usage
@@ -37,7 +38,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 ### Tasks
 These are the main Gulp tasks:
 * Run `gulp` to start the default task. Watches for file changes and starts Browsersync.
-* Run `gulp development` to start the default task. Doesn't watch for file changes.
+* Run `gulp development` to start the default task without file watching and Browsersync.
 * Run `gulp preview` to create a prototype preview. Minifies CSS, JavaScript and images. Doesn't generate component HTML.
 * Run `gulp production` to create prduction ready files. Minifies CSS, JavaScript and images. Doesn't generate any HTML.
 
@@ -46,7 +47,7 @@ There are more tasks available for standalone execution:
 * `js-dev`, `js-prev` and `js-dist` for JavaScript concatenation and linting.
 * `html-dev` and `html-prev` for static HTML file generation.
 * `img-dev`, `img-prev` and `img-dist` for image copying and icon sprite generation.
-* `npmassets-dev`, `npmassets-prev` and `npmassets-prev` for copying files from Node modules.
+* `npmassets-dev`, `npmassets-prev` and `npmassets-dist` for copying files from Node modules.
 
 *The generated folders `dev`, `prev` and `dist` are excluded from Git.*
 
@@ -59,7 +60,7 @@ Output to `dev/css`, `prev/css` or `dist/css`.
 
 This styleguide splits the CSS into small parts. This ensures a better organization of style declarations. Each component sits in it's own file and is re-usable across the project. See [HTML](#html) for the HTML-side of componentization.
 
-The function `@import` includes other Sass or CSS files in the main Sass file. The final output is one large CSS file to minimize browser requests. See `src/css/main.scss` for more information.
+The function `@import` includes Sass or CSS files in the main Sass file. The final output is one large CSS file to minimize browser requests. See `src/css/main.scss` for more information.
 
 *The development task generates sourcemaps. The preview and production tasks minify the CSS.*
 
@@ -68,7 +69,7 @@ The function `@import` includes other Sass or CSS files in the main Sass file. T
 Located in `src/js`.  
 Output to `dev/js`, `prev/js` or `dist/js`.
 
-JavaScript files are concatenated in the following order: First files from `libraries`, then files from `functions` and lastly files from `components`. Within these folders the order is alphabetical. Subfolders are possible aswell.
+JavaScript files are concatenated in the following order: First files from `libraries`, then from `functions` and lastly from `components`. Within these folders the order is alphabetical. Subfolders are supported as well.
 
 Files from `functions` and `components` are transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. ESLint is configured for ES2015 aswell, see `gulp/eslint.json` and [ESLint rules documentation](http://eslint.org/docs/rules/) for more options.
 
@@ -91,6 +92,7 @@ Layouts determine the scaffolding of the HTML document. They contain the `<head>
 
 Layouts are located in `src/html/partials/layouts`.
 
+A minimalistic layout may look like this:
 ```handlebars
 <!DOCTYPE html>
 <html lang="en">
@@ -114,14 +116,17 @@ The syntax `{{> "includes/example" }}` includes the file `src/html/partials/incl
 
 
 #### Components and Pages
-Components are reference pages for UI elements. The gulp task `preview` will not render them. Pages are prototypes for the final web pages.
+Component pages are references for UI elements. The gulp task `preview` will not render them.
 
-The `default` gulp task injects a navigation bar into both components and pages HTML files for easier switching between them and additional settings.
+Pages are prototypes for the final web pages.
+
+The `default` gulp task injects a navigation bar into both component and page HTML files for fast site switching and additional settings.
 
 Components are located in `src/html/pages/components`, pages in `src/html/pages`.
 
-The YAML front matter between the opening `---` and closing `---` contains general information like the title, description and cetagory. These will be used primarily by layouts and the Styleguide navigation. Add additional information, which can be accessed via `{{@file.meta.key}}`. Replace `key` with the variable name from the front matter.
+The YAML front matter between the opening `---` and closing `---` contains general information like the title, description and category. These will be used primarily by layouts and the Styleguide navigation. The front matter can be accessed with `{{@file.meta.key}}`. Replace `key` with the name from the front matter.
 
+A simple component page is defined by it's category and the correspondening layout:
 ```handlebars
 ---
 title: Example
@@ -135,8 +140,7 @@ category: Components
 {{/extend}}
 ```
 
-Components may use additional markup with nicely styled containers:
-
+Components may use additional markup within the main body with nicely styled containers:
 ```handlebars
 {{#embed "styleguide/article" title="Some title" description="Some description text." background="#555"}}
 {{#content "body"}}
@@ -163,7 +167,7 @@ The following parameters are available:
 
 
 #### Styleguide CSS
-The components HTML files and the development menu use some styling. All styles are located in `src/html/css/sg.scss`.
+The component HTML files and the development menu use some styling. All styles are located in `src/html/css/sg.scss`.
 
 *The style definitions located in `src/css` use the prefix `sg-` to ensure compatibility with the main stylesheet.*
 
@@ -177,33 +181,34 @@ All files and folders placed in `src/img` will be copied to `dev/img`, `prev/img
 SVG files placed in the `src/img/icons` folder will be transformed into an SVG icon sprite named `icons.svg`. The original icons will *not* be copied to output folders.
 
 Icons can be used in HTML with the following syntax:
-
 ```html
 <svg><use xlink:href="{{rel}}img/icons.svg#icon"></use></svg>
 ```
 
-This Styleguide ships with [SVG for Everybody](https://github.com/jonathantneal/svg4everybody), a polyfill for browsers that do not support external SVG reference.
+This styleguide ships with [svgxuse](https://github.com/Keyamoon/svgxuse), a polyfill for browsers that do not support external SVG reference.
 
 *The preview and production tasks minify images with a lossless compressor.*
 
 
 ### NPM Assets
-Files from Node modules can be incorporated into the Styleguide. Simply install the module with `npm install --save-dev module-name` and add file or folder paths to `src/npm-assets.js`.
+Files from Node modules can be incorporated into the styleguide. Simply install the module with `npm install --save-dev module-name` and add file or folder paths to `src/npm-assets.js`.
 
 `npm-assets.js` contains an array of objects. Each object has a `glob` and `dest` key:
 
 * `glob` will be passed to `gulp.src()` and specifies which files will be copied. Refer to the [gulp.src documentation](https://github.com/gulpjs/gulp/blob/master/docs/API.md#globs) for more information regarding globs.
 * `dest` sets the destination for the copy process. The development, preview and production tasks each prefix the destination with their specific output folders (e.g. `dev/js` for development). Base path variables from `gulp/paths.js` can be used (`path.css.base`, `path.js.base`, `path.html.base` and `path.img.base`).
 
+The following example is the default example:
 ```javascript
-{
-  glob: 'node_modules/svg4everybody/dist/svg4everybody.{js,min.js}',
-  dest: paths.js.base
-}
+module.exports = [
+  {
+    glob: 'node_modules/svgxuse/svgxuse.{js,min.js}',
+    dest: paths.js.base
+  }
+];
 ```
 
 
 ## Credits
 
-* [SVG for Everybody](https://github.com/jonathantneal/svg4everybody)
 * [Material icons by Google](https://design.google.com/icons/)
