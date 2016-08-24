@@ -186,6 +186,16 @@ gulp.task('js-dev', ['js-lint'], () => {
 gulp.task('js-watch', ['js-dev']);
 
 
+// JavaScript Styleguide
+gulp.task('js-sg', () => {
+  return gulp.src(`${paths.html.src}/js/sg.js`)
+    .pipe(eslint(config.js.eslint))
+    .pipe(eslint.format())
+    .pipe(babel(config.js.babel).on('error', babelError))
+    .pipe(gulp.dest(paths.js.dev));
+});
+
+
 // JavaScript Preview
 gulp.task('js-prev', () => {
   return gulp.src([
@@ -526,7 +536,7 @@ gulp.task('default', ['clean-dev'], () => {
   }
 
   // Run initial task queue
-  runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev', 'npmassets-dev'], 'browsersync');
+  runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'npmassets-dev'], 'browsersync');
 
   // Watch CSS
   let watchCSS = gulp.watch(`${paths.css.src}/**/*.scss`, ['css-watch']);

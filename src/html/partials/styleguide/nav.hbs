@@ -30,7 +30,7 @@
           <a href="{{rel}}img/icons.html" class="sg-nav__link" target="_blank">Icon Preview</a>
         </li>
         <li class="sg-nav__sub-item">
-          <a href="http://localhost:3001" class="sg-nav__link" target="_blank">BrowserSync</a>
+          <a href="http://localhost:3001" class="sg-nav__link" target="_blank">Browsersync</a>
         </li>
       </ul>
     </li>
@@ -46,74 +46,3 @@
     </svg>
   </button>
 </nav>
-
-
-<script>
-  function sgGetCookie(name) {
-    var value = '; ' + document.cookie;
-    var parts = value.split('; ' + name + '=');
-    if (parts.length == 2) {
-      return parts.pop().split(';').shift()
-    };
-  }
-
-  var sgNav           = document.querySelector('.sg-nav');
-  var sgNavHideBtn    = document.querySelector('.sg-nav__hide-btn');
-  var sgNavBtn        = document.querySelectorAll('.sg-nav__button');
-  var sgNavSubList    = document.querySelectorAll('.sg-nav__sub-list');
-  var sgNavActive     = true;
-  var sgNavLastActive = null;
-
-  if (sgGetCookie('sgNavActive') === 'false') {
-    sgNavHideBtn.classList.add('sg-nav__hide-btn--active');
-    sgNav.classList.add('sg-nav--hidden');
-
-    sgNavActive = false;
-  }
-
-  sgNavHideBtn.onclick = function() {
-    if (sgNavActive) {
-      this.classList.add('sg-nav__hide-btn--active');
-      sgNav.classList.add('sg-nav--hidden');
-
-      sgNavActive     = false;
-      document.cookie = 'sgNavActive=false';
-    } else {
-      this.classList.remove('sg-nav__hide-btn--active');
-      sgNav.classList.remove('sg-nav--hidden');
-
-      sgNavActive     = true;
-      document.cookie = 'sgNavActive=true';
-    }
-
-    for (var i = 0; i < sgNavBtn.length; i++) {
-      sgNavBtn[i].classList.remove('sg-nav__button--active');
-      sgNavSubList[i].classList.remove('sg-nav__sub-list--visible');
-
-      sgNavLastActive = null;
-    }
-  };
-
-  for (var i = 0; i < sgNavBtn.length; i++) {
-    sgNavBtn[i].addEventListener('click', function(event) {
-      event.preventDefault();
-
-      for (var i = 0; i < sgNavBtn.length; i++) {
-        sgNavBtn[i].classList.remove('sg-nav__button--active');
-        sgNavSubList[i].classList.remove('sg-nav__sub-list--visible');
-      }
-
-      if (this === sgNavLastActive) {
-        this.classList.remove('sg-nav__button--active');
-        this.nextElementSibling.classList.remove('sg-nav__sub-list--visible');
-
-        sgNavLastActive = null;
-      } else {
-        this.classList.add('sg-nav__button--active');
-        this.nextElementSibling.classList.add('sg-nav__sub-list--visible');
-
-        sgNavLastActive = this;
-      }
-    });
-  }
-</script>
