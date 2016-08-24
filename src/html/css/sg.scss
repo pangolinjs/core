@@ -24,7 +24,6 @@ $padding-xl: ($padding * 3);
 $color-blue:  rgb(0, 100, 200);
 $color-gray:  rgb(100, 100, 100);
 $color-alto:  rgb(220, 220, 220);
-$color-white: rgb(255, 255, 255);
 
 
 
@@ -65,8 +64,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE NAV LIST
-// =====================================
+/* STYLEGUIDE NAV LIST
+ * ================================== */
 
 .sg-nav__list {
   all: unset;
@@ -97,8 +96,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE NAV ITEM
-// =====================================
+/* STYLEGUIDE NAV ITEM
+ * ================================== */
 
 .sg-nav__item {
   all: unset;
@@ -114,8 +113,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE NAV BUTTON
-// =====================================
+/* STYLEGUIDE NAV BUTTON
+ * ================================== */
 
 .sg-nav__button {
   display: block;
@@ -126,7 +125,7 @@ $color-white: rgb(255, 255, 255);
   font-size: 16px;
   font-weight: 400;
   text-transform: uppercase;
-  color: $color-white;
+  color: #fff;
 
   background: none;
 
@@ -154,8 +153,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE NAV ICON
-// =====================================
+/* STYLEGUIDE NAV ICON
+ * ================================== */
 
 .sg-nav__icon {
   all: unset;
@@ -169,15 +168,15 @@ $color-white: rgb(255, 255, 255);
   font-weight: 700;
   color: $color-gray;
 
-  background-color: $color-white;
+  background-color: #fff;
 
   border-radius: 50%;
 }
 
 
 
-// STYLEGUIDE NAV TEXT
-// =====================================
+/* STYLEGUIDE NAV TEXT
+ * ================================== */
 
 .sg-nav__text {
   all: unset;
@@ -199,8 +198,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE NAV SUBLIST
-// =====================================
+/* STYLEGUIDE NAV SUBLIST
+ * ================================== */
 
 .sg-nav__sub-list {
   all: unset;
@@ -226,8 +225,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE NAV SUBITEM
-// =====================================
+/* STYLEGUIDE NAV SUBITEM
+ * ================================== */
 
 .sg-nav__sub-item {
   all: unset;
@@ -242,8 +241,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE NAV LINK
-// =====================================
+/* STYLEGUIDE NAV LINK
+ * ================================== */
 
 .sg-nav__link {
   all: unset;
@@ -258,6 +257,8 @@ $color-white: rgb(255, 255, 255);
 
   outline: none;
 
+  cursor: pointer;
+
   &:visited {
     color: $color-gray;
   }
@@ -265,7 +266,7 @@ $color-white: rgb(255, 255, 255);
   &:hover,
   &:focus,
   &:active {
-    color: $color-white;
+    color: #fff;
     background: lighten($color-blue, 20%);
   }
 
@@ -281,8 +282,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE NAV HIDE BUTTON
-// =====================================
+/* STYLEGUIDE NAV HIDE BUTTON
+ * ================================== */
 
 .sg-nav__hide-btn {
   position: fixed;
@@ -296,7 +297,7 @@ $color-white: rgb(255, 255, 255);
 
   font-size: 24px;
   line-height: 1;
-  color: $color-white;
+  color: #fff;
 
   background: lighten($color-blue, 20%);
 
@@ -371,8 +372,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE HEADER TITLE
-// =====================================
+/* STYLEGUIDE HEADER TITLE
+ * ================================== */
 
 .sg-header__title {
   all: unset;
@@ -392,8 +393,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE HEADER DESCRIPTION
-// =====================================
+/* STYLEGUIDE HEADER DESCRIPTION
+ * ================================== */
 
 .sg-header__description {
   all: unset;
@@ -439,8 +440,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE ARTICLE HEADER
-// =====================================
+/* STYLEGUIDE ARTICLE HEADER
+ * ================================== */
 
 .sg-article__header {
   padding: $padding-sm;
@@ -454,8 +455,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE ARTICLE TITLE
-// =====================================
+/* STYLEGUIDE ARTICLE TITLE
+ * ================================== */
 
 .sg-article__title {
   margin: 0 0 10px;
@@ -471,8 +472,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE ARTICLE DESCRIPTION
-// =====================================
+/* STYLEGUIDE ARTICLE DESCRIPTION
+ * ================================== */
 
 .sg-article__description {
   margin: 0 0 10px;
@@ -488,8 +489,8 @@ $color-white: rgb(255, 255, 255);
 
 
 
-// STYLEGUIDE ARTICLE BODY
-// =====================================
+/* STYLEGUIDE ARTICLE BODY
+ * ================================== */
 
 .sg-article__body {
   padding: $padding-sm;
