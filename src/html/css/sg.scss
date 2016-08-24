@@ -284,6 +284,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
     color: $color-gray;
   }
 
+  &.is-active,
   &:hover,
   &:focus,
   &:active {

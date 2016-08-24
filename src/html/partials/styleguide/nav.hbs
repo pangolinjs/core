@@ -1,15 +1,15 @@
-<nav class="sg-nav  js-sg-nav">
+<nav class="sg-nav js-sg-nav">
   <ul class="sg-nav__list">
 
   {{#each navItems}}
     <li class="sg-nav__item">
 
-      <button class="sg-nav__button  js-sg-nav-btn">
+      <button class="sg-nav__button js-sg-nav-btn">
         <span class="sg-nav__icon" style="display: none;">{{this.icon}}</span>
         <span class="sg-nav__text">{{this.name}}</span>
       </button>
 
-      <ul class="sg-nav__sub-list  js-sg-nav-sub">
+      <ul class="sg-nav__sub-list js-sg-nav-sub">
       {{#each this.pages}}
         <li class="sg-nav__sub-item">
           <a href="{{rel}}{{this.url}}" class="sg-nav__link">{{this.name}}</a>
@@ -21,11 +21,11 @@
   {{/each}}
 
     <li class="sg-nav__item">
-      <button class="sg-nav__button  js-sg-nav-btn">
+      <button class="sg-nav__button js-sg-nav-btn">
         <span class="sg-nav__icon" style="display: none;">S</span>
         <span class="sg-nav__text">Settings</span>
       </button>
-      <ul class="sg-nav__sub-list  js-sg-nav-sub">
+      <ul class="sg-nav__sub-list js-sg-nav-sub">
         <li class="sg-nav__sub-item">
           <a href="{{rel}}img/icons.html" class="sg-nav__link" target="_blank">Icon Preview</a>
         </li>
@@ -35,9 +35,27 @@
       </ul>
     </li>
 
+    <li class="sg-nav__item" style="display: none;">
+      <button class="sg-nav__button js-sg-nav-btn">
+        <span class="sg-nav__icon" style="display: none;">A</span>
+        <span class="sg-nav__text">Accessibility</span>
+      </button>
+      <ul class="sg-nav__sub-list js-sg-nav-sub">
+        <li class="sg-nav__sub-item">
+          <button class="sg-nav__link js-sg-a11y js-sg-a11y-contrast">Contrast Check</button>
+        </li>
+        <li class="sg-nav__sub-item">
+          <button class="sg-nav__link js-sg-a11y js-sg-a11y-aria-hidden">Hide <code>aria-hidden="true"</code></button>
+        </li>
+        <li class="sg-nav__sub-item">
+          <button class="sg-nav__link js-sg-a11y js-sg-a11y-alt">Highlight missing <code>alt</code></button>
+        </li>
+      </ul>
+    </li>
+
   </ul>
 
-  <button class="sg-nav__hide-btn  js-sg-nav-hide-btn" style="display: none;">
+  <button class="sg-nav__hide-btn js-sg-nav-hide-btn" style="display: none;">
     <svg class="sg-nav__hide-btn-icon sg-nav__hide-btn-icon--close" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
     </svg>
