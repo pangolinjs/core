@@ -6,10 +6,10 @@
 
 
 (function() {
-  let sgNav           = document.querySelector('.sg-nav');
-  let sgNavHideBtn    = document.querySelector('.sg-nav__hide-btn');
-  let sgNavBtn        = document.querySelectorAll('.sg-nav__button');
-  let sgNavSubList    = document.querySelectorAll('.sg-nav__sub-list');
+  let sgNav           = document.querySelector('.js-sg-nav');
+  let sgNavHideBtn    = document.querySelector('.js-sg-nav-hide-btn');
+  let sgNavBtn        = document.querySelectorAll('.js-sg-nav-btn');
+  let sgNavSubList    = document.querySelectorAll('.js-sg-nav-sub');
   let sgNavActive     = true;
   let sgNavLastActive = null;
 
@@ -27,8 +27,8 @@
   };
 
   if (sgGetCookie('sgNavActive') === 'false') {
-    sgNavHideBtn.classList.add('sg-nav__hide-btn--active');
-    sgNav.classList.add('sg-nav--hidden');
+    sgNavHideBtn.classList.add('is-active');
+    sgNav.classList.add('is-hidden');
 
     sgNavActive = false;
   }
@@ -40,22 +40,22 @@
 
   let toggleSgMenuBar = function() {
     if (sgNavActive) {
-      this.classList.add('sg-nav__hide-btn--active');
-      sgNav.classList.add('sg-nav--hidden');
+      this.classList.add('is-active');
+      sgNav.classList.add('is-hidden');
 
       sgNavActive     = false;
       document.cookie = 'sgNavActive=false';
     } else {
-      this.classList.remove('sg-nav__hide-btn--active');
-      sgNav.classList.remove('sg-nav--hidden');
+      this.classList.remove('is-active');
+      sgNav.classList.remove('is-hidden');
 
       sgNavActive     = true;
       document.cookie = 'sgNavActive=true';
     }
 
     for (let i = 0; i < sgNavBtn.length; i++) {
-      sgNavBtn[i].classList.remove('sg-nav__button--active');
-      sgNavSubList[i].classList.remove('sg-nav__sub-list--visible');
+      sgNavBtn[i].classList.remove('is-active');
+      sgNavSubList[i].classList.remove('is-active');
 
       sgNavLastActive = null;
     }
@@ -72,18 +72,18 @@
     event.preventDefault();
 
     for (let i = 0; i < sgNavBtn.length; i++) {
-      sgNavBtn[i].classList.remove('sg-nav__button--active');
-      sgNavSubList[i].classList.remove('sg-nav__sub-list--visible');
+      sgNavBtn[i].classList.remove('is-active');
+      sgNavSubList[i].classList.remove('is-active');
     }
 
     if (this === sgNavLastActive) {
-      this.classList.remove('sg-nav__button--active');
-      this.nextElementSibling.classList.remove('sg-nav__sub-list--visible');
+      this.classList.remove('is-active');
+      this.nextElementSibling.classList.remove('is-active');
 
       sgNavLastActive = null;
     } else {
-      this.classList.add('sg-nav__button--active');
-      this.nextElementSibling.classList.add('sg-nav__sub-list--visible');
+      this.classList.add('is-active');
+      this.nextElementSibling.classList.add('is-active');
 
       sgNavLastActive = this;
     }

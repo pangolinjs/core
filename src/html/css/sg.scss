@@ -13,6 +13,9 @@
 $screen-sm:  50em; // 800px
 $screen-lg:  85em; // 1360px
 
+// Heights
+$height-nav: 2.5em; // 40px
+
 // Padding
 $padding:    2em;
 $padding-xs: ($padding / 3);
@@ -25,14 +28,13 @@ $color-blue:  rgb(0, 100, 200);
 $color-gray:  rgb(100, 100, 100);
 $color-alto:  rgb(220, 220, 220);
 
-
-
-
-/* FONT
- * ====================================================== */
-
-@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,700';
-
+/* System UI Font Stack
+ * Source:
+ * https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/ */
+$font-stack: -apple-system, BlinkMacSystemFont,
+  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+  "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
 
 
 
@@ -40,26 +42,39 @@ $color-alto:  rgb(220, 220, 220);
  * ====================================================== */
 
 .sg-nav {
-  all: unset;
-
   display: block;
   box-sizing: border-box;
-  height: 40px;
+  height: $height-nav; // 40px
+  margin: 0;
+  padding: 0;
 
-  font-family: 'Roboto', sans-serif;
+  font-family: $font-stack;
+  font-size: 1rem; // 16px
 
   &::before,
   &::after {
-    all: unset;
+    display: none;
   }
 
   *, *::before, *::after {
     box-sizing: border-box;
   }
-}
 
-.sg-nav--hidden {
-  height: 0;
+  &.is-hidden {
+    height: 0;
+  }
+
+  code {
+    display: inline;
+    margin: 0;
+    padding: 0 0.2em;
+
+    font-size: 1em;
+    font-family: monospace, monospace;
+    color: #fff;
+
+    background: $color-gray;
+  }
 }
 
 
@@ -68,15 +83,13 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-nav__list {
-  all: unset;
-
   display: flex;
   position: fixed;
   z-index: 9999;
-  height: 40px;
+  height: $height-nav; // 40px
   top: 0;
+  right: $height-nav; // 40px
   left: 0;
-  right: 40px;
   margin: 0;
   padding: 0;
 
@@ -86,11 +99,11 @@ $color-alto:  rgb(220, 220, 220);
 
   &::before,
   &::after {
-    all: unset;
+    display: none;
   }
 
-  .sg-nav--hidden & {
-    transform: translate3d(0, -40px, 0);
+  .is-hidden & {
+    display: none;
   }
 }
 
@@ -100,14 +113,14 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-nav__item {
-  all: unset;
-
-  display: block;
-  height: inherit;
+  display: block !important;
+  height: $height-nav; // 40px
+  margin: 0;
+  padding: 0;
 
   &::before,
   &::after {
-    all: unset;
+    display: none;
   }
 }
 
@@ -118,11 +131,11 @@ $color-alto:  rgb(220, 220, 220);
 
 .sg-nav__button {
   display: block;
-  height: 40px;
+  height: $height-nav;
   margin: 0;
-  padding: 0 12px;
+  padding: 0 0.75em; // 0 12px
 
-  font-size: 16px;
+  font-size: 1em; // 16px
   font-weight: 400;
   text-transform: uppercase;
   color: #fff;
@@ -134,7 +147,7 @@ $color-alto:  rgb(220, 220, 220);
 
   cursor: pointer;
 
-  &.sg-nav__button--active,
+  &.is-active,
   &:hover,
   &:focus,
   &:active {
@@ -143,11 +156,11 @@ $color-alto:  rgb(220, 220, 220);
 
   &::before,
   &::after {
-    all: unset;
+    display: none;
   }
 
   @media (min-width: $screen-sm) {
-    padding: 0 20px;
+    padding: 0 1.25em; // 0 20px
   }
 }
 
@@ -157,20 +170,26 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-nav__icon {
-  all: unset;
-
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 1.375em; // 22px
+  height: 1.375em; // 2px
+  margin: 0;
+  padding: 0;
 
+  font-size: 1em; // 16px
   font-weight: 700;
   color: $color-gray;
 
   background-color: #fff;
 
   border-radius: 50%;
+
+  &::before,
+  &::after {
+    display: none;
+  }
 }
 
 
@@ -179,20 +198,21 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-nav__text {
-  all: unset;
-
   display: none;
+  margin: 0;
+  padding: 0;
 
   &::before,
   &::after {
-    all: unset;
+    display: none;
   }
 
   @media (min-width: $screen-sm) {
     display: inline;
-    margin-left: 8px;
+    margin-left: 0.5em; // 8px
 
-    letter-spacing: 0.01em;
+    font-size: 1em; // 16px
+    letter-spacing: 0.01em; // 0.16px
   }
 }
 
@@ -202,12 +222,10 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-nav__sub-list {
-  all: unset;
-
   display: none;
   position: absolute;
   width: inherit;
-  top: 40px;
+  top: $height-nav; // 16px
   margin: 0;
   padding: 0;
 
@@ -215,12 +233,12 @@ $color-alto:  rgb(220, 220, 220);
 
   &::before,
   &::after {
-    all: unset;
+    display: none;
   }
-}
 
-.sg-nav__sub-list--visible {
-  display: block;
+  &.is-active {
+    display: block;
+  }
 }
 
 
@@ -229,13 +247,13 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-nav__sub-item {
-  all: unset;
-
   display: block;
+  margin: 0;
+  padding: 0;
 
   &::before,
   &::after {
-    all: unset;
+    display: none;
   }
 }
 
@@ -245,16 +263,19 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-nav__link {
-  all: unset;
-
   display: block;
-  padding: 10px 12px;
+  width: 100%;
+  margin: 0;
+  padding: 0.7142857142857143em 0.8571428571428571em; // 10px 12px
 
-  font-size: 14px;
+  font-size: 0.875em; // 14px
   font-weight: 400;
   color: $color-gray;
+  text-align: left;
   text-decoration: none;
 
+  background: none;
+  border: none;
   outline: none;
 
   cursor: pointer;
@@ -272,11 +293,11 @@ $color-alto:  rgb(220, 220, 220);
 
   &::before,
   &::after {
-    all: unset;
+    display: none;
   }
 
   @media (min-width: $screen-sm) {
-    padding: 10px 20px;
+    padding: 0.7142857142857143em 1.428571428571429em; // 10px 20px
   }
 }
 
@@ -286,16 +307,17 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-nav__hide-btn {
+  display: block !important;
   position: fixed;
   z-index: 9999;
-  height: 40px;
-  width: 40px;
+  height: $height-nav; // 40px
+  width: $height-nav; // 40px
   top: 0;
   right: 0;
   margin: 0;
-  padding: 5px;
+  padding: 0;
 
-  font-size: 24px;
+  font-size: 1em;
   line-height: 1;
   color: #fff;
 
@@ -316,27 +338,26 @@ $color-alto:  rgb(220, 220, 220);
 
   &::before,
   &::after {
-    all: unset;
+    display: none;
   }
 }
 
 .sg-nav__hide-btn-icon {
-  all: unset;
-
   fill: currentColor;
-  height: 28px;
+  height: 1em; // 28px
+  font-size: 1.75em; // 28px
 }
 
 .sg-nav__hide-btn-icon--show {
   display: none;
 
-  .sg-nav__hide-btn--active & {
+  .is-active & {
     display: inline;
   }
 }
 
 .sg-nav__hide-btn-icon--close {
-  .sg-nav__hide-btn--active & {
+  .is-active & {
     display: none;
   }
 }
@@ -348,15 +369,13 @@ $color-alto:  rgb(220, 220, 220);
  * ====================================================== */
 
 .sg-header {
-  all: unset;
-
   display: block;
   box-sizing: border-box;
   max-width: $screen-lg;
   margin: $padding-sm auto $padding-lg;
   padding: $padding-sm;
 
-  font-family: 'Roboto', sans-serif;
+  font-size: 1rem; // 16px
 
   border-bottom: 1px solid $color-alto;
 
@@ -376,18 +395,17 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-header__title {
-  all: unset;
-
   display: block;
-  margin: 0 0 10px;
+  margin: 0 0 0.5em;
+  padding: 0;
 
-  font-size: 26px;
+  font-family: $font-stack;
+  font-size: 1.5em; // 24px
   font-weight: 300;
   color: $color-blue;
 
   @media (min-width: $screen-sm) {
-    margin: 0 0 15px;
-    font-size: 48px;
+    font-size: 3em; // 48px
   }
 }
 
@@ -397,17 +415,17 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-header__description {
-  all: unset;
-
   display: block;
   margin: 0;
+  padding: 0;
 
-  font-size: 14px;
-  font-weight: 300;
+  font-family: $font-stack;
+  font-size: 0.875em; // 14px
+  font-weight: 400;
   color: $color-gray;
 
   @media (min-width: $screen-sm) {
-    font-size: 18px;
+    font-size: 1.125em; // 18px
   }
 }
 
@@ -431,7 +449,7 @@ $color-alto:  rgb(220, 220, 220);
 
 
 .sg-article {
-  margin-bottom: $padding-lg;
+  margin: 0 0 $padding-lg;
 
   @media (min-width: $screen-sm) {
     margin-bottom: $padding-xl;
@@ -446,8 +464,6 @@ $color-alto:  rgb(220, 220, 220);
 .sg-article__header {
   padding: $padding-sm;
 
-  font-family: 'Roboto', sans-serif;
-
   @media (min-width: $screen-sm) {
     padding: $padding;
   }
@@ -459,14 +475,16 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-article__title {
-  margin: 0 0 10px;
+  margin: 0 0 0.5em;
+  padding: 0;
 
-  font-size: 20px;
-  font-weight: 100;
+  font-family: $font-stack;
+  font-size: 1.25em; // 20px
+  font-weight: 300;
   color: $color-blue;
 
   @media (min-width: $screen-sm) {
-    font-size: 24px;
+    font-size: 1.5em; // 24px
   }
 }
 
@@ -476,14 +494,16 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-article__description {
-  margin: 0 0 10px;
+  margin: 0 0 0.625em;
+  padding: 0;
 
-  font-size: 14px;
-  font-weight: 100;
+  font-family: $font-stack;
+  font-size: 0.875em; // 14px
+  font-weight: 400;
   color: $color-gray;
 
   @media (min-width: $screen-sm) {
-    font-size: 16px;
+    font-size: 1em;
   }
 }
 
@@ -493,6 +513,7 @@ $color-alto:  rgb(220, 220, 220);
  * ================================== */
 
 .sg-article__body {
+  margin: 0;
   padding: $padding-sm;
 
   outline: 1px solid $color-alto;

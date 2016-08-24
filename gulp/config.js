@@ -49,13 +49,16 @@ module.exports = {
           'position: fixed',
           'z-index: 9999',
           'box-sizing: border-box',
-          'height: 40px',
+          'height: 2.5em',
           'top: 0',
-          'right: 40px',
-          'padding: 10px 16px',
-          'font-family: Roboto, sans-serif',
-          'font-size: 16px',
-          'font-weight: 100',
+          'right: 2.5em',
+          'padding: 0.625em 1em',
+          'font-family: -apple-system, BlinkMacSystemFont,\
+            "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",\
+            "Fira Sans", "Droid Sans", "Helvetica Neue",\
+            sans-serif;',
+          'font-size: 1rem',
+          'font-weight: 400',
           'text-transform: uppercase',
           'color: #fff',
           'background-color: rgb(47, 151, 255)'
