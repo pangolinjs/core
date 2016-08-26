@@ -43,7 +43,7 @@ const imagemin     = require('gulp-imagemin');
 
 // Paths & Config
 const paths        = require('./gulp/paths.js');
-const config       = require('./gulp/config.js');
+const config       = require('./gulp/config.json');
 
 
 
@@ -525,6 +525,10 @@ gulp.task('production', ['clean-dist'], () => {
 
 
 gulp.task('browsersync', () => {
+  // Setup Browsersync root directory
+  config.html.browsersync.server = paths.html.dev;
+
+  // Fire up Browsersync
   browsersync(config.html.browsersync);
 });
 
