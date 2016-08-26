@@ -2,6 +2,20 @@
 
 
 
+## 1.11.0
+2016-08-26
+
+### Improved
+- Switched to permissive MIT license
+- Separated Styleguide JavaScript from HTML
+- Styleguide CSS
+- Gulp config file is now JSON
+
+### Added
+- Basic accessibility testing from Styleguide navigation
+
+
+
 ## 1.10.0
 2016-08-15
 
