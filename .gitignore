@@ -1,15 +1,19 @@
 # OS specific stuff
 Thumbs.db
+Desktop.ini
 .DS_Store
+._*
+*~
 
 # Logs
 logs
 *.log
+npm-debug.log*
 
 # Dependency directory
 node_modules
 
-# Dev and Dist folders
+# Generated content
 dev
 prev
 dist
