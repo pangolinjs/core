@@ -7,8 +7,13 @@
  * Default aspect ratio is 1:1. Change this by applying
  * modifier classes.
  *
- * The aspect-ratio hack is applied to an empty element
- * because it allows the component to respect `max-height`.
+ * Usage:
+ * <div class="embed-responsive embed-responsive--16by9">
+ *  <video class="embed-responsive__content">
+ *    <source src="http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4" type="video/mp4">
+ *    <p>Your browser doesn't support HTML5 Video.</p>
+ *  </video>
+ * </div>
  *
  * Based on:
  * http://alistapart.com/article/creating-intrinsic-ratios-for-video
@@ -50,7 +55,7 @@
 }
 
 .embed-responsive--3by1 {
-  padding-bottom: 33.3333333333%;
+  padding-bottom: calc(100% / 3);
 }
 
 .embed-responsive--4by3 {
