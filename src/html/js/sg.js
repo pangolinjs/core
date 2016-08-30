@@ -97,9 +97,7 @@
 
 
 (function() {
-  let a11yButtons = document.querySelectorAll('.js-sg-a11y');
-
-
+  /* eslint no-console: 0 */
 
   /* A11Y CONTRAST CECK
    * ==================================================== */
@@ -126,34 +124,67 @@
     }
   };
 
+  let a11yContrastButton = document.querySelector('.js-sg-a11y-contrast');
+  a11yContrastButton.addEventListener('click', function() {
+    a11yContrast.toggle(this);
+  });
 
 
-  /* A11Y HIDE ARIA-HIDDEN="true"
+
+  /* A11Y DUPLICATE ID
    * ==================================================== */
 
-  let a11yAriaHidden = {
+  let a11yDuplicateId = {
     active: false,
-    elementList: document.querySelectorAll('[aria-hidden="true"]'),
+    elementList: document.querySelectorAll('[id]'),
+    idList: {},
     toggle: function(button) {
       if (this.active) {
-        for (let i = 0; i < this.elementList.length; i++) {
-          this.elementList[i].style.display = null;
-        }
+
+        document.querySelectorAll('[id]').forEach(function(item) {
+          item.style.outline = null;
+        });
+
+        this.idList = {};
         button.classList.remove('is-active');
         this.active = false;
+
       } else {
         for (let i = 0; i < this.elementList.length; i++) {
-          this.elementList[i].style.display = 'none';
+          let currentId = this.elementList[i].id;
+          if (this.idList.hasOwnProperty(currentId)) {
+
+            this.idList[currentId]++;
+          } else {
+            this.idList[currentId] = 1;
+          }
         }
+
+        for (let key in this.idList) {
+          if (this.idList.hasOwnProperty(key) && this.idList[key] > 1) {
+            console.error('Duplicate ID:');
+            document.querySelectorAll(`#${key}`).forEach(function(item) {
+              item.style.outline = '0.5em solid red';
+              console.log(item);
+            });
+          }
+        }
+
         button.classList.add('is-active');
         this.active = true;
+
       }
     }
   };
 
+  let a11yDuplicateIdButton = document.querySelector('.js-sg-a11y-duplicate-id');
+  a11yDuplicateIdButton.addEventListener('click', function() {
+    a11yDuplicateId.toggle(this);
+  });
 
 
-  /* A11Y HIGHLIGHT MISSING ALT ATTRIBUTE
+
+  /* A11Y HIGHLIGHT MISSING ALT
    * ==================================================== */
 
   let a11yAlt = {
@@ -168,7 +199,9 @@
         this.active = false;
       } else {
         for (let i = 0; i < this.elementList.length; i++) {
-          this.elementList[i].style.outline = '1em solid red';
+          this.elementList[i].style.outline = '0.5em solid red';
+          console.error('Missing alt attribute:');
+          console.log(this.elementList[i]);
         }
         button.classList.add('is-active');
         this.active = true;
@@ -176,24 +209,8 @@
     }
   };
 
-
-
-  /* TOGGLE A11Y TESTS
-   * ==================================================== */
-
-  let toggleA11y = function(event) {
-    event.preventDefault();
-
-    if (this.classList.contains('js-sg-a11y-contrast')) {
-      a11yContrast.toggle(this);
-    } else if (this.classList.contains('js-sg-a11y-aria-hidden')) {
-      a11yAriaHidden.toggle(this);
-    } else if (this.classList.contains('js-sg-a11y-alt')) {
-      a11yAlt.toggle(this);
-    }
-  };
-
-  for (let i = 0; i < a11yButtons.length; i++) {
-    a11yButtons[i].addEventListener('click', toggleA11y);
-  }
+  let a11yAltButton = document.querySelector('.js-sg-a11y-alt');
+  a11yAltButton.addEventListener('click', function() {
+    a11yAlt.toggle(this);
+  });
 })();
