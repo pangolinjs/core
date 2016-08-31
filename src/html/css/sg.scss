@@ -24,9 +24,10 @@ $padding-lg: ($padding * 2);
 $padding-xl: ($padding * 3);
 
 // Colors
-$color-blue:  rgb(0, 100, 200);
-$color-gray:  rgb(100, 100, 100);
-$color-alto:  rgb(220, 220, 220);
+$color-blue:       rgb(0, 100, 200);
+$color-light-blue: lighten($color-blue, 20%);
+$color-gray:       rgb(100, 100, 100);
+$color-alto:       rgb(220, 220, 220);
 
 /* System UI Font Stack
  * Source:
@@ -151,7 +152,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   &:hover,
   &:focus,
   &:active {
-    background: lighten($color-blue, 20%);
+    background: $color-light-blue;
   }
 
   &::before,
@@ -289,7 +290,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   &:focus,
   &:active {
     color: #fff;
-    background: lighten($color-blue, 20%);
+    background: $color-light-blue;
   }
 
   &::before,
@@ -322,7 +323,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   line-height: 1;
   color: #fff;
 
-  background: lighten($color-blue, 20%);
+  background: $color-light-blue;
 
   border: none;
   outline: none;
@@ -334,7 +335,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   &:hover,
   &:focus,
   &:active {
-    background: lighten($color-blue, 10%);
+    background: $color-blue;
   }
 
   &::before,

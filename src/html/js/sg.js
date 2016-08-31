@@ -99,6 +99,15 @@
 (function() {
   /* eslint no-console: 0 */
 
+  let a11yButton = {
+    active: function(element) {
+      element.classList.add('is-active');
+    },
+    inactive: function(element) {
+      element.classList.remove('is-active');
+    }
+  };
+
   /* A11Y CONTRAST CECK
    * ==================================================== */
 
@@ -109,14 +118,14 @@
       if (this.active) {
 
         htmlElement.removeAttribute('style');
-        button.classList.remove('is-active');
+        a11yButton.inactive(button);
         this.active = false;
 
       } else {
 
         htmlElement.style.WebkitFilter = 'grayscale(100%)';
         htmlElement.style.filter       = 'grayscale(100%)';
-        button.classList.add('is-active');
+        a11yButton.active(button);
         this.active = true;
 
       }
@@ -143,7 +152,7 @@
           item.removeAttribute('style');
         });
 
-        button.classList.remove('is-active');
+        a11yButton.inactive(button);
         this.active = false;
 
       } else {
@@ -172,7 +181,7 @@
 
         }
 
-        button.classList.add('is-active');
+        a11yButton.active(button);
         this.active = true;
       }
     }
@@ -198,7 +207,7 @@
           item.removeAttribute('style');
         });
 
-        button.classList.remove('is-active');
+        a11yButton.inactive(button);
         this.active = false;
 
       } else {
@@ -209,7 +218,7 @@
           item.style.outline = '0.5em solid red';
         });
 
-        button.classList.add('is-active');
+        a11yButton.active(button);
         this.active = true;
 
       }
@@ -218,5 +227,47 @@
 
   document.querySelector('.js-sg-a11y-alt').addEventListener('click', function() {
     a11yAlt.toggle(this);
+  });
+
+
+
+  /* A11Y MISSING LABEL
+   * ==================================================== */
+
+  let a11yLabel = {
+    active: false,
+    toggle: function(button) {
+      let inputElements = document.querySelectorAll('input:not([type="submit"])');
+
+      if (this.active) {
+
+        [...inputElements].forEach(function(item) {
+          item.removeAttribute('style');
+        });
+
+        a11yButton.inactive(button);
+        this.active = false;
+
+      } else {
+
+        [...inputElements].forEach(function(item) {
+          let itemId = item.id;
+
+          if ((!itemId || !document.querySelector(`label[for="${itemId}"]`)) && (item.parentElement.nodeName !== 'LABEL')) {
+            console.error('Missing label:');
+            console.log(item);
+            item.style.outline = '0.5em solid red';
+          }
+        });
+
+        a11yButton.active(button);
+        this.active = true;
+
+      }
+    }
+  };
+
+  document.querySelector('.js-sg-a11y-label').addEventListener('click', function() {
+    a11yLabel.toggle(this);
   });
 })();
