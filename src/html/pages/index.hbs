@@ -5,14 +5,14 @@ category: Pages
 ---
 {{#extend "layouts/pages"}}
 {{#content "body"}}
-  <h1>This is your homepage</h1>
+  <h1 id="test">This is your homepage</h1>
   <h2>{{@file.meta.description}}</h2>
 
   <p>It's the first page (index.html) the visitor of your site will see.</p>
 
-  <h2>Image Placeholder</h2>
+  <h2 id="test">Image Placeholder</h2>
   <p>Use services like <a href="http://placehold.it/">Placehold.it</a> for image placeholders.</p>
-  <img src="http://placehold.it/350x150" alt="Placeholder">
+  <img src="http://placehold.it/350x150">
 
   <h2>SVG Icons</h2>
   <svg width="96" height="96"><use xlink:href="{{rel}}img/icons.svg#menu"></use></svg>

@@ -104,28 +104,26 @@
 
   let a11yContrast = {
     active: false,
-    elementList: document.querySelectorAll('html'),
     toggle: function(button) {
+      let htmlElement = document.querySelector('html');
       if (this.active) {
-        for (let i = 0; i < this.elementList.length; i++) {
-          this.elementList[i].style.WebkitFilter = null;
-          this.elementList[i].style.filter       = null;
-        }
+
+        htmlElement.removeAttribute('style');
         button.classList.remove('is-active');
         this.active = false;
+
       } else {
-        for (let i = 0; i < this.elementList.length; i++) {
-          this.elementList[i].style.WebkitFilter = 'grayscale(100%)';
-          this.elementList[i].style.filter       = 'grayscale(100%)';
-        }
+
+        htmlElement.style.WebkitFilter = 'grayscale(100%)';
+        htmlElement.style.filter       = 'grayscale(100%)';
         button.classList.add('is-active');
         this.active = true;
+
       }
     }
   };
 
-  let a11yContrastButton = document.querySelector('.js-sg-a11y-contrast');
-  a11yContrastButton.addEventListener('click', function() {
+  document.querySelector('.js-sg-a11y-contrast').addEventListener('click', function() {
     a11yContrast.toggle(this);
   });
 
@@ -136,81 +134,89 @@
 
   let a11yDuplicateId = {
     active: false,
-    elementList: document.querySelectorAll('[id]'),
-    idList: {},
     toggle: function(button) {
+      let elementsWithId = document.querySelectorAll('[id]');
+
       if (this.active) {
 
-        document.querySelectorAll('[id]').forEach(function(item) {
-          item.style.outline = null;
+        [...elementsWithId].forEach(function(item) {
+          item.removeAttribute('style');
         });
 
-        this.idList = {};
         button.classList.remove('is-active');
         this.active = false;
 
       } else {
-        for (let i = 0; i < this.elementList.length; i++) {
-          let currentId = this.elementList[i].id;
-          if (this.idList.hasOwnProperty(currentId)) {
 
-            this.idList[currentId]++;
+        let idList = {};
+
+        [...elementsWithId].forEach(function(item) {
+          let currentId = item.id;
+
+          if (idList.hasOwnProperty(currentId)) {
+            idList[currentId]++;
           } else {
-            this.idList[currentId] = 1;
+            idList[currentId] = 1;
           }
-        }
+        });
 
-        for (let key in this.idList) {
-          if (this.idList.hasOwnProperty(key) && this.idList[key] > 1) {
+        for (let key in idList) {
+
+          if (idList.hasOwnProperty(key) && idList[key] > 1) {
             console.error('Duplicate ID:');
-            document.querySelectorAll(`#${key}`).forEach(function(item) {
-              item.style.outline = '0.5em solid red';
+            [...document.querySelectorAll(`#${key}`)].forEach(function(item) {
               console.log(item);
+              item.style.outline = '0.5em solid red';
             });
           }
+
         }
 
         button.classList.add('is-active');
         this.active = true;
-
       }
     }
   };
 
-  let a11yDuplicateIdButton = document.querySelector('.js-sg-a11y-duplicate-id');
-  a11yDuplicateIdButton.addEventListener('click', function() {
+  document.querySelector('.js-sg-a11y-duplicate-id').addEventListener('click', function() {
     a11yDuplicateId.toggle(this);
   });
 
 
 
-  /* A11Y HIGHLIGHT MISSING ALT
+  /* A11Y MISSING ALT
    * ==================================================== */
 
   let a11yAlt = {
     active: false,
-    elementList: document.querySelectorAll('img:not([alt])'),
     toggle: function(button) {
+      let imgsWithoutAlt = document.querySelectorAll('img:not([alt])');
+
       if (this.active) {
-        for (let i = 0; i < this.elementList.length; i++) {
-          this.elementList[i].style.outline = null;
-        }
+
+        [...imgsWithoutAlt].forEach(function(item) {
+          item.removeAttribute('style');
+        });
+
         button.classList.remove('is-active');
         this.active = false;
+
       } else {
-        for (let i = 0; i < this.elementList.length; i++) {
-          this.elementList[i].style.outline = '0.5em solid red';
+
+        [...imgsWithoutAlt].forEach(function(item) {
           console.error('Missing alt attribute:');
-          console.log(this.elementList[i]);
-        }
+          console.log(item);
+          item.style.outline = '0.5em solid red';
+        });
+
         button.classList.add('is-active');
         this.active = true;
+
       }
     }
   };
 
-  let a11yAltButton = document.querySelector('.js-sg-a11y-alt');
-  a11yAltButton.addEventListener('click', function() {
+  document.querySelector('.js-sg-a11y-alt').addEventListener('click', function() {
     a11yAlt.toggle(this);
   });
 })();
