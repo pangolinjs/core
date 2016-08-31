@@ -124,7 +124,7 @@ The `default` gulp task injects a navigation bar into both component and page HT
 
 Components are located in `src/html/pages/components`, pages in `src/html/pages`.
 
-The YAML front matter between the opening `---` and closing `---` contains general information like the title, description and category. These will be used primarily by layouts and the Styleguide navigation. The front matter can be accessed with `{{@file.meta.key}}`. Replace `key` with the name from the front matter.
+The YAML front matter between the opening `---` and closing `---` contains general information like the title, description and category. These will be used primarily by layouts and the Styleguide navigation. The front matter can be accessed with `{{page "key"}}`. Replace `key` with the name from the front matter.
 
 A simple component page is defined by it's category and the correspondening layout:
 ```handlebars
@@ -157,13 +157,16 @@ The following parameters are available:
 
 #### Default Variables
 
-* `{{@file.meta.title}}`: Title of the current component or page.
-* `{{@file.meta.description}}`: Description of the current component or page.
-* `{{version}}`: Current styleguide version (e.g. "1.7.0").
-* `{{lang}}`: Global project language (e.g. "en").
-* `{{rel}}`: Relative path to the root (e.g. "../").
-* `{{filepath}}`: Relative path containing the filename of the current page (e.g. "components/header.html").
-* `{{dev}}`: Returns true for development task.
+* `{{meta.version}}`: Current styleguide version (e.g. "1.7.0").
+* `{{meta.lang}}`: Global project language (e.g. "en").
+* `{{meta.dev}}`: Returns true for development task.
+* `{{page "title"}}`: Title of the current page.
+* `{{page "description"}}`: Description of the current page.
+* `{{page "category"}}`: Category of the current page.
+* `{{page "filebase"}}`: The name of the current page file without extension (e.g. "index").
+* `{{page "filename"}}`: The name of the current page file with extension (e.g. "index.html").
+* `{{page "filepath"}}`: Relative path containing the filename of the current page (e.g. "components/header.html").
+* `{{page "reldir"}}`: Relative path to the root (e.g. "../").
 
 
 #### Styleguide CSS
