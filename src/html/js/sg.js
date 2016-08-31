@@ -199,11 +199,11 @@
   let a11yAlt = {
     active: false,
     toggle: function(button) {
-      let imgsWithoutAlt = document.querySelectorAll('img:not([alt])');
+      let missingAltAttribute = document.querySelectorAll('img:not([alt]), object:not([alt])');
 
       if (this.active) {
 
-        [...imgsWithoutAlt].forEach(function(item) {
+        [...missingAltAttribute].forEach(function(item) {
           item.removeAttribute('style');
         });
 
@@ -212,7 +212,7 @@
 
       } else {
 
-        [...imgsWithoutAlt].forEach(function(item) {
+        [...missingAltAttribute].forEach(function(item) {
           console.error('Missing alt attribute:');
           console.log(item);
           item.style.outline = '0.5em solid red';
