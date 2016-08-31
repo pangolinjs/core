@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html{{#if lang}} lang="{{lang}}"{{/if}}>
+<html{{#if meta.lang}} lang="{{meta.lang}}"{{/if}}>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{#if @file.meta.description}}<meta name="description" content="{{@file.meta.description}}">{{/if}}
-    {{#if @file.meta.title}}<title>{{@file.meta.title}}</title>{{/if}}
+    {{#if (page "description")~}}<meta name="description" content="{{page 'description'}}">{{/if}}
+    {{#if (page "title")}}<title>{{page "title"}}</title>{{/if}}
 
     <!-- CSS -->
-    {{#if dev}}<link rel="stylesheet" href="{{rel}}css/sg.css?v={{version}}">{{/if}}
-    <link rel="stylesheet" href="{{rel}}css/styles.css?v={{version}}">
+    {{#if meta.dev}}<link rel="stylesheet" href="{{page 'reldir'}}css/sg.css?v={{meta.version}}">{{/if}}
+    <link rel="stylesheet" href="{{page 'reldir'}}css/styles.css?v={{meta.version}}">
   </head>
   <body>
 
-    {{#if dev}}{{> "styleguide/nav"}}{{/if}}
+    {{#if meta.dev}}{{> "styleguide/nav"}}{{/if}}
 
     {{{block "body"}}}
 
     <!-- JS -->
-    {{#if dev}}<script src="{{rel}}js/sg.js?v={{version}}"></script>{{/if}}
-    <script src="{{rel}}js/svgxuse.js?v={{version}}"></script>
-    <script src="{{rel}}js/scripts.js?v={{version}}"></script>
+    {{#if meta.dev}}<script src="{{page 'reldir'}}js/sg.js?v={{meta.version}}"></script>{{/if}}
+    <script src="{{page 'reldir'}}js/svgxuse.js?v={{meta.version}}"></script>
+    <script src="{{page 'reldir'}}js/scripts.js?v={{meta.version}}"></script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 <nav class="sg-nav js-sg-nav">
   <ul class="sg-nav__list">
 
-  {{#each navItems}}
+  {{#each pages.categories}}
     <li class="sg-nav__item">
 
       <button class="sg-nav__button js-sg-nav-btn">
@@ -12,7 +12,7 @@
       <ul class="sg-nav__sub-list js-sg-nav-sub">
       {{#each this.pages}}
         <li class="sg-nav__sub-item">
-          <a href="{{rel}}{{this.url}}" class="sg-nav__link">{{this.name}}</a>
+          <a href="{{page 'reldir'}}{{this.url}}" class="sg-nav__link">{{this.name}}</a>
         </li>
       {{/each}}
       </ul>
@@ -27,7 +27,7 @@
       </button>
       <ul class="sg-nav__sub-list js-sg-nav-sub">
         <li class="sg-nav__sub-item">
-          <a href="{{rel}}img/icons.html" class="sg-nav__link" target="_blank">Icon Preview</a>
+          <a href="{{page 'reldir'}}img/icons.html" class="sg-nav__link" target="_blank">Icon Preview</a>
         </li>
         <li class="sg-nav__sub-item">
           <a href="http://localhost:3001" class="sg-nav__link" target="_blank">Browsersync</a>

@@ -257,12 +257,20 @@ let compileHandlebars = (task) => {
     gulpDest = paths.html.prev;
   }
 
+  let dataMeta = {
+    version: require('./package.json').version,
+    lang: require('./package.json').lang,
+    dev: task === 'dev' ? true : false,
+  }
 
-  // Create navItems object
-  let pages    = glob.sync(pageDir);
-  let navItems = {};
 
-  for (let page of pages) {
+  // Create dataPages object
+  let pageList = glob.sync(pageDir);
+  let dataPages = {
+    categories: {}
+  };
+
+  for (let page of pageList) {
     let frontMatter = fm(fs.readFileSync(page, 'utf8')).attributes;
     let url         = path.relative(`${paths.html.src}/pages`, page).replace('.hbs', '.html');
     let name        = frontMatter.title ? frontMatter.title : url;
@@ -273,10 +281,10 @@ let compileHandlebars = (task) => {
       url
     };
 
-    if (navItems.hasOwnProperty(category)) {
-      navItems[category].pages.push(pageItem);
+    if (dataPages.categories.hasOwnProperty(category)) {
+      dataPages.categories[category].pages.push(pageItem);
     } else {
-      navItems[category] = {
+      dataPages.categories[category] = {
         name: category,
         icon: category[0],
         pages: [pageItem]
@@ -290,19 +298,6 @@ let compileHandlebars = (task) => {
     .partials(`${paths.html.src}/partials/**/*.hbs`)
     .helpers(require('handlebars-layouts'))
     .helpers({
-      rel: (options) => {
-        let currentPath = path.dirname(options.data.file.path);
-        let sourcePath  = path.resolve(`${paths.html.src}/pages`);
-
-        if (currentPath === sourcePath) {
-          return '';
-        }
-
-        return `${path.relative(currentPath, sourcePath)}/`;
-      },
-      filepath: (options) => {
-        return path.relative(`${paths.html.src}/pages`, options.data.file.path).replace('.hbs', '.html');
-      },
       // Handlebars concat helper
       // Source: http://stackoverflow.com/a/34812062
       concat: (json) => {
@@ -318,18 +313,62 @@ let compileHandlebars = (task) => {
         }
 
         return concat;
+      },
+      page: (key, options) => {
+        let file = options.data.file.path;
+
+        let frontMatter = fm(fs.readFileSync(file, 'utf8')).attributes;
+
+        switch (key) {
+          case 'filebase':
+            return path.basename(file, '.hbs');
+            break;
+
+          case 'filename':
+            return path.basename(file, '.hbs') + '.html';
+            break;
+
+          case 'filepath':
+            return path.relative(`${paths.html.src}/pages`, file).replace('.hbs', '.html');
+            break;
+
+          case 'reldir':
+            let currentPath = path.dirname(file);
+            let sourcePath  = path.resolve(`${paths.html.src}/pages`);
+
+            if (currentPath === sourcePath) {
+              return '';
+            }
+
+            return `${path.relative(currentPath, sourcePath)}/`;
+            break;
+
+          case 'title':
+            return frontMatter.title;
+            break;
+
+          case 'description':
+            return frontMatter.description;
+            break;
+
+          case 'category':
+            return frontMatter.category;
+            break;
+        }
+
+        if (frontMatter.hasOwnProperty(key)) {
+          return frontMatter[key];
+        }
       }
     })
     .data({
-      version: require('./package.json').version,
-      lang: require('./package.json').lang,
-      dev: task === 'dev' ? true : false,
-      navItems: navItems
+      meta: dataMeta,
+      pages: dataPages
     });
 
 
   return gulp.src(gulpSrc)
-    .pipe(gulpFm({property: 'meta'}))
+    .pipe(gulpFm({property: 'fm'}))
     .pipe(hbStream.on('error', handlebarsError))
     .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest(gulpDest));
