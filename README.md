@@ -166,7 +166,7 @@ The following parameters are available:
 * `{{page "filebase"}}`: The name of the current page file without extension (e.g. "index").
 * `{{page "filename"}}`: The name of the current page file with extension (e.g. "index.html").
 * `{{page "filepath"}}`: Relative path containing the filename of the current page (e.g. "components/header.html").
-* `{{page "reldir"}}`: Relative path to the root (e.g. "../").
+* `{{page "rel"}}`: Relative path to the root (e.g. "../").
 
 
 #### Styleguide CSS
@@ -185,7 +185,7 @@ SVG files placed in the `src/img/icons` folder will be transformed into an SVG i
 
 Icons can be used in HTML with the following syntax:
 ```html
-<svg><use xlink:href="{{rel}}img/icons.svg#icon"></use></svg>
+<svg><use xlink:href="{{page 'rel'}}img/icons.svg#filename-icon"></use></svg>
 ```
 
 This styleguide ships with [svgxuse](https://github.com/Keyamoon/svgxuse), a polyfill for browsers that do not support external SVG reference.

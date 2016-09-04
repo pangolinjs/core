@@ -1,0 +1,18 @@
+---
+title: Icons
+description: All SVG icons from the generated icon sprite in one place.
+category: Components
+---
+{{#extend "layouts/components"}}
+{{#content "body"}}
+
+  {{#embed "styleguide/article" padding="none"}}
+  {{#content "body"}}
+
+    <iframe src="{{page 'rel'}}img/icons.html" class="sg-iframe js-sg-iframe"></iframe>
+
+  {{/content}}
+  {{/embed}}
+
+{{/content}}
+{{/extend}}

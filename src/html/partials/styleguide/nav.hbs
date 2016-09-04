@@ -12,28 +12,13 @@
       <ul class="sg-nav__sub-list js-sg-nav-sub">
       {{#each this.pages}}
         <li class="sg-nav__sub-item">
-          <a href="{{page 'reldir'}}{{this.url}}" class="sg-nav__link">{{this.name}}</a>
+          <a href="{{page 'rel'}}{{this.url}}" class="sg-nav__link">{{this.name}}</a>
         </li>
       {{/each}}
       </ul>
 
     </li>
   {{/each}}
-
-    <li class="sg-nav__item">
-      <button class="sg-nav__button js-sg-nav-btn">
-        <span class="sg-nav__icon" style="display: none;">S</span>
-        <span class="sg-nav__text">Settings</span>
-      </button>
-      <ul class="sg-nav__sub-list js-sg-nav-sub">
-        <li class="sg-nav__sub-item">
-          <a href="{{page 'reldir'}}img/icons.html" class="sg-nav__link" target="_blank">Icon Preview</a>
-        </li>
-        <li class="sg-nav__sub-item">
-          <a href="http://localhost:3001" class="sg-nav__link" target="_blank">Browsersync</a>
-        </li>
-      </ul>
-    </li>
 
     <li class="sg-nav__item" style="display: none;">
       <button class="sg-nav__button js-sg-nav-btn">
@@ -52,6 +37,18 @@
         </li>
         <li class="sg-nav__sub-item">
           <button class="sg-nav__link js-sg-a11y-label">Missing <code>label</code></button>
+        </li>
+      </ul>
+    </li>
+
+    <li class="sg-nav__item">
+      <button class="sg-nav__button js-sg-nav-btn">
+        <span class="sg-nav__icon" style="display: none;">S</span>
+        <span class="sg-nav__text">Settings</span>
+      </button>
+      <ul class="sg-nav__sub-list js-sg-nav-sub">
+        <li class="sg-nav__sub-item">
+          <a href="http://localhost:3001" class="sg-nav__link" target="_blank">Browsersync</a>
         </li>
       </ul>
     </li>

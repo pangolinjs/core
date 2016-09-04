@@ -271,3 +271,21 @@
     a11yLabel.toggle(this);
   });
 })();
+
+
+
+(function() {
+  /* AUTO HEIGHT ADJUST FOR IFRAMES
+   * ==================================================== */
+
+  let iframes = document.querySelectorAll('.js-sg-iframe');
+
+  let autoHeightAdjust = function(item) {
+    // Wait for iframes to finish loading
+    item.onload = function() {
+      item.style.height = `${item.contentWindow.document.body.scrollHeight}px`;
+    };
+  };
+
+  [...iframes].forEach(autoHeightAdjust);
+})();

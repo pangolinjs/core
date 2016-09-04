@@ -55,19 +55,29 @@
     "svgSpriteDev": {
       "mode": {
         "symbol": {
-          "dest": ".",
+          "dest": "",
           "sprite": "icons.svg",
           "example": {
             "dest": "icons.html"
           }
+        }
+      },
+      "shape": {
+        "id": {
+          "generator": "%s-icon"
         }
       }
     },
     "svgSpriteDist": {
       "mode": {
         "symbol": {
-          "dest": ".",
+          "dest": "",
           "sprite": "icons.svg"
+        }
+      },
+      "shape": {
+        "id": {
+          "generator": "%s-icon"
         }
       }
     },
@@ -78,9 +88,7 @@
       "png": {
         "optimizationLevel": 5
       },
-      "svg": {
-        "plugins": [{"removeUselessDefs": false}]
-      }
+      "svg": {}
     }
   }
 }

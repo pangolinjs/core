@@ -538,3 +538,19 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 .sg-article__body--bg {
   outline: none;
 }
+
+.sg-article__body--padding-none {
+  padding: 0;
+}
+
+
+
+/* STYLEGUIDE IFRAME
+ * ================================== */
+
+.sg-iframe {
+  display: block;
+  width: 100%;
+
+  border: none;
+}

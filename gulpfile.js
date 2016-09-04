@@ -332,7 +332,7 @@ let compileHandlebars = (task) => {
             return path.relative(`${paths.html.src}/pages`, file).replace('.hbs', '.html');
             break;
 
-          case 'reldir':
+          case 'rel':
             let currentPath = path.dirname(file);
             let sourcePath  = path.resolve(`${paths.html.src}/pages`);
 
