@@ -181,12 +181,16 @@ Output to `dev/img`, `prev/img` or `dist/img`.
 
 All files and folders placed in `src/img` will be copied to `dev/img`, `prev/img` or `dist/img`.
 
-SVG files placed in the `src/img/icons` folder will be transformed into an SVG icon sprite named `icons.svg`. The original icons will *not* be copied to output folders.
+SVG files placed in the `src/img/icons` folder will be transformed into an SVG icon sprite named `icons.svg`. The original icons will *not* be copied to output folders. SVG symbols can be referenced with their ID. The icon workflow creates IDs from the filename of the original SVG placed in `src/img/icons`. Each ID is suffixed with "-icon" for better compatibility with browsers that need a polyfill.
 
 Icons can be used in HTML with the following syntax:
 ```html
-<svg><use xlink:href="{{page 'rel'}}img/icons.svg#filename-icon"></use></svg>
+<svg width="24" height="24">
+  <use xlink:href="{{page 'rel'}}img/icons.svg#filename-icon"></use>
+</svg>
 ```
+
+Specifying intrinsic dimensions is considered good style. Without an intrinsic width and height browsers often scale SVGs to fill the whole viewport. This happens if dimensions set in CSS fail to load.
 
 This styleguide ships with [svgxuse](https://github.com/Keyamoon/svgxuse), a polyfill for browsers that do not support external SVG reference.
 
@@ -199,9 +203,9 @@ Files from Node modules can be incorporated into the styleguide. Simply install 
 `npmassets.js` contains an array of objects. Each object has a `glob` and `dest` key:
 
 * `glob` will be passed to `gulp.src()` and specifies which files will be copied. Refer to the [gulp.src documentation](https://github.com/gulpjs/gulp/blob/master/docs/API.md#globs) for more information regarding globs.
-* `dest` sets the destination for the copy process. The development, preview and production tasks each prefix the destination with their specific output folders (e.g. `dev/js` for development). Base path variables from `gulp/paths.js` can be used (`path.css.base`, `path.js.base`, `path.html.base` and `path.img.base`).
+* `dest` sets the destination for the copy process. The development, preview and production tasks each prefix the destination with their specific output folders (e.g. `dev/` for development). Base path variables from `gulp/paths.js` can be used (`path.css.base`, `path.js.base`, `path.html.base` and `path.img.base`).
 
-The following example is the default example:
+The following example is included with the styleguide:
 ```javascript
 module.exports = [
   {
