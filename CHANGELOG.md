@@ -2,6 +2,27 @@
 
 
 
+## 1.12.0
+2016-09-07
+
+### Improved
+- Missing `alt` accessibility check
+- Uniform Handlebars helpers and data
+
+### Added
+- Example for `embed-responsive`
+- Duplicate ID accessibility check
+- Missing `label` accessibility check
+- SVG icon sprite component page
+
+### Fixed
+- NPM Assets copy task (new syntax)
+
+### Removed
+- Leftover IDs from testing
+
+
+
 ## 1.11.0
 2016-08-26
 
