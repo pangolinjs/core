@@ -2,6 +2,14 @@
 
 
 
+## 1.12.1
+2016-09-07
+
+### Removed
+- HTML development clean task
+
+
+
 ## 1.12.0
 2016-09-07
 
