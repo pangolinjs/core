@@ -98,10 +98,10 @@ A minimalistic layout may look like this:
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{@file.meta.title}}</title>
+    <title>{{page 'title'}}</title>
   </head>
   <body>
-    {{{block "body"}}}
+    {{{block "content"}}}
   </body>
 </html>
 ```
@@ -112,7 +112,7 @@ These files can be included in all other files (even in other includes). The pro
 
 Includes are located in `src/html/partials/includes`.
 
-The syntax `{{> "includes/example" }}` includes the file `src/html/partials/includes/example.hbs`.
+The syntax `{{> "includes/example"}}` includes the file `src/html/partials/includes/example.hbs`.
 
 
 #### Components and Pages
