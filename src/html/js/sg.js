@@ -44,13 +44,13 @@
       sgNav.classList.add('is-hidden');
 
       sgNavActive     = false;
-      document.cookie = 'sgNavActive=false';
+      document.cookie = 'sgNavActive=false;path=/';
     } else {
       this.classList.remove('is-active');
       sgNav.classList.remove('is-hidden');
 
       sgNavActive     = true;
-      document.cookie = 'sgNavActive=true';
+      document.cookie = 'sgNavActive=true;path=/';
     }
 
     for (let i = 0; i < sgNavBtn.length; i++) {
