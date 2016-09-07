@@ -11,6 +11,7 @@ const fs           = require('fs');
 const glob         = require('glob');
 const del          = require('del');
 const path         = require('path');
+const mkdirp       = require('mkdirp');
 const browsersync  = require('browser-sync');
 
 // Gulp
@@ -485,19 +486,36 @@ gulp.task('img-dist', ['img-dist-copy', 'img-dist-icons']);
  * ========================================================================== */
 
 let copyNpmAssets = (taskDest) => {
-  let npmAssets = require(`./${paths.src}/npmassets.js`);
+  let npmAssetsConfig = `./${paths.src}/npmassets.js`;
+
+  delete require.cache[require.resolve(npmAssetsConfig)];
+  let npmAssets = require(npmAssetsConfig);
 
   if (Array.isArray(npmAssets) && npmAssets.length > 0) {
     for (let asset of npmAssets) {
-      gulp.src(asset.glob)
-        .pipe(gulp.dest(`${taskDest}/${asset.dest}`))
-        .pipe(browsersync.stream());
+
+      glob(`node_modules/${asset.module}/${asset.files}`, {nodir: true}, function(err, files) {
+        files.forEach(function(file) {
+          let filePath = path.relative(`node_modules/${asset.module}/`, file);
+          let fileDir  = path.dirname(filePath);
+
+          if (fileDir === '.') {
+            fileDir = '';
+          }
+
+          mkdirp(`${taskDest}/${asset.dest}/${fileDir}`, function(err) {
+            if (err) {
+              console.error(err);
+            }
+
+            fs.createReadStream(file).pipe(fs.createWriteStream(`${taskDest}/${asset.dest}/${filePath}`));
+          });
+        });
+      });
     }
-  } else {
+
     browsersync.reload();
   }
-
-  delete require.cache[require.resolve(`./${paths.src}/npmassets.js`)];
 }
 
 // NPM Assets dev copy

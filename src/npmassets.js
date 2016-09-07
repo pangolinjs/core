@@ -10,7 +10,8 @@ const paths = require('../gulp/paths.js');
 
 module.exports = [
   {
-    glob: 'node_modules/svgxuse/svgxuse.{js,min.js}',
+    module: 'svgxuse',
+    files: 'svgxuse.min.js',
     dest: paths.js.base
   }
 ];
