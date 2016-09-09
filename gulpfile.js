@@ -320,11 +320,11 @@ let compileHandlebars = (task) => {
             break;
 
           case 'filename':
-            return path.basename(file, '.hbs') + '.html';
+            return `${path.basename(file, '.hbs')}.html`.replace('index.html', '');
             break;
 
           case 'filepath':
-            return path.relative(`${paths.html.src}/pages`, file).replace('.hbs', '.html');
+            return path.relative(`${paths.html.src}/pages`, file).replace('.hbs', '.html').replace('index.html', '');
             break;
 
           case 'rel':
