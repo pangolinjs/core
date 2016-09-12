@@ -39,20 +39,18 @@
    * ==================================================== */
 
   let toggleSgMenuBar = function() {
-    const navCookie = 'sgNavActive=false;path=/';
-
     if (sgNavActive) {
       this.classList.add('is-active');
       sgNav.classList.add('is-hidden');
 
       sgNavActive     = false;
-      document.cookie = navCookie;
+      document.cookie = 'sgNavActive=false;path=/';
     } else {
       this.classList.remove('is-active');
       sgNav.classList.remove('is-hidden');
 
       sgNavActive     = true;
-      document.cookie = navCookie;
+      document.cookie = 'sgNavActive=true;path=/';
     }
 
     for (let i = 0; i < sgNavBtn.length; i++) {
