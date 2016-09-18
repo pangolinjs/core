@@ -1,16 +1,16 @@
-/* NPM ASSETS
+/* SIMPLE COPY
  * ========================================================================== */
 
-const paths = require('../gulp/paths.js');
+const paths = require('./paths.js');
 
 
 /**
- * Specify files from node modules that shall be copied to `dev`, 'prev' or `dist`.
+ * Specify files that shall be copied to `dev`, 'prev' or `dist`.
  */
 
 module.exports = [
   {
-    module: 'svgxuse',
+    folder: 'node_modules/svgxuse',
     files: 'svgxuse.min.js',
     dest: paths.js.base
   }

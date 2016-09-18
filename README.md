@@ -14,7 +14,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
   3. [JavaScript](#javascript)
   4. [HTML](#html)
   5. [Images and Icons](#images-and-icons)
-  6. [NPM Assets](#npm-assets)
+  6. [Copy](#copy)
 4. [Credits](#credits)
 
 
@@ -47,7 +47,7 @@ There are more tasks available for standalone execution:
 * `js-dev`, `js-prev` and `js-dist` for JavaScript concatenation and linting.
 * `html-dev` and `html-prev` for static HTML file generation.
 * `img-dev`, `img-prev` and `img-dist` for image copying and icon sprite generation.
-* `npmassets-dev`, `npmassets-prev` and `npmassets-dist` for copying files from Node modules.
+* `copy-dev`, `copy-prev` and `copy-dist` for copying files from Node modules.
 
 *The generated folders `dev`, `prev` and `dist` are excluded from Git.*
 
@@ -197,22 +197,22 @@ This styleguide ships with [svgxuse](https://github.com/Keyamoon/svgxuse), a pol
 *The preview and production tasks minify images with a lossless compressor.*
 
 
-### NPM Assets
-Files from Node modules can be integrated into the styleguide. Simply install the module with `npm install --save-dev module-name` and add files or folders to `src/npmassets.js`.
+### Copy
+Files that don't fit in the above mentioned categories can be integrated into the styleguide with the file `gulp/copy.js`. To integrate files from Node modules, simply install the module with `npm install --save-dev module-name` and add files or folders to `copy.js`.
 
-`npmassets.js` contains an array of objects. Each object is a copy instruction and has a `module`, `files` and `dest` key.
+`copy.js` contains an array of objects. Each object is a copy instruction and has a `folder`, `files` and `dest` key.
 
-* `module` is the base path. Do not include `node_modules`, the Gulp task automatically prefixes the final path.
+* `folder` is the base path.
 * `files` specifies which files and folders will be copied. The folder structure will be kept (e.g. `dist/**` results in `dev/js/dist/**`). Use [globs](https://github.com/isaacs/node-glob#glob-primer) to copy more than one file.
 * `dest` sets the destination for the copy process. The development, preview and production tasks each prefix the destination with their specific output folders (e.g. `dev/` for development). Base path variables from `gulp/paths.js` can be used (`path.css.base`, `path.js.base`, `path.html.base` and `path.img.base`). But feel free to set arbitrary destinations.
 
-Beware of overwriting files from other tasks (e.g. `css/styles.css`), the NPM Assets task is started last. Due to asynchronous task execution the exact write order is unknown.
+Beware of overwriting files from other tasks (e.g. `css/styles.css`), the copy task is started last. Due to asynchronous task execution the exact write order is unknown.
 
 #### Copy single files
 ```javascript
 module.exports = [
   {
-    module: 'svgxuse',
+    folder: 'node_modules/svgxuse',
     files: 'svgxuse.{js,min.js}',
     dest: paths.js.base
   }
@@ -224,7 +224,7 @@ This declaration copies the files `node_modules/svgxuse/svgxuse.js` and `node_mo
 ```javascript
 module.exports = [
   {
-    module: '@polymer',
+    folder: 'node_modules/@polymer',
     files: '**',
     dest: 'polymer'
   }
@@ -236,7 +236,7 @@ Everything from `node_modules/@polymer` will be copied to `taskfolder/polymer`. 
 ```javascript
 module.exports = [
   {
-    module: '@polymer/font-roboto',
+    folder: 'node_modules/@polymer/font-roboto',
     files: '**',
     dest: 'polymer'
   }

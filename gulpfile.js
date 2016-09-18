@@ -475,34 +475,34 @@ gulp.task('img-dist', ['img-dist-copy', 'img-dist-icons']);
 
 
 
-/* NPM Assets
+/* COPY
  * Copy files from node modules.
  * ========================================================================== */
 
-let copyNpmAssets = (taskDest) => {
-  let npmAssetsConfig = `./${paths.src}/npmassets.js`;
+let simpleCopy = (taskDest) => {
+  let copyConfig = `./gulp/copy.js`;
 
-  delete require.cache[require.resolve(npmAssetsConfig)];
-  let npmAssets = require(npmAssetsConfig);
+  delete require.cache[require.resolve(copyConfig)];
+  let copyList = require(copyConfig);
 
-  if (Array.isArray(npmAssets) && npmAssets.length > 0) {
-    for (let asset of npmAssets) {
+  if (Array.isArray(copyList) && copyList.length > 0) {
+    for (let item of copyList) {
 
-      glob(`node_modules/${asset.module}/${asset.files}`, {nodir: true}, function(err, files) {
+      glob(`${item.folder}/${item.files}`, {nodir: true}, function(err, files) {
         files.forEach(function(file) {
-          let filePath = path.relative(`node_modules/${asset.module}/`, file);
+          let filePath = path.relative(`${item.folder}`, file);
           let fileDir  = path.dirname(filePath);
 
           if (fileDir === '.') {
             fileDir = '';
           }
 
-          mkdirp(`${taskDest}/${asset.dest}/${fileDir}`, function(err) {
+          mkdirp(`${taskDest}/${item.dest}/${fileDir}`, function(err) {
             if (err) {
               console.error(err);
             }
 
-            fs.createReadStream(file).pipe(fs.createWriteStream(`${taskDest}/${asset.dest}/${filePath}`));
+            fs.createReadStream(file).pipe(fs.createWriteStream(`${taskDest}/${item.dest}/${filePath}`));
           });
         });
       });
@@ -512,24 +512,24 @@ let copyNpmAssets = (taskDest) => {
   }
 }
 
-// NPM Assets dev copy
-gulp.task('npmassets-dev', () => {
-  return copyNpmAssets(paths.dev);
+// Copy dev
+gulp.task('copy-dev', () => {
+  return simpleCopy(paths.dev);
 });
 
 
-// NPM Assets watch
-gulp.task('npmassets-watch', ['npmassets-dev']);
+// Copy watch
+gulp.task('copy-watch', ['copy-dev']);
 
 
-// NPM Assets preview copy
-gulp.task('npmassets-prev', () => {
-  return copyNpmAssets(paths.prev);
+// Copy preview
+gulp.task('copy-prev', () => {
+  return simpleCopy(paths.prev);
 });
 
-// NPM Assets production copy
-gulp.task('npmassets-dist', () => {
-  return copyNpmAssets(paths.dist);
+// Copy production
+gulp.task('copy-dist', () => {
+  return simpleCopy(paths.dist);
 });
 
 
@@ -541,7 +541,7 @@ gulp.task('npmassets-dist', () => {
 
 
 gulp.task('development', ['clean-dev'], () => {
-  runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev', 'npmassets-dev']);
+  runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev', 'copy-dev']);
 });
 
 
@@ -552,7 +552,7 @@ gulp.task('development', ['clean-dev'], () => {
 
 
 gulp.task('preview', ['clean-prev'], () => {
-  runSequence(['css-prev', 'js-prev', 'html-prev', 'img-prev', 'npmassets-prev']);
+  runSequence(['css-prev', 'js-prev', 'html-prev', 'img-prev', 'copy-prev']);
 });
 
 
@@ -564,7 +564,7 @@ gulp.task('preview', ['clean-prev'], () => {
 
 
 gulp.task('production', ['clean-dist'], () => {
-  runSequence(['css-dist', 'js-dist', 'img-dist', 'npmassets-dist']);
+  runSequence(['css-dist', 'js-dist', 'img-dist', 'copy-dist']);
 });
 
 
@@ -591,7 +591,7 @@ gulp.task('default', ['clean-dev'], () => {
   }
 
   // Run initial task queue
-  runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'npmassets-dev'], 'browsersync');
+  runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev'], 'browsersync');
 
   // Watch CSS
   let watchCSS = gulp.watch(`${paths.css.src}/**/*.scss`, ['css-watch']);
@@ -610,6 +610,6 @@ gulp.task('default', ['clean-dev'], () => {
   watchImg.on('change', onChangeMessage);
 
   // Watch NPM Assets
-  let watchNpmAssets = gulp.watch(`${paths.src}/npmassets.js`, ['npmassets-watch']);
-  watchNpmAssets.on('change', onChangeMessage);
+  let watchCopy = gulp.watch(`${paths.src}/copy.js`, ['copy-watch']);
+  watchCopy.on('change', onChangeMessage);
 });
