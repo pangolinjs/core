@@ -610,6 +610,6 @@ gulp.task('default', ['clean-dev'], () => {
   watchImg.on('change', onChangeMessage);
 
   // Watch NPM Assets
-  let watchCopy = gulp.watch(`${paths.src}/copy.js`, ['copy-watch']);
+  let watchCopy = gulp.watch(`gulp/copy.js`, ['copy-watch']);
   watchCopy.on('change', onChangeMessage);
 });
