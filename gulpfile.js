@@ -267,7 +267,7 @@ let compileHandlebars = (task) => {
 
   for (let page of pageList) {
     let frontMatter = fm(fs.readFileSync(page, 'utf8')).attributes;
-    let url         = path.relative(`${paths.html.src}/pages`, page).replace('.hbs', '.html');
+    let url         = path.relative(`${paths.html.src}/pages`, page).replace('.hbs', '.html').replace(/\\/g, '/');
     let name        = frontMatter.title ? frontMatter.title : url;
     let category    = frontMatter.category ? frontMatter.category : 'Undefined';
 
@@ -324,7 +324,7 @@ let compileHandlebars = (task) => {
             break;
 
           case 'filepath':
-            return path.relative(`${paths.html.src}/pages`, file).replace('.hbs', '.html').replace('index.html', '');
+            return path.relative(`${paths.html.src}/pages`, file).replace('.hbs', '.html').replace('index.html', '').replace(/\\/g, '/');
             break;
 
           case 'rel':
@@ -335,7 +335,7 @@ let compileHandlebars = (task) => {
               return '';
             }
 
-            return `${path.relative(currentPath, sourcePath)}/`;
+            return `${path.relative(currentPath, sourcePath)}/`.replace(/\\/g, '/');
             break;
 
           case 'title':
