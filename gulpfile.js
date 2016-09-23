@@ -541,7 +541,7 @@ gulp.task('copy-dist', () => {
 
 
 gulp.task('development', ['clean-dev'], () => {
-  runSequence(['css-dev', 'css-sg', 'js-dev', 'html-dev', 'img-dev', 'copy-dev']);
+  runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev']);
 });
 
 
