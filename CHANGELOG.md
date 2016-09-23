@@ -2,6 +2,21 @@
 
 
 
+## 1.13.0
+2016-09-23
+
+### Improved
+- More generic copy task
+- Replace Windows file paths with Unix in Handlebars output
+- No more `index.html` in {{page "filename"}} and {{page "filepath"}} helpers
+
+### Fixed
+- README.md errors
+- Styleguide navigation bar cookie
+- Copy task watching
+
+
+
 ## 1.12.1
 2016-09-07
 

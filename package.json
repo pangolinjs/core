@@ -1,6 +1,6 @@
 {
   "name": "styleguide",
-  "version": "1.12.1",
+  "version": "1.13.0",
   "description": "Living Styleguide for componentized front end development with Sass, JavaScript and Handlebars.",
   "author": "Fynn Becker <info@fynn-becker.de>",
   "lang": "en",
