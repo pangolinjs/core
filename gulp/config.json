@@ -15,7 +15,7 @@
 
   "js": {
     "eslint": {
-      "configFile": "./gulp/eslint.json"
+      "configFile": ".eslintrc.json"
     },
     "babel": {
       "presets": ["es2015"],

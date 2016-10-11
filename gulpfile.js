@@ -1,5 +1,8 @@
 'use strict';
 
+/* eslint-env node */
+/* eslint no-console: "off" */
+
 
 
 /* MODULES
@@ -255,8 +258,8 @@ let compileHandlebars = (task) => {
   let dataMeta = {
     version: require('./package.json').version,
     lang: require('./package.json').lang,
-    dev: task === 'dev' ? true : false,
-  }
+    dev: task === 'dev',
+  };
 
 
   // Create dataPages object
@@ -284,7 +287,7 @@ let compileHandlebars = (task) => {
         icon: category[0],
         pages: [pageItem]
       };
-    };
+    }
   }
 
 
@@ -296,59 +299,56 @@ let compileHandlebars = (task) => {
       // Handlebars concat helper
       // Source: http://stackoverflow.com/a/34812062
       concat: (json) => {
-        var concat = '';
-        var flipArray = [];
+        let output = '';
+        let flipArray = [];
 
         for (let key in json.hash) {
           flipArray.push(json.hash[key]);
         }
 
         for (let i = (flipArray.length - 1); i >= 0; i--) {
-          concat += flipArray[i];
+          output += flipArray[i];
         }
 
-        return concat;
+        return output;
       },
       page: (key, options) => {
         let file = options.data.file.path;
+
+        // Initialize variables
+        let currentPath;
+        let sourcePath;
 
         let frontMatter = fm(fs.readFileSync(file, 'utf8')).attributes;
 
         switch (key) {
           case 'filebase':
             return path.basename(file, '.hbs');
-            break;
 
           case 'filename':
             return `${path.basename(file, '.hbs')}.html`.replace('index.html', '');
-            break;
 
           case 'filepath':
             return path.relative(`${paths.html.src}/pages`, file).replace('.hbs', '.html').replace('index.html', '').replace(/\\/g, '/');
-            break;
 
           case 'rel':
-            let currentPath = path.dirname(file);
-            let sourcePath  = path.resolve(`${paths.html.src}/pages`);
+            currentPath = path.dirname(file);
+            sourcePath  = path.resolve(`${paths.html.src}/pages`);
 
             if (currentPath === sourcePath) {
               return '';
             }
 
             return `${path.relative(currentPath, sourcePath)}/`.replace(/\\/g, '/');
-            break;
 
           case 'title':
             return frontMatter.title;
-            break;
 
           case 'description':
             return frontMatter.description;
-            break;
 
           case 'category':
             return frontMatter.category;
-            break;
         }
 
         if (frontMatter.hasOwnProperty(key)) {
@@ -488,7 +488,7 @@ let simpleCopy = (taskDest) => {
   if (Array.isArray(copyList) && copyList.length > 0) {
     for (let item of copyList) {
 
-      glob(`${item.folder}/${item.files}`, {nodir: true}, function(err, files) {
+      glob(`${item.folder}/${item.files}`, {nodir: true}, function(globError, files) {
         files.forEach(function(file) {
           let filePath = path.relative(`${item.folder}`, file);
           let fileDir  = path.dirname(filePath);
@@ -497,9 +497,9 @@ let simpleCopy = (taskDest) => {
             fileDir = '';
           }
 
-          mkdirp(`${taskDest}/${item.dest}/${fileDir}`, function(err) {
-            if (err) {
-              console.error(err);
+          mkdirp(`${taskDest}/${item.dest}/${fileDir}`, function(mkdirError) {
+            if (mkdirError) {
+              console.error(mkdirError);
             }
 
             fs.createReadStream(file).pipe(fs.createWriteStream(`${taskDest}/${item.dest}/${filePath}`));
@@ -510,7 +510,7 @@ let simpleCopy = (taskDest) => {
 
     browsersync.reload();
   }
-}
+};
 
 // Copy dev
 gulp.task('copy-dev', () => {
@@ -588,7 +588,7 @@ gulp.task('default', ['clean-dev'], () => {
   let onChangeMessage = (event) => {
     console.log('\n');
     gutil.log(`${gutil.colors.blue(event.path)} ${event.type}`);
-  }
+  };
 
   // Run initial task queue
   runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev'], 'browsersync');

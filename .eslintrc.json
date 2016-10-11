@@ -28,7 +28,7 @@
     "camelcase": 2,
     "comma-spacing": 2,
     "computed-property-spacing": 2,
-    "key-spacing": 2,
+    "key-spacing": ["error", { "mode": "minimum" }],
     "keyword-spacing": 2,
     "no-bitwise": 2,
     "no-mixed-operators": 2,
