@@ -15,4 +15,4 @@
 // COMPONENTS
 // =========================================================
 
-require('./components/example')();
+require('./components/example.js')();
