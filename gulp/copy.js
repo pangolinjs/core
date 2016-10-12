@@ -1,8 +1,6 @@
 /* SIMPLE COPY
  * ========================================================================== */
 
-/* eslint-env node */
-
 
 
 const paths = require('./paths.js');

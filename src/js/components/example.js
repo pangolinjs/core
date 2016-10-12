@@ -1,11 +1,20 @@
 /* EXAMPLE
  *
- * Use the helloWorld() function from the `functions` directory.
+ * Use the function from the `functions/helloWorld.js` file.
 ============================================================================= */
 
-/* global helloWorld */
 
 
-(function() {
+// Dependencies
+// =========================================================
+
+const helloWorld = require('../functions/helloWorld.js');
+
+
+
+// Export
+// =========================================================
+
+module.exports = function() {
   helloWorld(['foo', 'bar', 'baz']);
-})();
+};

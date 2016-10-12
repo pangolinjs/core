@@ -1,6 +1,7 @@
 'use strict';
 
-/* eslint-env node */
+
+
 /* eslint no-console: "off" */
 
 
@@ -15,6 +16,8 @@ const glob         = require('glob');
 const del          = require('del');
 const path         = require('path');
 const mkdirp       = require('mkdirp');
+const source       = require('vinyl-source-stream');
+const buffer       = require('vinyl-buffer');
 const through      = require('through2');
 const browsersync  = require('browser-sync');
 
@@ -24,20 +27,21 @@ const gulp         = require('gulp');
 // Utilities
 const gutil        = require('gulp-util');
 const rename       = require('gulp-rename');
-const concat       = require('gulp-concat');
 const runSequence  = require('run-sequence');
 
-// CSS/Sass
+// CSS
 const sass         = require('gulp-sass');
 const sourcemaps   = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 
 // JavaScript
 const babel        = require('gulp-babel');
+const browserify   = require('browserify');
+const babelify     = require('babelify');
 const uglify       = require('gulp-uglify');
 const eslint       = require('gulp-eslint');
 
-// Handelbars
+// HTML
 const hb           = require('gulp-hb');
 const fm           = require('front-matter');
 
@@ -83,8 +87,8 @@ gulp.task('clean-img-dev', () => {
 
 
 
-/* SASS
- * Compile Sass code into CSS
+/* CSS
+ * Compile Sass into CSS
  * ========================================================================== */
 
 
@@ -136,7 +140,7 @@ gulp.task('css-dist', () => {
 
 
 /* JAVASCRIPT
- * Lint javscript
+ * Lint, bundle and transpile JavaScript
  * ========================================================================== */
 
 
@@ -155,10 +159,7 @@ let babelError = function(error) {
 
 // JavaScript Lint
 gulp.task('js-lint', () => {
-  return gulp.src([
-    `${paths.js.src}/functions/**/*.js`,
-    `${paths.js.src}/components/**/*.js`
-  ])
+  return gulp.src(`${paths.js.src}/**/*.js`)
     .pipe(eslint(config.js.eslint))
     .pipe(eslint.format());
 });
@@ -166,14 +167,16 @@ gulp.task('js-lint', () => {
 
 // JavaScript Dev
 gulp.task('js-dev', ['js-lint'], () => {
-  return gulp.src([
-    `${paths.js.src}/libraries/**/*.js`,
-    `${paths.js.src}/functions/**/*.js`,
-    `${paths.js.src}/components/**/*.js`
-  ])
-    .pipe(sourcemaps.init())
-      .pipe(babel(config.js.babel).on('error', babelError))
-      .pipe(concat('scripts.js'))
+  const b = browserify({
+    entries: `${paths.js.src}/main.js`,
+    debug: true,
+    transform: [babelify.configure(config.js.babel)]
+  });
+
+  return b.bundle()
+    .pipe(source('scripts.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js.dev))
     .pipe(browsersync.stream({match: '**/*.js'}));
@@ -195,28 +198,32 @@ gulp.task('js-sg', () => {
 
 
 // JavaScript Preview
-gulp.task('js-prev', () => {
-  return gulp.src([
-    `${paths.js.src}/libraries/**/*.js`,
-    `${paths.js.src}/functions/**/*.js`,
-    `${paths.js.src}/components/**/*.js`
-  ])
-    .pipe(babel(config.js.babel))
-    .pipe(concat('scripts.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest(paths.js.prev));
+gulp.task('js-prev', ['js-lint'], () => {
+    const b = browserify({
+      entries: `${paths.js.src}/main.js`,
+      debug: true,
+      transform: [babelify.configure(config.js.babel)]
+    });
+
+    return b.bundle()
+      .pipe(source('scripts.js'))
+      .pipe(buffer())
+      .pipe(uglify())
+      .pipe(gulp.dest(paths.js.prev));
 });
 
 
 // JavaScript Production
-gulp.task('js-dist', () => {
-  return gulp.src([
-    `${paths.js.src}/libraries/**/*.js`,
-    `${paths.js.src}/functions/**/*.js`,
-    `${paths.js.src}/components/**/*.js`
-  ])
-    .pipe(babel(config.js.babel))
-    .pipe(concat('scripts.js'))
+gulp.task('js-dist', ['js-lint'], () => {
+  const b = browserify({
+    entries: `${paths.js.src}/main.js`,
+    debug: true,
+    transform: [babelify.configure(config.js.babel)]
+  });
+
+  return b.bundle()
+    .pipe(source('scripts.js'))
+    .pipe(buffer())
     .pipe(uglify())
     .pipe(gulp.dest(paths.js.dist));
 });
@@ -398,7 +405,7 @@ gulp.task('html-prev', () => {
 
 
 /* Images
- * Copy images and compress production files
+ * Copy images and use a lossless compressor
  * ========================================================================== */
 
 
@@ -485,7 +492,7 @@ gulp.task('img-dist', ['img-dist-copy', 'img-dist-icons']);
 
 
 /* COPY
- * Copy files from node modules.
+ * Copy files from one location to another – very simple
  * ========================================================================== */
 
 let simpleCopy = (taskDest) => {
@@ -544,8 +551,7 @@ gulp.task('copy-dist', () => {
 
 
 
-/* Development
- * Generate development files.
+/* DEVELOPMENT
  * ========================================================================== */
 
 
@@ -555,8 +561,7 @@ gulp.task('development', ['clean-dev'], () => {
 
 
 
-/* Preview
- * Generate files for preview.
+/* PREVIEW
  * ========================================================================== */
 
 
@@ -567,8 +572,7 @@ gulp.task('preview', ['clean-prev'], () => {
 
 
 
-/* Production
- * Generate production ready files.
+/* PRODUCTION
  * ========================================================================== */
 
 
@@ -580,7 +584,6 @@ gulp.task('production', ['clean-dist'], () => {
 
 
 /* DEFAULT
- * Run all dev tasks and watch for changes.
  * ========================================================================== */
 
 

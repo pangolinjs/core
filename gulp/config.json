@@ -18,8 +18,7 @@
       "configFile": ".eslintrc.json"
     },
     "babel": {
-      "presets": ["es2015"],
-      "ignore": "libraries/*.js"
+      "presets": ["es2015"]
     }
   },
 

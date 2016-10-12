@@ -69,13 +69,11 @@ The function `@import` includes Sass or CSS files in the main Sass file. The fin
 Located in `src/js`.  
 Output to `dev/js`, `prev/js` or `dist/js`.
 
-JavaScript files are concatenated in the following order: First files from `libraries`, then from `functions` and lastly from `components`. Within these folders the order is alphabetical. Subfolders are supported as well.
+JavaScript files are bundled together with [Browserify](http://browserify.org/) and transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. [ESLint](http://eslint.org) checks if the code follows common standards. Global [ESLint rules](http://eslint.org/docs/rules/) are set in `.eslintrc.json`. Per-file rules can be set with comments (e.g. `/* eslint no-console: "off" */`)
 
-Files from `functions` and `components` are transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. ESLint is configured for ES2015 aswell, see `gulp/eslint.json` and [ESLint rules documentation](http://eslint.org/docs/rules/) for more options.
+Browserify follows the same `require()` and `modules.exports` system Nodes uses. This makes loading npm modules very easy. The example setup in `src/js` provides a brief overview of the capabilities.
 
-All third-party stuff should be placed inside the folder `src/js/libraries`. Babel and ESLint ignore files in this folder to prevent errors.
-
-*The development task runs ESLint and generates sourcemaps. The preview and production tasks uglify the source.*
+*The development task generates sourcemaps. The preview and production tasks uglify the source.*
 
 
 ### HTML
