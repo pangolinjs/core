@@ -69,9 +69,9 @@ The function `@import` includes Sass or CSS files in the main Sass file. The fin
 Located in `src/js`.  
 Output to `dev/js`, `prev/js` or `dist/js`.
 
-JavaScript files are bundled together with [Browserify](http://browserify.org/) and transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. [ESLint](http://eslint.org) checks if the code follows common standards. Global [ESLint rules](http://eslint.org/docs/rules/) are set in `.eslintrc.json`. Per-file rules can be set with comments (e.g. `/* eslint no-console: "off" */`)
+JavaScript files are bundled together with [Browserify](http://browserify.org/) and transpiled with [Babel](https://babeljs.io/) and the ES2015 preset. [ESLint](http://eslint.org) checks if the code follows common standards.
 
-Browserify follows the same `require()` and `modules.exports` system Nodes uses. This makes loading npm modules very easy. The example setup in `src/js` provides a brief overview of the capabilities.
+Global [ESLint rules](http://eslint.org/docs/rules/) are set in `.eslintrc.json`. Per-file rules can be set with comments (e.g. `/* eslint no-console: "off" */`). With a `.eslintignore` file in the project root, JavaScript files can be [excluded from linting](http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories). Browserify follows the same `require()` and `modules.exports` system Node uses. This makes loading code from other files or even npm modules very easy. The example setup in `src/js` provides a brief overview of the capabilities.
 
 *The development task generates sourcemaps. The preview and production tasks uglify the source.*
 
