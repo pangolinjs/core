@@ -15,6 +15,7 @@ const glob         = require('glob');
 const del          = require('del');
 const path         = require('path');
 const mkdirp       = require('mkdirp');
+const through      = require('through2');
 const browsersync  = require('browser-sync');
 
 // Gulp
@@ -39,7 +40,6 @@ const eslint       = require('gulp-eslint');
 // Handelbars
 const hb           = require('gulp-hb');
 const fm           = require('front-matter');
-const gulpFm       = require('gulp-front-matter');
 
 // Images
 const svgSprite    = require('gulp-svg-sprite');
@@ -362,9 +362,18 @@ let compileHandlebars = (task) => {
     });
 
 
+  const removeFrontmatter = through.obj(function(file, enc, callback) {
+    let contents = file.contents.toString('utf8');
+    file.contents = new Buffer(contents.replace(/^(---)\n(.|\n)+(---)\n/g, ''), 'utf8');
+
+    this.push(file);
+    callback();
+  });
+
+
   return gulp.src(gulpSrc)
-    .pipe(gulpFm({property: 'fm'}))
     .pipe(hbStream.on('error', handlebarsError))
+    .pipe(removeFrontmatter)
     .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest(gulpDest));
 };
