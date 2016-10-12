@@ -2,6 +2,26 @@
 
 
 
+## 1.14.0
+2016-10-12
+
+### Improved
+- Styleguide menu JavaScript generation with `development` task
+- Increase Sass precision to 10
+- Switch to simple gulp plugin to remove Handlebars front matter
+- Use `.eslintrc.json` instead of custom path and file to support IDE linters
+
+### Updated
+- Normalize.css
+
+### Added
+- Bundle JavaScript with Browserify
+
+### Removed
+- JavaScript concatenation (replaced by Browserify)
+
+
+
 ## 1.13.0
 2016-09-23
 
