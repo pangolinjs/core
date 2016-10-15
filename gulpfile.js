@@ -372,7 +372,7 @@ let compileHandlebars = (task) => {
 
   const removeFrontmatter = through.obj(function(file, enc, callback) {
     let contents = file.contents.toString('utf8');
-    file.contents = new Buffer(contents.replace(/^(---)\n(.|\n)+(---)\n/g, ''), 'utf8');
+    file.contents = new Buffer(contents.replace(/^(---)(\r?\n|\r)[\S\s]*(---)(\r?\n|\r)/, ''), 'utf8');
 
     this.push(file);
     callback();
