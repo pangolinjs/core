@@ -3,7 +3,7 @@
 // Visually hides element but keeps text readable for screen readers.
 //
 // Source:
-// https://css-tricks.com/places-its-tempting-to-use-display-none-but-dont/
+// https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
 // =============================================================================
 
 
@@ -12,11 +12,13 @@
   position: absolute;
   width: 1px;
   height: 1px;
-  margin: -1px;
-  padding: 0;
-  clip: rect(0 0 0 0);
+
   overflow: hidden;
-  border: 0;
+
+  clip: rect(1px 1px 1px 1px); /* IE 6/7 */
+  clip: rect(1px, 1px, 1px, 1px);
+
+  white-space: nowrap; /* added line */
 }
 
 /**
@@ -33,8 +35,11 @@
     position: static;
     width: auto;
     height: auto;
-    margin: 0;
-    clip: auto;
+
     overflow: visible;
+
+    clip: auto;
+
+    white-space: normal;
   }
 }
