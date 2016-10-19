@@ -2,6 +2,20 @@
 
 
 
+## 1.14.1
+2016-19-10
+
+### Improved
+- Screenreader only CSS
+
+### Added
+- Node environment eslint flag to gulpfile.js
+
+### Fixed
+- Cross platform frontmatter remover
+
+
+
 ## 1.14.0
 2016-10-12
 
