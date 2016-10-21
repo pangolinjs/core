@@ -1,15 +1,17 @@
 ---
 title: Forms
-description: Users input things. The server gets things.
+description: Users input things.
 category: Components
 ---
 {{#extend "layouts/components"}}
 {{#content "body"}}
 
-  {{#embed "styleguide/article" title="Buttons" description="Usually they submit forms or trigger JavaScript actions."}}
+  {{#embed "styleguide/article" title="Buttons"}}
   {{#content "body"}}
     <button>Button</button>
+    <button disabled>Button (disabled)</button>
     <input type="submit" value="Input">
+    <input type="submit" value="Input (disabled)" disabled>
     <a href="#">Link</a>
   {{/content}}
   {{/embed}}
@@ -54,39 +56,49 @@ category: Components
 
   {{#embed "styleguide/article" title="Checkbox"}}
   {{#content "body"}}
-    <input type="checkbox" name="checkbox" value="checkbox-1" id="checkbox-1" checked>
-    <label for="checkbox-1">Checkbox #1 (checked)</label>
+    <label>
+      <input type="checkbox">
+      <span>Checkbox #1</span>
+    </label>
 
-    <input type="checkbox" name="checkbox" value="checkbox-2" id="checkbox-2">
-    <label for="checkbox-2">Checkbox #2</label>
+    <label>
+      <input type="checkbox" checked>
+      <span>Checkbox #2 (checked)</span>
+    </label>
 
-    <input type="checkbox" name="checkbox" value="checkbox-3" id="checkbox-3" disabled>
-    <label for="checkbox-3">Checkbox #3 (disabled)</label>
+    <label>
+      <input type="checkbox" disabled>
+      <span>Checkbox #3 (disabled)</span>
+    </label>
 
-    <input type="checkbox" name="checkbox" value="checkbox-4" id="checkbox-4">
-    <label for="checkbox-4">Checkbox #4</label>
-
-    <input type="checkbox" name="checkbox" value="checkbox-5" id="checkbox-5" disabled checked>
-    <label for="checkbox-5">Checkbox #5 (checked, disabled)</label>
+    <label>
+      <input type="checkbox" checked disabled>
+      <span>Checkbox #4 (checked and disabled)</span>
+    </label>
   {{/content}}
   {{/embed}}
 
   {{#embed "styleguide/article" title="Radio"}}
   {{#content "body"}}
-    <input type="radio" name="radio" value="radio-1" id="radio-1" checked>
-    <label for="radio-1">Radio #1</label>
+    <label>
+      <input type="radio" name="radio">
+      <span>Radio #1</span>
+    </label>
 
-    <input type="radio" name="radio" value="radio-2" id="radio-2">
-    <label for="radio-2">Radio #2</label>
+    <label>
+      <input type="radio" name="radio" checked>
+      <span>Radio #2 (checked)</span>
+    </label>
 
-    <input type="radio" name="radio" value="radio-3" id="radio-3" disabled>
-    <label for="radio-3">Radio #3 (disabled)</label>
+    <label>
+      <input type="radio" name="radio" disabled>
+      <span>Radio #3 (disabled)</span>
+    </label>
 
-    <input type="radio" name="radio" value="radio-4" id="radio-4">
-    <label for="radio-4">Radio #4</label>
-
-    <input type="radio" name="radio2" value="radio" id="radio2" disabled checked>
-    <label for="radio2">Radio (checked, disabled)</label>
+    <label>
+      <input type="radio" name="radio2" checked disabled>
+      <span>Radio #4 (checked and disabled)</span>
+    </label>
   {{/content}}
   {{/embed}}
 
@@ -101,22 +113,12 @@ category: Components
     </select>
 
     <label for="select2">Select (disabled)</label>
-    <select id="select2">
+    <select id="select2" disabled>
       <option value="select-1">Option 1</option>
       <option value="select-2">Option 2</option>
       <option value="select-3">Option 3</option>
       <option value="select-4">Option 4</option>
     </select>
-  {{/content}}
-  {{/embed}}
-
-  {{#embed "styleguide/article" title="Color and File"}}
-  {{#content "body"}}
-    <label for="color">Color input</label>
-    <input type="color" id="color">
-
-    <label for="file">File input</label>
-    <input type="file" id="file">
   {{/content}}
   {{/embed}}
 
