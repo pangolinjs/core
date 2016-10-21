@@ -1,7 +1,5 @@
 /* FRONT END STYLEGUIDE
  * for style guide driven development
- *
- * Fynn Becker <info@fynn-becker.de>
  * ========================================================================== */
 
 

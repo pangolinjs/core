@@ -3,22 +3,18 @@
 
 
 
-/* SCREENREADER ONLY
+/* SCREEN READER ONLY
  *
- * Only display content to screen readers
+ * Visually hide elements but make them accessible to
+ * screen reader and keyboard users.
+ *
+ * Optional class `.sr-only--focusable` to show element
+ * when it receives focus.
  * ====================================================== */
 
 .sr-only {
   @include sr-only;
 }
-
-/**
- * Use in conjunction with .sr-only to display content when
- * it's focused. Useful for "Skip to main content" links.
- *
- * See:
- * http://www.w3.org/TR/2013/NOTE-WCAG20-TECHS-20130905/G1
- */
 
 .sr-only--focusable {
   @include sr-only-focusable;
