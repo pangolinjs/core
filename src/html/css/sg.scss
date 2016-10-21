@@ -6,28 +6,58 @@
 
 
 
+// VIEWPORT FONT SIZE
+// =========================================================
+
+@mixin viewport-font-size($font-size-min, $font-size-max) {
+  $factor:  strip-unit($font-size-max - $font-size-min);
+  $divisor: strip-unit($screen-lg - $screen-xs);
+
+  font-size: $font-size-min;
+
+  @media (min-width: $screen-xs) {
+    font-size: calc(#{$font-size-min} + #{$factor} * (100vw - #{$screen-xs}) / #{$divisor});
+  }
+
+  @media (min-width: $screen-lg) {
+    font-size: $font-size-max;
+  }
+}
+
+
+
+// STRIP-UNIT
+//
+// Strips arbitrary unity from numbers
+//
+// Source:
+// https://css-tricks.com/snippets/sass/strip-unit-function/
+// =============================================================================
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+
+
 // VARIABLES
 // =========================================================
 
 // Breakpoints
-$screen-sm:  50rem; // 800px
+$screen-xs:  36rem; // 576px
 $screen-lg:  85rem; // 1360px
 
 // Heights
-$height-nav: 2.5em; // 40px
-
-// Padding
-$padding:    2em;
-$padding-xs: ($padding / 3);
-$padding-sm: ($padding / 2);
-$padding-lg: ($padding * 2);
-$padding-xl: ($padding * 3);
+$height-nav: 2rem; // 32px
 
 // Colors
-$color-blue:       rgb(0, 100, 200);
-$color-light-blue: lighten($color-blue, 20%);
-$color-gray:       rgb(100, 100, 100);
-$color-alto:       rgb(220, 220, 220);
+$color-primary:    rgb(0, 120, 255);
+$color-text:       rgb(255, 255, 255);
+$color-background: rgb(50, 50, 50);
 
 /* System UI Font Stack
  * Source:
@@ -45,12 +75,12 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 .sg-nav {
   display: block;
   box-sizing: border-box;
-  height: $height-nav; // 40px
+  height: $height-nav;
   margin: 0;
   padding: 0;
 
   font-family: $font-stack;
-  font-size: 1rem; // 16px
+  font-size: 0.875rem;
 
   &::before,
   &::after {
@@ -72,9 +102,9 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
     font-size: 1em;
     font-family: monospace, monospace;
-    color: #fff;
+    color: $color-text;
 
-    background: $color-gray;
+    background: $color-primary;
   }
 }
 
@@ -87,14 +117,14 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   display: flex;
   position: fixed;
   z-index: 9999;
-  height: $height-nav; // 40px
+  height: $height-nav;
   top: 0;
-  right: $height-nav; // 40px
+  right: $height-nav;
   left: 0;
   margin: 0;
   padding: 0;
 
-  background-color: $color-gray;
+  background-color: $color-background;
 
   will-change: transform;
 
@@ -115,7 +145,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
 .sg-nav__item {
   display: block !important;
-  height: $height-nav; // 40px
+  height: $height-nav;
   margin: 0;
   padding: 0;
 
@@ -134,12 +164,12 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   display: block;
   height: $height-nav;
   margin: 0;
-  padding: 0 0.75em; // 0 12px
+  padding: 0 0.75em;
 
-  font-size: 1em; // 16px
+  font-size: 1em;
   font-weight: 400;
   text-transform: uppercase;
-  color: #fff;
+  color: $color-text;
 
   background: none;
 
@@ -152,7 +182,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   &:hover,
   &:focus,
   &:active {
-    background: $color-light-blue;
+    background: $color-primary;
   }
 
   &::before,
@@ -160,8 +190,8 @@ $font-stack: -apple-system, BlinkMacSystemFont,
     display: none;
   }
 
-  @media (min-width: $screen-sm) {
-    padding: 0 1.25em; // 0 20px
+  @media (min-width: $screen-xs) {
+    padding: 0 1em;
   }
 }
 
@@ -171,17 +201,15 @@ $font-stack: -apple-system, BlinkMacSystemFont,
  * ================================== */
 
 .sg-nav__icon {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 1.375em; // 22px
-  height: 1.375em; // 2px
-  margin: 0;
+  display: inline-block !important;
+  width: 1.2em;
+  height: 1.2em;
+  margin: -0.1em;
   padding: 0;
 
-  font-size: 1em; // 16px
+  font-size: 1em;
   font-weight: 700;
-  color: $color-gray;
+  color: $color-background;
 
   background-color: #fff;
 
@@ -208,12 +236,12 @@ $font-stack: -apple-system, BlinkMacSystemFont,
     display: none;
   }
 
-  @media (min-width: $screen-sm) {
+  @media (min-width: $screen-xs) {
     display: inline;
-    margin-left: 0.5em; // 8px
+    margin-left: 0.5em;
 
-    font-size: 1em; // 16px
-    letter-spacing: 0.01em; // 0.16px
+    font-size: 1em;
+    letter-spacing: 0.02em;
   }
 }
 
@@ -226,11 +254,11 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   display: none;
   position: absolute;
   width: inherit;
-  top: $height-nav; // 16px
+  top: $height-nav;
   margin: 0;
   padding: 0;
 
-  background-color: $color-alto;
+  background-color: $color-background;
 
   &::before,
   &::after {
@@ -267,11 +295,11 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   display: block;
   width: 100%;
   margin: 0;
-  padding: 0.7142857142857143em 0.8571428571428571em; // 10px 12px
+  padding: 0.75em;
 
-  font-size: 0.875em; // 14px
+  font-size: 1em;
   font-weight: 400;
-  color: $color-gray;
+  color: $color-text;
   text-align: left;
   text-decoration: none;
 
@@ -282,15 +310,15 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   cursor: pointer;
 
   &:visited {
-    color: $color-gray;
+    color: $color-text;
   }
 
   &.is-active,
   &:hover,
   &:focus,
   &:active {
-    color: #fff;
-    background: $color-light-blue;
+    color: $color-text;
+    background: $color-primary;
   }
 
   &::before,
@@ -298,8 +326,8 @@ $font-stack: -apple-system, BlinkMacSystemFont,
     display: none;
   }
 
-  @media (min-width: $screen-sm) {
-    padding: 0.7142857142857143em 1.428571428571429em; // 10px 20px
+  @media (min-width: $screen-xs) {
+    padding: 0.5em 1em;
   }
 }
 
@@ -312,8 +340,8 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   display: block !important;
   position: fixed;
   z-index: 9999;
-  height: $height-nav; // 40px
-  width: $height-nav; // 40px
+  height: $height-nav;
+  width: $height-nav;
   top: 0;
   right: 0;
   margin: 0;
@@ -323,7 +351,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   line-height: 1;
   color: #fff;
 
-  background: $color-light-blue;
+  background: $color-background;
 
   border: none;
   outline: none;
@@ -335,7 +363,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   &:hover,
   &:focus,
   &:active {
-    background: $color-blue;
+    background: $color-primary;
   }
 
   &::before,
@@ -346,8 +374,8 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
 .sg-nav__hide-btn-icon {
   fill: currentColor;
-  height: 1em; // 28px
-  font-size: 1.75em; // 28px
+  height: 1em;
+  font-size: 1.75em;
 }
 
 .sg-nav__hide-btn-icon--show {
@@ -374,61 +402,43 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   display: block;
   box-sizing: border-box;
   max-width: $screen-lg;
-  margin: $padding-sm auto $padding-lg;
-  padding: $padding-sm;
+  margin: 2rem auto 3rem;
+  padding: 1rem;
 
-  font-size: 1rem; // 16px
-
-  border-bottom: 1px solid $color-alto;
+  border-bottom: 0.0625rem solid rgba($color-background, 0.3);
 
   *, *::before, *::after {
     box-sizing: border-box;
   }
 
-  @media (min-width: $screen-sm) {
-    margin: $padding auto $padding-xl;
-    padding: $padding;
+  @media (min-width: $screen-xs) {
+    margin: 3rem auto 5rem;
+    padding: 2rem;
   }
 }
-
-
-
-/* STYLEGUIDE HEADER TITLE
- * ================================== */
 
 .sg-header__title {
-  display: block;
-  margin: 0 0 0.5em;
-  padding: 0;
-
-  font-family: $font-stack;
-  font-size: 1.5em; // 24px
-  font-weight: 300;
-  color: $color-blue;
-
-  @media (min-width: $screen-sm) {
-    font-size: 3em; // 48px
-  }
-}
-
-
-
-/* STYLEGUIDE HEADER DESCRIPTION
- * ================================== */
-
-.sg-header__description {
   display: block;
   margin: 0;
   padding: 0;
 
   font-family: $font-stack;
-  font-size: 0.875em; // 14px
-  font-weight: 400;
-  color: $color-gray;
+  font-weight: 300;
+  color: $color-primary;
 
-  @media (min-width: $screen-sm) {
-    font-size: 1.125em; // 18px
-  }
+  @include viewport-font-size(1.5rem, 3rem);
+}
+
+.sg-header__description {
+  display: block;
+  margin: 1em 0 0;
+  padding: 0;
+
+  font-family: $font-stack;
+  font-weight: 400;
+  color: $color-background;
+
+  @include viewport-font-size(0.875rem, 1.125rem);
 }
 
 
@@ -451,74 +461,48 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
 
 .sg-article {
-  margin: 0 0 $padding-lg;
+  margin: 0 0 4rem;
 
-  @media (min-width: $screen-sm) {
-    margin-bottom: $padding-xl;
+  @media (min-width: $screen-xs) {
+    margin-bottom: 0 0 5rem;
   }
 }
-
-
-
-/* STYLEGUIDE ARTICLE HEADER
- * ================================== */
 
 .sg-article__header {
-  padding: $padding-sm;
+  padding: 1rem;
 
-  @media (min-width: $screen-sm) {
-    padding: $padding;
+  @media (min-width: $screen-xs) {
+    padding: 2rem;
   }
 }
-
-
-
-/* STYLEGUIDE ARTICLE TITLE
- * ================================== */
 
 .sg-article__title {
   margin: 0 0 0.5em;
   padding: 0;
 
   font-family: $font-stack;
-  font-size: 1.25em; // 20px
   font-weight: 300;
-  color: $color-blue;
+  color: $color-primary;
 
-  @media (min-width: $screen-sm) {
-    font-size: 1.5em; // 24px
-  }
+  @include viewport-font-size(1.25rem, 1.5rem);
 }
-
-
-
-/* STYLEGUIDE ARTICLE DESCRIPTION
- * ================================== */
 
 .sg-article__description {
   margin: 0 0 0.625em;
   padding: 0;
 
   font-family: $font-stack;
-  font-size: 0.875em; // 14px
   font-weight: 400;
-  color: $color-gray;
+  color: $color-background;
 
-  @media (min-width: $screen-sm) {
-    font-size: 1em;
-  }
+  @include viewport-font-size(0.875rem, 1rem);
 }
-
-
-
-/* STYLEGUIDE ARTICLE BODY
- * ================================== */
 
 .sg-article__body {
   margin: 0;
-  padding: $padding-sm;
+  padding: 1rem;
 
-  outline: 1px solid $color-alto;
+  outline: 0.0625rem solid rgba($color-background, 0.3);
 
   &::before,
   &::after {
@@ -530,8 +514,8 @@ $font-stack: -apple-system, BlinkMacSystemFont,
     clear: both;
   }
 
-  @media (min-width: $screen-sm) {
-    padding: $padding;
+  @media (min-width: $screen-xs) {
+    padding: 2rem;
   }
 }
 
