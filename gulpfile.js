@@ -145,15 +145,26 @@ gulp.task('css-dist', () => {
  * ========================================================================== */
 
 
-// Handle Bable error
-let babelError = function(error) {
-  console.log(
-    '\n' + gutil.colors.underline(error.fileName) + '\n'
-    + gutil.colors.gray('  line ' + error.loc.line + '  col ' + error.loc.column)
-    + '  ' + gutil.colors.red('Babel error: ')
-    + gutil.colors.blue(error.message.replace(error.fileName + ': ', '')) + '\n\n'
-    + error.codeFrame + '\n'
-  );
+// Handle Browserify and Babel errors
+let browserifyError = function(error) {
+  if (error.filename) {
+    // Babel error
+    error.filename = error.filename.replace(/\\/g, '/');
+    error.message  = error.message.split(': ');
+
+    console.log(`
+${gutil.colors.underline(error.filename)}
+  ${error.loc.line}:${error.loc.column}  ${gutil.colors.red(`error`)}  ${error.message[1]}
+
+${error.codeFrame}
+    `);
+  } else {
+    // Browserify error
+    console.log(`
+${gutil.colors.red('Browserify error')}
+${error.message}
+    `);
+  }
   this.emit('end');
 };
 
@@ -174,7 +185,7 @@ gulp.task('js-dev', ['js-lint'], () => {
     transform: [babelify.configure(config.js.babel)]
   });
 
-  return b.bundle()
+  return b.bundle().on('error', browserifyError)
     .pipe(source('scripts.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
@@ -193,7 +204,7 @@ gulp.task('js-sg', () => {
   return gulp.src(`${paths.html.src}/js/sg.js`)
     .pipe(eslint(config.js.eslint))
     .pipe(eslint.format())
-    .pipe(babel(config.js.babel).on('error', babelError))
+    .pipe(babel(config.js.babel).on('error', console.log))
     .pipe(gulp.dest(paths.js.dev));
 });
 
