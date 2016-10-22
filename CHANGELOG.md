@@ -2,6 +2,19 @@
 
 
 
+## 1.14.2
+2016-10-22
+
+### Improved
+- Handlebars example files
+- Styleguide CSS
+- In-file documentation
+
+### Added
+- Browserify error handler
+
+
+
 ## 1.14.1
 2016-19-10
 
