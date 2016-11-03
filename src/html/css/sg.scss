@@ -254,9 +254,11 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   display: none;
   position: absolute;
   width: inherit;
+  max-height: calc(100vh - #{$height-nav});
   top: $height-nav;
   margin: 0;
   padding: 0;
+  overflow-x: auto;
 
   background-color: $color-background;
 
