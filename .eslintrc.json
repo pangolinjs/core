@@ -20,7 +20,7 @@
     "yoda": 2,
     "no-shadow": 2,
     "no-shadow-restricted-names": 2,
-    "no-use-before-define": 2,
+    "no-use-before-define": ["error", { "functions": false }],
 
     "array-bracket-spacing": 2,
     "block-spacing": 2,
