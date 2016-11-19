@@ -15,7 +15,7 @@
     "no-floating-decimal": 2,
     "no-loop-func": 2,
     "no-self-compare": 2,
-    "no-warning-comments": 2,
+    "no-warning-comments": 1,
 
     "yoda": 2,
     "no-shadow": 2,
