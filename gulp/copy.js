@@ -6,7 +6,7 @@
 // Make paths variable available
 // =========================================================
 
-const paths = require('./gulp/paths.json');
+const paths = require('./paths.json');
 
 
 
@@ -17,7 +17,7 @@ module.exports = [
   {
     folder: 'node_modules/svgxuse',
     files: 'svgxuse.min.js',
-    dest: paths.js,
+    dest: paths.js.base,
     exclude: ['dev', 'prev', 'dist']
   }
 ];
