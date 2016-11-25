@@ -1,0 +1,11 @@
+{
+  "src":  "src",
+  "dev":  "dev",
+  "prev": "prev",
+  "dist": "dist",
+
+  "css":  "css",
+  "js":   "js",
+  "html": "html",
+  "img":  "img"
+}

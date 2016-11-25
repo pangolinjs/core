@@ -503,37 +503,47 @@ gulp.task('img-dist', ['img-dist-copy', 'img-dist-icons']);
 
 
 
-/* COPY
+/* SIMPLE COPY
  * Copy files from one location to another – very simple
  * ========================================================================== */
 
-let simpleCopy = (taskDest) => {
-  let copyConfig = `./gulp/copy.js`;
+let simpleCopy = (task) => {
+  let copyConfig = `./copy.js`;
+  let destination = paths[task];
 
   delete require.cache[require.resolve(copyConfig)];
   let copyList = require(copyConfig);
 
   if (Array.isArray(copyList) && copyList.length > 0) {
     for (let item of copyList) {
+      let exclude = false;
 
-      glob(`${item.folder}/${item.files}`, {nodir: true}, function(globError, files) {
-        files.forEach(function(file) {
-          let filePath = path.relative(`${item.folder}`, file);
-          let fileDir  = path.dirname(filePath);
+      if (Array.isArray(item.exclude)) {
+        exclude = item.exclude.indexOf(task) !== -1;
+      } else if (task === item.exclude) {
+        exclude = true;
+      }
 
-          if (fileDir === '.') {
-            fileDir = '';
-          }
+      if (!exclude) {
+        glob(`${item.folder}/${item.files}`, {nodir: true}, function(globError, files) {
+          files.forEach(function(file) {
+            let filePath = path.relative(`${item.folder}`, file);
+            let fileDir  = path.dirname(filePath);
 
-          mkdirp(`${taskDest}/${item.dest}/${fileDir}`, function(mkdirError) {
-            if (mkdirError) {
-              console.error(mkdirError);
+            if (fileDir === '.') {
+              fileDir = '';
             }
 
-            fs.createReadStream(file).pipe(fs.createWriteStream(`${taskDest}/${item.dest}/${filePath}`));
+            mkdirp(`${destination}/${item.dest}/${fileDir}`, function(mkdirError) {
+              if (mkdirError) {
+                console.error(mkdirError);
+              }
+
+              fs.createReadStream(file).pipe(fs.createWriteStream(`${destination}/${item.dest}/${filePath}`));
+            });
           });
         });
-      });
+      }
     }
 
     browsersync.reload();
@@ -542,7 +552,7 @@ let simpleCopy = (taskDest) => {
 
 // Copy dev
 gulp.task('copy-dev', () => {
-  return simpleCopy(paths.dev);
+  return simpleCopy('dev');
 });
 
 
@@ -552,12 +562,12 @@ gulp.task('copy-watch', ['copy-dev']);
 
 // Copy preview
 gulp.task('copy-prev', () => {
-  return simpleCopy(paths.prev);
+  return simpleCopy('prev');
 });
 
 // Copy production
 gulp.task('copy-dist', () => {
-  return simpleCopy(paths.dist);
+  return simpleCopy('dist');
 });
 
 
