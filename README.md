@@ -8,14 +8,15 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 ## Contents
 1. [Dependencies](#dependencies)
 2. [Installation](#installation)
-3. [Usage](#usage)
+3. [Configuration](#configuration)
+4. [Usage](#usage)
   1. [Tasks](#tasks)
   2. [CSS](#css)
   3. [JavaScript](#javascript)
   4. [HTML](#html)
   5. [Images and Icons](#images-and-icons)
   6. [Copy](#copy)
-4. [Credits](#credits)
+5. [Credits](#credits)
 
 
 ## Dependencies
@@ -31,6 +32,11 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 
 *Check for outdated Node modules with `npm outdated`.*
 *Update Node modules with `npm update`.*
+
+
+## Configuration
+
+This styleguide comes pre-configured with example content. The files `gulp/config.json` and `gulp/paths.json` can be used to customize specific task settings and the source and destination folders.
 
 
 ## Usage
@@ -198,11 +204,12 @@ This styleguide ships with [svgxuse](https://github.com/Keyamoon/svgxuse), a pol
 ### Copy
 Files that don't fit in the above mentioned categories can be integrated into the styleguide with the file `gulp/copy.js`. To integrate files from Node modules, simply install the module with `npm install --save-dev module-name` and add files or folders to `copy.js`.
 
-`copy.js` contains an array of objects. Each object is a copy instruction and has a `folder`, `files` and `dest` key.
+`copy.js` contains an array of objects. Each object is a copy instruction and has a `folder`, `files`, `dest` and optional `exclude` key.
 
 * `folder` is the base path.
 * `files` specifies which files and folders will be copied. The folder structure will be kept (e.g. `dist/**` results in `dev/js/dist/**`). Use [globs](https://github.com/isaacs/node-glob#glob-primer) to copy more than one file.
 * `dest` sets the destination for the copy process. The development, preview and production tasks each prefix the destination with their specific output folders (e.g. `dev/` for development). Base path variables from `gulp/paths.js` can be used (`path.css.base`, `path.js.base`, `path.html.base` and `path.img.base`). But feel free to set arbitrary destinations.
+* [optional] `excludes` contains a string or an array of strings with names for tasks that will not perform the copy instruction. Available task names are `dev`, `prev` and `dist`.
 
 Beware of overwriting files from other tasks (e.g. `css/styles.css`), the copy task is started last. Due to asynchronous task execution the exact write order is unknown.
 
@@ -212,11 +219,12 @@ module.exports = [
   {
     folder: 'node_modules/svgxuse',
     files: 'svgxuse.{js,min.js}',
-    dest: paths.js.base
+    dest: paths.js.base,
+    exclude: 'dist'
   }
 ];
 ```
-This declaration copies the files `node_modules/svgxuse/svgxuse.js` and `node_modules/svgxuse/svgxuse.min.js` to `taskfolder/js/svgxuse.js` and `taskfolder/js/svgxuse.min.js`. `taskfolder` is either `dev`, `prev` or `dist` depending on the task.
+This declaration copies the files `node_modules/svgxuse/svgxuse.js` and `node_modules/svgxuse/svgxuse.min.js` to `taskfolder/js/svgxuse.js` and `taskfolder/js/svgxuse.min.js`. `taskfolder` is either `dev` or `prev` depending on the task. The `dist` task is excluded.
 
 #### Preserve original folder structure
 ```javascript
