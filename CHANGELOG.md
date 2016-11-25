@@ -2,6 +2,21 @@
 
 
 
+## 1.15.0
+2016-11-25
+
+### Improved
+- Styleguide CSS
+- Layout partials
+- ESLint configuration
+- Replaced included normalize.css with npm package
+- Replace path configuration JavaScript with JSON
+
+### Added
+- Exclude option for copy task
+
+
+
 ## 1.14.2
 2016-10-22
 
