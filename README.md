@@ -22,7 +22,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 ## Dependencies
 * [Node.js with npm](https://nodejs.org/)
 
-*Only tested with Node.js Current (v6.x).*
+*Only tested with Node.js v6.9.1 and v7.2.0. An update from 6 to 7 requires a full re-install of dependencies.*
 
 
 ## Installation
