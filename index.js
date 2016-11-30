@@ -8,6 +8,7 @@
 
 const fs       = require('fs');
 const ncp      = require('ncp');
+const path     = require('path');
 const process  = require('process');
 const readline = require('readline');
 const spawn    = require('child_process').spawn;
@@ -15,8 +16,9 @@ const spawn    = require('child_process').spawn;
 
 let packageJSON = {
   scripts: {
-    start: 'front-end-styleguide',
-    test: 'front-end-styleguide development'
+    start: './node_modules/.bin/front-end-styleguide',
+    preview: './node_modules/.bin/front-end-styleguide preview',
+    production: './node_modules/.bin/front-end-styleguide production'
   },
   devDependencies: {
     'babel-preset-es2015': '^6.9.0',
@@ -59,21 +61,25 @@ let initProject = function(dir) {
     output: process.stdout
   });
 
-  let projectFolder = dir.match(/([^\/]*)\/*$/)[1];;
+  let projectFolder = path.parse(dir).name;
 
   rl.question(`Project name: (${projectFolder}) `, (answer) => {
     answer = answer || projectFolder;
     packageJSON.name = answer.toLowerCase().replace(' ', '-');
 
     rl.question('Project description: ', (answer) => {
-      packageJSON.description = answer;
+      if (answer) {
+        packageJSON.description = answer;
+      }
 
       rl.question('Version: (1.0.0) ', (answer) => {
         answer = answer || '1.0.0';
         packageJSON.version = answer;
 
         rl.question('Author name: ', (answer) => {
-          packageJSON.author = answer;
+          if (answer) {
+            packageJSON.author = answer;
+          }
 
           rl.question('Author e-mail: ', (answer) => {
             if (answer && packageJSON.author.length) {
@@ -86,6 +92,11 @@ let initProject = function(dir) {
               if (error) {
                 return console.error(error);
               }
+
+              spawn('npm', ['install'], {
+                cwd: dir,
+                stdio: 'inherit'
+              });
             });
 
             fs.writeFile(`${dir}/.gitignore`, gitignore, (error) => {
@@ -115,8 +126,9 @@ let initProject = function(dir) {
 
 
 let spawnGulp = function(dir, task) {
-  spawn(`${__dirname}/node_modules/.bin/gulp`, [`--dir=${dir}`, task], {
+  spawn('"' + path.join(__dirname, '/node_modules/.bin/gulp') + '"', [`--dir=${dir}`, task], {
     cwd: __dirname,
+    shell: true,
     stdio: 'inherit'
   });
 };
