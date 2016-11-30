@@ -1,4 +1,4 @@
-# Front End Development Styleguide
+# Front End Styleguide
 
 Living Styleguide for componentized front end development.
 

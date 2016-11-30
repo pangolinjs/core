@@ -1,26 +1,25 @@
 'use strict';
 
-
-
 /* eslint-env node */
 /* eslint no-console: "off" */
 
 
 
-/* MODULES
+/* DEPENDENCIES
  * ========================================================================== */
 
 
 // Base
+const browsersync  = require('browser-sync');
+const buffer       = require('vinyl-buffer');
+const del          = require('del');
 const fs           = require('fs');
 const glob         = require('glob');
-const del          = require('del');
-const path         = require('path');
 const mkdirp       = require('mkdirp');
+const path         = require('path');
+const process      = require('process');
 const source       = require('vinyl-source-stream');
-const buffer       = require('vinyl-buffer');
 const through      = require('through2');
-const browsersync  = require('browser-sync');
 
 // Gulp
 const gulp         = require('gulp');
@@ -51,9 +50,14 @@ const svgSprite    = require('gulp-svg-sprite');
 const imagemin     = require('gulp-imagemin');
 
 // Paths & Config
-const config       = require('./gulp/config.json');
-const paths        = require('./gulp/paths.json');
+const cwd          = gutil.env.dir;
+const config       = require(`${cwd}/config/config.json`);
+const paths        = require(`${cwd}/config/paths.json`);
 
+paths.src = `${cwd}/${paths.src}`;
+paths.dev = `${cwd}/${paths.dev}`;
+paths.prev = `${cwd}/${paths.prev}`;
+paths.dist = `${cwd}/${paths.dist}`;
 
 
 
@@ -64,25 +68,25 @@ const paths        = require('./gulp/paths.json');
 
 // Clean Development
 gulp.task('clean-dev', () => {
-  return del(paths.dev);
+  return del(paths.dev, {force: true});
 });
 
 
 // Clean Preview
 gulp.task('clean-prev', () => {
-  return del(paths.prev);
+  return del(paths.prev, {force: true});
 });
 
 
 // Clean Distribution
 gulp.task('clean-dist', () => {
-  return del(paths.dist);
+  return del(paths.dist, {force: true});
 });
 
 
 // Clean Dev Images
 gulp.task('clean-img-dev', () => {
-  return del(`${paths.dev}/${paths.img.base}/**`);
+  return del(`${paths.dev}/${paths.img.base}/**`, {force: true});
 });
 
 
@@ -112,7 +116,7 @@ gulp.task('css-watch', ['css-dev']);
 
 // CSS Styleguide
 gulp.task('css-sg', () => {
-  return gulp.src(`${paths.src}/${paths.html.base}/${paths.html.css}/sg.scss`)
+  return gulp.src('docs/sg.scss')
     .pipe(sass(config.css.dist).on('error', sass.logError))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(gulp.dest(`${paths.dev}/${paths.css.base}`));
@@ -172,7 +176,7 @@ ${error.message}
 // JavaScript Lint
 gulp.task('js-lint', () => {
   return gulp.src(`${paths.src}/${paths.js.base}/**/*.js`)
-    .pipe(eslint(config.js.eslint))
+    .pipe(eslint())
     .pipe(eslint.format());
 });
 
@@ -182,7 +186,7 @@ gulp.task('js-dev', ['js-lint'], () => {
   const b = browserify({
     entries: `${paths.src}/${paths.js.base}/${paths.js.entry}`,
     debug: true,
-    transform: [babelify.configure(config.js.babel)]
+    transform: [babelify]
   });
 
   return b.bundle().on('error', browserifyError)
@@ -201,10 +205,8 @@ gulp.task('js-watch', ['js-dev']);
 
 // JavaScript Styleguide
 gulp.task('js-sg', () => {
-  return gulp.src(`${paths.src}/${paths.html.base}/${paths.html.js}/sg.js`)
-    .pipe(eslint(config.js.eslint))
-    .pipe(eslint.format())
-    .pipe(babel(config.js.babel).on('error', console.log))
+  return gulp.src('docs/sg.js')
+    .pipe(babel({ presets: ['es2015'] }))
     .pipe(uglify())
     .pipe(gulp.dest(`${paths.dev}/${paths.js.base}`));
 });
@@ -215,7 +217,7 @@ gulp.task('js-prev', ['js-lint'], () => {
     const b = browserify({
       entries: `${paths.src}/${paths.js.base}/${paths.js.entry}`,
       debug: true,
-      transform: [babelify.configure(config.js.babel)]
+      transform: [babelify]
     });
 
     return b.bundle()
@@ -231,7 +233,7 @@ gulp.task('js-dist', ['js-lint'], () => {
   const b = browserify({
     entries: `${paths.src}/${paths.js.base}/${paths.js.entry}`,
     debug: true,
-    transform: [babelify.configure(config.js.babel)]
+    transform: [babelify]
   });
 
   return b.bundle()
@@ -276,7 +278,6 @@ let compileHandlebars = (task) => {
 
   let dataMeta = {
     version: require('./package.json').version,
-    lang: require('./package.json').lang,
     dev: task === 'dev',
   };
 
@@ -313,6 +314,7 @@ let compileHandlebars = (task) => {
   // Create Handlebars Stream with partials, helpers and data
   let hbStream = hb(config.html.hb)
     .partials(`${paths.src}/${paths.html.base}/${paths.html.partials}/**/*.hbs`)
+    .partials('docs/**/*.hbs')
     .helpers(require('handlebars-layouts'))
     .helpers({
       // Handlebars concat helper
@@ -512,7 +514,7 @@ let simpleCopyMessage = (from, to) => {
 };
 
 let simpleCopy = (task) => {
-  let copyConfig = `./gulp/copy.js`;
+  let copyConfig = `${paths.src}/copy.js`;
   let destination = paths[task];
 
   delete require.cache[require.resolve(copyConfig)];
@@ -651,6 +653,6 @@ gulp.task('default', ['clean-dev'], () => {
   watchImg.on('change', onChangeMessage);
 
   // Watch NPM Assets
-  let watchCopy = gulp.watch(`./gulp/copy.js`, ['copy-watch']);
+  let watchCopy = gulp.watch(`${paths.src}/copy.js`, ['copy-watch']);
   watchCopy.on('change', onChangeMessage);
 });

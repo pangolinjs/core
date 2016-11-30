@@ -6,18 +6,18 @@ category: Components
 {{#extend "layouts/components"}}
 {{#content "body"}}
 
-  {{#embed "styleguide/article" title="Documentation file for a component" description="You can wrap components or variations thereof in awesome boxes with headings and descriptions."}}
+  {{#embed "sg/article" title="Documentation file for a component" description="You can wrap components or variations thereof in awesome boxes with headings and descriptions."}}
   {{#content "body"}}
     <p>You can develop your component in this file. But it is recommended to build them as partials for reusability of your code.</p>
 
     <p>Partials will be loaded from the <code>src/html/partials</code> folder. Component partials should be placed in <code>src/html/partials/includes</code>.</p>
 
-    {{> "includes/example"}}
+    {{> includes/example}}
   {{/content}}
   {{/embed}}
 
 
-  {{#embed "styleguide/article" title="A variation with light background" description="This can have a description aswell." background="lightgray"}}
+  {{#embed "sg/article" title="A variation with light background" description="This can have a description aswell." background="lightgray"}}
   {{#content "body"}}
     <p>To develop components on colored backgrounds, add the parameter <code>background</code> to the component frame partial with a CSS color.</p>
     <p>Example: <code>background="lightgray"</code>.</p>
@@ -25,7 +25,7 @@ category: Components
   {{/embed}}
 
 
-  {{#embed "styleguide/article" title="A variation with dark background" description="This can have a description aswell." background="gray"}}
+  {{#embed "sg/article" title="A variation with dark background" description="This can have a description aswell." background="gray"}}
   {{#content "body"}}
     <p>To develop components on colored backgrounds, add the parameter <code>background</code> to the component frame partial with a CSS color.</p>
     <p>Example: <code>background="gray"</code>.</p>

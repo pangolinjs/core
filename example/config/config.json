@@ -13,15 +13,6 @@
     }
   },
 
-  "js": {
-    "eslint": {
-      "configFile": ".eslintrc.json"
-    },
-    "babel": {
-      "presets": ["es2015"]
-    }
-  },
-
   "html": {
     "hb": {
       "bustCache": true

@@ -6,7 +6,7 @@ category: Components
 {{#extend "layouts/components"}}
 {{#content "body"}}
 
-  {{#embed "styleguide/article" title="Usage"}}
+  {{#embed "sg/article" title="Usage"}}
   {{#content "body"}}
 
     <p>SVG symbols can be referenced with their ID. The icon workflow creates IDs from the filename of the original SVG placed in <code>src/img/icons</code>. Each ID is suffixed with "-icon" for better compatibility with browsers that need a polyfill.</p>
@@ -20,7 +20,7 @@ category: Components
   {{/content}}
   {{/embed}}
 
-  {{#embed "styleguide/article" padding="none"}}
+  {{#embed "sg/article" padding="none"}}
   {{#content "body"}}
 
     <iframe src="{{page 'rel'}}img/icons.html" class="sg-iframe js-sg-iframe"></iframe>

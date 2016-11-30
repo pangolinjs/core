@@ -6,7 +6,7 @@
 // Make paths variable available
 // =========================================================
 
-const paths = require('./paths.json');
+const paths = require('../config/paths.json');
 
 
 
