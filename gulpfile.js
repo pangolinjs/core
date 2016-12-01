@@ -1,8 +1,5 @@
 'use strict';
 
-/* eslint-env node */
-/* eslint no-console: "off" */
-
 
 
 /* DEPENDENCIES
@@ -13,11 +10,9 @@
 const browsersync  = require('browser-sync');
 const buffer       = require('vinyl-buffer');
 const del          = require('del');
-const fs           = require('fs');
+const fs           = require('fs-extra');
 const glob         = require('glob');
-const mkdirp       = require('mkdirp');
 const path         = require('path');
-const process      = require('process');
 const source       = require('vinyl-source-stream');
 const through      = require('through2');
 
@@ -54,8 +49,8 @@ const cwd          = gutil.env.dir;
 const config       = require(`${cwd}/config/config.json`);
 const paths        = require(`${cwd}/config/paths.json`);
 
-paths.src = `${cwd}/${paths.src}`;
-paths.dev = `${cwd}/${paths.dev}`;
+paths.src  = `${cwd}/${paths.src}`;
+paths.dev  = `${cwd}/${paths.dev}`;
 paths.prev = `${cwd}/${paths.prev}`;
 paths.dist = `${cwd}/${paths.dist}`;
 
@@ -531,23 +526,17 @@ let simpleCopy = (task) => {
       }
 
       if (!exclude) {
-        glob(`${item.folder}/${item.files}`, {nodir: true}, function(globError, files) {
-          files.forEach(function(file) {
-            let filePath = path.relative(`${item.folder}`, file);
-            let fileDir  = path.dirname(filePath);
+        glob(`${cwd}/${item.folder}/${item.files}`, {nodir: true}, function(globError, files) {
+          files.forEach(function(fileSrc) {
 
-            if (fileDir === '.') {
-              fileDir = '';
-            }
+            let fileDest = `${destination}/${item.dest}/${path.relative(cwd + '/' + item.folder, fileSrc)}`;
 
-            mkdirp(`${destination}/${item.dest}/${fileDir}`, function(mkdirError) {
-              if (mkdirError) {
-                console.error(mkdirError);
+            fs.copy(fileSrc, fileDest, (fsError) => {
+              if (fsError) {
+                console.error(fsError);
               }
 
-              simpleCopyMessage(file, `${destination}/${item.dest}/${filePath}`);
-
-              fs.createReadStream(file).pipe(fs.createWriteStream(`${destination}/${item.dest}/${filePath}`));
+              simpleCopyMessage(path.relative(cwd, fileSrc), path.relative(cwd, fileDest));
             });
           });
         });

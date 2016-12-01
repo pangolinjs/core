@@ -5,8 +5,7 @@
 /* DEPENDENCIES
  * ========================================================================== */
 
-const fs       = require('fs');
-const ncp      = require('ncp');
+const fs       = require('fs-extra');
 const path     = require('path');
 const process  = require('process');
 const readline = require('readline');
@@ -117,7 +116,7 @@ Installing npm packages…
               }
             });
 
-            ncp(`${__dirname}/init`, dir, (error) => {
+            fs.copy(`${__dirname}/init`, dir, (error) => {
               if (error) {
                 return console.error(error);
               }
