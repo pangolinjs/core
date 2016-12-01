@@ -5,7 +5,6 @@
 /* DEPENDENCIES
  * ========================================================================== */
 
-
 const fs       = require('fs');
 const ncp      = require('ncp');
 const path     = require('path');
@@ -53,7 +52,6 @@ dist
 
 /* INITIALIZE NEW PROJECT
  * ========================================================================== */
-
 
 let initProject = function(dir) {
   const rl = readline.createInterface({
@@ -150,7 +148,6 @@ let updateProject = function(dir) {
 /* RUN GULP with optional ARGUMENTS
  * ========================================================================== */
 
-
 let spawnGulp = function(dir, task) {
   spawn('"' + path.join(__dirname, '/node_modules/.bin/gulp') + '"', [`--dir=${dir}`, task], {
     cwd: __dirname,
@@ -163,7 +160,6 @@ let spawnGulp = function(dir, task) {
 
 /* EXPOSE to OUTER SPACE
  * ========================================================================== */
-
 
 module.exports = function() {
   let argument = process.argv[2] || 'default';

@@ -21,4 +21,4 @@ The following tasks are available:
 * Run `front-end-styleguide preview` to create a prototype preview. Minifies CSS, JavaScript and images. Doesn't generate component HTML.
 * Run `front-end-styleguide production` to create prduction ready files. Minifies CSS, JavaScript and images. Doesn't generate any HTML.
 
-For more information have a look at the [readme of the init folder](init#readme).
+For more information take a look at the [readme of the init folder](init#readme).

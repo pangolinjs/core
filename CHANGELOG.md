@@ -2,6 +2,15 @@
 
 
 
+## 2.0.0
+2016-12-01
+
+## Improved
+- Make a npm package out of this styleguide
+- Switch back to GPLv3 license
+
+
+
 ## 1.15.0
 2016-11-25
 
