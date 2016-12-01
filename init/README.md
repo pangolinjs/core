@@ -6,7 +6,7 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 
 
 ## Contents
-1. [Dependencies](#dependencies)
+1. [Prerequisites](#prerequisites)
 2. [Installation](#installation)
 3. [Configuration](#configuration)
 4. [Usage](#usage)
@@ -250,4 +250,4 @@ Everything from `node_modules/@polymer/font-roboto` will be copied to `taskfolde
 
 ## Credits
 
-* [Material icons by Google](https://design.google.com/icons/)
+* [Material Icons by Google](https://material.io/icons/)
