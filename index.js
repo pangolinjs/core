@@ -25,7 +25,7 @@ let packageJSON = {
     'normalize.css': '^5.0.0',
     'svgxuse': '^1.1.20'
   }
-}
+};
 
 let gitignore =
 `# OS specific stuff
@@ -63,29 +63,36 @@ let initProject = function(dir) {
 
   let projectFolder = path.parse(dir).name;
 
-  rl.question(`Project name: (${projectFolder}) `, (answer) => {
-    answer = answer || projectFolder;
-    packageJSON.name = answer.toLowerCase().replace(' ', '-');
+  console.log(`
+Welcome to the Front End Styleguide initialization process.
 
-    rl.question('Project description: ', (answer) => {
-      if (answer) {
-        packageJSON.description = answer;
+Please answer the following questions to generate a custom
+package.json for your new project.
+`);
+
+  rl.question(`Project name: (${projectFolder}) `, (projectName) => {
+    projectName = projectName || projectFolder;
+    packageJSON.name = projectName.toLowerCase().replace(' ', '-');
+
+    rl.question('Project description: ', (projectDescription) => {
+      if (projectDescription) {
+        packageJSON.description = projectDescription;
       }
 
-      rl.question('Version: (1.0.0) ', (answer) => {
-        answer = answer || '1.0.0';
-        packageJSON.version = answer;
+      rl.question('Version: (1.0.0) ', (version) => {
+        version = version || '1.0.0';
+        packageJSON.version = version;
 
-        rl.question('Author name: ', (answer) => {
-          if (answer) {
-            packageJSON.author = answer;
+        rl.question('Author name: ', (authorName) => {
+          if (authorName) {
+            packageJSON.author = authorName;
           }
 
-          rl.question('Author e-mail: ', (answer) => {
-            if (answer && packageJSON.author.length) {
-              packageJSON.author += answer ? ` <${answer}>` : '';
-            } else if (answer) {
-              packageJSON.author += `<${answer}>`;
+          rl.question('Author email: ', (authorEmail) => {
+            if (authorEmail && packageJSON.author.length) {
+              packageJSON.author += authorEmail ? ` <${authorEmail}>` : '';
+            } else if (authorEmail) {
+              packageJSON.author += `<${authorEmail}>`;
             }
 
             fs.writeFile(`${dir}/package.json`, JSON.stringify(packageJSON, null, 2), 'utf8', (error) => {
@@ -93,7 +100,14 @@ let initProject = function(dir) {
                 return console.error(error);
               }
 
-              spawn('npm', ['install'], {
+              console.log(`
+Thank you. That's it!
+Just wait a few more seconds for the finishing touches.
+
+Installing npm packages…
+`);
+
+              spawn('npm', ['install', '--loglevel=error'], {
                 cwd: dir,
                 stdio: 'inherit'
               });
@@ -105,7 +119,7 @@ let initProject = function(dir) {
               }
             });
 
-            ncp(`${__dirname}/example`, dir, (error) => {
+            ncp(`${__dirname}/init`, dir, (error) => {
               if (error) {
                 return console.error(error);
               }
@@ -116,6 +130,18 @@ let initProject = function(dir) {
         });
       });
     });
+  });
+};
+
+
+
+/* UPDATE PROJECT
+ * ========================================================================== */
+
+let updateProject = function(dir) {
+  spawn('npm', ['install'], {
+    cwd: dir,
+    stdio: 'inherit'
   });
 };
 
@@ -135,18 +161,18 @@ let spawnGulp = function(dir, task) {
 
 
 
-/* DECIDE between INIT and GULP
+/* EXPOSE to OUTER SPACE
  * ========================================================================== */
 
 
-let run = function() {
+module.exports = function() {
   let argument = process.argv[2] || 'default';
 
   if (argument === 'init') {
     initProject(process.cwd());
+  } else if (argument === 'update') {
+    updateProject(process.cwd());
   } else {
     spawnGulp(process.cwd(), argument);
   }
-}
-
-module.exports = run;
+};
