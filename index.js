@@ -5,12 +5,17 @@
 /* DEPENDENCIES
  * ========================================================================== */
 
+const chalk    = require('chalk');
 const fs       = require('fs-extra');
 const path     = require('path');
 const process  = require('process');
 const readline = require('readline');
 const spawn    = require('child_process').spawn;
 
+
+
+/* SETTINGS
+ * ========================================================================== */
 
 let packageJSON = {
   scripts: {
@@ -20,6 +25,7 @@ let packageJSON = {
   },
   devDependencies: {
     'babel-preset-es2015': '^6.9.0',
+    'front-end-styleguide': '^2.1.0',
     'normalize.css': '^5.0.0',
     'svgxuse': '^1.1.20'
   }
@@ -53,19 +59,15 @@ dist
  * ========================================================================== */
 
 let initProject = function(dir) {
+  console.log('\n' + chalk.black.bgWhite(' Front End Styleguide Initialization ') + '\n');
+  console.log('Please answer the following questions to generate a custom\npackage.json for your new project.\n');
+
   const rl = readline.createInterface({
     input:  process.stdin,
     output: process.stdout
   });
 
   let projectFolder = path.parse(dir).name;
-
-  console.log(`
-Welcome to the Front End Styleguide initialization process.
-
-Please answer the following questions to generate a custom
-package.json for your new project.
-`);
 
   rl.question(`Project name: (${projectFolder}) `, (projectName) => {
     projectName = projectName || projectFolder;
@@ -97,16 +99,15 @@ package.json for your new project.
                 return console.error(error);
               }
 
-              console.log(`
-Thank you. That's it!
-Just wait a few more seconds for the finishing touches.
-
-Installing npm packages…
-`);
+              console.log('\n' + chalk.green('Thank you. That\'s it!'));
+              console.log('Just wait a few more seconds for the finishing touches.\n');
+              console.log(chalk.italic('Installing npm packages…') + '\n');
 
               spawn('npm', ['install', '--loglevel=error'], {
                 cwd: dir,
                 stdio: 'inherit'
+              }).on('close', () => {
+                console.log('\nYour new project was successfully set up!');
               });
             });
 

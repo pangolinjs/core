@@ -3,8 +3,11 @@
 
 ## Installation
 
-* Global: `npm install -g front-end-styleguide`.
-* Local: `npm install front-end-styleguide`.
+`npm install front-end-styleguide`.
+
+For global CLI access install `npm install -g front-end-styleguide-cli`.  
+The CLI needs a local version of front-end-styleguide.
+
 
 
 ## Project Creation
@@ -20,7 +23,6 @@ The following tasks are available:
 * `front-end-styleguide preview` to create a prototype preview. Minifies CSS, JavaScript and images. Doesn't generate component HTML.
 * `front-end-styleguide production` to create production ready files. Minifies CSS, JavaScript and images. Doesn't generate any HTML.
 
-If you installed a local version you have to run:  
-`./node_modules/.bin/front-end-styleguide` instead of `front-end-styleguide`.
+If you installed the local version only you have to run `./node_modules/.bin/front-end-styleguide`.
 
 For more information take a look at the [readme of the init folder](init#readme).
