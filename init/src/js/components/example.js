@@ -12,9 +12,7 @@ const helloWorld = require('../functions/helloWorld.js');
 
 
 
-// Export
+// Component
 // =========================================================
 
-module.exports = function() {
-  helloWorld(['foo', 'bar', 'baz']);
-};
+helloWorld(['foo', 'bar', 'baz']);

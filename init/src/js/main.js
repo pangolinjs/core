@@ -20,4 +20,4 @@ require('svgxuse');
 // COMPONENTS
 // =========================================================
 
-require('./components/example.js')();
+require('./components/example.js');

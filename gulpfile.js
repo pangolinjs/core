@@ -112,7 +112,7 @@ gulp.task('css-watch', ['css-dev']);
 // CSS Styleguide
 gulp.task('css-sg', () => {
   return gulp.src('docs/sg.scss')
-    .pipe(sass(config.css.dist).on('error', sass.logError))
+    .pipe(sass(config.css.dist))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(gulp.dest(`${paths.dev}/${paths.css.base}`));
 });
@@ -121,7 +121,7 @@ gulp.task('css-sg', () => {
 // CSS Preview
 gulp.task('css-prev', () => {
   return gulp.src(`${paths.src}/${paths.css.base}/**/*.scss`)
-    .pipe(sass(config.css.dist).on('error', sass.logError))
+    .pipe(sass(config.css.dist))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(rename(paths.css.output))
     .pipe(gulp.dest(`${paths.prev}/${paths.css.base}`));
@@ -130,7 +130,7 @@ gulp.task('css-prev', () => {
 // CSS Production
 gulp.task('css-dist', () => {
   return gulp.src(`${paths.src}/${paths.css.base}/**/*.scss`)
-    .pipe(sass(config.css.dist).on('error', sass.logError))
+    .pipe(sass(config.css.dist))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(rename(paths.css.output))
     .pipe(gulp.dest(`${paths.dist}/${paths.css.base}`));
@@ -176,8 +176,17 @@ gulp.task('js-lint', () => {
 });
 
 
+// JavaScript Lint
+gulp.task('js-lint-break', () => {
+  return gulp.src(`${paths.src}/${paths.js.base}/**/*.js`)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+
 // JavaScript Dev
-gulp.task('js-dev', ['js-lint'], () => {
+gulp.task('js-dev', () => {
   const b = browserify({
     entries: `${paths.src}/${paths.js.base}/${paths.js.entry}`,
     debug: true,
@@ -195,7 +204,7 @@ gulp.task('js-dev', ['js-lint'], () => {
 
 
 // JavaScript Watch
-gulp.task('js-watch', ['js-dev']);
+gulp.task('js-watch', ['js-lint', 'js-dev']);
 
 
 // JavaScript Styleguide
@@ -208,7 +217,7 @@ gulp.task('js-sg', () => {
 
 
 // JavaScript Preview
-gulp.task('js-prev', ['js-lint'], () => {
+gulp.task('js-prev', () => {
     const b = browserify({
       entries: `${paths.src}/${paths.js.base}/${paths.js.entry}`,
       debug: true,
@@ -224,7 +233,7 @@ gulp.task('js-prev', ['js-lint'], () => {
 
 
 // JavaScript Production
-gulp.task('js-dist', ['js-lint'], () => {
+gulp.task('js-dist', () => {
   const b = browserify({
     entries: `${paths.src}/${paths.js.base}/${paths.js.entry}`,
     debug: true,
@@ -388,7 +397,7 @@ let compileHandlebars = (task) => {
 
 
   return gulp.src(gulpSrc)
-    .pipe(hbStream.on('error', handlebarsError))
+    .pipe(task === 'dev' ? hbStream.on('error', handlebarsError) : hbStream)
     .pipe(removeFrontmatter)
     .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest(gulpDest));
@@ -468,7 +477,7 @@ gulp.task('img-prev-copy', () => {
 // Images Preview Icons
 gulp.task('img-prev-icons', () => {
   return gulp.src(iconSource)
-    .pipe(svgSprite(config.img.svgSpriteDist).on('error', (error) => { console.log(error); }))
+    .pipe(svgSprite(config.img.svgSpriteDist))
     .pipe(gulp.dest(`${paths.prev}/${paths.img.base}`));
 });
 
@@ -489,7 +498,7 @@ gulp.task('img-dist-copy', () => {
 // Images Production Icons
 gulp.task('img-dist-icons', () => {
   return gulp.src(iconSource)
-    .pipe(svgSprite(config.img.svgSpriteDist).on('error', (error) => { console.log(error); }))
+    .pipe(svgSprite(config.img.svgSpriteDist))
     .pipe(gulp.dest(`${paths.dist}/${paths.img.base}`));
 });
 
@@ -531,13 +540,12 @@ let simpleCopy = (task) => {
 
             let fileDest = `${destination}/${item.dest}/${path.relative(cwd + '/' + item.folder, fileSrc)}`;
 
-            fs.copy(fileSrc, fileDest, (fsError) => {
-              if (fsError) {
-                console.error(fsError);
-              }
-
+            try {
+              fs.copySync(fileSrc, fileDest);
               simpleCopyMessage(path.relative(cwd, fileSrc), path.relative(cwd, fileDest));
-            });
+            } catch (fsError) {
+              console.error(fsError);
+            }
           });
         });
       }
@@ -574,7 +582,7 @@ gulp.task('copy-dist', () => {
  * ========================================================================== */
 
 
-gulp.task('development', ['clean-dev'], () => {
+gulp.task('development', ['clean-dev', 'js-lint'], () => {
   runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev']);
 });
 
@@ -584,7 +592,7 @@ gulp.task('development', ['clean-dev'], () => {
  * ========================================================================== */
 
 
-gulp.task('preview', ['clean-prev'], () => {
+gulp.task('preview', ['clean-prev', 'js-lint-break'], () => {
   runSequence(['css-prev', 'js-prev', 'html-prev', 'img-prev', 'copy-prev']);
 });
 
@@ -595,7 +603,7 @@ gulp.task('preview', ['clean-prev'], () => {
  * ========================================================================== */
 
 
-gulp.task('production', ['clean-dist'], () => {
+gulp.task('production', ['clean-dist', 'js-lint-break'], () => {
   runSequence(['css-dist', 'js-dist', 'img-dist', 'copy-dist']);
 });
 
@@ -621,10 +629,7 @@ gulp.task('browsersync', () => {
 });
 
 
-gulp.task('default', ['clean-dev'], () => {
-  // Run initial task queue
-  runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev'], 'browsersync');
-
+gulp.task('watcher', () => {
   // Watch CSS
   let watchCSS = gulp.watch(`${paths.src}/${paths.css.base}/**/*.scss`, ['css-watch']);
   watchCSS.on('change', onChangeMessage);
@@ -644,4 +649,10 @@ gulp.task('default', ['clean-dev'], () => {
   // Watch NPM Assets
   let watchCopy = gulp.watch(`${paths.src}/copy.js`, ['copy-watch']);
   watchCopy.on('change', onChangeMessage);
+});
+
+
+gulp.task('default', ['clean-dev', 'js-lint'], () => {
+  // Run initial task queue
+  runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev'], 'browsersync', 'watcher');
 });

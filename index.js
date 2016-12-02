@@ -20,6 +20,7 @@ const spawn    = require('child_process').spawn;
 let packageJSON = {
   scripts: {
     start: './node_modules/.bin/front-end-styleguide',
+    development: './node_modules/.bin/front-end-styleguide development',
     preview: './node_modules/.bin/front-end-styleguide preview',
     production: './node_modules/.bin/front-end-styleguide production'
   },
