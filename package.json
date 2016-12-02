@@ -17,7 +17,6 @@
   },
   "main": "index.js",
   "bin": "bin/front-end-styleguide.js",
-  "preferGlobal": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/mvsde/styleguide"

@@ -148,7 +148,7 @@ let updateProject = function(dir) {
  * ========================================================================== */
 
 let spawnGulp = function(dir, task) {
-  spawn('"' + path.join(__dirname, '/node_modules/.bin/gulp') + '"', [`--dir=${dir}`, task], {
+  spawn(`"${path.dirname(require.resolve('gulp'))}/bin/gulp.js"`, [`--dir=${dir}`, task], {
     cwd: __dirname,
     shell: true,
     stdio: 'inherit'

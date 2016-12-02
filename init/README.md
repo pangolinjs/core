@@ -28,10 +28,11 @@ Uses the [Gulp](http://gulpjs.com/) task runner to compile [Sass](http://sass-la
 
 ## Installation
 Make sure `front-end-styleguide` is installed globally with `npm install -g front-end-styleguide`.
-Run `npm install` to get all dependencies.
+If you installed the styleguide locally you have to run `./node_modules/.bin/front-end-styleguide` instead of `front-end-styleguide`.
+
+Run `npm install` to get or update all dependencies.
 
 *Check for outdated modules with `npm outdated`.*
-*Update modules with `npm update`.*
 
 
 ## Configuration
@@ -45,10 +46,10 @@ The files `config/config.json` and `config/paths.json` can be used to customize 
 
 ### Tasks
 These are the main tasks:
-* Run `front-end-styleguide` to start the default task. Watches for file changes and starts Browsersync.
-* Run `front-end-styleguide development` to start the default task without file watching and Browsersync.
-* Run `front-end-styleguide preview` to create a prototype preview. Minifies CSS, JavaScript and images. Doesn't generate component HTML.
-* Run `front-end-styleguide production` to create prduction ready files. Minifies CSS, JavaScript and images. Doesn't generate any HTML.
+* `front-end-styleguide` to start the default task. Watches for file changes and starts Browsersync.
+* `front-end-styleguide development` to start the default task without file watching / Browsersync.
+* `front-end-styleguide preview` to create a prototype preview. Minifies CSS, JavaScript and images. Doesn't generate component HTML.
+* `front-end-styleguide production` to create production ready files. Minifies CSS, JavaScript and images. Doesn't generate any HTML.
 
 There are more tasks available for standalone execution:
 * `css-dev`, `css-prev` and `css-dist` for Sass compilation.
