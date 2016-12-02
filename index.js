@@ -26,7 +26,7 @@ let packageJSON = {
   },
   devDependencies: {
     'babel-preset-es2015': '^6.9.0',
-    'front-end-styleguide': '^2.1.0',
+    'front-end-styleguide': '^2.1.1',
     'normalize.css': '^5.0.0',
     'svgxuse': '^1.1.20'
   }

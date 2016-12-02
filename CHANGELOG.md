@@ -2,6 +2,15 @@
 
 
 
+## 2.1.1
+2016-12-02
+
+## Improved
+- Errors break preview and production tasks
+- README.md updated with latest changes
+
+
+
 ## 2.1.0
 2016-12-02
 
