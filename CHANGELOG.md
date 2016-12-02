@@ -2,6 +2,14 @@
 
 
 
+## 2.1.0
+2016-12-02
+
+## Improved
+- Switch to separate CLI and local versions
+
+
+
 ## 2.0.0
 2016-12-01
 

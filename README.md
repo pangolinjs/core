@@ -23,6 +23,6 @@ The following tasks are available:
 * `front-end-styleguide preview` to create a prototype preview. Minifies CSS, JavaScript and images. Doesn't generate component HTML.
 * `front-end-styleguide production` to create production ready files. Minifies CSS, JavaScript and images. Doesn't generate any HTML.
 
-If you installed the local version only you have to run `./node_modules/.bin/front-end-styleguide`.
+If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide`.
 
-For more information take a look at the [readme of the init folder](init#readme).
+For more information take a look at the [readme of the init folder](init/README.md).
