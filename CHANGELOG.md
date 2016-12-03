@@ -2,6 +2,14 @@
 
 
 
+## 2.1.2
+2016-12-03
+
+## Fixed
+- Startup on Windows not working correctly
+
+
+
 ## 2.1.1
 2016-12-02
 
