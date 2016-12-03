@@ -14,6 +14,25 @@ const spawn    = require('child_process').spawn;
 
 
 
+/* SEARCH LOCAL INSTALLATION
+ * ========================================================================== */
+
+let searchLocalInstallation = (dir) => {
+  try {
+    require.resolve(`${dir}/node_modules/front-end-styleguide`);
+  } catch (error) {
+    console.error(`
+${chalk.black.bgRed(' ERROR ')} Local front-end-styleguide not found in ${chalk.magenta(dir)}
+
+Start a new project: front-end-styleguide init
+Install locally:     npm install front-end-styleguide --save-dev
+`);
+    process.exit(1);
+  }
+};
+
+
+
 /* SETTINGS
  * ========================================================================== */
 
@@ -104,7 +123,7 @@ let initProject = function(dir) {
               console.log('Just wait a few more seconds for the finishing touches.\n');
               console.log(chalk.italic('Installing npm packages…') + '\n');
 
-              spawn('npm', ['install', '--loglevel=error'], {
+              spawn('npm', ['install'], {
                 cwd: dir,
                 stdio: 'inherit'
               }).on('close', () => {
@@ -138,7 +157,7 @@ let initProject = function(dir) {
  * ========================================================================== */
 
 let updateProject = function(dir) {
-  spawn('npm', ['install'], {
+  spawn('npm', ['update'], {
     cwd: dir,
     stdio: 'inherit'
   }).on('close', (code) => {
@@ -152,7 +171,7 @@ let updateProject = function(dir) {
  * ========================================================================== */
 
 let spawnGulp = function(dir, task) {
-  spawn('node', [`"${path.dirname(require.resolve('gulp'))}/bin/gulp.js"`, `--dir=${dir}`, task], {
+  spawn(`"${dir}/node_modules/.bin/gulp"`, [`--dir=${dir}`, task], {
     cwd: __dirname,
     shell: true,
     stdio: 'inherit'
@@ -172,8 +191,10 @@ module.exports = function() {
   if (argument === 'init') {
     initProject(process.cwd());
   } else if (argument === 'update') {
+    searchLocalInstallation(process.cwd());
     updateProject(process.cwd());
   } else {
+    searchLocalInstallation(process.cwd());
     spawnGulp(process.cwd(), argument);
   }
 };
