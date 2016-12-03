@@ -154,6 +154,8 @@ let spawnGulp = function(dir, task) {
     cwd: __dirname,
     shell: true,
     stdio: 'inherit'
+  }).on('close', (code) => {
+    process.exit(code);
   });
 };
 
