@@ -2,6 +2,14 @@
 
 
 
+## 2.1.3
+2016-12-03
+
+## Added
+- Correct exit code emitting
+
+
+
 ## 2.1.2
 2016-12-03
 

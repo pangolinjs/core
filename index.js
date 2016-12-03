@@ -26,9 +26,9 @@ let packageJSON = {
   },
   devDependencies: {
     'babel-preset-es2015': '^6.9.0',
-    'front-end-styleguide': '^2.1.1',
+    'front-end-styleguide': '^2.1.3',
     'normalize.css': '^5.0.0',
-    'svgxuse': '^1.1.20'
+    'svgxuse': '^1.1.23'
   }
 };
 
@@ -141,6 +141,8 @@ let updateProject = function(dir) {
   spawn('npm', ['install'], {
     cwd: dir,
     stdio: 'inherit'
+  }).on('close', (code) => {
+    process.exit(code);
   });
 };
 
