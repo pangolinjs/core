@@ -37,6 +37,7 @@ Install locally:     npm install front-end-styleguide --save-dev
 let updateProject = function(dir) {
   spawn('npm', ['update'], {
     cwd: dir,
+    shell: true,
     stdio: 'inherit'
   }).on('close', (code) => {
     process.exit(code);
