@@ -6,13 +6,15 @@
 `npm install front-end-styleguide`.
 
 For global CLI access install `npm install -g front-end-styleguide-cli`.  
-The CLI needs a local version of front-end-styleguide.
+The CLI needs a local version of the front-end-styleguide.
 
 
 
 ## Project Creation
 
 Create new project with `front-end-styleguide init`.
+
+*If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide init`.*
 
 
 ## Usage
@@ -32,6 +34,6 @@ The following tasks are available:
   * Doesn't generate any HTML.
   * Errors break pipe.
 
-If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide`.
+For more information take a look at the [readme of the init package](mvsde/styleguide-init/blob/master/init/README.md).
 
-For more information take a look at the [readme of the init folder](init/README.md).
+*If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide [task]`.*
