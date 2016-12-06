@@ -3,7 +3,7 @@
 
 ## Installation
 
-For global CLI access install `npm install -g front-end-styleguide-cli`.
+For global CLI access install `npm install -g front-end-styleguide-cli`.  
 For local installation only run `npm install front-end-styleguide --save-dev`.
 
 
