@@ -1,5 +1,6 @@
 # Front End Styleguide
 
+[![NPM version][npm-image]][npm-url] [![Dependencies][dependencies-image]][npm-url]
 
 ## Installation
 
@@ -35,3 +36,9 @@ The following tasks are available:
 For more information take a look at the [readme of the init package](https://github.com/mvsde/styleguide-init/blob/master/init/README.md).
 
 *If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide [task]`.*
+
+
+[npm-image]: https://img.shields.io/npm/v/front-end-styleguide.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/front-end-styleguide
+
+[dependencies-image]: https://img.shields.io/david/mvsde/styleguide.svg?style=flat-square
