@@ -266,6 +266,11 @@ let handlebarsError = function(error) {
 };
 
 
+let handlebarsOptions = {
+  bustCache: true
+};
+
+
 // Handlebars Function
 let compileHandlebars = (task) => {
   let pageDir      = `${paths.src}/${paths.html.base}/${paths.html.pages}/**/*.hbs`;
@@ -316,7 +321,7 @@ let compileHandlebars = (task) => {
 
 
   // Create Handlebars Stream with partials, helpers and data
-  let hbStream = hb(config.html.hb)
+  let hbStream = hb(handlebarsOptions)
     .partials(`${paths.src}/${paths.html.base}/${paths.html.partials}/**/*.hbs`)
     .partials('docs/**/*.hbs')
     .helpers(require('handlebars-layouts'))
@@ -337,14 +342,15 @@ let compileHandlebars = (task) => {
 
         return output;
       },
+
+      // Return page metadata
+      // This includes file specific data aswell as frontmatter
       page: (key, options) => {
         let file = options.data.file.path;
 
         // Initialize variables
         let currentPath;
         let sourcePath;
-
-        let frontMatter = fm(fs.readFileSync(file, 'utf8')).attributes;
 
         switch (key) {
           case 'filebase':
@@ -365,18 +371,11 @@ let compileHandlebars = (task) => {
             }
 
             return `${path.relative(currentPath, sourcePath)}/`.replace(/\\/g, '/');
-
-          case 'title':
-            return frontMatter.title;
-
-          case 'description':
-            return frontMatter.description;
-
-          case 'category':
-            return frontMatter.category;
         }
 
-        if (frontMatter.hasOwnProperty(key)) {
+        let frontMatter = fm(fs.readFileSync(file, 'utf8')).attributes;
+
+        if (['filebase', 'filename', 'filepath', 'rel'].indexOf(key) === -1 && frontMatter.hasOwnProperty(key)) {
           return frontMatter[key];
         }
       }
