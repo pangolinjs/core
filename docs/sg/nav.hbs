@@ -12,7 +12,7 @@
       <ul class="sg-nav__sub-list js-sg-nav-sub">
       {{#each this.pages}}
         <li class="sg-nav__sub-item">
-          <a href="{{page 'rel'}}{{this.url}}" class="sg-nav__link">{{this.name}}</a>
+          <a href="{{page 'rel'}}{{this.url}}" class="sg-nav__link{{#eq this.url (page 'filepath')}} is-active{{/eq}}">{{this.name}}</a>
         </li>
       {{/each}}
       </ul>

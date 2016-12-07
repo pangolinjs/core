@@ -324,58 +324,40 @@ let compileHandlebars = (task) => {
   let hbStream = hb(handlebarsOptions)
     .partials(`${paths.src}/${paths.html.base}/${paths.html.partials}/**/*.hbs`)
     .partials('docs/**/*.hbs')
+    .helpers(require('handlebars-helpers'))
     .helpers(require('handlebars-layouts'))
     .helpers({
-      // Handlebars concat helper
-      // Source: http://stackoverflow.com/a/34812062
-      concat: (json) => {
-        let output = '';
-        let flipArray = [];
-
-        for (let key in json.hash) {
-          flipArray.push(json.hash[key]);
-        }
-
-        for (let i = (flipArray.length - 1); i >= 0; i--) {
-          output += flipArray[i];
-        }
-
-        return output;
-      },
-
       // Return page metadata
       // This includes file specific data aswell as frontmatter
       page: (key, options) => {
         let file = options.data.file.path;
 
         // Initialize variables
-        let currentPath;
-        let sourcePath;
-
-        switch (key) {
-          case 'filebase':
-            return path.basename(file, '.hbs');
-
-          case 'filename':
-            return `${path.basename(file, '.hbs')}.html`.replace('index.html', '');
-
-          case 'filepath':
-            return path.relative(`${paths.src}/${paths.html.base}/${paths.html.pages}`, file).replace('.hbs', '.html').replace('index.html', '').replace(/\\/g, '/');
-
-          case 'rel':
-            currentPath = path.dirname(file);
-            sourcePath  = path.resolve(`${paths.src}/${paths.html.base}/${paths.html.pages}`);
-
-            if (currentPath === sourcePath) {
-              return '';
-            }
-
-            return `${path.relative(currentPath, sourcePath)}/`.replace(/\\/g, '/');
-        }
-
+        let currentPath = path.dirname(file);
+        let sourcePath  = path.resolve(`${paths.src}/${paths.html.base}/${paths.html.pages}`);
         let frontMatter = fm(fs.readFileSync(file, 'utf8')).attributes;
 
-        if (['filebase', 'filename', 'filepath', 'rel'].indexOf(key) === -1 && frontMatter.hasOwnProperty(key)) {
+        // Return the file name without extension
+        if (key === 'filebase') {
+          return path.basename(file, '.hbs');
+
+        // Return the whole filename including extension
+      } else if (key === 'filename') {
+          return `${path.basename(file, '.hbs')}.html`;
+
+        // Return the UNIX filepath
+        } else if (key === 'filepath') {
+          return path.relative(`${paths.src}/${paths.html.base}/${paths.html.pages}`, file).replace('.hbs', '.html').replace(/\\/g, '/');
+
+        // Return a relative path to the task folder root
+        } else if (key === 'rel') {
+          if (currentPath === sourcePath) {
+            return '';
+          }
+          return `${path.relative(currentPath, sourcePath)}/`.replace(/\\/g, '/');
+
+        // Return frontmatter value
+        } else if (frontMatter.hasOwnProperty(key)) {
           return frontMatter[key];
         }
       }
@@ -616,6 +598,27 @@ gulp.task('production', ['clean-dist', 'js-lint-break'], () => {
 let onChangeMessage = (event) => {
   console.log('\n');
   gutil.log(`${gutil.colors.blue(event.path)} ${event.type}`);
+};
+
+
+config.html.browsersync.notify = {
+  styles: [
+    'position: fixed',
+    'z-index: 9999',
+    'box-sizing: border-box',
+    'height: 2rem',
+    'top: 0',
+    'right: 2rem',
+    'padding: 0 1rem',
+    'font-size: 0.875rem',
+    'font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;',
+    'font-weight: 400',
+    'text-transform: uppercase',
+    'line-height: 2rem',
+    'letter-spacing: 0.02em',
+    'color: #fff',
+    'background-color: rgb(0, 120, 255)'
+  ]
 };
 
 
