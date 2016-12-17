@@ -5,13 +5,13 @@
 ## Installation
 
 For global CLI access install `npm install -g front-end-styleguide-cli`.  
-For local installation only run `npm install front-end-styleguide --save-dev`.
+For local installation run `npm install front-end-styleguide --save-dev`.
 
 
 
 ## Project Creation
 
-Create new project with `front-end-styleguide init`.
+Create a new project with `front-end-styleguide init`.
 
 *If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide init`.*
 
