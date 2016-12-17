@@ -12,6 +12,7 @@
 ## Added
 - Assemble Handlebars helpers and current page indicator
 - Linting scripts
+- EditorConfig
 
 ## Updated
 - Gulp Sass
