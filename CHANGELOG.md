@@ -2,6 +2,22 @@
 
 
 
+## 2.2.2
+2016-12-17
+
+## Improved
+- README.md
+- Handlebars task
+
+## Added
+- Assemble Handlebars helpers and current page indicator
+- Linting scripts
+
+## Updated
+- Gulp Sass
+
+
+
 ## 2.2.1
 2016-12-04
 
