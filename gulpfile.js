@@ -28,6 +28,7 @@ const runSequence  = require('run-sequence');
 const sass         = require('gulp-sass');
 const sourcemaps   = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
+const stylelint    = require('gulp-stylelint');
 
 // JavaScript
 const babel        = require('gulp-babel');
@@ -92,6 +93,36 @@ gulp.task('clean-img-dev', () => {
  * ========================================================================== */
 
 
+// CSS Lint
+gulp.task('css-lint', () => {
+  process.chdir(cwd);
+
+  return gulp.src(`${paths.src}/${paths.css.base}/**/*.scss`)
+    .pipe(stylelint({
+      failAfterError: false,
+      reporters: [{
+        formatter: 'string',
+        console: true
+      }]
+    }));
+});
+
+
+// CSS Lint Break
+gulp.task('css-lint-break', () => {
+  process.chdir(cwd);
+
+  return gulp.src(`${paths.src}/${paths.css.base}/**/*.scss`)
+    .pipe(stylelint({
+      failAfterError: true,
+      reporters: [{
+        formatter: 'string',
+        console: true
+      }]
+    }));
+});
+
+
 // CSS Development
 gulp.task('css-dev', () => {
   return gulp.src(`${paths.src}/${paths.css.base}/**/*.scss`)
@@ -106,7 +137,7 @@ gulp.task('css-dev', () => {
 
 
 // CSS Watch
-gulp.task('css-watch', ['css-dev']);
+gulp.task('css-watch', ['css-lint', 'css-dev']);
 
 
 // CSS Styleguide
@@ -170,14 +201,18 @@ ${error.message}
 
 // JavaScript Lint
 gulp.task('js-lint', () => {
+  process.chdir(cwd);
+
   return gulp.src(`${paths.src}/${paths.js.base}/**/*.js`)
     .pipe(eslint())
     .pipe(eslint.format());
 });
 
 
-// JavaScript Lint
+// JavaScript Lint Break
 gulp.task('js-lint-break', () => {
+  process.chdir(cwd);
+
   return gulp.src(`${paths.src}/${paths.js.base}/**/*.js`)
     .pipe(eslint())
     .pipe(eslint.format())
@@ -563,7 +598,7 @@ gulp.task('copy-dist', () => {
  * ========================================================================== */
 
 
-gulp.task('development', ['clean-dev', 'js-lint'], () => {
+gulp.task('development', ['clean-dev', 'css-lint', 'js-lint'], () => {
   runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev']);
 });
 
@@ -573,7 +608,7 @@ gulp.task('development', ['clean-dev', 'js-lint'], () => {
  * ========================================================================== */
 
 
-gulp.task('preview', ['clean-prev', 'js-lint-break'], () => {
+gulp.task('preview', ['clean-prev', 'css-lint-break', 'js-lint-break'], () => {
   runSequence(['css-prev', 'js-prev', 'html-prev', 'img-prev', 'copy-prev']);
 });
 
@@ -584,7 +619,7 @@ gulp.task('preview', ['clean-prev', 'js-lint-break'], () => {
  * ========================================================================== */
 
 
-gulp.task('production', ['clean-dist', 'js-lint-break'], () => {
+gulp.task('production', ['clean-dist', 'css-lint-break', 'js-lint-break'], () => {
   runSequence(['css-dist', 'js-dist', 'img-dist', 'copy-dist']);
 });
 
@@ -654,7 +689,10 @@ gulp.task('watcher', () => {
 });
 
 
-gulp.task('default', ['clean-dev', 'js-lint'], () => {
+gulp.task('default', ['clean-dev', 'css-lint', 'js-lint'], () => {
   // Run initial task queue
-  runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev'], 'browsersync', 'watcher');
+  runSequence(
+    ['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev'],
+    'browsersync', 'watcher'
+  );
 });
