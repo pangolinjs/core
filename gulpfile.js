@@ -45,11 +45,18 @@ const fm           = require('front-matter');
 const svgSprite    = require('gulp-svg-sprite');
 const imagemin     = require('gulp-imagemin');
 
-// Paths & Config
+// CWD
 const cwd          = gutil.env.dir;
-const config       = require(`${cwd}/config/config.json`);
-const paths        = require(`${cwd}/config/paths.json`);
+const moduleCWD    = process.cwd();
 
+// Switch CWD to actual working directory
+process.cwd(cwd);
+
+// Paths & Config
+const config = require(`${cwd}/config/config.json`);
+const paths  = require(`${cwd}/config/paths.json`);
+
+// Adjust paths with CWD
 paths.src  = `${cwd}/${paths.src}`;
 paths.dev  = `${cwd}/${paths.dev}`;
 paths.prev = `${cwd}/${paths.prev}`;
@@ -142,7 +149,7 @@ gulp.task('css-watch', ['css-lint', 'css-dev']);
 
 // CSS Styleguide
 gulp.task('css-sg', () => {
-  return gulp.src('docs/sg.scss')
+  return gulp.src(`${moduleCWD}/docs/sg.scss`)
     .pipe(sass(config.css.dist))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(gulp.dest(`${paths.dev}/${paths.css.base}`));
@@ -244,7 +251,7 @@ gulp.task('js-watch', ['js-lint', 'js-dev']);
 
 // JavaScript Styleguide
 gulp.task('js-sg', () => {
-  return gulp.src('docs/sg.js')
+  return gulp.src(`${moduleCWD}/docs/sg.js`)
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(uglify())
     .pipe(gulp.dest(`${paths.dev}/${paths.js.base}`));
@@ -358,7 +365,7 @@ let compileHandlebars = (task) => {
   // Create Handlebars Stream with partials, helpers and data
   let hbStream = hb(handlebarsOptions)
     .partials(`${paths.src}/${paths.html.base}/${paths.html.partials}/**/*.hbs`)
-    .partials('docs/**/*.hbs')
+    .partials(`${moduleCWD}/docs/**/*.hbs`)
     .helpers(require('handlebars-helpers'))
     .helpers(require('handlebars-layouts'))
     .helpers({
