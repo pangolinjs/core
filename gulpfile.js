@@ -45,18 +45,57 @@ const fm           = require('front-matter');
 const svgSprite    = require('gulp-svg-sprite');
 const imagemin     = require('gulp-imagemin');
 
+// Front End Styleguide
+const frontEndStyleguideInit = require('front-end-styleguide-init');
+
 // CWD
-const cwd          = gutil.env.dir;
-const moduleCWD    = process.cwd();
+const cwd = gutil.env.dir;
+const moduleCWD = process.cwd();
 
 // Switch CWD to actual working directory
 process.cwd(cwd);
 
-// Paths & Config
-const config = require(`${cwd}/config/config.json`);
-const paths  = require(`${cwd}/config/paths.json`);
+
+
+/* CONFIGURATION
+ * ========================================================================== */
+
+let config = frontEndStyleguideInit.configFile;
+let configPath = `${cwd}/` + (gutil.env.config || 'config/config.json');
+
+try {
+  config = Object.assign(config, require(configPath));
+} catch (error) {
+  if (error.code !== 'MODULE_NOT_FOUND') {
+    console.log(error.code);
+  } else {
+    console.error(`
+${gutil.colors.black.bgYellow(' WARN ')} The configuration file ${gutil.colors.magenta(configPath)} is missing.
+       Fall back to default configuration.
+`);
+  }
+}
+
+
+let paths = frontEndStyleguideInit.pathsFile;
+let pathsPath = `${cwd}/` + (gutil.env.paths  || 'config/paths.json');
+
+try {
+  paths = Object.assign(paths, require(pathsPath));
+} catch (error) {
+  if (error.code !== 'MODULE_NOT_FOUND') {
+    console.log(error.code);
+  } else {
+    console.error(`
+${gutil.colors.black.bgYellow(' WARN ')} The paths configuration file ${gutil.colors.magenta(pathsPath)} is missing.
+       Fall back to default paths configuration.
+`);
+  }
+}
+
 
 // Adjust paths with CWD
+
 paths.src  = `${cwd}/${paths.src}`;
 paths.dev  = `${cwd}/${paths.dev}`;
 paths.prev = `${cwd}/${paths.prev}`;
@@ -543,9 +582,21 @@ let simpleCopyMessage = (from, to) => {
 let simpleCopy = (task) => {
   let copyConfig = `${paths.src}/copy.js`;
   let destination = paths[task];
+  let copyList = null;
 
-  delete require.cache[require.resolve(copyConfig)];
-  let copyList = require(copyConfig);
+  try {
+    delete require.cache[require.resolve(copyConfig)];
+    copyList = require(copyConfig);
+  } catch (error) {
+    if (error.code !== 'MODULE_NOT_FOUND') {
+      console.log(error.code);
+    } else {
+      console.error(`
+${gutil.colors.black.bgYellow(' WARN ')} The copy file ${gutil.colors.magenta(copyConfig)} is missing.
+       No Files will be copied.
+  `);
+    }
+  }
 
   if (Array.isArray(copyList) && copyList.length > 0) {
     for (let item of copyList) {

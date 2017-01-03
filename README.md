@@ -33,9 +33,12 @@ The following tasks are available:
   * Doesn't generate any HTML.
   * Errors break pipe.
 
-For more information take a look at the [readme of the init package](https://github.com/mvsde/styleguide-init/blob/master/init/README.md).
+Custom configuration files can be specified:
+* `front-end-styleguide [task] --config=path/to/config.json --paths=path/to/paths.json`
 
-*If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide [task]`.*
+For more information take a look at the [readme of the init package](https://github.com/mvsde/styleguide-init/blob/master/init/always/README.md).
+
+*If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide [task] [options]`.*
 
 
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide.svg?style=flat-square

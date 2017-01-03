@@ -5,10 +5,9 @@
 /* DEPENDENCIES
  * ========================================================================== */
 
-const chalk   = require('chalk');
-const init    = require('front-end-styleguide-init');
-const process = require('process');
-const spawn   = require('child_process').spawn;
+const chalk = require('chalk');
+const init  = require('front-end-styleguide-init');
+const spawn = require('child_process').spawn;
 
 
 
@@ -49,8 +48,8 @@ let updateProject = function(dir) {
 /* RUN GULP with optional ARGUMENTS
  * ========================================================================== */
 
-let spawnGulp = function(dir, task) {
-  spawn(`"${dir}/node_modules/.bin/gulp"`, [`--dir=${dir}`, task], {
+let spawnGulp = function(dir, args) {
+  spawn(`"${dir}/node_modules/.bin/gulp"`, [...args, `--dir=${dir}`], {
     cwd: __dirname,
     shell: true,
     stdio: 'inherit'
@@ -65,15 +64,16 @@ let spawnGulp = function(dir, task) {
  * ========================================================================== */
 
 module.exports = function() {
-  let argument = process.argv[2] || 'default';
+  let processArgs = process.argv;
+  let args = processArgs.slice(2, processArgs.length);
 
-  if (argument === 'init') {
+  if (args[0] === 'init') {
     init(process.cwd());
-  } else if (argument === 'update') {
+  } else if (args[0] === 'update') {
     searchLocalInstallation(process.cwd());
     updateProject(process.cwd());
   } else {
     searchLocalInstallation(process.cwd());
-    spawnGulp(process.cwd(), argument);
+    spawnGulp(process.cwd(), args);
   }
 };
