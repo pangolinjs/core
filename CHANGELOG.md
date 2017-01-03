@@ -2,6 +2,14 @@
 
 
 
+## 2.4.0
+2017-01-03
+
+## Added
+- Fallback configuration
+
+
+
 ## 2.3.1
 2016-12-31
 
