@@ -49,7 +49,7 @@ let updateProject = function(dir) {
  * ========================================================================== */
 
 let spawnGulp = function(dir, args) {
-  spawn(`"${dir}/node_modules/.bin/gulp"`, [...args, `--dir=${dir}`], {
+  spawn(`"${dir}/node_modules/.bin/gulp"`, [...args, `--dir="${dir}"`], {
     cwd: __dirname,
     shell: true,
     stdio: 'inherit'
