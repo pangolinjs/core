@@ -367,7 +367,7 @@ let compileHandlebars = (task) => {
   }
 
   let dataMeta = {
-    version: require('./package.json').version,
+    version: require(`${cwd}/package.json`).version,
     dev: task === 'dev',
   };
 
