@@ -2,6 +2,15 @@
 
 
 
+## 2.4.1
+2017-01-13
+
+## Fixed
+- Spaces in project paths
+- Handlebars version variable
+
+
+
 ## 2.4.0
 2017-01-03
 
