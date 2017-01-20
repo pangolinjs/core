@@ -4,6 +4,7 @@
  * components title and containers.
  * ========================================================================== */
 
+/* stylelint-disable declaration-no-important */
 
 
 // VIEWPORT FONT SIZE
@@ -62,10 +63,21 @@ $color-background: rgb(50, 50, 50);
 /* System UI Font Stack
  * Source:
  * https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/ */
+// stylelint-disable-next-line value-keyword-case
 $font-stack: -apple-system, BlinkMacSystemFont,
   "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
   "Fira Sans", "Droid Sans", "Helvetica Neue",
   sans-serif;
+
+
+
+/* STYLEGUIDE BACKGROUND
+ * ====================================================== */
+
+.sg-background {
+  background-image: none;
+  background-color: #fff;
+}
 
 
 
@@ -101,6 +113,8 @@ $font-stack: -apple-system, BlinkMacSystemFont,
     padding: 0 0.2em;
 
     font-size: 1em;
+    // This is a fix for some browser oddity
+    // stylelint-disable-next-line font-family-no-duplicate-names
     font-family: monospace, monospace;
     color: $color-text;
 

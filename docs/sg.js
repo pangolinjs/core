@@ -3,6 +3,7 @@
  * JavaScript specific to the Styleguide navigation.
  * ========================================================================== */
 
+/* eslint no-console: 0 */
 
 
 (function() {
@@ -97,8 +98,6 @@
 
 
 (function() {
-  /* eslint no-console: 0 */
-
   let a11yButton = {
     active: function(element) {
       element.classList.add('is-active');
