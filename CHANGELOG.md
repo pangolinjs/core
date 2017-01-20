@@ -2,6 +2,14 @@
 
 
 
+## 2.4.2
+2017-01-20
+
+## Improved
+- Reset component body background to white
+
+
+
 ## 2.4.1
 2017-01-13
 
