@@ -2,6 +2,18 @@
 
 
 
+## 2.5.0
+2017-02-11
+
+## Added
+- Basic testing
+
+## Updated
+- Dependencies
+- stylelint rules
+
+
+
 ## 2.4.2
 2017-01-20
 
