@@ -1,0 +1,21 @@
+/* UTILITIES
+ * ========================================================================== */
+
+
+
+/* SCREEN READER ONLY
+ *
+ * Visually hide elements but make them accessible to
+ * screen reader and keyboard users.
+ *
+ * Optional class `.sr-only--focusable` to show element
+ * when it receives focus.
+ * ====================================================== */
+
+.sr-only {
+  @include sr-only;
+}
+
+.sr-only--focusable {
+  @include sr-only-focusable;
+}

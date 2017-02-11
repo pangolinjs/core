@@ -1,0 +1,49 @@
+// SCREEN READER ONLY
+//
+// Visually hides elements but keeps them accessible for screen readers and
+// keyboard users.
+//
+// Source:
+// https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+// =============================================================================
+
+
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+
+  overflow: hidden;
+
+  clip: rect(1px 1px 1px 1px); /* IE 6/7 */
+  clip: rect(1px, 1px, 1px, 1px);
+
+  white-space: nowrap;
+}
+
+
+
+/* SHOW ON FOCUS
+ *
+ * Use in conjunction with `sr-only` to display content when
+ * it's focused. Useful for "Skip to main content" links.
+ *
+ * Based on:
+ * https://github.com/h5bp/html5-boilerplate
+ * ====================================================== */
+
+@mixin sr-only-focusable {
+  &:active,
+  &:focus {
+    position: static;
+    width: auto;
+    height: auto;
+
+    overflow: visible;
+
+    clip: auto;
+
+    white-space: normal;
+  }
+}

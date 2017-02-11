@@ -7,6 +7,7 @@
 
 const chalk = require('chalk');
 const init  = require('front-end-styleguide-init');
+const path  = require('path');
 const spawn = require('child_process').spawn;
 
 
@@ -49,7 +50,9 @@ let updateProject = function(dir) {
  * ========================================================================== */
 
 let spawnGulp = function(dir, args) {
-  spawn(`"${dir}/node_modules/.bin/gulp"`, [...args, `--dir="${dir}"`], {
+  const gulpBin = path.resolve(require.resolve('gulp'), '../bin/gulp.js');
+
+  spawn(`node "${gulpBin}"`, [...args, `--dir="${dir}"`], {
     cwd: __dirname,
     shell: true,
     stdio: 'inherit'
@@ -65,7 +68,7 @@ let spawnGulp = function(dir, args) {
 
 module.exports = function() {
   let processArgs = process.argv;
-  let args = processArgs.slice(2, processArgs.length);
+  let args = processArgs.slice(2);
 
   if (args[0] === 'init') {
     init(process.cwd());
@@ -73,7 +76,9 @@ module.exports = function() {
     searchLocalInstallation(process.cwd());
     updateProject(process.cwd());
   } else {
-    searchLocalInstallation(process.cwd());
+    if (!process.env.TEST) {
+      searchLocalInstallation(process.cwd());
+    }
     spawnGulp(process.cwd(), args);
   }
 };

@@ -1,0 +1,32 @@
+---
+title: Icons
+description: All SVG icons from the generated icon sprite in one place.
+category: Components
+---
+{{#extend "layouts/components"}}
+{{#content "body"}}
+
+  {{#embed "sg/article" title="Usage"}}
+  {{#content "body"}}
+
+    <p>SVG symbols can be referenced with their ID. The icon workflow creates IDs from the filename of the original SVG placed in <code>src/img/icons</code>. Each ID is suffixed with "-icon" for better compatibility with browsers that need a polyfill.</p>
+
+    <pre>&lt;svg width="24" height="24">
+  &lt;use xlink:href="&lbrace;{page 'rel'}}img/icons.svg#filename-icon">&lt;/use>
+&lt;/svg></pre>
+
+    <p>Specifying intrinsic dimensions is considered good style. Without an intrinsic width and height browsers often scale SVGs to fill the whole viewport. This happens if dimensions set in CSS fail to load.</p>
+
+  {{/content}}
+  {{/embed}}
+
+  {{#embed "sg/article" padding="none"}}
+  {{#content "body"}}
+
+    <iframe src="{{page 'rel'}}img/icons.html" class="sg-iframe js-sg-iframe"></iframe>
+
+  {{/content}}
+  {{/embed}}
+
+{{/content}}
+{{/extend}}

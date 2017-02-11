@@ -1,0 +1,27 @@
+{
+  "src": "src",
+  "dev": "dev",
+  "prev": "prev",
+  "dist": "dist",
+
+  "css": {
+    "base": "css",
+    "output": "styles.css"
+  },
+  "js": {
+    "base": "js",
+    "entry": "main.js",
+    "output": "scripts.js"
+  },
+  "html": {
+    "base": "html",
+    "css": "css",
+    "js": "js",
+    "pages": "pages",
+    "partials": "partials"
+  },
+  "img": {
+    "base": "img",
+    "icons": "icons"
+  }
+}

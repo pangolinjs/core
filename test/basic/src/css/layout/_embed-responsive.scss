@@ -1,0 +1,83 @@
+/* EMBED RESPONSIVE
+ *
+ * For use with media embeds – such as videos, slideshows,
+ * or even images – that need to retain a specific aspect
+ * ratio but adapt to the width of their containing element.
+ *
+ * Default aspect ratio is 1:1. Change this by applying
+ * modifier classes.
+ *
+ * Usage:
+ * <div class="embed-responsive embed-responsive--16by9">
+ *  <video class="embed-responsive__content">
+ *    <source src="http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4" type="video/mp4">
+ *    <p>Your browser doesn't support HTML5 Video.</p>
+ *  </video>
+ * </div>
+ *
+ * Based on:
+ * http://alistapart.com/article/creating-intrinsic-ratios-for-video
+ *
+ * Source:
+ * https://suitcss.github.io
+ *
+ * License:
+ * Copyright (c) Nicolas Gallagher
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * ========================================================================== */
+
+
+
+.embed-responsive {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  overflow: hidden;
+}
+
+
+
+/* ASPECT RATIO MODIFIERS
+ * ====================================================== */
+
+.embed-responsive--2by1 {
+  padding-bottom: 50%;
+}
+
+.embed-responsive--3by1 {
+  padding-bottom: calc(100% / 3);
+}
+
+.embed-responsive--4by3 {
+  padding-bottom: 75%;
+}
+
+.embed-responsive--16by9 {
+  padding-bottom: 56.25%;
+}
+
+
+
+/* EMBED CONTENT
+ *
+ * Fit the content to the aspect ratio.
+ * ====================================================== */
+
+.embed-responsive__content {
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

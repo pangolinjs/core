@@ -1,0 +1,64 @@
+{
+  "css": {
+    "dev": {
+      "outputStyle": "expanded",
+      "precision": 10
+    },
+    "dist": {
+      "outputStyle": "compressed",
+      "precision": 10
+    },
+    "autoprefixer": {
+      "browsers": ["> 1%"]
+    }
+  },
+
+  "html": {
+    "browsersync": {
+      "startPath": "/index.html",
+      "logPrefix": "Browsersync",
+      "scrollElements": ["*"]
+    }
+  },
+
+  "img": {
+    "svgSpriteDev": {
+      "mode": {
+        "symbol": {
+          "dest": "",
+          "sprite": "icons.svg",
+          "example": {
+            "dest": "icons.html"
+          }
+        }
+      },
+      "shape": {
+        "id": {
+          "generator": "%s-icon"
+        }
+      }
+    },
+    "svgSpriteDist": {
+      "mode": {
+        "symbol": {
+          "dest": "",
+          "sprite": "icons.svg"
+        }
+      },
+      "shape": {
+        "id": {
+          "generator": "%s-icon"
+        }
+      }
+    },
+    "imagemin": {
+      "jpg": {
+        "progressive": true
+      },
+      "png": {
+        "optimizationLevel": 5
+      },
+      "svg": {}
+    }
+  }
+}

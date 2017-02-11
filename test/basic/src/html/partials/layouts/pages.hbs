@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{#if (page "description")~}}<meta name="description" content="{{page 'description'}}">{{/if}}
+    {{#if (page "title")}}<title>{{page "title"}}</title>{{/if}}
+
+    {{#if meta.dev}}<link rel="stylesheet" href="{{page 'rel'}}css/sg.css?v={{meta.version}}">{{/if}}
+    <link rel="stylesheet" href="{{page 'rel'}}css/styles.css?v={{meta.version}}">
+  </head>
+  <body>
+
+    {{#if meta.dev}}{{> sg/nav}}{{/if}}
+
+    {{{block "body"}}}
+
+    {{#if meta.dev}}<script src="{{page 'rel'}}js/sg.js?v={{meta.version}}"></script>{{/if}}
+    <script src="{{page 'rel'}}js/scripts.js?v={{meta.version}}"></script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+# EDITORCONFIG
+# http://editorconfig.org/
+# ==============================================================================
+
+
+# Top-most EditorConfig file
+root = true
+
+
+# Global rules
+# ==========================================================
+
+[*]
+
+# Indentation
+indent_style = space
+indent_size = 2
+
+# Line endings and trailing whitespace
+end_of_line = lf
+trim_trailing_whitespace = true
+
+# Charset
+charset = utf-8
+
+# Final new line
+insert_final_newline = true
+
+
+# Markdown rules
+# ==========================================================
+
+[*.md]
+
+# Trailing whitespace
+trim_trailing_whitespace = false

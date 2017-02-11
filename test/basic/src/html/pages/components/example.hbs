@@ -1,0 +1,36 @@
+---
+title: Example Component
+description: This is a short description for the component.
+category: Components
+---
+{{#extend "layouts/components"}}
+{{#content "body"}}
+
+  {{#embed "sg/article" title="Documentation file for a component" description="You can wrap components or variations thereof in awesome boxes with headings and descriptions."}}
+  {{#content "body"}}
+    <p>You can develop your component in this file. But it is recommended to build them as partials for reusability of your code.</p>
+
+    <p>Partials will be loaded from the <code>src/html/partials</code> folder. Component partials should be placed in <code>src/html/partials/includes</code>.</p>
+
+    {{> includes/example}}
+  {{/content}}
+  {{/embed}}
+
+
+  {{#embed "sg/article" title="A variation with light background" description="This can have a description aswell." background="lightgray"}}
+  {{#content "body"}}
+    <p>To develop components on colored backgrounds, add the parameter <code>background</code> to the component frame partial with a CSS color.</p>
+    <p>Example: <code>background="lightgray"</code>.</p>
+  {{/content}}
+  {{/embed}}
+
+
+  {{#embed "sg/article" title="A variation with dark background" description="This can have a description aswell." background="gray"}}
+  {{#content "body"}}
+    <p>To develop components on colored backgrounds, add the parameter <code>background</code> to the component frame partial with a CSS color.</p>
+    <p>Example: <code>background="gray"</code>.</p>
+  {{/content}}
+  {{/embed}}
+
+{{/content}}
+{{/extend}}

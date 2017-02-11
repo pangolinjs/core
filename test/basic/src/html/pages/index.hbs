@@ -1,0 +1,22 @@
+---
+title: Homepage
+description: Every page may have a short description
+category: Pages
+---
+{{#extend "layouts/pages"}}
+{{#content "body"}}
+  <h1>This is your homepage</h1>
+  <h2>{{page "description"}}</h2>
+
+  <p>This is the first page (aka index.html) visitors will see.</p>
+
+  <h2>Image Placeholder</h2>
+  <p>Use services like <a href="https://placehold.it/">Placehold.it</a> for image placeholders.</p>
+  <img src="https://placehold.it/350x200" alt="Placeholder">
+
+  <h2>SVG Icons</h2>
+  <svg width="96" height="96">
+    <use xlink:href="{{page 'rel'}}img/icons.svg#menu-icon"></use>
+  </svg>
+{{/content}}
+{{/extend}}
