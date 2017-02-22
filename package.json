@@ -15,7 +15,9 @@
   "scripts": {
     "lint": "eslint **/*.js",
     "pretest": "npm run lint",
-    "test": "cd test/basic && cross-env TEST=true node ../../bin/front-end-styleguide.js development preview production"
+    "test": "cd test/basic && cross-env TEST=true node ../../bin/front-end-styleguide.js development preview production",
+    "prewatchtest": "npm run lint",
+    "watchtest": "cd test/basic && cross-env TEST=true node ../../bin/front-end-styleguide.js"
   },
   "main": "index.js",
   "bin": "bin/front-end-styleguide.js",
