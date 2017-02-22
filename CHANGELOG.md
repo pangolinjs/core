@@ -5,10 +5,10 @@
 ## 2.5.0
 2017-02-11
 
-## Added
+### Added
 - Basic testing
 
-## Updated
+### Updated
 - Dependencies
 - stylelint rules
 
@@ -17,7 +17,7 @@
 ## 2.4.2
 2017-01-20
 
-## Improved
+### Improved
 - Reset component body background to white
 
 
@@ -25,7 +25,7 @@
 ## 2.4.1
 2017-01-13
 
-## Fixed
+### Fixed
 - Spaces in project paths
 - Handlebars version variable
 
@@ -34,7 +34,7 @@
 ## 2.4.0
 2017-01-03
 
-## Added
+### Added
 - Fallback configuration
 
 
@@ -42,7 +42,7 @@
 ## 2.3.1
 2016-12-31
 
-## Fixed
+### Fixed
 - Path mess
 
 
@@ -50,7 +50,7 @@
 ## 2.3.0
 2016-12-31
 
-## Added
+### Added
 - stylelint
 
 
@@ -58,16 +58,16 @@
 ## 2.2.2
 2016-12-17
 
-## Improved
+### Improved
 - README.md
 - Handlebars task
 
-## Added
+### Added
 - Assemble Handlebars helpers and current page indicator
 - Linting scripts
 - EditorConfig
 
-## Updated
+### Updated
 - Gulp Sass
 
 
@@ -75,7 +75,7 @@
 ## 2.2.1
 2016-12-04
 
-## Fixed
+### Fixed
 - Line endings for npm package
 - Readme link
 
@@ -84,11 +84,11 @@
 ## 2.2.0
 2016-12-03
 
-## Improved
+### Improved
 - Cross-platform improvements
 - Readme fixes
 
-## Added
+### Added
 - Switch to external init package
 
 
@@ -96,7 +96,7 @@
 ## 2.1.3
 2016-12-03
 
-## Added
+### Added
 - Correct exit code emitting
 
 
@@ -104,7 +104,7 @@
 ## 2.1.2
 2016-12-03
 
-## Fixed
+### Fixed
 - Startup on Windows not working correctly
 
 
@@ -112,7 +112,7 @@
 ## 2.1.1
 2016-12-02
 
-## Improved
+### Improved
 - Errors break preview and production tasks
 - README.md updated with latest changes
 
@@ -121,7 +121,7 @@
 ## 2.1.0
 2016-12-02
 
-## Improved
+### Improved
 - Switch to separate CLI and local versions
 
 
@@ -129,7 +129,7 @@
 ## 2.0.0
 2016-12-01
 
-## Improved
+### Improved
 - Make a npm package out of this styleguide
 - Switch back to GPLv3 license
 
@@ -367,7 +367,7 @@
 ## 1.6.1
 2016-06-27
 
-## Improved
+### Improved
 - Browsersync notification
 - Styleguide CSS
 
@@ -725,4 +725,4 @@
 ## 0.1.0
 2016-11-28
 
-The first (almost) working release. Some issues with Gulp's watch remaining (editor's note after 8 months: still not working flaweless :P).
+The first (almost) working release. Some issues with Gulp's watch remaining (editor's note after 8 months: still not working flawlessly :P).
