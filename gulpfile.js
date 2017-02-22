@@ -374,9 +374,19 @@ let compileHandlebars = (task) => {
 
   // Create dataPages object
   let pageList = glob.sync(pageDir);
-  let dataPages = {
-    categories: {}
-  };
+  let dataPages = [];
+
+  /*
+    Model for navigation:
+
+    dataPages = [{
+      name: 'Category name',
+      pages: [{
+        name: 'Page name',
+        url: 'some-page.html'
+      }]
+    }];
+  */
 
   for (let page of pageList) {
     let frontMatter = fm(fs.readFileSync(page, 'utf8')).attributes;
@@ -389,14 +399,15 @@ let compileHandlebars = (task) => {
       url
     };
 
-    if (dataPages.categories.hasOwnProperty(category)) {
-      dataPages.categories[category].pages.push(pageItem);
+    let categoryInDataPages = dataPages.find((item) => item.name === category);
+
+    if (categoryInDataPages) {
+      categoryInDataPages.pages.push(pageItem);
     } else {
-      dataPages.categories[category] = {
+      dataPages.push({
         name: category,
-        icon: category[0],
         pages: [pageItem]
-      };
+      });
     }
   }
 
@@ -445,7 +456,7 @@ let compileHandlebars = (task) => {
     })
     .data({
       meta: dataMeta,
-      pages: dataPages
+      categories: dataPages
     });
 
 

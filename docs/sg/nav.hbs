@@ -1,30 +1,21 @@
 <nav class="sg-nav js-sg-nav">
   <ul class="sg-nav__list">
 
-  {{#each pages.categories}}
-    <li class="sg-nav__item">
-
-      <button class="sg-nav__button js-sg-nav-btn">
-        <span class="sg-nav__icon" style="display: none;">{{this.icon}}</span>
-        <span class="sg-nav__text">{{this.name}}</span>
-      </button>
-
-      <ul class="sg-nav__sub-list js-sg-nav-sub">
-      {{#each this.pages}}
-        <li class="sg-nav__sub-item">
-          <a href="{{page 'rel'}}{{this.url}}" class="sg-nav__link{{#eq this.url (page 'filepath')}} is-active{{/eq}}">{{this.name}}</a>
-        </li>
-      {{/each}}
-      </ul>
-
-    </li>
-  {{/each}}
+    {{#each categories}}
+      <li class="sg-nav__item">
+        <button class="sg-nav__button js-sg-nav-btn">{{this.name}}</button>
+        <ul class="sg-nav__sub-list js-sg-nav-sub">
+          {{#each this.pages}}
+            <li class="sg-nav__sub-item">
+              <a href="{{page 'rel'}}{{this.url}}" class="sg-nav__link{{#eq this.url (page 'filepath')}} is-active{{/eq}}">{{this.name}}</a>
+            </li>
+          {{/each}}
+        </ul>
+      </li>
+    {{/each}}
 
     <li class="sg-nav__item" style="display: none;">
-      <button class="sg-nav__button js-sg-nav-btn">
-        <span class="sg-nav__icon" style="display: none;">A</span>
-        <span class="sg-nav__text">Accessibility</span>
-      </button>
+      <button class="sg-nav__button js-sg-nav-btn">Accessibility</button>
       <ul class="sg-nav__sub-list js-sg-nav-sub">
         <li class="sg-nav__sub-item">
           <button class="sg-nav__link js-sg-a11y-contrast">Contrast Check</button>
