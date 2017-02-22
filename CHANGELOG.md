@@ -2,6 +2,23 @@
 
 
 
+## 2.5.1
+2017-02-22
+
+### Improved
+- Styleguide navigation
+
+### Added
+- Test for watchers: `npm run watchtest`
+
+### Updated
+- stylelint rules for test
+
+### Fixed
+- CHANGELOG.md headings
+
+
+
 ## 2.5.0
 2017-02-11
 
