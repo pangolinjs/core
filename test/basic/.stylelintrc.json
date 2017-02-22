@@ -74,6 +74,9 @@
     "selector-max-compound-selectors": [3, {
       "severity": "warning"
     }],
+    "selector-nested-pattern": ["^(?!(&__)|(&--)).+", {
+      "message": "Creating BEM classes with Sass nesting is not allowed"
+    }],
     "selector-no-id": true,
     "selector-no-qualifying-type": [true, {
       "ignore": ["attribute"]
