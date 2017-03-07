@@ -36,6 +36,7 @@ const browserify   = require('browserify');
 const babelify     = require('babelify');
 const uglify       = require('gulp-uglify');
 const eslint       = require('gulp-eslint');
+const envify       = require('envify/custom');
 
 // HTML
 const hb           = require('gulp-hb');
@@ -274,6 +275,13 @@ gulp.task('js-dev', () => {
     transform: [babelify]
   });
 
+  b.transform(envify({
+    _: 'purge',
+    NODE_ENV: 'development'
+  }), {
+    global: true
+  });
+
   return b.bundle().on('error', browserifyError)
     .pipe(source(paths.js.output))
     .pipe(buffer())
@@ -305,6 +313,13 @@ gulp.task('js-prev', () => {
       transform: [babelify]
     });
 
+    b.transform(envify({
+      _: 'purge',
+      NODE_ENV: 'production'
+    }), {
+      global: true
+    });
+
     return b.bundle()
       .pipe(source(paths.js.output))
       .pipe(buffer())
@@ -319,6 +334,13 @@ gulp.task('js-dist', () => {
     entries: `${paths.src}/${paths.js.base}/${paths.js.entry}`,
     debug: true,
     transform: [babelify]
+  });
+
+  b.transform(envify({
+    _: 'purge',
+    NODE_ENV: 'production'
+  }), {
+    global: true
   });
 
   return b.bundle()
