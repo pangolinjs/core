@@ -5,18 +5,26 @@ category: Pages
 ---
 {{#extend "layouts/pages"}}
 {{#content "body"}}
-  <h1>This is your homepage</h1>
-  <h2>{{page "description"}}</h2>
+  <h1 id="duplicate-id-1">This page is filled with accessibility problems</h1>
+  <p>Go ahead and try the <code>A11Y</code> navbar entry!</p>
+  <h2 id="duplicate-id-1">{{page "description"}}</h2>
 
   <p>This is the first page (aka index.html) visitors will see.</p>
 
-  <h2>Image Placeholder</h2>
-  <p>Use services like <a href="https://placehold.it/">Placehold.it</a> for image placeholders.</p>
-  <img src="https://placehold.it/350x200" alt="Placeholder">
+  <h2 id="duplicate-id-2">Image Placeholder</h2>
+  <p id="duplicate-id-2">Use services like <a href="https://placehold.it/">Placehold.it</a> for image placeholders.</p>
+  <img src="https://placehold.it/350x200">
+  <img src="https://placehold.it/350x200">
 
   <h2>SVG Icons</h2>
   <svg width="96" height="96">
     <use xlink:href="{{page 'rel'}}img/icons.svg#menu-icon"></use>
   </svg>
+
+  <input type="text" placeholder="Missing label">
+  <input type="password" placeholder="Another missing label">
+
+  <button></button>
+  <a href="#"></a>
 {{/content}}
 {{/extend}}
