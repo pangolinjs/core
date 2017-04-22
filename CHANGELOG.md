@@ -2,6 +2,19 @@
 
 
 
+## 2.5.3
+2017-04-22
+
+### Improved
+- A11Y testing from styleguide navbar
+- Use `development` NODE_ENV for preview task
+- Module testing
+
+### Updated
+- Dependencies
+
+
+
 ## 2.5.2
 2017-03-07
 
