@@ -315,7 +315,7 @@ gulp.task('js-prev', () => {
 
     b.transform(envify({
       _: 'purge',
-      NODE_ENV: 'production'
+      NODE_ENV: 'development'
     }), {
       global: true
     });
