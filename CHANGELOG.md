@@ -2,6 +2,14 @@
 
 
 
+## 2.5.4
+2017-04-23
+
+### Improved
+- Replaced `gulp.watch` with `chokidar` <- more reliable!
+
+
+
 ## 2.5.3
 2017-04-22
 
