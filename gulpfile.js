@@ -9,6 +9,7 @@
 // Base
 const browsersync  = require('browser-sync');
 const buffer       = require('vinyl-buffer');
+const chokidar     = require('chokidar');
 const del          = require('del');
 const fs           = require('fs-extra');
 const glob         = require('glob');
@@ -25,26 +26,26 @@ const rename       = require('gulp-rename');
 const runSequence  = require('run-sequence');
 
 // CSS
+const autoprefixer = require('gulp-autoprefixer');
 const sass         = require('gulp-sass');
 const sourcemaps   = require('gulp-sourcemaps');
-const autoprefixer = require('gulp-autoprefixer');
 const stylelint    = require('gulp-stylelint');
 
 // JavaScript
 const babel        = require('gulp-babel');
-const browserify   = require('browserify');
 const babelify     = require('babelify');
-const uglify       = require('gulp-uglify');
-const eslint       = require('gulp-eslint');
+const browserify   = require('browserify');
 const envify       = require('envify/custom');
+const eslint       = require('gulp-eslint');
+const uglify       = require('gulp-uglify');
 
 // HTML
-const hb           = require('gulp-hb');
 const fm           = require('front-matter');
+const hb           = require('gulp-hb');
 
 // Images
-const svgSprite    = require('gulp-svg-sprite');
 const imagemin     = require('gulp-imagemin');
+const svgSprite    = require('gulp-svg-sprite');
 
 // Front End Styleguide
 const frontEndStyleguideInit = require('front-end-styleguide-init');
@@ -721,12 +722,6 @@ gulp.task('production', ['clean-dist', 'css-lint-break', 'js-lint-break'], () =>
  * ========================================================================== */
 
 
-let onChangeMessage = (event) => {
-  console.log('\n');
-  gutil.log(`${gutil.colors.blue(event.path)} ${event.type}`);
-};
-
-
 config.html.browsersync.notify = {
   styles: [
     'position: fixed',
@@ -758,25 +753,47 @@ gulp.task('browsersync', () => {
 
 
 gulp.task('watcher', () => {
-  // Watch CSS
-  let watchCSS = gulp.watch(`${paths.src}/${paths.css.base}/**/*.scss`, ['css-watch']);
-  watchCSS.on('change', onChangeMessage);
+  const options = {
+    cwd: paths.src + '/',
+    ignoreInitial: true,
+    ignorePermissionErrors: true
+  };
 
-  // Watch JavaScript
-  let watchJS = gulp.watch(`${paths.src}/${paths.js.base}/**/*.js`, ['js-watch']);
-  watchJS.on('change', onChangeMessage);
+  const message = (event, filepath) => {
+    console.log('\n');
+    gutil.log(`${event[0].toUpperCase() + event.slice(1)} ${gutil.colors.blue(filepath)}`);
+  };
 
-  // Watch HTML
-  let watchHTML = gulp.watch(`${paths.src}/${paths.html.base}/**/*.hbs`, ['html-watch']);
-  watchHTML.on('change', onChangeMessage);
 
-  // Watch Images
-  let watchImg = gulp.watch(`${paths.src}/${paths.img.base}/**/*`, ['img-watch']);
-  watchImg.on('change', onChangeMessage);
+  chokidar.watch(`${paths.css.base}/**/*.scss`, options)
+    .on('all', (event, filepath) => {
+      message(event, filepath);
+      runSequence('css-watch');
+    });
 
-  // Watch NPM Assets
-  let watchCopy = gulp.watch(`${paths.src}/copy.js`, ['copy-watch']);
-  watchCopy.on('change', onChangeMessage);
+  chokidar.watch(`${paths.src}/${paths.js.base}/**/*.js`, options)
+    .on('all', (event, filepath) => {
+      message(event, filepath);
+      runSequence('js-watch');
+    });
+
+  chokidar.watch(`${paths.src}/${paths.html.base}/**/*.hbs`, options)
+    .on('all', (event, filepath) => {
+      message(event, filepath);
+      runSequence('html-watch');
+    });
+
+  chokidar.watch(`${paths.src}/${paths.img.base}/**/*`, options)
+    .on('all', (event, filepath) => {
+      message(event, filepath);
+      runSequence('img-watch');
+    });
+
+  chokidar.watch(`${paths.src}/copy.js`, options)
+    .on('all', (event, filepath) => {
+      message(event, filepath);
+      runSequence('copy-watch');
+    });
 });
 
 
