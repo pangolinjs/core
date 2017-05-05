@@ -1,14 +1,10 @@
 /* SIMPLE COPY
  * ========================================================================== */
 
-
-
 // Make paths variable available
 // =========================================================
 
-const paths = require('../config/paths.json');
-
-
+const paths = require('../config/paths.json')
 
 // Specify files to copy
 // =========================================================
@@ -20,4 +16,4 @@ module.exports = [
     dest: paths.js.base,
     exclude: ['dev', 'prev', 'dist']
   }
-];
+]

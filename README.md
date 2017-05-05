@@ -1,6 +1,9 @@
 # Front End Styleguide
 
-[![NPM version][npm-image]][npm-url] [![Dependencies][dependencies-image]][npm-url]
+[![JavaScript Style Guide][standard-image]][standard-url]
+
+[![NPM version][npm-image]][npm-url]
+[![Dependencies][dependencies-image]][npm-url]
 
 ## Installation
 
@@ -40,6 +43,8 @@ For more information take a look at the [readme of the init package](https://git
 
 *If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide [task] [options]`.*
 
+[standard-image]: https://cdn.rawgit.com/feross/standard/master/badge.svg
+[standard-url]: https://github.com/feross/standard
 
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/front-end-styleguide
