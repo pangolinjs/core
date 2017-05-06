@@ -1,0 +1,12 @@
+<article class="sg-article">
+  {% if title %}
+    <header class="sg-article__header">
+      <h2 class="sg-article__title">{{ title }}</h2>
+      {% if description %}<p class="sg-article__description">{{ description }}</p>{% endif %}
+    </header>
+  {% endif %}
+
+  <div class="sg-article__body{% if padding %} sg-article__body--padding-{{ padding }}{% endif %}{% if background %} sg-article__body--bg{% endif %}"{% if background %} style="background: {{ background }}"{% endif %}>
+    {% block body %}{% endblock %}
+  </div>
+</article>

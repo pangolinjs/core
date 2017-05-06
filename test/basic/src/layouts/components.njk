@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ meta.title }}</title>
+
+    <link rel="stylesheet" href="{{ meta.path.toRoot }}css/sg.css?v={{ meta.version }}">
+    <link rel="stylesheet" href="{{ meta.path.toRoot }}css/styles.css?v={{ meta.version }}">
+  </head>
+  <body>
+
+    {% include sgNav %}
+
+    <header class="sg-header">
+      <h1 class="sg-header__title">{{ meta.title }}</h1>
+    </header>
+
+    <main class="sg-body">
+      {% for section in sections %}
+        {% include section %}
+      {% endfor %}
+    </main>
+
+    <script src="{{ meta.path.toRoot }}js/sg.js?v={{ meta.version }}"></script>
+    <script src="{{ meta.path.toRoot }}js/scripts.js?v={{ meta.version }}"></script>
+  </body>
+</html>

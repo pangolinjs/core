@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if pageDescription %}<meta name="description" content="{{ pageDescription }}">{% endif %}
+    {% if pageTitle %}<title>{{ pageTitle }}</title>{% endif %}
+
+    {% if (meta.env === 'development') %}<link rel="stylesheet" href="/css/sg.css?v={{ meta.version }}">{% endif %}
+    <link rel="stylesheet" href="/css/styles.css?v={{ meta.version }}">
+  </head>
+  <body>
+    {% if (meta.env) === 'development' %}{% include sgNav %}{% endif %}
+
+    {% block body %}{% endblock %}
+
+    {% if (meta.env === 'development') %}<script src="/js/sg.js?v={{ meta.version }}"></script>{% endif %}
+    <script src="/js/scripts.js?v={{ meta.version }}"></script>
+  </body>
+</html>

@@ -12,7 +12,6 @@ const fs = require('fs-extra')
 const glob = require('glob')
 const path = require('path')
 const source = require('vinyl-source-stream')
-const through = require('through2')
 
 // Gulp
 const gulp = require('gulp')
@@ -37,87 +36,149 @@ const eslint = require('gulp-eslint')
 const uglify = require('gulp-uglify')
 
 // HTML
-const fm = require('front-matter')
-const hb = require('gulp-hb')
+const nunjucks = require('nunjucks')
 
 // Images
 const imagemin = require('gulp-imagemin')
 const svgSprite = require('gulp-svg-sprite')
 
-// Front End Styleguide
-const frontEndStyleguideInit = require('front-end-styleguide-init')
-
 // CWD
 const cwd = gutil.env.dir
-const moduleCWD = process.cwd()
+const sgModuleDir = process.cwd()
 
 // Switch CWD to actual working directory
-process.cwd(cwd)
+if (!process.env.TEST) {
+  process.chdir(cwd)
+}
 
 /* CONFIGURATION
  * ========================================================================== */
 
-let config = frontEndStyleguideInit.configFile
-let configPath = `${cwd}/` + (gutil.env.config || 'config/config.json')
-
-try {
-  config = Object.assign(config, require(configPath))
-} catch (error) {
-  if (error.code !== 'MODULE_NOT_FOUND') {
-    console.log(error.code)
-  } else {
-    console.error(`
-${gutil.colors.black.bgYellow(' WARN ')} The configuration file ${gutil.colors.magenta(configPath)} is missing.
-       Fall back to default configuration.
-`)
+let paths = {
+  output: {
+    css: {
+      path: 'css',
+      name: 'styles.css'
+    },
+    js: {
+      path: 'js',
+      name: 'scripts.js'
+    },
+    img: {
+      path: 'img',
+      icons: 'icons.svg'
+    }
   }
 }
 
-var paths = frontEndStyleguideInit.pathsFile
-let pathsPath = `${cwd}/` + (gutil.env.paths || 'config/paths.json')
-
 try {
-  paths = Object.assign(paths, require(pathsPath))
+  Object.assign(paths, require(`${cwd}/` + (gutil.env.paths || 'config/paths.json')))
 } catch (error) {
-  if (error.code !== 'MODULE_NOT_FOUND') {
-    console.log(error.code)
-  } else {
-    console.error(`
-${gutil.colors.black.bgYellow(' WARN ')} The paths configuration file ${gutil.colors.magenta(pathsPath)} is missing.
-       Fall back to default paths configuration.
-`)
+  console.log(`${gutil.colors.black.bgCyan('INFO')} Using default paths.
+  `)
+}
+
+// Add input paths
+
+paths.src = `${cwd}/src`
+paths.dev = `${cwd}/dev`
+paths.prev = `${cwd}/prev`
+paths.dist = `${cwd}/dist`
+
+let config = {
+  css: {
+    dev: {
+      outputStyle: 'expanded',
+      precision: 10
+    },
+    dist: {
+      outputStyle: 'compressed',
+      precision: 10
+    },
+    autoprefixer: {
+      browsers: ['> 1%']
+    }
+  },
+
+  html: {
+    browsersync: {
+      startPath: '/index.html',
+      logPrefix: 'Browsersync',
+      scrollElements: ['*']
+    }
+  },
+
+  img: {
+    svgSpriteDev: {
+      mode: {
+        symbol: {
+          dest: '',
+          sprite: paths.output.img.icons,
+          example: {
+            dest: 'icons.html'
+          }
+        }
+      },
+      shape: {
+        id: {
+          generator: '%s-icon'
+        }
+      }
+    },
+    svgSpriteDist: {
+      mode: {
+        symbol: {
+          dest: '',
+          sprite: paths.output.img.icons
+        }
+      },
+      shape: {
+        id: {
+          generator: '%s-icon'
+        }
+      }
+    },
+    imagemin: {
+      jpg: {
+        progressive: true
+      },
+      png: {
+        optimizationLevel: 5
+      },
+      svg: {}
+    }
   }
 }
 
-// Adjust paths with CWD
-
-paths.src = `${cwd}/${paths.src}`
-paths.dev = `${cwd}/${paths.dev}`
-paths.prev = `${cwd}/${paths.prev}`
-paths.dist = `${cwd}/${paths.dist}`
+try {
+  Object.assign(config, require(`${cwd}/` + (gutil.env.config || 'config/config.json')))
+} catch (error) {
+  console.log(`${gutil.colors.black.bgCyan('INFO')} Using default configuration.
+  `)
+}
 
 /* CLEAN
  * Delete directories
  * ========================================================================== */
 
 // Clean Development
-gulp.task('clean-dev', () => {
+gulp.task('clean:dev', () => {
   return del(paths.dev, {force: true})
 })
 
 // Clean Preview
-gulp.task('clean-prev', () => {
+gulp.task('clean:prev', () => {
   return del(paths.prev, {force: true})
 })
 
 // Clean Distribution
-gulp.task('clean-dist', () => {
+gulp.task('clean:dist', () => {
   return del(paths.dist, {force: true})
 })
 
 // Clean Dev Images
-gulp.task('clean-img-dev', () => {
-  return del(`${paths.dev}/${paths.img.base}/**`, { force: true })
+gulp.task('clean:img-dev', () => {
+  return del(`${paths.dev}/img/**`, { force: true })
 })
 
 /* CSS
@@ -125,10 +186,8 @@ gulp.task('clean-img-dev', () => {
  * ========================================================================== */
 
 // CSS Lint
-gulp.task('css-lint', () => {
-  process.chdir(cwd)
-
-  return gulp.src(`${paths.src}/${paths.css.base}/**/*.scss`)
+gulp.task('css:lint', () => {
+  return gulp.src(`${paths.src}/**/*.scss`)
     .pipe(stylelint({
       failAfterError: false,
       reporters: [{
@@ -139,10 +198,8 @@ gulp.task('css-lint', () => {
 })
 
 // CSS Lint Break
-gulp.task('css-lint-break', () => {
-  process.chdir(cwd)
-
-  return gulp.src(`${paths.src}/${paths.css.base}/**/*.scss`)
+gulp.task('css:lint-break', () => {
+  return gulp.src(`${paths.src}/**/*.scss`)
     .pipe(stylelint({
       failAfterError: true,
       reporters: [{
@@ -153,44 +210,44 @@ gulp.task('css-lint-break', () => {
 })
 
 // CSS Development
-gulp.task('css-dev', () => {
-  return gulp.src(`${paths.src}/${paths.css.base}/**/*.scss`)
+gulp.task('css:dev', () => {
+  return gulp.src(`${paths.src}/main.scss`)
     .pipe(sourcemaps.init())
       .pipe(sass(config.css.dev).on('error', sass.logError))
       .pipe(autoprefixer(config.css.autoprefixer))
-      .pipe(rename(paths.css.output))
+      .pipe(rename(paths.output.css.name))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(`${paths.dev}/${paths.css.base}`))
+    .pipe(gulp.dest(`${paths.dev}/${paths.output.css.path}`))
     .pipe(browsersync.stream({match: '**/*.css'}))
 })
 
 // CSS Watch
-gulp.task('css-watch', ['css-lint', 'css-dev'])
+gulp.task('css:watch', ['css:lint', 'css:dev'])
 
 // CSS Styleguide
-gulp.task('css-sg', () => {
-  return gulp.src(`${moduleCWD}/docs/sg.scss`)
+gulp.task('css:sg', () => {
+  return gulp.src(`${sgModuleDir}/docs/sg.scss`)
     .pipe(sass(config.css.dist))
     .pipe(autoprefixer(config.css.autoprefixer))
-    .pipe(gulp.dest(`${paths.dev}/${paths.css.base}`))
+    .pipe(gulp.dest(`${paths.dev}/${paths.output.css.path}`))
 })
 
 // CSS Preview
-gulp.task('css-prev', () => {
-  return gulp.src(`${paths.src}/${paths.css.base}/**/*.scss`)
+gulp.task('css:prev', () => {
+  return gulp.src(`${paths.src}/main.scss`)
     .pipe(sass(config.css.dist))
     .pipe(autoprefixer(config.css.autoprefixer))
-    .pipe(rename(paths.css.output))
-    .pipe(gulp.dest(`${paths.prev}/${paths.css.base}`))
+    .pipe(rename(paths.output.css.name))
+    .pipe(gulp.dest(`${paths.prev}/${paths.output.css.path}`))
 })
 
 // CSS Production
-gulp.task('css-dist', () => {
-  return gulp.src(`${paths.src}/${paths.css.base}/**/*.scss`)
+gulp.task('css:dist', () => {
+  return gulp.src(`${paths.src}/main.scss`)
     .pipe(sass(config.css.dist))
     .pipe(autoprefixer(config.css.autoprefixer))
-    .pipe(rename(paths.css.output))
-    .pipe(gulp.dest(`${paths.dist}/${paths.css.base}`))
+    .pipe(rename(paths.output.css.name))
+    .pipe(gulp.dest(`${paths.dist}/${paths.output.css.path}`))
 })
 
 /* JAVASCRIPT
@@ -221,28 +278,24 @@ ${error.message}
 }
 
 // JavaScript Lint
-gulp.task('js-lint', () => {
-  process.chdir(cwd)
-
-  return gulp.src(`${paths.src}/${paths.js.base}/**/*.js`)
+gulp.task('js:lint', () => {
+  return gulp.src(`${paths.src}/**/*.js`)
     .pipe(eslint())
     .pipe(eslint.format())
 })
 
 // JavaScript Lint Break
-gulp.task('js-lint-break', () => {
-  process.chdir(cwd)
-
-  return gulp.src(`${paths.src}/${paths.js.base}/**/*.js`)
+gulp.task('js:lint-break', () => {
+  return gulp.src(`${paths.src}/**/*.js`)
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
 })
 
 // JavaScript Dev
-gulp.task('js-dev', () => {
+gulp.task('js:dev', () => {
   const b = browserify({
-    entries: `${paths.src}/${paths.js.base}/${paths.js.entry}`,
+    entries: `${paths.src}/main.js`,
     debug: true,
     transform: [babelify]
   })
@@ -255,29 +308,29 @@ gulp.task('js-dev', () => {
   })
 
   return b.bundle().on('error', browserifyError)
-    .pipe(source(paths.js.output))
+    .pipe(source(paths.output.js.name))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(`${paths.dev}/${paths.js.base}`))
+    .pipe(gulp.dest(`${paths.dev}/${paths.output.js.path}`))
     .pipe(browsersync.stream({match: '**/*.js'}))
 })
 
 // JavaScript Watch
-gulp.task('js-watch', ['js-lint', 'js-dev'])
+gulp.task('js:watch', ['js:lint', 'js:dev'])
 
 // JavaScript Styleguide
-gulp.task('js-sg', () => {
-  return gulp.src(`${moduleCWD}/docs/sg.js`)
+gulp.task('js:sg', () => {
+  return gulp.src(`${sgModuleDir}/docs/sg.js`)
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(uglify())
-    .pipe(gulp.dest(`${paths.dev}/${paths.js.base}`))
+    .pipe(gulp.dest(`${paths.dev}/${paths.output.js.path}`))
 })
 
 // JavaScript Preview
-gulp.task('js-prev', () => {
+gulp.task('js:prev', () => {
   const b = browserify({
-    entries: `${paths.src}/${paths.js.base}/${paths.js.entry}`,
+    entries: `${paths.src}/main.js`,
     debug: true,
     transform: [babelify]
   })
@@ -290,16 +343,16 @@ gulp.task('js-prev', () => {
   })
 
   return b.bundle()
-    .pipe(source(paths.js.output))
+    .pipe(source(paths.output.js.name))
     .pipe(buffer())
     .pipe(uglify())
-    .pipe(gulp.dest(`${paths.prev}/${paths.js.base}`))
+    .pipe(gulp.dest(`${paths.prev}/${paths.output.js.path}`))
 })
 
 // JavaScript Production
-gulp.task('js-dist', () => {
+gulp.task('js:dist', () => {
   const b = browserify({
-    entries: `${paths.src}/${paths.js.base}/${paths.js.entry}`,
+    entries: `${paths.src}/main.js`,
     debug: true,
     transform: [babelify]
   })
@@ -312,176 +365,145 @@ gulp.task('js-dist', () => {
   })
 
   return b.bundle()
-    .pipe(source(paths.js.output))
+    .pipe(source(paths.output.js.name))
     .pipe(buffer())
     .pipe(uglify())
-    .pipe(gulp.dest(`${paths.dist}/${paths.js.base}`))
+    .pipe(gulp.dest(`${paths.dist}/${paths.output.js.path}`))
 })
 
 /* HTML
- * Pre-compile Handlebars files into HTML
+ * Pre-compile Nunjucks files into HTML
  * ========================================================================== */
 
-// Handle Handlebars error
-let handlebarsError = function (error) {
-  console.log(
-    '\n' + gutil.colors.underline(error.fileName) + '\n' +
-    '  ' + gutil.colors.red('Handlebars error: ') +
-    gutil.colors.blue(error.message.replace(error.fileName + ': ', '')) + '\n'
-  )
+nunjucks.configure({ noCache: true })
 
-  this.emit('end')
+const nunjucksError = (error) => {
+  console.log(`
+${gutil.colors.bgRed('ERROR')} HTML rendering failed
+${error.message}
+`)
 }
 
-let handlebarsOptions = {
-  bustCache: true
+const htmlComponentsPath = `${paths.src}/components`
+const htmlComponentsList = () => fs.readdirSync(htmlComponentsPath)
+  .map(item => `components/${item}`)
+
+const htmlPrototypesPath = `${paths.src}/prototypes`
+const htmlPrototypesList = () => glob.sync(`${htmlPrototypesPath}/**/*.njk`)
+  .map(item => path.relative(htmlPrototypesPath, item).replace('.njk', '').replace(/\\/g, '/'))
+
+const htmlComponentTitle = title => {
+  return title.replace('components/', '').replace(/\b[a-z]/g, word => word.toUpperCase()).replace('-', ' ')
 }
 
-// Handlebars Function
-let compileHandlebars = (task) => {
-  let pageDir = `${paths.src}/${paths.html.base}/${paths.html.pages}/**/*.hbs`
-  let componentDir = `${paths.src}/${paths.html.base}/${paths.html.pages}/components/**/*.hbs`
+const htmlNavigation = activeFileName => {
+  let components = []
+  let prototypes = []
 
-  // Create gulp.src and gulp.dest variables for the
-  // development and production task
-  let gulpSrc = pageDir
-  let gulpDest = `${paths[task]}`
+  htmlComponentsList().forEach(fileName => {
+    const sections = glob.sync(`${paths.src}/${fileName}/*.guide.njk`)
 
-  if (task === 'prev') {
-    gulpSrc = [pageDir, `!${componentDir}`]
-  }
-
-  let dataMeta = {
-    version: require(`${cwd}/package.json`).version,
-    dev: task === 'dev'
-  }
-
-  // Create dataPages object
-  let pageList = glob.sync(pageDir)
-  let dataPages = []
-
-  /*
-    Model for navigation:
-
-    dataPages = [{
-      name: 'Category name',
-      pages: [{
-        name: 'Page name',
-        url: 'some-page.html'
-      }]
-    }];
-  */
-
-  for (let page of pageList) {
-    let frontMatter = fm(fs.readFileSync(page, 'utf8')).attributes
-    let url = path.relative(`${paths.src}/${paths.html.base}/${paths.html.pages}`, page).replace('.hbs', '.html').replace(/\\/g, '/')
-    let name = frontMatter.title ? frontMatter.title : url
-    let category = frontMatter.category ? frontMatter.category : 'Undefined'
-
-    let pageItem = {
-      name,
-      url
-    }
-
-    let categoryInDataPages = dataPages.find((item) => item.name === category)
-
-    if (categoryInDataPages) {
-      categoryInDataPages.pages.push(pageItem)
-    } else {
-      dataPages.push({
-        name: category,
-        pages: [pageItem]
+    if (sections.length > 0) {
+      components.push({
+        name: htmlComponentTitle(fileName),
+        url: `${fileName}.html`,
+        isActive: fileName === activeFileName
       })
     }
-  }
-
-  // Create Handlebars Stream with partials, helpers and data
-  let hbStream = hb(handlebarsOptions)
-    .partials(`${paths.src}/${paths.html.base}/${paths.html.partials}/**/*.hbs`)
-    .partials(`${moduleCWD}/docs/**/*.hbs`)
-    .helpers(require('handlebars-helpers'))
-    .helpers(require('handlebars-layouts'))
-    .helpers({
-      // Return page metadata
-      // This includes file specific data aswell as frontmatter
-      page: (key, options) => {
-        let file = options.data.file.path
-
-        // Initialize variables
-        let currentPath = path.dirname(file)
-        let sourcePath = path.resolve(`${paths.src}/${paths.html.base}/${paths.html.pages}`)
-        let frontMatter = fm(fs.readFileSync(file, 'utf8')).attributes
-
-        // Return the file name without extension
-        if (key === 'filebase') {
-          return path.basename(file, '.hbs')
-
-        // Return the whole filename including extension
-        } else if (key === 'filename') {
-          return `${path.basename(file, '.hbs')}.html`
-
-        // Return the UNIX filepath
-        } else if (key === 'filepath') {
-          return path.relative(`${paths.src}/${paths.html.base}/${paths.html.pages}`, file).replace('.hbs', '.html').replace(/\\/g, '/')
-
-        // Return a relative path to the task folder root
-        } else if (key === 'rel') {
-          if (currentPath === sourcePath) {
-            return ''
-          }
-
-          return `${path.relative(currentPath, sourcePath)}/`.replace(/\\/g, '/')
-
-        // Return frontmatter value
-        } else if (frontMatter.hasOwnProperty(key)) {
-          return frontMatter[key]
-        }
-      }
-    })
-    .data({
-      meta: dataMeta,
-      categories: dataPages
-    })
-
-  const removeFrontmatter = through.obj(function (file, enc, callback) {
-    let contents = file.contents.toString('utf8')
-    file.contents = Buffer.from(contents.replace(/^(---)(\r?\n|\r)[\S\s]*(---)(\r?\n|\r)/, ''), 'utf8')
-
-    this.push(file)
-    callback()
   })
 
-  return gulp.src(gulpSrc)
-    .pipe(task === 'dev' ? hbStream.on('error', handlebarsError) : hbStream)
-    .pipe(removeFrontmatter)
-    .pipe(rename({extname: '.html'}))
-    .pipe(gulp.dest(gulpDest))
+  htmlPrototypesList().forEach(fileName => {
+    prototypes.push({
+      name: fileName.replace(/\b[a-z]/g, word => word.toUpperCase()).replace('-', ' '),
+      url: `${fileName}.html`,
+      isActive: fileName === activeFileName
+    })
+  })
+
+  return { components, prototypes }
 }
 
-// HTML Development
-gulp.task('html-dev', () => {
-  return compileHandlebars('dev')
+const htmlMetaPath = fileName => {
+  let toRoot = path.relative(path.dirname(`${paths.dev}/${fileName}`), paths.dev).replace(/\\/g, '/') + '/'
+
+  return {
+    filePath: `${fileName}.html`,
+    fileName: `${path.basename(fileName)}.html`,
+    toRoot: toRoot === '/' ? '' : toRoot
+  }
+}
+
+const htmlRenderComponents = (outputPath, env) => {
+  htmlComponentsList().forEach(fileName => {
+    const title = htmlComponentTitle(fileName)
+    const sections = glob.sync(`${paths.src}/${fileName}/*.guide.njk`)
+
+    if (sections.length > 0) {
+      const options = {
+        meta: {
+          env,
+          title,
+          nav: htmlNavigation(fileName),
+          path: htmlMetaPath(fileName),
+          version: require(`${cwd}/package.json`).version
+        },
+        sections,
+        sgSection: `${sgModuleDir}/docs/section.njk`,
+        sgNav: `${sgModuleDir}/docs/nav.njk`
+      }
+
+      nunjucks.render(`${paths.src}/layouts/components.njk`, options, (error, result) => {
+        if (error) {
+          nunjucksError(error)
+        }
+
+        fs.outputFileSync(`${outputPath}/${fileName}.html`, result)
+      })
+    }
+  })
+}
+
+const htmlRenderPrototypes = (outputPath, env) => {
+  htmlPrototypesList().forEach(fileName => {
+    const options = {
+      meta: {
+        env,
+        nav: htmlNavigation(fileName),
+        path: htmlMetaPath(fileName),
+        version: require(`${cwd}/package.json`).version
+      },
+      sgNav: `${sgModuleDir}/docs/nav.njk`
+    }
+
+    nunjucks.render(`${htmlPrototypesPath}/${fileName}.njk`, options, (error, result) => {
+      if (error) {
+        nunjucksError(error)
+      }
+
+      fs.outputFileSync(`${outputPath}/${fileName}.html`, result)
+    })
+  })
+}
+
+gulp.task('html:dev:components', () => {
+  return htmlRenderComponents(paths.dev, 'development')
 })
 
-// HTML Watch
-gulp.task('html-watch', ['html-dev'], browsersync.reload)
+gulp.task('html:dev:prototypes', () => {
+  return htmlRenderPrototypes(paths.dev, 'development')
+})
 
-// HTML Preview
-gulp.task('html-prev', () => {
-  return compileHandlebars('prev')
+gulp.task('html:dev', ['html:dev:components', 'html:dev:prototypes'])
+
+gulp.task('html:watch', ['html:dev'], browsersync.reload)
+
+gulp.task('html:prev', () => {
+  return htmlRenderPrototypes(paths.prev, 'production')
 })
 
 /* Images
  * Copy images and use a lossless compressor
  * ========================================================================== */
-
-let imgSource = [
-  `${paths.src}/${paths.img.base}/**`,
-  `!${paths.src}/${paths.img.base}/${paths.img.icons}`,
-  `!${paths.src}/${paths.img.base}/${paths.img.icons}/**`
-]
-
-let iconSource = `${paths.src}/${paths.img.base}/${paths.img.icons}/*.svg`
 
 let imageminConfig = [
   imagemin.jpegtran(config.img.imagemin.jpg),
@@ -490,57 +512,57 @@ let imageminConfig = [
 ]
 
 // Images Dev Copy
-gulp.task('img-dev-copy', ['clean-img-dev'], () => {
-  return gulp.src(imgSource)
-    .pipe(gulp.dest(`${paths.dev}/${paths.img.base}`))
+gulp.task('img:dev-copy', ['clean:img-dev'], () => {
+  return gulp.src(`${paths.src}/img/**`)
+    .pipe(gulp.dest(`${paths.dev}/${paths.output.img.path}`))
 })
 
 // Images Dev Icons
-gulp.task('img-dev-icons', ['clean-img-dev'], () => {
-  return gulp.src(iconSource)
+gulp.task('img:dev-icons', ['clean:img-dev'], () => {
+  return gulp.src(`${paths.src}/components/icons/*.svg`)
     .pipe(svgSprite(config.img.svgSpriteDev).on('error', (error) => { console.log(error) }))
-    .pipe(gulp.dest(`${paths.dev}/${paths.img.base}`))
+    .pipe(gulp.dest(`${paths.dev}/${paths.output.img.path}`))
 })
 
 // Images Dev
-gulp.task('img-dev', ['img-dev-copy', 'img-dev-icons'])
+gulp.task('img:dev', ['img:dev-copy', 'img:dev-icons'])
 
 // Images Watch
-gulp.task('img-watch', ['img-dev'], browsersync.reload)
+gulp.task('img:watch', ['img:dev'], browsersync.reload)
 
 // Images Preview Copy
-gulp.task('img-prev-copy', () => {
-  return gulp.src(imgSource)
+gulp.task('img:prev-copy', () => {
+  return gulp.src(`${paths.src}/img/**`)
     .pipe(imagemin(imageminConfig))
-    .pipe(gulp.dest(`${paths.prev}/${paths.img.base}`))
+    .pipe(gulp.dest(`${paths.prev}/${paths.output.img.path}`))
 })
 
 // Images Preview Icons
-gulp.task('img-prev-icons', () => {
-  return gulp.src(iconSource)
+gulp.task('img:prev-icons', () => {
+  return gulp.src(`${paths.src}/components/icons/*.svg`)
     .pipe(svgSprite(config.img.svgSpriteDist))
-    .pipe(gulp.dest(`${paths.prev}/${paths.img.base}`))
+    .pipe(gulp.dest(`${paths.prev}/${paths.output.img.path}`))
 })
 
 // Images Preview
-gulp.task('img-prev', ['img-prev-copy', 'img-prev-icons'])
+gulp.task('img:prev', ['img:prev-copy', 'img:prev-icons'])
 
 // Images Production Copy
-gulp.task('img-dist-copy', () => {
-  return gulp.src(imgSource)
+gulp.task('img:dist-copy', () => {
+  return gulp.src(`${paths.src}/img/**`)
     .pipe(imagemin(imageminConfig))
-    .pipe(gulp.dest(`${paths.dist}/${paths.img.base}`))
+    .pipe(gulp.dest(`${paths.dist}/${paths.output.img.path}`))
 })
 
 // Images Production Icons
-gulp.task('img-dist-icons', () => {
-  return gulp.src(iconSource)
+gulp.task('img:dist-icons', () => {
+  return gulp.src(`${paths.src}/components/icons/*.svg`)
     .pipe(svgSprite(config.img.svgSpriteDist))
-    .pipe(gulp.dest(`${paths.dist}/${paths.img.base}`))
+    .pipe(gulp.dest(`${paths.dist}/${paths.output.img.path}`))
 })
 
 // Images Production
-gulp.task('img-dist', ['img-dist-copy', 'img-dist-icons'])
+gulp.task('img:dist', ['img:dist-copy', 'img:dist-icons'])
 
 /* SIMPLE COPY
  * Copy files from one location to another – very simple
@@ -600,42 +622,43 @@ ${gutil.colors.black.bgYellow(' WARN ')} The copy file ${gutil.colors.magenta(co
 }
 
 // Copy dev
-gulp.task('copy-dev', () => {
+gulp.task('copy:dev', () => {
   return simpleCopy('dev')
 })
 
 // Copy watch
-gulp.task('copy-watch', ['copy-dev'])
+gulp.task('copy:watch', ['copy:dev'])
 
 // Copy preview
-gulp.task('copy-prev', () => {
+gulp.task('copy:prev', () => {
   return simpleCopy('prev')
 })
 
 // Copy production
-gulp.task('copy-dist', () => {
+gulp.task('copy:dist', () => {
   return simpleCopy('dist')
 })
 
 /* DEVELOPMENT
  * ========================================================================== */
 
-gulp.task('development', ['clean-dev', 'css-lint', 'js-lint'], () => {
-  runSequence(['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev'])
+gulp.task('development', ['clean:dev', 'css:lint', 'js:lint'], () => {
+  runSequence(['css:dev', 'css:sg', 'js:dev', 'js:sg', 'html:dev', 'img:dev', 'copy:dev'])
+  // gulp.run('html:dev')
 })
 
 /* PREVIEW
  * ========================================================================== */
 
-gulp.task('preview', ['clean-prev', 'css-lint-break', 'js-lint-break'], () => {
-  runSequence(['css-prev', 'js-prev', 'html-prev', 'img-prev', 'copy-prev'])
+gulp.task('preview', ['clean:prev', 'css:lint-break', 'js:lint-break'], () => {
+  runSequence(['css:prev', 'js:prev', 'html:prev', 'img:prev', 'copy:prev'])
 })
 
 /* PRODUCTION
  * ========================================================================== */
 
-gulp.task('production', ['clean-dist', 'css-lint-break', 'js-lint-break'], () => {
-  runSequence(['css-dist', 'js-dist', 'img-dist', 'copy-dist'])
+gulp.task('production', ['clean:dist', 'css:lint-break', 'js:lint-break'], () => {
+  runSequence(['css:dist', 'js:dist', 'img:dist', 'copy:dist'])
 })
 
 /* DEFAULT
@@ -681,41 +704,41 @@ gulp.task('watcher', () => {
     gutil.log(`${event[0].toUpperCase() + event.slice(1)} ${gutil.colors.blue(filepath)}`)
   }
 
-  chokidar.watch(`${paths.css.base}/**/*.scss`, options)
+  chokidar.watch(`${paths.src}/**/*.scss`, options)
     .on('all', (event, filepath) => {
       message(event, filepath)
-      runSequence('css-watch')
+      runSequence('css:watch')
     })
 
-  chokidar.watch(`${paths.src}/${paths.js.base}/**/*.js`, options)
+  chokidar.watch(`${paths.src}/**/*.js`, options)
     .on('all', (event, filepath) => {
       message(event, filepath)
-      runSequence('js-watch')
+      runSequence('js:watch')
     })
 
-  chokidar.watch(`${paths.src}/${paths.html.base}/**/*.hbs`, options)
+  chokidar.watch(`${paths.src}/**/*.njk`, options)
     .on('all', (event, filepath) => {
       message(event, filepath)
-      runSequence('html-watch')
+      runSequence('html:watch')
     })
 
-  chokidar.watch(`${paths.src}/${paths.img.base}/**/*`, options)
+  chokidar.watch([`${paths.src}/img/**`, `${paths.src}/components/icons/*.svg`], options)
     .on('all', (event, filepath) => {
       message(event, filepath)
-      runSequence('img-watch')
+      runSequence('img:watch')
     })
 
   chokidar.watch(`${paths.src}/copy.js`, options)
     .on('all', (event, filepath) => {
       message(event, filepath)
-      runSequence('copy-watch')
+      runSequence('copy:watch')
     })
 })
 
-gulp.task('default', ['clean-dev', 'css-lint', 'js-lint'], () => {
+gulp.task('default', ['clean:dev', 'css:lint', 'js:lint'], () => {
   // Run initial task queue
   runSequence(
-    ['css-dev', 'css-sg', 'js-dev', 'js-sg', 'html-dev', 'img-dev', 'copy-dev'],
+    ['css:dev', 'css:sg', 'js:dev', 'js:sg', 'html:dev', 'img:dev', 'copy:dev'],
     'browsersync', 'watcher'
   )
 })
