@@ -41,6 +41,9 @@ const nunjucks = require('nunjucks')
 const imagemin = require('gulp-imagemin')
 const svgSprite = require('gulp-svg-sprite')
 
+/* CONFIGURATION
+ * ========================================================================== */
+
 // CWD
 const cwd = gutil.env.dir
 const sgModuleDir = process.cwd()
@@ -49,9 +52,6 @@ const sgModuleDir = process.cwd()
 if (!process.env.TEST) {
   process.chdir(cwd)
 }
-
-/* CONFIGURATION
- * ========================================================================== */
 
 let paths = {
   output: {
@@ -254,7 +254,7 @@ gulp.task('css:dist', () => {
  * ========================================================================== */
 
 // Handle Browserify and Babel errors
-let browserifyError = function (error) {
+const browserifyError = function (error) {
   if (error.filename) {
     // Babel error
     error.filename = error.filename.replace(/\\/g, '/')
@@ -423,7 +423,7 @@ const htmlNavigation = activeFileName => {
 }
 
 const htmlMetaPath = fileName => {
-  let toRoot = path.relative(path.dirname(`${paths.dev}/${fileName}`), paths.dev).replace(/\\/g, '/') + '/'
+  const toRoot = path.relative(path.dirname(`${paths.dev}/${fileName}`), paths.dev).replace(/\\/g, '/') + '/'
 
   return {
     filePath: `${fileName}.html`,
@@ -504,7 +504,7 @@ gulp.task('html:prev', () => {
  * Copy images and use a lossless compressor
  * ========================================================================== */
 
-let imageminConfig = [
+const imageminConfig = [
   imagemin.jpegtran(config.img.imagemin.jpg),
   imagemin.optipng(config.img.imagemin.png),
   imagemin.svgo(config.img.imagemin.svg)
@@ -519,7 +519,7 @@ gulp.task('img:copy:dev', ['clean:img'], () => {
 // Images Dev Icons
 gulp.task('img:icons:dev', ['clean:img'], () => {
   return gulp.src(`${paths.src}/components/icons/*.svg`)
-    .pipe(svgSprite(config.img.svgSpriteDev).on('error', (error) => { console.log(error) }))
+    .pipe(svgSprite(config.img.svgSpriteDev).on('error', error => console.log(error)))
     .pipe(gulp.dest(`${paths.dev}/${paths.output.img.path}`))
 })
 
@@ -571,9 +571,10 @@ let simpleCopyMessage = (from, to) => {
   console.log(`${gutil.colors.underline(from)} => ${gutil.colors.underline(to)}`)
 }
 
-let simpleCopy = (task) => {
-  let copyConfig = `${paths.src}/copy.js`
-  let destination = paths[task]
+const simpleCopy = task => {
+  const copyConfig = `${paths.src}/copy.js`
+  const destination = paths[task]
+
   let copyList = null
 
   try {
@@ -584,7 +585,7 @@ let simpleCopy = (task) => {
       console.log(error.code)
     } else {
       console.error(`
-${gutil.colors.black.bgYellow(' WARN ')} The copy file ${gutil.colors.magenta(copyConfig)} is missing.
+${gutil.colors.black.bgYellow('WARN')} The copy file ${gutil.colors.magenta(copyConfig)} is missing.
        No Files will be copied.
   `)
     }
@@ -601,7 +602,7 @@ ${gutil.colors.black.bgYellow(' WARN ')} The copy file ${gutil.colors.magenta(co
       }
 
       if (!exclude) {
-        glob(`${cwd}/${item.folder}/${item.files}`, {nodir: true}, function (globError, files) {
+        glob(`${cwd}/${item.folder}/${item.files}`, { nodir: true }, function (globError, files) {
           files.forEach(function (fileSrc) {
             let fileDest = `${destination}/${item.dest}/${path.relative(cwd + '/' + item.folder, fileSrc)}`
 

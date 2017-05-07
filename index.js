@@ -11,12 +11,12 @@ const spawn = require('child_process').spawn
 /* SEARCH LOCAL INSTALLATION
  * ========================================================================== */
 
-let searchLocalInstallation = (dir) => {
+const searchLocalInstallation = dir => {
   try {
     require.resolve(`${dir}/node_modules/front-end-styleguide`)
   } catch (error) {
     console.error(`
-${chalk.black.bgRed(' ERROR ')} Local front-end-styleguide not found in ${chalk.magenta(dir)}
+${chalk.black.bgRed('ERROR')} Local front-end-styleguide not found in ${chalk.magenta(dir)}
 
 Start a new project: front-end-styleguide init
 Install locally:     npm install front-end-styleguide --save-dev
@@ -28,12 +28,12 @@ Install locally:     npm install front-end-styleguide --save-dev
 /* UPDATE PROJECT
  * ========================================================================== */
 
-let updateProject = function (dir) {
+const updateProject = function (dir) {
   spawn('npm', ['update'], {
     cwd: dir,
     shell: true,
     stdio: 'inherit'
-  }).on('close', (code) => {
+  }).on('close', code => {
     process.exit(code)
   })
 }
@@ -41,14 +41,14 @@ let updateProject = function (dir) {
 /* RUN GULP with optional ARGUMENTS
  * ========================================================================== */
 
-let spawnGulp = function (dir, args) {
+const spawnGulp = function (dir, args) {
   const gulpBin = path.resolve(require.resolve('gulp'), '../bin/gulp.js')
 
   spawn(`node "${gulpBin}"`, [...args, `--dir="${dir}"`], {
     cwd: __dirname,
     shell: true,
     stdio: 'inherit'
-  }).on('close', (code) => {
+  }).on('close', code => {
     process.exit(code)
   })
 }
@@ -57,19 +57,26 @@ let spawnGulp = function (dir, args) {
  * ========================================================================== */
 
 module.exports = function () {
-  let processArgs = process.argv
-  let args = processArgs.slice(2)
+  const processArgs = process.argv
+  const args = processArgs.slice(2)
 
-  if (args[0] === 'init') {
-    init(process.cwd())
-  } else if (args[0] === 'update') {
-    searchLocalInstallation(process.cwd())
-    updateProject(process.cwd())
-  } else {
-    if (!process.env.TEST) {
-      searchLocalInstallation(process.cwd())
-    }
+  switch (args[0]) {
+    case 'init':
+      init(process.cwd())
+      break
 
-    spawnGulp(process.cwd(), args)
+    case 'update':
+      if (!process.env.TEST) {
+        searchLocalInstallation(process.cwd())
+      }
+      updateProject(process.cwd())
+      break
+
+    default:
+      if (!process.env.TEST) {
+        searchLocalInstallation(process.cwd())
+      }
+      spawnGulp(process.cwd(), args)
+      break
   }
 }
