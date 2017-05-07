@@ -39,7 +39,7 @@ The following tasks are available:
 Custom configuration files can be specified:
 * `front-end-styleguide [task] --config=path/to/config.json --paths=path/to/paths.json`
 
-For more information take a look at the [readme of the init package](https://github.com/mvsde/styleguide-init/blob/master/init/always/README.md).
+For more information take a look at the [templates of the init package](https://github.com/mvsde/styleguide-init/blob/master/templates).
 
 *If you didn't install the CLI package please run `./node_modules/.bin/front-end-styleguide [task] [options]`.*
 
