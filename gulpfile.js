@@ -7,7 +7,6 @@
 const browsersync = require('browser-sync')
 const buffer = require('vinyl-buffer')
 const chokidar = require('chokidar')
-const del = require('del')
 const fs = require('fs-extra')
 const glob = require('glob')
 const path = require('path')
@@ -20,11 +19,11 @@ const gulp = require('gulp')
 const gutil = require('gulp-util')
 const rename = require('gulp-rename')
 const runSequence = require('run-sequence')
+const sourcemaps = require('gulp-sourcemaps')
 
 // CSS
 const autoprefixer = require('gulp-autoprefixer')
 const sass = require('gulp-sass')
-const sourcemaps = require('gulp-sourcemaps')
 const stylelint = require('gulp-stylelint')
 
 // JavaScript
@@ -163,22 +162,22 @@ try {
 
 // Clean Development
 gulp.task('clean:dev', () => {
-  return del(paths.dev, {force: true})
+  return fs.emptyDirSync(paths.dev)
 })
 
 // Clean Preview
 gulp.task('clean:prev', () => {
-  return del(paths.prev, {force: true})
+  return fs.emptyDirSync(paths.prev)
 })
 
 // Clean Distribution
 gulp.task('clean:dist', () => {
-  return del(paths.dist, {force: true})
+  return fs.emptyDirSync(paths.dist)
 })
 
 // Clean Dev Images
-gulp.task('clean:img-dev', () => {
-  return del(`${paths.dev}/img/**`, { force: true })
+gulp.task('clean:img', () => {
+  return fs.emptyDirSync(`${paths.dev}/img`)
 })
 
 /* CSS
@@ -198,7 +197,7 @@ gulp.task('css:lint', () => {
 })
 
 // CSS Lint Break
-gulp.task('css:lint-break', () => {
+gulp.task('css:lint:break', () => {
   return gulp.src(`${paths.src}/**/*.scss`)
     .pipe(stylelint({
       failAfterError: true,
@@ -285,7 +284,7 @@ gulp.task('js:lint', () => {
 })
 
 // JavaScript Lint Break
-gulp.task('js:lint-break', () => {
+gulp.task('js:lint:break', () => {
   return gulp.src(`${paths.src}/**/*.js`)
     .pipe(eslint())
     .pipe(eslint.format())
@@ -512,57 +511,57 @@ let imageminConfig = [
 ]
 
 // Images Dev Copy
-gulp.task('img:dev-copy', ['clean:img-dev'], () => {
+gulp.task('img:copy:dev', ['clean:img'], () => {
   return gulp.src(`${paths.src}/img/**`)
     .pipe(gulp.dest(`${paths.dev}/${paths.output.img.path}`))
 })
 
 // Images Dev Icons
-gulp.task('img:dev-icons', ['clean:img-dev'], () => {
+gulp.task('img:icons:dev', ['clean:img'], () => {
   return gulp.src(`${paths.src}/components/icons/*.svg`)
     .pipe(svgSprite(config.img.svgSpriteDev).on('error', (error) => { console.log(error) }))
     .pipe(gulp.dest(`${paths.dev}/${paths.output.img.path}`))
 })
 
 // Images Dev
-gulp.task('img:dev', ['img:dev-copy', 'img:dev-icons'])
+gulp.task('img:dev', ['img:copy:dev', 'img:icons:dev'])
 
 // Images Watch
 gulp.task('img:watch', ['img:dev'], browsersync.reload)
 
 // Images Preview Copy
-gulp.task('img:prev-copy', () => {
+gulp.task('img:copy:prev', () => {
   return gulp.src(`${paths.src}/img/**`)
     .pipe(imagemin(imageminConfig))
     .pipe(gulp.dest(`${paths.prev}/${paths.output.img.path}`))
 })
 
 // Images Preview Icons
-gulp.task('img:prev-icons', () => {
+gulp.task('img:icons:prev', () => {
   return gulp.src(`${paths.src}/components/icons/*.svg`)
     .pipe(svgSprite(config.img.svgSpriteDist))
     .pipe(gulp.dest(`${paths.prev}/${paths.output.img.path}`))
 })
 
 // Images Preview
-gulp.task('img:prev', ['img:prev-copy', 'img:prev-icons'])
+gulp.task('img:prev', ['img:copy:prev', 'img:icons:prev'])
 
 // Images Production Copy
-gulp.task('img:dist-copy', () => {
+gulp.task('img:copy:dist', () => {
   return gulp.src(`${paths.src}/img/**`)
     .pipe(imagemin(imageminConfig))
     .pipe(gulp.dest(`${paths.dist}/${paths.output.img.path}`))
 })
 
 // Images Production Icons
-gulp.task('img:dist-icons', () => {
+gulp.task('img:icons:dist', () => {
   return gulp.src(`${paths.src}/components/icons/*.svg`)
     .pipe(svgSprite(config.img.svgSpriteDist))
     .pipe(gulp.dest(`${paths.dist}/${paths.output.img.path}`))
 })
 
 // Images Production
-gulp.task('img:dist', ['img:dist-copy', 'img:dist-icons'])
+gulp.task('img:dist', ['img:copy:dist', 'img:icons:dist'])
 
 /* SIMPLE COPY
  * Copy files from one location to another – very simple
@@ -650,14 +649,14 @@ gulp.task('development', ['clean:dev', 'css:lint', 'js:lint'], () => {
 /* PREVIEW
  * ========================================================================== */
 
-gulp.task('preview', ['clean:prev', 'css:lint-break', 'js:lint-break'], () => {
+gulp.task('preview', ['clean:prev', 'css:lint:break', 'js:lint:break'], () => {
   runSequence(['css:prev', 'js:prev', 'html:prev', 'img:prev', 'copy:prev'])
 })
 
 /* PRODUCTION
  * ========================================================================== */
 
-gulp.task('production', ['clean:dist', 'css:lint-break', 'js:lint-break'], () => {
+gulp.task('production', ['clean:dist', 'css:lint:break', 'js:lint:break'], () => {
   runSequence(['css:dist', 'js:dist', 'img:dist', 'copy:dist'])
 })
 
