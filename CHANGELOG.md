@@ -5,6 +5,14 @@
 ## 3.0.0
 2017-05-07
 
+### Fixed
+- README.md link
+
+
+
+## 3.0.0
+2017-05-07
+
 ### Improved
 - More or less a complete rewrite
 
