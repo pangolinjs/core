@@ -512,7 +512,7 @@ const imageminConfig = [
 
 // Images Dev Copy
 gulp.task('img:copy:dev', ['clean:img'], () => {
-  return gulp.src(`${paths.src}/img/**`)
+  return gulp.src(`${paths.src}/images/**`)
     .pipe(gulp.dest(`${paths.dev}/${paths.output.img.path}`))
 })
 
@@ -531,7 +531,7 @@ gulp.task('img:watch', ['img:dev'], browsersync.reload)
 
 // Images Preview Copy
 gulp.task('img:copy:prev', () => {
-  return gulp.src(`${paths.src}/img/**`)
+  return gulp.src(`${paths.src}/images/**`)
     .pipe(imagemin(imageminConfig))
     .pipe(gulp.dest(`${paths.prev}/${paths.output.img.path}`))
 })
@@ -548,7 +548,7 @@ gulp.task('img:prev', ['img:copy:prev', 'img:icons:prev'])
 
 // Images Production Copy
 gulp.task('img:copy:dist', () => {
-  return gulp.src(`${paths.src}/img/**`)
+  return gulp.src(`${paths.src}/images/**`)
     .pipe(imagemin(imageminConfig))
     .pipe(gulp.dest(`${paths.dist}/${paths.output.img.path}`))
 })
