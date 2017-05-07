@@ -2,6 +2,14 @@
 
 
 
+## 3.0.0
+2017-05-07
+
+### Improved
+- More or less a complete rewrite
+
+
+
 ## 2.5.4
 2017-04-23
 

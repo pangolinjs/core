@@ -5,18 +5,18 @@
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][dependencies-image]][npm-url]
 
+
 ## Installation
 
-For global CLI access run `npm install -g front-end-styleguide-cli`.  
+For CLI access run `npm install -g front-end-styleguide-cli`.  
 For local installation run `npm install front-end-styleguide --save-dev`.
-
 
 
 ## Project Creation
 
 Create a new project with `front-end-styleguide init`.
 
-*If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide init`.*
+*If you didn't install the CLI package please run `./node_modules/.bin/front-end-styleguide init`.*
 
 
 ## Usage
@@ -41,7 +41,8 @@ Custom configuration files can be specified:
 
 For more information take a look at the [readme of the init package](https://github.com/mvsde/styleguide-init/blob/master/init/always/README.md).
 
-*If you didn't install the CLI package you have to run `./node_modules/.bin/front-end-styleguide [task] [options]`.*
+*If you didn't install the CLI package please run `./node_modules/.bin/front-end-styleguide [task] [options]`.*
+
 
 [standard-image]: https://cdn.rawgit.com/feross/standard/master/badge.svg
 [standard-url]: https://github.com/feross/standard
