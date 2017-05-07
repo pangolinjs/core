@@ -18,9 +18,7 @@
     </header>
 
     <main class="sg-body">
-      {% for section in sections %}
-        {% include section %}
-      {% endfor %}
+      {% for section in sections %}{% include section %}{% endfor %}
     </main>
 
     <script src="{{ meta.path.toRoot }}js/sg.js?v={{ meta.version }}"></script>
