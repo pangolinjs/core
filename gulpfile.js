@@ -644,7 +644,6 @@ gulp.task('copy:dist', () => {
 
 gulp.task('development', ['clean:dev', 'css:lint', 'js:lint'], () => {
   runSequence(['css:dev', 'css:sg', 'js:dev', 'js:sg', 'html:dev', 'img:dev', 'copy:dev'])
-  // gulp.run('html:dev')
 })
 
 /* PREVIEW
@@ -685,10 +684,7 @@ config.html.browsersync.notify = {
 }
 
 gulp.task('browsersync', () => {
-  // Setup Browsersync root directory
   config.html.browsersync.server = paths.dev
-
-  // Fire up Browsersync
   browsersync(config.html.browsersync)
 })
 
@@ -722,7 +718,7 @@ gulp.task('watcher', () => {
       runSequence('html:watch')
     })
 
-  chokidar.watch([`${paths.src}/img/**`, `${paths.src}/components/icons/*.svg`], options)
+  chokidar.watch([`${paths.src}/images/**`, `${paths.src}/components/icons/*.svg`], options)
     .on('all', (event, filepath) => {
       message(event, filepath)
       runSequence('img:watch')
@@ -736,7 +732,6 @@ gulp.task('watcher', () => {
 })
 
 gulp.task('default', ['clean:dev', 'css:lint', 'js:lint'], () => {
-  // Run initial task queue
   runSequence(
     ['css:dev', 'css:sg', 'js:dev', 'js:sg', 'html:dev', 'img:dev', 'copy:dev'],
     'browsersync', 'watcher'
