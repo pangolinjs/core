@@ -2,6 +2,20 @@
 
 
 
+## 3.1.0
+2017-05-18
+
+### Improved
+- Enforce Styleguide styles
+
+### Added
+- stylelint for test
+
+### Updated
+- Dependencies
+
+
+
 ## 3.0.2
 2017-05-08
 
