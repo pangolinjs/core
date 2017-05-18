@@ -4,8 +4,6 @@
  * components title and containers.
  * ========================================================================== */
 
-/* stylelint-disable declaration-no-important */
-
 
 // VIEWPORT FONT SIZE
 // =========================================================
@@ -29,7 +27,7 @@
 
 // STRIP-UNIT
 //
-// Strips arbitrary unity from numbers
+// Strips unit from numbers
 //
 // Source:
 // https://css-tricks.com/snippets/sass/strip-unit-function/
@@ -60,14 +58,8 @@ $color-primary:    rgb(0, 120, 255);
 $color-text:       rgb(255, 255, 255);
 $color-background: rgb(50, 50, 50);
 
-/* System UI Font Stack
- * Source:
- * https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/ */
-// stylelint-disable-next-line value-keyword-case
-$font-stack: -apple-system, BlinkMacSystemFont,
-  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-  "Fira Sans", "Droid Sans", "Helvetica Neue",
-  sans-serif;
+// System Font Stack
+$font-stack: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif;
 
 
 
@@ -92,20 +84,13 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   margin: 0;
   padding: 0;
 
-  font-family: $font-stack;
-  font-size: 0.875rem;
+  &.is-hidden {
+    height: 0;
+  }
 
   &::before,
   &::after {
-    display: none;
-  }
-
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  &.is-hidden {
-    height: 0;
+    display: none !important;
   }
 
   code {
@@ -125,42 +110,44 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
 
 .sg-nav__list {
+  all: initial;
+
   display: flex;
   position: fixed;
-  z-index: 9999;
+  z-index: 10000;
   height: $height-nav;
   top: 0;
   right: $height-nav;
   left: 0;
   margin: 0;
   padding: 0;
-  // overflow-x: auto;
 
   background-color: $color-background;
 
   will-change: transform;
 
-  &::before,
-  &::after {
+  .is-hidden & {
     display: none;
   }
 
-  .is-hidden & {
-    display: none;
+  &::before,
+  &::after {
+    display: none !important;
   }
 }
 
 
 .sg-nav__item {
+  all: initial;
+
   display: block !important;
-  position: static;
   height: $height-nav;
   margin: 0;
   padding: 0;
 
   &::before,
   &::after {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -172,7 +159,8 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   margin: 0;
   padding: 0 1em;
 
-  font-size: 1em;
+  font-family: $font-stack !important;
+  font-size: 0.875rem;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -194,7 +182,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
   &::before,
   &::after {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -205,6 +193,8 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
 
 .sg-nav__sub-list {
+  all: initial;
+
   display: none;
   position: absolute;
   width: inherit;
@@ -212,22 +202,25 @@ $font-stack: -apple-system, BlinkMacSystemFont,
   top: $height-nav;
   margin: 0;
   padding: 0;
-  overflow-x: auto;
+
+  overflow-y: auto;
 
   background-color: $color-background;
 
-  &::before,
-  &::after {
-    display: none;
-  }
-
   &.is-active {
     display: block;
+  }
+
+  &::before,
+  &::after {
+    display: none !important;
   }
 }
 
 
 .sg-nav__sub-item {
+  all: initial;
+
   display: block;
   position: static;
   margin: 0;
@@ -235,19 +228,23 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
   &::before,
   &::after {
-    display: none;
+    display: none !important;
   }
 }
 
 
 .sg-nav__link {
+  all: initial;
+
   display: block;
   position: static;
+  box-sizing: border-box;
   width: 100%;
   margin: 0;
   padding: 0.75em;
 
-  font-size: 1em;
+  font-family: $font-stack !important;
+  font-size: 0.875rem;
   font-weight: 400;
   color: $color-text;
   text-align: left;
@@ -275,7 +272,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
   &::before,
   &::after {
-    display: none;
+    display: none !important;
   }
 
   @media (min-width: $screen-xs) {
@@ -320,7 +317,7 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
   &::before,
   &::after {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -352,8 +349,9 @@ $font-stack: -apple-system, BlinkMacSystemFont,
  * ====================================================== */
 
 .sg-header {
+  all: initial;
+
   display: block;
-  position: static;
   box-sizing: border-box;
   max-width: $screen-lg;
   margin: 2rem auto 3rem;
@@ -361,8 +359,9 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
   border-bottom: 0.0625rem solid rgba($color-background, 0.3);
 
-  *, *::before, *::after {
-    box-sizing: border-box;
+  &::before,
+  &::after {
+    display: none !important;
   }
 
   @media (min-width: $screen-xs) {
@@ -372,29 +371,21 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 }
 
 .sg-header__title {
-  display: block;
-  position: static;
-  margin: 0;
-  padding: 0;
+  all: initial;
 
-  font-family: $font-stack;
+  @include viewport-font-size(1.5rem, 3rem);
+
+  display: block;
+  margin: 0;
+
+  font-family: $font-stack !important;
   font-weight: 300;
   color: $color-primary;
 
-  @include viewport-font-size(1.5rem, 3rem);
-}
-
-.sg-header__description {
-  display: block;
-  position: static;
-  margin: 1em 0 0;
-  padding: 0;
-
-  font-family: $font-stack;
-  font-weight: 400;
-  color: $color-background;
-
-  @include viewport-font-size(0.875rem, 1.125rem);
+  &::before,
+  &::after {
+    display: none !important;
+  }
 }
 
 
@@ -405,8 +396,14 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
 
 .sg-body {
+  display: block;
   max-width: $screen-lg;
   margin: 0 auto;
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
 }
 
 
@@ -417,7 +414,13 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
 
 .sg-article {
+  display: block;
   margin: 0 0 4rem;
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
 
   @media (min-width: $screen-xs) {
     margin-bottom: 0 0 5rem;
@@ -425,7 +428,15 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 }
 
 .sg-article__header {
+  all: initial;
+
+  display: block;
   padding: 1rem;
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
 
   @media (min-width: $screen-xs) {
     padding: 2rem;
@@ -433,28 +444,45 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 }
 
 .sg-article__title {
+  all: initial;
+
+  @include viewport-font-size(1.25rem, 1.5rem);
+
+  display: block;
   margin: 0 0 0.5em;
   padding: 0;
 
-  font-family: $font-stack;
+  font-family: $font-stack !important;
   font-weight: 300;
   color: $color-primary;
 
-  @include viewport-font-size(1.25rem, 1.5rem);
+  &::before,
+  &::after {
+    display: none !important;
+  }
 }
 
 .sg-article__description {
+  all: initial;
+
+  @include viewport-font-size(0.875rem, 1rem);
+
+  display: block;
   margin: 0 0 0.625em;
   padding: 0;
 
-  font-family: $font-stack;
+  font-family: $font-stack !important;
   font-weight: 400;
   color: $color-background;
 
-  @include viewport-font-size(0.875rem, 1rem);
+  &::before,
+  &::after {
+    display: none !important;
+  }
 }
 
 .sg-article__body {
+  display: block;
   margin: 0;
   padding: 1rem;
 
@@ -462,11 +490,13 @@ $font-stack: -apple-system, BlinkMacSystemFont,
 
   &::before,
   &::after {
-    content: ' ';
-    display: table;
-  }
+    content: '';
 
-  &::after {
+    display: table;
+    margin: 0;
+    padding: 0;
+    height: 0;
+
     clear: both;
   }
 
@@ -489,8 +519,15 @@ $font-stack: -apple-system, BlinkMacSystemFont,
  * ================================== */
 
 .sg-iframe {
+  all: initial;
+
   display: block;
   width: 100%;
 
   border: none;
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
 }

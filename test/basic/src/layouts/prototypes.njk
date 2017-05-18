@@ -11,10 +11,10 @@
     <title>{{ pageTitle }}</title>
   {% endif %}
 
+    <link rel="stylesheet" href="/css/styles.css?v={{ meta.version }}">
   {%- if (meta.env === 'development') %}
     <link rel="stylesheet" href="/css/sg.css?v={{ meta.version }}">
   {%- endif %}
-    <link rel="stylesheet" href="/css/styles.css?v={{ meta.version }}">
 
     {%- block head %}{% endblock %}
   </head>
