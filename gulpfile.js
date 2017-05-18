@@ -95,7 +95,7 @@ let config = {
       precision: 10
     },
     autoprefixer: {
-      browsers: ['> 1%']
+      browsers: ['> 1%', 'last 3 versions']
     }
   },
 
