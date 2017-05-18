@@ -13,7 +13,7 @@
   ],
   "author": "Fynn Becker <info@fynn-becker.de>",
   "scripts": {
-    "lint": "eslint **/*.js",
+    "lint": "stylelint **/*.scss && eslint **/*.js",
     "pretest": "npm run lint",
     "test": "cd test/basic && cross-env TEST=true node ../../bin/front-end-styleguide.js development preview production",
     "watchtest": "cd test/basic && cross-env TEST=true node ../../bin/front-end-styleguide.js"
@@ -57,6 +57,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "normalize.css": "^7.0.0",
+    "stylelint": "^7.10.1",
     "svgxuse": "^1.2.1"
   },
   "engines": {
