@@ -2,6 +2,17 @@
 
 
 
+## 3.2.0
+2017-06-03
+
+### Added
+- Ability to use `.browserslistrc`
+
+### Updated
+- Dependencies
+
+
+
 ## 3.1.0
 2017-05-18
 
