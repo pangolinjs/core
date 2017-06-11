@@ -383,13 +383,13 @@ ${error.message}
 `)
 }
 
-const htmlComponentsPath = `${paths.src}/components`
-const htmlComponentsList = () => fs.readdirSync(htmlComponentsPath)
+const htmlComponentsList = () => fs.readdirSync(`${paths.src}/components`)
   .map(item => `components/${item}`)
 
 const htmlPrototypesPath = `${paths.src}/prototypes`
 const htmlPrototypesList = () => glob.sync(`${htmlPrototypesPath}/**/*.njk`)
-  .map(item => path.relative(htmlPrototypesPath, item).replace('.njk', '').replace(/\\/g, '/'))
+  .map(item => path.relative(htmlPrototypesPath, item)
+  .replace('.njk', '').replace(/\\/g, '/'))
 
 const htmlComponentTitle = title => {
   return title.replace('components/', '').replace(/\b[a-z]/g, word => word.toUpperCase()).replace('-', ' ')
@@ -435,9 +435,11 @@ const htmlMetaPath = fileName => {
 const htmlRenderComponents = (outputPath, env) => {
   htmlComponentsList().forEach(fileName => {
     const title = htmlComponentTitle(fileName)
-    const sections = glob.sync(`${paths.src}/${fileName}/*.guide.njk`)
+    const sections = glob.sync(`${fileName}/*.guide.njk`, { cwd: paths.src })
 
     if (sections.length > 0) {
+      const nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader([sgModuleDir, paths.src]))
+
       const options = {
         meta: {
           env,
@@ -447,11 +449,16 @@ const htmlRenderComponents = (outputPath, env) => {
           version: require(`${cwd}/package.json`).version
         },
         sections,
-        sgSection: `${sgModuleDir}/docs/section.njk`,
-        sgNav: `${sgModuleDir}/docs/nav.njk`
+        sgSection: 'docs/section.njk',
+        sgNav: 'docs/nav.njk'
       }
 
-      nunjucks.render(`${paths.src}/layouts/components.njk`, options, (error, result) => {
+      nunjucksEnv.addGlobal('meta', options.meta)
+      nunjucksEnv.addGlobal('sections', options.sections)
+      nunjucksEnv.addGlobal('sgSection', options.sgSection)
+      nunjucksEnv.addGlobal('sgNav', options.sgNav)
+
+      nunjucksEnv.render('layouts/components.njk', (error, result) => {
         if (error) {
           nunjucksError(error)
         }
@@ -464,6 +471,8 @@ const htmlRenderComponents = (outputPath, env) => {
 
 const htmlRenderPrototypes = (outputPath, env) => {
   htmlPrototypesList().forEach(fileName => {
+    const nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader([sgModuleDir, paths.src]))
+
     const options = {
       meta: {
         env,
@@ -471,10 +480,13 @@ const htmlRenderPrototypes = (outputPath, env) => {
         path: htmlMetaPath(fileName),
         version: require(`${cwd}/package.json`).version
       },
-      sgNav: `${sgModuleDir}/docs/nav.njk`
+      sgNav: 'docs/nav.njk'
     }
 
-    nunjucks.render(`${htmlPrototypesPath}/${fileName}.njk`, options, (error, result) => {
+    nunjucksEnv.addGlobal('meta', options.meta)
+    nunjucksEnv.addGlobal('sgNav', options.sgNav)
+
+    nunjucksEnv.render(`prototypes/${fileName}.njk`, (error, result) => {
       if (error) {
         nunjucksError(error)
       }
