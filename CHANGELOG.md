@@ -2,6 +2,14 @@
 
 
 
+## 3.3.0
+2017-06-11
+
+### Improved
+- Moved to Nunjucks environment with global variables
+
+
+
 ## 3.2.0
 2017-06-03
 
