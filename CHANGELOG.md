@@ -2,6 +2,18 @@
 
 
 
+## 3.4.0
+2017-06-26
+
+### Updated
+- Dependencies
+
+### Fixed
+- Make files outside the `src`-folder available to Nunjucks
+- JavaScript Standard Style inconsistencies
+
+
+
 ## 3.3.0
 2017-06-11
 
