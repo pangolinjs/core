@@ -4,5 +4,9 @@
 {% extends sgSection %}
 
 {% block body %}
+  <h3>Include another component file</h3>
   {% include "./default.njk" %}
+
+  <h3>Include something from outside the src-folder</h3>
+  <pre><code>{% include "../../../package.json" %}</code></pre>
 {% endblock %}

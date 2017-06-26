@@ -83,6 +83,7 @@ paths.src = `${cwd}/src`
 paths.dev = `${cwd}/dev`
 paths.prev = `${cwd}/prev`
 paths.dist = `${cwd}/dist`
+paths.nodeModules = `${cwd}/node_modules`
 
 let config = {
   css: {
@@ -435,10 +436,13 @@ const htmlMetaPath = fileName => {
 const htmlRenderComponents = (outputPath, env) => {
   htmlComponentsList().forEach(fileName => {
     const title = htmlComponentTitle(fileName)
-    const sections = glob.sync(`${fileName}/*.guide.njk`, { cwd: paths.src })
+    const sections = glob.sync(`src/${fileName}/*.guide.njk`, { cwd })
 
     if (sections.length > 0) {
-      const nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader([sgModuleDir, paths.src]))
+      const nunjucksEnv = new nunjucks.Environment(
+        new nunjucks.FileSystemLoader([
+          sgModuleDir, cwd
+        ]))
 
       const options = {
         meta: {
@@ -458,7 +462,7 @@ const htmlRenderComponents = (outputPath, env) => {
       nunjucksEnv.addGlobal('sgSection', options.sgSection)
       nunjucksEnv.addGlobal('sgNav', options.sgNav)
 
-      nunjucksEnv.render('layouts/components.njk', (error, result) => {
+      nunjucksEnv.render('src/layouts/components.njk', (error, result) => {
         if (error) {
           nunjucksError(error)
         }
@@ -471,7 +475,10 @@ const htmlRenderComponents = (outputPath, env) => {
 
 const htmlRenderPrototypes = (outputPath, env) => {
   htmlPrototypesList().forEach(fileName => {
-    const nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader([sgModuleDir, paths.src]))
+    const nunjucksEnv = new nunjucks.Environment(
+      new nunjucks.FileSystemLoader([
+        sgModuleDir, cwd
+      ]))
 
     const options = {
       meta: {
@@ -486,7 +493,7 @@ const htmlRenderPrototypes = (outputPath, env) => {
     nunjucksEnv.addGlobal('meta', options.meta)
     nunjucksEnv.addGlobal('sgNav', options.sgNav)
 
-    nunjucksEnv.render(`prototypes/${fileName}.njk`, (error, result) => {
+    nunjucksEnv.render(`src/prototypes/${fileName}.njk`, (error, result) => {
       if (error) {
         nunjucksError(error)
       }
