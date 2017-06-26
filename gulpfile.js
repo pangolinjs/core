@@ -212,9 +212,9 @@ gulp.task('css:lint:break', () => {
 gulp.task('css:dev', () => {
   return gulp.src(`${paths.src}/main.scss`)
     .pipe(sourcemaps.init())
-      .pipe(sass(config.css.dev).on('error', sass.logError))
-      .pipe(autoprefixer(config.css.autoprefixer))
-      .pipe(rename(paths.output.css.name))
+    .pipe(sass(config.css.dev).on('error', sass.logError))
+    .pipe(autoprefixer(config.css.autoprefixer))
+    .pipe(rename(paths.output.css.name))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(`${paths.dev}/${paths.output.css.path}`))
     .pipe(browsersync.stream({match: '**/*.css'}))
@@ -389,7 +389,7 @@ const htmlComponentsList = () => fs.readdirSync(`${paths.src}/components`)
 const htmlPrototypesPath = `${paths.src}/prototypes`
 const htmlPrototypesList = () => glob.sync(`${htmlPrototypesPath}/**/*.njk`)
   .map(item => path.relative(htmlPrototypesPath, item)
-  .replace('.njk', '').replace(/\\/g, '/'))
+    .replace('.njk', '').replace(/\\/g, '/'))
 
 const htmlComponentTitle = title => {
   return title.replace('components/', '').replace(/\b[a-z]/g, word => word.toUpperCase()).replace('-', ' ')
@@ -678,7 +678,7 @@ gulp.task('production', ['clean:dist', 'css:lint:break', 'js:lint:break'], () =>
 config.html.browsersync.notify = {
   styles: [
     'position: fixed',
-    'z-index: 9999',
+    'z-index: 10000',
     'box-sizing: border-box',
     'height: 2rem',
     'top: 0',
