@@ -393,7 +393,10 @@ const htmlPrototypesList = () => glob.sync(`${htmlPrototypesPath}/**/*.njk`)
     .replace('.njk', '').replace(/\\/g, '/'))
 
 const htmlComponentTitle = title => {
-  return title.replace('components/', '').replace(/\b[a-z]/g, word => word.toUpperCase()).replace('-', ' ')
+  return title
+    .replace('components/', '')
+    .replace(/[\s-_.]/g, ' ')
+    .replace(/^.|\s.|\/./g, word => word.toUpperCase())
 }
 
 const htmlNavigation = activeFileName => {
@@ -414,7 +417,7 @@ const htmlNavigation = activeFileName => {
 
   htmlPrototypesList().forEach(fileName => {
     prototypes.push({
-      name: fileName.replace(/\b[a-z]/g, word => word.toUpperCase()).replace('-', ' '),
+      name: htmlComponentTitle(fileName),
       url: `${fileName}.html`,
       isActive: fileName === activeFileName
     })
