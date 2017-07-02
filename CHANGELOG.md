@@ -2,6 +2,23 @@
 
 
 
+## 3.5.0
+2017-07-02
+
+### Added
+- Branding capabilities
+- `gulp test` for linting only
+
+### Updated
+- Dependencies
+- stylelint rules
+
+### Fixed
+- Navigation hide button sizing (@finn-h)
+- Handle umlauts in component and prototype pages (#2)
+
+
+
 ## 3.4.0
 2017-06-26
 
