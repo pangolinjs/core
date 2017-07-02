@@ -7,8 +7,6 @@
 // https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
 // =============================================================================
 
-
-
 @mixin sr-only {
   position: absolute;
   width: 1px;
@@ -21,8 +19,6 @@
 
   white-space: nowrap;
 }
-
-
 
 /* SHOW ON FOCUS
  *

@@ -11,8 +11,6 @@
 // http://codepen.io/jakob-e/pen/doMoML
 // =============================================================================
 
-
-
 @function svg-url($svg) {
   // Chunk up string in order to avoid
   // "stack level too deep" error
@@ -36,8 +34,6 @@
 
   @return url("data:image/svg+xml;charset=utf8,#{$encoded}");
 }
-
-
 
 // STR-REPLACE
 //

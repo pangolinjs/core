@@ -59,6 +59,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "normalize.css": "^7.0.0",
     "stylelint": "^7.11.1",
+    "stylelint-config-standard": "^16.0.0",
     "svgxuse": "^1.2.1"
   },
   "engines": {
