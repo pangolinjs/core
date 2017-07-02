@@ -24,6 +24,7 @@ const sourcemaps = require('gulp-sourcemaps')
 // CSS
 const autoprefixer = require('gulp-autoprefixer')
 const sass = require('gulp-sass')
+const sassVars = require('gulp-sass-vars')
 const stylelint = require('gulp-stylelint')
 
 // JavaScript
@@ -157,6 +158,17 @@ try {
   `)
 }
 
+// Load branding
+
+let brandingObject = {}
+
+try {
+  brandingObject = require(`${cwd}/config/branding.json`)
+} catch (error) {
+  console.log(`${gutil.colors.black.bgCyan('INFO')} Using default branding.
+  `)
+}
+
 /* CLEAN
  * Delete directories
  * ========================================================================== */
@@ -227,6 +239,7 @@ gulp.task('css:watch', ['css:lint', 'css:dev'])
 // CSS Styleguide
 gulp.task('css:sg', () => {
   return gulp.src(`${sgModuleDir}/docs/sg.scss`)
+    .pipe(sassVars(brandingObject.css || {}, { verbose: false }))
     .pipe(sass(config.css.dist))
     .pipe(autoprefixer(config.css.autoprefixer))
     .pipe(gulp.dest(`${paths.dev}/${paths.output.css.path}`))
@@ -402,6 +415,7 @@ const htmlComponentTitle = title => {
 const htmlNavigation = activeFileName => {
   let components = []
   let prototypes = []
+  let branding = {}
 
   htmlComponentsList().forEach(fileName => {
     const sections = glob.sync(`${paths.src}/${fileName}/*.guide.njk`)
@@ -423,7 +437,13 @@ const htmlNavigation = activeFileName => {
     })
   })
 
-  return { components, prototypes }
+  if (brandingObject.logo) {
+    branding.icon = `config/${brandingObject.logo.icon}`
+    branding.title = brandingObject.logo.title
+    branding.url = brandingObject.logo.url
+  }
+
+  return { components, prototypes, branding }
 }
 
 const htmlMetaPath = fileName => {
@@ -700,8 +720,8 @@ config.html.browsersync.notify = {
     'text-transform: uppercase',
     'line-height: 2rem',
     'letter-spacing: 0.02em',
-    'color: #fff',
-    'background-color: rgb(0, 120, 255)'
+    `color: ${brandingObject.css ? brandingObject.css['color-text'] : '#fff'}`,
+    `background-color: ${brandingObject.css ? brandingObject.css['color-primary'] : 'rgb(0, 120, 255)'}`
   ]
 }
 

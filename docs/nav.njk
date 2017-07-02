@@ -1,6 +1,14 @@
 <nav class="sg-nav js-sg-nav">
   <ul class="sg-nav__list">
 
+    {% if meta.nav.branding.icon %}
+      <li class="sg-nav__item">
+        <a href="{{ meta.nav.branding.url or meta.path.toRoot + 'index.html' }}" class="sg-nav__button sg-nav__button--icon" title="{{ meta.nav.branding.title }}" rel="noopener">
+          {% include meta.nav.branding.icon %}
+        </a>
+      </li>
+    {% endif %}
+
     <li class="sg-nav__item">
       <button class="sg-nav__button js-sg-nav-btn">Components</button>
       <ul class="sg-nav__sub-list js-sg-nav-sub">

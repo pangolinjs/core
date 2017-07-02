@@ -1,0 +1,13 @@
+{
+  "css": {
+    "color-primary": "#f88",
+    "color-secondary": "#999",
+    "color-text": "#000",
+    "color-background": "#ddd"
+  },
+  "logo": {
+    "icon": "icon.svg",
+    "title": "Fynn Becker | Front End Development",
+    "url": "https://fynn-becker.de"
+  }
+}
