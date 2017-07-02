@@ -702,6 +702,11 @@ gulp.task('production', ['clean:dist', 'css:lint:break', 'js:lint:break'], () =>
   runSequence(['css:dist', 'js:dist', 'img:dist', 'copy:dist'])
 })
 
+/* TEST
+ * ========================================================================== */
+
+gulp.task('test', ['css:lint:break', 'js:lint:break'])
+
 /* DEFAULT
  * ========================================================================== */
 
