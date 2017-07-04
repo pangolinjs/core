@@ -438,8 +438,8 @@ const htmlNavigation = activeFileName => {
   })
 
   if (brandingObject.logo) {
-    branding.icon = `config/${brandingObject.logo.icon}`
-    branding.logo = `config/${brandingObject.logo.logo}`
+    branding.icon = brandingObject.logo.icon ? `config/${brandingObject.logo.icon}` : false
+    branding.logo = brandingObject.logo.logo ? `config/${brandingObject.logo.logo}` : false
     branding.title = brandingObject.logo.title
     branding.url = brandingObject.logo.url
   }
