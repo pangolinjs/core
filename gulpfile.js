@@ -439,6 +439,7 @@ const htmlNavigation = activeFileName => {
 
   if (brandingObject.logo) {
     branding.icon = `config/${brandingObject.logo.icon}`
+    branding.logo = `config/${brandingObject.logo.logo}`
     branding.title = brandingObject.logo.title
     branding.url = brandingObject.logo.url
   }
@@ -467,23 +468,18 @@ const htmlRenderComponents = (outputPath, env) => {
           sgModuleDir, cwd
         ]))
 
-      const options = {
-        meta: {
-          env,
-          title,
-          nav: htmlNavigation(fileName),
-          path: htmlMetaPath(fileName),
-          version: require(`${cwd}/package.json`).version
-        },
-        sections,
-        sgSection: 'docs/section.njk',
-        sgNav: 'docs/nav.njk'
-      }
-
-      nunjucksEnv.addGlobal('meta', options.meta)
-      nunjucksEnv.addGlobal('sections', options.sections)
-      nunjucksEnv.addGlobal('sgSection', options.sgSection)
-      nunjucksEnv.addGlobal('sgNav', options.sgNav)
+      nunjucksEnv.addGlobal('meta', {
+        env,
+        title,
+        nav: htmlNavigation(fileName),
+        path: htmlMetaPath(fileName),
+        version: require(`${cwd}/package.json`).version
+      })
+      nunjucksEnv.addGlobal('sections', sections)
+      nunjucksEnv.addGlobal('sgHeader', 'docs/header.njk')
+      nunjucksEnv.addGlobal('sgSection', 'docs/section.njk')
+      nunjucksEnv.addGlobal('sgNav', 'docs/nav.njk')
+      nunjucksEnv.addGlobal('sgFooter', 'docs/footer.njk')
 
       nunjucksEnv.render('src/layouts/components.njk', (error, result) => {
         if (error) {
@@ -503,18 +499,13 @@ const htmlRenderPrototypes = (outputPath, env) => {
         sgModuleDir, cwd
       ]))
 
-    const options = {
-      meta: {
-        env,
-        nav: htmlNavigation(fileName),
-        path: htmlMetaPath(fileName),
-        version: require(`${cwd}/package.json`).version
-      },
-      sgNav: 'docs/nav.njk'
-    }
-
-    nunjucksEnv.addGlobal('meta', options.meta)
-    nunjucksEnv.addGlobal('sgNav', options.sgNav)
+    nunjucksEnv.addGlobal('meta', {
+      env,
+      nav: htmlNavigation(fileName),
+      path: htmlMetaPath(fileName),
+      version: require(`${cwd}/package.json`).version
+    })
+    nunjucksEnv.addGlobal('sgNav', 'docs/nav.njk')
 
     nunjucksEnv.render(`src/prototypes/${fileName}.njk`, (error, result) => {
       if (error) {

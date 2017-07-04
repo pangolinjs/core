@@ -9,17 +9,21 @@
     <link rel="stylesheet" href="{{ meta.path.toRoot }}css/styles.css?v={{ meta.version }}">
     <link rel="stylesheet" href="{{ meta.path.toRoot }}css/sg.css?v={{ meta.version }}">
   </head>
-  <body>
+  <body class="sg-background">
 
     {% include sgNav %}
 
     <header class="sg-header">
-      <h1 class="sg-header__title">{{ meta.title }}</h1>
+      {% include sgHeader %}
     </header>
 
     <main class="sg-body">
       {% for section in sections %}{% include section %}{% endfor %}
     </main>
+
+    <footer class="sg-footer">
+      {% include sgFooter %}
+    </footer>
 
     <script src="{{ meta.path.toRoot }}js/sg.js?v={{ meta.version }}"></script>
     <script src="{{ meta.path.toRoot }}js/scripts.js?v={{ meta.version }}"></script>

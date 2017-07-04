@@ -11,9 +11,9 @@
     <title>{{ pageTitle }}</title>
   {% endif %}
 
-    <link rel="stylesheet" href="/css/styles.css?v={{ meta.version }}">
+    <link rel="stylesheet" href="{{ meta.path.toRoot }}css/styles.css?v={{ meta.version }}">
   {%- if (meta.env === 'development') %}
-    <link rel="stylesheet" href="/css/sg.css?v={{ meta.version }}">
+    <link rel="stylesheet" href="{{ meta.path.toRoot }}css/sg.css?v={{ meta.version }}">
   {%- endif %}
 
     {%- block head %}{% endblock %}
@@ -26,9 +26,9 @@
     {%- block body %}{% endblock %}
 
   {%- if (meta.env === 'development') %}
-    <script src="/js/sg.js?v={{ meta.version }}"></script>
+    <script src="{{ meta.path.toRoot }}js/sg.js?v={{ meta.version }}"></script>
   {%- endif %}
-    <script src="/js/scripts.js?v={{ meta.version }}"></script>
+    <script src="{{ meta.path.toRoot }}js/scripts.js?v={{ meta.version }}"></script>
 
     {%- block foot %}{% endblock %}
   </body>

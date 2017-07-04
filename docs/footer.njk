@@ -1,0 +1,7 @@
+{% if meta.nav.branding.logo %}
+  <a href="{{ meta.nav.branding.url or meta.path.toRoot + 'index.html' }}" class="sg-footer__logo" title="{{ meta.nav.branding.title }}" rel="noopener">
+    {% include meta.nav.branding.logo %}
+  </a>
+{% endif %}
+
+<p class="sg-footer__info">Powered by <a href="https://github.com/mvsde/styleguide" target="_blank" rel="noopener">Front-End-Styleguide</a></p>
