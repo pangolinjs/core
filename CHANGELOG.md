@@ -2,6 +2,14 @@
 
 
 
+## 3.6.1
+2017-07-04
+
+### Fixed
+- Make branding image really optional
+
+
+
 ## 3.6.0
 2017-07-04
 
