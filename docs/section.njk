@@ -1,7 +1,10 @@
 <article class="sg-article">
   {% if title %}
     <header class="sg-article__header">
-      <h2 class="sg-article__title">{{ title }}</h2>
+      <h2 id="{{ title | lower | replace(' ', '-') | urlencode }}" class="sg-article__title">
+        <a href="#{{ title | lower | replace(' ', '-') | urlencode }}" class="sg-article__title-id-link" title="Link to this section">#</a>
+        {{ title }}
+      </h2>
       {% if description %}<p class="sg-article__description">{{ description }}</p>{% endif %}
     </header>
   {% endif %}

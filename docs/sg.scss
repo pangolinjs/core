@@ -351,7 +351,7 @@ $font-stack: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helveti
   display: block;
   box-sizing: border-box;
   max-width: $screen-lg;
-  margin: 2rem auto 3rem;
+  margin: 2rem auto;
   padding: 1rem;
 
   border-bottom: 0.0625rem solid rgba($color-background, 0.3);
@@ -362,7 +362,7 @@ $font-stack: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helveti
   }
 
   @media (min-width: $screen-xs) {
-    margin: 3rem auto 5rem;
+    margin: 3rem auto;
     padding: 2rem;
   }
 }
@@ -404,7 +404,7 @@ $font-stack: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helveti
 
 .sg-article {
   display: block;
-  margin: 0 0 4rem;
+  margin: 0 0 2rem;
 
   &::before,
   &::after {
@@ -412,7 +412,7 @@ $font-stack: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helveti
   }
 
   @media (min-width: $screen-xs) {
-    margin-bottom: 0 0 5rem;
+    margin-bottom: 0 0 3rem;
   }
 }
 
@@ -420,7 +420,7 @@ $font-stack: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helveti
   all: initial;
 
   display: block;
-  padding: 1rem;
+  padding: 0 1rem 1rem;
 
   &::before,
   &::after {
@@ -428,7 +428,7 @@ $font-stack: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helveti
   }
 
   @media (min-width: $screen-xs) {
-    padding: 2rem;
+    padding: 0 2rem 2rem;
   }
 }
 
@@ -439,7 +439,7 @@ $font-stack: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helveti
 
   display: block;
   margin: 0 0 0.5em;
-  padding: 0;
+  padding: 3rem 0 0;
 
   font-family: $font-stack !important;
   font-weight: 300;
@@ -448,6 +448,28 @@ $font-stack: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helveti
   &::before,
   &::after {
     display: none !important;
+  }
+
+  @media (min-width: $screen-xs) {
+    position: relative;
+    padding: 4rem 0 0;
+  }
+}
+
+.sg-article__title-id-link {
+  vertical-align: top;
+
+  font-size: 0.8em;
+  text-decoration: none;
+  color: $color-secondary;
+
+  &:hover,
+  &:focus {
+    color: $color-primary;
+  }
+  @media (min-width: $screen-xs) {
+    position: absolute;
+    left: -1em;
   }
 }
 
