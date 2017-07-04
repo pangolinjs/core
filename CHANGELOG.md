@@ -2,6 +2,17 @@
 
 
 
+## 3.6.0
+2017-07-04
+
+### Added
+- Hash-links to component sections
+
+### Improved
+- Branding capability for component footer
+
+
+
 ## 3.5.0
 2017-07-02
 
