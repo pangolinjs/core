@@ -1,0 +1,17 @@
+/* BODY
+ * ========================================================================== */
+
+.sg-body {
+  display: block;
+  max-width: $screen-lg;
+  margin: 0 auto 3rem;
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
+
+  @media (min-width: $screen-xs) {
+    margin-bottom: 5rem;
+  }
+}

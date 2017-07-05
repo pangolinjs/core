@@ -1,0 +1,274 @@
+/* NAVIGATION
+ * ========================================================================== */
+
+.sg-nav {
+  display: block;
+  position: static;
+  box-sizing: border-box;
+  height: $height-nav;
+  margin: 0;
+  padding: 0;
+
+  &.is-hidden {
+    height: 0;
+  }
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
+
+  code {
+    display: inline;
+    margin: 0;
+    padding: 0 0.2em;
+
+    font-size: 1em;
+    // This is a fix for some browser oddity
+    // stylelint-disable-next-line font-family-no-duplicate-names
+    font-family: monospace, monospace;
+    color: $color-text;
+
+    background: $color-primary;
+  }
+}
+
+.sg-nav__list {
+  all: initial;
+
+  display: flex;
+  position: fixed;
+  z-index: 10000;
+  height: $height-nav;
+  top: 0;
+  right: $height-nav;
+  left: 0;
+  margin: 0;
+  padding: 0;
+
+  background-color: $color-background;
+
+  will-change: transform;
+
+  .is-hidden & {
+    display: none;
+  }
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
+}
+
+.sg-nav__item {
+  all: initial;
+
+  display: block !important;
+  height: $height-nav;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
+}
+
+.sg-nav__button {
+  display: block;
+  position: static;
+  height: $height-nav;
+  margin: 0;
+  padding: 0 1em;
+
+  font-family: $font-stack !important;
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: $color-text;
+
+  background: none;
+
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+
+  &.is-active,
+  &:hover,
+  &:focus,
+  &:active {
+    background: $color-primary;
+  }
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
+}
+
+.sg-nav__button--icon {
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+
+  svg {
+    $icon-size: 1.5rem;
+
+    display: block !important;
+    position: relative !important;
+    width: $icon-size;
+    height: $icon-size;
+    top: (($height-nav - $icon-size) / 2);
+  }
+}
+
+// SUBMENU
+// =========================================================
+
+.sg-nav__sub-list {
+  all: initial;
+
+  display: none;
+  position: absolute;
+  width: inherit;
+  max-height: calc(100vh - #{$height-nav});
+  top: $height-nav;
+  margin: 0;
+  padding: 0;
+
+  overflow-y: auto;
+
+  background-color: $color-background;
+
+  &.is-active {
+    display: block;
+  }
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
+}
+
+.sg-nav__sub-item {
+  all: initial;
+
+  display: block;
+  position: static;
+  margin: 0;
+  padding: 0;
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
+}
+
+.sg-nav__link {
+  all: initial;
+
+  display: block;
+  position: static;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0.75em;
+
+  font-family: $font-stack !important;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: $color-text;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+
+  background: none;
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+
+  &:visited {
+    color: $color-text;
+  }
+
+  &.is-active,
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color-text;
+    background: $color-primary;
+    outline: none;
+  }
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
+
+  @media (min-width: $screen-xs) {
+    padding: 0.5em 1em;
+  }
+}
+
+// HIDE BUTTON
+// =========================================================
+
+.sg-nav__hide-btn {
+  display: block !important;
+  position: fixed;
+  z-index: 9999;
+  height: $height-nav;
+  width: $height-nav;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+
+  font-size: 1rem;
+  line-height: 1;
+  color: $color-text;
+
+  background: $color-background;
+
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+
+  will-change: transform;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: $color-primary;
+  }
+
+  &::before,
+  &::after {
+    display: none !important;
+  }
+}
+
+.sg-nav__hide-btn-icon {
+  position: static;
+  fill: currentColor;
+  height: 1em;
+  font-size: 1.75em;
+}
+
+.sg-nav__hide-btn-icon--show {
+  display: none;
+
+  .is-active & {
+    display: inline;
+  }
+}
+
+.sg-nav__hide-btn-icon--close {
+  .is-active & {
+    display: none;
+  }
+}
