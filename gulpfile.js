@@ -240,8 +240,10 @@ gulp.task('css:watch', ['css:lint', 'css:dev'])
 gulp.task('css:sg', () => {
   return gulp.src(`${sgModuleDir}/docs/sg.scss`)
     .pipe(sassVars(brandingObject.css || {}, { verbose: false }))
+    .pipe(sourcemaps.init())
     .pipe(sass(config.css.dist))
     .pipe(autoprefixer(config.css.autoprefixer))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(`${paths.dev}/${paths.output.css.path}`))
 })
 

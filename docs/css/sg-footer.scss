@@ -23,8 +23,14 @@
 }
 
 .sg-footer__logo {
+  all: initial;
+
   display: inline-block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+
+  &:focus {
+    @include focus;
+  }
 
   svg {
     max-width: 100%;
@@ -33,6 +39,8 @@
 }
 
 .sg-footer__info {
+  all: initial;
+
   display: block;
   margin: 0;
   padding: 0;
@@ -43,6 +51,22 @@
   color: $color-secondary;
 
   a {
-    color: currentColor;
+    all: initial;
+
+    font-size: 1em;
+    font-family: $font-stack;
+    text-decoration: underline;
+    color: $color-secondary;
+
+    &:hover,
+    &:focus {
+      color: $color-primary;
+    }
+
+    &:focus {
+      @include focus;
+
+      text-decoration: none;
+    }
   }
 }

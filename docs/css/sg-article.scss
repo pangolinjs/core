@@ -56,9 +56,12 @@
 }
 
 .sg-article__title-id-link {
+  all: initial;
+
   vertical-align: top;
 
   font-size: 0.8em;
+  font-family: $font-stack;
   text-decoration: none;
   color: $color-secondary;
 
@@ -66,6 +69,11 @@
   &:focus {
     color: $color-primary;
   }
+
+  &:focus {
+    @include focus;
+  }
+
   @media (min-width: $screen-xs) {
     position: absolute;
     left: -1em;

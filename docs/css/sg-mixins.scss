@@ -31,3 +31,11 @@
 
   @return $number;
 }
+
+// FOCUS
+// =========================================================
+
+@mixin focus {
+  outline: 0.125rem solid $color-primary;
+  outline-offset: 0.0625rem;
+}
