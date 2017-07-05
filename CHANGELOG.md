@@ -2,6 +2,17 @@
 
 
 
+## 3.6.2
+2017-07-05
+
+### Improved
+- Split styleguide CSS into multiple files
+
+### Fixed
+- Reset footer and hash-link styles
+
+
+
 ## 3.6.1
 2017-07-04
 
