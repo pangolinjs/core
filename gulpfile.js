@@ -42,6 +42,8 @@ const nunjucks = require('nunjucks')
 const imagemin = require('gulp-imagemin')
 const svgSprite = require('gulp-svg-sprite')
 
+const log = require('./lib/log')
+
 /* CONFIGURATION
  * ========================================================================== */
 
@@ -74,8 +76,7 @@ let paths = {
 try {
   Object.assign(paths, require(`${cwd}/` + (gutil.env.paths || 'config/paths.json')))
 } catch (error) {
-  console.log(`${gutil.colors.black.bgCyan('INFO')} Using default paths.
-  `)
+  log.defaultPath()
 }
 
 // Add input paths
@@ -154,8 +155,7 @@ let config = {
 try {
   Object.assign(config, require(`${cwd}/` + (gutil.env.config || 'config/config.json')))
 } catch (error) {
-  console.log(`${gutil.colors.black.bgCyan('INFO')} Using default configuration.
-  `)
+  log.defaultConfiguration()
 }
 
 // Load branding
@@ -165,8 +165,7 @@ let brandingObject = {}
 try {
   brandingObject = require(`${cwd}/config/branding.json`)
 } catch (error) {
-  console.log(`${gutil.colors.black.bgCyan('INFO')} Using default branding.
-  `)
+  log.defaultBranding()
 }
 
 /* CLEAN
