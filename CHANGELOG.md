@@ -2,6 +2,18 @@
 
 
 
+## 3.7.0
+2017-07-19
+
+### Updated
+- Dependencies
+
+### Removed
+- Check for local styleguide
+- CLI stuff that front-end-styleguide-cli already provides
+
+
+
 ## 3.6.2
 2017-07-05
 
