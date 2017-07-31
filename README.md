@@ -39,7 +39,7 @@ The following tasks are available:
 Custom configuration files can be specified:
 * `front-end-styleguide [task] --config=path/to/config.json --paths=path/to/paths.json`
 
-For more information take a look at the [templates of the init package](https://github.com/mvsde/styleguide-init/blob/master/templates).
+For more information take a look at the [templates of the init package](https://github.com/front-end-styleguide/styleguide-init/blob/master/templates).
 
 *If you didn't install the CLI package please run `./node_modules/.bin/front-end-styleguide [task] [options]`.*
 
@@ -50,4 +50,4 @@ For more information take a look at the [templates of the init package](https://
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/front-end-styleguide
 
-[dependencies-image]: https://img.shields.io/david/mvsde/styleguide.svg?style=flat-square
+[dependencies-image]: https://img.shields.io/david/front-end-styleguide/styleguide.svg?style=flat-square

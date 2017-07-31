@@ -3,16 +3,29 @@
   "version": "3.7.0",
   "description": "Living Styleguide for componentized front end development with Sass, JavaScript and Nunjucks.",
   "keywords": [
-    "front-end",
-    "living styleguide",
-    "css",
-    "scss",
-    "javascript",
     "babel",
-    "browserify",
-    "nunjucks"
+    "css",
+    "es6"
+    "front-end",
+    "html",
+    "javascript",
+    "nunjucks",
+    "sass",
+    "styleguide"
   ],
-  "author": "Fynn Becker <info@fynn-becker.de>",
+  "author": {
+    "name": "Fynn Becker",
+    "email": "info@fynn-becker.de"
+  },
+  "homepage": "http://front-end-style.guide",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/front-end-styleguide/styleguide"
+  },
+  "bugs": {
+    "url": "https://github.com/front-end-styleguide/styleguide/issues",
+    "email": "help@front-end-style.guide"
+  },
   "scripts": {
     "lint": "stylelint **/*.scss && eslint **/*.js",
     "pretest": "npm run lint",
@@ -21,7 +34,6 @@
   },
   "main": "index.js",
   "bin": "bin/front-end-styleguide.js",
-  "repository": "mvsde/styleguide",
   "dependencies": {
     "babelify": "^7.3.0",
     "browser-sync": "^2.12.8",
