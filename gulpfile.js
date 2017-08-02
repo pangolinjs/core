@@ -395,7 +395,8 @@ const htmlRenderComponents = (outputPath, env) => {
         path: htmlMetaPath(fileName),
         version: require(`${cwd}/package.json`).version
       })
-      nunjucksEnv.addGlobal('sections', sections)
+      nunjucksEnv.addGlobal('sections', sections) // Deprecated
+      nunjucksEnv.addGlobal('sgSections', sections)
       nunjucksEnv.addGlobal('sgHeader', 'docs/header.njk')
       nunjucksEnv.addGlobal('sgSection', 'docs/section.njk')
       nunjucksEnv.addGlobal('sgNav', 'docs/nav.njk')
@@ -433,6 +434,13 @@ const htmlRenderPrototypes = (outputPath, env) => {
       version: require(`${cwd}/package.json`).version
     })
     nunjucksEnv.addGlobal('sgNav', 'docs/nav.njk')
+
+    nunjucksEnv.addFilter('addRandom', (str, min, max) => {
+      min = Math.ceil(min)
+      max = Math.floor(max)
+
+      return str + (Math.floor(Math.random() * (max - min)) + min)
+    })
 
     nunjucksEnv.render(`src/prototypes/${fileName}.njk`, (error, result) => {
       if (error) {
