@@ -56,22 +56,7 @@ if (!process.env.TEST) {
   process.chdir(cwd)
 }
 
-let paths = {
-  output: {
-    css: {
-      path: 'css',
-      name: 'styles.css'
-    },
-    js: {
-      path: 'js',
-      name: 'scripts.js'
-    },
-    img: {
-      path: 'img',
-      icons: 'icons.svg'
-    }
-  }
-}
+let {paths, config} = require('./lib/config')
 
 try {
   Object.assign(paths, require(`${cwd}/` + (gutil.env.paths || 'config/paths.json')))
@@ -80,77 +65,11 @@ try {
 }
 
 // Add input paths
-
 paths.src = `${cwd}/src`
 paths.dev = `${cwd}/dev`
 paths.prev = `${cwd}/prev`
 paths.dist = `${cwd}/dist`
 paths.nodeModules = `${cwd}/node_modules`
-
-let config = {
-  css: {
-    dev: {
-      outputStyle: 'expanded',
-      precision: 10
-    },
-    dist: {
-      outputStyle: 'compressed',
-      precision: 10
-    },
-    autoprefixer: {
-      browsers: fs.existsSync(`${cwd}/.browserslistrc`) ? null : ['> 1%', 'last 3 versions']
-    }
-  },
-
-  html: {
-    browsersync: {
-      startPath: '/index.html',
-      logPrefix: 'Browsersync',
-      scrollElements: ['*']
-    }
-  },
-
-  img: {
-    svgSpriteDev: {
-      mode: {
-        symbol: {
-          dest: '',
-          sprite: paths.output.img.icons,
-          example: {
-            dest: 'icons.html'
-          }
-        }
-      },
-      shape: {
-        id: {
-          generator: '%s-icon'
-        }
-      }
-    },
-    svgSpriteDist: {
-      mode: {
-        symbol: {
-          dest: '',
-          sprite: paths.output.img.icons
-        }
-      },
-      shape: {
-        id: {
-          generator: '%s-icon'
-        }
-      }
-    },
-    imagemin: {
-      jpg: {
-        progressive: true
-      },
-      png: {
-        optimizationLevel: 5
-      },
-      svg: {}
-    }
-  }
-}
 
 try {
   Object.assign(config, require(`${cwd}/` + (gutil.env.config || 'config/config.json')))
