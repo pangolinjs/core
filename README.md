@@ -1,9 +1,8 @@
-# Front End Styleguide
-
-[![JavaScript Style Guide][standard-image]][standard-url]
+# <img alt="" src="https://cdn.rawgit.com/front-end-styleguide/brand/master/mark/mark.svg" width="24"> Front End Styleguide
 
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][dependencies-image]][npm-url]
+[![JavaScript Standard Style][standard-image]][standard-url]
 
 
 ## Installation
@@ -44,10 +43,10 @@ For more information take a look at the [templates of the init package](https://
 *If you didn't install the CLI package please run `./node_modules/.bin/front-end-styleguide [task] [options]`.*
 
 
-[standard-image]: https://cdn.rawgit.com/feross/standard/master/badge.svg
-[standard-url]: https://github.com/feross/standard
-
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/front-end-styleguide
 
 [dependencies-image]: https://img.shields.io/david/front-end-styleguide/styleguide.svg?style=flat-square
+
+[standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square
+[standard-url]: https://standardjs.com

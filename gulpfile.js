@@ -725,7 +725,7 @@ config.html.browsersync.notify = {
     'line-height: 2rem',
     'letter-spacing: 0.02em',
     `color: ${brandingObject.css ? brandingObject.css['color-text'] : '#fff'}`,
-    `background-color: ${brandingObject.css ? brandingObject.css['color-primary'] : 'rgb(0, 120, 255)'}`
+    `background-color: ${brandingObject.css ? brandingObject.css['color-primary'] : 'rgb(29, 80, 151)'}`
   ]
 }
 
