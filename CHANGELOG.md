@@ -2,6 +2,21 @@
 
 
 
+## 3.7.1
+2017-08-04
+
+### Improved
+- Test
+- Add random numbers to component section ID
+- Meta information
+- Moved default config into separate file
+- Clean up Nunjucks compilation
+
+### Updated
+- Dependencies
+
+
+
 ## 3.7.0
 2017-07-19
 
