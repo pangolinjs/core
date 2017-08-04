@@ -1,4 +1,4 @@
-{% set id = (title + '-') | lower | replace(' ', '-') | addRandom(1000, 9999) | urlencode %}
+{% set id = (title + '-31415927') | lower | replace(' ', '-') | urlencode %}
 
 <article class="sg-article">
   {% if title %}
