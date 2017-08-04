@@ -2,6 +2,14 @@
 
 
 
+## 3.7.2
+2017-08-04
+
+### Fixed
+- Section heading IDs aren't random anymore (kinda defeats the purpose of links…)
+
+
+
 ## 3.7.1
 2017-08-04
 
