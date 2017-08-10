@@ -596,23 +596,35 @@ gulp.task('copy:dist', () => {
 /* DEVELOPMENT
  * ========================================================================== */
 
-gulp.task('development', ['clean:dev', 'css:lint', 'js:lint'], () => {
+gulp.task('build:dev', ['clean:dev'], () => {
   runSequence(['css:dev', 'css:sg', 'js:dev', 'js:sg', 'html:dev', 'img:dev', 'copy:dev'])
 })
+
+// Deprecated
+gulp.task('development', ['build:dev'])
 
 /* PREVIEW
  * ========================================================================== */
 
-gulp.task('preview', ['clean:prev', 'css:lint:break', 'js:lint:break'], () => {
+gulp.task('build:prev', ['clean:prev'], () => {
   runSequence(['css:prev', 'js:prev', 'html:prev', 'img:prev', 'copy:prev'])
 })
 
-/* PRODUCTION
+// Deprecated
+gulp.task('preview', ['build:prev'])
+
+/* BUILD
  * ========================================================================== */
 
-gulp.task('production', ['clean:dist', 'css:lint:break', 'js:lint:break'], () => {
+gulp.task('build:dist', ['clean:dist'], () => {
   runSequence(['css:dist', 'js:dist', 'img:dist', 'copy:dist'])
 })
+
+// Alias for `build:dist`
+gulp.task('build', ['build:dist'])
+
+// Deprecated
+gulp.task('production', ['build'])
 
 /* TEST
  * ========================================================================== */
@@ -690,9 +702,11 @@ gulp.task('watcher', () => {
     })
 })
 
-gulp.task('default', ['clean:dev', 'css:lint', 'js:lint'], () => {
+gulp.task('dev', ['clean:dev', 'css:lint', 'js:lint'], () => {
   runSequence(
     ['css:dev', 'css:sg', 'js:dev', 'js:sg', 'html:dev', 'img:dev', 'copy:dev'],
     'browsersync', 'watcher'
   )
 })
+
+gulp.task('default', ['dev'])

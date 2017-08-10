@@ -21,16 +21,16 @@ Create a new project with `front-end-styleguide init`.
 ## Usage
 
 The following tasks are available:
-* `front-end-styleguide` to start the default task.
+* `front-end-styleguide dev` to start the default task.
   * Watches for file changes.
   * Starts Browsersync.
-* `front-end-styleguide development` to start the default task
+* `front-end-styleguide build:dev` to start the default task
   * No file watching / Browsersync.
-* `front-end-styleguide preview` to create a prototype preview.
+* `front-end-styleguide build:prev` to create a prototype preview.
   * Minifies CSS, JavaScript and images.
   * Doesn't generate component HTML.
   * Errors break pipe.
-* `front-end-styleguide production` to create production ready files.
+* `front-end-styleguide build` to create production ready files.
   * Minifies CSS, JavaScript and images.
   * Doesn't generate any HTML.
   * Errors break pipe.
