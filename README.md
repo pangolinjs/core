@@ -7,15 +7,18 @@
 
 ## Installation
 
-For CLI access run `npm install -g front-end-styleguide-cli`.  
-For local installation run `npm install front-end-styleguide --save-dev`.
+```bash
+# Yarn
+yarn global add front-end-styleguide-cli
+
+# npm
+npm install -g front-end-styleguide-cli
+```
 
 
 ## Project Creation
 
 Create a new project with `front-end-styleguide init`.
-
-*If you didn't install the CLI package please run `./node_modules/.bin/front-end-styleguide init`.*
 
 
 ## Usage
@@ -35,12 +38,9 @@ The following tasks are available:
   * Doesn't generate any HTML.
   * Errors break pipe.
 
-Custom configuration files can be specified:
-* `front-end-styleguide [task] --config=path/to/config.json --paths=path/to/paths.json`
+Custom configuration files can be specified: `front-end-styleguide [task] --config=path/to/config.json --paths=path/to/paths.json`.
 
 For more information take a look at the [templates of the init package](https://github.com/front-end-styleguide/styleguide-init/blob/master/templates).
-
-*If you didn't install the CLI package please run `./node_modules/.bin/front-end-styleguide [task] [options]`.*
 
 
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide.svg?style=flat-square
