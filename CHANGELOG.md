@@ -2,6 +2,18 @@
 
 
 
+## 3.7.3
+2017-08-23
+
+### Improved
+- Gulp task names
+- Readme
+
+### Updated
+- Dependencies
+
+
+
 ## 3.7.2
 2017-08-04
 
