@@ -40,7 +40,7 @@ The following tasks are available:
 
 Custom configuration files can be specified: `front-end-styleguide [task] --config=path/to/config.json --paths=path/to/paths.json`.
 
-For more information take a look at the [templates of the init package](https://github.com/front-end-styleguide/styleguide-init/blob/master/templates).
+For more information take a look at the [templates of the init package](https://github.com/front-end-styleguide/init/blob/master/templates).
 
 
 ## Test
@@ -61,7 +61,7 @@ The default test runs all styleguide build tasks. The watchtest starts the devel
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/front-end-styleguide
 
-[dependencies-image]: https://img.shields.io/david/front-end-styleguide/styleguide.svg?style=flat-square
+[dependencies-image]: https://img.shields.io/david/front-end-styleguide/core.svg?style=flat-square
 
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square
 [standard-url]: https://standardjs.com
