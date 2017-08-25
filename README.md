@@ -43,6 +43,21 @@ Custom configuration files can be specified: `front-end-styleguide [task] --conf
 For more information take a look at the [templates of the init package](https://github.com/front-end-styleguide/styleguide-init/blob/master/templates).
 
 
+## Test
+
+```bash
+# Yarn
+yarn test
+yarn watchtest
+
+# npm
+npm test
+npm run watchtest
+```
+
+The default test runs all styleguide build tasks. The watchtest starts the development task with file watching and Browsersync.
+
+
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/front-end-styleguide
 
