@@ -30,7 +30,8 @@
     "lint": "stylelint **/*.scss && eslint **/*.js",
     "pretest": "npm run lint",
     "test": "cd test/basic && node ../../bin/front-end-styleguide.js build:dev build:prev build",
-    "watchtest": "cd test/basic && node ../../bin/front-end-styleguide.js dev"
+    "watchtest": "cd test/basic && node ../../bin/front-end-styleguide.js dev",
+    "linttest": "cd test/basic && node ../../bin/front-end-styleguide.js test"
   },
   "main": "index.js",
   "bin": "bin/front-end-styleguide.js",

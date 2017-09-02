@@ -9,6 +9,7 @@ const buffer = require('vinyl-buffer')
 const chokidar = require('chokidar')
 const fs = require('fs-extra')
 const glob = require('glob')
+const httpsPost = require('./lib/httpsPost')
 const path = require('path')
 const source = require('vinyl-source-stream')
 
@@ -316,13 +317,6 @@ gulp.task('js:dist', () => {
 
 nunjucks.configure({ noCache: true })
 
-const nunjucksError = (error) => {
-  console.log(`
-${gutil.colors.bgRed('ERROR')} HTML rendering failed
-${error.message}
-`)
-}
-
 const htmlComponentsList = () => fs.readdirSync(`${paths.src}/components`)
   .map(item => `components/${item}`)
 
@@ -383,6 +377,7 @@ const htmlMetaPath = fileName => {
   }
 }
 
+// TODO: Make a proper Gulp plugin out of this
 const htmlRenderComponents = env => {
   let componentPages = []
 
@@ -415,7 +410,7 @@ const htmlRenderComponents = env => {
       try {
         result = nunjucksEnv.render('src/layouts/components.njk')
       } catch (error) {
-        nunjucksError(error)
+        log.nunjucksError(error)
       }
 
       componentPages.push({
@@ -428,6 +423,7 @@ const htmlRenderComponents = env => {
   return componentPages
 }
 
+// TODO: Make a proper Gulp plugin out of this
 const htmlRenderPrototypes = env => {
   let prototypePages = []
 
@@ -450,7 +446,7 @@ const htmlRenderPrototypes = env => {
     try {
       result = nunjucksEnv.render(`src/prototypes/${fileName}.njk`)
     } catch (error) {
-      nunjucksError(error)
+      log.nunjucksError(error)
     }
 
     prototypePages.push({
@@ -462,6 +458,64 @@ const htmlRenderPrototypes = env => {
   return prototypePages
 }
 
+const htmlLint = callback => {
+  let pages = htmlRenderPrototypes('development')
+  let requests = []
+
+  pages.forEach(page => {
+    if (!page.content) return
+
+    const options = {
+      hostname: 'validator.w3.org',
+      port: '443',
+      path: '/nu/?out=json',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'User-Agent': 'front-end-styleguide'
+      }
+    }
+
+    let request = httpsPost(options, page.content)
+      .then(data => {
+        let messageTypes = []
+
+        JSON.parse(data).messages.forEach(message => {
+          messageTypes.push(message.type)
+          log.htmlLintError(`${page.path}.html`, message)
+        })
+
+        if (messageTypes.indexOf('error') >= 0) {
+          return 'error'
+        }
+
+        return 'success'
+      })
+      .catch(error => log.htmlLintConnection(error))
+
+    requests.push(request)
+  })
+
+  Promise.all(requests).then(result => {
+    callback(result)
+  })
+}
+
+// HTML Lint
+gulp.task('html:lint', () => {
+  return htmlLint(result => {})
+})
+
+// HTML Lint Break
+gulp.task('html:lint:break', () => {
+  return htmlLint(result => {
+    if (result.indexOf('error') >= 0) {
+      process.exit(1)
+    }
+  })
+})
+
+// HTML Development Components
 gulp.task('html:dev:components', () => {
   return htmlRenderComponents('development').forEach(file => {
     if (file.content) {
@@ -470,6 +524,7 @@ gulp.task('html:dev:components', () => {
   })
 })
 
+// HTML Development Prototypes
 gulp.task('html:dev:prototypes', () => {
   return htmlRenderPrototypes('development').forEach(file => {
     if (file.content) {
@@ -478,10 +533,13 @@ gulp.task('html:dev:prototypes', () => {
   })
 })
 
+// HTML Development
 gulp.task('html:dev', ['html:dev:components', 'html:dev:prototypes'])
 
+// HTML Watch
 gulp.task('html:watch', ['html:dev'], browsersync.reload)
 
+// HTML Preview
 gulp.task('html:prev', () => {
   return htmlRenderPrototypes('production').forEach(file => {
     if (file.content) {
@@ -665,7 +723,7 @@ gulp.task('production', ['build'])
 /* TEST
  * ========================================================================== */
 
-gulp.task('test', ['css:lint:break', 'js:lint:break'])
+gulp.task('test', ['css:lint:break', 'js:lint:break', 'html:lint:break'])
 
 /* DEFAULT
  * ========================================================================== */
