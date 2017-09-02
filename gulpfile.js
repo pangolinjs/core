@@ -28,7 +28,6 @@ const sassVars = require('gulp-sass-vars')
 const stylelint = require('gulp-stylelint')
 
 // JavaScript
-const babel = require('gulp-babel')
 const babelify = require('babelify')
 const browserify = require('browserify')
 const envify = require('envify/custom')
@@ -254,8 +253,15 @@ gulp.task('js:watch', ['js:lint', 'js:dev'])
 
 // JavaScript Styleguide
 gulp.task('js:sg', () => {
-  return gulp.src(`${sgModuleDir}/docs/sg.js`)
-    .pipe(babel({ presets: ['es2015'] }))
+  const b = browserify({
+    entries: `${sgModuleDir}/docs/sg.js`,
+    debug: true,
+    transform: [babelify]
+  })
+
+  return b.bundle()
+    .pipe(source('sg.js'))
+    .pipe(buffer())
     .pipe(uglify())
     .pipe(gulp.dest(`${paths.dev}/${paths.output.js.path}`))
 })

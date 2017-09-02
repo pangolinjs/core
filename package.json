@@ -45,7 +45,6 @@
     "glob": "^7.0.3",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
-    "gulp-babel": "^6.1.2",
     "gulp-eslint": "^4.0.0",
     "gulp-imagemin": "^3.0.1",
     "gulp-rename": "^1.2.2",
