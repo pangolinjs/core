@@ -383,7 +383,9 @@ const htmlMetaPath = fileName => {
   }
 }
 
-const htmlRenderComponents = (outputPath, env) => {
+const htmlRenderComponents = env => {
+  let componentPages = []
+
   htmlComponentsList().forEach(fileName => {
     const title = htmlComponentTitle(fileName)
     const sections = glob.sync(`src/${fileName}/*.guide.njk`, { cwd })
@@ -408,18 +410,27 @@ const htmlRenderComponents = (outputPath, env) => {
       nunjucksEnv.addGlobal('sgNav', 'docs/nav.njk')
       nunjucksEnv.addGlobal('sgFooter', 'docs/footer.njk')
 
-      nunjucksEnv.render('src/layouts/components.njk', (error, result) => {
-        if (error) {
-          nunjucksError(error)
-        }
+      let result
 
-        fs.outputFileSync(`${outputPath}/${fileName}.html`, result)
+      try {
+        result = nunjucksEnv.render('src/layouts/components.njk')
+      } catch (error) {
+        nunjucksError(error)
+      }
+
+      componentPages.push({
+        path: fileName,
+        content: result
       })
     }
   })
+
+  return componentPages
 }
 
-const htmlRenderPrototypes = (outputPath, env) => {
+const htmlRenderPrototypes = env => {
+  let prototypePages = []
+
   htmlPrototypesList().forEach(fileName => {
     const nunjucksEnv = new nunjucks.Environment(
       new nunjucks.FileSystemLoader([
@@ -434,22 +445,37 @@ const htmlRenderPrototypes = (outputPath, env) => {
     })
     nunjucksEnv.addGlobal('sgNav', 'docs/nav.njk')
 
-    nunjucksEnv.render(`src/prototypes/${fileName}.njk`, (error, result) => {
-      if (error) {
-        nunjucksError(error)
-      }
+    let result
 
-      fs.outputFileSync(`${outputPath}/${fileName}.html`, result)
+    try {
+      result = nunjucksEnv.render(`src/prototypes/${fileName}.njk`)
+    } catch (error) {
+      nunjucksError(error)
+    }
+
+    prototypePages.push({
+      path: fileName,
+      content: result
     })
   })
+
+  return prototypePages
 }
 
 gulp.task('html:dev:components', () => {
-  return htmlRenderComponents(paths.dev, 'development')
+  return htmlRenderComponents('development').forEach(file => {
+    if (file.content) {
+      fs.outputFileSync(`${paths.dev}/${file.path}.html`, file.content)
+    }
+  })
 })
 
 gulp.task('html:dev:prototypes', () => {
-  return htmlRenderPrototypes(paths.dev, 'development')
+  return htmlRenderPrototypes('development').forEach(file => {
+    if (file.content) {
+      fs.outputFileSync(`${paths.dev}/${file.path}.html`, file.content)
+    }
+  })
 })
 
 gulp.task('html:dev', ['html:dev:components', 'html:dev:prototypes'])
@@ -457,7 +483,11 @@ gulp.task('html:dev', ['html:dev:components', 'html:dev:prototypes'])
 gulp.task('html:watch', ['html:dev'], browsersync.reload)
 
 gulp.task('html:prev', () => {
-  return htmlRenderPrototypes(paths.prev, 'production')
+  return htmlRenderPrototypes('production').forEach(file => {
+    if (file.content) {
+      fs.outputFileSync(`${paths.prev}/${file.path}.html`, file.content)
+    }
+  })
 })
 
 /* Images
