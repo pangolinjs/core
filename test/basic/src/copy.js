@@ -1,11 +1,11 @@
-/* SIMPLE COPY
+/* COPY
  * ========================================================================== */
 
 module.exports = [
   {
-    folder: 'node_modules/svgxuse',
-    files: 'svgxuse.min.js',
-    dest: 'js',
+    folder: 'src/images',
+    files: '*',
+    dest: 'test',
     exclude: ['dist']
   }
 ]

@@ -187,29 +187,6 @@ gulp.task('css:dist', () => {
  * Lint, bundle and transpile JavaScript
  * ========================================================================== */
 
-// Handle Browserify and Babel errors
-const browserifyError = function (error) {
-  if (error.filename) {
-    // Babel error
-    error.filename = error.filename.replace(/\\/g, '/')
-    error.message = error.message.split(': ')
-
-    console.log(`
-${gutil.colors.underline(error.filename)}
-  ${error.loc.line}:${error.loc.column}  ${gutil.colors.red(`error`)}  ${error.message[1]}
-
-${error.codeFrame}
-    `)
-  } else {
-    // Browserify error
-    console.log(`
-${gutil.colors.red('Browserify error')}
-${error.message}
-    `)
-  }
-  this.emit('end')
-}
-
 // JavaScript Lint
 gulp.task('js:lint', () => {
   return gulp.src(`${paths.src}/**/*.js`)
@@ -240,7 +217,10 @@ gulp.task('js:dev', () => {
     global: true
   })
 
-  return b.bundle().on('error', browserifyError)
+  return b.bundle().on('error', function (error) {
+    log.browserifyError(error)
+    this.emit('end')
+  })
     .pipe(source(paths.output.js.name))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
@@ -611,13 +591,9 @@ gulp.task('img:icons:dist', () => {
 // Images Production
 gulp.task('img:dist', ['img:copy:dist', 'img:icons:dist'])
 
-/* SIMPLE COPY
- * Copy files from one location to another – very simple
+/* COPY
+ * Copy files from one location to another
  * ========================================================================== */
-
-let simpleCopyMessage = (from, to) => {
-  console.log(`${gutil.colors.underline(from)} => ${gutil.colors.underline(to)}`)
-}
 
 const simpleCopy = task => {
   const copyConfig = `${paths.src}/copy.js`
@@ -630,12 +606,9 @@ const simpleCopy = task => {
     copyList = require(copyConfig)
   } catch (error) {
     if (error.code !== 'MODULE_NOT_FOUND') {
-      console.log(error.code)
+      console.error(error.code)
     } else {
-      console.error(`
-${gutil.colors.black.bgYellow('WARN')} The copy file ${gutil.colors.magenta(copyConfig)} is missing.
-       No Files will be copied.
-  `)
+      log.copyMissing(copyConfig)
     }
   }
 
@@ -650,13 +623,13 @@ ${gutil.colors.black.bgYellow('WARN')} The copy file ${gutil.colors.magenta(copy
       }
 
       if (!exclude) {
-        glob(`${cwd}/${item.folder}/${item.files}`, { nodir: true }, function (globError, files) {
+        glob(path.join(cwd, item.folder, item.files), { nodir: true }, function (globError, files) {
           files.forEach(function (fileSrc) {
             let fileDest = `${destination}/${item.dest}/${path.relative(cwd + '/' + item.folder, fileSrc)}`
 
             try {
               fs.copySync(fileSrc, fileDest)
-              simpleCopyMessage(path.relative(cwd, fileSrc), path.relative(cwd, fileDest))
+              log.copyFile(path.relative(cwd, fileSrc), path.relative(cwd, fileDest))
             } catch (fsError) {
               console.error(fsError)
             }
