@@ -9,7 +9,6 @@ const buffer = require('vinyl-buffer')
 const chokidar = require('chokidar')
 const fs = require('fs-extra')
 const glob = require('glob')
-const httpsPost = require('./lib/httpsPost')
 const path = require('path')
 const source = require('vinyl-source-stream')
 
@@ -36,7 +35,9 @@ const eslint = require('gulp-eslint')
 const uglify = require('gulp-uglify')
 
 // HTML
-const nunjucks = require('nunjucks')
+const htmlLint = require('./lib/htmlLint.js')
+const htmlRenderComponents = require('./lib/htmlRenderComponents')
+const htmlRenderPrototypes = require('./lib/htmlRenderPrototypes')
 
 // Images
 const imagemin = require('gulp-imagemin')
@@ -295,222 +296,32 @@ gulp.task('js:dist', () => {
  * Pre-compile Nunjucks files into HTML
  * ========================================================================== */
 
-nunjucks.configure({ noCache: true })
-
-const htmlComponentsList = () => fs.readdirSync(`${paths.src}/components`)
-  .map(item => `components/${item}`)
-
-const htmlPrototypesPath = `${paths.src}/prototypes`
-const htmlPrototypesList = () => glob.sync(`${htmlPrototypesPath}/**/*.njk`)
-  .map(item => path.relative(htmlPrototypesPath, item)
-    .replace('.njk', '').replace(/\\/g, '/'))
-
-const htmlComponentTitle = title => {
-  return title
-    .replace('components/', '')
-    .replace(/[\s-_.]/g, ' ')
-    .replace(/^.|\s.|\/./g, word => word.toUpperCase())
-}
-
-const htmlNavigation = activeFileName => {
-  let components = []
-  let prototypes = []
-  let branding = {}
-
-  htmlComponentsList().forEach(fileName => {
-    const sections = glob.sync(`${paths.src}/${fileName}/*.guide.njk`)
-
-    if (sections.length > 0) {
-      components.push({
-        name: htmlComponentTitle(fileName),
-        url: `${fileName}.html`,
-        isActive: fileName === activeFileName
-      })
-    }
-  })
-
-  htmlPrototypesList().forEach(fileName => {
-    prototypes.push({
-      name: htmlComponentTitle(fileName),
-      url: `${fileName}.html`,
-      isActive: fileName === activeFileName
-    })
-  })
-
-  if (brandingObject.logo) {
-    branding.icon = brandingObject.logo.icon ? `config/${brandingObject.logo.icon}` : false
-    branding.logo = brandingObject.logo.logo ? `config/${brandingObject.logo.logo}` : false
-    branding.title = brandingObject.logo.title
-    branding.url = brandingObject.logo.url
-  }
-
-  return { components, prototypes, branding }
-}
-
-const htmlMetaPath = fileName => {
-  const toRoot = path.relative(path.dirname(`${paths.dev}/${fileName}`), paths.dev).replace(/\\/g, '/') + '/'
-
-  return {
-    filePath: `${fileName}.html`,
-    fileName: `${path.basename(fileName)}.html`,
-    toRoot: toRoot === '/' ? '' : toRoot
-  }
-}
-
-// TODO: Make a proper Gulp plugin out of this
-const htmlRenderComponents = env => {
-  let componentPages = []
-
-  htmlComponentsList().forEach(fileName => {
-    const title = htmlComponentTitle(fileName)
-    const sections = glob.sync(`src/${fileName}/*.guide.njk`, { cwd })
-
-    if (sections.length > 0) {
-      const nunjucksEnv = new nunjucks.Environment(
-        new nunjucks.FileSystemLoader([
-          sgModuleDir, cwd
-        ]))
-
-      nunjucksEnv.addGlobal('meta', {
-        env,
-        title,
-        nav: htmlNavigation(fileName),
-        path: htmlMetaPath(fileName),
-        version: require(`${cwd}/package.json`).version
-      })
-      nunjucksEnv.addGlobal('sections', sections) // Deprecated
-      nunjucksEnv.addGlobal('sgSections', sections)
-      nunjucksEnv.addGlobal('sgHeader', 'docs/header.njk')
-      nunjucksEnv.addGlobal('sgSection', 'docs/section.njk')
-      nunjucksEnv.addGlobal('sgNav', 'docs/nav.njk')
-      nunjucksEnv.addGlobal('sgFooter', 'docs/footer.njk')
-
-      let result
-
-      try {
-        result = nunjucksEnv.render('src/layouts/components.njk')
-      } catch (error) {
-        log.nunjucksError(error)
-      }
-
-      componentPages.push({
-        path: fileName,
-        content: result
-      })
-    }
-  })
-
-  return componentPages
-}
-
-// TODO: Make a proper Gulp plugin out of this
-const htmlRenderPrototypes = env => {
-  let prototypePages = []
-
-  htmlPrototypesList().forEach(fileName => {
-    const nunjucksEnv = new nunjucks.Environment(
-      new nunjucks.FileSystemLoader([
-        sgModuleDir, cwd
-      ]))
-
-    nunjucksEnv.addGlobal('meta', {
-      env,
-      nav: htmlNavigation(fileName),
-      path: htmlMetaPath(fileName),
-      version: require(`${cwd}/package.json`).version
-    })
-    nunjucksEnv.addGlobal('sgNav', 'docs/nav.njk')
-
-    let result
-
-    try {
-      result = nunjucksEnv.render(`src/prototypes/${fileName}.njk`)
-    } catch (error) {
-      log.nunjucksError(error)
-    }
-
-    prototypePages.push({
-      path: fileName,
-      content: result
-    })
-  })
-
-  return prototypePages
-}
-
-const htmlLint = callback => {
-  let pages = htmlRenderPrototypes('development')
-  let requests = []
-
-  pages.forEach(page => {
-    if (!page.content) return
-
-    const options = {
-      hostname: 'validator.w3.org',
-      port: '443',
-      path: '/nu/?out=json',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'text/html; charset=utf-8',
-        'User-Agent': 'front-end-styleguide'
-      }
-    }
-
-    let request = httpsPost(options, page.content)
-      .then(data => {
-        let messageTypes = []
-
-        JSON.parse(data).messages.forEach(message => {
-          messageTypes.push(message.type)
-          log.htmlLintError(`${page.path}.html`, message)
-        })
-
-        if (messageTypes.indexOf('error') >= 0) {
-          return 'error'
-        }
-
-        return 'success'
-      })
-      .catch(error => log.htmlLintConnection(error))
-
-    requests.push(request)
-  })
-
-  Promise.all(requests).then(result => {
-    callback(result)
-  })
-}
-
 // HTML Lint
 gulp.task('html:lint', () => {
-  return htmlLint(result => {})
+  return gulp.src(`${paths.src}/prototypes/**/*.njk`)
+    .pipe(htmlRenderPrototypes(config.html.dev, paths, brandingObject))
+    .pipe(htmlLint({ failAfterError: false }))
 })
 
 // HTML Lint Break
 gulp.task('html:lint:break', () => {
-  return htmlLint(result => {
-    if (result.indexOf('error') >= 0) {
-      process.exit(1)
-    }
-  })
+  return gulp.src(`${paths.src}/prototypes/**/*.njk`)
+    .pipe(htmlRenderPrototypes(config.html.dev, paths, brandingObject))
+    .pipe(htmlLint({ failAfterError: true }))
 })
 
 // HTML Development Components
 gulp.task('html:dev:components', () => {
-  return htmlRenderComponents('development').forEach(file => {
-    if (file.content) {
-      fs.outputFileSync(`${paths.dev}/${file.path}.html`, file.content)
-    }
-  })
+  return gulp.src(`${paths.src}/components/**/*.guide.njk`)
+    .pipe(htmlRenderComponents(config.html.dev, paths, brandingObject))
+    .pipe(gulp.dest(`${paths.dev}/components`))
 })
 
 // HTML Development Prototypes
 gulp.task('html:dev:prototypes', () => {
-  return htmlRenderPrototypes('development').forEach(file => {
-    if (file.content) {
-      fs.outputFileSync(`${paths.dev}/${file.path}.html`, file.content)
-    }
-  })
+  return gulp.src(`${paths.src}/prototypes/**/*.njk`)
+    .pipe(htmlRenderPrototypes(config.html.dev, paths, brandingObject))
+    .pipe(gulp.dest(`${paths.dev}`))
 })
 
 // HTML Development
