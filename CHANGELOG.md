@@ -2,6 +2,24 @@
 
 
 
+## 3.8.0
+2017-09-12
+
+### Added
+- HTML linting/validation
+
+### Improved
+- Remove empty lines from console log
+- Move styleguide front end JavaScript to Browserify
+- Move more console logging to separate file
+- Switch to some sort of Gulp plugins for HTML rendering
+
+### Updated
+- Readme
+- Dependencies
+
+
+
 ## 3.7.3
 2017-08-23
 
