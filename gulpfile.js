@@ -332,11 +332,9 @@ gulp.task('html:watch', ['html:dev'], browsersync.reload)
 
 // HTML Preview
 gulp.task('html:prev', () => {
-  return htmlRenderPrototypes('production').forEach(file => {
-    if (file.content) {
-      fs.outputFileSync(`${paths.prev}/${file.path}.html`, file.content)
-    }
-  })
+  return gulp.src(`${paths.src}/prototypes/**/*.njk`)
+    .pipe(htmlRenderPrototypes(config.html.dev, paths, brandingObject))
+    .pipe(gulp.dest(`${paths.prev}`))
 })
 
 /* Images
