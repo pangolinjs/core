@@ -2,6 +2,14 @@
 
 
 
+## 3.8.1
+2017-09-15
+
+### Fixed
+- HTML preview rendering config
+
+
+
 ## 3.8.0
 2017-09-12
 
