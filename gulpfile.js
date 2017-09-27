@@ -1,16 +1,12 @@
-'use strict'
-
 /* DEPENDENCIES
  * ========================================================================== */
 
 // Base
 const browsersync = require('browser-sync')
-const buffer = require('vinyl-buffer')
 const chokidar = require('chokidar')
 const fs = require('fs-extra')
 const glob = require('glob')
 const path = require('path')
-const source = require('vinyl-source-stream')
 
 // Gulp
 const gulp = require('gulp')
@@ -28,11 +24,9 @@ const sassVars = require('gulp-sass-vars')
 const stylelint = require('gulp-stylelint')
 
 // JavaScript
-const babelify = require('babelify')
-const browserify = require('browserify')
-const envify = require('envify/custom')
 const eslint = require('gulp-eslint')
-const uglify = require('gulp-uglify')
+const webpack = require('webpack')
+const WebpackFriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 // HTML
 const htmlLint = require('./lib/htmlLint.js')
@@ -189,13 +183,6 @@ gulp.task('css:dist', () => {
  * ========================================================================== */
 
 // JavaScript Lint
-gulp.task('js:lint', () => {
-  return gulp.src(`${paths.src}/**/*.js`)
-    .pipe(eslint())
-    .pipe(eslint.format())
-})
-
-// JavaScript Lint Break
 gulp.task('js:lint:break', () => {
   return gulp.src(`${paths.src}/**/*.js`)
     .pipe(eslint())
@@ -203,93 +190,136 @@ gulp.task('js:lint:break', () => {
     .pipe(eslint.failAfterError())
 })
 
+// Webpack configuration
+const webpackESLintLoader = {
+  test: /\.js$/,
+  include: [paths.src],
+  loader: 'eslint-loader',
+  enforce: 'pre'
+}
+
+const webpackBabelLoader = {
+  test: /\.js$/,
+  include: [paths.src],
+  loader: 'babel-loader'
+}
+
+const webpackDevEnv = new webpack.DefinePlugin({
+  'process.env': {
+    NODE_ENV: '"development"'
+  }
+})
+
+const webpackProdEnv = new webpack.DefinePlugin({
+  'process.env': {
+    NODE_ENV: '"production"'
+  }
+})
+
+const webpackFriendlyErrors = new WebpackFriendlyErrorsPlugin({
+  clearConsole: false
+})
+
+const webpackUglify = new webpack.optimize.UglifyJsPlugin({
+  compress: {
+    warnings: false
+  }
+})
+
 // JavaScript Dev
-gulp.task('js:dev', () => {
-  const b = browserify({
-    entries: `${paths.src}/main.js`,
-    debug: true,
-    transform: [babelify]
-  })
+const webpackDev = webpack({
+  entry: `${paths.src}/main.js`,
+  output: {
+    filename: paths.output.js.name,
+    path: `${paths.dev}/${paths.output.js.path}`
+  },
+  plugins: [webpackDevEnv, webpackFriendlyErrors],
+  module: {
+    rules: [webpackESLintLoader, webpackBabelLoader]
+  }
+})
 
-  b.transform(envify({
-    _: 'purge',
-    NODE_ENV: 'development'
-  }), {
-    global: true
-  })
+gulp.task('js:dev', cb => {
+  webpackDev.run((error, stats) => {
+    if (error) {
+      console.error(error)
+    }
 
-  return b.bundle().on('error', function (error) {
-    log.browserifyError(error)
-    this.emit('end')
+    browsersync.reload()
+    cb()
   })
-    .pipe(source(paths.output.js.name))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(`${paths.dev}/${paths.output.js.path}`))
-    .pipe(browsersync.stream({match: '**/*.js'}))
 })
 
 // JavaScript Watch
-gulp.task('js:watch', ['js:lint', 'js:dev'])
+gulp.task('js:watch', ['js:dev'])
 
 // JavaScript Styleguide
-gulp.task('js:sg', () => {
-  const b = browserify({
-    entries: `${sgModuleDir}/docs/sg.js`,
-    debug: true,
-    transform: [babelify]
-  })
+const webpackSg = webpack({
+  entry: `${sgModuleDir}/docs/sg.js`,
+  output: {
+    filename: 'sg.js',
+    path: `${paths.dev}/${paths.output.js.path}`
+  },
+  plugins: [webpackDevEnv, webpackUglify],
+  module: {
+    rules: [webpackBabelLoader]
+  }
+})
 
-  return b.bundle()
-    .pipe(source('sg.js'))
-    .pipe(buffer())
-    .pipe(uglify())
-    .pipe(gulp.dest(`${paths.dev}/${paths.output.js.path}`))
+gulp.task('js:sg', cb => {
+  webpackSg.run((error, stats) => {
+    if (error) {
+      console.error(error)
+    }
+
+    cb()
+  })
 })
 
 // JavaScript Preview
-gulp.task('js:prev', () => {
-  const b = browserify({
-    entries: `${paths.src}/main.js`,
-    debug: true,
-    transform: [babelify]
-  })
+const webpackPrev = webpack({
+  entry: `${paths.src}/main.js`,
+  output: {
+    filename: paths.output.js.name,
+    path: `${paths.prev}/${paths.output.js.path}`
+  },
+  plugins: [webpackDevEnv, webpackUglify, webpackFriendlyErrors],
+  module: {
+    rules: [webpackBabelLoader]
+  }
+})
 
-  b.transform(envify({
-    _: 'purge',
-    NODE_ENV: 'development'
-  }), {
-    global: true
-  })
+gulp.task('js:prev', cb => {
+  webpackPrev.run((error, stats) => {
+    if (error) {
+      console.error(error)
+    }
 
-  return b.bundle()
-    .pipe(source(paths.output.js.name))
-    .pipe(buffer())
-    .pipe(uglify())
-    .pipe(gulp.dest(`${paths.prev}/${paths.output.js.path}`))
+    cb()
+  })
 })
 
 // JavaScript Production
-gulp.task('js:dist', () => {
-  const b = browserify({
-    entries: `${paths.src}/main.js`,
-    debug: true,
-    transform: [babelify]
-  })
+const webpackProd = webpack({
+  entry: `${paths.src}/main.js`,
+  output: {
+    filename: paths.output.js.name,
+    path: `${paths.dist}/${paths.output.js.path}`
+  },
+  plugins: [webpackProdEnv, webpackUglify, webpackFriendlyErrors],
+  module: {
+    rules: [webpackBabelLoader]
+  }
+})
 
-  b.transform(envify({
-    _: 'purge',
-    NODE_ENV: 'production'
-  }), {
-    global: true
-  })
+gulp.task('js:dist', cb => {
+  webpackProd.run((error, stats) => {
+    if (error) {
+      console.error(error)
+    }
 
-  return b.bundle()
-    .pipe(source(paths.output.js.name))
-    .pipe(buffer())
-    .pipe(uglify())
-    .pipe(gulp.dest(`${paths.dist}/${paths.output.js.path}`))
+    cb()
+  })
 })
 
 /* HTML
@@ -578,7 +608,7 @@ gulp.task('watcher', () => {
     })
 })
 
-gulp.task('dev', ['clean:dev', 'css:lint', 'js:lint'], () => {
+gulp.task('dev', ['clean:dev', 'css:lint'], () => {
   runSequence(
     ['css:dev', 'css:sg', 'js:dev', 'js:sg', 'html:dev', 'img:dev', 'copy:dev'],
     'browsersync', 'watcher'
