@@ -16,6 +16,5 @@ yarn-error.log*
 node_modules
 
 # Generated content
-dev
-prev
-dist
+test/dev
+test/dist
