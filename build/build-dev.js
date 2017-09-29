@@ -12,9 +12,6 @@ module.exports = (cwd) => {
   // Output path
   config.output.path = `${cwd}/dev`
 
-  // Source map level
-  config.devtool = 'source-map'
-
   // NODE_ENV plugin
   config.plugins.push(new webpack.DefinePlugin({
     'process.env': {

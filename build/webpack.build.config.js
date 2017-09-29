@@ -3,7 +3,6 @@ const webpack = require('webpack')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrors = require('friendly-errors-webpack-plugin')
-const OptimizeCSSAssets = require('optimize-css-assets-webpack-plugin')
 
 module.exports = (cwd) => {
   // ESLint loader
@@ -29,13 +28,17 @@ module.exports = (cwd) => {
         {
           loader: 'css-loader',
           options: {
-            sourceMap: process.env.NODE_ENV === 'development'
+            minimize: {
+              safe: true
+            },
+            sourceMap: true
           }
         },
         {
           loader: 'sass-loader',
           options: {
-            sourceMap: process.env.NODE_ENV === 'development'
+            precision: 10,
+            sourceMap: true
           }
         }
       ]
@@ -47,22 +50,12 @@ module.exports = (cwd) => {
     compress: {
       warnings: false
     },
-    sourceMap: process.env.NODE_ENV === 'development'
+    sourceMap: true
   })
 
   // Extract CSS plugin
   const extractCSSPlugin = new ExtractTextPlugin({
     filename: 'css/[name].css'
-  })
-
-  // Compress CSS plugin
-  const compressCSSPlugin = new OptimizeCSSAssets({
-    cssProcessorOptions: {
-      safe: true,
-      map: process.env.NODE_ENV === 'development'
-        ? { inline: false }
-        : false
-    }
   })
 
   // Code Splitting plugin
@@ -99,6 +92,7 @@ module.exports = (cwd) => {
       filename: 'js/[name].js',
       chunkFilename: 'js/[id].js'
     },
+    devtool: 'source-map',
     module: {
       rules: [
         eslintLoader,
@@ -109,7 +103,7 @@ module.exports = (cwd) => {
     plugins: [
       compressJSPlugin,
       extractCSSPlugin,
-      compressCSSPlugin,
+      // compressCSSPlugin,
       codeSplittingPlugin,
       extractWebpackManifestPlugin,
       formatOutputPlugin,
