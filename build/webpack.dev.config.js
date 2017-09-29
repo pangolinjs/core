@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const StylelintPlugin = require('stylelint-webpack-plugin')
 
 module.exports = (cwd) => {
-  // ESLint loader
+  // Lint JavaScript
   const eslintLoader = {
     test: /\.js$/,
     exclude: /node_modules/,
@@ -11,14 +11,14 @@ module.exports = (cwd) => {
     enforce: 'pre'
   }
 
-  // Babel loader
+  // Transpile with Babel
   const babelLoader = {
     test: /\.js$/,
     exclude: /node_modules/,
     loader: 'babel-loader'
   }
 
-  // CSS Loader
+  // Compile Sass
   const cssLoader = {
     test: /\.(css|scss)$/,
     use: [
@@ -41,22 +41,22 @@ module.exports = (cwd) => {
     ]
   }
 
-  // NODE_ENV plugin
+  // Set NODE_ENV
   const nodeEnvPlugin = new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: '"development"'
     }
   })
 
-  // Stylelint plugin
+  // Lint CSS
   const stylelintPlugin = new StylelintPlugin({
     syntax: 'scss'
   })
 
-  // Hot Module Replacement plugin
+  // Hot Module Replacement
   const hmrPlugin = new webpack.HotModuleReplacementPlugin()
 
-  // Don't emit files with error plugin
+  // Don't emit files with error
   const noErrorEmitPlugin = new webpack.NoEmitOnErrorsPlugin()
 
   return {

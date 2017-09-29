@@ -7,13 +7,14 @@ const webpack = require('webpack')
 module.exports = (cwd) => {
   const config = require('./webpack.build.config')(cwd)
 
-  // NODE_ENV plugin
+  // Set NODE_ENV
   config.plugins.push(new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: '"production"'
     }
   }))
 
+  // Empty output path to get rid of leftovers
   fs.emptyDir(`${cwd}/dist`, error => {
     if (error) throw error
 

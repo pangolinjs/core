@@ -22,10 +22,11 @@ module.exports = (cwd) => {
       }
     }))
 
+    // Create webpack compiler and express app
     const compiler = webpack(config)
     const app = express()
 
-    // Webpack bundle output
+    // Webpack bundle inject
     const devMiddleware = require('webpack-dev-middleware')(compiler, {
       quiet: true
     })
@@ -36,16 +37,17 @@ module.exports = (cwd) => {
       heartbeat: 2000
     })
 
-    // Force reload after HTML change
-    chokidar.watch(`${cwd}/**/*.njk`)
-      .on('all', (event, path) => {
+    // Force reload after HTML or static asset change
+    chokidar.watch([`${cwd}/src/**/*.njk`, `${cwd}/src/assets/**/*`])
+      .on('all', () => {
         hotMiddleware.publish({ action: 'reload' })
       })
 
     app.use(devMiddleware)
     app.use(hotMiddleware)
 
-    app.use(`${cwd}/src/static`, express.static('./static'))
+    // Add static asset path
+    app.use('/assets', express.static(`${cwd}/src/assets`))
 
     // Render prototypes and send HTML
     app.get(/.*(\/|\.html)$/, (req, res) => {
@@ -62,6 +64,7 @@ module.exports = (cwd) => {
         })
     })
 
+    // Start server
     app.listen(port)
   })
 }

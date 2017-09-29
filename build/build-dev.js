@@ -13,13 +13,14 @@ module.exports = (cwd) => {
   // Output path
   config.output.path = `${cwd}/dev`
 
-  // NODE_ENV plugin
+  // Set NODE_ENV
   config.plugins.push(new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: '"development"'
     }
   }))
 
+  // Empty output path to get rid of leftovers
   fs.emptyDir(`${cwd}/dev`, error => {
     if (error) throw error
 
@@ -39,12 +40,8 @@ module.exports = (cwd) => {
       }
     })
 
-    const globOptions = {
-      cwd
-    }
-
     // Render prototypes and write HTML files
-    glob(`src/prototypes/*.njk`, globOptions, (error, files) => {
+    glob(`src/prototypes/*.njk`, { cwd }, (error, files) => {
       if (error) throw error
 
       files.forEach(file => {

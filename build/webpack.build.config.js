@@ -1,11 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
 
+const CopyPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrors = require('friendly-errors-webpack-plugin')
+const ImageminPlugin = require('imagemin-webpack-plugin').default
 
 module.exports = (cwd) => {
-  // ESLint loader
+  // Lint JavaScript
   const eslintLoader = {
     test: /\.js$/,
     exclude: /node_modules/,
@@ -13,14 +15,14 @@ module.exports = (cwd) => {
     enforce: 'pre'
   }
 
-  // Babel loader
+  // Transpile with Babel
   const babelLoader = {
     test: /\.js$/,
     exclude: /node_modules/,
     loader: 'babel-loader'
   }
 
-  // CSS loader
+  // Compile Sass
   const cssLoader = {
     test: /\.(css|scss)$/,
     use: ExtractTextPlugin.extract({
@@ -45,7 +47,7 @@ module.exports = (cwd) => {
     })
   }
 
-  // Compress JavaScript plugin
+  // Minify JavaScript and eliminate dead code (tree shaking)
   const compressJSPlugin = new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false
@@ -53,13 +55,13 @@ module.exports = (cwd) => {
     sourceMap: true
   })
 
-  // Extract CSS plugin
+  // Extract CSS from bundled JavaScript
   const extractCSSPlugin = new ExtractTextPlugin({
     filename: 'css/[name].css'
   })
 
-  // Code Splitting plugin
-  const codeSplittingPlugin = new webpack.optimize.CommonsChunkPlugin({
+  // Separate vendor JavaScript from bundle
+  const extractVendorPlugin = new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     minChunks: function (module, count) {
       return (
@@ -70,18 +72,34 @@ module.exports = (cwd) => {
     }
   })
 
-  // Extract webpack manifest plugin
-  const extractWebpackManifestPlugin = new webpack.optimize.CommonsChunkPlugin({
+  // Separate webpack manifest JavaScript from bundle
+  const extractManifestPlugin = new webpack.optimize.CommonsChunkPlugin({
     name: 'manifest',
     chunks: ['vendor']
   })
 
-  // Format output plugin
+  // Copy static assets folder
+  const copyAssetsPlugin = new CopyPlugin([
+    {
+      from: `src/assets`,
+      to: 'assets'
+    }
+  ])
+
+  // Compress images from static assets
+  const compressImages = new ImageminPlugin({
+    test: /\.(jpe?g|png|gif|svg)$/i,
+    jpegtran: {
+      progressive: true
+    }
+  })
+
+  // Format output
   const formatOutputPlugin = new FriendlyErrors({
     clearConsole: false
   })
 
-  // Don't emit files with error plugin
+  // Don't emit files with error
   const noErrorEmitPlugin = new webpack.NoEmitOnErrorsPlugin()
 
   return {
@@ -103,9 +121,10 @@ module.exports = (cwd) => {
     plugins: [
       compressJSPlugin,
       extractCSSPlugin,
-      // compressCSSPlugin,
-      codeSplittingPlugin,
-      extractWebpackManifestPlugin,
+      extractVendorPlugin,
+      extractManifestPlugin,
+      copyAssetsPlugin,
+      compressImages,
       formatOutputPlugin,
       noErrorEmitPlugin
     ]
