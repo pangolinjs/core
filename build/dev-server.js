@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'development'
+process.env.FESG_ENV = 'dev'
 
 const chokidar = require('chokidar')
 const express = require('express')

@@ -70,7 +70,7 @@ module.exports = (cwd) => {
     }
   })
 
-  // Extract webpack manfigest plugin
+  // Extract webpack manifest plugin
   const extractWebpackManifestPlugin = new webpack.optimize.CommonsChunkPlugin({
     name: 'manifest',
     chunks: ['vendor']

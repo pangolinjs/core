@@ -6,13 +6,17 @@
 
     <title>{{ page.title }}</title>
 
-    <link rel="stylesheet" href="css/main.css">
+    {% if process.env.FESG_ENV == 'build:dev' %}
+      <link rel="stylesheet" href="css/main.css">
+    {% endif %}
   </head>
   <body>
     {% block body %}{% endblock %}
 
-    <script src="js/manifest.js"></script>
-    <script src="js/vendor.js"></script>
+    {% if process.env.FESG_ENV == 'build:dev' %}
+      <script src="js/manifest.js"></script>
+      <script src="js/vendor.js"></script>
+    {% endif %}
     <script src="js/main.js"></script>
   </body>
 </html>
