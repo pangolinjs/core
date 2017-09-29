@@ -1,15 +1,16 @@
 {
   "name": "front-end-styleguide",
   "version": "4.0.0-alpha",
-  "description": "Living Styleguide for componentized front end development with Sass, JavaScript and Nunjucks.",
+  "description": "Pattern library framework for styleguide driven front end development with Sass, ES6+ and Nunjucks.",
   "keywords": [
     "babel",
     "css",
     "es6",
-    "front-end",
+    "front end",
     "html",
     "javascript",
     "nunjucks",
+    "pattern library",
     "sass",
     "styleguide",
     "webpack"
@@ -33,7 +34,7 @@
     "test": "npm run test:build && npm run test:build:dev",
     "test:dev": "cd test && node ../bin/front-end-styleguide.js dev",
     "test:build": "cd test && node ../bin/front-end-styleguide.js build",
-    "test:build:dev": "cd test && node ../bin/front-end-styleguide.js build-dev"
+    "test:build:dev": "cd test && node ../bin/front-end-styleguide.js build:dev"
   },
   "bin": "bin/front-end-styleguide.js",
   "dependencies": {
@@ -54,6 +55,7 @@
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "stylelint": "^8.1.1",
     "stylelint-webpack-plugin": "^0.9.0",
     "webpack": "^3.6.0",
     "webpack-dev-middleware": "^1.12.0",
@@ -67,7 +69,6 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "normalize.css": "^7.0.0",
-    "stylelint": "^8.1.1",
     "stylelint-config-standard": "^17.0.0"
   },
   "engines": {

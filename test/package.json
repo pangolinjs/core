@@ -1,0 +1,7 @@
+{
+  "name": "front-end-styleguide-test",
+  "version": "0.0.0",
+  "dependencies": {
+    "es6-promise": "^4.1.1"
+  }
+}

@@ -18,3 +18,4 @@ node_modules
 # Generated content
 test/dev
 test/dist
+test/yarn.lock

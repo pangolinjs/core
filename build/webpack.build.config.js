@@ -1,3 +1,4 @@
+const path = require('path')
 const webpack = require('webpack')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -67,12 +68,11 @@ module.exports = (cwd) => {
   // Code Splitting plugin
   const codeSplittingPlugin = new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
-    // filename: 'vendor.js',
     minChunks: function (module, count) {
       return (
         module.resource &&
         /\.js$/.test(module.resource) &&
-        module.resource.indexOf(`${cwd}/node_modules`) === 0
+        module.resource.indexOf(path.join(cwd, 'node_modules')) === 0
       )
     }
   })
