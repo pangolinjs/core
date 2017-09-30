@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrors = require('friendly-errors-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const StylelintPlugin = require('stylelint-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = (cwd) => {
   // Lint JavaScript
@@ -58,10 +59,7 @@ module.exports = (cwd) => {
   })
 
   // Minify JavaScript and eliminate dead code (tree shaking)
-  const compressJSPlugin = new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    },
+  const compressJSPlugin = new UglifyJSPlugin({
     sourceMap: true
   })
 
@@ -124,6 +122,11 @@ module.exports = (cwd) => {
       path: `${cwd}/dist`,
       filename: 'js/[name].js',
       publicPath: '/'
+    },
+    resolve: {
+      alias: {
+        'fesg': path.join(__dirname, '../docs')
+      }
     },
     devtool: 'source-map',
     module: {

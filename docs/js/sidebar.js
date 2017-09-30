@@ -51,7 +51,7 @@ if (breakpoint.matches && content) {
 }
 
 // Wait a bit to avoid animating on page load
-setTimeout(() => {
+window.setTimeout(() => {
   sidebar.classList.add('is-animated')
   button.classList.add('is-animated')
 
