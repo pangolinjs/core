@@ -14,13 +14,6 @@ module.exports = (cwd) => {
   // Output path
   config.output.path = `${cwd}/dev`
 
-  // Set NODE_ENV
-  config.plugins.push(new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: '"development"'
-    }
-  }))
-
   // Empty output path to get rid of leftovers
   fs.emptyDir(`${cwd}/dev`, error => {
     if (error) throw error

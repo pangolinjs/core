@@ -1,0 +1,17 @@
+.fesg-content {
+  box-sizing: border-box;
+  padding: 0 5%;
+
+  @media (min-width: $fesg-breakpoint-sidebar) {
+    margin-left: $fesg-sidebar-width;
+    padding: 0 10%;
+
+    &.is-expanded {
+      margin-left: 0;
+    }
+
+    &.is-animated {
+      transition: margin-left $fesg-transition-sidebar;
+    }
+  }
+}

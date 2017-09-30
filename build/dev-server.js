@@ -29,6 +29,7 @@ module.exports = (cwd) => {
 
     // Webpack bundle inject
     const devMiddleware = require('webpack-dev-middleware')(compiler, {
+      publicPath: '/',
       quiet: true
     })
 

@@ -5,6 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrors = require('friendly-errors-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
+const StylelintPlugin = require('stylelint-webpack-plugin')
 
 module.exports = (cwd) => {
   // Lint JavaScript
@@ -25,6 +26,7 @@ module.exports = (cwd) => {
   // Compile Sass
   const cssLoader = {
     test: /\.(css|scss)$/,
+    exclude: /node_modules/,
     use: ExtractTextPlugin.extract({
       use: [
         {
@@ -47,12 +49,25 @@ module.exports = (cwd) => {
     })
   }
 
+  // Set `process.env`
+  const processEnvPlugin = new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: `"${process.env.NODE_ENV}"`,
+      FESG_ENV: `"${process.env.FESG_ENV}"`
+    }
+  })
+
   // Minify JavaScript and eliminate dead code (tree shaking)
   const compressJSPlugin = new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false
     },
     sourceMap: true
+  })
+
+  // Lint CSS
+  const stylelintPlugin = new StylelintPlugin({
+    syntax: 'scss'
   })
 
   // Extract CSS from bundled JavaScript
@@ -108,7 +123,7 @@ module.exports = (cwd) => {
     output: {
       path: `${cwd}/dist`,
       filename: 'js/[name].js',
-      chunkFilename: 'js/[id].js'
+      publicPath: '/'
     },
     devtool: 'source-map',
     module: {
@@ -119,7 +134,9 @@ module.exports = (cwd) => {
       ]
     },
     plugins: [
+      processEnvPlugin,
       compressJSPlugin,
+      stylelintPlugin,
       extractCSSPlugin,
       extractVendorPlugin,
       extractManifestPlugin,

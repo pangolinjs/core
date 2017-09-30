@@ -26,14 +26,19 @@ const templates = {
 /**
  * Get page name and URL
  * @param {string} cwd Current working directory
+ * @param {string} pageType `components` or `prototypes`
+ * @param {string} currentFile The file currently being processed
  */
-function pageObjects (cwd, pageType) {
+function pageObjects (cwd, pageType, currentFile) {
   return pageList[pageType](cwd).map((page) => {
     return {
-      name: page,
+      name: page.charAt(0).toUpperCase() + page.slice(1),
       url: pageType === 'components'
         ? `components/${page}.html`
-        : `${page}.html`
+        : `${page}.html`,
+      active: pageType === 'components'
+        ? `components/${page}` === path.dirname(currentFile)
+        : page === path.basename(currentFile, '.njk')
     }
   })
 }
@@ -79,8 +84,8 @@ module.exports = function (cwd, file) {
 
     const sidebar = () => {
       let html = new nunjucks.Template(templates.sidebar, env).render({
-        components: pageObjects(cwd, 'components'),
-        prototypes: pageObjects(cwd, 'prototypes')
+        components: pageObjects(cwd, 'components', file),
+        prototypes: pageObjects(cwd, 'prototypes', file)
       })
 
       return new nunjucks.runtime.SafeString(html)
