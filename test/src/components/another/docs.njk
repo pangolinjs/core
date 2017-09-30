@@ -1,0 +1,22 @@
+{% set page = {
+  title: "Another",
+  description: "Another small component for testing"
+} %}
+
+{% extends fesg.components %}
+
+{% block body %}
+
+  {% section title="Some random title", description="Hello" %}
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas amet eum nihil hic maxime praesentium.</p>
+  {% endsection %}
+
+  {% section title="Another title", description="A lengthy description" %}
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem, nisi quia nesciunt dolores similique sint repellendus esse delectus atque.</p>
+  {% endsection %}
+
+  {% section title="Another title", description="A lengthy description" %}
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum sunt repudiandae ullam earum sapiente optio quasi autem voluptates, qui deserunt eligendi nihil, similique ducimus perferendis, fugiat explicabo nisi iste! Quibusdam, velit eaque. Dolore autem incidunt excepturi corporis, aliquid molestiae nemo.</p>
+  {% endsection %}
+
+{% endblock %}

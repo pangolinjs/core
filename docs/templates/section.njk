@@ -1,0 +1,18 @@
+<section class="fesg-section">
+
+  {% if title or description %}
+    <header class="fesg-section__header">
+      {% if title %}
+        <h2 class="fesg-section__title">{{ title }}</h2>
+      {% endif %}
+      {% if description %}
+        <p class="fesg-section__description">{{ description }}</p>
+      {% endif %}
+    </header>
+  {% endif %}
+
+  <div class="fesg-section__body">
+    {{ body }}
+  </div>
+
+</section>

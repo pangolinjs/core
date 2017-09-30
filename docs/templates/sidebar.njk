@@ -1,0 +1,27 @@
+<aside class="fesg-sidebar">
+
+  <section class="fesg-sidebar__section">
+    <h2>Components</h2>
+    <ul>
+      {% for component in components %}
+        <li>
+          <a href="{{ component.url | relative }}">{{ component.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="fesg-sidebar__section">
+    <h2>Prototypes</h2>
+    <ul>
+      {% for prototype in prototypes %}
+        <li>
+          <a href="{{ prototype.url | relative }}">{{ prototype.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+</aside>
+
+

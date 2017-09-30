@@ -3,12 +3,13 @@ process.env.FESG_ENV = 'dev'
 
 const chokidar = require('chokidar')
 const express = require('express')
+const FriendlyErrors = require('friendly-errors-webpack-plugin')
 const getPort = require('get-port')
 const path = require('path')
-const renderHTML = require('./render-html')
 const webpack = require('webpack')
 
-const FriendlyErrors = require('friendly-errors-webpack-plugin')
+const pageList = require('./html/page-list')
+const renderNunjucks = require('./html/render-nunjucks')
 
 module.exports = (cwd) => {
   const config = require('./webpack.dev.config')(cwd)
@@ -49,19 +50,38 @@ module.exports = (cwd) => {
     // Add static asset path
     app.use('/assets', express.static(`${cwd}/src/assets`))
 
-    // Render prototypes and send HTML
-    app.get(/.*(\/|\.html)$/, (req, res) => {
-      let fileName = req.path === '/'
-        ? '/index'
-        : path.basename(req.path, '.html')
+    // Render components and send HTML
+    app.get('/components/*.html', (req, res) => {
+      let name = path.basename(req.path, '.html')
+      let inputPath = `components/${name}/docs.njk`
 
-      renderHTML.prototypes(cwd, `${fileName}.njk`)
+      if (!pageList.components(cwd).includes(name)) {
+        return res.status(404).end()
+      }
+
+      renderNunjucks(cwd, inputPath)
         .then(html => {
           res.send(html)
         })
-        .catch(error => {
-          console.error(error)
+        .catch(error => console.error(error))
+    })
+
+    // Render prototypes and send HTML
+    app.get(['/', '/*.html'], (req, res) => {
+      let name = req.path === '/'
+        ? 'index'
+        : path.basename(req.path, '.html')
+      let inputPath = `prototypes/${name}.njk`
+
+      if (!pageList.prototypes(cwd).includes(name)) {
+        return res.status(404).end()
+      }
+
+      renderNunjucks(cwd, inputPath)
+        .then(html => {
+          res.send(html)
         })
+        .catch(error => console.error(error))
     })
 
     // Start server

@@ -4,19 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ page.title }}</title>
-
-    {% if process.env.FESG_ENV == 'build:dev' %}
-      <link rel="stylesheet" href="css/main.css">
+    {% if page.title %}
+      <title>{{ page.title }}</title>
     {% endif %}
+    {% if page.description %}
+      <meta name="description" content="{{ page.description }}">
+    {% endif %}
+
+    {{ fesg.head }}
   </head>
   <body>
+    {{ fesg.sidebar }}
     {% block body %}{% endblock %}
-
-    {% if process.env.FESG_ENV == 'build:dev' %}
-      <script src="js/manifest.js"></script>
-      <script src="js/vendor.js"></script>
-    {% endif %}
-    <script src="js/main.js"></script>
   </body>
 </html>
