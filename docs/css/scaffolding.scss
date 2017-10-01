@@ -1,10 +1,13 @@
 .fesg-content {
+  @include fesg-reset-pseudo;
+
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  min-height: 100vh;
   box-sizing: border-box;
-  padding: 0 5%;
 
   @media (min-width: $fesg-breakpoint-sidebar) {
     margin-left: $fesg-sidebar-width;
-    padding: 0 10%;
 
     &.is-expanded {
       margin-left: 0;
@@ -14,4 +17,9 @@
       transition: margin-left $fesg-transition-sidebar;
     }
   }
+}
+
+.fesg-main {
+  @include fesg-reset-pseudo;
+  @include fesg-content;
 }

@@ -1,0 +1,35 @@
+// Fonts
+$fesg-font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Helvetica,
+  Arial,
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol";
+
+// Colors
+$fesg-color-primary: #1d5097;
+$fesg-color-text: #333;
+$fesg-color-border: #ddd;
+$fesg-color-background: #f2f4f7;
+
+// Spacing
+$fesg-spacing: 2vw;
+
+// Sidebar
+$fesg-sidebar-width: 12.5rem;
+$fesg-sidebar-padding: 0.75rem;
+
+// Breakpoints
+$fesg-breakpoint-sidebar: ($fesg-sidebar-width * 5);
+$fesg-breakpoint-min: 30rem;
+$fesg-breakpoint-max: 90rem;
+
+// Z-Indexes
+$fesg-z-index-sidebar: 1000;
+
+// Transition times
+$fesg-transition-sidebar: 0.3s;

@@ -1,0 +1,28 @@
+.fesg-header {
+  @include fesg-reset;
+  @include fesg-content;
+  @include fesg-margin(3);
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  background: $fesg-color-background;
+  background: var(--fesg-color-background, $fesg-color-background);
+  border-bottom: 0.125rem solid;
+  border-bottom-color: $fesg-color-border;
+  border-bottom-color: var(--fesg-color-border, $fesg-color-border);
+}
+
+.fesg-header__title {
+  @include fesg-reset;
+  @include fesg-fluid-type(1.5rem, 3.5rem);
+
+  margin-bottom: 0.25em;
+
+  font-weight: 600;
+}
+
+.fesg-header__description {
+  @include fesg-reset;
+  @include fesg-fluid-type(1rem, 1.25rem);
+}

@@ -1,0 +1,79 @@
+@function strip-unit ($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fesg-reset-pseudo {
+  &::before,
+  &::after {
+    display: none;
+  }
+}
+
+@mixin fesg-reset {
+  @include fesg-reset-pseudo;
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  font-size: 1rem;
+  font-family: $fesg-font-family;
+  font-family: var(--fesg-font-family, $fesg-font-family);
+  font-weight: 400;
+  text-transform: none;
+  text-decoration: none;
+  color: $fesg-color-text;
+  color: var(--fesg-color-text, $fesg-color-text);
+
+  background: none;
+  border: none;
+}
+
+@mixin fesg-content {
+  padding-left: 5%;
+  padding-right: 5%;
+
+  @media (min-width: $fesg-breakpoint-sidebar) {
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+}
+
+@mixin fesg-margin ($multiplier: 1) {
+  margin-bottom: ((strip-unit($fesg-spacing) / 100) * $fesg-breakpoint-min * $multiplier);
+
+  @media (min-width: $fesg-breakpoint-min) {
+    margin-bottom: ($fesg-spacing * $multiplier);
+  }
+
+  @media (min-width: $fesg-breakpoint-max) {
+    margin-bottom: ((strip-unit($fesg-spacing) / 100) * $fesg-breakpoint-max * $multiplier);
+  }
+}
+
+// Fluid Type source:
+// https://css-tricks.com/snippets/css/fluid-typography/
+
+@mixin fesg-fluid-type ($min-font-size, $max-font-size) {
+  $min-vw: $fesg-breakpoint-min;
+  $max-vw: $fesg-breakpoint-max;
+
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+
+      @media (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+
+      @media (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}

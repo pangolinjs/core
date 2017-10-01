@@ -23,6 +23,8 @@ module.exports = function () {
 
   this.run = function (context, args, body) {
     let html = new nunjucks.Template(sectionTemplate).render({
+      background: args.background,
+      width: args.width,
       title: args.title,
       description: args.description,
       body: new nunjucks.runtime.SafeString(body())

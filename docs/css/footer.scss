@@ -1,0 +1,28 @@
+.fesg-footer {
+  @include fesg-reset;
+
+  background: $fesg-color-background;
+  background: var(--fesg-color-background, $fesg-color-background);
+  border-top: 0.125rem solid;
+  border-top-color: $fesg-color-border;
+  border-top-color: var(--fesg-color-border, $fesg-color-border);
+}
+
+.fesg-footer__inner {
+  @include fesg-reset;
+  @include fesg-content;
+
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.fesg-footer__credit {
+  @include fesg-reset;
+
+  font-size: 0.875rem;
+  text-align: center;
+
+  a {
+    color: inherit;
+  }
+}

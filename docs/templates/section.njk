@@ -1,3 +1,6 @@
+{% set background_style = ' style="background: ' + background + '"' if background %}
+{% set width_style = ' style="width: ' + width + '"' if width %}
+
 <section class="fesg-section">
 
   {% if title or description %}
@@ -11,8 +14,10 @@
     </header>
   {% endif %}
 
-  <div class="fesg-section__body">
-    {{ body }}
+  <div class="fesg-section__content"{{ background_style | safe }}>
+    <div class="fesg-section__body"{{ width_style | safe }}>
+      {{ body }}
+    </div>
   </div>
 
 </section>

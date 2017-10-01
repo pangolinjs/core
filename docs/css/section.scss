@@ -1,0 +1,36 @@
+.fesg-section {
+  @include fesg-margin(3);
+}
+
+.fesg-section__header {
+  @include fesg-reset;
+
+  margin-bottom: 1rem;
+}
+
+.fesg-section__title {
+  @include fesg-reset;
+  @include fesg-fluid-type(1.25rem, 1.75rem);
+
+  margin-bottom: 0.25em;
+
+  font-weight: 600;
+}
+
+.fesg-section__description {
+  @include fesg-reset;
+}
+
+.fesg-section__content {
+  padding: 1rem;
+
+  background: $fesg-color-background;
+  background: var(--fesg-color-background, $fesg-color-background);
+  border: 0.0625rem solid;
+  border-color: $fesg-color-border;
+  border-color: var(--fesg-color-border, $fesg-color-border);
+
+  @media (min-width: $fesg-breakpoint-min) {
+    padding: 2rem;
+  }
+}
