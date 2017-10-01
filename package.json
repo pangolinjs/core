@@ -39,6 +39,7 @@
   "bin": "bin/front-end-styleguide.js",
   "dependencies": {
     "babel-loader": "^7.1.2",
+    "chalk": "^2.1.0",
     "chokidar": "^1.7.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.7",

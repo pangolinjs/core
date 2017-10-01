@@ -6,6 +6,7 @@ const glob = require('glob')
 const path = require('path')
 const webpack = require('webpack')
 
+const nunjucksError = require('./html/format-error')
 const renderNunjucks = require('./html/render-nunjucks')
 
 module.exports = (cwd) => {
@@ -51,7 +52,10 @@ module.exports = (cwd) => {
               if (error) throw error
             })
           })
-          .catch(error => console.error(error))
+          .catch(error => {
+            nunjucksError(error)
+            process.exit(1)
+          })
       })
     })
 
@@ -71,7 +75,10 @@ module.exports = (cwd) => {
               if (error) throw error
             })
           })
-          .catch(error => console.error(error))
+          .catch(error => {
+            nunjucksError(error)
+            process.exit(1)
+          })
       })
     })
   })

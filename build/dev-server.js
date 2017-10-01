@@ -8,6 +8,8 @@ const getPort = require('get-port')
 const path = require('path')
 const webpack = require('webpack')
 
+const nunjucksError = require('./html/format-error')
+const nunjucksSuccess = require('./html/format-success')
 const pageList = require('./html/page-list')
 const renderNunjucks = require('./html/render-nunjucks')
 
@@ -62,9 +64,10 @@ module.exports = (cwd) => {
 
       renderNunjucks(cwd, inputPath)
         .then(html => {
+          nunjucksSuccess(inputPath)
           res.send(html)
         })
-        .catch(error => console.error(error))
+        .catch(error => nunjucksError(error))
     })
 
     // Render prototypes and send HTML
@@ -80,9 +83,10 @@ module.exports = (cwd) => {
 
       renderNunjucks(cwd, inputPath)
         .then(html => {
+          nunjucksSuccess(inputPath)
           res.send(html)
         })
-        .catch(error => console.error(error))
+        .catch(error => nunjucksError(error))
     })
 
     // Start server
