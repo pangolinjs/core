@@ -6,6 +6,20 @@
     "build": "node ../bin/front-end-styleguide.js build",
     "build:dev": "node ../bin/front-end-styleguide.js build:dev"
   },
+  "ava": {
+    "verbose": true,
+    "files": ["test/unit"],
+    "require": ["babel-register"],
+    "babel": "inherit"
+  },
+  "nyc": {
+    "all": true,
+    "include": ["src"],
+    "reporter": [
+      "text",
+      "html"
+    ]
+  },
   "dependencies": {
     "es6-promise": "^4.1.1",
     "normalize.css": "^7.0.0"

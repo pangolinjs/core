@@ -1,6 +1,6 @@
 {
   "name": "front-end-styleguide",
-  "version": "4.0.0-alpha",
+  "version": "4.0.0-alpha.1",
   "description": "Pattern library framework for styleguide driven front end development with Sass, ES6+ and Nunjucks.",
   "keywords": [
     "babel",
@@ -31,7 +31,7 @@
   "scripts": {
     "lint": "stylelint \"**/*.?(s)css\" --syntax scss && eslint \"**/*.js\"",
     "pretest": "npm run lint",
-    "test": "npm run test:build && npm run test:build:dev",
+    "test": "cd test && nyc ava",
     "test:dev": "cd test && node ../bin/front-end-styleguide.js dev",
     "test:build": "cd test && node ../bin/front-end-styleguide.js build",
     "test:build:dev": "cd test && node ../bin/front-end-styleguide.js build:dev"
@@ -63,19 +63,23 @@
     "webpack-hot-middleware": "^2.19.1"
   },
   "devDependencies": {
-    "babel-core": "^7.0.0-beta.2",
-    "babel-preset-env": "^2.0.0-beta.2",
+    "ava": "^0.22.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-istanbul": "^4.1.5",
+    "babel-preset-env": "^1.6.0",
     "eslint": "^4.7.2",
     "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-ava": "^4.2.2",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "nyc": "^11.2.1",
     "stylelint": "^8.1.1",
     "stylelint-config-standard": "^17.0.0"
   },
   "peerDependencies": {
-    "babel-core": "^7.0.0-beta.2",
+    "babel-core": ">=6.26.0",
     "eslint": "^4.7.2",
     "stylelint": "^8.1.1"
   },
