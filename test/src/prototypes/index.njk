@@ -1,6 +1,6 @@
 {% set page = {
-  title: "Index",
-  description: "Every page may have a short description."
+  title: "Front End Styleguide",
+  description: "Pattern library framework for styleguide driven development with Sass, ES6+ and Nunjucks."
 } %}
 
 {% extends "../templates/prototypes.njk" %}
@@ -8,7 +8,10 @@
 {% block body %}
 
   <h1>{{ page.title }}</h1>
+  <p>{{ page.description }}</p>
 
-  <img src="assets/water.jpg" alt="Water">
+  <p>
+    To find out more head over to the <a href="https://front-end-style.guide/">styleguide website</a>.
+    The source code is available on <a href="https://github.com/front-end-styleguide/core" aria-label="Front End Styleguide source code">GitHub</a>.</p>
 
 {% endblock %}

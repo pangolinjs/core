@@ -1,0 +1,19 @@
+{% set page = {
+  title: "Image",
+  description: "Most of the time they illustrate things"
+} %}
+
+{% from "./templates.njk" import default as image %}
+
+{% extends fesg.components %}
+
+{% block body %}
+
+  {% section
+    title="Default",
+    description="Display an image with alternative text"
+  %}
+    {{ image("assets/water.jpg", "Foamy water") }}
+  {% endsection %}
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% macro default (name) %}
+  <p class="hello">Hello {{ name }}</p>
+{% endmacro %}
+
+{% macro longform (name) %}
+  <p class="hello hello--longform">
+    <strong class="hello__highlight">Hello {{ name}}!</strong>
+    How are you?
+  </p>
+{% endmacro %}

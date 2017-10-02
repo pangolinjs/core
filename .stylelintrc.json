@@ -1,47 +1,24 @@
 {
-  "extends": "stylelint-config-standard",
+  "extends": "stylelint-config-sass-guidelines",
   "rules": {
-    "value-no-vendor-prefix": true,
-    "property-no-vendor-prefix": true,
-    "at-rule-no-vendor-prefix": true,
-    "selector-no-vendor-prefix": true,
-
-    "declaration-no-important": [true, {
+    "comment-word-blacklist": [["/^TODO:/i", "/^FIX:/i", "/^FIXME:/i"], {
       "severity": "warning"
     }],
-    "declaration-empty-line-before": null,
-
-    "selector-max-compound-selectors": [3, {
-      "severity": "warning"
-    }],
-    "selector-nested-pattern": ["^(?!(&__)|(&--)).+", {
-      "message": "Creating BEM classes with Sass nesting is not allowed"
-    }],
-    "selector-max-id": 0,
-    "selector-no-qualifying-type": [true, {
-      "ignore": ["attribute"]
-    }],
-
-    "at-rule-no-unknown": [true, {
-      "ignoreAtRules": ["each", "else", "extend", "for", "function", "if", "include", "mixin", "return", "while"]
-    }],
-    "at-rule-empty-line-before": ["always", {
-      "except": [
-        "blockless-after-same-name-blockless",
-        "first-nested"
-      ],
-      "ignore": ["after-comment"],
-      "ignoreAtRules": ["if", "else"]
-    }],
-
-    "comment-word-blacklist": [["/^TODO:/", "/^FIX:/", "/^FIXME:/"], {
-      "severity": "warning"
-    }],
-
+    "declaration-no-important": true,
+    "declaration-property-value-blacklist": null,
     "max-nesting-depth": [3, {
       "severity": "warning"
     }],
     "no-duplicate-selectors": true,
-    "no-unknown-animations": true
+    "no-unknown-animations": true,
+    "order/properties-alphabetical-order": null,
+    "scss/dollar-variable-colon-space-after": "always-single-line",
+    "selector-class-pattern": ["^[a-z0-9\\_-]+$", {
+      "message": "Selector should be written in lowercase with hyphens"
+    }],
+    "selector-nested-pattern": ["^(?!(&__)|(&--)).+", {
+      "message": "Creating BEM classes with Sass nesting is not allowed"
+    }],
+    "string-quotes": "double"
   }
 }

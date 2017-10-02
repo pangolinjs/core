@@ -58,22 +58,20 @@
   $min-vw: $fesg-breakpoint-min;
   $max-vw: $fesg-breakpoint-max;
 
-  $u1: unit($min-vw);
-  $u2: unit($max-vw);
-  $u3: unit($min-font-size);
-  $u4: unit($max-font-size);
+  $unit-1: unit($min-vw);
+  $unit-2: unit($max-vw);
+  $unit-3: unit($min-font-size);
+  $unit-4: unit($max-font-size);
 
-  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
-    & {
-      font-size: $min-font-size;
+  @if $unit-1 == $unit-2 and $unit-1 == $unit-3 and $unit-1 == $unit-4 {
+    font-size: $min-font-size;
 
-      @media (min-width: $min-vw) {
-        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
-      }
+    @media (min-width: $min-vw) {
+      font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+    }
 
-      @media (min-width: $max-vw) {
-        font-size: $max-font-size;
-      }
+    @media (min-width: $max-vw) {
+      font-size: $max-font-size;
     }
   }
 }
