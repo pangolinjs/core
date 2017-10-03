@@ -22,18 +22,28 @@ module.exports = (cwd) => {
       rules: [
         {
           test: /\.js$/,
-          exclude: /node_modules/,
+          include: [
+            path.resolve(cwd, 'src'),
+            path.resolve(__dirname, '../docs')
+          ],
           loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: /\.js$/,
-          exclude: /node_modules/,
+          include: [
+            path.resolve(cwd, 'src'),
+            path.resolve(__dirname, '../docs')
+          ],
           loader: 'babel-loader'
         },
         {
           test: /\.(css|scss)$/,
-          exclude: /node_modules/,
+          include: [
+            path.resolve(cwd, 'src'),
+            path.resolve(cwd, 'config'),
+            path.resolve(__dirname, '../docs')
+          ],
           use: [
             {
               loader: 'style-loader'
