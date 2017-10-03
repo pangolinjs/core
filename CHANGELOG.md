@@ -2,6 +2,13 @@
 
 
 
+## 4.0.0
+2017-10-03
+
+Complete rewrite with webpack. The `test` represents the new and improved folder structure.
+
+
+
 ## 3.8.1
 2017-09-15
 

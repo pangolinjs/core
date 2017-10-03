@@ -4,6 +4,8 @@
 [![Dependencies][dependencies-image]][npm-url]
 [![JavaScript Standard Style][standard-image]][standard-url]
 
+Pattern library framework for styleguide driven development with Sass, ES6+ and Nunjucks.
+
 
 ## Installation
 
@@ -18,44 +20,63 @@ npm install -g front-end-styleguide-cli
 
 ## Project Creation
 
-Create a new project with `front-end-styleguide init`.
+```bash
+mkdir new-project
+cd new-project
+front-end-styleguide init
+```
 
 
 ## Usage
 
-The following tasks are available:
-* `front-end-styleguide dev` to start the default task.
-  * Watches for file changes.
-  * Starts Browsersync.
-* `front-end-styleguide build:dev` to start the default task
-  * No file watching / Browsersync.
-* `front-end-styleguide build:prev` to create a prototype preview.
-  * Minifies CSS, JavaScript and images.
-  * Doesn't generate component HTML.
-  * Errors break pipe.
-* `front-end-styleguide build` to create production ready files.
-  * Minifies CSS, JavaScript and images.
-  * Doesn't generate any HTML.
-  * Errors break pipe.
+```bash
+# Start dev server
+yarn dev
+# or
+npm run dev
 
-Custom configuration files can be specified: `front-end-styleguide [task] --config=path/to/config.json --paths=path/to/paths.json`.
+# Build files for production
+yarn build
+# or
+npm run build
+
+# Create static styleguide
+yarn build:dev
+# or
+npm run build:dev
+
+# Run linting
+yarn lint
+# or
+npm run lint
+
+# Run unit and e2e tests
+yarn test
+# or
+npm run test
+```
 
 For more information take a look at the [templates of the init package](https://github.com/front-end-styleguide/init/blob/master/templates).
 
 
-## Test
+## Test the core package
 
 ```bash
-# Yarn
+# Linting
+yarn lint
+# or
+npm run lint
+
+# Automated testing
 yarn test
-yarn watchtest
+# or
+npm run test
 
-# npm
-npm test
-npm run watchtest
+# Dev server testing
+yarn test:dev
+# or
+npm run test:dev
 ```
-
-The default test runs all styleguide build tasks. The watchtest starts the development task with file watching and Browsersync.
 
 
 [npm-image]: https://img.shields.io/npm/v/front-end-styleguide.svg?style=flat-square
