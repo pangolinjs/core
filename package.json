@@ -29,7 +29,10 @@
     "email": "info@fynn-becker.de"
   },
   "scripts": {
-    "lint": "stylelint \"**/*.?(s)css\" --syntax scss && eslint \"**/*.js\"",
+    "lint": "run-s -n lint:js lint:css lint:html",
+    "lint:js": "eslint \"**/*.js\"",
+    "lint:css": "stylelint \"**/*.?(s)css\" --syntax scss",
+    "lint:html": "cd test && node ../bin/front-end-styleguide.js lint:html",
     "test": "run-s -n test:unit test:e2e test:build test:build:dev",
     "test:unit": "cd test && nyc ava",
     "test:e2e": "cd test && testcafe chrome,firefox test/e2e --app \"node ../bin/front-end-styleguide.js dev\" --app-init-delay 4000",
