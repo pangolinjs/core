@@ -1,19 +1,9 @@
-const fs = require('fs')
 const nunjucks = require('nunjucks')
 const path = require('path')
 
+const loadTemplate = require('./load-template')
 const pageList = require('./page-list')
 const SectionExtension = require('./section-extension')
-
-/**
- * Load template as string
- * @param {string} name Template name
- */
-function loadTemplate (name) {
-  return fs.readFileSync(
-    path.resolve(__dirname, `../../docs/templates/${name}.njk`)
-  ).toString()
-}
 
 // Cache templates
 const templates = {

@@ -1,6 +1,6 @@
 {
   "name": "front-end-styleguide",
-  "version": "4.0.0-alpha.1",
+  "version": "4.0.0",
   "description": "Pattern library framework for styleguide driven front end development with Sass, ES6+ and Nunjucks.",
   "keywords": [
     "babel",

@@ -1,10 +1,11 @@
-const fs = require('fs-extra')
 const nunjucks = require('nunjucks')
-const path = require('path')
 
-const sectionTemplate = fs.readFileSync(
-  path.resolve(__dirname, '../../docs/templates/section.njk')
-).toString()
+const loadTemplate = require('./load-template')
+
+// Cache templates
+const templates = {
+  section: loadTemplate('section')
+}
 
 module.exports = function () {
   this.tags = ['section']
@@ -22,7 +23,7 @@ module.exports = function () {
   }
 
   this.run = function (context, args, body) {
-    let html = new nunjucks.Template(sectionTemplate).render({
+    let html = new nunjucks.Template(templates.section).render({
       background: args.background,
       width: args.width,
       title: args.title,

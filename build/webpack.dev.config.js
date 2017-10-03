@@ -4,61 +4,6 @@ const webpack = require('webpack')
 const StylelintPlugin = require('stylelint-webpack-plugin')
 
 module.exports = (cwd) => {
-  // Lint JavaScript
-  const eslintLoader = {
-    test: /\.js$/,
-    exclude: /node_modules/,
-    loader: 'eslint-loader',
-    enforce: 'pre'
-  }
-
-  // Transpile with Babel
-  const babelLoader = {
-    test: /\.js$/,
-    exclude: /node_modules/,
-    loader: 'babel-loader'
-  }
-
-  // Compile Sass
-  const cssLoader = {
-    test: /\.(css|scss)$/,
-    exclude: /node_modules/,
-    use: [
-      {
-        loader: 'style-loader'
-      },
-      {
-        loader: 'css-loader',
-        options: {
-          sourceMap: true
-        }
-      },
-      {
-        loader: 'sass-loader',
-        options: {
-          precision: 10,
-          sourceMap: true
-        }
-      }
-    ]
-  }
-
-  // Set `process.env`
-  const processEnvPlugin = new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: `"${process.env.NODE_ENV}"`,
-      FESG_ENV: `"${process.env.FESG_ENV}"`
-    }
-  })
-
-  // Lint CSS
-  const stylelintPlugin = new StylelintPlugin({
-    syntax: 'scss'
-  })
-
-  // Hot Module Replacement
-  const hmrPlugin = new webpack.HotModuleReplacementPlugin()
-
   return {
     context: cwd,
     entry: ['./src/main.js', `${__dirname}/dev-client`],
@@ -74,12 +19,54 @@ module.exports = (cwd) => {
     },
     devtool: 'cheap-module-eval-source-map',
     module: {
-      rules: [eslintLoader, babelLoader, cssLoader]
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loader: 'eslint-loader',
+          enforce: 'pre'
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader'
+        },
+        {
+          test: /\.(css|scss)$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'style-loader'
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                precision: 10,
+                sourceMap: true
+              }
+            }
+          ]
+        }
+      ]
     },
     plugins: [
-      processEnvPlugin,
-      stylelintPlugin,
-      hmrPlugin
+      new webpack.NoEmitOnErrorsPlugin(),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: `"${process.env.NODE_ENV}"`,
+          FESG_ENV: `"${process.env.FESG_ENV}"`
+        }
+      }),
+      new StylelintPlugin({
+        syntax: 'scss'
+      }),
+      new webpack.HotModuleReplacementPlugin()
     ]
   }
 }

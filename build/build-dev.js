@@ -23,13 +23,14 @@ module.exports = (cwd) => {
     webpack(config, (error, stats) => {
       if (error) throw error
 
-      process.stdout.write(stats.toString({
-        colors: true,
-        modules: false,
+      console.log(stats.toString({
         children: false,
         chunks: false,
-        chunkModules: false
-      }) + '\n\n')
+        chunkModules: false,
+        colors: true,
+        errors: false,
+        modules: false
+      }) + '\n')
 
       if (stats.hasErrors()) {
         process.exit(1)

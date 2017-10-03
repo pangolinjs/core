@@ -3,10 +3,11 @@ process.env.FESG_ENV = 'dev'
 
 const chokidar = require('chokidar')
 const express = require('express')
-const FriendlyErrors = require('friendly-errors-webpack-plugin')
 const getPort = require('get-port')
 const path = require('path')
 const webpack = require('webpack')
+
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 const nunjucksError = require('./html/format-error')
 const nunjucksSuccess = require('./html/format-success')
@@ -19,7 +20,7 @@ module.exports = (cwd) => {
   getPort({ port: 8080 }).then(port => {
     // Format output
     // We have to delay this until we get the port
-    config.plugins.push(new FriendlyErrors({
+    config.plugins.push(new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
         messages: [`Dev server running on http://localhost:${port}`]
       }
