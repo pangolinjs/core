@@ -11,8 +11,8 @@
 
   z-index: ($fesg-z-index-sidebar + 1);
 
-  background: $fesg-color-primary;
-  background: var(--fesg-color-primary, $fesg-color-primary);
+  background: $fesg-color-sidebar-button-background;
+  background: var(--fesg-color-sidebar-button-background, var(--fesg-color-primary, $fesg-color-sidebar-button-background));
   border: none;
 
   cursor: pointer;
@@ -34,7 +34,8 @@
   left: 20%;
   height: 0.125rem;
 
-  background: #fff;
+  background: $fesg-color-sidebar-button-foreground;
+  background: var(--fesg-color-sidebar-button-foreground, $fesg-color-sidebar-button-foreground);
   border-radius: 0.0625rem;
 
   transition:
@@ -82,10 +83,14 @@
 
   z-index: $fesg-z-index-sidebar;
 
-  background: #fff;
+  color: $fesg-color-sidebar-text;
+  color: var(--fesg-color-sidebar-text, var(--fesg-color-text, $fesg-color-sidebar-text));
+
+  background: $fesg-color-sidebar-background;
+  background: var(--fesg-color-sidebar-background, $fesg-color-sidebar-background);
   border-right: 0.125em solid;
-  border-right-color: $fesg-color-border;
-  border-right-color: var(--fesg-color-border, $fesg-color-border);
+  border-right-color: $fesg-color-sidebar-border;
+  border-right-color: var(--fesg-color-sidebar-border, var(--fesg-color-border, $fesg-color-sidebar-border));
 
   overflow-y: auto;
 
@@ -138,20 +143,24 @@
 
   font-size: 1rem;
   text-decoration: none;
-  color: inherit;
+  color: $fesg-color-sidebar-text;
+  color: var(--fesg-color-sidebar-text, var(--fesg-color-text, $fesg-color-sidebar-text));
 
   &:hover,
   &:focus,
   &.is-active {
-    background: $fesg-color-background;
-    background: var(--fesg-color-background, $fesg-color-background);
+    color: $fesg-color-sidebar-highlight-text;
+    color: var(--fesg-color-sidebar-highlight-text, var(--fesg-color-text, $fesg-color-sidebar-highlight-text));
+
+    background: $fesg-color-sidebar-highlight-background;
+    background: var(--fesg-color-sidebar-highlight-background, var(--fesg-color-background, $fesg-color-sidebar-highlight-background));
   }
 
   &.is-active {
     padding-left: ($fesg-sidebar-padding - 0.25rem);
 
     border-left: 0.25rem solid;
-    border-left-color: $fesg-color-primary;
-    border-left-color: var(--fesg-color-primary, $fesg-color-primary);
+    border-left-color: $fesg-color-sidebar-highlight-border;
+    border-left-color: var(--fesg-color-sidebar-highlight-border, var(--fesg-color-primary, $fesg-color-sidebar-highlight-border));
   }
 }

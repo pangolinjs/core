@@ -12,9 +12,30 @@ $fesg-font-family:
 
 // Colors
 $fesg-color-primary: #1d5097;
-$fesg-color-text: #333;
+$fesg-color-text: #222;
 $fesg-color-border: #ddd;
 $fesg-color-background: #f2f4f7;
+
+$fesg-color-sidebar-text: $fesg-color-text;
+$fesg-color-sidebar-highlight-text: $fesg-color-text;
+$fesg-color-sidebar-highlight-background: $fesg-color-background;
+$fesg-color-sidebar-highlight-border: $fesg-color-primary;
+$fesg-color-sidebar-background: #fff;
+$fesg-color-sidebar-border: $fesg-color-border;
+$fesg-color-sidebar-button-foreground: #fff;
+$fesg-color-sidebar-button-background: $fesg-color-primary;
+
+$fesg-color-header-text: $fesg-color-text;
+$fesg-color-header-background: $fesg-color-background;
+$fesg-color-header-border: $fesg-color-border;
+
+$fesg-color-section-text: $fesg-color-text;
+$fesg-color-section-background: $fesg-color-background;
+$fesg-color-section-border: $fesg-color-border;
+
+$fesg-color-footer-text: $fesg-color-text;
+$fesg-color-footer-background: $fesg-color-background;
+$fesg-color-footer-border: $fesg-color-border;
 
 // Spacing
 $fesg-spacing: 2vw;

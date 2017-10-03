@@ -1,5 +1,33 @@
+// Overwrite Front End Styleguide styles with CSS Custom Properties
+
 :root {
-  // Overwrite all Front End Styleguide colors
-  // with CSS Custom Properties
-  --fesg-color-primary: #1d5097;
+  // Global colors:
+
+  // --fesg-color-primary
+  // --fesg-color-text
+  // --fesg-color-border
+  // --fesg-color-background
+
+  // Overwrite global:
+
+  // --fesg-color-sidebar-text
+  // --fesg-color-sidebar-highlight-text
+  // --fesg-color-sidebar-highlight-background
+  // --fesg-color-sidebar-highlight-border
+  // --fesg-color-sidebar-background
+  // --fesg-color-sidebar-border
+  // --fesg-color-sidebar-button-foreground
+  // --fesg-color-sidebar-button-background
+
+  // --fesg-color-header-text
+  // --fesg-color-header-background
+  // --fesg-color-header-border
+
+  // --fesg-color-section-text
+  // --fesg-color-section-background
+  // --fesg-color-section-border
+
+  // --fesg-color-footer-text
+  // --fesg-color-footer-background
+  // --fesg-color-footer-border
 }

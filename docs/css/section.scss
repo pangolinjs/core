@@ -6,6 +6,9 @@
   @include fesg-reset;
 
   margin-bottom: 1rem;
+
+  color: $fesg-color-section-text;
+  color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
 }
 
 .fesg-section__title {
@@ -24,11 +27,11 @@
 .fesg-section__content {
   padding: 1rem;
 
-  background: $fesg-color-background;
-  background: var(--fesg-color-background, $fesg-color-background);
+  background: $fesg-color-section-background;
+  background: var(--fesg-color-section-background, var(--fesg-color-background, $fesg-color-section-background));
   border: 0.0625rem solid;
-  border-color: $fesg-color-border;
-  border-color: var(--fesg-color-border, $fesg-color-border);
+  border-color: $fesg-color-section-border;
+  border-color: var(--fesg-color-section-border, var(--fesg-color-border, $fesg-color-section-border));
 
   @media (min-width: $fesg-breakpoint-min) {
     padding: 2rem;

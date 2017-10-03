@@ -1,11 +1,14 @@
 .fesg-footer {
   @include fesg-reset;
 
-  background: $fesg-color-background;
-  background: var(--fesg-color-background, $fesg-color-background);
+  color: $fesg-color-footer-text;
+  color: var(--fesg-color-footer-text, var(--fesg-color-text, $fesg-color-footer-text));
+
+  background: $fesg-color-footer-background;
+  background: var(--fesg-color-footer-background, var(--fesg-color-background, $fesg-color-footer-background));
   border-top: 0.125rem solid;
-  border-top-color: $fesg-color-border;
-  border-top-color: var(--fesg-color-border, $fesg-color-border);
+  border-top-color: $fesg-color-footer-border;
+  border-top-color: var(--fesg-color-footer-border, var(--fesg-color-border, $fesg-color-footer-border));
 }
 
 .fesg-footer__inner {

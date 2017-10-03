@@ -1,2 +1,9 @@
+// Vendor
 @import "../node_modules/normalize.css/normalize.css";
+
+// Setup
+@import "setup/variables";
+@import "setup/scaffolding";
+
+// Components
 @import "components/index";
