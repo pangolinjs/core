@@ -38,7 +38,7 @@ module.exports = (cwd) => {
     })
 
     // Render components and write HTML files
-    glob('**/docs.njk', { cwd: `${cwd}/src/components` }, (error, files) => {
+    glob('*/docs.njk', { cwd: `${cwd}/src/components` }, (error, files) => {
       if (error) throw error
 
       files.forEach(file => {

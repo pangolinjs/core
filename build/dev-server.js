@@ -4,7 +4,6 @@ process.env.FESG_ENV = 'dev'
 const chokidar = require('chokidar')
 const express = require('express')
 const getPort = require('get-port')
-const path = require('path')
 const webpack = require('webpack')
 
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
@@ -55,8 +54,8 @@ module.exports = (cwd) => {
     app.use('/assets', express.static(`${cwd}/src/assets`))
 
     // Render components and send HTML
-    app.get('/components/*.html', (req, res) => {
-      let name = path.basename(req.path, '.html')
+    app.get('/components/:name.html', (req, res) => {
+      let name = req.params.name
       let inputPath = `components/${name}/docs.njk`
 
       if (!pageList.components(cwd).includes(name)) {
@@ -72,10 +71,10 @@ module.exports = (cwd) => {
     })
 
     // Render prototypes and send HTML
-    app.get(['/', '/*.html'], (req, res) => {
+    app.get(['/', '/:name.html'], (req, res) => {
       let name = req.path === '/'
         ? 'index'
-        : path.basename(req.path, '.html')
+        : req.params.name
       let inputPath = `prototypes/${name}.njk`
 
       if (!pageList.prototypes(cwd).includes(name)) {
