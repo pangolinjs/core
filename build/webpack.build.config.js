@@ -54,8 +54,18 @@ module.exports = (cwd) => {
               {
                 loader: 'css-loader',
                 options: {
+                  importLoaders: 2,
                   minimize: {
                     safe: true
+                  },
+                  sourceMap: true
+                }
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  config: {
+                    path: path.resolve(cwd, 'postcss.config.js')
                   },
                   sourceMap: true
                 }

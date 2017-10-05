@@ -46,11 +46,24 @@ module.exports = (cwd) => {
           ],
           use: [
             {
-              loader: 'style-loader'
+              loader: 'style-loader',
+              options: {
+                sourceMap: true
+              }
             },
             {
               loader: 'css-loader',
               options: {
+                importLoaders: 2,
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: {
+                  path: path.resolve(cwd, 'postcss.config.js')
+                },
                 sourceMap: true
               }
             },
