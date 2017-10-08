@@ -2,6 +2,17 @@
 
 
 
+## 4.2.0
+2017-10-08
+
+## Improved
+- Expanded custom Nunjucks section tag
+
+## Updated
+- Dependencies
+
+
+
 ## 4.1.0
 2017-10-05
 
