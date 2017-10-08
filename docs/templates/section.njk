@@ -20,4 +20,43 @@
     </div>
   </div>
 
+  {% if usage or code %}
+    <div class="fesg-section__switch js-fesg-section-switch">
+      <div class="fesg-section__switch-header">
+        {% if usage %}
+          <button
+            class="fesg-section__switch-button js-fesg-section-switch-button"
+            data-switch-to="usage">
+            Usage
+          </button>
+        {% endif %}
+        {% if code %}
+          <button
+            class="fesg-section__switch-button js-fesg-section-switch-button"
+            data-switch-to="code">
+            Code
+          </button>
+        {% endif %}
+      </div>
+
+      <div class="fesg-section__switch-body">
+        {% if usage %}
+          <div
+            class="fesg-section__switch-panel js-fesg-section-switch-panel"
+            data-switch-panel="usage">
+            {{ usage }}
+          </div>
+        {% endif %}
+
+        {% if code %}
+          <div
+            class="fesg-section__switch-panel js-fesg-section-switch-panel"
+            data-switch-panel="code">
+            <pre class="fesg-section__switch-pre"><code class="fesg-section__switch-code js-fesg-section-code">{{ code }}</code></pre>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
 </section>

@@ -1,10 +1,9 @@
 .fesg-content {
   @include fesg-reset-pseudo;
 
-  display: grid;
-  grid-template-rows: max-content 1fr max-content;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  box-sizing: border-box;
 
   @media (min-width: $fesg-breakpoint-sidebar) {
     margin-left: $fesg-sidebar-width;
@@ -22,4 +21,6 @@
 .fesg-main {
   @include fesg-reset-pseudo;
   @include fesg-content;
+
+  flex-grow: 1;
 }

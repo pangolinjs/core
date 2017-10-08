@@ -28,27 +28,20 @@ module.exports = (cwd) => {
         {
           test: /\.js$/,
           include: [
-            path.resolve(cwd, 'src'),
-            path.resolve(__dirname, '../docs')
+            path.resolve(cwd, 'src')
           ],
           loader: 'eslint-loader',
           enforce: 'pre'
         },
         {
           test: /\.js$/,
-          include: [
-            path.resolve(cwd, 'src'),
-            path.resolve(__dirname, '../docs')
-          ],
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            extends: path.resolve(cwd, '.babelrc')
+          }
         },
         {
           test: /\.(css|scss)$/,
-          include: [
-            path.resolve(cwd, 'src'),
-            path.resolve(cwd, 'config'),
-            path.resolve(__dirname, '../docs')
-          ],
           use: ExtractTextPlugin.extract({
             use: [
               {

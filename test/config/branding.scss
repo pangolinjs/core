@@ -1,6 +1,11 @@
 // Overwrite Front End Styleguide styles with CSS Custom Properties
 
 :root {
+  // Font family:
+
+  // --fesg-font-family
+
+
   // Global colors:
 
   // --fesg-color-primary
@@ -8,7 +13,8 @@
   // --fesg-color-border
   // --fesg-color-background
 
-  // Overwrite global:
+
+  // Overwrite global colors:
 
   // --fesg-color-sidebar-text
   // --fesg-color-sidebar-highlight-text
@@ -24,6 +30,7 @@
   // --fesg-color-header-border
 
   // --fesg-color-section-text
+  // --fesg-color-section-button
   // --fesg-color-section-background
   // --fesg-color-section-border
 

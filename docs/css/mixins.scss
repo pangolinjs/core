@@ -22,6 +22,8 @@
   font-weight: 400;
   text-transform: none;
   text-decoration: none;
+  color: $fesg-color-text;
+  color: var(--fesg-color-text, $fesg-color-text);
 
   background: none;
   border: none;

@@ -9,17 +9,17 @@
 
 {% block body %}
 
-  {% section
-    title="Default",
-    description="A nice greeting"
-  %}
+  {% section title="Default", description="A nice greeting" %}
+    {{ hello.default("World") }}
+  {% usage %}
+    This doesn't really do anything other than
+    * print `Hello World` and
+    * that's pretty much it…
+  {% code %}
     {{ hello.default("World") }}
   {% endsection %}
 
-  {% section
-    title="Slightly longer",
-    description="Let's add a bit more verbosity…"
-  %}
+  {% section title="Slightly longer", description="Let's add a bit more verbosity…" %}
     {{ hello.longform("World") }}
   {% endsection %}
 
