@@ -83,9 +83,6 @@
 
   z-index: $fesg-z-index-sidebar;
 
-  color: $fesg-color-sidebar-text;
-  color: var(--fesg-color-sidebar-text, var(--fesg-color-text, $fesg-color-sidebar-text));
-
   background: $fesg-color-sidebar-background;
   background: var(--fesg-color-sidebar-background, $fesg-color-sidebar-background);
   border-right: 0.125em solid;
@@ -127,6 +124,8 @@
   margin: 0 $fesg-sidebar-padding 0.5rem;
 
   font-weight: 600;
+  color: $fesg-color-sidebar-text;
+  color: var(--fesg-color-sidebar-text, var(--fesg-color-text, $fesg-color-sidebar-text));
 }
 
 .fesg-sidebar__list {

@@ -6,9 +6,6 @@
   @include fesg-reset;
 
   margin-bottom: 1rem;
-
-  color: $fesg-color-section-text;
-  color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
 }
 
 .fesg-section__title {
@@ -18,10 +15,15 @@
   margin-bottom: 0.25em;
 
   font-weight: 600;
+  color: $fesg-color-section-text;
+  color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
 }
 
 .fesg-section__description {
   @include fesg-reset;
+
+  color: $fesg-color-section-text;
+  color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
 }
 
 .fesg-section__content {
@@ -79,6 +81,9 @@
 
   display: none;
   padding: 1rem 0.75rem;
+
+  color: $fesg-color-section-text;
+  color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
 
   background: $fesg-color-section-background;
   background: var(--fesg-color-section-background, var(--fesg-color-background, $fesg-color-section-background));

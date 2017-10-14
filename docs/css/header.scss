@@ -6,9 +6,6 @@
   padding-top: 2rem;
   padding-bottom: 2rem;
 
-  color: $fesg-color-header-text;
-  color: var(--fesg-color-header-text, var(--fesg-color-text, $fesg-color-header-text));
-
   background: $fesg-color-header-background;
   background: var(--fesg-color-header-background, var(--fesg-color-background, $fesg-color-header-background));
   border-bottom: 0.125rem solid;
@@ -23,9 +20,14 @@
   margin-bottom: 0.25em;
 
   font-weight: 600;
+  color: $fesg-color-header-text;
+  color: var(--fesg-color-header-text, var(--fesg-color-text, $fesg-color-header-text));
 }
 
 .fesg-header__description {
   @include fesg-reset;
   @include fesg-fluid-type(1rem, 1.25rem);
+
+  color: $fesg-color-header-text;
+  color: var(--fesg-color-header-text, var(--fesg-color-text, $fesg-color-header-text));
 }
