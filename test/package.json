@@ -8,13 +8,19 @@
   },
   "ava": {
     "verbose": true,
-    "files": ["test/unit"],
-    "require": ["babel-register"],
+    "files": [
+      "test/unit"
+    ],
+    "require": [
+      "babel-register"
+    ],
     "babel": "inherit"
   },
   "nyc": {
     "all": true,
-    "include": ["src"],
+    "include": [
+      "src"
+    ],
     "reporter": [
       "text",
       "html"
