@@ -83,8 +83,11 @@
 
   display: none;
   position: relative;
+  max-height: 20em;
   padding: 1rem 0.75rem;
   z-index: 1;
+
+  overflow-y: auto;
 
   color: $fesg-color-section-text;
   color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
@@ -146,5 +149,6 @@
 }
 
 .fesg-section__switch-pre {
+  margin: 0;
   overflow-x: auto;
 }
