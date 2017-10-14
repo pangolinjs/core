@@ -16,7 +16,7 @@ const renderNunjucks = require('./html/render-nunjucks')
 module.exports = (cwd) => {
   const config = require('./webpack.dev.config')(cwd)
 
-  getPort({ port: 8080 }).then(port => {
+  getPort({ port: process.env.PORT || 8080 }).then(port => {
     // Format output
     // We have to delay this until we get the port
     config.plugins.push(new FriendlyErrorsPlugin({
