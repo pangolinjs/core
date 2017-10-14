@@ -53,8 +53,10 @@
 .fesg-section__switch-button {
   @include fesg-reset;
 
+  position: relative;
   margin-bottom: -0.0625rem;
   padding: 0.5rem 0.75rem;
+  z-index: 2;
 
   color: $fesg-color-section-button;
   color: var(--fesg-color-section-button, $fesg-color-section-button);
@@ -80,7 +82,9 @@
   @include fesg-reset;
 
   display: none;
+  position: relative;
   padding: 1rem 0.75rem;
+  z-index: 1;
 
   color: $fesg-color-section-text;
   color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
@@ -110,6 +114,34 @@
 
   code {
     font-size: 0.875em;
+  }
+}
+
+.fesg-section__switch-code-copy {
+  @include fesg-reset;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem 0.75rem;
+
+  color: $fesg-color-section-button;
+  color: var(--fesg-color-section-button, $fesg-color-section-button);
+
+  border: 0.0625rem solid;
+  border-top: none;
+  border-right: none;
+  border-color: $fesg-color-section-border;
+  border-color: var(--fesg-color-section-border, var(--fesg-color-border, $fesg-color-section-border));
+
+  cursor: pointer;
+
+  &.is-active {
+    color: $fesg-color-sidebar-button-foreground;
+    color: var(--fesg-color-sidebar-button-foreground, $fesg-color-sidebar-button-foreground);
+
+    background: $fesg-color-sidebar-button-background;
+    background: var(--fesg-color-sidebar-button-background, var(--fesg-color-primary, $fesg-color-sidebar-button-background));
   }
 }
 

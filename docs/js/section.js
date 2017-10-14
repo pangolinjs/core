@@ -1,13 +1,35 @@
+import Clipboard from 'clipboard'
 import Prism from 'prismjs'
 import 'prismjs/themes/prism.css'
 
 const codeElements = document.querySelectorAll('.js-fesg-section-code')
+const codeCopy = document.querySelectorAll('.js-fesg-section-copy')
 
 for (let i = 0; i < codeElements.length; i++) {
   let code = codeElements[i].textContent
   let html = Prism.highlight(code, Prism.languages.html)
 
   codeElements[i].innerHTML = html
+}
+
+for (let i = 0; i < codeCopy.length; i++) {
+  let clipboard = new Clipboard(codeCopy[i], {
+    text (trigger) {
+      return trigger.nextElementSibling.textContent
+    }
+  })
+
+  clipboard.on('success', event => {
+    let buttonText = event.trigger.textContent
+
+    event.trigger.classList.add('is-active')
+    event.trigger.innerText = 'Copied'
+
+    window.setTimeout(() => {
+      event.trigger.classList.remove('is-active')
+      event.trigger.innerText = buttonText
+    }, 2000)
+  })
 }
 
 class Tab {
