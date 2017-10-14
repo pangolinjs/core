@@ -2,6 +2,24 @@
 
 
 
+## 4.3.0
+2017-10-14
+
+### Improved
+- Limit section height
+
+### Added
+- Dev server port can be set with env variable `PORT`
+- Code copy button
+
+### Updated
+- Dependencies
+
+### Fixed
+- Branding variables
+
+
+
 ## 4.2.0
 2017-10-08
 
