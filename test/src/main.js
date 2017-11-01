@@ -5,9 +5,7 @@ import './components'
 // Import CSS
 import './main.scss'
 
-// Import Frond End Styleguide JavaScript and CSS
+// Import Frond End Styleguide branding
 if (process.env.NODE_ENV === 'development') {
-  require(`fesg/js/scripts`)
-  require(`fesg/css/styles.scss`)
   require('../config/branding.scss')
 }

@@ -16,6 +16,7 @@ yarn-error.log*
 node_modules
 
 # Generated content
+dist
 test/.nyc_output
 test/coverage
 test/dev

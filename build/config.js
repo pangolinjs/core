@@ -6,10 +6,6 @@ module.exports = cwd => {
       devtool: 'cheap-module-eval-source-map',
       css: {
         extract: false
-      },
-      sass: {
-        precision: 10,
-        sourceMap: true
       }
     },
     'build': {
@@ -18,10 +14,6 @@ module.exports = cwd => {
       devtool: 'source-map',
       css: {
         extract: true
-      },
-      sass: {
-        precision: 10,
-        sourceMap: true
       }
     },
     'build:dev': {
@@ -30,10 +22,6 @@ module.exports = cwd => {
       devtool: 'source-map',
       css: {
         extract: true
-      },
-      sass: {
-        precision: 10,
-        sourceMap: true
       }
     }
   }

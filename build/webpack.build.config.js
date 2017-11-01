@@ -44,8 +44,14 @@ module.exports = cwd => {
     }),
     new CopyPlugin([
       {
-        from: `src/static`,
+        from: 'src/static',
         to: 'static'
+      },
+      {
+        context: __dirname,
+        from: '../dist',
+        to: 'fesg',
+        ignore: [process.env.NODE_ENV === 'production' ? '*' : '']
       }
     ]),
     new ImageminPlugin({

@@ -25,7 +25,10 @@ module.exports = cwd => {
     },
     {
       loader: 'sass-loader',
-      options: config.sass
+      options: {
+        precision: 10,
+        sourceMap: true
+      }
     }
   ]
 
@@ -61,11 +64,6 @@ module.exports = cwd => {
       filename: 'js/[name].js',
       publicPath: '/'
     },
-    resolve: {
-      alias: {
-        'fesg': path.join(__dirname, '../docs')
-      }
-    },
     devtool: config.devtool,
     module: {
       rules: [
@@ -80,10 +78,10 @@ module.exports = cwd => {
         },
         {
           test: /\.js$/,
-          loader: 'babel-loader',
-          options: {
-            extends: path.resolve(cwd, '.babelrc')
-          }
+          include: [
+            path.resolve(cwd, 'src')
+          ],
+          loader: 'babel-loader'
         },
         cssLoader
       ]

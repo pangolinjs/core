@@ -4,6 +4,7 @@ process.env.FESG_ENV = 'dev'
 const chokidar = require('chokidar')
 const express = require('express')
 const getPort = require('get-port')
+const path = require('path')
 const webpack = require('webpack')
 
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
@@ -13,7 +14,7 @@ const nunjucksSuccess = require('./html/format-success')
 const pageList = require('./html/page-list')
 const renderNunjucks = require('./html/render-nunjucks')
 
-module.exports = (cwd) => {
+module.exports = cwd => {
   const config = require('./webpack.dev.config')(cwd)
 
   getPort({ port: process.env.PORT || 8080 }).then(port => {
@@ -50,8 +51,11 @@ module.exports = (cwd) => {
     app.use(devMiddleware)
     app.use(hotMiddleware)
 
-    // Add static asset path
+    // Add static path
     app.use('/static', express.static(`${cwd}/src/static`))
+
+    // Add Front End Styleguide static path
+    app.use('/fesg', express.static(path.join(__dirname, '../dist')))
 
     // Render components and send HTML
     app.get('/components/:name.html', (req, res) => {
