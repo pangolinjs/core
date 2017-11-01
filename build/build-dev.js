@@ -9,18 +9,15 @@ const webpack = require('webpack')
 const nunjucksError = require('./html/format-error')
 const renderNunjucks = require('./html/render-nunjucks')
 
-module.exports = (cwd) => {
-  const config = require('./webpack.build.config')(cwd)
-
-  // Output path
-  config.output.path = `${cwd}/dev`
+module.exports = cwd => {
+  const webpackConfig = require('./webpack.build.config')(cwd)
 
   // Empty output path to get rid of leftovers
   fs.emptyDir(`${cwd}/dev`, error => {
     if (error) throw error
 
     // Run the webpack pipeline
-    webpack(config, (error, stats) => {
+    webpack(webpackConfig, (error, stats) => {
       if (error) throw error
 
       console.log(stats.toString({
@@ -49,7 +46,7 @@ module.exports = (cwd) => {
 
         renderNunjucks(cwd, inputPath)
           .then(html => {
-            fs.outputFile(outputPath, html, (error) => {
+            fs.outputFile(outputPath, html, error => {
               if (error) throw error
             })
           })
@@ -72,7 +69,7 @@ module.exports = (cwd) => {
 
         renderNunjucks(cwd, inputPath)
           .then(html => {
-            fs.outputFile(outputPath, html, (error) => {
+            fs.outputFile(outputPath, html, error => {
               if (error) throw error
             })
           })
