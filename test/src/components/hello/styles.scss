@@ -5,5 +5,9 @@
 
 .hello__highlight {
   display: block;
+  padding-left: 1.5em;
+
   font-size: 120%;
+
+  background: url("./assets/mark.svg") no-repeat;
 }
