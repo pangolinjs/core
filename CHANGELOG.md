@@ -2,6 +2,24 @@
 
 
 
+## 4.4.0
+2017-11-04
+
+### Improved
+- Extract common webpack options into shared config
+- Pre-compile styleguide CSS and JavaScript
+
+### Added
+- Prototype build `build:proto`
+
+### Updated
+- Dependencies
+
+### Removed
+- css-loader `url()` handling
+
+
+
 ## 4.3.0
 2017-10-14
 

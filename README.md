@@ -61,7 +61,7 @@ yarn test
 npm run test
 ```
 
-For more information take a look at the [templates of the init package](https://github.com/front-end-styleguide/init/blob/master/templates).
+For more information take a look at the [templates](https://github.com/front-end-styleguide/templates).
 
 
 ## Test the core package
