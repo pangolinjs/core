@@ -40,10 +40,15 @@ yarn build
 # or
 npm run build
 
-# Create static styleguide
+# Build static styleguide with prototypes and components
 yarn build:dev
 # or
 npm run build:dev
+
+# Build static styleguide with prototypes only
+yarn build:proto
+# or
+npm run build:proto
 
 # Run linting
 yarn lint
@@ -72,10 +77,16 @@ yarn test
 # or
 npm run test
 
-# Dev server testing
+# Dev server and build testing
 yarn test:dev
+yarn test:build
+yarn test:build:dev
+yarn test:build:proto
 # or
 npm run test:dev
+npm run test:build
+npm run test:build:dev
+npm run test:build:proto
 ```
 
 

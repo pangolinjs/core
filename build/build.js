@@ -5,10 +5,11 @@ const fs = require('fs-extra')
 const webpack = require('webpack')
 
 module.exports = cwd => {
+  const config = require('./config')(cwd)[process.env.FESG_ENV]
   const webpackConfig = require('./webpack.build.config')(cwd)
 
   // Empty output path to get rid of leftovers
-  fs.emptyDir(`${cwd}/dist`, error => {
+  fs.emptyDir(config.path, error => {
     if (error) throw error
 
     webpack(webpackConfig, (error, stats) => {

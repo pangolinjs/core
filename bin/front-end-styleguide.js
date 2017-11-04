@@ -13,6 +13,9 @@ switch (process.argv[2]) {
   case 'build:dev':
     require('../build/build-dev')(process.cwd())
     break
+  case 'build:proto':
+    require('../build/build-proto')(process.cwd())
+    break
   default:
     console.log(`
 Available commands:
@@ -20,5 +23,6 @@ Available commands:
 - lint:html
 - dev
 - build
-- build:dev`)
+- build:dev
+- build:proto`)
 }

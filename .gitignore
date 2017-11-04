@@ -21,5 +21,6 @@ test/.nyc_output
 test/coverage
 test/dev
 test/dist
+test/proto
 test/package-lock.json
 test/yarn.lock

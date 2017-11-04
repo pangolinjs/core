@@ -40,7 +40,8 @@
     "test:e2e": "cd test && testcafe chrome:headless,firefox:headless test/e2e --app \"node ../bin/front-end-styleguide.js dev\" --app-init-delay 4000",
     "test:dev": "cd test && node ../bin/front-end-styleguide.js dev",
     "test:build": "cd test && node ../bin/front-end-styleguide.js build",
-    "test:build:dev": "cd test && node ../bin/front-end-styleguide.js build:dev"
+    "test:build:dev": "cd test && node ../bin/front-end-styleguide.js build:dev",
+    "test:build:proto": "cd test && node ../bin/front-end-styleguide.js build:proto"
   },
   "bin": "bin/front-end-styleguide.js",
   "dependencies": {

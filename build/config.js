@@ -23,6 +23,14 @@ module.exports = cwd => {
       css: {
         extract: true
       }
+    },
+    'build:proto': {
+      entry: './src/main.js',
+      path: `${cwd}/proto`,
+      devtool: 'source-map',
+      css: {
+        extract: true
+      }
     }
   }
 }

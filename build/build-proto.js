@@ -1,5 +1,5 @@
-process.env.NODE_ENV = 'development'
-process.env.FESG_ENV = 'build:dev'
+process.env.NODE_ENV = 'production'
+process.env.FESG_ENV = 'build:proto'
 
 const fs = require('fs-extra')
 const glob = require('glob')
@@ -33,29 +33,6 @@ module.exports = cwd => {
       if (stats.hasErrors()) {
         process.exit(1)
       }
-    })
-
-    // Render components and write HTML files
-    glob('*/docs.njk', { cwd: `${cwd}/src/components` }, (error, files) => {
-      if (error) throw error
-
-      files.forEach(file => {
-        let name = path.dirname(file)
-
-        let inputPath = `components/${name}/docs.njk`
-        let outputPath = `${config.path}/components/${name}.html`
-
-        renderNunjucks(cwd, inputPath)
-          .then(html => {
-            fs.outputFile(outputPath, html, error => {
-              if (error) throw error
-            })
-          })
-          .catch(error => {
-            nunjucksError(error)
-            process.exit(1)
-          })
-      })
     })
 
     // Render prototypes and write HTML files
