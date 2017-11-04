@@ -44,8 +44,8 @@ module.exports = cwd => {
     }),
     new CopyPlugin([
       {
-        from: 'src/static',
-        to: 'static'
+        from: 'src/assets',
+        to: 'assets'
       },
       {
         context: __dirname,

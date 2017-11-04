@@ -42,8 +42,8 @@ module.exports = cwd => {
       heartbeat: 2000
     })
 
-    // Force reload after HTML or static asset change
-    chokidar.watch([`${cwd}/src/**/*.njk`, `${cwd}/src/static/**/*`])
+    // Force reload after HTML or asset change
+    chokidar.watch([`${cwd}/src/**/*.njk`, `${cwd}/src/assets/**/*`])
       .on('all', () => {
         hotMiddleware.publish({ action: 'reload' })
       })
@@ -51,10 +51,10 @@ module.exports = cwd => {
     app.use(devMiddleware)
     app.use(hotMiddleware)
 
-    // Add static path
-    app.use('/static', express.static(`${cwd}/src/static`))
+    // Add assets path
+    app.use('/assets', express.static(`${cwd}/src/assets`))
 
-    // Add Front End Styleguide static path
+    // Add Front End Styleguide assets path
     app.use('/fesg', express.static(path.join(__dirname, '../dist')))
 
     // Render components and send HTML

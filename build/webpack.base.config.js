@@ -11,7 +11,8 @@ module.exports = cwd => {
       options: {
         importLoaders: 2,
         minimize: config.css.extract,
-        sourceMap: true
+        sourceMap: true,
+        url: false
       }
     },
     {
@@ -83,31 +84,7 @@ module.exports = cwd => {
           ],
           loader: 'babel-loader'
         },
-        cssLoader,
-        {
-          test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'static/img/'
-          }
-        },
-        {
-          test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'static/media/'
-          }
-        },
-        {
-          test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'static/fonts/'
-          }
-        }
+        cssLoader
       ]
     }
   }
