@@ -64,6 +64,7 @@
   border: 0.0625rem solid;
   border-color: $fesg-color-section-border;
   border-color: var(--fesg-color-section-border, var(--fesg-color-border, $fesg-color-section-border));
+  border-radius: 0;
 
   cursor: pointer;
 
@@ -83,12 +84,11 @@
 
   display: none;
   position: relative;
-  max-height: 20em;
-  padding: 1rem 0.75rem;
   z-index: 1;
 
-  overflow-y: auto;
+  overflow: hidden;
 
+  font-size: 1rem;
   color: $fesg-color-section-text;
   color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
 
@@ -120,6 +120,13 @@
   }
 }
 
+.fesg-section__switch-scroll {
+  max-height: 20em;
+  padding: 1rem 0.75rem;
+
+  overflow: auto;
+}
+
 .fesg-section__switch-code-copy {
   @include fesg-reset;
 
@@ -131,11 +138,14 @@
   color: $fesg-color-section-button;
   color: var(--fesg-color-section-button, $fesg-color-section-button);
 
+  background: $fesg-color-section-background;
+  background: var(--fesg-color-section-background, var(--fesg-color-background, $fesg-color-section-background));
   border: 0.0625rem solid;
   border-top: none;
   border-right: none;
   border-color: $fesg-color-section-border;
   border-color: var(--fesg-color-section-border, var(--fesg-color-border, $fesg-color-section-border));
+  border-radius: 0;
 
   cursor: pointer;
 
@@ -150,5 +160,9 @@
 
 .fesg-section__switch-pre {
   margin: 0;
-  overflow-x: auto;
+  white-space: pre;
+}
+
+.fesg-section__switch-code {
+  white-space: pre;
 }

@@ -14,6 +14,7 @@
   background: $fesg-color-sidebar-button-background;
   background: var(--fesg-color-sidebar-button-background, var(--fesg-color-primary, $fesg-color-sidebar-button-background));
   border: none;
+  border-radius: 0;
 
   cursor: pointer;
 

@@ -44,7 +44,9 @@
           <div
             class="fesg-section__switch-panel js-fesg-section-switch-panel"
             data-switch-panel="usage">
-            {{ usage }}
+            <div class="fesg-section__switch-scroll">
+              {{ usage }}
+            </div>
           </div>
         {% endif %}
 
@@ -53,7 +55,9 @@
             class="fesg-section__switch-panel js-fesg-section-switch-panel"
             data-switch-panel="code">
             <button class="fesg-section__switch-code-copy js-fesg-section-copy">Copy</button>
-            <pre class="fesg-section__switch-pre"><code class="fesg-section__switch-code js-fesg-section-code">{{ code }}</code></pre>
+            <div class="fesg-section__switch-scroll">
+              <pre class="fesg-section__switch-pre"><code class="fesg-section__switch-code js-fesg-section-code">{{ code }}</code></pre>
+            </div>
           </div>
         {% endif %}
       </div>
