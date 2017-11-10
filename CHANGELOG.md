@@ -2,6 +2,18 @@
 
 
 
+## 4.5.0
+2017-11-10
+
+### Improved
+- Section CSS
+- Inherit font-family from project
+
+### Added
+- Sidebar fuzzy search
+
+
+
 ## 4.4.0
 2017-11-04
 
