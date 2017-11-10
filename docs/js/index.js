@@ -1,4 +1,5 @@
 import './button'
+import './search'
 import './section'
 import './sidebar'
 

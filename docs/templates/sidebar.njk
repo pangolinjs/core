@@ -12,8 +12,23 @@
     <nav class="fesg-sidebar__nav">
 
       <section class="fesg-sidebar__section">
-        <h2 class="fesg-sidebar__title">Components</h2>
-        <ul class="fesg-sidebar__list">
+        <h2 class="fesg-sidebar__heading fesg-sidebar__heading--title">Front End Styleguide</h2>
+        <form class="fesg-sidebar__form js-fesg-sidebar-form" autocomplete="off">
+          <label for="fesg-sidebar-search" class="fesg-sr-only">Search Components and Prototypes</label>
+          <input
+            type="search"
+            id="fesg-sidebar-search"
+            class="fesg-sidebar__search js-fesg-sidebar-search"
+            placeholder="Search">
+          <button class="fesg-sidebar__search-reset js-fesg-sidebar-search-reset">
+            <span class="fesg-sr-only">Reset Search</span>
+          </button>
+        </form>
+      </section>
+
+      <section class="fesg-sidebar__section">
+        <h3 class="fesg-sidebar__heading">Components</h3>
+        <ul class="fesg-sidebar__list js-fesg-sidebar-components">
           {% for component in components %}
             <li class="fesg-sidebar__item">
               <a
@@ -27,8 +42,8 @@
       </section>
 
       <section class="fesg-sidebar__section">
-        <h2 class="fesg-sidebar__title">Prototypes</h2>
-        <ul class="fesg-sidebar__list">
+        <h3 class="fesg-sidebar__heading">Prototypes</h3>
+        <ul class="fesg-sidebar__list js-fesg-sidebar-prototypes">
           {% for prototype in prototypes %}
             <li class="fesg-sidebar__item">
               <a
@@ -43,4 +58,25 @@
 
     </nav>
   </aside>
+
+  <script class="js-fesg-sidebar-page-data" type="applications/json">
+    [
+      {% for page in components %}
+        {
+          "type": "component",
+          "name": "{{ page.name }}",
+          "url": "{{ page.url | relative }}",
+          "active": {{ "true" if page.active else "false" }}
+        },
+      {% endfor %}
+      {% for page in prototypes %}
+        {
+          "type": "prototype",
+          "name": "{{ page.name }}",
+          "url": "{{ page.url | relative }}",
+          "active": {{ "true" if page.active else "false" }}
+        }{{ "," if not loop.last }}
+      {% endfor %}
+    ]
+  </script>
 {% endif %}

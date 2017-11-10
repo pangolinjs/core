@@ -1,7 +1,7 @@
 const sidebar = document.querySelector('.js-fesg-sidebar')
 const button = document.querySelector('.js-fesg-sidebar-toggle')
 const content = document.querySelector('.js-fesg-content')
-const breakpoint = window.matchMedia('(min-width: 62.5rem)')
+const breakpoint = window.matchMedia('(min-width: 70rem)')
 
 /**
  * Open sidebar
