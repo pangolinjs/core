@@ -33,7 +33,7 @@ module.exports = cwd => {
     // Webpack bundle inject
     const devMiddleware = require('webpack-dev-middleware')(compiler, {
       publicPath: '/',
-      quiet: true
+      logLevel: 'silent'
     })
 
     // Hot-reload and error display
