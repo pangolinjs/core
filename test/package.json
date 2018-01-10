@@ -21,8 +21,12 @@
     "include": [
       "src"
     ],
+    "exclude": [
+      "src/main.js"
+    ],
     "reporter": [
       "text",
+      "text-summary",
       "html"
     ]
   },
