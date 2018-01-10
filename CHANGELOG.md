@@ -2,6 +2,18 @@
 
 
 
+## 4.5.1
+2018-01-10
+
+### Updated
+- Dependencies
+
+### Removed
+- Component background
+- Babel istanbul plugin from unit test
+
+
+
 ## 4.5.0
 2017-11-10
 
