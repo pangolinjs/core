@@ -6,7 +6,6 @@ const chalk = require('chalk')
  */
 module.exports = (error) => {
   console.error(chalk`
-{white.bgRed  ERROR } Nunjucks rendering failed
-${error.message}
-`)
+{black.bgRed  ERROR } ${error.name}
+${error.message}`)
 }

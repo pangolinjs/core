@@ -17,6 +17,21 @@ const renderNunjucks = require('./html/render-nunjucks')
 module.exports = cwd => {
   const config = require('./webpack.dev.config')(cwd)
 
+  let previousHTML = ''
+
+  function handleRender (inputPath, res) {
+    renderNunjucks(cwd, inputPath)
+      .then(html => {
+        nunjucksSuccess(inputPath)
+        previousHTML = html
+        res.send(html)
+      })
+      .catch(error => {
+        nunjucksError(error)
+        res.send(previousHTML)
+      })
+  }
+
   getPort({ port: process.env.PORT || 8080 }).then(port => {
     // Format output
     // We have to delay this until we get the port
@@ -66,12 +81,7 @@ module.exports = cwd => {
         return res.status(404).end()
       }
 
-      renderNunjucks(cwd, inputPath)
-        .then(html => {
-          nunjucksSuccess(inputPath)
-          res.send(html)
-        })
-        .catch(error => nunjucksError(error))
+      handleRender(inputPath, res)
     })
 
     // Render prototypes and send HTML
@@ -85,12 +95,7 @@ module.exports = cwd => {
         return res.status(404).end()
       }
 
-      renderNunjucks(cwd, inputPath)
-        .then(html => {
-          nunjucksSuccess(inputPath)
-          res.send(html)
-        })
-        .catch(error => nunjucksError(error))
+      handleRender(inputPath, res)
     })
 
     // Start server

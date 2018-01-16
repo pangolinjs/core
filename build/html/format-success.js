@@ -6,6 +6,6 @@ const chalk = require('chalk')
  */
 module.exports = (file) => {
   console.log(chalk`
-{white.bgBlue  INFO } Nunjucks rendering successful
+{black.bgBlue  INFO } Template render success
 ${file}`)
 }
