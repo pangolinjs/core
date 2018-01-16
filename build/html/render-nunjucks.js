@@ -1,16 +1,16 @@
 const nunjucks = require('nunjucks')
 const path = require('path')
 
-const loadTemplate = require('./load-template')
+const htmlUtils = require('./utils')
 const pageList = require('./page-list')
 const SectionExtension = require('./section-extension')
 
 // Cache templates
 const templates = {
-  head: loadTemplate('head'),
-  sidebar: loadTemplate('sidebar'),
-  footer: loadTemplate('footer'),
-  components: loadTemplate('components')
+  head: htmlUtils.loadTemplate('head'),
+  sidebar: htmlUtils.loadTemplate('sidebar'),
+  footer: htmlUtils.loadTemplate('footer'),
+  components: htmlUtils.loadTemplate('components')
 }
 
 /**

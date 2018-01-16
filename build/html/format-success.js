@@ -5,7 +5,8 @@ const chalk = require('chalk')
  * @param {string} file File path
  */
 module.exports = (file) => {
-  console.log(chalk`
-{black.bgBlue  INFO } Template render success
-${file}`)
+  console.log('\x1Bc')
+  console.log(chalk`{black.bgGreen  DONE } Template render success
+
+{black.bgBlue  FILE } ${file}`)
 }

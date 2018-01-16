@@ -6,11 +6,11 @@ const showdownConverter = new showdown.Converter({
   simpleLineBreaks: true
 })
 
-const loadTemplate = require('./load-template')
+const htmlUtils = require('./utils')
 
 // Cache templates
 const templates = {
-  section: loadTemplate('section')
+  section: htmlUtils.loadTemplate('section')
 }
 
 module.exports = function () {

@@ -9,8 +9,7 @@ const webpack = require('webpack')
 
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
-const nunjucksError = require('./html/format-error')
-const nunjucksSuccess = require('./html/format-success')
+const htmlUtils = require('./html/utils')
 const pageList = require('./html/page-list')
 const renderNunjucks = require('./html/render-nunjucks')
 
@@ -22,12 +21,12 @@ module.exports = cwd => {
   function handleRender (inputPath, res) {
     renderNunjucks(cwd, inputPath)
       .then(html => {
-        nunjucksSuccess(inputPath)
+        htmlUtils.log.success(inputPath)
         previousHTML = html
         res.send(html)
       })
       .catch(error => {
-        nunjucksError(error)
+        htmlUtils.log.error(error, inputPath)
         res.send(previousHTML)
       })
   }
