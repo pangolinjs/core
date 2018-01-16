@@ -1,6 +1,8 @@
 const path = require('path')
+const webpack = require('webpack')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const StylelintPlugin = require('stylelint-webpack-plugin')
 
 module.exports = cwd => {
   const config = require('./config')(cwd)[process.env.FESG_ENV]
@@ -86,6 +88,18 @@ module.exports = cwd => {
         },
         cssLoader
       ]
-    }
+    },
+    plugins: [
+      new webpack.NoEmitOnErrorsPlugin(),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: `"${process.env.NODE_ENV}"`,
+          FESG_ENV: `"${process.env.FESG_ENV}"`
+        }
+      }),
+      new StylelintPlugin({
+        syntax: 'scss'
+      })
+    ]
   }
 }
