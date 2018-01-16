@@ -49,7 +49,6 @@ module.exports = cwd => {
         {
           loader: 'style-loader',
           options: {
-            singleton: true,
             sourceMap: true
           }
         },
