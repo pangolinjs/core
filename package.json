@@ -1,6 +1,6 @@
 {
   "name": "front-end-styleguide",
-  "version": "4.5.2",
+  "version": "4.5.3",
   "description": "Pattern library framework for styleguide driven front end development with Sass, ES6+ and Nunjucks.",
   "keywords": [
     "babel",
@@ -69,7 +69,7 @@
     "sass-loader": "^6.0.6",
     "showdown": "^1.8.5",
     "style-loader": "^0.19.1",
-    "stylelint-webpack-plugin": "^0.9.0",
+    "stylelint-webpack-plugin": "^0.10.1",
     "uglifyjs-webpack-plugin": "^1.1.4",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.2",

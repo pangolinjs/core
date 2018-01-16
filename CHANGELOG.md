@@ -2,6 +2,18 @@
 
 
 
+## 4.5.3
+2018-01-16
+
+### Improved
+- Copy content of `<code>` element when clicking copy button of section
+- Moved common webpack plugins to base config
+
+### Fixed
+- Revert FOUC remover (this disabled sourcemaps)
+
+
+
 ## 4.5.2
 2018-01-16
 
