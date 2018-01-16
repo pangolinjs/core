@@ -2,6 +2,19 @@
 
 
 
+## 4.5.2
+2018-01-16
+
+### Improved
+- Reduces Express response complexity
+- Removed development FOUC (Flash of unstyled content)
+- Outsource some HTML stuff into utils file
+
+### Updated
+- Dependencies
+
+
+
 ## 4.5.1
 2018-01-10
 
