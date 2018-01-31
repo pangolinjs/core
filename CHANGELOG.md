@@ -2,6 +2,21 @@
 
 
 
+## 4.5.4
+2018-01-31
+
+### Improved
+- Reduced extreme Nunjucks indentation
+- Some default styling for section usage content
+
+### Added
+- IDs and links for component sections
+
+### Updated
+- Dependencies
+
+
+
 ## 4.5.3
 2018-01-16
 
