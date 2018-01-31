@@ -87,6 +87,7 @@
   overflow: hidden;
 
   font-size: 1rem;
+  line-height: 1.4;
   color: $fesg-color-section-text;
   color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
 
@@ -100,16 +101,13 @@
     display: block;
   }
 
-  > :first-child {
-    margin-top: 0;
-  }
-
-  > :last-child {
-    margin-bottom: 0;
+  p {
+    margin: 0 0 1em;
   }
 
   ul,
   ol {
+    margin: 0 0 1em;
     padding-left: 1.5em;
   }
 
@@ -123,6 +121,14 @@
   padding: 1rem 0.75rem;
 
   overflow: auto;
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
 }
 
 .fesg-section__switch-code-copy {
