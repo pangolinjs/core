@@ -10,14 +10,13 @@
     "verbose": true,
     "files": [
       "test/unit"
-    ],
-    "require": [
-      "babel-register"
-    ],
-    "babel": "inherit"
+    ]
   },
   "nyc": {
     "all": true,
+    "require": [
+      "babel-register"
+    ],
     "include": [
       "src"
     ],
@@ -33,5 +32,8 @@
   "dependencies": {
     "es6-promise": "^4.1.1",
     "normalize.css": "^7.0.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1"
   }
 }
