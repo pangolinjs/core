@@ -1,18 +1,18 @@
 {%- if process.env.FESG_ENV == 'dev' or process.env.FESG_ENV == 'build:dev' %}
-  <link rel="stylesheet" href="{{ 'fesg/styles.css' | relative }}">
+<link rel="stylesheet" href="{{ 'fesg/styles.css' | relative }}">
 {% endif -%}
 
 {%- if process.env.FESG_ENV == 'build:dev' or process.env.FESG_ENV == 'build:proto' %}
-  <link rel="stylesheet" href="{{ 'css/main.css' | relative }}">
+<link rel="stylesheet" href="{{ 'css/main.css' | relative }}">
 {% endif -%}
 
 {%- if process.env.FESG_ENV == 'dev' or process.env.FESG_ENV == 'build:dev' %}
-  <script defer src="{{ 'fesg/scripts.js' | relative }}"></script>
+<script defer src="{{ 'fesg/scripts.js' | relative }}"></script>
 {% endif -%}
 
 {%- if process.env.FESG_ENV == 'build:dev' or process.env.FESG_ENV == 'build:proto' %}
-  <script defer src="{{ 'js/manifest.js' | relative }}"></script>
-  <script defer src="{{ 'js/vendor.js' | relative }}"></script>
+<script defer src="{{ 'js/manifest.js' | relative }}"></script>
+<script defer src="{{ 'js/vendor.js' | relative }}"></script>
 {% endif -%}
 
 <script defer src="{{ 'js/main.js' | relative }}"></script>

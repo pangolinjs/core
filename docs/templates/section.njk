@@ -4,14 +4,17 @@
 <section class="fesg-section">
 
   {% if title or description %}
-    <header class="fesg-section__header">
-      {% if title %}
-        <h2 class="fesg-section__title">{{ title }}</h2>
-      {% endif %}
-      {% if description %}
-        <p class="fesg-section__description">{{ description }}</p>
-      {% endif %}
-    </header>
+  <header class="fesg-section__header">
+
+    {% if title %}
+    <h2 class="fesg-section__title">{{ title }}</h2>
+    {% endif %}
+
+    {% if description %}
+    <p class="fesg-section__description">{{ description }}</p>
+    {% endif %}
+
+  </header>
   {% endif %}
 
   <div class="fesg-section__content"{{ background_style | safe }}>
@@ -21,47 +24,54 @@
   </div>
 
   {% if usage or code %}
-    <div class="fesg-section__switch js-fesg-section-switch">
-      <div class="fesg-section__switch-header">
-        {% if usage %}
-          <button
-            class="fesg-section__switch-button js-fesg-section-switch-button"
-            data-switch-to="usage">
-            Usage
-          </button>
-        {% endif %}
-        {% if code %}
-          <button
-            class="fesg-section__switch-button js-fesg-section-switch-button"
-            data-switch-to="code">
-            Code
-          </button>
-        {% endif %}
-      </div>
+  <div class="fesg-section__switch js-fesg-section-switch">
 
-      <div class="fesg-section__switch-body">
-        {% if usage %}
-          <div
-            class="fesg-section__switch-panel js-fesg-section-switch-panel"
-            data-switch-panel="usage">
-            <div class="fesg-section__switch-scroll">
-              {{ usage }}
-            </div>
-          </div>
-        {% endif %}
+    <div class="fesg-section__switch-header">
 
-        {% if code %}
-          <div
-            class="fesg-section__switch-panel js-fesg-section-switch-panel"
-            data-switch-panel="code">
-            <button class="fesg-section__switch-code-copy js-fesg-section-copy">Copy</button>
-            <div class="fesg-section__switch-scroll">
-              <pre class="fesg-section__switch-pre"><code class="fesg-section__switch-code js-fesg-section-code">{{ code }}</code></pre>
-            </div>
-          </div>
-        {% endif %}
-      </div>
+      {% if usage %}
+      <button
+        class="fesg-section__switch-button js-fesg-section-switch-button"
+        data-switch-to="usage">
+        Usage
+      </button>
+      {% endif %}
+
+      {% if code %}
+      <button
+        class="fesg-section__switch-button js-fesg-section-switch-button"
+        data-switch-to="code">
+        Code
+      </button>
+      {% endif %}
+
     </div>
+
+    <div class="fesg-section__switch-body">
+
+      {% if usage %}
+      <div
+        class="fesg-section__switch-panel js-fesg-section-switch-panel"
+        data-switch-panel="usage">
+        <div class="fesg-section__switch-scroll">
+          {{ usage }}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if code %}
+      <div
+        class="fesg-section__switch-panel js-fesg-section-switch-panel"
+        data-switch-panel="code">
+        <button class="fesg-section__switch-code-copy js-fesg-section-copy">Copy</button>
+        <div class="fesg-section__switch-scroll">
+          <pre class="fesg-section__switch-pre"><code class="fesg-section__switch-code js-fesg-section-code">{{ code }}</code></pre>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+
+  </div>
   {% endif %}
 
 </section>

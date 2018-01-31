@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% if page.title %}
-      <title>{{ page.title }}</title>
+    <title>{{ page.title }}</title>
     {% endif %}
     {% if page.description %}
-      <meta name="description" content="{{ page.description }}">
+    <meta name="description" content="{{ page.description }}">
     {% endif %}
 
     {{ fesg.head }}
@@ -19,15 +19,19 @@
     {{ fesg.sidebar }}
 
     <div class="fesg-content js-fesg-content">
+
       {% if page.title or page.description %}
-        <header class="fesg-header">
-          {% if page.title %}
-            <h1 class="fesg-header__title">{{ page.title }}</h1>
-          {% endif %}
-          {% if page.description %}
-            <p class="fesg-header__description">{{ page.description }}</p>
-          {% endif %}
-        </header>
+      <header class="fesg-header">
+
+        {% if page.title %}
+        <h1 class="fesg-header__title">{{ page.title }}</h1>
+        {% endif %}
+
+        {% if page.description %}
+        <p class="fesg-header__description">{{ page.description }}</p>
+        {% endif %}
+
+      </header>
       {% endif %}
 
       <main class="fesg-main">

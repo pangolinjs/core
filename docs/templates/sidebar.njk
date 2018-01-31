@@ -1,82 +1,82 @@
 {% if process.env.NODE_ENV == 'development' %}
-  <button
-    class="fesg-sidebar-toggle js-fesg-sidebar-toggle"
-    aria-controls="fesg-sidebar"
-    aria-label="Open Front End Styleguide sidebar">
-    <span class="fesg-sidebar-toggle__line"></span>
-    <span class="fesg-sidebar-toggle__line"></span>
-    <span class="fesg-sidebar-toggle__line"></span>
-  </button>
+<button
+  class="fesg-sidebar-toggle js-fesg-sidebar-toggle"
+  aria-controls="fesg-sidebar"
+  aria-label="Open Front End Styleguide sidebar">
+  <span class="fesg-sidebar-toggle__line"></span>
+  <span class="fesg-sidebar-toggle__line"></span>
+  <span class="fesg-sidebar-toggle__line"></span>
+</button>
 
-  <aside id="fesg-sidebar" class="fesg-sidebar js-fesg-sidebar" aria-hidden="true">
-    <nav class="fesg-sidebar__nav">
+<aside id="fesg-sidebar" class="fesg-sidebar js-fesg-sidebar" aria-hidden="true">
+  <nav class="fesg-sidebar__nav">
 
-      <section class="fesg-sidebar__section">
-        <h2 class="fesg-sidebar__heading fesg-sidebar__heading--title">Front End Styleguide</h2>
-        <form class="fesg-sidebar__form js-fesg-sidebar-form" autocomplete="off">
-          <label for="fesg-sidebar-search" class="fesg-sr-only">Search Components and Prototypes</label>
-          <input
-            type="search"
-            id="fesg-sidebar-search"
-            class="fesg-sidebar__search js-fesg-sidebar-search"
-            placeholder="Search">
-          <button class="fesg-sidebar__search-reset js-fesg-sidebar-search-reset">
-            <span class="fesg-sr-only">Reset Search</span>
-          </button>
-        </form>
-      </section>
+    <section class="fesg-sidebar__section">
+      <h2 class="fesg-sidebar__heading fesg-sidebar__heading--title">Front End Styleguide</h2>
+      <form class="fesg-sidebar__form js-fesg-sidebar-form" autocomplete="off">
+        <label for="fesg-sidebar-search" class="fesg-sr-only">Search Components and Prototypes</label>
+        <input
+          type="search"
+          id="fesg-sidebar-search"
+          class="fesg-sidebar__search js-fesg-sidebar-search"
+          placeholder="Search">
+        <button class="fesg-sidebar__search-reset js-fesg-sidebar-search-reset">
+          <span class="fesg-sr-only">Reset Search</span>
+        </button>
+      </form>
+    </section>
 
-      <section class="fesg-sidebar__section">
-        <h3 class="fesg-sidebar__heading">Components</h3>
-        <ul class="fesg-sidebar__list js-fesg-sidebar-components">
-          {% for component in components %}
-            <li class="fesg-sidebar__item">
-              <a
-                class="fesg-sidebar__link {{ 'is-active' if component.active }}"
-                href="{{ component.url | relative }}">
-                {{ component.name }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </section>
+    <section class="fesg-sidebar__section">
+      <h3 class="fesg-sidebar__heading">Components</h3>
+      <ul class="fesg-sidebar__list js-fesg-sidebar-components">
+        {% for component in components %}
+        <li class="fesg-sidebar__item">
+          <a
+            class="fesg-sidebar__link {{ 'is-active' if component.active }}"
+            href="{{ component.url | relative }}">
+            {{ component.name }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
 
-      <section class="fesg-sidebar__section">
-        <h3 class="fesg-sidebar__heading">Prototypes</h3>
-        <ul class="fesg-sidebar__list js-fesg-sidebar-prototypes">
-          {% for prototype in prototypes %}
-            <li class="fesg-sidebar__item">
-              <a
-                class="fesg-sidebar__link {{ 'is-active' if prototype.active }}"
-                href="{{ prototype.url | relative }}">
-                {{ prototype.name }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </section>
+    <section class="fesg-sidebar__section">
+      <h3 class="fesg-sidebar__heading">Prototypes</h3>
+      <ul class="fesg-sidebar__list js-fesg-sidebar-prototypes">
+        {% for prototype in prototypes %}
+        <li class="fesg-sidebar__item">
+          <a
+            class="fesg-sidebar__link {{ 'is-active' if prototype.active }}"
+            href="{{ prototype.url | relative }}">
+            {{ prototype.name }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
 
-    </nav>
-  </aside>
+  </nav>
+</aside>
 
-  <script class="js-fesg-sidebar-page-data" type="applications/json">
-    [
-      {% for page in components %}
-        {
-          "type": "component",
-          "name": "{{ page.name }}",
-          "url": "{{ page.url | relative }}",
-          "active": {{ "true" if page.active else "false" }}
-        },
-      {% endfor %}
-      {% for page in prototypes %}
-        {
-          "type": "prototype",
-          "name": "{{ page.name }}",
-          "url": "{{ page.url | relative }}",
-          "active": {{ "true" if page.active else "false" }}
-        }{{ "," if not loop.last }}
-      {% endfor %}
-    ]
-  </script>
+<script class="js-fesg-sidebar-page-data" type="applications/json">
+[
+  {% for page in components %}
+  {
+    "type": "component",
+    "name": "{{ page.name }}",
+    "url": "{{ page.url | relative }}",
+    "active": {{ "true" if page.active else "false" }}
+  },
+  {% endfor %}
+  {% for page in prototypes %}
+  {
+    "type": "prototype",
+    "name": "{{ page.name }}",
+    "url": "{{ page.url | relative }}",
+    "active": {{ "true" if page.active else "false" }}
+  }{{ "," if not loop.last }}
+  {% endfor %}
+]
+</script>
 {% endif %}
