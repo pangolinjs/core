@@ -12,11 +12,38 @@
   @include fesg-reset;
   @include fesg-fluid-type(1.25rem, 1.75rem);
 
+  position: relative;
   margin-bottom: 0.25em;
 
   font-weight: 600;
   color: $fesg-color-section-text;
   color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
+}
+
+.fesg-section__title-link {
+  @include fesg-reset;
+
+  display: block;
+  position: absolute;
+  bottom: 0.25em;
+  left: -1.2em;
+
+  font-size: 1em;
+
+  opacity: 0.5;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.fesg-section__title-icon {
+  display: block;
+  width: 0.8em;
+  height: 0.8em;
+
+  fill: currentColor;
 }
 
 .fesg-section__description {
