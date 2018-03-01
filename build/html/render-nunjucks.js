@@ -43,7 +43,7 @@ module.exports = function (cwd, file) {
   return new Promise((resolve, reject) => {
     // Create Nunjucks environment
     let env = new nunjucks.Environment(
-      new nunjucks.FileSystemLoader(`${cwd}/src`)
+      new nunjucks.FileSystemLoader(path.join(cwd, 'src'))
     )
 
     // Prefix URL to make it relative

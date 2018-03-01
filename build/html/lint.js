@@ -17,29 +17,17 @@ const options = {
   }
 }
 
-/**
- * Format connection error
- * @param {string} error Error message
- */
-function formatConnectionError (error) {
-  console.log(chalk`
-{white.bgRed ERROR} Unable to connect to HTML validator
-${error}
-`)
-}
-
 module.exports = cwd => {
-  glob('*.njk', { cwd: `${cwd}/src/prototypes` }, (error, files) => {
+  glob('*.njk', { cwd: path.join(cwd, 'src/prototypes') }, (error, files) => {
     if (error) throw error
 
     let requests = []
 
     files.forEach(file => {
-      let name = path.basename(file, '.njk')
+      let fileName = path.basename(file)
+      let inputPath = path.join('prototypes', fileName)
 
-      let inputPath = `prototypes/${name}.njk`
-
-      let request = renderNunjucks(cwd, inputPath)
+      requests.push(renderNunjucks(cwd, inputPath)
         .then(html => {
           return httpsPost(options, html)
         }, error => {
@@ -47,43 +35,40 @@ module.exports = cwd => {
           process.exit(1)
         })
         .then(data => {
-          // JSON.parse(data).messages.forEach(message => {
-          //   htmlUtils.log.lint(message, file)
-          // })
-
           let result = JSON.parse(data)
           result.path = inputPath
 
           return result
         }, error => {
-          formatConnectionError(error)
+          htmlUtils.log.connectionError(error)
+          return false
+        }))
+    })
+
+    Promise.all(requests)
+      .then(results => {
+        // Skip error logging if validator connection failed
+        if (!results[0]) return
+
+        let messages = [].concat(...results.map(item => item.messages))
+        let errors = messages.filter(item => item.type === 'error')
+
+        let messageType = errors.length
+          ? chalk`{white.bgRed  ERROR }`
+          : chalk`{black.bgCyan  INFO }`
+
+        if (messages.length) {
+          console.log(chalk`\n${messageType} HTML validation\n`)
+          htmlUtils.log.lint(results)
+        }
+
+        if (errors.length) {
+          console.error(`  HTML validation failed with ${errors.length} ${errors.length === 1 ? 'error' : 'errors'}\n`)
           process.exit(1)
-        })
-
-      requests.push(request)
-    })
-
-    Promise.all(requests).then(results => {
-      let messages = []
-        .concat(...results.map(item => item.messages))
-
-      let errors = messages.filter(item => item.type === 'error')
-
-      let messageType = errors.length
-        ? chalk`{white.bgRed  ERROR }`
-        : chalk`{black.bgCyan  INFO }`
-
-      if (messages.length) {
-        console.log(chalk`\n${messageType} HTML validation\n`)
-        htmlUtils.log.lint(results)
-      }
-
-      if (errors.length) {
-        console.error(`  HTML validation failed with ${errors.length} ${errors.length === 1 ? 'error' : 'errors'}\n`)
-        process.exit(1)
-      }
-    }).catch(error => {
-      console.error(error)
-    })
+        }
+      })
+      .catch(error => {
+        console.error(error)
+      })
   })
 }

@@ -7,9 +7,9 @@ const path = require('path')
  * @return {string[]}
  */
 function components (cwd) {
-  let files = glob.sync('**/docs.njk', { cwd: `${cwd}/src/components` })
+  let files = glob.sync('**/docs.njk', { cwd: path.join(cwd, 'src/components') })
 
-  return files.map((file) => {
+  return files.map(file => {
     return path.dirname(file)
   })
 }
@@ -20,9 +20,9 @@ function components (cwd) {
  * @return {string[]}
  */
 function prototypes (cwd) {
-  let files = glob.sync('*.njk', { cwd: `${cwd}/src/prototypes` })
+  let files = glob.sync('*.njk', { cwd: path.join(cwd, 'src/prototypes') })
 
-  return files.map((file) => {
+  return files.map(file => {
     return path.basename(file, '.njk')
   })
 }

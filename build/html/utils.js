@@ -11,7 +11,7 @@ exports.clearConsole = function () {
 }
 
 exports.loadTemplate = function (name) {
-  let filePath = path.resolve(__dirname, `../../docs/templates/${name}.njk`)
+  let filePath = path.resolve(__dirname, '../../docs/templates', name + '.njk')
   let fileContents = fs.readFileSync(filePath)
 
   return fileContents.toString()
@@ -39,6 +39,15 @@ exports.log = {
     console.error(chalk`{black.bgBlue  FILE } ${file}`)
     console.error()
     console.error(chalk`${error.message}`)
+  },
+
+  /**
+   * Format connection error
+   * @param {string} error Error message
+   */
+  connectionError (error) {
+    console.log(chalk`\n{white.bgRed  ERROR } HTML validator connection failed\n`)
+    console.log(chalk`  ${error}\n`)
   },
 
   /**

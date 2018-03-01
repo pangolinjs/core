@@ -45,14 +45,14 @@ module.exports = cwd => {
     })
 
     // Render prototypes and write HTML files
-    glob('*.njk', { cwd: `${cwd}/src/prototypes` }, (error, files) => {
+    glob('*.njk', { cwd: path.join(cwd, 'src/prototypes') }, (error, files) => {
       if (error) throw error
 
       files.forEach(file => {
         let name = path.basename(file, '.njk')
 
-        let inputPath = `prototypes/${name}.njk`
-        let outputPath = `${config.path}/${name}.html`
+        let inputPath = path.join('prototypes', name + '.njk')
+        let outputPath = path.join(config.path, name + '.html')
 
         renderNunjucks(cwd, inputPath)
           .then(html => {
