@@ -1,4 +1,4 @@
-import Clipboard from 'clipboard'
+import ClipboardJS from 'clipboard'
 import Prism from 'prismjs'
 import 'prismjs/themes/prism.css'
 
@@ -13,7 +13,7 @@ for (let i = 0; i < codeElements.length; i++) {
 }
 
 for (let i = 0; i < codeCopy.length; i++) {
-  let clipboard = new Clipboard(codeCopy[i], {
+  let clipboard = new ClipboardJS(codeCopy[i], {
     text (trigger) {
       return trigger.parentElement.querySelector('code').textContent
     }

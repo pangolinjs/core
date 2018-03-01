@@ -30,8 +30,8 @@
     ]
   },
   "dependencies": {
-    "es6-promise": "^4.1.1",
-    "normalize.css": "^7.0.0"
+    "es6-promise": "^4.2.4",
+    "normalize.css": "^8.0.0"
   },
   "devDependencies": {
     "babel-preset-env": "^1.6.1"
