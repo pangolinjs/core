@@ -18,29 +18,6 @@ const options = {
 }
 
 /**
- * Format linter output
- * @param {string} file Linted HTML file
- * @param {Object} message Validator message
- */
-function formatMessage (file, message) {
-  if (message.type === 'error') {
-    console.log(chalk`\n{white.bgRed ERROR} HTML validation error`)
-  } else {
-    console.log(chalk`\n{black.bgCyan INFO} HTML validation info`)
-  }
-
-  let codeHighlight = message.extract.substr(message.hiliteStart, message.hiliteLength)
-  let line = message.firstLine ? `${message.firstLine}-${message.lastLine}` : message.lastLine
-  let column = message.firstColumn ? `${message.firstColumn}–${message.lastColumn}` : message.lastColumn
-
-  console.log(chalk`
-{underline ${file}} [Line ${line}, Column ${column}]
-{gray ${message.extract.replace(codeHighlight, chalk.white(codeHighlight)).replace(/^/gm, '| ')}}
-${message.message}
-`)
-}
-
-/**
  * Format connection error
  * @param {string} error Error message
  */
@@ -64,21 +41,20 @@ module.exports = cwd => {
 
       let request = renderNunjucks(cwd, inputPath)
         .then(html => {
-          return new Promise((resolve, reject) => {
-            httpsPost(options, html)
-              .then(data => resolve(data))
-              .catch(error => reject(error))
-          })
+          return httpsPost(options, html)
         }, error => {
           htmlUtils.log.error(error, inputPath)
           process.exit(1)
         })
         .then(data => {
-          JSON.parse(data).messages.forEach(message => {
-            formatMessage(file, message)
-          })
+          // JSON.parse(data).messages.forEach(message => {
+          //   htmlUtils.log.lint(message, file)
+          // })
 
-          return JSON.parse(data).messages
+          let result = JSON.parse(data)
+          result.path = inputPath
+
+          return result
         }, error => {
           formatConnectionError(error)
           process.exit(1)
@@ -88,13 +64,22 @@ module.exports = cwd => {
     })
 
     Promise.all(requests).then(results => {
-      let errorCount = results.reduce((sum, result) => {
-        let errors = result.filter(message => message.type === 'error')
-        return sum + errors.length
-      }, 0)
+      let messages = []
+        .concat(...results.map(item => item.messages))
 
-      if (errorCount > 0) {
-        console.error(`Failed with ${errorCount} ${errorCount === 1 ? 'error' : 'errors'}`)
+      let errors = messages.filter(item => item.type === 'error')
+
+      let messageType = errors.length
+        ? chalk`{white.bgRed  ERROR }`
+        : chalk`{black.bgCyan  INFO }`
+
+      if (messages.length) {
+        console.log(chalk`\n${messageType} HTML validation\n`)
+        htmlUtils.log.lint(results)
+      }
+
+      if (errors.length) {
+        console.error(`  HTML validation failed with ${errors.length} ${errors.length === 1 ? 'error' : 'errors'}\n`)
         process.exit(1)
       }
     }).catch(error => {
