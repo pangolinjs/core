@@ -2,6 +2,19 @@
 
 
 
+## 4.5.5
+2018-03-01
+
+### Improved
+- Error logging
+- Grouped HTML validation errors and warnings
+- Switched to `path.join` instead of template strings for path concatenation
+
+### Updated
+- Dependencies
+
+
+
 ## 4.5.4
 2018-01-31
 
