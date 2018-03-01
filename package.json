@@ -34,7 +34,7 @@
     "lint:js": "eslint \"**/*.js\"",
     "lint:css": "stylelint \"**/*.?(s)css\" --syntax scss",
     "lint:html": "cd test && node ../bin/front-end-styleguide.js lint:html",
-    "test": "run-s -n install test:init test:unit test:e2e test:build test:build:dev",
+    "test": "run-s -n install test:init test:unit test:e2e test:build test:build:dev test:build:proto",
     "test:init": "cd test && npm install",
     "test:unit": "cd test && nyc ava",
     "test:e2e": "cd test && testcafe chrome:headless,firefox:headless test/e2e --app \"node ../bin/front-end-styleguide.js dev\" --app-init-delay 4000",

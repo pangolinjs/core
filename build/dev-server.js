@@ -21,11 +21,13 @@ module.exports = cwd => {
   function handleRender (inputPath, res) {
     renderNunjucks(cwd, inputPath)
       .then(html => {
-        htmlUtils.log.success(inputPath)
         previousHTML = html
+        htmlUtils.clearConsole()
+        htmlUtils.log.success(inputPath)
         res.send(html)
       })
       .catch(error => {
+        htmlUtils.clearConsole()
         htmlUtils.log.error(error, inputPath)
         res.send(previousHTML)
       })
@@ -46,27 +48,26 @@ module.exports = cwd => {
 
     // Webpack bundle inject
     const devMiddleware = require('webpack-dev-middleware')(compiler, {
-      publicPath: '/',
-      logLevel: 'silent'
+      logLevel: 'silent',
+      publicPath: '/'
     })
 
     // Hot-reload and error display
     const hotMiddleware = require('webpack-hot-middleware')(compiler, {
-      log: false,
-      heartbeat: 2000
+      heartbeat: 2000,
+      log: false
     })
 
-    // Force reload after HTML or asset change
-    chokidar.watch([`${cwd}/src/**/*.njk`, `${cwd}/src/assets/**/*`])
-      .on('all', () => {
-        hotMiddleware.publish({ action: 'reload' })
-      })
+    // Watch for HTML or asset changes
+    chokidar
+      .watch(['src/**/*.njk', 'src/assets/**/*'], { cwd })
+      .on('all', () => hotMiddleware.publish({ action: 'reload' }))
 
     app.use(devMiddleware)
     app.use(hotMiddleware)
 
     // Add assets path
-    app.use('/assets', express.static(`${cwd}/src/assets`))
+    app.use('/assets', express.static(path.join(cwd, 'src/assets')))
 
     // Add Front End Styleguide assets path
     app.use('/fesg', express.static(path.join(__dirname, '../dist')))
@@ -74,7 +75,8 @@ module.exports = cwd => {
     // Render components and send HTML
     app.get('/components/:name.html', (req, res) => {
       let name = req.params.name
-      let inputPath = `components/${name}/docs.njk`
+      let inputPath = path.join('components', name, 'docs.njk')
+      console.log(inputPath)
 
       if (!pageList.components(cwd).includes(name)) {
         return res.status(404).end()
@@ -88,7 +90,7 @@ module.exports = cwd => {
       let name = req.path === '/'
         ? 'index'
         : req.params.name
-      let inputPath = `prototypes/${name}.njk`
+      let inputPath = path.join('prototypes', name + '.njk')
 
       if (!pageList.prototypes(cwd).includes(name)) {
         return res.status(404).end()

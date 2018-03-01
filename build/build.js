@@ -15,6 +15,19 @@ module.exports = cwd => {
     webpack(webpackConfig, (error, stats) => {
       if (error) throw error
 
+      if (stats.hasErrors()) {
+        console.log(stats.toString({
+          assets: false,
+          children: false,
+          chunks: false,
+          chunkModules: false,
+          colors: true,
+          errors: false,
+          modules: false
+        }) + '\n')
+        process.exit(1)
+      }
+
       console.log(stats.toString({
         children: false,
         chunks: false,
@@ -23,10 +36,6 @@ module.exports = cwd => {
         errors: false,
         modules: false
       }) + '\n')
-
-      if (stats.hasErrors()) {
-        process.exit(1)
-      }
     })
   })
 }

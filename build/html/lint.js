@@ -3,7 +3,7 @@ const glob = require('glob')
 const path = require('path')
 
 const httpsPost = require('./https-post')
-const nunjucksError = require('./format-error')
+const htmlUtils = require('./utils')
 const renderNunjucks = require('./render-nunjucks')
 
 const options = {
@@ -60,7 +60,9 @@ module.exports = cwd => {
     files.forEach(file => {
       let name = path.basename(file, '.njk')
 
-      let request = renderNunjucks(cwd, `prototypes/${name}.njk`)
+      let inputPath = `prototypes/${name}.njk`
+
+      let request = renderNunjucks(cwd, inputPath)
         .then(html => {
           return new Promise((resolve, reject) => {
             httpsPost(options, html)
@@ -68,7 +70,7 @@ module.exports = cwd => {
               .catch(error => reject(error))
           })
         }, error => {
-          nunjucksError(error)
+          htmlUtils.log.error(error, inputPath)
           process.exit(1)
         })
         .then(data => {

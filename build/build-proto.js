@@ -6,7 +6,7 @@ const glob = require('glob')
 const path = require('path')
 const webpack = require('webpack')
 
-const nunjucksError = require('./html/format-error')
+const htmlUtils = require('./html/utils')
 const renderNunjucks = require('./html/render-nunjucks')
 
 module.exports = cwd => {
@@ -21,6 +21,19 @@ module.exports = cwd => {
     webpack(webpackConfig, (error, stats) => {
       if (error) throw error
 
+      if (stats.hasErrors()) {
+        console.log(stats.toString({
+          assets: false,
+          children: false,
+          chunks: false,
+          chunkModules: false,
+          colors: true,
+          errors: false,
+          modules: false
+        }) + '\n')
+        process.exit(1)
+      }
+
       console.log(stats.toString({
         children: false,
         chunks: false,
@@ -29,10 +42,6 @@ module.exports = cwd => {
         errors: false,
         modules: false
       }) + '\n')
-
-      if (stats.hasErrors()) {
-        process.exit(1)
-      }
     })
 
     // Render prototypes and write HTML files
@@ -52,7 +61,7 @@ module.exports = cwd => {
             })
           })
           .catch(error => {
-            nunjucksError(error)
+            htmlUtils.log.error(error, inputPath)
             process.exit(1)
           })
       })

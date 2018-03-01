@@ -77,7 +77,10 @@ module.exports = cwd => {
             path.resolve(cwd, 'test')
           ],
           loader: 'eslint-loader',
-          enforce: 'pre'
+          enforce: 'pre',
+          options: {
+            emitWarning: process.env.FESG_ENV === 'dev'
+          }
         },
         {
           test: /\.js$/,
@@ -98,6 +101,7 @@ module.exports = cwd => {
         }
       }),
       new StylelintPlugin({
+        emitErrors: process.env.FESG_ENV.startsWith('build'),
         syntax: 'scss'
       })
     ]

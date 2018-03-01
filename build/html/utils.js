@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const readline = require('readline')
 
-function clearConsole () {
+exports.clearConsole = function () {
   const blank = '\n'.repeat(process.stdout.rows)
   console.log(blank)
   readline.cursorTo(process.stdout, 0, 0)
@@ -19,14 +19,12 @@ exports.loadTemplate = function (name) {
 
 exports.log = {
   success (file) {
-    clearConsole()
     console.log(chalk`{black.bgGreen  DONE } Template render success`)
     console.log()
     console.log(chalk`{black.bgBlue  FILE } ${file}`)
   },
 
   error (error, file) {
-    clearConsole()
     console.error(chalk`{black.bgRed  ERROR } ${error.name}`)
     console.error()
     console.error(chalk`{black.bgBlue  FILE } ${file}`)

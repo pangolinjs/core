@@ -48,7 +48,7 @@ module.exports = function (cwd, file) {
 
     // Prefix URL to make it relative
     env.addFilter('relative', (url) => {
-      if (file.startsWith('components/')) {
+      if (file.split(path.sep)[0] === 'components') {
         return `../${url}`
       } else {
         return url
