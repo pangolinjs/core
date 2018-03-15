@@ -12,7 +12,9 @@ category: Components
 
     <p>Partials will be loaded from the <code>src/html/partials</code> folder. Component partials should be placed in <code>src/html/partials/includes</code>.</p>
 
-    {{> includes/example}}
+    {{#> "includes/example"}}
+      <p>You may use the <code>partial-block</code> in the partial.</p>
+    {{/"includes/example"}}
   {{/content}}
   {{/embed}}
 
