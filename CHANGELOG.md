@@ -2,6 +2,17 @@
 
 
 
+## 4.5.7
+2018-03-17
+
+### Updated
+- Dependencies
+
+### Fixed
+- Component page highlighting in sidebar
+
+
+
 ## 4.5.6
 2018-03-15
 
