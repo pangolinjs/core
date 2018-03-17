@@ -27,7 +27,7 @@ function pageObjects (cwd, pageType, currentFile) {
         ? `components/${page}.html`
         : `${page}.html`,
       active: pageType === 'components'
-        ? `components/${page}` === path.dirname(currentFile)
+        ? `components${path.sep}${page}` === path.dirname(currentFile)
         : page === path.basename(currentFile, '.njk')
     }
   })
