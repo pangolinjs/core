@@ -5,7 +5,8 @@ module.exports = cwd => {
       path: `${cwd}/dev`,
       devtool: 'cheap-module-eval-source-map',
       css: {
-        extract: false
+        extract: false,
+        minimize: false
       }
     },
     'build': {
@@ -13,7 +14,10 @@ module.exports = cwd => {
       path: `${cwd}/dist`,
       devtool: 'source-map',
       css: {
-        extract: true
+        extract: true,
+        minimize: {
+          mergeRules: false
+        }
       }
     },
     'build:dev': {
@@ -21,7 +25,10 @@ module.exports = cwd => {
       path: `${cwd}/dev`,
       devtool: 'source-map',
       css: {
-        extract: true
+        extract: true,
+        minimize: {
+          mergeRules: false
+        }
       }
     },
     'build:proto': {
@@ -29,7 +36,10 @@ module.exports = cwd => {
       path: `${cwd}/proto`,
       devtool: 'source-map',
       css: {
-        extract: true
+        extract: true,
+        minimize: {
+          mergeRules: false
+        }
       }
     }
   }

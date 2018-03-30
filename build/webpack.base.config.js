@@ -12,7 +12,7 @@ module.exports = cwd => {
       loader: 'css-loader',
       options: {
         importLoaders: 2,
-        minimize: config.css.extract,
+        minimize: config.css.minimize,
         sourceMap: true,
         url: false
       }
