@@ -2,6 +2,17 @@
 
 
 
+## 4.5.8
+2018-03-30
+
+### Updated
+- Dependencies
+
+### Fixed
+- cssnano mergeRules problems
+
+
+
 ## 4.5.7
 2018-03-17
 
