@@ -4,12 +4,16 @@ process.env.FESG_ENV = 'build:dev'
 const fs = require('fs-extra')
 const glob = require('glob')
 const htmlUtils = require('./html/utils')
+const merge = require('webpack-merge')
 const path = require('path')
 const renderNunjucks = require('./html/render-nunjucks')
 const webpack = require('webpack')
 
 module.exports = context => {
-  const config = require('./webpack.build.config')(context)
+  const config = merge(
+    require('./webpack.build.config')(context),
+    require('./webpack.project.config')(context)
+  )
 
   // Empty output path to get rid of leftovers
   fs.emptyDir(config.output.path, error => {

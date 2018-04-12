@@ -2,10 +2,14 @@ process.env.NODE_ENV = 'production'
 process.env.FESG_ENV = 'build'
 
 const fs = require('fs-extra')
+const merge = require('webpack-merge')
 const webpack = require('webpack')
 
 module.exports = context => {
-  const config = require('./webpack.build.config')(context)
+  const config = merge(
+    require('./webpack.build.config')(context),
+    require('./webpack.project.config')(context)
+  )
 
   // Empty output path to get rid of leftovers
   fs.emptyDir(config.output.path, error => {
