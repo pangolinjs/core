@@ -3,7 +3,9 @@ module.exports = [
     loader: 'css-loader',
     options: {
       importLoaders: 2,
-      minimize: process.env.FESG_ENV.startsWith('build'),
+      minimize: process.env.FESG_ENV.startsWith('build')
+        ? { mergeRules: false }
+        : false,
       sourceMap: true,
       url: false
     }

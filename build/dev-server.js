@@ -3,15 +3,13 @@ process.env.FESG_ENV = 'dev'
 
 const chokidar = require('chokidar')
 const express = require('express')
-const getPort = require('get-port')
-const path = require('path')
-const webpack = require('webpack')
-
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-
+const getPort = require('get-port')
 const htmlUtils = require('./html/utils')
 const pageList = require('./html/page-list')
+const path = require('path')
 const renderNunjucks = require('./html/render-nunjucks')
+const webpack = require('webpack')
 
 module.exports = cwd => {
   const config = require('./webpack.dev.config')(cwd)

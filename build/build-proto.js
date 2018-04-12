@@ -3,22 +3,20 @@ process.env.FESG_ENV = 'build:proto'
 
 const fs = require('fs-extra')
 const glob = require('glob')
+const htmlUtils = require('./html/utils')
 const path = require('path')
+const renderNunjucks = require('./html/render-nunjucks')
 const webpack = require('webpack')
 
-const htmlUtils = require('./html/utils')
-const renderNunjucks = require('./html/render-nunjucks')
-
 module.exports = cwd => {
-  const config = require('./config')(cwd)[process.env.FESG_ENV]
-  const webpackConfig = require('./webpack.build.config')(cwd)
+  const config = require('./webpack.build.config')(cwd)
 
   // Empty output path to get rid of leftovers
-  fs.emptyDir(config.path, error => {
+  fs.emptyDir(config.output.path, error => {
     if (error) throw error
 
     // Run the webpack pipeline
-    webpack(webpackConfig, (error, stats) => {
+    webpack(config, (error, stats) => {
       if (error) throw error
 
       if (stats.hasErrors()) {
@@ -52,7 +50,7 @@ module.exports = cwd => {
         let name = path.basename(file, '.njk')
 
         let inputPath = path.join('prototypes', name + '.njk')
-        let outputPath = path.join(config.path, name + '.html')
+        let outputPath = path.join(config.output.path, name + '.html')
 
         renderNunjucks(cwd, inputPath)
           .then(html => {

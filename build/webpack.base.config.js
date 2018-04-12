@@ -5,17 +5,21 @@ const StylelintPlugin = require('stylelint-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = cwd => {
-  const config = require('./config')(cwd)[process.env.FESG_ENV]
+  const outputPaths = {
+    'dev': `${cwd}/dev`,
+    'build': `${cwd}/dist`,
+    'build:dev': `${cwd}/dev`,
+    'build:proto': `${cwd}/proto`
+  }
 
   return {
     context: cwd,
-    entry: config.entry,
+    entry: './src/main.js',
     output: {
-      path: config.path,
+      path: outputPaths[process.env.FESG_ENV],
       filename: 'js/[name].js',
       publicPath: '/'
     },
-    devtool: config.devtool,
     module: {
       rules: [
         {

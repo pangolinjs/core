@@ -73,7 +73,8 @@
     "uglifyjs-webpack-plugin": "^1.1.4",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.2",
-    "webpack-hot-middleware": "^2.21.0"
+    "webpack-hot-middleware": "^2.21.0",
+    "webpack-merge": "^4.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.0.0",

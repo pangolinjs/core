@@ -1,11 +1,12 @@
+const merge = require('webpack-merge')
 const webpack = require('webpack')
 
 module.exports = cwd => {
-  const webpackConfig = require('./webpack.base.config')(cwd)
-
-  webpackConfig.plugins.push(...[
-    new webpack.HotModuleReplacementPlugin()
-  ])
-
-  return webpackConfig
+  return merge(require('./webpack.base.config')(cwd), {
+    entry: ['./src/main.js', `${__dirname}/dev-client`],
+    devtool: 'cheap-module-eval-source-map',
+    plugins: [
+      new webpack.HotModuleReplacementPlugin()
+    ]
+  })
 }
