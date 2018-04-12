@@ -1,8 +1,8 @@
 const merge = require('webpack-merge')
 const webpack = require('webpack')
 
-module.exports = cwd => {
-  return merge(require('./webpack.base.config')(cwd), {
+module.exports = context => {
+  return merge(require('./webpack.base.config')(context), {
     entry: ['./src/main.js', `${__dirname}/dev-client`],
     devtool: 'cheap-module-eval-source-map',
     plugins: [

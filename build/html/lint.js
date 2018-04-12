@@ -17,8 +17,8 @@ const options = {
   }
 }
 
-module.exports = cwd => {
-  glob('*.njk', { cwd: path.join(cwd, 'src/prototypes') }, (error, files) => {
+module.exports = context => {
+  glob('*.njk', { cwd: path.join(context, 'src/prototypes') }, (error, files) => {
     if (error) throw error
 
     let requests = []
@@ -27,7 +27,7 @@ module.exports = cwd => {
       let fileName = path.basename(file)
       let inputPath = path.join('prototypes', fileName)
 
-      requests.push(renderNunjucks(cwd, inputPath)
+      requests.push(renderNunjucks(context, inputPath)
         .then(html => {
           return httpsPost(options, html)
         }, error => {

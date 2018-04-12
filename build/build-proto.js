@@ -8,8 +8,8 @@ const path = require('path')
 const renderNunjucks = require('./html/render-nunjucks')
 const webpack = require('webpack')
 
-module.exports = cwd => {
-  const config = require('./webpack.build.config')(cwd)
+module.exports = context => {
+  const config = require('./webpack.build.config')(context)
 
   // Empty output path to get rid of leftovers
   fs.emptyDir(config.output.path, error => {
@@ -43,7 +43,7 @@ module.exports = cwd => {
     })
 
     // Render prototypes and write HTML files
-    glob('*.njk', { cwd: path.join(cwd, 'src/prototypes') }, (error, files) => {
+    glob('*.njk', { cwd: path.join(context, 'src/prototypes') }, (error, files) => {
       if (error) throw error
 
       files.forEach(file => {
@@ -52,7 +52,7 @@ module.exports = cwd => {
         let inputPath = path.join('prototypes', name + '.njk')
         let outputPath = path.join(config.output.path, name + '.html')
 
-        renderNunjucks(cwd, inputPath)
+        renderNunjucks(context, inputPath)
           .then(html => {
             fs.outputFile(outputPath, html, error => {
               if (error) throw error

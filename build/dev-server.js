@@ -11,13 +11,13 @@ const path = require('path')
 const renderNunjucks = require('./html/render-nunjucks')
 const webpack = require('webpack')
 
-module.exports = cwd => {
-  const config = require('./webpack.dev.config')(cwd)
+module.exports = context => {
+  const config = require('./webpack.dev.config')(context)
 
   let previousHTML = ''
 
   function handleRender (inputPath, res) {
-    renderNunjucks(cwd, inputPath)
+    renderNunjucks(context, inputPath)
       .then(html => {
         previousHTML = html
         htmlUtils.clearConsole()
@@ -58,14 +58,14 @@ module.exports = cwd => {
 
     // Watch for HTML or asset changes
     chokidar
-      .watch(['src/**/*.njk', 'src/assets/**/*'], { cwd })
+      .watch(['src/**/*.njk', 'src/assets/**/*'], { cwd: context })
       .on('all', () => hotMiddleware.publish({ action: 'reload' }))
 
     app.use(devMiddleware)
     app.use(hotMiddleware)
 
     // Add assets path
-    app.use('/assets', express.static(path.join(cwd, 'src/assets')))
+    app.use('/assets', express.static(path.join(context, 'src/assets')))
 
     // Add Front End Styleguide assets path
     app.use('/fesg', express.static(path.join(__dirname, '../dist')))
@@ -76,7 +76,7 @@ module.exports = cwd => {
       let inputPath = path.join('components', name, 'docs.njk')
       console.log(inputPath)
 
-      if (!pageList.components(cwd).includes(name)) {
+      if (!pageList.components(context).includes(name)) {
         return res.status(404).end()
       }
 
@@ -90,7 +90,7 @@ module.exports = cwd => {
         : req.params.name
       let inputPath = path.join('prototypes', name + '.njk')
 
-      if (!pageList.prototypes(cwd).includes(name)) {
+      if (!pageList.prototypes(context).includes(name)) {
         return res.status(404).end()
       }
 

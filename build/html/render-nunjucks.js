@@ -15,12 +15,12 @@ const templates = {
 
 /**
  * Get page name and URL
- * @param {string} cwd Current working directory
+ * @param {string} context Project directory
  * @param {string} pageType `components` or `prototypes`
  * @param {string} currentFile The file currently being processed
  */
-function pageObjects (cwd, pageType, currentFile) {
-  return pageList[pageType](cwd).map((page) => {
+function pageObjects (context, pageType, currentFile) {
+  return pageList[pageType](context).map((page) => {
     return {
       name: page.charAt(0).toUpperCase() + page.slice(1),
       url: pageType === 'components'
@@ -35,15 +35,15 @@ function pageObjects (cwd, pageType, currentFile) {
 
 /**
  * Render Nunjucks file to string
- * @param {string} cwd Current working directory
+ * @param {string} context Project directory
  * @param {string} file File to render
  * @return {Promise<string>}
  */
-module.exports = function (cwd, file) {
+module.exports = function (context, file) {
   return new Promise((resolve, reject) => {
     // Create Nunjucks environment
     let env = new nunjucks.Environment(
-      new nunjucks.FileSystemLoader(path.join(cwd, 'src'))
+      new nunjucks.FileSystemLoader(path.join(context, 'src'))
     )
 
     // Prefix URL to make it relative
@@ -74,8 +74,8 @@ module.exports = function (cwd, file) {
 
     const sidebar = () => {
       let html = new nunjucks.Template(templates.sidebar, env).render({
-        components: pageObjects(cwd, 'components', file),
-        prototypes: pageObjects(cwd, 'prototypes', file)
+        components: pageObjects(context, 'components', file),
+        prototypes: pageObjects(context, 'prototypes', file)
       })
 
       return new nunjucks.runtime.SafeString(html)

@@ -4,16 +4,16 @@ const path = require('path')
 const StylelintPlugin = require('stylelint-webpack-plugin')
 const webpack = require('webpack')
 
-module.exports = cwd => {
+module.exports = context => {
   const outputPaths = {
-    'dev': `${cwd}/dev`,
-    'build': `${cwd}/dist`,
-    'build:dev': `${cwd}/dev`,
-    'build:proto': `${cwd}/proto`
+    'dev': `${context}/dev`,
+    'build': `${context}/dist`,
+    'build:dev': `${context}/dev`,
+    'build:proto': `${context}/proto`
   }
 
   return {
-    context: cwd,
+    context: context,
     entry: './src/main.js',
     output: {
       path: outputPaths[process.env.FESG_ENV],
@@ -25,8 +25,8 @@ module.exports = cwd => {
         {
           test: /\.js$/,
           include: [
-            path.resolve(cwd, 'src'),
-            path.resolve(cwd, 'test')
+            path.resolve(context, 'src'),
+            path.resolve(context, 'test')
           ],
           loader: 'eslint-loader',
           enforce: 'pre',
@@ -37,7 +37,7 @@ module.exports = cwd => {
         {
           test: /\.js$/,
           include: [
-            path.resolve(cwd, 'src')
+            path.resolve(context, 'src')
           ],
           loader: 'babel-loader'
         },
