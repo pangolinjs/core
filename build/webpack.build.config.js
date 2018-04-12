@@ -2,7 +2,6 @@ const path = require('path')
 const webpack = require('webpack')
 
 const CopyPlugin = require('copy-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
@@ -13,9 +12,6 @@ module.exports = cwd => {
   webpackConfig.plugins.push(...[
     new UglifyJSPlugin({
       sourceMap: true
-    }),
-    new ExtractTextPlugin({
-      filename: 'css/[name].css'
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',

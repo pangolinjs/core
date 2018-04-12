@@ -1,63 +1,11 @@
-const path = require('path')
-const webpack = require('webpack')
-
+const cssLoaders = require('./css-loaders')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
 const StylelintPlugin = require('stylelint-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = cwd => {
   const config = require('./config')(cwd)[process.env.FESG_ENV]
-
-  let sharedCssLoaders = [
-    {
-      loader: 'css-loader',
-      options: {
-        importLoaders: 2,
-        minimize: config.css.minimize,
-        sourceMap: true,
-        url: false
-      }
-    },
-    {
-      loader: 'postcss-loader',
-      options: {
-        config: {
-          path: path.resolve(cwd, 'postcss.config.js')
-        },
-        sourceMap: true
-      }
-    },
-    {
-      loader: 'sass-loader',
-      options: {
-        precision: 10,
-        sourceMap: true
-      }
-    }
-  ]
-
-  let cssLoader
-
-  if (config.css.extract) {
-    cssLoader = {
-      test: /\.(css|scss)$/,
-      use: ExtractTextPlugin.extract({
-        use: sharedCssLoaders
-      })
-    }
-  } else {
-    cssLoader = {
-      test: /\.(css|scss)$/,
-      use: [
-        {
-          loader: 'style-loader',
-          options: {
-            sourceMap: true
-          }
-        },
-        ...sharedCssLoaders
-      ]
-    }
-  }
 
   return {
     context: cwd,
@@ -89,7 +37,18 @@ module.exports = cwd => {
           ],
           loader: 'babel-loader'
         },
-        cssLoader
+        {
+          test: /\.(css|scss)$/,
+          use: ExtractTextPlugin.extract({
+            fallback: {
+              loader: 'style-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            use: cssLoaders
+          })
+        }
       ]
     },
     plugins: [
@@ -103,6 +62,10 @@ module.exports = cwd => {
       new StylelintPlugin({
         emitErrors: process.env.FESG_ENV.startsWith('build'),
         syntax: 'scss'
+      }),
+      new ExtractTextPlugin({
+        disable: process.env.FESG_ENV === 'dev',
+        filename: 'css/[name].css'
       })
     ]
   }
