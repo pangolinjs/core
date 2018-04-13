@@ -61,7 +61,7 @@ yarn test
 npm run test
 ```
 
-For more information take a look at the [templates](https://github.com/front-end-styleguide/templates).
+For more information take a look at the [docs](https://github.com/front-end-styleguide/docs).
 
 
 ## Test the core package
