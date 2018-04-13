@@ -2,6 +2,21 @@
 
 
 
+## 4.6.0-beta.1
+2018-04-13
+
+### Added
+- webpack-merge for project specific configuration
+
+### Improved
+- CSS loader situation
+- Renamed `cwd` to `context`
+
+### Updated
+- Dependencies
+
+
+
 ## 4.5.8
 2018-03-30
 
