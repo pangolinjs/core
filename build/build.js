@@ -12,26 +12,19 @@ module.exports = context => {
   )
 
   // Empty output path to get rid of leftovers
-  fs.emptyDir(config.output.path, error => {
+  try {
+    fs.emptyDirSync(config.output.path)
+  } catch (error) {
+    throw error
+  }
+
+  // Run the webpack pipeline
+  webpack(config, (error, stats) => {
     if (error) throw error
 
-    webpack(config, (error, stats) => {
-      if (error) throw error
-
-      if (stats.hasErrors()) {
-        console.log(stats.toString({
-          assets: false,
-          children: false,
-          chunks: false,
-          chunkModules: false,
-          colors: true,
-          errors: false,
-          modules: false
-        }) + '\n')
-        process.exit(1)
-      }
-
+    if (stats.hasErrors()) {
       console.log(stats.toString({
+        assets: false,
         children: false,
         chunks: false,
         chunkModules: false,
@@ -39,6 +32,16 @@ module.exports = context => {
         errors: false,
         modules: false
       }) + '\n')
-    })
+      process.exit(1)
+    }
+
+    console.log(stats.toString({
+      children: false,
+      chunks: false,
+      chunkModules: false,
+      colors: true,
+      errors: false,
+      modules: false
+    }) + '\n')
   })
 }

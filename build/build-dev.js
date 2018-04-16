@@ -16,27 +16,19 @@ module.exports = context => {
   )
 
   // Empty output path to get rid of leftovers
-  fs.emptyDir(config.output.path, error => {
+  try {
+    fs.emptyDirSync(config.output.path)
+  } catch (error) {
+    throw error
+  }
+
+  // Run the webpack pipeline
+  webpack(config, (error, stats) => {
     if (error) throw error
 
-    // Run the webpack pipeline
-    webpack(config, (error, stats) => {
-      if (error) throw error
-
-      if (stats.hasErrors()) {
-        console.log(stats.toString({
-          assets: false,
-          children: false,
-          chunks: false,
-          chunkModules: false,
-          colors: true,
-          errors: false,
-          modules: false
-        }) + '\n')
-        process.exit(1)
-      }
-
+    if (stats.hasErrors()) {
       console.log(stats.toString({
+        assets: false,
         children: false,
         chunks: false,
         chunkModules: false,
@@ -44,52 +36,62 @@ module.exports = context => {
         errors: false,
         modules: false
       }) + '\n')
+      process.exit(1)
+    }
+
+    console.log(stats.toString({
+      children: false,
+      chunks: false,
+      chunkModules: false,
+      colors: true,
+      errors: false,
+      modules: false
+    }) + '\n')
+  })
+
+  // Render components and write HTML files
+  glob('*/docs.njk', { cwd: path.join(context, 'src/components') }, (error, files) => {
+    if (error) throw error
+
+    files.forEach(file => {
+      let name = path.dirname(file)
+
+      let inputPath = path.join('components', name, 'docs.njk')
+      let outputPath = path.join(config.output.path, 'components', name + '.html')
+
+      renderNunjucks(context, inputPath)
+        .then(html => {
+          fs.outputFile(outputPath, html, error => {
+            if (error) throw error
+          })
+        })
+        .catch(error => {
+          htmlUtils.log.error(error, inputPath)
+          process.exit(1)
+        })
     })
+  })
 
-    // Render components and write HTML files
-    glob('*/docs.njk', { cwd: path.join(context, 'src/components') }, (error, files) => {
-      if (error) throw error
+  // Render prototypes and write HTML files
+  glob('*.njk', { cwd: path.join(context, 'src/prototypes') }, (error, files) => {
+    if (error) throw error
 
-      files.forEach(file => {
-        let name = path.dirname(file)
+    files.forEach(file => {
+      let name = path.basename(file, '.njk')
 
-        let inputPath = path.join('components', name, 'docs.njk')
-        let outputPath = path.join(config.output.path, 'components', name + '.html')
+      let inputPath = path.join('prototypes', name + '.njk')
+      let outputPath = path.join(config.output.path, name + '.html')
 
-        renderNunjucks(context, inputPath)
-          .then(html => {
-            fs.outputFile(outputPath, html, error => {
-              if (error) throw error
-            })
+      renderNunjucks(context, inputPath)
+        .then(html => {
+          fs.outputFile(outputPath, html, error => {
+            if (error) throw error
           })
-          .catch(error => {
-            htmlUtils.log.error(error, inputPath)
-            process.exit(1)
-          })
-      })
-    })
-
-    // Render prototypes and write HTML files
-    glob('*.njk', { cwd: path.join(context, 'src/prototypes') }, (error, files) => {
-      if (error) throw error
-
-      files.forEach(file => {
-        let name = path.basename(file, '.njk')
-
-        let inputPath = path.join('prototypes', name + '.njk')
-        let outputPath = path.join(config.output.path, name + '.html')
-
-        renderNunjucks(context, inputPath)
-          .then(html => {
-            fs.outputFile(outputPath, html, error => {
-              if (error) throw error
-            })
-          })
-          .catch(error => {
-            htmlUtils.log.error(error, inputPath)
-            process.exit(1)
-          })
-      })
+        })
+        .catch(error => {
+          htmlUtils.log.error(error, inputPath)
+          process.exit(1)
+        })
     })
   })
 }
