@@ -14,7 +14,7 @@ const webpack = require('webpack')
 
 module.exports = context => {
   const config = merge(
-    require('./webpack.build.config')(context),
+    require('./webpack.dev.config')(context),
     require('./webpack.project.config')(context)
   )
 
