@@ -2,6 +2,17 @@
 
 
 
+## 4.6.0-beta.2
+2018-04-13
+
+### Fixed
+- Use correct webpack config for dev server
+
+### Updated
+- Dependencies
+
+
+
 ## 4.6.0-beta.1
 2018-04-13
 
