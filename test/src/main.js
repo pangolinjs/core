@@ -6,6 +6,6 @@ import './components'
 import './main.scss'
 
 // Import Frond End Styleguide branding
-if (process.env.NODE_ENV === 'development') {
+if (process.env.FESG_ENV === 'dev' || process.env.FESG_ENV === 'build:dev') {
   require('../config/branding.scss')
 }

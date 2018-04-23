@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'development'
+process.env.NODE_ENV = 'production'
 process.env.FESG_ENV = 'build:dev'
 
 const fs = require('fs-extra')

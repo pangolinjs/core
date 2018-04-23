@@ -16,7 +16,9 @@
     {% block head %}{% endblock %}
   </head>
   <body class="fesg-body">
+    {% if process.env.FESG_ENV == 'dev' or process.env.FESG_ENV == 'build:dev' %}
     {{ fesg.sidebar }}
+    {% endif %}
 
     <div class="fesg-content js-fesg-content">
 

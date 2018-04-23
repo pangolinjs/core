@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% if page.title %}
-      <title>{{ page.title }}</title>
+    <title>{{ page.title }}</title>
     {% endif %}
     {% if page.description %}
-      <meta name="description" content="{{ page.description }}">
+    <meta name="description" content="{{ page.description }}">
     {% endif %}
 
     {{ fesg.head }}
   </head>
   <body>
+    {% if process.env.FESG_ENV == 'dev' or process.env.FESG_ENV == 'build:dev' %}
     {{ fesg.sidebar }}
+    {% endif %}
+
     {% block body %}{% endblock %}
   </body>
 </html>
