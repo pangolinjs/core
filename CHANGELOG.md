@@ -2,6 +2,18 @@
 
 
 
+## 4.6.0-beta.3
+2018-04-23
+
+### Improved
+- `production` NODE_ENV for all build tasks
+- More webpack config flexibility
+
+### Updated
+- Dependencies
+
+
+
 ## 4.6.0-beta.2
 2018-04-13
 
