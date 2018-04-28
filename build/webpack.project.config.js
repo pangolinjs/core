@@ -1,21 +1,24 @@
-const path = require('path')
+const getConfig = require('./utils/get-config')
 
+/**
+ * Get project webpack config
+ * @param {string} context Project directory
+ * @return {Object} Configuration object
+ */
 module.exports = context => {
-  const configPath = path.join(context, 'config/webpack.js')
+  const config = getConfig(context, 'webpack.js')
 
-  try {
-    const config = require(configPath)
-
-    if (typeof config.configure === 'function') {
-      return config.configure(context)
-    }
-
-    if (typeof config.configure === 'object') {
-      return config.configure
-    }
-
-    return {}
-  } catch (error) {
+  if (!config || !config.configure) {
     return {}
   }
+
+  if (typeof config.configure === 'function') {
+    return config.configure(context)
+  }
+
+  if (typeof config.configure === 'object') {
+    return config.configure
+  }
+
+  return {}
 }

@@ -4,7 +4,7 @@ process.env.FESG_ENV = 'dev'
 const chokidar = require('chokidar')
 const express = require('express')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-const getPort = require('get-port')
+const getPort = require('./utils/get-port')
 const htmlUtils = require('./html/utils')
 const merge = require('webpack-merge')
 const pageList = require('./html/page-list')
@@ -35,7 +35,7 @@ module.exports = context => {
       })
   }
 
-  getPort({ port: process.env.PORT || 8080 }).then(port => {
+  getPort(context).then(port => {
     // Format output
     // We have to delay this until we get the port
     config.plugins.push(new FriendlyErrorsPlugin({
@@ -103,5 +103,5 @@ module.exports = context => {
 
     // Start server
     app.listen(port)
-  })
+  }).catch(error => { throw error })
 }
