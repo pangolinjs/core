@@ -4,9 +4,11 @@ process.env.FESG_ENV = 'dev'
 const chokidar = require('chokidar')
 const express = require('express')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const getConfig = require('./utils/get-config')
 const getPort = require('./utils/get-port')
 const htmlUtils = require('./html/utils')
 const merge = require('webpack-merge')
+const opn = require('opn')
 const pageList = require('./html/page-list')
 const path = require('path')
 const renderNunjucks = require('./html/render-nunjucks')
@@ -17,6 +19,8 @@ module.exports = context => {
     require('./webpack.dev.config')(context),
     require('./webpack.project.config')(context)
   )
+
+  const devServerConfig = getConfig(context, 'webpack.js').devServer || {}
 
   let previousHTML = ''
 
@@ -40,13 +44,20 @@ module.exports = context => {
     // We have to delay this until we get the port
     config.plugins.push(new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
-        messages: [`Dev server running on http://localhost:${port}`]
+        messages: [`Dev server running at http://localhost:${port}`]
       }
     }))
 
     // Create webpack compiler and express app
     const compiler = webpack(config)
     const app = express()
+
+    compiler.plugin('done', () => {
+      // Auto open in browser if config is set
+      if (devServerConfig.open) {
+        opn(`http://localhost:${port}`, { app: devServerConfig.browser })
+      }
+    })
 
     // Webpack bundle inject
     const devMiddleware = require('webpack-dev-middleware')(compiler, {
@@ -78,7 +89,6 @@ module.exports = context => {
     app.get('/components/:name.html', (req, res) => {
       let name = req.params.name
       let inputPath = path.join('components', name, 'docs.njk')
-      console.log(inputPath)
 
       if (!pageList.components(context).includes(name)) {
         return res.status(404).end()

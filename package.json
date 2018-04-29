@@ -63,6 +63,7 @@
     "imagemin-webpack-plugin": "^2.0.0",
     "node-sass": "^4.7.2",
     "nunjucks": "^3.0.1",
+    "opn": "^5.3.0",
     "portfinder": "^1.0.13",
     "postcss-loader": "^2.0.9",
     "prismjs": "^1.9.0",
