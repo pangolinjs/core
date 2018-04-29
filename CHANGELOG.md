@@ -2,6 +2,19 @@
 
 
 
+## 4.6.0
+2018-04-29
+
+### Added
+- Dev server port configuration
+- Auto open in browser configuration
+- Bundling progress
+
+### Updated
+- Dependencies
+
+
+
 ## 4.6.0-beta.3
 2018-04-23
 
