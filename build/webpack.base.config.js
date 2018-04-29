@@ -56,6 +56,7 @@ module.exports = context => {
       ]
     },
     plugins: [
+      new webpack.ProgressPlugin(),
       new webpack.NoEmitOnErrorsPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
