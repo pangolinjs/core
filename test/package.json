@@ -1,11 +1,7 @@
 {
   "name": "pangolin-test",
   "version": "0.0.0",
-  "scripts": {
-    "dev": "node ../bin/pangolin.js dev",
-    "build": "node ../bin/pangolin.js build",
-    "build:dev": "node ../bin/pangolin.js build:dev"
-  },
+  "private": true,
   "ava": {
     "verbose": true,
     "files": [

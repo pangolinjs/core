@@ -1,28 +1,10 @@
 #!/usr/bin/env node
 
-switch (process.argv[2]) {
-  case 'lint:html':
-    require('../build/html/lint')(process.cwd())
-    break
-  case 'dev':
-    require('../build/dev-server')(process.cwd())
-    break
-  case 'build':
-    require('../build/build')(process.cwd())
-    break
-  case 'build:dev':
-    require('../build/build-dev')(process.cwd())
-    break
-  case 'build:proto':
-    require('../build/build-proto')(process.cwd())
-    break
-  default:
-    console.log(`
-Available commands:
+const minimist = require('minimist')
+const service = require('../lib/service')
 
-- lint:html
-- dev
-- build
-- build:dev
-- build:proto`)
-}
+const rawArgv = process.argv.slice(2)
+const args = minimist(rawArgv)
+const command = args._[0]
+
+service.run(command, args)
