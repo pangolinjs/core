@@ -1,6 +1,6 @@
-const sidebar = document.querySelector('.js-fesg-sidebar')
-const button = document.querySelector('.js-fesg-sidebar-toggle')
-const content = document.querySelector('.js-fesg-content')
+const sidebar = document.querySelector('.js-pangolin-sidebar')
+const button = document.querySelector('.js-pangolin-sidebar-toggle')
+const content = document.querySelector('.js-pangolin-content')
 const breakpoint = window.matchMedia('(min-width: 70rem)')
 
 /**
@@ -11,7 +11,7 @@ function openSidebar () {
   button.classList.add('is-active')
 
   sidebar.setAttribute('aria-hidden', 'false')
-  button.setAttribute('aria-label', 'Close Front End Styleguide sidebar')
+  button.setAttribute('aria-label', 'Close Pangolin sidebar')
 
   if (content) {
     content.classList.remove('is-expanded')
@@ -26,7 +26,7 @@ function closeSidebar () {
   button.classList.remove('is-active')
 
   sidebar.setAttribute('aria-hidden', 'true')
-  button.setAttribute('aria-label', 'Open Front End Styleguide sidebar')
+  button.setAttribute('aria-label', 'Open Pangolin sidebar')
 
   if (content) {
     content.classList.add('is-expanded')

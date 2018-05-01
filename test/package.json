@@ -1,10 +1,10 @@
 {
-  "name": "front-end-styleguide-test",
+  "name": "pangolin-test",
   "version": "0.0.0",
   "scripts": {
-    "dev": "node ../bin/front-end-styleguide.js dev",
-    "build": "node ../bin/front-end-styleguide.js build",
-    "build:dev": "node ../bin/front-end-styleguide.js build:dev"
+    "dev": "node ../bin/pangolin.js dev",
+    "build": "node ../bin/pangolin.js build",
+    "build:dev": "node ../bin/pangolin.js build:dev"
   },
   "ava": {
     "verbose": true,

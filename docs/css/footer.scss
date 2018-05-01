@@ -1,28 +1,28 @@
-.fesg-footer {
-  @include fesg-reset;
+.pangolin-footer {
+  @include pangolin-reset;
 
-  background: $fesg-color-footer-background;
-  background: var(--fesg-color-footer-background, var(--fesg-color-background, $fesg-color-footer-background));
+  background: $pangolin-color-footer-background;
+  background: var(--pangolin-color-footer-background, var(--pangolin-color-background, $pangolin-color-footer-background));
   border-top: 0.125rem solid;
-  border-top-color: $fesg-color-footer-border;
-  border-top-color: var(--fesg-color-footer-border, var(--fesg-color-border, $fesg-color-footer-border));
+  border-top-color: $pangolin-color-footer-border;
+  border-top-color: var(--pangolin-color-footer-border, var(--pangolin-color-border, $pangolin-color-footer-border));
 }
 
-.fesg-footer__inner {
-  @include fesg-reset;
-  @include fesg-content;
+.pangolin-footer__inner {
+  @include pangolin-reset;
+  @include pangolin-content;
 
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
 
-.fesg-footer__credit {
-  @include fesg-reset;
+.pangolin-footer__credit {
+  @include pangolin-reset;
 
   font-size: 0.875rem;
   text-align: center;
-  color: $fesg-color-footer-text;
-  color: var(--fesg-color-footer-text, var(--fesg-color-text, $fesg-color-footer-text));
+  color: $pangolin-color-footer-text;
+  color: var(--pangolin-color-footer-text, var(--pangolin-color-text, $pangolin-color-footer-text));
 
   a {
     color: inherit;

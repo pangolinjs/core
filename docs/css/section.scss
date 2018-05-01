@@ -1,27 +1,27 @@
-.fesg-section {
-  @include fesg-margin(3);
+.pangolin-section {
+  @include pangolin-margin(3);
 }
 
-.fesg-section__header {
-  @include fesg-reset;
+.pangolin-section__header {
+  @include pangolin-reset;
 
   margin-bottom: 1rem;
 }
 
-.fesg-section__title {
-  @include fesg-reset;
-  @include fesg-fluid-type(1.25rem, 1.75rem);
+.pangolin-section__title {
+  @include pangolin-reset;
+  @include pangolin-fluid-type(1.25rem, 1.75rem);
 
   position: relative;
   margin-bottom: 0.25em;
 
   font-weight: 600;
-  color: $fesg-color-section-text;
-  color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
+  color: $pangolin-color-section-text;
+  color: var(--pangolin-color-section-text, var(--pangolin-color-text, $pangolin-color-section-text));
 }
 
-.fesg-section__title-link {
-  @include fesg-reset;
+.pangolin-section__title-link {
+  @include pangolin-reset;
 
   display: block;
   position: absolute;
@@ -38,7 +38,7 @@
   }
 }
 
-.fesg-section__title-icon {
+.pangolin-section__title-icon {
   display: block;
   width: 0.8em;
   height: 0.8em;
@@ -46,49 +46,49 @@
   fill: currentColor;
 }
 
-.fesg-section__description {
-  @include fesg-reset;
+.pangolin-section__description {
+  @include pangolin-reset;
 
-  color: $fesg-color-section-text;
-  color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
+  color: $pangolin-color-section-text;
+  color: var(--pangolin-color-section-text, var(--pangolin-color-text, $pangolin-color-section-text));
 }
 
-.fesg-section__content {
+.pangolin-section__content {
   padding: 1rem;
 
   border: 0.0625rem solid;
-  border-color: $fesg-color-section-border;
-  border-color: var(--fesg-color-section-border, var(--fesg-color-border, $fesg-color-section-border));
+  border-color: $pangolin-color-section-border;
+  border-color: var(--pangolin-color-section-border, var(--pangolin-color-border, $pangolin-color-section-border));
 
-  @media (min-width: $fesg-breakpoint-min) {
+  @media (min-width: $pangolin-breakpoint-min) {
     padding: 2rem;
   }
 }
 
-.fesg-section__switch {
-  @include fesg-reset;
+.pangolin-section__switch {
+  @include pangolin-reset;
 
   margin-top: 1rem;
 }
 
-.fesg-section__switch-header {
+.pangolin-section__switch-header {
   display: flex;
 }
 
-.fesg-section__switch-button {
-  @include fesg-reset;
+.pangolin-section__switch-button {
+  @include pangolin-reset;
 
   position: relative;
   margin-bottom: -0.0625rem;
   padding: 0.5rem 0.75rem;
   z-index: 2;
 
-  color: $fesg-color-section-button;
-  color: var(--fesg-color-section-button, $fesg-color-section-button);
+  color: $pangolin-color-section-button;
+  color: var(--pangolin-color-section-button, $pangolin-color-section-button);
 
   border: 0.0625rem solid;
-  border-color: $fesg-color-section-border;
-  border-color: var(--fesg-color-section-border, var(--fesg-color-border, $fesg-color-section-border));
+  border-color: $pangolin-color-section-border;
+  border-color: var(--pangolin-color-section-border, var(--pangolin-color-border, $pangolin-color-section-border));
   border-radius: 0;
 
   cursor: pointer;
@@ -98,14 +98,14 @@
   }
 
   &.is-expanded {
-    background: $fesg-color-section-background;
-    background: var(--fesg-color-section-background, var(--fesg-color-background, $fesg-color-section-background));
+    background: $pangolin-color-section-background;
+    background: var(--pangolin-color-section-background, var(--pangolin-color-background, $pangolin-color-section-background));
     border-bottom-color: transparent;
   }
 }
 
-.fesg-section__switch-panel {
-  @include fesg-reset;
+.pangolin-section__switch-panel {
+  @include pangolin-reset;
 
   display: none;
   position: relative;
@@ -115,14 +115,14 @@
 
   font-size: 1rem;
   line-height: 1.4;
-  color: $fesg-color-section-text;
-  color: var(--fesg-color-section-text, var(--fesg-color-text, $fesg-color-section-text));
+  color: $pangolin-color-section-text;
+  color: var(--pangolin-color-section-text, var(--pangolin-color-text, $pangolin-color-section-text));
 
-  background: $fesg-color-section-background;
-  background: var(--fesg-color-section-background, var(--fesg-color-background, $fesg-color-section-background));
+  background: $pangolin-color-section-background;
+  background: var(--pangolin-color-section-background, var(--pangolin-color-background, $pangolin-color-section-background));
   border: 0.0625rem solid;
-  border-color: $fesg-color-section-border;
-  border-color: var(--fesg-color-section-border, var(--fesg-color-border, $fesg-color-section-border));
+  border-color: $pangolin-color-section-border;
+  border-color: var(--pangolin-color-section-border, var(--pangolin-color-border, $pangolin-color-section-border));
 
   &.is-expanded {
     display: block;
@@ -143,7 +143,7 @@
   }
 }
 
-.fesg-section__switch-scroll {
+.pangolin-section__switch-scroll {
   max-height: 20em;
   padding: 1rem 0.75rem;
 
@@ -158,42 +158,42 @@
   }
 }
 
-.fesg-section__switch-code-copy {
-  @include fesg-reset;
+.pangolin-section__switch-code-copy {
+  @include pangolin-reset;
 
   position: absolute;
   top: 0;
   right: 0;
   padding: 0.5rem 0.75rem;
 
-  color: $fesg-color-section-button;
-  color: var(--fesg-color-section-button, $fesg-color-section-button);
+  color: $pangolin-color-section-button;
+  color: var(--pangolin-color-section-button, $pangolin-color-section-button);
 
-  background: $fesg-color-section-background;
-  background: var(--fesg-color-section-background, var(--fesg-color-background, $fesg-color-section-background));
+  background: $pangolin-color-section-background;
+  background: var(--pangolin-color-section-background, var(--pangolin-color-background, $pangolin-color-section-background));
   border: 0.0625rem solid;
   border-top: none;
   border-right: none;
-  border-color: $fesg-color-section-border;
-  border-color: var(--fesg-color-section-border, var(--fesg-color-border, $fesg-color-section-border));
+  border-color: $pangolin-color-section-border;
+  border-color: var(--pangolin-color-section-border, var(--pangolin-color-border, $pangolin-color-section-border));
   border-radius: 0;
 
   cursor: pointer;
 
   &.is-active {
-    color: $fesg-color-sidebar-button-foreground;
-    color: var(--fesg-color-sidebar-button-foreground, $fesg-color-sidebar-button-foreground);
+    color: $pangolin-color-sidebar-button-foreground;
+    color: var(--pangolin-color-sidebar-button-foreground, $pangolin-color-sidebar-button-foreground);
 
-    background: $fesg-color-sidebar-button-background;
-    background: var(--fesg-color-sidebar-button-background, var(--fesg-color-primary, $fesg-color-sidebar-button-background));
+    background: $pangolin-color-sidebar-button-background;
+    background: var(--pangolin-color-sidebar-button-background, var(--pangolin-color-primary, $pangolin-color-sidebar-button-background));
   }
 }
 
-.fesg-section__switch-pre {
+.pangolin-section__switch-pre {
   margin: 0;
   white-space: pre;
 }
 
-.fesg-section__switch-code {
+.pangolin-section__switch-code {
   white-space: pre;
 }

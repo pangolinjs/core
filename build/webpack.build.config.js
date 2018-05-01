@@ -35,8 +35,8 @@ module.exports = context => {
         {
           context: __dirname,
           from: '../dist',
-          to: 'fesg',
-          ignore: [process.env.FESG_ENV === 'build:dev' ? '' : '*']
+          to: 'pangolin',
+          ignore: [process.env.PANGOLIN_ENV === 'build:dev' ? '' : '*']
         }
       ]),
       new ImageminPlugin({

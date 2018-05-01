@@ -11,36 +11,36 @@
     <meta name="description" content="{{ page.description }}">
     {% endif %}
 
-    {{ fesg.head }}
+    {{ pangolin.head }}
 
     {% block head %}{% endblock %}
   </head>
-  <body class="fesg-body">
-    {% if process.env.FESG_ENV == 'dev' or process.env.FESG_ENV == 'build:dev' %}
-    {{ fesg.sidebar }}
+  <body class="pangolin-body">
+    {% if process.env.PANGOLIN_ENV == 'dev' or process.env.PANGOLIN_ENV == 'build:dev' %}
+    {{ pangolin.sidebar }}
     {% endif %}
 
-    <div class="fesg-content js-fesg-content">
+    <div class="pangolin-content js-pangolin-content">
 
       {% if page.title or page.description %}
-      <header class="fesg-header">
+      <header class="pangolin-header">
 
         {% if page.title %}
-        <h1 class="fesg-header__title">{{ page.title }}</h1>
+        <h1 class="pangolin-header__title">{{ page.title }}</h1>
         {% endif %}
 
         {% if page.description %}
-        <p class="fesg-header__description">{{ page.description }}</p>
+        <p class="pangolin-header__description">{{ page.description }}</p>
         {% endif %}
 
       </header>
       {% endif %}
 
-      <main class="fesg-main">
+      <main class="pangolin-main">
         {% block body %}{% endblock %}
       </main>
 
-      {{ fesg.footer }}
+      {{ pangolin.footer }}
     </div>
   </body>
 </html>

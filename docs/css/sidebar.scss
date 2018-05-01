@@ -1,21 +1,21 @@
-.fesg-sidebar {
-  @include fesg-reset;
+.pangolin-sidebar {
+  @include pangolin-reset;
 
   position: fixed;
   top: 0;
   left: 0;
-  width: $fesg-sidebar-width;
+  width: $pangolin-sidebar-width;
   height: 100%;
-  padding: $fesg-sidebar-padding 0;
+  padding: $pangolin-sidebar-padding 0;
   transform: translateX(-100%);
 
-  z-index: $fesg-z-index-sidebar;
+  z-index: $pangolin-z-index-sidebar;
 
-  background: $fesg-color-sidebar-background;
-  background: var(--fesg-color-sidebar-background, $fesg-color-sidebar-background);
+  background: $pangolin-color-sidebar-background;
+  background: var(--pangolin-color-sidebar-background, $pangolin-color-sidebar-background);
   border-right: 0.125rem solid;
-  border-right-color: $fesg-color-sidebar-border;
-  border-right-color: var(--fesg-color-sidebar-border, var(--fesg-color-border, $fesg-color-sidebar-border));
+  border-right-color: $pangolin-color-sidebar-border;
+  border-right-color: var(--pangolin-color-sidebar-border, var(--pangolin-color-border, $pangolin-color-sidebar-border));
 
   overflow-y: auto;
 
@@ -25,50 +25,50 @@
   }
 
   &.is-animated {
-    transition: transform $fesg-transition-sidebar;
+    transition: transform $pangolin-transition-sidebar;
   }
 
-  @media (min-width: $fesg-breakpoint-sidebar) {
+  @media (min-width: $pangolin-breakpoint-sidebar) {
     &.is-open {
       box-shadow: none;
     }
   }
 }
 
-.fesg-sidebar__form {
-  @include fesg-reset;
+.pangolin-sidebar__form {
+  @include pangolin-reset;
 
   position: relative;
-  margin: 0 $fesg-sidebar-padding;
+  margin: 0 $pangolin-sidebar-padding;
 }
 
-.fesg-sidebar__search {
-  @include fesg-reset;
+.pangolin-sidebar__search {
+  @include pangolin-reset;
 
   display: block;
   width: 100%;
-  padding: ($fesg-sidebar-padding / 1.5) ($fesg-sidebar-padding + 1.5rem) ($fesg-sidebar-padding / 1.5) $fesg-sidebar-padding;
+  padding: ($pangolin-sidebar-padding / 1.5) ($pangolin-sidebar-padding + 1.5rem) ($pangolin-sidebar-padding / 1.5) $pangolin-sidebar-padding;
 
   border: 0.0625rem solid;
-  border-color: $fesg-color-sidebar-border;
-  border-color: var(--fesg-color-sidebar-border, var(--fesg-color-border, $fesg-color-sidebar-border));
+  border-color: $pangolin-color-sidebar-border;
+  border-color: var(--pangolin-color-sidebar-border, var(--pangolin-color-border, $pangolin-color-sidebar-border));
 }
 
-.fesg-sidebar__search-reset {
-  @include fesg-reset;
+.pangolin-sidebar__search-reset {
+  @include pangolin-reset;
 
   display: none;
   position: absolute;
   width: 1.25rem;
   height: 1.25rem;
   top: 50%;
-  right: ($fesg-sidebar-padding / 1.5);
+  right: ($pangolin-sidebar-padding / 1.5);
 
   transform: translateY(-50%);
 
   border: 0.0625rem solid;
-  border-color: $fesg-color-sidebar-button-background;
-  border-color: var(--fesg-color-sidebar-button-background, var(--fesg-color-primary, $fesg-color-sidebar-button-background));
+  border-color: $pangolin-color-sidebar-button-background;
+  border-color: var(--pangolin-color-sidebar-button-background, var(--pangolin-color-primary, $pangolin-color-sidebar-button-background));
   border-radius: 50%;
 
   cursor: pointer;
@@ -88,8 +88,8 @@
     top: 50%;
     left: 50%;
 
-    background: $fesg-color-sidebar-button-background;
-    background: var(--fesg-color-sidebar-button-background, var(--fesg-color-primary, $fesg-color-sidebar-button-background));
+    background: $pangolin-color-sidebar-button-background;
+    background: var(--pangolin-color-sidebar-button-background, var(--pangolin-color-primary, $pangolin-color-sidebar-button-background));
   }
 
   &::before {
@@ -101,8 +101,8 @@
   }
 }
 
-.fesg-sidebar__section {
-  @include fesg-reset;
+.pangolin-sidebar__section {
+  @include pangolin-reset;
 
   margin-bottom: 1.5rem;
 
@@ -111,62 +111,62 @@
   }
 }
 
-.fesg-sidebar__title,
-.fesg-sidebar__heading {
-  @include fesg-reset;
+.pangolin-sidebar__title,
+.pangolin-sidebar__heading {
+  @include pangolin-reset;
 
-  margin: 0 $fesg-sidebar-padding 0.5rem;
+  margin: 0 $pangolin-sidebar-padding 0.5rem;
 
   font-size: 1.125rem;
   font-weight: 600;
-  color: $fesg-color-sidebar-text;
-  color: var(--fesg-color-sidebar-text, var(--fesg-color-text, $fesg-color-sidebar-text));
+  color: $pangolin-color-sidebar-text;
+  color: var(--pangolin-color-sidebar-text, var(--pangolin-color-text, $pangolin-color-sidebar-text));
 }
 
-.fesg-sidebar__heading--title {
+.pangolin-sidebar__heading--title {
   font-size: 1.25rem;
 }
 
-.fesg-sidebar__list {
-  @include fesg-reset;
+.pangolin-sidebar__list {
+  @include pangolin-reset;
 
   list-style: none;
 }
 
-.fesg-sidebar__item {
-  @include fesg-reset;
+.pangolin-sidebar__item {
+  @include pangolin-reset;
 }
 
-.fesg-sidebar__item--empty {
-  padding: 0.5rem $fesg-sidebar-padding;
+.pangolin-sidebar__item--empty {
+  padding: 0.5rem $pangolin-sidebar-padding;
 }
 
-.fesg-sidebar__link {
-  @include fesg-reset;
+.pangolin-sidebar__link {
+  @include pangolin-reset;
 
   display: block;
-  padding: 0.5rem $fesg-sidebar-padding;
+  padding: 0.5rem $pangolin-sidebar-padding;
 
   font-size: 1rem;
   text-decoration: none;
-  color: $fesg-color-sidebar-text;
-  color: var(--fesg-color-sidebar-text, var(--fesg-color-text, $fesg-color-sidebar-text));
+  color: $pangolin-color-sidebar-text;
+  color: var(--pangolin-color-sidebar-text, var(--pangolin-color-text, $pangolin-color-sidebar-text));
 
   &:hover,
   &:focus,
   &.is-active {
-    color: $fesg-color-sidebar-highlight-text;
-    color: var(--fesg-color-sidebar-highlight-text, var(--fesg-color-text, $fesg-color-sidebar-highlight-text));
+    color: $pangolin-color-sidebar-highlight-text;
+    color: var(--pangolin-color-sidebar-highlight-text, var(--pangolin-color-text, $pangolin-color-sidebar-highlight-text));
 
-    background: $fesg-color-sidebar-highlight-background;
-    background: var(--fesg-color-sidebar-highlight-background, var(--fesg-color-background, $fesg-color-sidebar-highlight-background));
+    background: $pangolin-color-sidebar-highlight-background;
+    background: var(--pangolin-color-sidebar-highlight-background, var(--pangolin-color-background, $pangolin-color-sidebar-highlight-background));
   }
 
   &.is-active {
-    padding-left: ($fesg-sidebar-padding - 0.25rem);
+    padding-left: ($pangolin-sidebar-padding - 0.25rem);
 
     border-left: 0.25rem solid;
-    border-left-color: $fesg-color-sidebar-highlight-border;
-    border-left-color: var(--fesg-color-sidebar-highlight-border, var(--fesg-color-primary, $fesg-color-sidebar-highlight-border));
+    border-left-color: $pangolin-color-sidebar-highlight-border;
+    border-left-color: var(--pangolin-color-sidebar-highlight-border, var(--pangolin-color-primary, $pangolin-color-sidebar-highlight-border));
   }
 }

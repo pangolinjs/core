@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'production'
-process.env.FESG_ENV = 'build:dev'
+process.env.PANGOLIN_ENV = 'build:dev'
 
 const fs = require('fs-extra')
 const glob = require('glob')

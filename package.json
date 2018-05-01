@@ -1,7 +1,7 @@
 {
-  "name": "front-end-styleguide",
+  "name": "@pangolin/core",
   "version": "4.6.0",
-  "description": "Pattern library framework for styleguide driven front end development with Sass, ES6+ and Nunjucks.",
+  "description": "Framework for componentized front end development with Nunjucks, Sass, and JavaScript",
   "keywords": [
     "babel",
     "css",
@@ -19,13 +19,13 @@
     "name": "Fynn Becker",
     "email": "info@fynn-becker.de"
   },
-  "homepage": "https://github.com/front-end-styleguide/core",
+  "homepage": "https://github.com/pangolinjs/core",
   "repository": {
     "type": "git",
-    "url": "https://github.com/front-end-styleguide/core"
+    "url": "https://github.com/pangolinjs/core"
   },
   "bugs": {
-    "url": "https://github.com/front-end-styleguide/core/issues",
+    "url": "https://github.com/pangolinjs/core/issues",
     "email": "info@fynn-becker.de"
   },
   "scripts": {
@@ -33,17 +33,17 @@
     "lint": "run-s -n lint:js lint:css lint:html",
     "lint:js": "eslint \"**/*.js\"",
     "lint:css": "stylelint \"**/*.?(s)css\" --syntax scss",
-    "lint:html": "cd test && node ../bin/front-end-styleguide.js lint:html",
+    "lint:html": "cd test && node ../bin/pangolin.js lint:html",
     "test": "run-s -n install test:init test:unit test:e2e test:build test:build:dev test:build:proto",
     "test:init": "cd test && npm install",
     "test:unit": "cd test && nyc ava",
-    "test:e2e": "cd test && testcafe chrome:headless,firefox:headless test/e2e --app \"node ../bin/front-end-styleguide.js dev\" --app-init-delay 4000",
-    "test:dev": "cd test && node ../bin/front-end-styleguide.js dev",
-    "test:build": "cd test && node ../bin/front-end-styleguide.js build",
-    "test:build:dev": "cd test && node ../bin/front-end-styleguide.js build:dev",
-    "test:build:proto": "cd test && node ../bin/front-end-styleguide.js build:proto"
+    "test:e2e": "cd test && testcafe chrome:headless,firefox:headless test/e2e --app \"node ../bin/pangolin.js dev\" --app-init-delay 4000",
+    "test:dev": "cd test && node ../bin/pangolin.js dev",
+    "test:build": "cd test && node ../bin/pangolin.js build",
+    "test:build:dev": "cd test && node ../bin/pangolin.js build:dev",
+    "test:build:proto": "cd test && node ../bin/pangolin.js build:proto"
   },
-  "bin": "bin/front-end-styleguide.js",
+  "bin": "bin/pangolin.js",
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

@@ -1,20 +1,20 @@
-# <img alt="" src="https://cdn.rawgit.com/front-end-styleguide/brand/master/mark/mark.svg" width="24"> Front End Styleguide
+# <img alt="" src="https://cdn.rawgit.com/pangolinjs/brand/master/icon/icon.svg" width="24"> Pangolin
 
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][dependencies-image]][npm-url]
 [![JavaScript Standard Style][standard-image]][standard-url]
 
-Pattern library framework for styleguide driven development with Sass, ES6+ and Nunjucks.
+Framework for componentized front end development with Nunjucks, Sass, and JavaScript.
 
 
 ## Installation
 
 ```bash
 # Yarn
-yarn global add front-end-styleguide-cli
+yarn global add @pangolin/cli
 
 # npm
-npm install -g front-end-styleguide-cli
+npm install -g @pangolin/cli
 ```
 
 
@@ -23,7 +23,7 @@ npm install -g front-end-styleguide-cli
 ```bash
 mkdir new-project
 cd new-project
-front-end-styleguide init
+pangolin init
 ```
 
 
@@ -61,7 +61,7 @@ yarn test
 npm run test
 ```
 
-For more information take a look at the [docs](https://github.com/front-end-styleguide/docs).
+For more information take a look at the [docs](https://pangolinjs.org).
 
 
 ## Test the core package
@@ -90,10 +90,10 @@ npm run test:build:proto
 ```
 
 
-[npm-image]: https://img.shields.io/npm/v/front-end-styleguide.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/front-end-styleguide
+[npm-image]: https://img.shields.io/npm/v/@pangolin/core.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/@pangolin/core
 
-[dependencies-image]: https://img.shields.io/david/front-end-styleguide/core.svg?style=flat-square
+[dependencies-image]: https://img.shields.io/david/pangolinjs/core.svg?style=flat-square
 
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square
 [standard-url]: https://standardjs.com

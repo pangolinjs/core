@@ -13,7 +13,7 @@ const options = {
   method: 'POST',
   headers: {
     'Content-Type': 'text/html; charset=utf-8',
-    'User-Agent': 'front-end-styleguide'
+    'User-Agent': '@pangolin/core'
   }
 }
 

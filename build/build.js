@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'production'
-process.env.FESG_ENV = 'build'
+process.env.PANGOLIN_ENV = 'build'
 
 const fs = require('fs-extra')
 const merge = require('webpack-merge')

@@ -1,4 +1,4 @@
-const button = document.querySelector('.js-fesg-sidebar-toggle')
+const button = document.querySelector('.js-pangolin-sidebar-toggle')
 
 let dragging = false
 let yPosition = 0

@@ -1,4 +1,4 @@
-.fesg-sr-only {
+.pangolin-sr-only {
   position: absolute;
 
   width: 1px;
@@ -14,29 +14,29 @@
   overflow: hidden;
 }
 
-.fesg-content {
-  @include fesg-reset-pseudo;
+.pangolin-content {
+  @include pangolin-reset-pseudo;
 
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 
-  @media (min-width: $fesg-breakpoint-sidebar) {
-    margin-left: $fesg-sidebar-width;
+  @media (min-width: $pangolin-breakpoint-sidebar) {
+    margin-left: $pangolin-sidebar-width;
 
     &.is-expanded {
       margin-left: 0;
     }
 
     &.is-animated {
-      transition: margin-left $fesg-transition-sidebar;
+      transition: margin-left $pangolin-transition-sidebar;
     }
   }
 }
 
-.fesg-main {
-  @include fesg-reset-pseudo;
-  @include fesg-content;
+.pangolin-main {
+  @include pangolin-reset-pseudo;
+  @include pangolin-content;
 
   flex-grow: 1;
 }

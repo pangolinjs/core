@@ -2,15 +2,15 @@
   @return $value / ($value * 0 + 1);
 }
 
-@mixin fesg-reset-pseudo {
+@mixin pangolin-reset-pseudo {
   &::before,
   &::after {
     display: none;
   }
 }
 
-@mixin fesg-reset {
-  @include fesg-reset-pseudo;
+@mixin pangolin-reset {
+  @include pangolin-reset-pseudo;
 
   box-sizing: border-box;
   margin: 0;
@@ -20,41 +20,41 @@
   font-weight: 400;
   text-transform: none;
   text-decoration: none;
-  color: $fesg-color-text;
-  color: var(--fesg-color-text, $fesg-color-text);
+  color: $pangolin-color-text;
+  color: var(--pangolin-color-text, $pangolin-color-text);
 
   background: none;
   border: none;
 }
 
-@mixin fesg-content {
+@mixin pangolin-content {
   padding-left: 5%;
   padding-right: 5%;
 
-  @media (min-width: $fesg-breakpoint-sidebar) {
+  @media (min-width: $pangolin-breakpoint-sidebar) {
     padding-left: 10%;
     padding-right: 10%;
   }
 }
 
-@mixin fesg-margin ($multiplier: 1) {
-  margin-bottom: ((strip-unit($fesg-spacing) / 100) * $fesg-breakpoint-min * $multiplier);
+@mixin pangolin-margin ($multiplier: 1) {
+  margin-bottom: ((strip-unit($pangolin-spacing) / 100) * $pangolin-breakpoint-min * $multiplier);
 
-  @media (min-width: $fesg-breakpoint-min) {
-    margin-bottom: ($fesg-spacing * $multiplier);
+  @media (min-width: $pangolin-breakpoint-min) {
+    margin-bottom: ($pangolin-spacing * $multiplier);
   }
 
-  @media (min-width: $fesg-breakpoint-max) {
-    margin-bottom: ((strip-unit($fesg-spacing) / 100) * $fesg-breakpoint-max * $multiplier);
+  @media (min-width: $pangolin-breakpoint-max) {
+    margin-bottom: ((strip-unit($pangolin-spacing) / 100) * $pangolin-breakpoint-max * $multiplier);
   }
 }
 
 // Fluid Type source:
 // https://css-tricks.com/snippets/css/fluid-typography/
 
-@mixin fesg-fluid-type ($min-font-size, $max-font-size) {
-  $min-vw: $fesg-breakpoint-min;
-  $max-vw: $fesg-breakpoint-max;
+@mixin pangolin-fluid-type ($min-font-size, $max-font-size) {
+  $min-vw: $pangolin-breakpoint-min;
+  $max-vw: $pangolin-breakpoint-max;
 
   $unit-1: unit($min-vw);
   $unit-2: unit($max-vw);

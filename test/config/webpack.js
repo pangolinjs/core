@@ -16,7 +16,7 @@
 
 // module.exports = {
 //   configure: context => {
-//     if (process.env.FESG_ENV === 'build') {
+//     if (process.env.PANGOLIN_ENV === 'build') {
 //       return {
 //         output: {
 //           path: path.join(context, 'output-build')
@@ -24,7 +24,7 @@
 //       }
 //     }
 
-//     if (process.env.FESG_ENV === 'build:dev') {
+//     if (process.env.PANGOLIN_ENV === 'build:dev') {
 //       return {
 //         output: {
 //           path: path.join(context, 'output-build-dev')

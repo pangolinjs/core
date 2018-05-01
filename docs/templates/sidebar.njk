@@ -1,37 +1,37 @@
 <button
-  class="fesg-sidebar-toggle js-fesg-sidebar-toggle"
-  aria-controls="fesg-sidebar"
-  aria-label="Open Front End Styleguide sidebar">
-  <span class="fesg-sidebar-toggle__line"></span>
-  <span class="fesg-sidebar-toggle__line"></span>
-  <span class="fesg-sidebar-toggle__line"></span>
+  class="pangolin-sidebar-toggle js-pangolin-sidebar-toggle"
+  aria-controls="pangolin-sidebar"
+  aria-label="Open Pangolin sidebar">
+  <span class="pangolin-sidebar-toggle__line"></span>
+  <span class="pangolin-sidebar-toggle__line"></span>
+  <span class="pangolin-sidebar-toggle__line"></span>
 </button>
 
-<aside id="fesg-sidebar" class="fesg-sidebar js-fesg-sidebar" aria-hidden="true">
-  <nav class="fesg-sidebar__nav">
+<aside id="pangolin-sidebar" class="pangolin-sidebar js-pangolin-sidebar" aria-hidden="true">
+  <nav class="pangolin-sidebar__nav">
 
-    <section class="fesg-sidebar__section">
-      <h2 class="fesg-sidebar__heading fesg-sidebar__heading--title">Front End Styleguide</h2>
-      <form class="fesg-sidebar__form js-fesg-sidebar-form" autocomplete="off">
-        <label for="fesg-sidebar-search" class="fesg-sr-only">Search Components and Prototypes</label>
+    <section class="pangolin-sidebar__section">
+      <h2 class="pangolin-sidebar__heading pangolin-sidebar__heading--title">Pangolin</h2>
+      <form class="pangolin-sidebar__form js-pangolin-sidebar-form" autocomplete="off">
+        <label for="pangolin-sidebar-search" class="pangolin-sr-only">Search Components and Prototypes</label>
         <input
           type="search"
-          id="fesg-sidebar-search"
-          class="fesg-sidebar__search js-fesg-sidebar-search"
+          id="pangolin-sidebar-search"
+          class="pangolin-sidebar__search js-pangolin-sidebar-search"
           placeholder="Search">
-        <button class="fesg-sidebar__search-reset js-fesg-sidebar-search-reset">
-          <span class="fesg-sr-only">Reset Search</span>
+        <button class="pangolin-sidebar__search-reset js-pangolin-sidebar-search-reset">
+          <span class="pangolin-sr-only">Reset Search</span>
         </button>
       </form>
     </section>
 
-    <section class="fesg-sidebar__section">
-      <h3 class="fesg-sidebar__heading">Components</h3>
-      <ul class="fesg-sidebar__list js-fesg-sidebar-components">
+    <section class="pangolin-sidebar__section">
+      <h3 class="pangolin-sidebar__heading">Components</h3>
+      <ul class="pangolin-sidebar__list js-pangolin-sidebar-components">
         {% for component in components %}
-        <li class="fesg-sidebar__item">
+        <li class="pangolin-sidebar__item">
           <a
-            class="fesg-sidebar__link {{ 'is-active' if component.active }}"
+            class="pangolin-sidebar__link {{ 'is-active' if component.active }}"
             href="{{ component.url | relative }}">
             {{ component.name }}
           </a>
@@ -40,13 +40,13 @@
       </ul>
     </section>
 
-    <section class="fesg-sidebar__section">
-      <h3 class="fesg-sidebar__heading">Prototypes</h3>
-      <ul class="fesg-sidebar__list js-fesg-sidebar-prototypes">
+    <section class="pangolin-sidebar__section">
+      <h3 class="pangolin-sidebar__heading">Prototypes</h3>
+      <ul class="pangolin-sidebar__list js-pangolin-sidebar-prototypes">
         {% for prototype in prototypes %}
-        <li class="fesg-sidebar__item">
+        <li class="pangolin-sidebar__item">
           <a
-            class="fesg-sidebar__link {{ 'is-active' if prototype.active }}"
+            class="pangolin-sidebar__link {{ 'is-active' if prototype.active }}"
             href="{{ prototype.url | relative }}">
             {{ prototype.name }}
           </a>
@@ -58,7 +58,7 @@
   </nav>
 </aside>
 
-<script class="js-fesg-sidebar-page-data" type="application/json">
+<script class="js-pangolin-sidebar-page-data" type="application/json">
 [
   {% for page in components %}
   {

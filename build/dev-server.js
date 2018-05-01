@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'development'
-process.env.FESG_ENV = 'dev'
+process.env.PANGOLIN_ENV = 'dev'
 
 const chokidar = require('chokidar')
 const express = require('express')
@@ -82,8 +82,8 @@ module.exports = context => {
     // Add assets path
     app.use('/assets', express.static(path.join(context, 'src/assets')))
 
-    // Add Front End Styleguide assets path
-    app.use('/fesg', express.static(path.join(__dirname, '../dist')))
+    // Add Pangolin assets path
+    app.use('/pangolin', express.static(path.join(__dirname, '../dist')))
 
     // Render components and send HTML
     app.get('/components/:name.html', (req, res) => {

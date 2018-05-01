@@ -16,7 +16,7 @@ module.exports = context => {
     context: context,
     entry: './src/main.js',
     output: {
-      path: outputPaths[process.env.FESG_ENV],
+      path: outputPaths[process.env.PANGOLIN_ENV],
       filename: 'js/[name].js',
       publicPath: '/'
     },
@@ -31,7 +31,7 @@ module.exports = context => {
           loader: 'eslint-loader',
           enforce: 'pre',
           options: {
-            emitWarning: process.env.FESG_ENV === 'dev'
+            emitWarning: process.env.PANGOLIN_ENV === 'dev'
           }
         },
         {
@@ -61,15 +61,15 @@ module.exports = context => {
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: `"${process.env.NODE_ENV}"`,
-          FESG_ENV: `"${process.env.FESG_ENV}"`
+          PANGOLIN_ENV: `"${process.env.PANGOLIN_ENV}"`
         }
       }),
       new StylelintPlugin({
-        emitErrors: process.env.FESG_ENV.startsWith('build'),
+        emitErrors: process.env.PANGOLIN_ENV.startsWith('build'),
         syntax: 'scss'
       }),
       new ExtractTextPlugin({
-        disable: process.env.FESG_ENV === 'dev',
+        disable: process.env.PANGOLIN_ENV === 'dev',
         filename: 'css/[name].css'
       })
     ]

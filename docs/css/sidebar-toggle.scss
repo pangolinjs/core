@@ -1,18 +1,18 @@
-.fesg-sidebar-toggle {
-  @include fesg-reset;
+.pangolin-sidebar-toggle {
+  @include pangolin-reset;
 
   position: fixed;
   top: 0;
-  left: ($fesg-sidebar-width - 0.125rem);
+  left: ($pangolin-sidebar-width - 0.125rem);
   width: 2rem;
   height: 2rem;
   padding: 0;
-  transform: translateX(-$fesg-sidebar-width);
+  transform: translateX(-$pangolin-sidebar-width);
 
-  z-index: ($fesg-z-index-sidebar + 1);
+  z-index: ($pangolin-z-index-sidebar + 1);
 
-  background: $fesg-color-sidebar-button-background;
-  background: var(--fesg-color-sidebar-button-background, var(--fesg-color-primary, $fesg-color-sidebar-button-background));
+  background: $pangolin-color-sidebar-button-background;
+  background: var(--pangolin-color-sidebar-button-background, var(--pangolin-color-primary, $pangolin-color-sidebar-button-background));
   border: none;
   border-radius: 0;
 
@@ -23,25 +23,25 @@
   }
 
   &.is-animated {
-    transition: transform $fesg-transition-sidebar;
+    transition: transform $pangolin-transition-sidebar;
   }
 }
 
-.fesg-sidebar-toggle__line {
-  @include fesg-reset;
+.pangolin-sidebar-toggle__line {
+  @include pangolin-reset;
 
   position: absolute;
   top: calc(50% - 0.0625rem);
   left: 20%;
   height: 0.125rem;
 
-  background: $fesg-color-sidebar-button-foreground;
-  background: var(--fesg-color-sidebar-button-foreground, $fesg-color-sidebar-button-foreground);
+  background: $pangolin-color-sidebar-button-foreground;
+  background: var(--pangolin-color-sidebar-button-foreground, $pangolin-color-sidebar-button-foreground);
   border-radius: 0.0625rem;
 
   transition:
-    transform $fesg-transition-sidebar,
-    opacity $fesg-transition-sidebar;
+    transform $pangolin-transition-sidebar,
+    opacity $pangolin-transition-sidebar;
 
   &:nth-child(1) {
     width: 60%;

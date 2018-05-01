@@ -2,49 +2,49 @@
 {% set width_style = 'style="width: ' + width + '"' if width %}
 
 <section
-  class="fesg-section"
-  {% if title %}id="fesg_{{ title | replace(r/\W/g, "_") | lower }}"{% endif %}>
+  class="pangolin-section"
+  {% if title %}id="pangolin_{{ title | replace(r/\W/g, "_") | lower }}"{% endif %}>
 
   {% if title or description %}
-  <header class="fesg-section__header">
+  <header class="pangolin-section__header">
 
     {% if title %}
-    <h2 class="fesg-section__title">
+    <h2 class="pangolin-section__title">
       <a
         aria-label="Link for {{ title }}"
-        class="fesg-section__title-link"
-        href="#fesg_{{ title | replace(r/\W/g, "_") | lower }}">
-        <svg class="fesg-section__title-icon" height="24" viewBox="0 0 24 24" width="24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg>
+        class="pangolin-section__title-link"
+        href="#pangolin_{{ title | replace(r/\W/g, "_") | lower }}">
+        <svg class="pangolin-section__title-icon" height="24" viewBox="0 0 24 24" width="24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24.973.973 0 0 1 0-1.42z"/></svg>
       </a>
       {{ title }}
     </h2>
     {% endif %}
 
     {% if description %}
-    <p class="fesg-section__description">{{ description }}</p>
+    <p class="pangolin-section__description">{{ description }}</p>
     {% endif %}
 
   </header>
   {% endif %}
 
   <div
-    class="fesg-section__content"
+    class="pangolin-section__content"
     {{ background_style | safe }}>
     <div
-      class="fesg-section__body"
+      class="pangolin-section__body"
       {{ width_style | safe }}>
       {{ body }}
     </div>
   </div>
 
   {% if usage or code %}
-  <div class="fesg-section__switch js-fesg-section-switch">
+  <div class="pangolin-section__switch js-pangolin-section-switch">
 
-    <div class="fesg-section__switch-header">
+    <div class="pangolin-section__switch-header">
 
       {% if usage %}
       <button
-        class="fesg-section__switch-button js-fesg-section-switch-button"
+        class="pangolin-section__switch-button js-pangolin-section-switch-button"
         data-switch-to="usage">
         Usage
       </button>
@@ -52,7 +52,7 @@
 
       {% if code %}
       <button
-        class="fesg-section__switch-button js-fesg-section-switch-button"
+        class="pangolin-section__switch-button js-pangolin-section-switch-button"
         data-switch-to="code">
         Code
       </button>
@@ -60,13 +60,13 @@
 
     </div>
 
-    <div class="fesg-section__switch-body">
+    <div class="pangolin-section__switch-body">
 
       {% if usage %}
       <div
-        class="fesg-section__switch-panel js-fesg-section-switch-panel"
+        class="pangolin-section__switch-panel js-pangolin-section-switch-panel"
         data-switch-panel="usage">
-        <div class="fesg-section__switch-scroll">
+        <div class="pangolin-section__switch-scroll">
           {{ usage }}
         </div>
       </div>
@@ -74,11 +74,11 @@
 
       {% if code %}
       <div
-        class="fesg-section__switch-panel js-fesg-section-switch-panel"
+        class="pangolin-section__switch-panel js-pangolin-section-switch-panel"
         data-switch-panel="code">
-        <button class="fesg-section__switch-code-copy js-fesg-section-copy">Copy</button>
-        <div class="fesg-section__switch-scroll">
-          <pre class="fesg-section__switch-pre"><code class="fesg-section__switch-code js-fesg-section-code">{{ code }}</code></pre>
+        <button class="pangolin-section__switch-code-copy js-pangolin-section-copy">Copy</button>
+        <div class="pangolin-section__switch-scroll">
+          <pre class="pangolin-section__switch-pre"><code class="pangolin-section__switch-code js-pangolin-section-code">{{ code }}</code></pre>
         </div>
       </div>
       {% endif %}

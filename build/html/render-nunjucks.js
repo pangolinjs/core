@@ -62,7 +62,7 @@ module.exports = function (context, file) {
     env.addGlobal('process', {
       env: {
         NODE_ENV: process.env.NODE_ENV,
-        FESG_ENV: process.env.FESG_ENV
+        PANGOLIN_ENV: process.env.PANGOLIN_ENV
       }
     })
 
@@ -92,7 +92,7 @@ module.exports = function (context, file) {
     }
 
     // Add components, footer, and sidebar templates
-    env.addGlobal('fesg', {
+    env.addGlobal('pangolin', {
       head: head(),
       sidebar: sidebar(),
       footer: footer(),

@@ -2,8 +2,8 @@ import ClipboardJS from 'clipboard'
 import Prism from 'prismjs'
 import 'prismjs/themes/prism.css'
 
-const codeElements = document.querySelectorAll('.js-fesg-section-code')
-const codeCopy = document.querySelectorAll('.js-fesg-section-copy')
+const codeElements = document.querySelectorAll('.js-pangolin-section-code')
+const codeCopy = document.querySelectorAll('.js-pangolin-section-copy')
 
 for (let i = 0; i < codeElements.length; i++) {
   let code = codeElements[i].textContent
@@ -75,8 +75,8 @@ class Navigation {
     this.tabs = []
 
     let panels = {}
-    let buttonElements = container.querySelectorAll('.js-fesg-section-switch-button')
-    let panelElements = container.querySelectorAll('.js-fesg-section-switch-panel')
+    let buttonElements = container.querySelectorAll('.js-pangolin-section-switch-button')
+    let panelElements = container.querySelectorAll('.js-pangolin-section-switch-panel')
 
     for (let i = 0; i < panelElements.length; i++) {
       panels[panelElements[i].dataset.switchPanel] = panelElements[i]
@@ -113,7 +113,7 @@ class Navigation {
   }
 }
 
-const containers = document.querySelectorAll('.js-fesg-section-switch')
+const containers = document.querySelectorAll('.js-pangolin-section-switch')
 const switchers = []
 
 for (let i = 0; i < containers.length; i++) {

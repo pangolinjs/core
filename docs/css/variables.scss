@@ -1,45 +1,45 @@
 // Colors
-$fesg-color-primary: #1d5097;
-$fesg-color-text: #222;
-$fesg-color-border: #ddd;
-$fesg-color-background: #f2f4f7;
+$pangolin-color-primary: #1d5097;
+$pangolin-color-text: #222;
+$pangolin-color-border: #ddd;
+$pangolin-color-background: #f2f4f7;
 
-$fesg-color-sidebar-text: $fesg-color-text;
-$fesg-color-sidebar-highlight-text: $fesg-color-text;
-$fesg-color-sidebar-highlight-background: $fesg-color-background;
-$fesg-color-sidebar-highlight-border: $fesg-color-primary;
-$fesg-color-sidebar-background: #fff;
-$fesg-color-sidebar-border: $fesg-color-border;
-$fesg-color-sidebar-button-foreground: #fff;
-$fesg-color-sidebar-button-background: $fesg-color-primary;
+$pangolin-color-sidebar-text: $pangolin-color-text;
+$pangolin-color-sidebar-highlight-text: $pangolin-color-text;
+$pangolin-color-sidebar-highlight-background: $pangolin-color-background;
+$pangolin-color-sidebar-highlight-border: $pangolin-color-primary;
+$pangolin-color-sidebar-background: #fff;
+$pangolin-color-sidebar-border: $pangolin-color-border;
+$pangolin-color-sidebar-button-foreground: #fff;
+$pangolin-color-sidebar-button-background: $pangolin-color-primary;
 
-$fesg-color-header-text: $fesg-color-text;
-$fesg-color-header-background: $fesg-color-background;
-$fesg-color-header-border: $fesg-color-border;
+$pangolin-color-header-text: $pangolin-color-text;
+$pangolin-color-header-background: $pangolin-color-background;
+$pangolin-color-header-border: $pangolin-color-border;
 
-$fesg-color-section-text: $fesg-color-text;
-$fesg-color-section-button: $fesg-color-text;
-$fesg-color-section-background: $fesg-color-background;
-$fesg-color-section-border: $fesg-color-border;
+$pangolin-color-section-text: $pangolin-color-text;
+$pangolin-color-section-button: $pangolin-color-text;
+$pangolin-color-section-background: $pangolin-color-background;
+$pangolin-color-section-border: $pangolin-color-border;
 
-$fesg-color-footer-text: $fesg-color-text;
-$fesg-color-footer-background: $fesg-color-background;
-$fesg-color-footer-border: $fesg-color-border;
+$pangolin-color-footer-text: $pangolin-color-text;
+$pangolin-color-footer-background: $pangolin-color-background;
+$pangolin-color-footer-border: $pangolin-color-border;
 
 // Spacing
-$fesg-spacing: 2vw;
+$pangolin-spacing: 2vw;
 
 // Sidebar
-$fesg-sidebar-width: 14rem;
-$fesg-sidebar-padding: 0.75rem;
+$pangolin-sidebar-width: 14rem;
+$pangolin-sidebar-padding: 0.75rem;
 
 // Breakpoints
-$fesg-breakpoint-sidebar: ($fesg-sidebar-width * 5);
-$fesg-breakpoint-min: 30rem;
-$fesg-breakpoint-max: 90rem;
+$pangolin-breakpoint-sidebar: ($pangolin-sidebar-width * 5);
+$pangolin-breakpoint-min: 30rem;
+$pangolin-breakpoint-max: 90rem;
 
 // Z-Indexes
-$fesg-z-index-sidebar: 1000;
+$pangolin-z-index-sidebar: 1000;
 
 // Transition times
-$fesg-transition-sidebar: 0.3s;
+$pangolin-transition-sidebar: 0.3s;
