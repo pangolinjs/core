@@ -1,0 +1,19 @@
+{
+  "all": true,
+  "require": [
+    "babel-register"
+  ],
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "src/main.js",
+    "src/**/*.e2e.js",
+    "src/**/*.unit.js"
+  ],
+  "reporter": [
+    "text",
+    "text-summary",
+    "html"
+  ]
+}

@@ -1,18 +1,13 @@
-{%- if process.env.PANGOLIN_ENV == 'dev' or process.env.PANGOLIN_ENV == 'build:dev' %}
-<link rel="stylesheet" href="{{ 'pangolin/styles.css' | relative }}">
-{% endif -%}
-
-{%- if process.env.PANGOLIN_ENV == 'build:dev' or process.env.PANGOLIN_ENV == 'build:proto' %}
+{# Link to vendors JS and CSS during build #}
+{% if r/^build:/.test(process.env.PANGOLIN_ENV) %}
+<script defer src="{{ 'js/vendors.js' | relative }}"></script>
 <link rel="stylesheet" href="{{ 'css/main.css' | relative }}">
-{% endif -%}
+{% endif %}
 
-{%- if process.env.PANGOLIN_ENV == 'dev' or process.env.PANGOLIN_ENV == 'build:dev' %}
+{# Link to Pangolin JS and CSS during dev #}
+{% if r/dev$/.test(process.env.PANGOLIN_ENV) %}
 <script defer src="{{ 'pangolin/scripts.js' | relative }}"></script>
-{% endif -%}
-
-{%- if process.env.PANGOLIN_ENV == 'build:dev' or process.env.PANGOLIN_ENV == 'build:proto' %}
-<script defer src="{{ 'js/manifest.js' | relative }}"></script>
-<script defer src="{{ 'js/vendor.js' | relative }}"></script>
-{% endif -%}
+<link rel="stylesheet" href="{{ 'pangolin/styles.css' | relative }}">
+{% endif %}
 
 <script defer src="{{ 'js/main.js' | relative }}"></script>

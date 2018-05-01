@@ -5,24 +5,7 @@
   "ava": {
     "verbose": true,
     "files": [
-      "test/unit"
-    ]
-  },
-  "nyc": {
-    "all": true,
-    "require": [
-      "babel-register"
-    ],
-    "include": [
-      "src"
-    ],
-    "exclude": [
-      "src/main.js"
-    ],
-    "reporter": [
-      "text",
-      "text-summary",
-      "html"
+      "src/**/*.unit.js"
     ]
   },
   "dependencies": {
