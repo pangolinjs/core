@@ -72,7 +72,7 @@ yarn lint
 # or
 npm run lint
 
-# Automated testing
+# Pseudo automated testing
 yarn test
 # or
 npm run test
