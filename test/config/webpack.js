@@ -1,5 +1,12 @@
+/**
+ * Test different project configuration possibilities
+ */
+
 // const path = require('path')
 
+/**
+ * Change dev server settings
+ */
 // module.exports = {
 //   devServer: {
 //     open: true,
@@ -8,28 +15,36 @@
 //   }
 // }
 
+/**
+ * Tap into webpack-chain
+ */
 // module.exports = {
-//   configure: {
-//     entry: './src/main.js'
+//   chain (config) {
+//     if (process.env.PANGOLIN_ENV === 'build') {
+//       config.output
+//         .path(path.join(config.get('context'), 'output-dist'))
+//     }
 //   }
 // }
 
+/**
+ * Merge into webpack configuration object
+ */
 // module.exports = {
-//   configure: context => {
-//     if (process.env.PANGOLIN_ENV === 'build') {
-//       return {
-//         output: {
-//           path: path.join(context, 'output-build')
-//         }
-//       }
+//   configure: {
+//     entry: {
+//       main: ['./src/hello-world.js']
 //     }
+//   }
+// }
 
-//     if (process.env.PANGOLIN_ENV === 'build:dev') {
-//       return {
-//         output: {
-//           path: path.join(context, 'output-build-dev')
-//         }
-//       }
+/**
+ * Mutate webpack configuration object
+ */
+// module.exports = {
+//   configure (config) {
+//     if (process.env.PANGOLIN_ENV === 'build') {
+//       config.output.path = path.join(config.context, 'output-dist')
 //     }
 //   }
 // }
