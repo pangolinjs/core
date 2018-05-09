@@ -10,13 +10,22 @@ template: templates/components.njk
 
 {{ page.description }}
 
+::: info
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita consequatur nam hic, quod veritatis maxime exercitationem! Eligendi quod, cupiditate temporibus eaque quia dolor debitis rerum repudiandae maxime rem veniam voluptatem vitae alias a iste amet ut ab dolorum natus ipsam.
+:::
+
 ## Example
+
+### Default
 
 ::: component
 {{ hello.default("World") }}
 :::
 
-::: component
+
+### Longform
+
+::: component A custom title
 {{ hello.longform("World") }}
 :::
 
