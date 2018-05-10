@@ -67,6 +67,7 @@
     "opn": "^5.3.0",
     "portfinder": "^1.0.13",
     "postcss-loader": "^2.0.9",
+    "prismjs": "^1.14.0",
     "sass-loader": "^7.0.1",
     "showdown": "^1.8.5",
     "style-loader": "^0.21.0",
