@@ -4,6 +4,9 @@
   "private": true,
   "ava": {
     "verbose": true,
+    "require": [
+      "@babel/register"
+    ],
     "files": [
       "src/**/*.unit.js"
     ]

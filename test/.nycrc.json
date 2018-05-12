@@ -1,11 +1,10 @@
 {
   "all": true,
-  "require": [
-    "babel-register"
-  ],
   "include": [
     "src"
   ],
+  "sourceMap": false,
+  "instrument": false,
   "exclude": [
     "src/main.js",
     "src/**/*.e2e.js",
