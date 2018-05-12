@@ -16,4 +16,5 @@ yarn-error.log*
 node_modules
 
 # Generated content
-.temp
+docs/dist
+docs/.temp

@@ -18,7 +18,7 @@ config.entry('index')
 
 config.output
   .filename('scripts.js')
-  .path(path.resolve(__dirname, '.temp'))
+  .path(path.resolve(__dirname, 'dist'))
 
 config.module
   .rule('js')
