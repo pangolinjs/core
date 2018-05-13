@@ -32,7 +32,9 @@
     "bin",
     "docs/dist",
     "docs/templates",
-    "lib"
+    "lib",
+    "npm-shrinkwrap.json",
+    "yarn.lock"
   ],
   "scripts": {
     "prepare": "node docs/build",
