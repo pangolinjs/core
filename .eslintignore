@@ -1,7 +1,2 @@
-dist
-
-test/coverage
-test/dev
-test/dist
-test/node_modules
-test/proto
+/docs/dist
+/test/project

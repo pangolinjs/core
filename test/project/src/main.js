@@ -1,4 +1,3 @@
-import 'es6-promise' // Test code splitting
 import './components'
 
 // Import custom colors

@@ -1,0 +1,34 @@
+{
+  "name": "pangolin-test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "lint:js": "node ../../bin/pangolin lint --js",
+    "lint:css": "node ../../bin/pangolin lint --css",
+    "test:unit": "ava",
+    "test:e2e": "testcafe chrome:headless src/**/*.e2e.js --app \"npm run dev\" --app-init-delay 4000",
+    "inspect": "node ../../bin/pangolin inspect",
+    "dev": "node ../../bin/pangolin dev",
+    "build": "node ../../bin/pangolin build",
+    "build:dev": "node ../../bin/pangolin build --dev",
+    "build:proto": "node ../../bin/pangolin build --proto"
+  },
+  "ava": {
+    "verbose": true,
+    "require": [
+      "@babel/register"
+    ],
+    "files": [
+      "src/**/*.unit.js"
+    ]
+  },
+  "dependencies": {
+    "lodash.camelcase": "^4.3.0",
+    "normalize.css": "^8.0.0"
+  },
+  "devDependencies": {
+    "@babel/register": "^7.0.0-beta.46",
+    "ava": "^1.0.0-beta.4",
+    "testcafe": "^0.19.2"
+  }
+}
