@@ -69,7 +69,7 @@
     "prismjs": "^1.9.0",
     "sass-loader": "^7.0.1",
     "showdown": "^1.8.5",
-    "style-loader": "^0.20.1",
+    "style-loader": "^0.21.0",
     "stylelint-webpack-plugin": "^0.10.1",
     "uglifyjs-webpack-plugin": "^1.1.4",
     "webpack": "^3.10.0",
@@ -94,7 +94,7 @@
     "stylelint": "^9.1.1",
     "stylelint-config-sass-guidelines": "^5.0.0",
     "stylelint-order": "^0.8.0",
-    "stylelint-scss": "^2.2.0",
+    "stylelint-scss": "^3.1.0",
     "testcafe": "^0.20.2"
   },
   "peerDependencies": {

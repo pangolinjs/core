@@ -1,4 +1,4 @@
-# <img alt="" src="https://cdn.rawgit.com/front-end-styleguide/brand/master/mark/mark.svg" width="24"> Front End Styleguide
+# Front End Styleguide
 
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][dependencies-image]][npm-url]
@@ -61,7 +61,7 @@ yarn test
 npm run test
 ```
 
-For more information take a look at the [docs](https://github.com/front-end-styleguide/docs).
+For more information take a look at the [docs](https://pangolinjs.org/v4/).
 
 
 ## Test the core package
