@@ -2,6 +2,17 @@
 
 
 
+## 4.7.0
+2018-06-05
+
+### Fixed
+- Error if project config is missing
+
+### Updated
+- Dependencies
+
+
+
 ## 4.6.0
 2018-04-29
 
