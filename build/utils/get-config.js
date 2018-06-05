@@ -11,6 +11,6 @@ module.exports = (context, name) => {
     const config = require(path.join(context, 'config', name))
     return config
   } catch (error) {
-    return undefined
+    return {}
   }
 }
