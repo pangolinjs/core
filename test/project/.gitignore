@@ -1,6 +1,5 @@
 /dev
 /dist
-/proto
 
 package-lock.json
 yarn.lock

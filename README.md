@@ -45,11 +45,6 @@ yarn build:dev
 # or
 npm run build:dev
 
-# Build static styleguide with prototypes only
-yarn build:proto
-# or
-npm run build:proto
-
 # Run linting
 yarn lint
 # or

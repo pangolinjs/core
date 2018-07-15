@@ -10,8 +10,7 @@
     "inspect": "node ../../bin/pangolin inspect",
     "dev": "node ../../bin/pangolin dev",
     "build": "node ../../bin/pangolin build",
-    "build:dev": "node ../../bin/pangolin build --dev",
-    "build:proto": "node ../../bin/pangolin build --proto"
+    "build:dev": "node ../../bin/pangolin build --dev"
   },
   "ava": {
     "verbose": true,
