@@ -71,22 +71,6 @@ For more information take a look at the [docs](https://pangolinjs.org).
 yarn lint
 # or
 npm run lint
-
-# Pseudo automated testing
-yarn test
-# or
-npm run test
-
-# Dev server and build testing
-yarn test:dev
-yarn test:build
-yarn test:build:dev
-yarn test:build:proto
-# or
-npm run test:dev
-npm run test:build
-npm run test:build:dev
-npm run test:build:proto
 ```
 
 

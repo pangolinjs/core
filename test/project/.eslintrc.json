@@ -1,6 +1,9 @@
 {
   "root": true,
-  "plugins": ["ava"],
+  "parser": "babel-eslint",
+  "plugins": [
+    "ava"
+  ],
   "extends": [
     "standard",
     "plugin:ava/recommended",

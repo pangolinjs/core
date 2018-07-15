@@ -39,14 +39,16 @@ config.module
       .loader('css-loader')
       .options({
         importLoaders: 2,
-        minimize: true,
         sourceMap: true
       })
       .end()
     .use('postcss-loader')
       .loader('postcss-loader')
       .options({
-        plugins: [require('autoprefixer')()],
+        plugins: [
+          require('autoprefixer')(),
+          require('cssnano')()
+        ],
         sourceMap: true
       })
       .end()
