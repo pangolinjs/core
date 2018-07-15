@@ -1,8 +1,9 @@
-.intro {
-  width: 40em;
-  max-width: 100%;
-  margin: 4em auto;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-  font-family: sans-serif;
+body {
   color: $color-text;
 }

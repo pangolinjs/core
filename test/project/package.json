@@ -22,7 +22,7 @@
     ]
   },
   "dependencies": {
-    "lodash.camelcase": "^4.3.0",
+    "lodash.truncate": "^4.4.2",
     "normalize.css": "^8.0.0"
   },
   "devDependencies": {
