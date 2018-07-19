@@ -12,22 +12,13 @@
     "build": "node ../../bin/pangolin build",
     "build:dev": "node ../../bin/pangolin build --dev"
   },
-  "ava": {
-    "verbose": true,
-    "require": [
-      "@babel/register"
-    ],
-    "files": [
-      "src/**/*.unit.js"
-    ]
-  },
   "dependencies": {
     "lodash.truncate": "^4.4.2",
     "normalize.css": "^8.0.0"
   },
   "devDependencies": {
-    "@babel/register": "^7.0.0-beta.46",
-    "ava": "^1.0.0-beta.4",
+    "@babel/register": "^7.0.0-beta.54",
+    "ava": "^0.25.0",
     "testcafe": "^0.20.4"
   }
 }
