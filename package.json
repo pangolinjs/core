@@ -30,8 +30,7 @@
   },
   "files": [
     "bin",
-    "docs/dist",
-    "docs/templates",
+    "doc",
     "lib",
     "npm-shrinkwrap.json",
     "yarn.lock"
@@ -54,7 +53,6 @@
     "css-loader": "^1.0.0",
     "eslint-loader": "^2.0.0",
     "fast-glob": "^2.2.1",
-    "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs-extra": "^7.0.0",
     "imagemin-webpack-plugin": "^2.0.0",
