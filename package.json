@@ -30,13 +30,13 @@
   },
   "files": [
     "bin",
-    "doc",
     "lib",
+    "ui",
     "npm-shrinkwrap.json",
     "yarn.lock"
   ],
   "scripts": {
-    "prepare": "node docs/build",
+    "prepare": "node ui/build",
     "lint": "run-s lint:*",
     "lint:js": "eslint --format codeframe \"**/*.js\"",
     "lint:css": "stylelint \"**/*.?(s)css\" --syntax scss --custom-formatter node_modules/stylelint-codeframe-formatter"

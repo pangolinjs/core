@@ -16,4 +16,4 @@ yarn-error.log*
 node_modules
 
 # Generated content
-docs/dist
+ui/dist
