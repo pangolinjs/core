@@ -2,6 +2,17 @@
 
 
 
+## 4.8.0
+2018-07-26
+
+### Improved
+- Keep symbols in SVG icon sprites
+
+### Updated
+- Dependencies
+
+
+
 ## 4.7.0
 2018-06-05
 
