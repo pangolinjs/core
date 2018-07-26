@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <title>{{ page.name }} | {{ project.name }}</title>
+
     <link rel="stylesheet" href="{% static 'pangolin/styles.css' %}">
     <script defer src="{% static 'pangolin/scripts.js' %}"></script>
   </head>
   <body>
-    {% include "nav.njk" %}
-    <iframe src="{{ preview_url }}"></iframe>
+    <div class="pangolin-container">
+      {% include "nav.njk" %}
+      {% include "preview.njk" %}
+      {% include "docs.njk" %}
+    </div>
   </body>
 </html>

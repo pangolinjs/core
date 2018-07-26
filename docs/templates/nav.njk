@@ -1,1 +1,47 @@
-{{ components | dump(2) }}
+{% macro link (path, text) %}
+  <a
+    {%- if path == page.path %} aria-current="page"{% endif %}
+    class="pangolin-nav__text pangolin-nav__text--link {% if path == page.path %}is-active{% endif %}"
+    href="{% static path %}.html"
+
+  >
+    {{ text }}
+  </a>
+{% endmacro %}
+
+{% macro nav (items, depth = 0) %}
+  {% set depth = depth + 1 %}
+  <ul class="pangolin-nav__list">
+    {% for item in items -%}
+
+      <li
+        class="pangolin-nav__item"
+        style="--depth:{{ depth }}"
+      >
+
+        {%- set children = item.children -%}
+
+        {%- if (children | length == 1) and children[0].path -%}
+          {{ link(children[0].path, children[0].name) }}
+        {%- elseif children -%}
+          <span class="pangolin-nav__text pangolin-nav__text--title">{{ item.name }}</span>
+          {{ nav(children, depth) }}
+        {%- endif -%}
+
+        {%- if item.path -%}
+          {{ link(item.path, item.name) }}
+        {%- endif -%}
+
+      </li>
+
+    {%- endfor %}
+  </ul>
+{% endmacro %}
+
+<nav
+  aria-label="Pangolin Navigation"
+  class="pangolin-nav"
+>
+  <h2 class="pangolin-nav__title">{{ project.name }}</h2>
+  {{ nav(components) }}
+</nav>

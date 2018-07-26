@@ -5,6 +5,15 @@
 // const path = require('path')
 
 /**
+ * Project settings
+ */
+module.exports = {
+  project: {
+    name: 'Pangolin Test'
+  }
+}
+
+/**
  * Change dev server settings
  */
 // module.exports = {

@@ -1,0 +1,20 @@
+.pangolin-preview {
+  grid-area: preview;
+  display: flex;
+  flex-direction: column;
+}
+
+.pangolin-preview__header {
+  flex-shrink: 0;
+}
+
+.pangolin-preview__title {
+  margin: 1rem 0;
+}
+
+.pangolin-preview__iframe {
+  flex-grow: 1;
+  width: 100%;
+
+  border: var(--border);
+}

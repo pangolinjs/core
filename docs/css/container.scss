@@ -1,0 +1,13 @@
+.pangolin-container {
+  --border: 1px solid var(--border-color);
+
+  display: grid;
+  height: 100vh;
+  grid-gap: 8px;
+  grid-template:
+    3fr 2fr /
+    16rem 1fr;
+  grid-template-areas:
+    "nav preview"
+    "nav docs";
+}

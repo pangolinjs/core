@@ -66,7 +66,6 @@
     "opn": "^5.3.0",
     "portfinder": "^1.0.13",
     "postcss-loader": "^2.0.9",
-    "prismjs": "^1.14.0",
     "sass-loader": "^7.0.1",
     "showdown": "^1.8.5",
     "style-loader": "^0.21.0",
@@ -94,6 +93,7 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-testcafe": "^0.2.1",
+    "normalize.css": "^8.0.0",
     "npm-run-all": "^4.1.2",
     "stylelint": "^9.1.1",
     "stylelint-config-sass-guidelines": "^5.0.0",
@@ -101,8 +101,8 @@
     "stylelint-scss": "^3.2.0"
   },
   "peerDependencies": {
-    "eslint": "^4.19.1",
-    "stylelint": "^9.2.0"
+    "eslint": "^5.2.0",
+    "stylelint": "^9.4.0"
   },
   "engines": {
     "node": ">= 10.0.0"
