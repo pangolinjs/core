@@ -41,8 +41,11 @@ module.exports = context => {
       ]),
       new ImageminPlugin({
         test: /\.(jpe?g|png|gif|svg)$/i,
-        jpegtran: {
-          progressive: true
+        svgo: {
+          plugins: [{
+            // Keep symbols in icon sprites
+            removeUselessDefs: false
+          }]
         }
       }),
       new FriendlyErrorsPlugin({
