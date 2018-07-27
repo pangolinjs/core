@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    {%- if process.env.PANGOLIN_ENV == 'build:dev' %}
-    <link rel="stylesheet" href="{% static 'css/vendors.css' %}">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script defer src="{% static 'js/vendors.js' %}"></script>
-    {% endif -%}
-
-    <script defer src="{% static 'js/main.js' %}"></script>
+    <title>{{ page.name }}</title>
   </head>
   <body>
     <p>The Blog template</p>

@@ -10,6 +10,7 @@
 // module.exports = {
 //   project: {
 //     name: 'Pangolin Test',
+//     base: '/test/',
 //     theme: {
 //       'color-theme': '#f00',
 //       'font-family': 'Arial'
