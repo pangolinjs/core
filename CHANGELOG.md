@@ -2,6 +2,14 @@
 
 
 
+## 4.9.0
+2018-07-27
+
+### Added
+- Project-based configuration for imagemin
+
+
+
 ## 4.8.0
 2018-07-26
 
