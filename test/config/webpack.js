@@ -33,3 +33,15 @@
 //     }
 //   }
 // }
+
+// module.exports = {
+//   imagemin: {
+//     svgo: {
+//       plugins: [{
+//         // Keep symbols in icon sprites
+//         cleanupIDs: false,
+//         removeUselessDefs: false
+//       }]
+//     }
+//   }
+// }

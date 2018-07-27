@@ -1,5 +1,6 @@
 const CopyPlugin = require('copy-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const getConfig = require('./utils/get-config')
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const merge = require('webpack-merge')
 const path = require('path')
@@ -7,6 +8,8 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = context => {
+  const config = getConfig(context, 'webpack.js')
+
   return merge(require('./webpack.base.config')(context), {
     devtool: 'source-map',
     plugins: [
@@ -41,12 +44,7 @@ module.exports = context => {
       ]),
       new ImageminPlugin({
         test: /\.(jpe?g|png|gif|svg)$/i,
-        svgo: {
-          plugins: [{
-            // Keep symbols in icon sprites
-            removeUselessDefs: false
-          }]
-        }
+        ...config.imagemin
       }),
       new FriendlyErrorsPlugin({
         clearConsole: false
