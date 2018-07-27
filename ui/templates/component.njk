@@ -9,6 +9,16 @@
 
     <link rel="stylesheet" href="{% static 'pangolin/styles.css' %}">
     <script defer src="{% static 'pangolin/scripts.js' %}"></script>
+
+    {% if project.theme -%}
+    <style>
+      :root {
+        {%- for property, value in project.theme %}
+          --{{ property }}: {{ value }};
+        {%- endfor %}
+      }
+    </style>
+    {%- endif %}
   </head>
   <body>
     <div class="pangolin-container">

@@ -1,20 +1,9 @@
-:root {
-  --theme-color: rgb(204, 91, 24);
-  --border-color: rgb(221, 221, 221);
-  --background-color: rgb(245, 245, 245);
-  --highlight-background-color: rgb(226, 226, 226);
-}
-
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, // macOS
-    "Segoe UI", // Windows
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", // Linux
-    "Helvetica Neue", sans-serif; // Fallback
+  font-family: var(--font-family, $font-family);
 }
 
 h1,

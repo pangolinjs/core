@@ -7,11 +7,15 @@
 /**
  * Project settings
  */
-module.exports = {
-  project: {
-    name: 'Pangolin Test'
-  }
-}
+// module.exports = {
+//   project: {
+//     name: 'Pangolin Test',
+//     theme: {
+//       'color-theme': '#f00',
+//       'font-family': 'Arial'
+//     }
+//   }
+// }
 
 /**
  * Change dev server settings

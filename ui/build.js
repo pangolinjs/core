@@ -46,6 +46,7 @@ config.module
       .loader('postcss-loader')
       .options({
         plugins: [
+          require('postcss-custom-properties')(),
           require('autoprefixer')(),
           require('cssnano')()
         ],
