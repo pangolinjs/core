@@ -1,14 +1,4 @@
 {
   "root": true,
-  "parser": "babel-eslint",
-  "plugins": [
-    "ava"
-  ],
-  "extends": [
-    "standard",
-    "plugin:ava/recommended"
-  ],
-  "rules": {
-    "no-warning-comments": "warn"
-  }
+  "extends": "@pangolin/eslint-config"
 }

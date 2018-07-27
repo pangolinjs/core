@@ -37,7 +37,6 @@
   ],
   "scripts": {
     "prepare": "node ui/build",
-    "lint": "run-s lint:*",
     "lint:js": "eslint --format codeframe \"**/*.js\"",
     "lint:css": "stylelint \"**/*.?(s)css\" --syntax scss --custom-formatter node_modules/stylelint-codeframe-formatter"
   },
@@ -67,7 +66,6 @@
     "portfinder": "^1.0.13",
     "postcss-loader": "^2.0.9",
     "sass-loader": "^7.0.1",
-    "showdown": "^1.8.5",
     "style-loader": "^0.21.0",
     "stylelint-codeframe-formatter": "^1.0.4",
     "stylelint-webpack-plugin": "^0.10.1",
@@ -81,24 +79,13 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.0.0-beta.54",
+    "@pangolin/eslint-config": "^1.0.0",
+    "@pangolin/stylelint-config": "^1.0.1",
     "autoprefixer": "^9.0.1",
-    "ava": "^1.0.0-beta.4",
-    "babel-eslint": "^8.2.6",
     "cssnano": "^4.0.3",
     "eslint": "^5.2.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-ava": "^5.0.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "eslint-plugin-testcafe": "^0.2.1",
     "normalize.css": "^8.0.0",
-    "npm-run-all": "^4.1.2",
-    "stylelint": "^9.1.1",
-    "stylelint-config-sass-guidelines": "^5.0.0",
-    "stylelint-order": "^0.8.0",
-    "stylelint-scss": "^3.2.0"
+    "stylelint": "^9.1.1"
   },
   "peerDependencies": {
     "eslint": "^5.2.0",

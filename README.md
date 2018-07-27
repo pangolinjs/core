@@ -63,9 +63,11 @@ For more information take a look at the [docs](https://pangolinjs.org).
 
 ```bash
 # Linting
-yarn lint
+yarn lint:js
+yarn lint:css
 # or
-npm run lint
+npm run lint:js
+npm run lint:css
 ```
 
 

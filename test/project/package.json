@@ -6,7 +6,6 @@
     "lint:js": "node ../../bin/pangolin lint --js",
     "lint:css": "node ../../bin/pangolin lint --css",
     "test:unit": "ava",
-    "test:e2e": "testcafe chrome:headless src/**/*.e2e.js --app \"npm run dev\" --app-init-delay 4000",
     "inspect": "node ../../bin/pangolin inspect",
     "dev": "node ../../bin/pangolin dev",
     "build": "node ../../bin/pangolin build",
@@ -18,7 +17,6 @@
   },
   "devDependencies": {
     "@babel/register": "^7.0.0-beta.54",
-    "ava": "^0.25.0",
-    "testcafe": "^0.20.4"
+    "ava": "^0.25.0"
   }
 }
