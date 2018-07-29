@@ -1009,9 +1009,6 @@
     "assign-symbols": {
       "version": "1.0.0"
     },
-    "async": {
-      "version": "1.5.2"
-    },
     "async-each": {
       "version": "1.0.1"
     },
@@ -6348,22 +6345,6 @@
           "version": "2.1.0",
           "requires": {
             "is-natural-number": "^4.0.1"
-          }
-        }
-      }
-    },
-    "portfinder": {
-      "version": "1.0.13",
-      "requires": {
-        "async": "^1.5.2",
-        "debug": "^2.2.0",
-        "mkdirp": "0.5.x"
-      },
-      "dependencies": {
-        "debug": {
-          "version": "2.6.9",
-          "requires": {
-            "ms": "2.0.0"
           }
         }
       }

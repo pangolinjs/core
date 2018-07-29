@@ -1,5 +1,6 @@
-// TODO: Search for free port
-const ws = new WebSocket('ws://localhost:12345')
+/* global WebSocket, websocketPort */
+
+const ws = new WebSocket(`ws://localhost:${websocketPort}`)
 
 ws.onmessage = event => {
   if (event.data === 'window-reload') {
