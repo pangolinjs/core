@@ -44,7 +44,7 @@
     "pangolin-core": "bin/pangolin.js"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.54",
+    "@babel/core": "^7.0.0-beta.55",
     "babel-loader": "^8.0.0-beta.2",
     "chalk": "^2.3.0",
     "chokidar": "^2.0.0",
@@ -54,7 +54,7 @@
     "fast-glob": "^2.2.1",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs-extra": "^7.0.0",
-    "imagemin-webpack-plugin": "^2.0.0",
+    "imagemin-webpack-plugin": "^2.2.0",
     "javascript-stringify": "^1.6.0",
     "koa-mount": "^3.0.0",
     "koa-static": "^5.0.0",
@@ -69,7 +69,7 @@
     "style-loader": "^0.21.0",
     "stylelint-codeframe-formatter": "^1.0.4",
     "stylelint-webpack-plugin": "^0.10.1",
-    "webpack": "^4.16.2",
+    "webpack": "^4.16.3",
     "webpack-chain": "^4.6.0",
     "webpack-hot-middleware": "^2.22.3",
     "webpack-merge": "^4.1.2",
@@ -78,7 +78,7 @@
     "ws": "^6.0.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.0.0-beta.54",
+    "@babel/preset-env": "^7.0.0-beta.55",
     "@pangolin/eslint-config": "^1.0.0",
     "@pangolin/stylelint-config": "^1.0.1",
     "autoprefixer": "^9.0.1",
