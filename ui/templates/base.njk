@@ -26,9 +26,19 @@
     {%- endif %}
   </head>
   <body>
+
     <div class="container">
-      {% include "nav.njk" %}
-      {% block content %}{% endblock %}
+
+      <aside class="container__sidebar">
+        {% include "sidebar.njk" %}
+      </aside>
+
+      <main class="container__main">
+        {% include "title.njk" %}
+        {% block content %}{% endblock %}
+      </main>
+
     </div>
+
   </body>
 </html>

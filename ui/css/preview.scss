@@ -1,5 +1,10 @@
 .preview {
-  grid-area: content-1;
+  margin: 1rem;
+  height: 50vh;
+
+  @media (min-width: $breakpoint-layout) {
+    height: auto;
+  }
 }
 
 .preview__iframe {
@@ -7,4 +12,5 @@
   height: 100%;
 
   border: 1px solid var(--color-border, $color-border);
+  background: #fff;
 }

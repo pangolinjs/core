@@ -4,6 +4,7 @@
 
 body {
   font-family: var(--font-family, $font-family);
+  background: var(--color-background, $color-background);
 }
 
 h1,
@@ -22,5 +23,9 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+}
+
+a {
+  color: var(--color-theme, $color-theme);
 }

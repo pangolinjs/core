@@ -1,12 +1,20 @@
 .container {
-  display: grid;
-  height: 100vh;
-  grid-gap: 8px;
-  grid-template:
-    min-content 3fr 2fr /
-    16rem 1fr;
-  grid-template-areas:
-    "nav header"
-    "nav content-1"
-    "nav content-2";
+  @media (min-width: $breakpoint-layout) {
+    display: grid;
+    grid-template: 100vh / 16rem 1fr;
+  }
+}
+
+.container__sidebar {
+  @media (min-width: $breakpoint-layout) {
+    overflow-y: auto;
+    border-right: 1px solid var(--color-border, $color-border);
+  }
+}
+
+.container__main {
+  @media (min-width: $breakpoint-layout) {
+    display: grid;
+    grid-template-rows: min-content 3fr 2fr;
+  }
 }

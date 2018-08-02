@@ -58,6 +58,7 @@
     "javascript-stringify": "^1.6.0",
     "koa-mount": "^3.0.0",
     "koa-static": "^5.0.0",
+    "marked": "^0.4.0",
     "mini-css-extract-plugin": "^0.4.0",
     "minimist": "^1.2.0",
     "node-sass": "^4.7.2",
