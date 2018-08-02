@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{ page.name }} | {{ project.name }}</title>
+
+    <link rel="stylesheet" href="{% static 'pangolin/styles.css' %}">
+
+    {% if websocket.port %}
+    <script>var websocketPort = {{ websocket.port }}</script>
+    {% endif %}
+
+    <script defer src="{% static 'pangolin/scripts.js' %}"></script>
+
+    {% if project.theme -%}
+    <style>
+      :root {
+        {%- for property, value in project.theme %}
+          --{{ property }}: {{ value }};
+        {%- endfor %}
+      }
+    </style>
+    {%- endif %}
+  </head>
+  <body>
+    <div class="pangolin-container">
+      {% include "nav.njk" %}
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

@@ -1,9 +1,11 @@
 /* global WebSocket, websocketPort */
 
-const ws = new WebSocket(`ws://localhost:${websocketPort}`)
+if (websocketPort) {
+  const ws = new WebSocket(`ws://localhost:${websocketPort}`)
 
-ws.onmessage = event => {
-  if (event.data === 'window-reload') {
-    window.location.reload()
+  ws.onmessage = event => {
+    if (event.data === 'window-reload') {
+      window.location.reload()
+    }
   }
 }

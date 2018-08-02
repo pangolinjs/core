@@ -3,9 +3,10 @@
   height: 100vh;
   grid-gap: 8px;
   grid-template:
-    3fr 2fr /
+    min-content 3fr 2fr /
     16rem 1fr;
   grid-template-areas:
-    "nav preview"
-    "nav docs";
+    "nav header"
+    "nav content-1"
+    "nav content-2";
 }
