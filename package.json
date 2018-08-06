@@ -44,7 +44,7 @@
     "pangolin-core": "bin/pangolin.js"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.55",
+    "@babel/core": "^7.0.0-beta.56",
     "babel-loader": "^8.0.0-beta.2",
     "chalk": "^2.3.0",
     "chokidar": "^2.0.0",
@@ -69,7 +69,7 @@
     "style-loader": "^0.21.0",
     "stylelint-codeframe-formatter": "^1.0.4",
     "stylelint-webpack-plugin": "^0.10.1",
-    "webpack": "^4.16.3",
+    "webpack": "^4.16.4",
     "webpack-chain": "^4.6.0",
     "webpack-hot-middleware": "^2.22.3",
     "webpack-merge": "^4.1.2",
@@ -78,12 +78,12 @@
     "ws": "^6.0.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.0.0-beta.55",
+    "@babel/preset-env": "^7.0.0-beta.56",
     "@pangolin/eslint-config": "^1.0.0",
     "@pangolin/stylelint-config": "^1.0.1",
-    "autoprefixer": "^9.0.1",
+    "autoprefixer": "^9.1.0",
     "cssnano": "^4.0.3",
-    "eslint": "^5.2.0",
+    "eslint": "^5.3.0",
     "normalize.css": "^8.0.0",
     "postcss-custom-properties": "^7.0.0",
     "stylelint": "^9.1.1"
