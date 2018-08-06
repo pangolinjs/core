@@ -1,9 +1,21 @@
 .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
+
+  color: #fff;
+
   background: var(--color-theme, $color-theme);
 }
 
 .title__heading {
   margin: 0;
-  color: #fff;
+}
+
+.title__link {
+  display: inline-block;
+  margin-left: 0.5rem;
+
+  color: inherit;
 }

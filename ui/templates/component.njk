@@ -1,6 +1,11 @@
 {% extends "base.njk" %}
 
 {% block content %}
+
   {% include "preview.njk" %}
-  {% include "docs.njk" %}
+
+  {% if page.docs %}
+    {% include "docs.njk" %}
+  {% endif %}
+
 {% endblock %}

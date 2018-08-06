@@ -1,15 +1,3 @@
 <section class="docs">
-
-  <header class="docs__header">
-    <h2 class="docs__title">Docs</h2>
-    <p><a href="{{ page.template }}">Component template</a></p>
-    <p><a href="{{ page.preview }}">Component preview</a></p>
-  </header>
-
-  {% if page.docs %}
-  <div class="docs__content">
-    {{ page.docs }}
-  </div>
-  {% endif %}
-
+  {{ page.docs }}
 </section>
