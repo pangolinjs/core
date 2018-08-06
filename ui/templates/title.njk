@@ -2,8 +2,10 @@
 
   <h1 class="title__heading">{{ page.name }}</h1>
 
+  {% if page.preview or page.template %}
   <nav aria-label="">
 
+    {% if page.preview %}
     <a
       class="title__link"
       href="{{ page.preview }}"
@@ -11,7 +13,9 @@
     >
       Preview
     </a>
+    {% endif %}
 
+    {% if page.template %}
     <a
       class="title__link"
       href="{{ page.template }}"
@@ -19,7 +23,9 @@
     >
       Template
     </a>
+    {% endif %}
 
   </nav>
+  {% endif %}
 
 </div>

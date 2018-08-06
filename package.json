@@ -65,6 +65,7 @@
     "nunjucks": "^3.0.1",
     "opn": "^5.3.0",
     "postcss-loader": "^2.0.9",
+    "prismjs": "^1.15.0",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "stylelint-codeframe-formatter": "^1.0.4",

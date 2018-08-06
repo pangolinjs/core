@@ -37,3 +37,11 @@ p {
 a {
   color: var(--color-theme, $color-theme);
 }
+
+pre {
+  margin: 0 0 1em;
+  padding: 1em;
+  overflow: auto;
+
+  background: #2d2d2d;
+}
