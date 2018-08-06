@@ -9,11 +9,11 @@ $font-family:
   Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
 $breakpoint-layout: 60rem;
+$padding: 1rem;
 
 @import "scaffolding";
 
 @import "container";
-@import "content";
 @import "docs";
 @import "nav";
 @import "preview";

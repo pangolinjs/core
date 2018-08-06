@@ -1,4 +1,15 @@
 .docs {
-  margin: 0 1rem 1rem;
+  margin: 0 $padding;
   overflow-y: auto;
+
+  > :not(pre) {
+    max-width: 35em;
+  }
+}
+
+.docs--single {
+  margin: 0;
+  padding: $padding;
+
+  background: #fff;
 }

@@ -13,21 +13,25 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
+  margin: 1em 0 0.5em;
 
   font-weight: 600;
 }
 
 h1 {
-  font-size: 1.75rem;
+  font-size: 1.75em;
 }
 
 h2 {
-  font-size: 1.4rem;
+  font-size: 1.4em;
 }
 
 h3 {
-  font-size: 1.1rem;
+  font-size: 1.1em;
+}
+
+p {
+  margin: 0 0 1em;
 }
 
 a {

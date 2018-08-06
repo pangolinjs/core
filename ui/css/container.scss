@@ -15,6 +15,6 @@
 .container__main {
   @media (min-width: $breakpoint-layout) {
     display: grid;
-    grid-template-rows: min-content 3fr 2fr;
+    grid-template-rows: min-content minmax(60vh, 1fr) minmax(auto, max-content);
   }
 }

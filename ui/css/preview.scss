@@ -1,5 +1,5 @@
 .preview {
-  margin: 1rem;
+  margin: $padding;
   height: 50vh;
 
   @media (min-width: $breakpoint-layout) {
