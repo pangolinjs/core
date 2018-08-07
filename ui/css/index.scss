@@ -1,22 +1,14 @@
 @import url("~normalize.css/normalize.css");
-@import url("~prismjs/themes/prism-tomorrow.css");
 
-$color-background: rgb(245, 245, 245);
-$color-background-highlight: rgb(226, 226, 226);
-$color-border: rgb(221, 221, 221);
-$color-theme: rgb(204, 91, 24);
-$font-family:
-  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+@import "variables";
 
-$breakpoint-layout: 60rem;
-$padding: 1rem;
+@import "base/scaffolding";
+@import "base/tables";
+@import "base/typography";
 
-@import "scaffolding";
-
-@import "container";
-@import "docs";
-@import "nav";
-@import "preview";
-@import "sidebar";
-@import "title";
+@import "components/container";
+@import "components/dark-mode";
+@import "components/docs";
+@import "components/nav";
+@import "components/preview";
+@import "components/title";

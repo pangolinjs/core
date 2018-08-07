@@ -1,20 +1,26 @@
 .container {
+  display: grid;
+
   @media (min-width: $breakpoint-layout) {
-    display: grid;
     grid-template: 100vh / 16rem 1fr;
   }
 }
 
 .container__sidebar {
+  display: grid;
+  background: var(--color-background-aside, $color-background-aside);
+
+  transition: background-color $transition-dark-mode;
+
   @media (min-width: $breakpoint-layout) {
-    overflow-y: auto;
-    border-right: 1px solid var(--color-border, $color-border);
+    grid-template-rows: min-content 1fr min-content;
   }
 }
 
 .container__main {
+  display: grid;
+
   @media (min-width: $breakpoint-layout) {
-    display: grid;
     grid-template-rows: min-content minmax(60vh, 1fr) minmax(auto, max-content);
   }
 }

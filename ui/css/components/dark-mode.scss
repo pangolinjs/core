@@ -1,0 +1,84 @@
+.dark-mode {
+  display: grid;
+  grid-template: 2em / 1fr 1fr;
+  align-items: center;
+  position: relative;
+  margin: $padding;
+}
+
+.dark-mode__input {
+  position: absolute;
+  appearance: none;
+}
+
+.dark-mode__label {
+  cursor: pointer;
+}
+
+.dark-mode__label--left {
+  justify-self: end;
+  padding-right: 2em;
+
+  text-align: right;
+}
+
+.dark-mode__label--right {
+  justify-self: start;
+  padding-left: 2em;
+}
+
+.dark-mode__toggle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  pointer-events: none;
+
+  &::before,
+  &::after {
+    content: "";
+
+    display: block;
+  }
+
+  &::before {
+    width: 3em;
+    height: 2em;
+
+    background: var(--color-background, $color-background);
+    border: 2px solid var(--color-border, $color-border);
+    border-radius: 1em;
+
+    transition:
+      background-color $transition-dark-mode,
+      border-color $transition-dark-mode,
+      box-shadow $transition-dark-mode;
+  }
+
+  &::after {
+    position: absolute;
+    width: calc(2em - 4px);
+    height: calc(2em - 4px);
+    top: 2px;
+    left: calc(50% - 1em + 2px);
+
+    background: var(--color-text, $color-text);
+    border-radius: 50%;
+
+    transition:
+      color $transition-dark-mode,
+      transform $transition-dark-mode;
+  }
+
+  .dark-mode__input:focus ~ &::before {
+    box-shadow: 0 0 0 2px var(--color-text, $color-text);
+  }
+
+  [value="enable"]:checked ~ &::after {
+    transform: translateX(8px);
+  }
+
+  [value="disable"]:checked ~ &::after {
+    transform: translateX(-8px);
+  }
+}

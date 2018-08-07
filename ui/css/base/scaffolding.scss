@@ -1,0 +1,56 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family, $font-family);
+  line-height: 1.4;
+  color: var(--color-text, $color-text);
+
+  background: var(--color-background, $color-background);
+
+  transition:
+    color $transition-dark-mode,
+    background-color $transition-dark-mode;
+}
+
+pre,
+code {
+  color: var(--color-text, $color-text);
+  background: var(--color-background-aside, $color-background-aside);
+
+  transition:
+    color $transition-dark-mode,
+    background-color $transition-dark-mode;
+}
+
+pre {
+  margin: 0 0 1em;
+  padding: 1em;
+  overflow: auto;
+}
+
+code {
+  padding: 0 0.25em;
+  box-decoration-break: clone;
+
+  pre & {
+    padding: 0;
+  }
+
+  // stylelint-disable-next-line selector-no-qualifying-type
+  pre &[class*="language-"] {
+    color: var(--color-text, $color-text);
+    text-shadow: none;
+  }
+
+  .token {
+    transition: color $transition-dark-mode;
+  }
+
+  .token.operator {
+    background: none;
+  }
+}

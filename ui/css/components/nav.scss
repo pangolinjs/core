@@ -1,3 +1,7 @@
+.nav {
+  overflow-y: auto;
+}
+
 .nav__list {
   list-style: none;
 
@@ -32,9 +36,11 @@
 .nav__text--link {
   text-decoration: none;
 
+  transition: background-color $transition-dark-mode;
+
   &:hover,
   &:focus,
   &.is-active {
-    background-color: var(--color-background-highlight, $color-background-highlight);
+    background: var(--color-background-active, $color-background-active);
   }
 }
