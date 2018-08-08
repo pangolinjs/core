@@ -2,6 +2,14 @@
 
 
 
+## 5.0.0-alpha.2
+2018-08-08
+
+### Improved
+- Re-arranged dependencies
+
+
+
 ## 5.0.0-alpha.1
 2018-08-08
 
