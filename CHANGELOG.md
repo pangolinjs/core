@@ -2,6 +2,14 @@
 
 
 
+## 5.0.0-alpha.4
+2018-08-08
+
+### Fixed
+- Set explicit paths for loader resolving
+
+
+
 ## 5.0.0-alpha.3
 2018-08-08
 
