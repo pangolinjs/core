@@ -2,6 +2,14 @@
 
 
 
+## 5.0.0-alpha.3
+2018-08-08
+
+### Fixed
+- Use relative paths for entry points
+
+
+
 ## 5.0.0-alpha.2
 2018-08-08
 
