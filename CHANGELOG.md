@@ -2,6 +2,13 @@
 
 
 
+## 5.0.0-alpha.1
+2018-08-08
+
+Complete rewrite. Stay tuned for the updated docs.
+
+
+
 ## 4.6.0
 2018-04-29
 
