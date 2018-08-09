@@ -1,6 +1,6 @@
 {
   "name": "@pangolin/core",
-  "version": "5.0.0-alpha.4",
+  "version": "5.0.0-alpha.5",
   "description": "Framework for componentized front end development with Nunjucks, Sass, and JavaScript",
   "keywords": [
     "babel",

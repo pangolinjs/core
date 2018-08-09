@@ -2,6 +2,24 @@
 
 
 
+## 5.0.0-alpha.5
+2018-08-09
+
+### Improved
+- `PANGOLIN_BASE` and `PANGOLIN_PORT` env variables
+- Project config loading
+
+### Updated
+- Dependencies
+
+### Fixed
+- webpack public path and project base
+
+### Removed
+- Auto-imports (too fragile)
+
+
+
 ## 5.0.0-alpha.4
 2018-08-08
 
