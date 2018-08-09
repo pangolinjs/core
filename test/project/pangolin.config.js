@@ -10,11 +10,10 @@
 // module.exports = {
 //   project: {
 //     name: 'Pangolin Test',
-//     base: '/test/',
-//     theme: {
-//       'color-theme': '#f00',
-//       'font-family': 'Arial'
-//     }
+//     base: '/base/',
+//     colorTheme: '#5d675b',
+//     colorTitle: '#f7ef99',
+//     fontFamily: 'Arial, sans-serif'
 //   }
 // }
 

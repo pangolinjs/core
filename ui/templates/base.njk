@@ -18,9 +18,9 @@
     {% if project.theme -%}
     <style>
       :root {
-        {%- for property, value in project.theme %}
-          --{{ property }}: {{ value }};
-        {%- endfor %}
+      {%- for property, value in project.theme %}
+        {% if value %}--{{ property }}: {{ value }};{% endif %}
+      {%- endfor %}
       }
     </style>
     {%- endif %}

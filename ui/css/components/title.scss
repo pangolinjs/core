@@ -4,7 +4,7 @@
   align-items: center;
   padding: $padding;
 
-  color: #fff;
+  color: var(--color-title, $color-title);
 
   background: var(--color-theme, $color-theme);
 }
