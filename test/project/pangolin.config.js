@@ -11,9 +11,11 @@
 //   project: {
 //     name: 'Pangolin Test',
 //     base: '/base/',
-//     colorTheme: '#5d675b',
-//     colorTitle: '#f7ef99',
-//     fontFamily: 'Arial, sans-serif'
+//     branding: {
+//       colorTheme: '#5d675b',
+//       colorTitle: '#f7ef99',
+//       fontFamily: 'Arial, sans-serif'
+//     }
 //   }
 // }
 

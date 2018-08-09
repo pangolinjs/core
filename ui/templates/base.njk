@@ -15,10 +15,10 @@
 
     <script defer src="{% static 'pangolin/scripts.js' %}"></script>
 
-    {% if project.theme -%}
+    {% if project.branding -%}
     <style>
       :root {
-      {%- for property, value in project.theme %}
+      {%- for property, value in project.branding %}
         {% if value %}--{{ property }}: {{ value }};{% endif %}
       {%- endfor %}
       }
