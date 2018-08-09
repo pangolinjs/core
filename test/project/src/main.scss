@@ -4,3 +4,10 @@
 // Setup
 @import "setup/variables";
 @import "setup/scaffolding";
+
+// Atoms
+@import "components/atoms/button/button";
+@import "components/atoms/teaser/teaser";
+
+// Molecules
+@import "components/molecules/article/article";

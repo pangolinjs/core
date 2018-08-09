@@ -1,4 +1,4 @@
-import truncate from './_truncate'
+import truncate from './truncate'
 
 const teaser = document.querySelectorAll('.js-teaser')
 
