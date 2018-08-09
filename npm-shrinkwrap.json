@@ -1402,6 +1402,18 @@
         }
       }
     },
+    "@babel/register": {
+      "version": "7.0.0-beta.56",
+      "requires": {
+        "core-js": "^2.5.7",
+        "find-cache-dir": "^1.0.0",
+        "home-or-tmp": "^3.0.0",
+        "lodash": "^4.17.10",
+        "mkdirp": "^0.5.1",
+        "pirates": "^4.0.0",
+        "source-map-support": "^0.4.2"
+      }
+    },
     "@babel/template": {
       "version": "7.0.0-beta.51",
       "requires": {
@@ -2190,6 +2202,18 @@
         },
         "slash": {
           "version": "2.0.0"
+        },
+        "source-map-support": {
+          "version": "0.5.6",
+          "requires": {
+            "buffer-from": "^1.0.0",
+            "source-map": "^0.6.0"
+          },
+          "dependencies": {
+            "source-map": {
+              "version": "0.6.1"
+            }
+          }
         },
         "strip-indent": {
           "version": "2.0.0"
@@ -5800,6 +5824,9 @@
         "minimalistic-crypto-utils": "^1.0.1"
       }
     },
+    "home-or-tmp": {
+      "version": "3.0.0"
+    },
     "hosted-git-info": {
       "version": "2.7.1"
     },
@@ -5892,7 +5919,7 @@
       "version": "0.1.5"
     },
     "ignore": {
-      "version": "4.0.3"
+      "version": "4.0.5"
     },
     "ignore-by-default": {
       "version": "1.0.1"
@@ -7425,6 +7452,9 @@
         }
       }
     },
+    "node-modules-regexp": {
+      "version": "1.0.0"
+    },
     "node-pre-gyp": {
       "requires": {
         "detect-libc": "^1.0.2",
@@ -8006,6 +8036,12 @@
       "version": "2.0.1",
       "requires": {
         "pinkie": "^2.0.0"
+      }
+    },
+    "pirates": {
+      "version": "4.0.0",
+      "requires": {
+        "node-modules-regexp": "^1.0.0"
       }
     },
     "pkg-conf": {
@@ -9611,15 +9647,9 @@
       }
     },
     "source-map-support": {
-      "version": "0.5.6",
+      "version": "0.4.18",
       "requires": {
-        "buffer-from": "^1.0.0",
-        "source-map": "^0.6.0"
-      },
-      "dependencies": {
-        "source-map": {
-          "version": "0.6.1"
-        }
+        "source-map": "^0.5.6"
       }
     },
     "source-map-url": {
