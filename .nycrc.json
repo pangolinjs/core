@@ -1,0 +1,11 @@
+{
+  "all": true,
+  "include": [
+    "bin/**",
+    "lib/**"
+  ],
+  "reporter": [
+    "text",
+    "html"
+  ]
+}
