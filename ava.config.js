@@ -1,6 +1,6 @@
 export default {
   verbose: true,
   files: [
-    'test/unit/**'
+    'test/unit/**/*.spec.js'
   ]
 }

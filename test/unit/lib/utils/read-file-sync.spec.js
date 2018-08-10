@@ -1,16 +1,23 @@
+import fs from 'fs-extra'
 import path from 'path'
 import readFileSync from '../../../../lib/utils/read-file-sync'
 import test from 'ava'
 
+test.before('setup', t => {
+  fs.ensureDirSync(path.join(__dirname, '.temp'))
+})
+
 test('reads file and returns content as string', t => {
-  const actual = readFileSync(path.join(__dirname, 'fixtures/string.txt'))
-  const expected = 'Hello World\n'
+  fs.writeFileSync(path.join(__dirname, '.temp/string.txt'), 'Hello World')
+
+  const actual = readFileSync(path.join(__dirname, '.temp/string.txt'))
+  const expected = 'Hello World'
 
   t.is(actual, expected)
 })
 
 test('returns undefined for missing files', t => {
-  const actual = readFileSync(path.join(__dirname, 'fixtures/missing-file.404'))
+  const actual = readFileSync('missing-file.404')
   const expected = undefined
 
   t.is(actual, expected)

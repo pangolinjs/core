@@ -2,32 +2,29 @@ import renderMarkdown from '../../../../lib/utils/render-markdown'
 import store from '../../../../lib/store'
 import test from 'ava'
 
-const markdown = `# Heading
+const storeBackup = {}
 
-Paragraph with [link](file.html)
-
-* List`
-
-const html = `<h1 id="heading">Heading</h1>
-<p>Paragraph with <a href="/file.html">link</a></p>
-<ul>
-<li>List</li>
-</ul>
-`
-
-test.before(t => {
+test.before('setup', t => {
+  Object.assign(storeBackup, store)
   store.config = { project: { base: '/' } }
 })
 
-test.after(t => {
-  store.config = null
+test.afterEach('cleanup', t => {
+  Object.assign(store, storeBackup)
 })
 
 test('renders markdown', t => {
-  const actual = renderMarkdown(markdown)
-  const expected = html
+  const markdown = '# Heading\nParagraph with [link](file.html)\n* List'
+  const html = renderMarkdown(markdown)
 
-  t.is(actual, expected)
+  t.snapshot(html)
+})
+
+test('highlights code', t => {
+  const markdown = '```js\nconst test =\'Hello World\'\n```'
+  const html = renderMarkdown(markdown)
+
+  t.snapshot(html)
 })
 
 test('strips ‘<h1>’', t => {
