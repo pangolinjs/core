@@ -44,8 +44,8 @@
     "pangolin-core": "bin/pangolin.js"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.56",
-    "@babel/register": "^7.0.0-beta.56",
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/register": "^7.0.0-rc.1",
     "ava": "^1.0.0-beta.6",
     "babel-loader": "^8.0.0-beta.2",
     "chalk": "^2.3.0",
@@ -64,7 +64,7 @@
     "marked": "^0.4.0",
     "mini-css-extract-plugin": "^0.4.0",
     "minimist": "^1.2.0",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.9.3",
     "nunjucks": "^3.0.1",
     "opn": "^5.3.0",
     "postcss-loader": "^3.0.0",
@@ -83,7 +83,7 @@
     "ws": "^6.0.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.0.0-beta.56",
+    "@babel/preset-env": "^7.0.0-rc.1",
     "@pangolin/eslint-config": "^1.0.0",
     "@pangolin/stylelint-config": "^1.0.1",
     "autoprefixer": "^9.1.0",
