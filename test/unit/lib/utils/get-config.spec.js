@@ -34,7 +34,12 @@ test.serial('loads config', t => {
     },
     project: {
       name: 'Hello',
-      base: '/base/'
+      base: '/base/',
+      branding: {
+        colorTheme: '#c0ffee',
+        colorTitle: '#639',
+        favicon: 'favicon.ico'
+      }
     }
   }`
   fs.writeFileSync(path.join(__dirname, '.temp/pangolin.config.js'), file)
@@ -46,7 +51,12 @@ test.serial('loads config', t => {
     },
     project: {
       name: 'Hello',
-      base: '/base/'
+      base: '/base/',
+      branding: {
+        colorTheme: '#c0ffee',
+        colorTitle: '#639',
+        favicon: 'favicon.ico'
+      }
     }
   }
 
@@ -81,23 +91,4 @@ test.serial('loads environment variables', t => {
 
   t.is(actual.devServer.port, 1337)
   t.is(actual.project.base, '/base/')
-})
-
-test.serial('loads branding', t => {
-  const file = `module.exports = {
-    project: {
-      branding: {
-        colorTheme: '#c0ffee',
-        colorTitle: '#639',
-        fontFamily: '"Comic Sans", sans-serif'
-      }
-    }
-  }`
-  fs.writeFileSync(path.join(__dirname, '.temp/pangolin.config.js'), file)
-
-  const actual = getConfig(path.join(__dirname, '.temp'))
-
-  t.is(actual.project.branding['color-theme'], '#c0ffee')
-  t.is(actual.project.branding['color-title'], '#639')
-  t.is(actual.project.branding['font-family'], '"Comic Sans", sans-serif')
 })
