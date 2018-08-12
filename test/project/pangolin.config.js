@@ -14,7 +14,7 @@
 //     branding: {
 //       colorTheme: '#5d675b',
 //       colorTitle: '#f7ef99',
-//       fontFamily: 'Arial, sans-serif'
+//       favicon: 'assets/favicon.ico'
 //     }
 //   }
 // }

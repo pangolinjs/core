@@ -7,6 +7,10 @@
 
     <title>{{ page.name }} | {{ project.name }}</title>
 
+    {% if project.branding.favicon %}
+    <link rel="shortcut icon" href="{% static project.branding.favicon %}">
+    {% endif %}
+
     <link rel="stylesheet" href="{% static 'pangolin/styles.css' %}">
 
     {% if websocket.port %}
@@ -18,9 +22,12 @@
     {% if project.branding -%}
     <style>
       :root {
-      {%- for property, value in project.branding %}
-        {% if value %}--{{ property }}: {{ value }};{% endif %}
-      {%- endfor %}
+        {% if project.branding.colorTheme %}
+        --color-theme: {{ project.branding.colorTheme }};
+        {% endif %}
+        {% if project.branding.colorTitle %}
+        --color-title: {{ project.branding.colorTitle }};
+        {% endif %}
       }
     </style>
     {%- endif %}
