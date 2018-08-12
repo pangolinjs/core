@@ -1,5 +1,3 @@
-/* global WebSocket */
-
 /**
  * WebSocket with auto-reconnect
  */
@@ -28,16 +26,21 @@ export default class Socket {
       return
     }
 
-    this.ws = new WebSocket(`ws://localhost:${global.websocketPort}`)
+    this.ws = new WebSocket(`ws://${window.location.hostname}:${global.websocketPort}`)
 
     this.ws.addEventListener('open', () => {
+      // Reload on reconnect
+      if (this.attempt > 1) {
+        window.location.reload()
+      }
+
       clearTimeout(this.timeout)
       this.timeout = null
       this.attempt = 1
     })
 
     this.ws.addEventListener('close', () => {
-      // Limited growth equation
+      // Limited growth equation approaches 5000ms
       const time = Math.floor(5000 - (5000 - 500) * Math.E ** (-0.05 * this.attempt))
 
       this.timeout = setTimeout(() => {

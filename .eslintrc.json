@@ -1,4 +1,7 @@
 {
   "root": true,
-  "extends": "@pangolin/eslint-config"
+  "extends": "@pangolin/eslint-config",
+  "env": {
+    "browser": true
+  }
 }
