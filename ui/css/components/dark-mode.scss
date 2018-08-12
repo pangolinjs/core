@@ -1,9 +1,13 @@
 .dark-mode {
-  display: grid;
-  grid-template: 2em / 1fr 1fr;
-  align-items: center;
-  position: relative;
-  margin: $padding;
+  display: none;
+
+  @supports (--a:0) {
+    display: grid;
+    grid-template: 2em / 1fr 1fr;
+    align-items: center;
+    position: relative;
+    margin: $padding;
+  }
 }
 
 .dark-mode__input {
