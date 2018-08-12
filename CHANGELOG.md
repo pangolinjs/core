@@ -2,6 +2,25 @@
 
 
 
+## 5.0.0-alpha.6
+2018-08-12
+
+### Added
+- Static asset handling
+- Favicon support
+
+### Improved
+- Reconnection handling
+- UI refinements
+
+### Fixed
+- Nunjucks and Markdown watcher
+
+### Updated
+- Dependencies
+
+
+
 ## 5.0.0-alpha.5
 2018-08-09
 
