@@ -45,10 +45,10 @@
     "pangolin-core": "bin/pangolin.js"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0-rc.3",
-    "@babel/register": "^7.0.0-rc.3",
+    "@babel/core": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "ava": "^1.0.0-beta.6",
-    "babel-loader": "^8.0.0-beta.2",
+    "babel-loader": "^8.0.0",
     "chalk": "^2.3.0",
     "chokidar": "^2.0.0",
     "copy-webpack-plugin": "^4.3.0",
@@ -72,7 +72,7 @@
     "postcss-loader": "^3.0.0",
     "prismjs": "^1.15.0",
     "sass-loader": "^7.0.1",
-    "style-loader": "^0.22.1",
+    "style-loader": "^0.23.0",
     "stylelint": "^9.4.0",
     "stylelint-codeframe-formatter": "^1.0.4",
     "stylelint-webpack-plugin": "^0.10.1",
@@ -85,11 +85,12 @@
     "ws": "^6.0.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.0.0-rc.3",
-    "@pangolin/eslint-config": "^1.0.0",
-    "@pangolin/stylelint-config": "^1.0.1",
+    "@babel/preset-env": "^7.0.0",
+    "@pangolin/eslint-config": "^2.0.0",
+    "@pangolin/stylelint-config": "^1.1.0",
     "autoprefixer": "^9.1.0",
     "cssnano": "^4.1.0",
+    "eslint-plugin-ava": "^5.1.0",
     "js-cookie": "^2.2.0",
     "normalize.css": "^8.0.0",
     "nyc": "^13.0.1",
