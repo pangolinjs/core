@@ -46,8 +46,6 @@
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
-    "@babel/register": "^7.0.0",
-    "ava": "^1.0.0-beta.6",
     "babel-loader": "^8.0.0",
     "chalk": "^2.3.0",
     "chokidar": "^2.0.0",
@@ -86,9 +84,11 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "@pangolin/eslint-config": "^2.0.0",
     "@pangolin/stylelint-config": "^1.1.0",
     "autoprefixer": "^9.1.0",
+    "ava": "^1.0.0-beta.8",
     "cssnano": "^4.1.0",
     "eslint-plugin-ava": "^5.1.0",
     "js-cookie": "^2.2.0",
