@@ -2,6 +2,21 @@
 
 
 
+## 5.0.0-alpha.7
+2018-08-30
+
+### Added
+- File hash for assets
+- Option to hide components from sidebar
+
+### Improved
+- Move AVA to dev dependencies
+
+### Updated
+- Dependencies
+
+
+
 ## 5.0.0-alpha.6
 2018-08-12
 
