@@ -2,10 +2,9 @@ import renderMarkdown from '../../../../lib/utils/render-markdown'
 import store from '../../../../lib/store'
 import test from 'ava'
 
-const storeBackup = {}
+const storeBackup = Object.assign({}, store)
 
-test.before('setup', t => {
-  Object.assign(storeBackup, store)
+test.beforeEach('setup', t => {
   store.config = { project: { base: '/' } }
 })
 
@@ -13,35 +12,35 @@ test.afterEach('cleanup', t => {
   Object.assign(store, storeBackup)
 })
 
-test('renders markdown', t => {
+test.serial('renders markdown', t => {
   const markdown = '# Heading\nParagraph with [link](file.html)\n* List'
   const html = renderMarkdown(markdown)
 
   t.snapshot(html)
 })
 
-test('highlights code', t => {
+test.serial('highlights code', t => {
   const markdown = '```js\nconst test =\'Hello World\'\n```'
   const html = renderMarkdown(markdown)
 
   t.snapshot(html)
 })
 
-test('strips ‘<h1>’', t => {
+test.serial('strips ‘<h1>’', t => {
   const actual = renderMarkdown('# Heading', { removeH1: true })
   const expected = ''
 
   t.is(actual, expected)
 })
 
-test('returns empty string on empty ‘markdown’ parameter', t => {
+test.serial('returns empty string on empty ‘markdown’ parameter', t => {
   const actual = renderMarkdown()
   const expected = ''
 
   t.is(actual, expected)
 })
 
-test('returns empty string on non-string ‘markdown’ parameter', t => {
+test.serial('returns empty string on non-string ‘markdown’ parameter', t => {
   const actualArray = renderMarkdown([])
   const actualFunction = renderMarkdown(() => {})
   const actualNumber = renderMarkdown(2)

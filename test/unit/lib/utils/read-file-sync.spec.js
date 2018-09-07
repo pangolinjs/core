@@ -3,9 +3,7 @@ import path from 'path'
 import readFileSync from '../../../../lib/utils/read-file-sync'
 import test from 'ava'
 
-test.before('setup', t => {
-  fs.ensureDirSync(path.join(__dirname, '.temp'))
-})
+fs.ensureDirSync(path.join(__dirname, '.temp'))
 
 test('reads file and returns content as string', t => {
   fs.writeFileSync(path.join(__dirname, '.temp/string.txt'), 'Hello World')

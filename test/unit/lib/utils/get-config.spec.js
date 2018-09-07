@@ -4,18 +4,17 @@ import path from 'path'
 import store from '../../../../lib/store'
 import test from 'ava'
 
-const storeBackup = {}
-
-test.before('setup', t => {
-  Object.assign(storeBackup, store)
-  fs.ensureDirSync(path.join(__dirname, '.temp'))
-})
+const storeBackup = Object.assign({}, store)
+fs.ensureDirSync(path.join(__dirname, '.temp'))
 
 test.afterEach('cleanup', t => {
   Object.assign(store, storeBackup)
-  delete require.cache[require.resolve('./.temp/pangolin.config.js')]
   delete process.env.PANGOLIN_PORT
   delete process.env.PANGOLIN_BASE
+
+  if (fs.existsSync(path.join(__dirname, '.temp/pangolin.config.js'))) {
+    delete require.cache[require.resolve('./.temp/pangolin.config.js')]
+  }
 })
 
 test.serial('returns config from store', t => {
@@ -49,6 +48,7 @@ test.serial('loads config', t => {
     devServer: {
       port: 1337
     },
+    fileNameHash: true,
     project: {
       name: 'Hello',
       base: '/base/',
@@ -72,6 +72,7 @@ test.serial('loads config with fallback values', t => {
     devServer: {
       port: 8080
     },
+    fileNameHash: true,
     project: {
       name: 'Pangolin',
       base: '/'
