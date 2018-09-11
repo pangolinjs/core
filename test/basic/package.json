@@ -2,5 +2,9 @@
   "name": "basic",
   "description": "A basic test for the Front-End Styleguide",
   "version": "1.0.0",
-  "author": "Fynn Becker <info@fynn-becker.de>"
+  "author": "Fynn Becker <info@fynn-becker.de>",
+  "dependencies": {
+    "normalize.css": "^8.0.0",
+    "svgxuse": "^1.2.6"
+  }
 }
