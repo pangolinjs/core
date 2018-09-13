@@ -1,5 +1,3 @@
-import cookies from 'js-cookie'
-
 /**
  * “The dark mode” brought to you by Batman™️
  */
@@ -15,7 +13,7 @@ export default class DarkMode {
     this.enableInput = options.enableInput
     this.disableInput = options.disableInput
     this.toggleClass = options.toggleClass || 'has-dark-mode'
-    this.enabled = cookies.getJSON('dark-mode-enabled') || false
+    this.enabled = localStorage.getItem('pangolinDarkMode') || false
     this.prismCSS = document.createElement('link')
   }
 
@@ -50,7 +48,7 @@ export default class DarkMode {
    */
   enable () {
     document.documentElement.classList.add(this.toggleClass)
-    cookies.set('dark-mode-enabled', true)
+    localStorage.setItem('pangolinDarkMode', true)
     this.prismCSS.href = 'https://unpkg.com/prismjs@1.15.0/themes/prism-tomorrow.css'
     this.enableInput.checked = true
   }
@@ -60,7 +58,7 @@ export default class DarkMode {
    */
   disable () {
     document.documentElement.classList.remove(this.toggleClass)
-    cookies.remove('dark-mode-enabled')
+    localStorage.removeItem('pangolinDarkMode')
     this.prismCSS.href = 'https://unpkg.com/prismjs@1.15.0/themes/prism.css'
     this.disableInput.checked = true
   }
