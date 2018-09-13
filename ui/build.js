@@ -70,7 +70,7 @@ config
   .plugin('progress')
   .use(webpack.ProgressPlugin)
 
-/* eslint-disable enable */
+/* eslint-enable indent */
 
 webpack(config.toConfig(), (error, stats) => {
   if (error) throw error
