@@ -1,9 +1,8 @@
 {% macro link (path, text) %}
   <a
     {%- if path == page.path %} aria-current="page"{% endif %}
-    class="nav__text nav__text--link {% if path == page.path %}is-active{% endif %}"
+    class="nav__text nav__text--link {% if path == page.path %}is-active js-nav-active{% endif %}"
     href="{% static path %}.html"
-
   >
     {{ text }}
   </a>
@@ -16,7 +15,7 @@
 
       <li
         class="nav__item"
-        style="--depth:{{ depth }}"
+        style="--depth:{{ depth }};"
       >
 
         {%- set children = item.children -%}
@@ -40,7 +39,7 @@
 
 <nav
   aria-label="Pangolin Navigation"
-  class="nav"
+  class="nav js-nav"
 >
   {{ nav(components) }}
 </nav>
