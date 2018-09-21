@@ -93,7 +93,7 @@
     "eslint-plugin-ava": "^5.1.0",
     "normalize.css": "^8.0.0",
     "nyc": "^13.0.1",
-    "postcss-custom-properties": "^7.0.0",
+    "postcss-custom-properties": "^8.0.4",
     "prism-themes": "^1.0.1"
   },
   "engines": {
