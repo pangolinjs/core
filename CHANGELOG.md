@@ -2,6 +2,24 @@
 
 
 
+## 5.0.0-alpha.8
+2018-09-21
+
+### Added
+- Split webpack runtime chunk
+
+### Improved
+- Save nav scroll position
+- UI for smaller viewports
+
+### Updated
+- Dependencies
+
+### Removed
+- Unused dependency
+
+
+
 ## 5.0.0-alpha.7
 2018-08-30
 
