@@ -1,12 +1,31 @@
 .title {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: $padding;
+  padding: ($padding / 2) $padding;
 
   color: var(--color-title, $color-title);
 
   background: var(--color-theme, $color-theme);
+
+  @media (min-width: $breakpoint-layout) {
+    padding: $padding;
+  }
+}
+
+.title__button {
+  margin-right: 1rem;
+  padding: 0 0.25rem;
+
+  font-size: 1.5rem;
+  color: var(--color-theme, $color-theme);
+
+  background: var(--color-title, $color-title);
+  border: 0;
+  border-radius: 0.125rem;
+
+  @media (min-width: $breakpoint-layout) {
+    display: none;
+  }
 }
 
 .title__heading {
@@ -15,6 +34,7 @@
 
 .title__links {
   display: flex;
+  margin-left: auto;
 }
 
 .title__link {

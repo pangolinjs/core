@@ -3777,6 +3777,14 @@
         "readable-stream": "^2.0.4"
       }
     },
+    "focus-trap": {
+      "version": "3.0.0",
+      "dev": true,
+      "requires": {
+        "tabbable": "^3.1.0",
+        "xtend": "^4.0.1"
+      }
+    },
     "for-in": {
       "version": "1.0.2"
     },
@@ -11030,6 +11038,10 @@
     },
     "symbol-observable": {
       "version": "1.2.0",
+      "dev": true
+    },
+    "tabbable": {
+      "version": "3.1.1",
       "dev": true
     },
     "table": {

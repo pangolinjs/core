@@ -1,4 +1,5 @@
 import './components/nav-active'
+import './components/sidebar'
 
 import DarkMode from './components/dark-mode'
 import Socket from './components/socket'

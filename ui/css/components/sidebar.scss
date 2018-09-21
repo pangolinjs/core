@@ -1,0 +1,32 @@
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  margin: ($padding / 2) $padding;
+
+  @media (min-width: $breakpoint-layout) {
+    margin: $padding;
+  }
+}
+
+.sidebar__button {
+  margin-right: 0.5rem;
+  padding: 0.1875rem;
+
+  font-size: 1.5rem;
+
+  background: none;
+  border: 0;
+  border-radius: 0;
+
+  @media (min-width: $breakpoint-layout) {
+    display: none;
+  }
+}
+
+.sidebar__icon {
+  display: block;
+}
+
+.sidebar__title {
+  margin: 0;
+}
