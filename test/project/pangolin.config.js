@@ -63,3 +63,16 @@
 //     }
 //   }
 // }
+
+/**
+ * Custom Nunjucks filters
+ */
+// module.exports = {
+//   nunjucks: {
+//     filters: {
+//       shorten: function (str, count) {
+//         return str.slice(0, count || 5) + '…'
+//       }
+//     }
+//   }
+// }
