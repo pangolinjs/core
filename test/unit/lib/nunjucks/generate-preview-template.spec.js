@@ -21,16 +21,11 @@ test('generates custom template', t => {
 })
 
 test('throws Error on missing options', t => {
-  const errorHead = t.throws(() => {
+  const error = t.throws(() => {
     generatePreviewTemplate({ body: 'test' })
   }, Error)
 
-  const errorBody = t.throws(() => {
-    generatePreviewTemplate({ head: 'test' })
-  }, Error)
-
-  t.is(errorHead.message, 'options.head missing')
-  t.is(errorBody.message, 'options.body missing')
+  t.is(error.message, 'options.head missing')
 })
 
 test('throws TypeError on wrong option types', t => {

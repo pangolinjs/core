@@ -18,6 +18,10 @@
         style="--depth:{{ depth }};"
       >
 
+        {%- if item.path -%}
+          {{ link(item.path, item.name) }}
+        {%- endif -%}
+
         {%- set children = item.children -%}
 
         {%- if (children | length == 1) and children[0].path -%}
@@ -25,10 +29,6 @@
         {%- elseif children -%}
           <span class="nav__text nav__text--title">{{ item.name }}</span>
           {{ nav(children, depth) }}
-        {%- endif -%}
-
-        {%- if item.path -%}
-          {{ link(item.path, item.name) }}
         {%- endif -%}
 
       </li>
