@@ -4,9 +4,9 @@
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud [exercitation ullamco laboris](components/atoms/button/button.html) nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat `inline code is available, too` cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-| This is a nice   | little table             |
-| :--------------- | -----------------------: |
-| it is powered by | Github flavored Markdown |
+| This is a nice   | little table              | with lots of content in it                           |
+|:-----------------|---------------------------|-----------------------------------------------------:|
+| It is powered by | Github flavored Markdown. | A Markdown version with a few nice little additions. |
 
 ## Heading
 
