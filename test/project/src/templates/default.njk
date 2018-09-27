@@ -8,6 +8,8 @@
     <title>{{ page.name }} | Preview | {{ project.name }}</title>
 
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+    {% block pangolin_head %}{% endblock %}
   </head>
   <body>
     {% block body %}{% endblock %}
