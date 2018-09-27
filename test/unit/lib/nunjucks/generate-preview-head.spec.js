@@ -2,11 +2,11 @@ import generatePreviewHead from '../../../../lib/nunjucks/generate-preview-head'
 import store from '../../../../lib/store'
 import test from 'ava'
 
-const storeBackup = Object.assign({}, store)
+const stateBackup = Object.assign({}, store.state)
 
 test.afterEach('cleanup', t => {
   delete process.env.PANGOLIN_ENV
-  Object.assign(store, storeBackup)
+  Object.assign(store.state, stateBackup)
 })
 
 test.serial('generates dev template', t => {
@@ -17,7 +17,7 @@ test.serial('generates dev template', t => {
 })
 
 test.serial('generates build template', t => {
-  store.config = { project: { base: '/test/' } }
+  store.state.config = { project: { base: '/test/' } }
   process.env.PANGOLIN_ENV = 'build'
   const template = generatePreviewHead()
 
@@ -25,7 +25,7 @@ test.serial('generates build template', t => {
 })
 
 test.serial('generates build:dev template', t => {
-  store.config = { project: { base: '/test/' } }
+  store.state.config = { project: { base: '/test/' } }
   process.env.PANGOLIN_ENV = 'build:dev'
   const template = generatePreviewHead()
 

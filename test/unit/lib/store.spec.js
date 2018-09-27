@@ -1,11 +1,12 @@
 import store from '../../../lib/store'
 import test from 'ava'
 
-test('has pre-defined structure', t => {
-  const actual = store
+test('has pre-defined state structure', t => {
+  const actual = store.state
   const expected = {
     components: null,
     config: null,
+    cwd: null,
     websocket: {
       port: null
     }

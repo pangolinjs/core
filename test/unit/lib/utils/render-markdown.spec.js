@@ -2,14 +2,14 @@ import renderMarkdown from '../../../../lib/utils/render-markdown'
 import store from '../../../../lib/store'
 import test from 'ava'
 
-const storeBackup = Object.assign({}, store)
+const stateBackup = Object.assign({}, store.state)
 
 test.beforeEach('setup', t => {
-  store.config = { project: { base: '/' } }
+  store.state.config = { project: { base: '/' } }
 })
 
 test.afterEach('cleanup', t => {
-  Object.assign(store, storeBackup)
+  Object.assign(store.state, stateBackup)
 })
 
 test.serial('renders markdown', t => {

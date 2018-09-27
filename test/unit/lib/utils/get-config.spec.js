@@ -4,11 +4,11 @@ import path from 'path'
 import store from '../../../../lib/store'
 import test from 'ava'
 
-const storeBackup = Object.assign({}, store)
+const stateBackup = Object.assign({}, store.state)
 fs.ensureDirSync(path.join(__dirname, '.temp'))
 
 test.afterEach('cleanup', t => {
-  Object.assign(store, storeBackup)
+  Object.assign(store.state, stateBackup)
   delete process.env.PANGOLIN_PORT
   delete process.env.PANGOLIN_BASE
 
@@ -18,7 +18,7 @@ test.afterEach('cleanup', t => {
 })
 
 test.serial('returns config from store', t => {
-  store.config = 'Hello World'
+  store.state.config = 'Hello World'
 
   const actual = getConfig()
   const expected = 'Hello World'
@@ -49,6 +49,7 @@ test.serial('loads config', t => {
       port: 1337
     },
     fileNameHash: true,
+    nunjucks: {},
     project: {
       name: 'Hello',
       base: '/base/',
@@ -73,6 +74,7 @@ test.serial('loads config with fallback values', t => {
       port: 8080
     },
     fileNameHash: true,
+    nunjucks: {},
     project: {
       name: 'Pangolin',
       base: '/'
