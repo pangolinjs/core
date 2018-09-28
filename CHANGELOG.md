@@ -2,6 +2,26 @@
 
 
 
+## 5.0.0-alpha.9
+2018-09-28
+
+### Added
+- Custom Nunjucks filters
+
+### Improved
+- Move Pangolin head to Nunjucks template block
+- Watch for components config changes
+- Cache Nunjucks preview environment
+
+### Updated
+- Dependencies
+
+### Fixed
+- Don’t show empty directories in sidebar nav
+- Allow tables to span the whole docs width
+
+
+
 ## 5.0.0-alpha.8
 2018-09-21
 
