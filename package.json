@@ -57,7 +57,6 @@
     "file-loader": "^2.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs-extra": "^7.0.0",
-    "imagemin-webpack-plugin": "^2.2.0",
     "javascript-stringify": "^1.6.0",
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
