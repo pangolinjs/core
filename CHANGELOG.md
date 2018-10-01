@@ -2,6 +2,20 @@
 
 
 
+## 5.0.0-alpha.10
+2018-10-01
+
+### Improved
+- Watch Nunjucks template changes
+
+### Updated
+- Dependencies
+
+### Removed
+- imagemin
+
+
+
 ## 5.0.0-alpha.9
 2018-09-28
 
