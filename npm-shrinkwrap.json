@@ -1,6 +1,6 @@
 {
   "name": "@pangolin/core",
-  "version": "5.0.0-alpha.9",
+  "version": "5.0.0-alpha.10",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -1418,11 +1418,11 @@
       }
     },
     "browserslist": {
-      "version": "4.1.1",
+      "version": "4.2.0",
       "requires": {
-        "caniuse-lite": "^1.0.30000884",
-        "electron-to-chromium": "^1.3.62",
-        "node-releases": "^1.0.0-alpha.11"
+        "caniuse-lite": "^1.0.30000889",
+        "electron-to-chromium": "^1.3.73",
+        "node-releases": "^1.0.0-alpha.12"
       }
     },
     "buf-compare": {
@@ -1557,7 +1557,7 @@
       }
     },
     "caniuse-lite": {
-      "version": "1.0.30000888"
+      "version": "1.0.30000890"
     },
     "capture-stack-trace": {
       "version": "1.0.1"
@@ -2545,7 +2545,7 @@
       "version": "1.1.1"
     },
     "electron-to-chromium": {
-      "version": "1.3.72"
+      "version": "1.3.75"
     },
     "elliptic": {
       "version": "6.4.1",
@@ -3115,7 +3115,7 @@
       "dev": true
     },
     "fast-glob": {
-      "version": "2.2.2",
+      "version": "2.2.3",
       "requires": {
         "@mrmlnc/readdir-enhanced": "^2.2.1",
         "@nodelib/fs.stat": "^1.0.1",
@@ -4031,7 +4031,7 @@
       }
     },
     "globals": {
-      "version": "11.7.0"
+      "version": "11.8.0"
     },
     "globby": {
       "version": "7.1.1",
@@ -5275,10 +5275,11 @@
       "version": "0.1.1"
     },
     "md5.js": {
-      "version": "1.3.4",
+      "version": "1.3.5",
       "requires": {
         "hash-base": "^3.0.0",
-        "inherits": "^2.0.1"
+        "inherits": "^2.0.1",
+        "safe-buffer": "^5.1.2"
       }
     },
     "mdast-util-compact": {
@@ -6281,8 +6282,6 @@
         },
         "find-cache-dir": {
           "version": "2.0.0",
-          "resolved": "https://registry.npmjs.org/find-cache-dir/-/find-cache-dir-2.0.0.tgz",
-          "integrity": "sha512-LDUY6V1Xs5eFskUVYtIwatojt6+9xC9Chnlk/jYOOvn3FAFfSaWddxahDGyNHh0b2dMXa6YW2m0tk8TdVaXHlA==",
           "dev": true,
           "requires": {
             "commondir": "^1.0.1",
@@ -6292,8 +6291,6 @@
         },
         "find-up": {
           "version": "3.0.0",
-          "resolved": "https://registry.npmjs.org/find-up/-/find-up-3.0.0.tgz",
-          "integrity": "sha512-1yD6RmLI1XBfxugvORwlck6f75tYL+iR0jqwsOrOxMZyGYqUuDhJ0l4AXdO1iX/FTs9cBAMEk1gWSEx1kSbylg==",
           "dev": true,
           "requires": {
             "locate-path": "^3.0.0"
@@ -6550,8 +6547,6 @@
         },
         "locate-path": {
           "version": "3.0.0",
-          "resolved": "https://registry.npmjs.org/locate-path/-/locate-path-3.0.0.tgz",
-          "integrity": "sha512-7AO748wWnIhNqAuaty2ZWHkQHRSNfPVIsPIfwEOWO22AmaoVrWavlOcMR5nzTLNYvp36X220/maaRsrec1G65A==",
           "dev": true,
           "requires": {
             "p-locate": "^3.0.0",
@@ -6745,8 +6740,6 @@
         },
         "p-limit": {
           "version": "2.0.0",
-          "resolved": "https://registry.npmjs.org/p-limit/-/p-limit-2.0.0.tgz",
-          "integrity": "sha512-fl5s52lI5ahKCernzzIyAP0QAZbGIovtVHGwpcu1Jr/EpzLVDI2myISHwGqK7m8uQFugVWSrbxH7XnhGtvEc+A==",
           "dev": true,
           "requires": {
             "p-try": "^2.0.0"
@@ -6754,8 +6747,6 @@
         },
         "p-locate": {
           "version": "3.0.0",
-          "resolved": "https://registry.npmjs.org/p-locate/-/p-locate-3.0.0.tgz",
-          "integrity": "sha512-x+12w/To+4GFfgJhBEpiDcLozRJGegY+Ei7/z0tSLkMmxGZNybVMSfWj9aJn8Z5Fc7dBUNJOOVgPv2H7IwulSQ==",
           "dev": true,
           "requires": {
             "p-limit": "^2.0.0"
@@ -6763,8 +6754,6 @@
         },
         "p-try": {
           "version": "2.0.0",
-          "resolved": "https://registry.npmjs.org/p-try/-/p-try-2.0.0.tgz",
-          "integrity": "sha512-hMp0onDKIajHfIkdRk3P4CdCmErkYAxxDtP3Wx/4nZ3aGlau2VKh3mZpcuFkH27WQkL/3WBCPOktzA9ZOAnMQQ==",
           "dev": true
         },
         "package-hash": {
@@ -6824,8 +6813,6 @@
         },
         "pkg-dir": {
           "version": "3.0.0",
-          "resolved": "https://registry.npmjs.org/pkg-dir/-/pkg-dir-3.0.0.tgz",
-          "integrity": "sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==",
           "dev": true,
           "requires": {
             "find-up": "^3.0.0"
@@ -6887,8 +6874,6 @@
         },
         "resolve-from": {
           "version": "4.0.0",
-          "resolved": "https://registry.npmjs.org/resolve-from/-/resolve-from-4.0.0.tgz",
-          "integrity": "sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==",
           "dev": true
         },
         "right-align": {
@@ -7707,7 +7692,7 @@
       "version": "0.1.1"
     },
     "postcss": {
-      "version": "7.0.4",
+      "version": "7.0.5",
       "requires": {
         "chalk": "^2.4.1",
         "source-map": "^0.6.1",
@@ -7755,10 +7740,10 @@
       }
     },
     "postcss-custom-properties": {
-      "version": "8.0.6",
+      "version": "8.0.8",
       "dev": true,
       "requires": {
-        "postcss": "^7.0.3",
+        "postcss": "^7.0.5",
         "postcss-values-parser": "^2.0.0"
       }
     },
@@ -8274,13 +8259,14 @@
       "version": "1.1.29"
     },
     "public-encrypt": {
-      "version": "4.0.2",
+      "version": "4.0.3",
       "requires": {
         "bn.js": "^4.1.0",
         "browserify-rsa": "^4.0.0",
         "create-hash": "^1.1.0",
         "parse-asn1": "^5.0.0",
-        "randombytes": "^2.0.1"
+        "randombytes": "^2.0.1",
+        "safe-buffer": "^5.1.2"
       }
     },
     "pump": {
@@ -8510,7 +8496,7 @@
       }
     },
     "regexpp": {
-      "version": "2.0.0"
+      "version": "2.0.1"
     },
     "regexpu-core": {
       "version": "4.2.0",
@@ -9046,14 +9032,14 @@
       }
     },
     "spdx-correct": {
-      "version": "3.0.1",
+      "version": "3.0.2",
       "requires": {
         "spdx-expression-parse": "^3.0.0",
         "spdx-license-ids": "^3.0.0"
       }
     },
     "spdx-exceptions": {
-      "version": "2.1.0"
+      "version": "2.2.0"
     },
     "spdx-expression-parse": {
       "version": "3.0.0",
@@ -10147,7 +10133,7 @@
       }
     },
     "webpack-chain": {
-      "version": "4.12.0",
+      "version": "4.12.1",
       "requires": {
         "deepmerge": "^1.5.2",
         "javascript-stringify": "^1.6.0"
@@ -10364,7 +10350,7 @@
       }
     },
     "ws": {
-      "version": "6.0.0",
+      "version": "6.1.0",
       "requires": {
         "async-limiter": "~1.0.0"
       }
