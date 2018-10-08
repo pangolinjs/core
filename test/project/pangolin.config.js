@@ -76,3 +76,34 @@
 //     }
 //   }
 // }
+
+/**
+ * Custom Nunjucks extension
+ */
+// module.exports = {
+//   nunjucks: {
+//     extensions: {
+//       uppercase: function () {
+//         this.tags = ['uppercase']
+
+//         this.parse = function (parser, nodes) {
+//           const token = parser.nextToken()
+//           const args = parser.parseSignature(null, true)
+
+//           parser.advanceAfterBlockEnd(token)
+
+//           return new nodes.CallExtension(this, 'run', args)
+//         }
+
+//         this.run = function (context, str) {
+//           console.log(str)
+//           if (typeof str === 'string') {
+//             return str.toUpperCase()
+//           }
+
+//           return str
+//         }
+//       }
+//     }
+//   }
+// }
