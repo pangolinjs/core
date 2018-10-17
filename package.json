@@ -74,7 +74,7 @@
     "stylelint-codeframe-formatter": "^1.0.4",
     "stylelint-webpack-plugin": "^0.10.1",
     "webpack": "^4.20.2",
-    "webpack-chain": "^4.6.0",
+    "webpack-chain": "^5.0.0",
     "webpack-merge": "^4.1.2",
     "webpack-serve": "^2.0.2",
     "webpackbar": "^2.6.1",
