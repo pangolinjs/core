@@ -36,8 +36,6 @@
 .nav__text--link {
   text-decoration: none;
 
-  transition: background-color $transition-dark-mode;
-
   &:hover,
   &:focus,
   &.is-active {

@@ -13,7 +13,6 @@
   background: #fff;
 
   border: 0 solid var(--color-border, $color-border);
-  transition: border-color $transition-dark-mode;
 
   @media (min-width: $breakpoint-layout) {
     border-width: 2px;

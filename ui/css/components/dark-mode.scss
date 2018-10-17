@@ -52,11 +52,6 @@
     background: var(--color-background, $color-background);
     border: 2px solid var(--color-border, $color-border);
     border-radius: 1em;
-
-    transition:
-      background-color $transition-dark-mode,
-      border-color $transition-dark-mode,
-      box-shadow $transition-dark-mode;
   }
 
   &::after {
@@ -69,9 +64,7 @@
     background: var(--color-text, $color-text);
     border-radius: 50%;
 
-    transition:
-      color $transition-dark-mode,
-      transform $transition-dark-mode;
+    transition: transform 300ms;
   }
 
   .dark-mode__input:focus ~ &::before {

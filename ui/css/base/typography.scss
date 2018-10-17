@@ -44,10 +44,6 @@ blockquote {
   background: var(--color-background-aside, $color-background-aside);
   border-left: 0.5em solid var(--color-theme, $color-theme);
 
-  transition:
-    background-color $transition-dark-mode,
-    border-color $transition-dark-mode;
-
   > :last-child {
     margin-bottom: 0;
   }

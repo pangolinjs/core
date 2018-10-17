@@ -16,10 +16,6 @@
 
   background: var(--color-background-aside, $color-background-aside);
 
-  transition:
-    transform 300ms,
-    background-color $transition-dark-mode;
-
   &.is-expanded {
     transform: translateX(0);
   }
