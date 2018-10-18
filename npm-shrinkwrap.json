@@ -257,6 +257,11 @@
         "chalk": "^2.0.0",
         "esutils": "^2.0.2",
         "js-tokens": "^4.0.0"
+      },
+      "dependencies": {
+        "js-tokens": {
+          "version": "4.0.0"
+        }
       }
     },
     "@babel/parser": {
@@ -1292,9 +1297,6 @@
             "supports-color": "^2.0.0"
           }
         },
-        "js-tokens": {
-          "version": "3.0.2"
-        },
         "strip-ansi": {
           "version": "3.0.1",
           "requires": {
@@ -1303,6 +1305,128 @@
         },
         "supports-color": {
           "version": "2.0.0"
+        }
+      }
+    },
+    "babel-eslint": {
+      "version": "8.2.6",
+      "dev": true,
+      "requires": {
+        "@babel/code-frame": "7.0.0-beta.44",
+        "@babel/traverse": "7.0.0-beta.44",
+        "@babel/types": "7.0.0-beta.44",
+        "babylon": "7.0.0-beta.44",
+        "eslint-scope": "3.7.1",
+        "eslint-visitor-keys": "^1.0.0"
+      },
+      "dependencies": {
+        "@babel/code-frame": {
+          "version": "7.0.0-beta.44",
+          "dev": true,
+          "requires": {
+            "@babel/highlight": "7.0.0-beta.44"
+          }
+        },
+        "@babel/generator": {
+          "version": "7.0.0-beta.44",
+          "dev": true,
+          "requires": {
+            "@babel/types": "7.0.0-beta.44",
+            "jsesc": "^2.5.1",
+            "lodash": "^4.2.0",
+            "source-map": "^0.5.0",
+            "trim-right": "^1.0.1"
+          }
+        },
+        "@babel/helper-function-name": {
+          "version": "7.0.0-beta.44",
+          "dev": true,
+          "requires": {
+            "@babel/helper-get-function-arity": "7.0.0-beta.44",
+            "@babel/template": "7.0.0-beta.44",
+            "@babel/types": "7.0.0-beta.44"
+          }
+        },
+        "@babel/helper-get-function-arity": {
+          "version": "7.0.0-beta.44",
+          "dev": true,
+          "requires": {
+            "@babel/types": "7.0.0-beta.44"
+          }
+        },
+        "@babel/helper-split-export-declaration": {
+          "version": "7.0.0-beta.44",
+          "dev": true,
+          "requires": {
+            "@babel/types": "7.0.0-beta.44"
+          }
+        },
+        "@babel/highlight": {
+          "version": "7.0.0-beta.44",
+          "dev": true,
+          "requires": {
+            "chalk": "^2.0.0",
+            "esutils": "^2.0.2",
+            "js-tokens": "^3.0.0"
+          }
+        },
+        "@babel/template": {
+          "version": "7.0.0-beta.44",
+          "dev": true,
+          "requires": {
+            "@babel/code-frame": "7.0.0-beta.44",
+            "@babel/types": "7.0.0-beta.44",
+            "babylon": "7.0.0-beta.44",
+            "lodash": "^4.2.0"
+          }
+        },
+        "@babel/traverse": {
+          "version": "7.0.0-beta.44",
+          "dev": true,
+          "requires": {
+            "@babel/code-frame": "7.0.0-beta.44",
+            "@babel/generator": "7.0.0-beta.44",
+            "@babel/helper-function-name": "7.0.0-beta.44",
+            "@babel/helper-split-export-declaration": "7.0.0-beta.44",
+            "@babel/types": "7.0.0-beta.44",
+            "babylon": "7.0.0-beta.44",
+            "debug": "^3.1.0",
+            "globals": "^11.1.0",
+            "invariant": "^2.2.0",
+            "lodash": "^4.2.0"
+          }
+        },
+        "@babel/types": {
+          "version": "7.0.0-beta.44",
+          "dev": true,
+          "requires": {
+            "esutils": "^2.0.2",
+            "lodash": "^4.2.0",
+            "to-fast-properties": "^2.0.0"
+          }
+        },
+        "debug": {
+          "version": "3.2.6",
+          "dev": true,
+          "requires": {
+            "ms": "^2.1.1"
+          }
+        },
+        "eslint-scope": {
+          "version": "3.7.1",
+          "dev": true,
+          "requires": {
+            "esrecurse": "^4.1.0",
+            "estraverse": "^4.1.1"
+          }
+        },
+        "jsesc": {
+          "version": "2.5.1",
+          "dev": true
+        },
+        "source-map": {
+          "version": "0.5.7",
+          "dev": true
         }
       }
     },
@@ -1327,6 +1451,10 @@
         "espurify": "^1.6.0",
         "estraverse": "^4.1.1"
       }
+    },
+    "babylon": {
+      "version": "7.0.0-beta.44",
+      "dev": true
     },
     "bail": {
       "version": "1.0.3"
@@ -1615,7 +1743,7 @@
       }
     },
     "caniuse-lite": {
-      "version": "1.0.30000892"
+      "version": "1.0.30000893"
     },
     "capture-stack-trace": {
       "version": "1.0.1"
@@ -1906,7 +2034,7 @@
       }
     },
     "commander": {
-      "version": "2.13.0"
+      "version": "2.19.0"
     },
     "common-path-prefix": {
       "version": "1.0.0",
@@ -2189,6 +2317,9 @@
         "regexpu-core": "^1.0.0"
       },
       "dependencies": {
+        "cssesc": {
+          "version": "0.1.0"
+        },
         "regexpu-core": {
           "version": "1.0.0",
           "requires": {
@@ -2235,10 +2366,11 @@
       "dev": true
     },
     "cssesc": {
-      "version": "0.1.0"
+      "version": "1.0.1",
+      "dev": true
     },
     "cssnano": {
-      "version": "4.1.4",
+      "version": "4.1.5",
       "dev": true,
       "requires": {
         "cosmiconfig": "^5.0.0",
@@ -2248,13 +2380,13 @@
       }
     },
     "cssnano-preset-default": {
-      "version": "4.0.2",
+      "version": "4.0.3",
       "dev": true,
       "requires": {
         "css-declaration-sorter": "^4.0.1",
         "cssnano-util-raw-cache": "^4.0.1",
         "postcss": "^7.0.0",
-        "postcss-calc": "^6.0.2",
+        "postcss-calc": "^7.0.0",
         "postcss-colormin": "^4.0.2",
         "postcss-convert-values": "^4.0.1",
         "postcss-discard-comments": "^4.0.1",
@@ -4788,7 +4920,7 @@
       "dev": true
     },
     "js-tokens": {
-      "version": "4.0.0"
+      "version": "3.0.2"
     },
     "js-yaml": {
       "version": "3.12.0",
@@ -5136,6 +5268,12 @@
       "dev": true,
       "requires": {
         "js-tokens": "^3.0.0 || ^4.0.0"
+      },
+      "dependencies": {
+        "js-tokens": {
+          "version": "4.0.0",
+          "dev": true
+        }
       }
     },
     "loud-rejection": {
@@ -7592,20 +7730,21 @@
       }
     },
     "postcss-calc": {
-      "version": "6.0.2",
+      "version": "7.0.0",
       "dev": true,
       "requires": {
         "css-unit-converter": "^1.1.1",
         "postcss": "^7.0.2",
-        "postcss-selector-parser": "^2.2.2",
-        "reduce-css-calc": "^2.0.0"
+        "postcss-selector-parser": "^5.0.0-rc.3",
+        "postcss-value-parser": "^3.3.0"
       },
       "dependencies": {
         "postcss-selector-parser": {
-          "version": "2.2.3",
+          "version": "5.0.0-rc.3",
           "dev": true,
           "requires": {
-            "flatten": "^1.0.2",
+            "babel-eslint": "^8.2.3",
+            "cssesc": "^1.0.1",
             "indexes-of": "^1.0.1",
             "uniq": "^1.0.1"
           }
@@ -7771,7 +7910,7 @@
       "version": "0.2.3"
     },
     "postcss-merge-longhand": {
-      "version": "4.0.6",
+      "version": "4.0.7",
       "dev": true,
       "requires": {
         "css-color-names": "0.0.4",
@@ -8332,14 +8471,6 @@
       "requires": {
         "indent-string": "^3.0.0",
         "strip-indent": "^2.0.0"
-      }
-    },
-    "reduce-css-calc": {
-      "version": "2.1.5",
-      "dev": true,
-      "requires": {
-        "css-unit-converter": "^1.1.1",
-        "postcss-value-parser": "^3.3.0"
       }
     },
     "regenerate": {
@@ -9290,10 +9421,6 @@
         "postcss-value-parser": "^3.3.0"
       },
       "dependencies": {
-        "cssesc": {
-          "version": "1.0.1",
-          "dev": true
-        },
         "postcss-selector-parser": {
           "version": "4.0.0",
           "dev": true,
@@ -9615,6 +9742,11 @@
       "requires": {
         "commander": "~2.13.0",
         "source-map": "~0.6.1"
+      },
+      "dependencies": {
+        "commander": {
+          "version": "2.13.0"
+        }
       }
     },
     "uglify-js": {
@@ -9967,7 +10099,7 @@
       }
     },
     "webpack": {
-      "version": "4.20.2",
+      "version": "4.21.0",
       "requires": {
         "@webassemblyjs/ast": "1.7.8",
         "@webassemblyjs/helper-module-context": "1.7.8",

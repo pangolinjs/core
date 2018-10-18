@@ -14,5 +14,10 @@
   "dependencies": {
     "lodash.truncate": "^4.4.2",
     "normalize.css": "^8.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "stylelint": "^9.6.0",
+    "stylelint-codeframe-formatter": "^1.0.4"
   }
 }
