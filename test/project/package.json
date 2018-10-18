@@ -5,7 +5,6 @@
   "scripts": {
     "lint:js": "node ../../bin/pangolin lint --js",
     "lint:css": "node ../../bin/pangolin lint --css",
-    "test:unit": "node ../../node_modules/.bin/ava",
     "inspect": "node ../../bin/pangolin inspect",
     "dev": "node ../../bin/pangolin dev",
     "build": "node ../../bin/pangolin build",
