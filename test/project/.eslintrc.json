@@ -1,10 +1,6 @@
 {
   "root": true,
   "extends": [
-    "@pangolin/eslint-config",
-    "plugin:ava/recommended"
-  ],
-  "plugins": [
-    "ava"
+    "@pangolin/eslint-config"
   ]
 }

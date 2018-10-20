@@ -18,7 +18,7 @@ config.entry('index')
 
 config.output
   .filename('scripts.js')
-  .path(path.resolve(__dirname, 'dist'))
+  .path(path.resolve(__dirname, 'dist/pangolin'))
 
 config.module
   .rule('js')

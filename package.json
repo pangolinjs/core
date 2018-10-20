@@ -58,8 +58,6 @@
     "file-loader": "^2.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs-extra": "^7.0.0",
-    "koa-mount": "^4.0.0",
-    "koa-static": "^5.0.0",
     "marked": "^0.5.1",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.3",
@@ -74,8 +72,8 @@
     "stylelint-webpack-plugin": "^0.10.1",
     "webpack": "^4.20.2",
     "webpack-chain": "^5.0.0",
+    "webpack-dev-server": "^3.1.9",
     "webpack-merge": "^4.1.2",
-    "webpack-serve": "^2.0.2",
     "webpackbar": "^2.6.1",
     "ws": "^6.0.0"
   },
