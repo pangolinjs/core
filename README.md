@@ -40,34 +40,41 @@ yarn build
 # or
 npm run build
 
-# Build static styleguide with prototypes and components
+# Build for static file servers
 yarn build:dev
 # or
 npm run build:dev
 
 # Run linting
-yarn lint
+yarn lint:css
+yarn lint:js
 # or
-npm run lint
-
-# Run unit and e2e tests
-yarn test
-# or
-npm run test
+npm run lint:css
+npm run lint:js
 ```
 
 For more information take a look at the [docs](https://pangolinjs.org).
 
 
-## Test the core package
+## Framework development
 
 ```bash
-# Linting
-yarn lint:js
-yarn lint:css
+# Build UI
+yarn prepare
 # or
-npm run lint:js
+npm run prepare
+
+# Testing
+yarn test:unit
+# or
+npm run test:unit
+
+# Linting
+yarn lint:css
+yarn lint:js
+# or
 npm run lint:css
+npm run lint:js
 ```
 
 
