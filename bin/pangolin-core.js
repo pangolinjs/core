@@ -27,7 +27,7 @@ program
 program
   .command('lint <language>')
   .usage('css|js [options]')
-  .description('Lint CSS/SCSS or JavaScript files')
+  .description('Lint CSS or JavaScript files')
   .allowUnknownOption()
   .action((language, env) => {
     if (!['css', 'js'].includes(language)) {

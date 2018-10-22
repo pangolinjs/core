@@ -42,7 +42,7 @@
     "test:unit": "nyc ava"
   },
   "bin": {
-    "pangolin-core": "bin/pangolin.js"
+    "pangolin-core": "bin/pangolin-core.js"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
