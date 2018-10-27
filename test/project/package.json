@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "lint:js": "node ../../bin/pangolin-core lint --js",
-    "lint:css": "node ../../bin/pangolin-core lint --css",
+    "lint:js": "node ../../bin/pangolin-core lint js",
+    "lint:css": "node ../../bin/pangolin-core lint css",
     "inspect": "node ../../bin/pangolin-core inspect",
     "dev": "node ../../bin/pangolin-core dev",
     "build": "node ../../bin/pangolin-core build",

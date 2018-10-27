@@ -1,4 +1,4 @@
-/.ny_output
+/.nyc_output
 /coverage
 /test/project
 /ui/dist
