@@ -1,7 +1,7 @@
 /**
  * WebSocket with auto-reconnect
  */
-export default class Socket {
+class Socket {
   /**
    * Create new socket
    * @param {Object} options Options
@@ -56,4 +56,12 @@ export default class Socket {
       }
     })
   }
+}
+
+if (global.websocketPort) {
+  const socket = new Socket({
+    port: global.websocketPort
+  })
+
+  socket.connect()
 }

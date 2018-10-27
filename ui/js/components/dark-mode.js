@@ -1,7 +1,7 @@
 /**
  * “The dark mode” brought to you by Batman™️
  */
-export default class DarkMode {
+class DarkMode {
   /**
    * Create new dark mode
    * @param {Object} options Options
@@ -62,4 +62,13 @@ export default class DarkMode {
     this.prismCSS.href = 'https://unpkg.com/prismjs@1.15.0/themes/prism.css'
     this.disableInput.checked = true
   }
+}
+
+if (document.querySelector('.js-dark-mode')) {
+  const darkMode = new DarkMode({
+    enableInput: document.querySelector('.js-dark-mode-enable'),
+    disableInput: document.querySelector('.js-dark-mode-disable')
+  })
+
+  darkMode.init()
 }
