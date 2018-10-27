@@ -2,6 +2,24 @@
 
 
 
+## 5.0.0-alpha.11
+2018-10-27
+
+### Added
+- Custom Nunjucks tags
+
+### Improved
+- CLI for pangolin-core
+- Bin file is now called `pangolin-core.js`
+
+### Updated
+- Dependencies
+
+### Removed
+- Dark mode transition to avoid page flashing
+
+
+
 ## 5.0.0-alpha.10
 2018-10-01
 
