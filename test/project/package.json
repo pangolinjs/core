@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "lint:js": "node ../../bin/pangolin lint --js",
-    "lint:css": "node ../../bin/pangolin lint --css",
-    "inspect": "node ../../bin/pangolin inspect",
-    "dev": "node ../../bin/pangolin dev",
-    "build": "node ../../bin/pangolin build",
-    "build:dev": "node ../../bin/pangolin build --dev"
+    "lint:js": "node ../../bin/pangolin-core lint --js",
+    "lint:css": "node ../../bin/pangolin-core lint --css",
+    "inspect": "node ../../bin/pangolin-core inspect",
+    "dev": "node ../../bin/pangolin-core dev",
+    "build": "node ../../bin/pangolin-core build",
+    "build:dev": "node ../../bin/pangolin-core build --dev"
   },
   "dependencies": {
     "lodash.truncate": "^4.4.2",
