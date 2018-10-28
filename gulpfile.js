@@ -225,24 +225,7 @@ gulp.task('css-dist', () => {
 
 // Handle Browserify and Babel errors
 let browserifyError = function(error) {
-  if (error.filename) {
-    // Babel error
-    error.filename = error.filename.replace(/\\/g, '/');
-    error.message  = error.message.split(': ');
-
-    console.log(`
-${gutil.colors.underline(error.filename)}
-  ${error.loc.line}:${error.loc.column}  ${gutil.colors.red(`error`)}  ${error.message[1]}
-
-${error.codeFrame}
-    `);
-  } else {
-    // Browserify error
-    console.log(`
-${gutil.colors.red('Browserify error')}
-${error.message}
-    `);
-  }
+  console.log(`\n${gutil.colors.red('Javascript error')}\n${error.message}\n`);
   this.emit('end');
 };
 
@@ -300,7 +283,7 @@ gulp.task('js-watch', ['js-lint', 'js-dev']);
 // JavaScript Styleguide
 gulp.task('js-sg', () => {
   return gulp.src(`${moduleCWD}/docs/sg.js`)
-    .pipe(babel({ presets: ['es2015'] }))
+    .pipe(babel({ presets: ['@babel/preset-env'] }))
     .pipe(uglify())
     .pipe(gulp.dest(`${paths.dev}/${paths.js.base}`));
 });
