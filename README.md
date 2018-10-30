@@ -1,4 +1,4 @@
-# <img alt="" src="https://cdn.rawgit.com/front-end-styleguide/brand/master/mark/mark.svg" width="24"> Front End Styleguide
+# Front End Styleguide
 
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][dependencies-image]][npm-url]
