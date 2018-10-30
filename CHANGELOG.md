@@ -2,6 +2,14 @@
 
 
 
+## 3.9.1
+2018-10-30
+
+### Fixed
+- Browserify error logging
+
+
+
 ## 3.9.0
 2018-10-30
 
