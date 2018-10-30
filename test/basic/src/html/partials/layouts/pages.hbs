@@ -7,8 +7,11 @@
     {{#if (page "description")~}}<meta name="description" content="{{page 'description'}}">{{/if}}
     {{#if (page "title")}}<title>{{page "title"}}</title>{{/if}}
 
-    {{#if meta.dev}}<link rel="stylesheet" href="{{page 'rel'}}css/sg.css?v={{meta.version}}">{{/if}}
-    <link rel="stylesheet" href="{{page 'rel'}}css/styles.css?v={{meta.version}}">
+    {{#if meta.dev}}<link rel="stylesheet" href="{{page 'rel'}}css/sg.css">{{/if}}
+    <link rel="stylesheet" href="{{page 'rel'}}css/styles.css">
+
+    {{#if meta.dev}}<script defer src="{{page 'rel'}}js/sg.js"></script>{{/if}}
+    <script defer src="{{page 'rel'}}js/scripts.js"></script>
   </head>
   <body>
 
@@ -16,7 +19,5 @@
 
     {{{block "body"}}}
 
-    {{#if meta.dev}}<script src="{{page 'rel'}}js/sg.js?v={{meta.version}}"></script>{{/if}}
-    <script src="{{page 'rel'}}js/scripts.js?v={{meta.version}}"></script>
   </body>
 </html>
