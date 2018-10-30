@@ -28,9 +28,7 @@ const sassVars = require('gulp-sass-vars')
 const stylelint = require('gulp-stylelint')
 
 // JavaScript
-const babelify = require('babelify')
 const browserify = require('browserify')
-const envify = require('envify/custom')
 const eslint = require('gulp-eslint')
 const uglify = require('gulp-uglify')
 
@@ -57,7 +55,7 @@ if (!process.env.TEST) {
   process.chdir(cwd)
 }
 
-let {paths, config} = require('./lib/config')
+let { paths, config } = require('./lib/config')
 
 try {
   Object.assign(paths, require(`${cwd}/` + (gutil.env.paths || 'config/paths.json')))
@@ -149,7 +147,7 @@ gulp.task('css:dev', () => {
     .pipe(rename(paths.output.css.name))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(`${paths.dev}/${paths.output.css.path}`))
-    .pipe(browsersync.stream({match: '**/*.css'}))
+    .pipe(browsersync.stream({ match: '**/*.css' }))
 })
 
 // CSS Watch
@@ -205,29 +203,20 @@ gulp.task('js:lint:break', () => {
 
 // JavaScript Dev
 gulp.task('js:dev', () => {
-  const b = browserify({
-    entries: `${paths.src}/main.js`,
-    debug: true,
-    transform: [babelify]
-  })
-
-  b.transform(envify({
-    _: 'purge',
-    NODE_ENV: 'development'
-  }), {
-    global: true
-  })
-
-  return b.bundle().on('error', function (error) {
-    log.browserifyError(error)
-    this.emit('end')
-  })
+  return browserify(`${paths.src}/main.js`, { debug: true })
+    .transform('babelify')
+    .transform('envify', { _: 'pruge', NODE_ENV: 'development' })
+    .bundle()
+    .on('error', function (error) {
+      log.browserifyError(error)
+      this.emit('end')
+    })
     .pipe(source(paths.output.js.name))
     .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(`${paths.dev}/${paths.output.js.path}`))
-    .pipe(browsersync.stream({match: '**/*.js'}))
+    .pipe(browsersync.stream({ match: '**/*.js' }))
 })
 
 // JavaScript Watch
@@ -235,13 +224,9 @@ gulp.task('js:watch', ['js:lint', 'js:dev'])
 
 // JavaScript Styleguide
 gulp.task('js:sg', () => {
-  const b = browserify({
-    entries: `${sgModuleDir}/docs/sg.js`,
-    debug: true,
-    transform: [babelify]
-  })
-
-  return b.bundle()
+  return browserify(`${sgModuleDir}/docs/sg.js`, { debug: true })
+    .transform('babelify', { presets: ['@babel/preset-env'] })
+    .bundle()
     .pipe(source('sg.js'))
     .pipe(buffer())
     .pipe(uglify())
@@ -250,20 +235,10 @@ gulp.task('js:sg', () => {
 
 // JavaScript Preview
 gulp.task('js:prev', () => {
-  const b = browserify({
-    entries: `${paths.src}/main.js`,
-    debug: true,
-    transform: [babelify]
-  })
-
-  b.transform(envify({
-    _: 'purge',
-    NODE_ENV: 'development'
-  }), {
-    global: true
-  })
-
-  return b.bundle()
+  return browserify(`${paths.src}/main.js`, { debug: true })
+    .transform('babelify')
+    .transform('envify', { _: 'purge', NODE_ENV: 'development' })
+    .bundle()
     .pipe(source(paths.output.js.name))
     .pipe(buffer())
     .pipe(uglify())
@@ -272,20 +247,10 @@ gulp.task('js:prev', () => {
 
 // JavaScript Production
 gulp.task('js:dist', () => {
-  const b = browserify({
-    entries: `${paths.src}/main.js`,
-    debug: true,
-    transform: [babelify]
-  })
-
-  b.transform(envify({
-    _: 'purge',
-    NODE_ENV: 'production'
-  }), {
-    global: true
-  })
-
-  return b.bundle()
+  return browserify(`${paths.src}/main.js`, { debug: true })
+    .transform('babelify')
+    .transform('envify', { _: 'purge', NODE_ENV: 'production' })
+    .bundle()
     .pipe(source(paths.output.js.name))
     .pipe(buffer())
     .pipe(uglify())

@@ -6,8 +6,11 @@
 
     <title>{{ meta.title }}</title>
 
-    <link rel="stylesheet" href="{{ meta.path.toRoot }}css/styles.css?v={{ meta.version }}">
-    <link rel="stylesheet" href="{{ meta.path.toRoot }}css/sg.css?v={{ meta.version }}">
+    <link rel="stylesheet" href="{{ meta.path.toRoot }}css/styles.css">
+    <link rel="stylesheet" href="{{ meta.path.toRoot }}css/sg.css">
+
+    <script defer src="{{ meta.path.toRoot }}js/sg.js"></script>
+    <script defer src="{{ meta.path.toRoot }}js/scripts.js"></script>
   </head>
   <body class="sg-background">
 
@@ -25,7 +28,5 @@
       {% include sgFooter %}
     </footer>
 
-    <script src="{{ meta.path.toRoot }}js/sg.js?v={{ meta.version }}"></script>
-    <script src="{{ meta.path.toRoot }}js/scripts.js?v={{ meta.version }}"></script>
   </body>
 </html>
