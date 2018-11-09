@@ -2,6 +2,16 @@
 
 
 
+## 5.0.0-beta.1
+2018-11-09
+
+This release seems to be stable enough for a first beta. Breaking changes can still be a thing but should be a lot rarer.
+
+### Updated
+- Dependencies (No `--ignore-engines` anymore for Nunjucks 🎉)
+
+
+
 ## 5.0.0-alpha.11
 2018-10-27
 
