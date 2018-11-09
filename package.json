@@ -74,7 +74,7 @@
     "webpack-chain": "^5.0.0",
     "webpack-dev-server": "^3.1.9",
     "webpack-merge": "^4.1.2",
-    "webpackbar": "^2.6.1",
+    "webpackbar": "^3.0.3",
     "ws": "^6.0.0"
   },
   "devDependencies": {
