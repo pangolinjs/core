@@ -2,6 +2,17 @@
 
 
 
+## 5.0.0-beta.3
+2018-12-03
+
+### Updated
+- Dependencies
+
+### Fixed
+- Correctly detect ports used by Docker
+
+
+
 ## 5.0.0-beta.2
 2018-11-28
 
