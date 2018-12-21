@@ -2,6 +2,17 @@
 
 
 
+## 5.0.0-beta.4
+2018-12-21
+
+### Added
+- Webpack Bundle Analyzer option for build command
+
+### Updated
+- Dependencies
+
+
+
 ## 5.0.0-beta.3
 2018-12-03
 
