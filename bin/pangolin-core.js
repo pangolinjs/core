@@ -20,8 +20,12 @@ program
   .command('build')
   .description('Build production files')
   .option('-d, --dev', 'Build files for static file server')
+  .option('--report', 'Generate report with webpack-bundle-analyzer')
   .action(env => {
-    require('../lib/commands/build')({ dev: env.dev })
+    require('../lib/commands/build')({
+      dev: env.dev,
+      report: env.report
+    })
   })
 
 program
