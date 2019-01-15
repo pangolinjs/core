@@ -2,6 +2,17 @@
 
 
 
+## 5.0.0-beta.5
+2019-01-15
+
+### Updated
+- Dependencies
+
+### Removed
+- npm shrinkwrap (fixes #31)
+
+
+
 ## 5.0.0-beta.4
 2018-12-21
 
