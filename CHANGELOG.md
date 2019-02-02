@@ -2,6 +2,17 @@
 
 
 
+## 5.0.0-beta.6
+2019-02-02
+
+### Added
+- Optional modern bundle
+
+### Updated
+- Dependencies
+
+
+
 ## 5.0.0-beta.5
 2019-01-15
 
