@@ -16,16 +16,17 @@ test.serial('generates dev template', t => {
   t.snapshot(template)
 })
 
-test.serial('generates build template', t => {
+test.serial('generates build:dev template', t => {
   store.state.config = { project: { base: '/test/' } }
-  process.env.PANGOLIN_ENV = 'build'
+  process.env.PANGOLIN_ENV = 'build:dev'
   const template = generatePreviewHead()
 
   t.snapshot(template)
 })
 
-test.serial('generates build:dev template', t => {
+test.serial('generates modern build:dev template', t => {
   store.state.config = { project: { base: '/test/' } }
+  store.state.modern = true
   process.env.PANGOLIN_ENV = 'build:dev'
   const template = generatePreviewHead()
 

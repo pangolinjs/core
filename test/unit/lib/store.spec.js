@@ -7,6 +7,7 @@ test('has pre-defined state structure', t => {
     components: null,
     config: null,
     cwd: null,
+    modern: false,
     websocket: {
       port: null
     }
