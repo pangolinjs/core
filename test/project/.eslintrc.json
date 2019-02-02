@@ -1,6 +1,0 @@
-{
-  "root": true,
-  "extends": [
-    "@pangolin/eslint-config"
-  ]
-}

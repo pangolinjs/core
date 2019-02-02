@@ -1,6 +1,8 @@
 module.exports = {
   plugins: {
     'autoprefixer': {},
-    'cssnano': {}
+    'cssnano': process.env.NODE_ENV === 'production'
+      ? {}
+      : false
   }
 }
