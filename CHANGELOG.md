@@ -2,6 +2,21 @@
 
 
 
+## 5.0.0-beta.7
+2019-02-14
+
+### Added
+- Build type env variable
+
+### Fixed
+- Different filenames for webpack report in modern build
+- Nav not remembering position
+
+### Updated
+- Dependencies
+
+
+
 ## 5.0.0-beta.6
 2019-02-02
 
