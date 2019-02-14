@@ -1,10 +1,10 @@
 const nav = document.querySelector('.js-nav')
-const storageKey = 'pangolinNavScrollPosition'
+const STORAGE_KEY = 'pangolinNavScrollPosition'
 
-window.addEventListener('DOMContentLoaded', () => {
-  nav.scrollTop = localStorage.getItem(storageKey)
+window.addEventListener('load', () => {
+  nav.scrollTop = localStorage.getItem(STORAGE_KEY)
 })
 
 window.addEventListener('beforeunload', () => {
-  localStorage.setItem(storageKey, nav.scrollTop)
+  localStorage.setItem(STORAGE_KEY, nav.scrollTop)
 })
