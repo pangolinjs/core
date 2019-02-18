@@ -2,6 +2,17 @@
 
 
 
+## 5.0.0-beta.8
+2019-02-18
+
+### Updated
+- Dependencies
+
+### Fixed
+- Fancy webpackbar in CI env
+
+
+
 ## 5.0.0-beta.7
 2019-02-14
 
