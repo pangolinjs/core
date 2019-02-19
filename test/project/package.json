@@ -12,6 +12,6 @@
   },
   "dependencies": {
     "lodash.truncate": "^4.4.2",
-    "normalize.css": "^8.0.0"
+    "normalize.css": "^8.0.1"
   }
 }
