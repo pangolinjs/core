@@ -31,6 +31,13 @@
 // }
 
 /**
+ * Add crossorigin attribute to scripts
+ */
+// module.exports = {
+//   crossorigin: 'anonymous'
+// }
+
+/**
  * Tap into webpack-chain
  */
 // module.exports = {
