@@ -2,6 +2,17 @@
 
 
 
+## 5.0.0-beta.9
+2019-02-19
+
+### Added
+- crossorigin config option
+
+### Updated
+- Dependencies
+
+
+
 ## 5.0.0-beta.8
 2019-02-18
 
