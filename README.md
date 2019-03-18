@@ -11,11 +11,11 @@ Framework for componentized front end development with Nunjucks, Sass, and JavaS
 ## Installation
 
 ```bash
-# Yarn
-yarn global add @pangolin/cli
-
 # npm
 npm install -g @pangolin/cli
+
+# Yarn
+yarn global add @pangolin/cli
 ```
 
 
@@ -30,28 +30,46 @@ pangolin init
 
 ## Usage
 
+### Start dev server
+
 ```bash
-# Start dev server
-yarn dev
-# or
+# npm
 npm run dev
 
-# Build files for production
-yarn build
-# or
+# Yarn
+yarn dev
+```
+
+### Build files for production
+
+```bash
+# npm
 npm run build
 
-# Build for static file servers
-yarn build:dev
-# or
+# Yarn
+yarn build
+```
+
+### Build for static file servers
+
+```bash
+# npm
 npm run build:dev
 
-# Run linting
-yarn lint:css
-yarn lint:js
-# or
+# Yarn
+yarn build:dev
+```
+
+### Lint CSS and JavaScript
+
+```bash
+# npm
 npm run lint:css
 npm run lint:js
+
+# Yarn
+yarn lint:css
+yarn lint:js
 ```
 
 For more information take a look at the [Pangolin docs](https://pangolinjs.org).
@@ -61,21 +79,21 @@ For more information take a look at the [Pangolin docs](https://pangolinjs.org).
 
 ```bash
 # Build UI
-yarn prepare
-# or
 npm run prepare
+# or
+yarn prepare
 
 # Testing
-yarn test:unit
-# or
 npm run test:unit
+# or
+yarn test:unit
 
 # Linting
-yarn lint:css
-yarn lint:js
-# or
 npm run lint:css
 npm run lint:js
+# or
+yarn lint:css
+yarn lint:js
 ```
 
 

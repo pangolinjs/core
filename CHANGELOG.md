@@ -2,6 +2,19 @@
 
 
 
+## 5.0.0-beta.10
+2019-03-18
+
+### Updated
+- Dependencies
+
+### Fixed
+- No 'defer'-attribute on module scripts
+- CSS import in JS for modern build
+- 'defaults' browserslist env
+
+
+
 ## 5.0.0-beta.9
 2019-02-19
 
