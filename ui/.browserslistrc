@@ -1,4 +1,5 @@
 # Supported browsers
-# https://github.com/ai/browserslist
+# https://github.com/browserslist/browserslist
 
-> 0.25%
+> 0.2%
+not dead
