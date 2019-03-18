@@ -33,7 +33,7 @@
     "bin",
     "lib",
     "ui",
-    "npm-shrinkwrap.json",
+    "package-lock.json",
     "yarn.lock"
   ],
   "scripts": {
