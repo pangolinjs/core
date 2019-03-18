@@ -1,1 +1,6 @@
 $color-text: #333;
+
+:export {
+  // stylelint-disable-next-line property-no-unknown
+  colorText: $color-text;
+}
