@@ -32,9 +32,7 @@
   "files": [
     "bin",
     "lib",
-    "ui",
-    "package-lock.json",
-    "yarn.lock"
+    "ui"
   ],
   "scripts": {
     "prepare": "node ui/build",
@@ -55,7 +53,7 @@
     "commander": "^2.19.0",
     "copy-webpack-plugin": "^5.0.1",
     "css-loader": "^2.1.1",
-    "eslint": "^5.15.2",
+    "eslint": "^5.15.3",
     "eslint-loader": "^2.1.2",
     "fast-glob": "^2.2.1",
     "file-loader": "^3.0.1",
