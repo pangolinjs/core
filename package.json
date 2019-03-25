@@ -38,7 +38,8 @@
     "prepare": "node ui/build",
     "lint:js": "eslint --format codeframe \"**/*.js\"",
     "lint:css": "stylelint \"**/*.?(s)css\" --syntax scss --custom-formatter node_modules/stylelint-codeframe-formatter",
-    "test:unit": "nyc ava"
+    "test:unit": "nyc ava",
+    "release": "standard-version"
   },
   "bin": {
     "pangolin-core": "bin/pangolin-core.js"
@@ -92,7 +93,8 @@
     "normalize.css": "^8.0.0",
     "nyc": "^13.3.0",
     "postcss-custom-properties": "^8.0.6",
-    "prism-themes": "^1.0.1"
+    "prism-themes": "^1.0.1",
+    "standard-version": "^5.0.2"
   },
   "engines": {
     "node": ">= 10.0.0"
