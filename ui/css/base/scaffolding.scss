@@ -1,15 +1,12 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 body {
-  font-family: $font-family;
   line-height: 1.4;
   color: var(--color-text, $color-text);
 
   background: var(--color-background, $color-background);
+}
+
+button {
+  color: inherit;
 }
 
 pre,
@@ -44,9 +41,6 @@ code {
 }
 
 .icon {
-  vertical-align: middle;
   width: 1em;
   height: 1em;
-
-  fill: currentColor;
 }
