@@ -1,4 +1,13 @@
-# Changelog
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+# [5.0.0-beta.11](https://github.com/pangolinjs/core/compare/v5.0.0-beta.10...v5.0.0-beta.11) (2019-03-25)
+
+
+### Bug Fixes
+
+* Menu close button color in dark mode ([e549e8d](https://github.com/pangolinjs/core/commit/e549e8d))
 
 
 
