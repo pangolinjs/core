@@ -1,6 +1,6 @@
 {% macro link (path, text) %}
   <a
-    {%- if path == page.path %} aria-current="page"{% endif %}
+    {% if path == page.path %} aria-current="page"{% endif %}
     class="nav__text nav__text--link {% if path == page.path %}is-active js-nav-active{% endif %}"
     href="{% static path %}.html"
   >
@@ -11,29 +11,29 @@
 {% macro nav (items, depth = 0) %}
   {% set depth = depth + 1 %}
   <ul class="nav__list">
-    {% for item in items -%}
+    {% for item in items %}
 
       <li
         class="nav__item"
         style="--depth:{{ depth }};"
       >
 
-        {%- if item.path -%}
+        {% if item.path %}
           {{ link(item.path, item.name) }}
-        {%- endif -%}
+        {% endif %}
 
-        {%- set children = item.children -%}
+        {% set children = item.children %}
 
-        {%- if (children | length == 1) and children[0].path -%}
+        {% if (children | length == 1) and children[0].path %}
           {{ link(children[0].path, children[0].name) }}
-        {%- elseif children -%}
+        {% elseif children %}
           <span class="nav__text nav__text--title">{{ item.name }}</span>
           {{ nav(children, depth) }}
-        {%- endif -%}
+        {% endif %}
 
       </li>
 
-    {%- endfor %}
+    {% endfor %}
   </ul>
 {% endmacro %}
 

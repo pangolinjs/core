@@ -18,7 +18,7 @@
     <script defer src="{% static 'pangolin/scripts.js' %}"></script>
     <link rel="stylesheet" href="{% static 'pangolin/styles.css' %}">
 
-    {% if project.branding -%}
+    {% if project.branding %}
     <style>
       :root {
         {% if project.branding.colorTheme %}
@@ -29,7 +29,7 @@
         {% endif %}
       }
     </style>
-    {%- endif %}
+    {% endif %}
   </head>
   <body>
 
