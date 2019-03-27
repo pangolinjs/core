@@ -12,8 +12,11 @@ program
 program
   .command('dev')
   .description('Start development server')
-  .action(() => {
-    require('../lib/commands/dev')()
+  .option('-o, --open [browser]', 'Open in default or specific browser')
+  .action(env => {
+    require('../lib/commands/dev')({
+      open: env.open
+    })
   })
 
 program

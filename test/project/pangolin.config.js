@@ -24,8 +24,6 @@
  */
 // module.exports = {
 //   devServer: {
-//     open: true,
-//     browser: 'firefox',
 //     port: 1337
 //   }
 // }
