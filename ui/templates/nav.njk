@@ -24,7 +24,7 @@
 
         {% set children = item.children %}
 
-        {% if (children | length == 1) and children[0].path %}
+        {% if (children | length == 1) and children[0].path and item.name == children[0].name %}
           {{ link(children[0].path, children[0].name) }}
         {% elseif children %}
           <span class="nav__text nav__text--title">{{ item.name }}</span>
