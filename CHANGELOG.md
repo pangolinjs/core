@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [5.0.0-beta.12](https://github.com/pangolinjs/core/compare/v5.0.0-beta.11...v5.0.0-beta.12) (2019-03-27)
+
+
+### Bug Fixes
+
+* Use checkbox for dark mode instead of radio ([07aceda](https://github.com/pangolinjs/core/commit/07aceda))
+
+
+### Features
+
+* Auto-set page title color ([a1ce450](https://github.com/pangolinjs/core/commit/a1ce450))
+* Move browser open from config to CLI ([cf30f49](https://github.com/pangolinjs/core/commit/cf30f49))
+* Show parent in nav if single child is named differently ([a56c1c8](https://github.com/pangolinjs/core/commit/a56c1c8))
+
+
+
 # [5.0.0-beta.11](https://github.com/pangolinjs/core/compare/v5.0.0-beta.10...v5.0.0-beta.11) (2019-03-25)
 
 
