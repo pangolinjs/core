@@ -3,12 +3,16 @@
   align-items: center;
   padding: ($padding / 2) $padding;
 
-  color: var(--color-title, $color-title);
+  color: #000;
 
   background: var(--color-theme, $color-theme);
 
   @media (min-width: $breakpoint-layout) {
     padding: $padding;
+  }
+
+  &.has-dark-background {
+    color: #fff;
   }
 }
 
@@ -19,7 +23,6 @@
   font-size: 1.5rem;
   color: var(--color-theme, $color-theme);
 
-  background: var(--color-title, $color-title);
   border: 0;
   border-radius: 0.125rem;
 
@@ -38,48 +41,10 @@
 }
 
 .title__link {
-  position: relative;
   margin-left: 0.5rem;
 
   font-size: 1.75rem;
   color: inherit;
-
-  &::after {
-    content: attr(aria-label);
-
-    position: absolute;
-    top: 50%;
-    right: 100%;
-    transform: translate(5px, -50%);
-    padding: 0.125rem 0.25rem;
-
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--color-theme, $color-theme);
-
-    background: var(--color-title, $color-title);
-    border-radius: 3px;
-
-    opacity: 0;
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-      transform 300ms,
-      opacity 300ms,
-      visibility 300ms;
-  }
-
-  &:hover::after,
-  &:focus::after {
-    transform: translate(0, -50%);
-
-    opacity: 1;
-    visibility: visible;
-  }
 }
 
 .title__icon {

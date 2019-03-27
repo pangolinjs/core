@@ -3,7 +3,6 @@ $padding: 1rem;
 
 // Themable colors and properties
 
-$color-title: rgb(255, 255, 255);
 $color-theme: rgb(204, 91, 24);
 
 // Non-themable colors and properties
@@ -14,6 +13,7 @@ $color-background-active: rgb(226, 226, 226);
 $color-background-aside: rgb(245, 245, 245);
 $color-border: rgb(220, 220, 220);
 $color-text: rgb(10, 10, 10);
+$color-link: rgb(100, 149, 237);
 
 :root {
   --color-background: #{$color-background};

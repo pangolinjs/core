@@ -1,4 +1,4 @@
-<div class="title">
+<div class="title js-color-contrast">
 
   <button
     aria-label="Open sidebar"
@@ -21,10 +21,10 @@
 
     {% if page.preview %}
     <a
-      aria-label="Preview"
       class="title__link"
       href="{{ page.preview }}"
       target="_blank"
+      title="Preview"
     >
       <svg
         class="title__icon icon"
@@ -39,10 +39,10 @@
 
     {% if page.template %}
     <a
-      aria-label="Template"
       class="title__link"
       href="{{ page.template }}"
       target="_blank"
+      title="Template"
     >
       <svg
         class="title__icon icon"
