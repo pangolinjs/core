@@ -1,36 +1,18 @@
-<div class="dark-mode js-dark-mode">
+<div class="dark-mode">
 
   <input
-    aria-label="Disable dark mode"
-    class="dark-mode__input js-dark-mode-disable"
-    id="dark-mode-disable"
+    class="dark-mode__input js-dark-mode-input"
+    id="dark-mode"
     name="dark-mode"
-    type="radio"
-    value="disable"
-  >
-
-  <input
-    aria-label="Enable dark mode"
-    class="dark-mode__input js-dark-mode-enable"
-    id="dark-mode-enable"
-    name="dark-mode"
-    type="radio"
-    value="enable"
+    type="checkbox"
   >
 
   <label
-    class="dark-mode__label dark-mode__label--left"
-    for="dark-mode-disable"
+    class="dark-mode__label"
+    for="dark-mode"
   >
     Light
-  </label>
-
-  <span class="dark-mode__toggle"></span>
-
-  <label
-    class="dark-mode__label dark-mode__label--right"
-    for="dark-mode-enable"
-  >
+    <span class="dark-mode__toggle"></span>
     Dark
   </label>
 

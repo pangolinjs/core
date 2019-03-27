@@ -1,43 +1,43 @@
+const STORAGE_KEY = 'pangolinDarkMode'
+const TOGGLE_CLASS = 'has-dark-mode'
+const PRISM_LIGHT = 'https://unpkg.com/prismjs@1.16.0/themes/prism-tomorrow.css'
+const PRISM_DARK = 'https://unpkg.com/prismjs@1.16.0/themes/prism.css'
+
 /**
- * “The dark mode” brought to you by Batman™️
+ * “The Dark Mode” brought to you by Batman™️
  */
 class DarkMode {
   /**
    * Create new dark mode
    * @param {Object} options Options
-   * @param {HTMLElement} options.enableInput Radio input to enable dark mode
-   * @param {HTMLElement} options.disableInput Radio input to disable dark mode
+   * @param {HTMLElement} options.input Checkbox to enable dark mode
    * @param {string} [options.toggleClass=has-dark-mode] Toggle class name
    */
   constructor (options) {
-    this.enableInput = options.enableInput
-    this.disableInput = options.disableInput
-    this.toggleClass = options.toggleClass || 'has-dark-mode'
-    this.enabled = localStorage.getItem('pangolinDarkMode') || false
+    this.input = options.input
+
+    this.toggleClass = options.toggleClass || TOGGLE_CLASS
+    this.enabled = localStorage.getItem(STORAGE_KEY) || false
+
     this.prismCSS = document.createElement('link')
+    this.prismCSS.rel = 'stylesheet'
+    document.head.appendChild(this.prismCSS)
   }
 
   /**
    * Set initial state and add event listeners
    */
   init () {
-    this.prismCSS.rel = 'stylesheet'
-    document.head.appendChild(this.prismCSS)
-
     if (this.enabled) {
       this.enable()
     } else {
       this.disable()
     }
 
-    this.enableInput.addEventListener('change', event => {
+    this.input.addEventListener('change', event => {
       if (event.target.checked) {
         this.enable()
-      }
-    })
-
-    this.disableInput.addEventListener('change', event => {
-      if (event.target.checked) {
+      } else {
         this.disable()
       }
     })
@@ -48,9 +48,9 @@ class DarkMode {
    */
   enable () {
     document.documentElement.classList.add(this.toggleClass)
-    localStorage.setItem('pangolinDarkMode', true)
-    this.prismCSS.href = 'https://unpkg.com/prismjs@1.15.0/themes/prism-tomorrow.css'
-    this.enableInput.checked = true
+    localStorage.setItem(STORAGE_KEY, true)
+    this.prismCSS.href = PRISM_LIGHT
+    this.input.checked = true
   }
 
   /**
@@ -58,17 +58,15 @@ class DarkMode {
    */
   disable () {
     document.documentElement.classList.remove(this.toggleClass)
-    localStorage.removeItem('pangolinDarkMode')
-    this.prismCSS.href = 'https://unpkg.com/prismjs@1.15.0/themes/prism.css'
-    this.disableInput.checked = true
+    localStorage.removeItem(STORAGE_KEY)
+    this.prismCSS.href = PRISM_DARK
+    this.input.checked = false
   }
 }
 
-if (document.querySelector('.js-dark-mode')) {
-  const darkMode = new DarkMode({
-    enableInput: document.querySelector('.js-dark-mode-enable'),
-    disableInput: document.querySelector('.js-dark-mode-disable')
-  })
+const input = document.querySelector('.js-dark-mode-input')
 
+if (input) {
+  const darkMode = new DarkMode({ input })
   darkMode.init()
 }

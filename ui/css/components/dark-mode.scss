@@ -1,12 +1,12 @@
 .dark-mode {
   display: none;
 
-  @supports (--a:0) {
-    display: grid;
-    grid-template: 2em / 1fr 1fr;
-    align-items: center;
-    position: relative;
+  // Enable dark mode setting if custom properties are supported
+  @supports (--a: 0) {
+    display: block;
     margin: $padding;
+
+    text-align: center;
   }
 }
 
@@ -16,27 +16,16 @@
 }
 
 .dark-mode__label {
+  display: inline-flex;
+  align-items: center;
+
   cursor: pointer;
 }
 
-.dark-mode__label--left {
-  justify-self: end;
-  padding-right: 2em;
-
-  text-align: right;
-}
-
-.dark-mode__label--right {
-  justify-self: start;
-  padding-left: 2em;
-}
-
 .dark-mode__toggle {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-
-  pointer-events: none;
+  position: relative;
+  display: inline-block;
+  margin: 0 0.5em;
 
   &::before,
   &::after {
@@ -60,6 +49,7 @@
     height: calc(2em - 4px);
     top: 2px;
     left: calc(50% - 1em + 2px);
+    transform: translateX(-8px);
 
     background: var(--color-text, $color-text);
     border-radius: 50%;
@@ -67,15 +57,11 @@
     transition: transform 300ms;
   }
 
-  .dark-mode__input:focus ~ &::before {
+  .dark-mode__input:focus ~ .dark-mode__label &::before {
     box-shadow: 0 0 0 2px var(--color-text, $color-text);
   }
 
-  [value="enable"]:checked ~ &::after {
+  .dark-mode__input:checked ~ .dark-mode__label &::after {
     transform: translateX(8px);
-  }
-
-  [value="disable"]:checked ~ &::after {
-    transform: translateX(-8px);
   }
 }
