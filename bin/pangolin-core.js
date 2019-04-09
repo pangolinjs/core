@@ -13,9 +13,13 @@ program
   .command('dev')
   .description('Start development server')
   .option('-o, --open [browser]', 'Open in default or specific browser')
+  .option('--host <hostname>', 'Override the default localhost hostname')
+  .option('--port <port>', 'Override the default 8080 port')
   .action(env => {
     require('../lib/commands/dev')({
-      open: env.open
+      open: env.open,
+      host: env.host,
+      port: env.port
     })
   })
 
