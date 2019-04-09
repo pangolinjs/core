@@ -68,6 +68,20 @@ npm run lint:css
 npm run lint:js
 ```
 
+### Docker test
+
+```bash
+# Build image
+docker build -t pangolin-dev .
+
+# Start dev server
+docker run -it -p 8080:8080 --entrypoint npm pangolin-dev run dev -- --host 0.0.0.0
+
+# Build files
+docker run -it --entrypoint npm pangolin-dev run build
+docker run -it --entrypoint npm pangolin-dev run build:dev
+```
+
 
 [actions-image]: https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/pangolinjs/core?style=flat-square
 [actions-url]: https://github.com/pangolinjs/core/actions
