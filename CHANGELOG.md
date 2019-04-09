@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [5.0.0-beta.13](https://github.com/pangolinjs/core/compare/v5.0.0-beta.12...v5.0.0-beta.13) (2019-04-09)
+
+
+### Features
+
+* Add host and port arguments to dev command ([e3d7a05](https://github.com/pangolinjs/core/commit/e3d7a05))
+
+
+
 # [5.0.0-beta.12](https://github.com/pangolinjs/core/compare/v5.0.0-beta.11...v5.0.0-beta.12) (2019-03-27)
 
 
