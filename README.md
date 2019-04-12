@@ -75,7 +75,7 @@ npm run lint:js
 docker build -t pangolin-dev .
 
 # Start dev server
-docker run -it -p 8080:8080 --entrypoint npm pangolin-dev run dev -- --host 0.0.0.0
+docker run -it -p 8080:8080 --entrypoint npm pangolin-dev run dev
 
 # Build files
 docker run -it --entrypoint npm pangolin-dev run build
