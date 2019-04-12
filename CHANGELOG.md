@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [5.0.0-beta.14](https://github.com/pangolinjs/core/compare/v5.0.0-beta.13...v5.0.0-beta.14) (2019-04-12)
+
+
+### Features
+
+* Format host depending on environment ([9e0963f](https://github.com/pangolinjs/core/commit/9e0963f))
+
+
+
 # [5.0.0-beta.13](https://github.com/pangolinjs/core/compare/v5.0.0-beta.12...v5.0.0-beta.13) (2019-04-09)
 
 
