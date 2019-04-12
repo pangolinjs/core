@@ -5,30 +5,43 @@ import store from '../../../../lib/store'
 import test from 'ava'
 
 const stateBackup = Object.assign({}, store.state)
-fs.ensureDirSync(path.join(__dirname, '.temp'))
+const tempPath = '.temp'
+const tempFile = `${tempPath}/pangolin.config.js`
 
-test.afterEach('cleanup', t => {
+test.serial.before('setup', t => {
+  fs.ensureDirSync(path.join(__dirname, tempPath))
+})
+
+test.serial.afterEach('cleanup', t => {
   Object.assign(store.state, stateBackup)
-  delete process.env.PANGOLIN_PORT
-  delete process.env.PANGOLIN_BASE
 
-  if (fs.existsSync(path.join(__dirname, '.temp/pangolin.config.js'))) {
-    delete require.cache[require.resolve('./.temp/pangolin.config.js')]
-  }
+  delete process.env.PANGOLIN_BASE
+  delete process.env.PANGOLIN_HOST
+  delete process.env.PANGOLIN_PORT
+
+  try {
+    delete require.cache[path.join(__dirname, tempFile)]
+  } catch (_) {}
+
+  fs.removeSync(path.join(__dirname, tempFile))
 })
 
 test.serial('returns config from store', t => {
   store.state.config = 'Hello World'
 
-  const actual = getConfig()
-  const expected = 'Hello World'
-
-  t.is(actual, expected)
+  const config = getConfig()
+  t.snapshot(config)
 })
 
-test.serial('loads config', t => {
+test.serial('loads default config', t => {
+  const config = getConfig()
+  t.snapshot(config)
+})
+
+test.serial('loads config from file', t => {
   const file = `module.exports = {
     devServer: {
+      host: '127.0.0.1',
       port: 1337
     },
     project: {
@@ -41,57 +54,17 @@ test.serial('loads config', t => {
       }
     }
   }`
-  fs.writeFileSync(path.join(__dirname, '.temp/pangolin.config.js'), file)
+  fs.writeFileSync(path.join(__dirname, tempFile), file)
 
-  const actual = getConfig(path.join(__dirname, '.temp'))
-  const expected = {
-    devServer: {
-      port: 1337
-    },
-    fileNameHash: true,
-    nunjucks: {},
-    project: {
-      name: 'Hello',
-      base: '/base/',
-      branding: {
-        colorTheme: '#c0ffee',
-        colorTitle: '#639',
-        favicon: 'favicon.ico'
-      }
-    }
-  }
-
-  t.deepEqual(actual, expected)
-})
-
-test.serial('loads config with fallback values', t => {
-  const file = 'module.exports = {}'
-  fs.writeFileSync(path.join(__dirname, '.temp/pangolin.config.js'), file)
-
-  const actual = getConfig(path.join(__dirname, '.temp'))
-  const expected = {
-    devServer: {
-      port: 8080
-    },
-    fileNameHash: true,
-    nunjucks: {},
-    project: {
-      name: 'Pangolin',
-      base: '/'
-    }
-  }
-
-  t.deepEqual(actual, expected)
+  const config = getConfig(path.join(__dirname, tempPath))
+  t.snapshot(config)
 })
 
 test.serial('loads environment variables', t => {
-  const file = 'module.exports = {}'
-  fs.writeFileSync(path.join(__dirname, '.temp/pangolin.config.js'), file)
+  process.env.PANGOLIN_HOST = '127.0.0.1'
   process.env.PANGOLIN_PORT = 1337
   process.env.PANGOLIN_BASE = '/base/'
 
-  const actual = getConfig(path.join(__dirname, '.temp'))
-
-  t.is(actual.devServer.port, 1337)
-  t.is(actual.project.base, '/base/')
+  const config = getConfig()
+  t.snapshot(config)
 })
