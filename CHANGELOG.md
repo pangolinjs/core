@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [5.0.0-beta.15](https://github.com/pangolinjs/core/compare/v5.0.0-beta.14...v5.0.0-beta.15) (2019-04-16)
+
+
+### Bug Fixes
+
+* Adjust default hostname in command help ([d82d774](https://github.com/pangolinjs/core/commit/d82d774))
+
+
+### Features
+
+* Use devServer options from webpack config ([f062775](https://github.com/pangolinjs/core/commit/f062775))
+
+
+
 # [5.0.0-beta.14](https://github.com/pangolinjs/core/compare/v5.0.0-beta.13...v5.0.0-beta.14) (2019-04-12)
 
 
