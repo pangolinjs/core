@@ -43,6 +43,11 @@
 //       config.output
 //         .path(path.join(config.get('context'), 'output-dist'))
 //     }
+
+//     if (process.env.PANGOLIN_ENV === 'dev') {
+//       config.devServer
+//         .clientLogLevel('info')
+//     }
 //   }
 // }
 
@@ -53,6 +58,9 @@
 //   configure: {
 //     entry: {
 //       main: ['./src/hello-world.js']
+//     },
+//     devServer: {
+//       clientLogLevel: 'info'
 //     }
 //   }
 // }
