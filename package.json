@@ -68,7 +68,7 @@
     "prismjs": "^1.16.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "stylelint": "^10.0.0",
+    "stylelint": "^10.0.1",
     "stylelint-codeframe-formatter": "^1.0.4",
     "stylelint-webpack-plugin": "^0.10.5",
     "webpack": "^4.30.0",
@@ -76,7 +76,7 @@
     "webpack-chain": "^5.2.4",
     "webpack-dev-server": "^3.3.1",
     "webpack-merge": "^4.2.1",
-    "webpackbar": "^3.1.5",
+    "webpackbar": "^3.2.0",
     "ws": "^6.2.1"
   },
   "devDependencies": {
@@ -90,7 +90,7 @@
     "cssnano": "^4.1.10",
     "eslint-plugin-ava": "^6.0.0",
     "focus-trap": "^5.0.0",
-    "nyc": "^13.3.0",
+    "nyc": "^14.0.0",
     "postcss-custom-properties": "^8.0.10",
     "prism-themes": "^1.1.0",
     "sanitize.css": "^8.0.0",
