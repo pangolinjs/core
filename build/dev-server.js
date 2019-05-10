@@ -8,7 +8,7 @@ const getConfig = require('./utils/get-config')
 const getPort = require('./utils/get-port')
 const htmlUtils = require('./html/utils')
 const merge = require('webpack-merge')
-const opn = require('opn')
+const open = require('open')
 const pageList = require('./html/page-list')
 const path = require('path')
 const renderNunjucks = require('./html/render-nunjucks')
@@ -55,7 +55,7 @@ module.exports = context => {
     compiler.plugin('done', () => {
       // Auto open in browser if config is set
       if (devServerConfig.open) {
-        opn(`http://localhost:${port}`, { app: devServerConfig.browser })
+        open(`http://localhost:${port}`, { app: devServerConfig.browser })
       }
     })
 
