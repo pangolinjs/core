@@ -47,9 +47,9 @@
   "dependencies": {
     "@babel/core": "^7.4.4",
     "@nuxtjs/friendly-errors-webpack-plugin": "^2.1.0",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^8.0.6",
     "chalk": "^2.4.2",
-    "chokidar": "^2.1.5",
+    "chokidar": "^3.0.0",
     "ci-info": "^2.0.0",
     "commander": "^2.20.0",
     "copy-webpack-plugin": "^5.0.3",
