@@ -5,11 +5,11 @@ import store from '../../../../lib/store'
 import test from 'ava'
 
 const stateBackup = Object.assign({}, store.state)
-const tempPath = '.temp'
+const tempPath = path.join(__dirname, '.temp')
 const tempFile = `${tempPath}/pangolin.config.js`
 
 test.serial.before('setup', t => {
-  fs.ensureDirSync(path.join(__dirname, tempPath))
+  fs.ensureDirSync(tempPath)
 })
 
 test.serial.afterEach('cleanup', t => {
@@ -20,21 +20,21 @@ test.serial.afterEach('cleanup', t => {
   delete process.env.PANGOLIN_PORT
 
   try {
-    delete require.cache[path.join(__dirname, tempFile)]
+    delete require.cache[tempFile]
   } catch (_) {}
 
-  fs.removeSync(path.join(__dirname, tempFile))
+  fs.removeSync(tempFile)
 })
 
 test.serial('returns config from store', t => {
   store.state.config = 'Hello World'
 
-  const config = getConfig()
+  const config = getConfig(tempPath)
   t.snapshot(config)
 })
 
 test.serial('loads default config', t => {
-  const config = getConfig()
+  const config = getConfig(tempPath)
   t.snapshot(config)
 })
 
@@ -54,9 +54,9 @@ test.serial('loads config from file', t => {
       }
     }
   }`
-  fs.writeFileSync(path.join(__dirname, tempFile), file)
+  fs.writeFileSync(tempFile, file)
 
-  const config = getConfig(path.join(__dirname, tempPath))
+  const config = getConfig(tempPath)
   t.snapshot(config)
 })
 
@@ -65,6 +65,6 @@ test.serial('loads environment variables', t => {
   process.env.PANGOLIN_PORT = 1337
   process.env.PANGOLIN_BASE = '/base/'
 
-  const config = getConfig()
+  const config = getConfig(tempPath)
   t.snapshot(config)
 })
