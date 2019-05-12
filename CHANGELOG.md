@@ -1,6 +1,16 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [5.0.0-beta.16](https://github.com/pangolinjs/core/compare/v5.0.0-beta.15...v5.0.0-beta.16) (2019-05-12)
+
+
+### Features
+
+* Log errors from user config file (Fixes [#40](https://github.com/pangolinjs/core/issues/40)) ([692d6cd](https://github.com/pangolinjs/core/commit/692d6cd))
+* Switch to dart-sass (Fixes [#41](https://github.com/pangolinjs/core/issues/41)) ([81648d6](https://github.com/pangolinjs/core/commit/81648d6))
+
+
 
 # [5.0.0-beta.15](https://github.com/pangolinjs/core/compare/v5.0.0-beta.14...v5.0.0-beta.15) (2019-04-16)
 
