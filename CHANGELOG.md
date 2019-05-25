@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.18](https://github.com/pangolinjs/core/compare/v5.0.0-beta.17...v5.0.0-beta.18) (2019-05-25)
+
+
+### Features
+
+* Support secure WebSocket (Fix [#38](https://github.com/pangolinjs/core/issues/38)) ([5d48062](https://github.com/pangolinjs/core/commit/5d48062))
+
+
+
 ## [5.0.0-beta.17](https://github.com/pangolinjs/core/compare/v5.0.0-beta.16...v5.0.0-beta.17) (2019-05-12)
 
 
