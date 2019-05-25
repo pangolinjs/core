@@ -26,12 +26,16 @@ class Socket {
       return
     }
 
-    this.ws = new WebSocket(`ws://${window.location.hostname}:${global.websocketPort}`)
+    const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:'
+    const hostname = location.hostname
+    const port = global.websocketPort
+
+    this.ws = new WebSocket(`${protocol}//${hostname}:${port}`)
 
     this.ws.addEventListener('open', () => {
       // Reload on reconnect
       if (this.attempt > 1) {
-        window.location.reload()
+        location.reload()
       }
 
       clearTimeout(this.timeout)
@@ -52,7 +56,7 @@ class Socket {
 
     this.ws.addEventListener('message', event => {
       if (event.data === 'window-reload') {
-        window.location.reload()
+        location.reload()
       }
     })
   }
