@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.19](https://github.com/pangolinjs/core/compare/v5.0.0-beta.18...v5.0.0-beta.19) (2019-06-15)
+
+
+### Features
+
+* Proxy WebSocket through webpack-dev-server (Fix [#38](https://github.com/pangolinjs/core/issues/38)) ([19aedef](https://github.com/pangolinjs/core/commit/19aedef))
+
+
+
 ## [5.0.0-beta.18](https://github.com/pangolinjs/core/compare/v5.0.0-beta.17...v5.0.0-beta.18) (2019-05-25)
 
 
