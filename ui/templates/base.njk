@@ -11,9 +11,7 @@
     <link rel="shortcut icon" href="{% static project.branding.favicon %}">
     {% endif %}
 
-    {% if websocket.port %}
-    <script>var websocketPort = {{ websocket.port }}</script>
-    {% endif %}
+    <script>var webSocketPath = '{{ webSocketPath }}'</script>
 
     <script defer src="{% static 'pangolin/scripts.js' %}"></script>
     <link rel="stylesheet" href="{% static 'pangolin/styles.css' %}">

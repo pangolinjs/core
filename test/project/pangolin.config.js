@@ -23,7 +23,19 @@
  */
 // module.exports = {
 //   devServer: {
-//     port: 1337
+//     port: 1337,
+//     webSocketPath: '/ui-socket'
+//   }
+// }
+
+/**
+ * Enable dev server HTTPS
+ */
+// module.exports = {
+//   configure: {
+//     devServer: {
+//       https: true
+//     }
 //   }
 // }
 
