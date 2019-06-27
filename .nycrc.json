@@ -3,7 +3,7 @@
   "include": [
     "bin/**",
     "lib/**",
-    "ui/**"
+    "ui/js/**"
   ],
   "reporter": [
     "text",
