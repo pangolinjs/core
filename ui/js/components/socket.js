@@ -8,6 +8,10 @@ let isReconnect = false
  * WebSocket with auto-reconnect
  */
 function connect () {
+  if (!webSocketPath) {
+    return
+  }
+
   if (webSocket && webSocket.readyState !== WebSocket.CLOSED) {
     return
   }
