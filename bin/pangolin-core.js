@@ -12,7 +12,7 @@ program
 program
   .command('dev')
   .description('Start development server')
-  .option('-o, --open [browser]', 'Open in default or specific browser')
+  .option('--open [browser]', 'Open in default or specific browser')
   .option('--host <hostname>', 'Override the default 0.0.0.0 hostname')
   .option('--port <port>', 'Override the default 8080 port')
   .action(env => {
@@ -26,7 +26,7 @@ program
 program
   .command('build')
   .description('Build production files')
-  .option('-d, --dev', 'Build files for static file server')
+  .option('--dev', 'Build files for static file server')
   .option('--modern', 'Build additional modern bundle')
   .option('--report', 'Generate report with webpack-bundle-analyzer')
   .action(env => {
@@ -57,13 +57,13 @@ program
   .command('inspect <task>')
   .usage('dev|build [options]')
   .description('Generate and output webpack config')
-  .option('-d, --dev', 'Switch to dev mode for build task')
-  .option('-v, --verbose', 'Show more information')
+  .option('--dev', 'Switch to dev mode for build task')
+  .option('--compact', 'Less line breaks in output')
   .action((task, env) => {
     require('../lib/commands/inspect')({
       task,
       dev: env.dev,
-      verbose: env.verbose
+      compact: env.compact
     })
   })
 
