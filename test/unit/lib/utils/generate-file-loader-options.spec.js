@@ -10,38 +10,48 @@ test.afterEach('cleanup', t => {
   Object.assign(store.state, stateBackup)
 })
 
-test.serial('generates options without hash', t => {
-  store.state.config = { fileNameHash: false }
+test.serial('generates options', t => {
+  process.env.NODE_ENV = 'development'
+
+  store.state.config = {
+    project: { base: '/stuff/' }
+  }
 
   const actual = generateFileLoaderOptions('test')
   const expected = {
-    name: 'assets/test/[name].[ext]',
-    publicPath: undefined
+    name: 'assets/test/[name].[ext]'
   }
 
   t.deepEqual(actual, expected)
 })
 
-test.serial('generates production options without hash', t => {
+test.serial('generates production options', t => {
   process.env.NODE_ENV = 'production'
-  store.state.config = { fileNameHash: false }
+
+  store.state.config = {
+    project: { base: '/stuff/' }
+  }
 
   const actual = generateFileLoaderOptions('test')
   const expected = {
     name: 'assets/test/[name].[ext]',
-    publicPath: '..'
+    publicPath: '/stuff/'
   }
 
   t.deepEqual(actual, expected)
 })
 
 test.serial('generate options with hash', t => {
-  store.state.config = { fileNameHash: true }
+  process.env.NODE_ENV = 'development'
+
+  store.state.config = {
+    fileNameHash: true,
+    project: { base: '/stuff/' }
+  }
 
   const actual = generateFileLoaderOptions('test')
   const expected = {
-    name: 'assets/test/[name].[hash:8].[ext]',
-    publicPath: undefined
+    name: 'assets/test/[name].[hash:8].[ext]'
   }
 
   t.deepEqual(actual, expected)
@@ -49,12 +59,16 @@ test.serial('generate options with hash', t => {
 
 test.serial('generate production options with hash', t => {
   process.env.NODE_ENV = 'production'
-  store.state.config = { fileNameHash: true }
+
+  store.state.config = {
+    fileNameHash: true,
+    project: { base: '/stuff/' }
+  }
 
   const actual = generateFileLoaderOptions('test')
   const expected = {
     name: 'assets/test/[name].[hash:8].[ext]',
-    publicPath: '..'
+    publicPath: '/stuff/'
   }
 
   t.deepEqual(actual, expected)
