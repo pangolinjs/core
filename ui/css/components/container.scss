@@ -31,5 +31,5 @@
 .container__main {
   display: grid;
   height: 100vh;
-  grid-template-rows: min-content minmax(60vh, 1fr) minmax(auto, max-content);
+  grid-template-rows: min-content 1fr;
 }
