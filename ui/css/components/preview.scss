@@ -12,9 +12,7 @@
   border: 0;
   background: #fff;
 
-  border: 0 solid var(--color-border, $color-border);
-
   @media (min-width: $breakpoint-layout) {
-    border-width: 2px;
+    border: 2px solid var(--color-border, $color-border);
   }
 }
