@@ -1,6 +1,7 @@
 const Config = require('webpack-chain')
 const CSSExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const webpack = require('webpack')
 
 const config = new Config()
@@ -8,26 +9,22 @@ const config = new Config()
 /* eslint-disable indent */
 
 config
-  .mode('production')
   .context(path.resolve(__dirname))
   .devtool('source-map')
 
-config.entry('index')
-  .add('./js/index.js')
-  .add('./css/index.scss')
+config.entry('main')
+  .add('./src/main.js')
+  .add('./src/main.scss')
 
 config.output
   .filename('scripts.js')
   .path(path.resolve(__dirname, 'dist/pangolin'))
 
 config.module
-  .rule('js')
-    .test(/\.js$/)
-    .exclude
-      .add(/node_modules/)
-      .end()
-    .use('babel-loader')
-      .loader('babel-loader')
+  .rule('vue')
+    .test(/\.vue$/)
+    .use('vue-loader')
+      .loader('vue-loader')
 
 config.module
   .rule('css')
@@ -47,7 +44,6 @@ config.module
       .options({
         plugins: [
           require('postcss-custom-properties')(),
-          require('autoprefixer')(),
           require('cssnano')()
         ],
         sourceMap: true
@@ -62,6 +58,10 @@ config.module
       })
 
 config
+  .plugin('vue')
+  .use(VueLoaderPlugin)
+
+config
   .plugin('css-extract')
   .use(CSSExtractPlugin, [{
     filename: 'styles.css'
@@ -73,15 +73,4 @@ config
 
 /* eslint-enable indent */
 
-webpack(config.toConfig(), (error, stats) => {
-  if (error) throw error
-
-  if (stats.hasErrors()) {
-    // Log unsuccessful bundling
-    console.log(stats.toString('errors-only') + '\n')
-
-    // Exit with a non-zero status code
-    // This allows CI tools to report errors
-    process.exit(1)
-  }
-})
+module.exports = config.toConfig()

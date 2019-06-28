@@ -1,8 +1,8 @@
-import generatePreviewTemplate from '../../../../lib/nunjucks/generate-preview-template'
+import generateTemplate from '../../../../lib/nunjucks/generate-template'
 import test from 'ava'
 
 test('generates default template', t => {
-  const template = generatePreviewTemplate({
+  const template = generateTemplate({
     head: '<link rel="stylesheet" href="main.css">',
     body: 'Hello World'
   })
@@ -11,7 +11,7 @@ test('generates default template', t => {
 })
 
 test('generates custom template', t => {
-  const template = generatePreviewTemplate({
+  const template = generateTemplate({
     template: 'blog.njk',
     head: '<link rel="stylesheet" href="main.css">',
     body: 'Hello World'
