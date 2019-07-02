@@ -59,7 +59,7 @@ export default {
 
   computed: {
     color () {
-      return this.$store.getters.headerColor
+      return this.$store.getters.brandColor
     },
     title () {
       return this.$store.state.current.name

@@ -1,5 +1,8 @@
 <template>
-  <v-app id="pangolin">
+  <v-app
+    id="pangolin"
+    :dark="dark"
+  >
     <c-sidebar />
     <router-view />
   </v-app>
@@ -24,6 +27,12 @@ export default {
 
   components: {
     CSidebar
+  },
+
+  computed: {
+    dark () {
+      return this.$store.state.dark
+    }
   },
 
   mounted () {

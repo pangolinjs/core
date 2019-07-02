@@ -1,11 +1,15 @@
 import {
   mdiFileExport,
   mdiFileXml,
-  mdiFolder
+  mdiFolder,
+  mdiWeatherNight,
+  mdiWeatherSunny
 } from '@mdi/js'
 
 export default {
   fileExport: mdiFileExport,
   fileXml: mdiFileXml,
-  folder: mdiFolder
+  folder: mdiFolder,
+  moon: mdiWeatherNight,
+  sun: mdiWeatherSunny
 }

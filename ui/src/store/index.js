@@ -6,13 +6,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     sidebar: undefined,
+    dark: false,
     project: {},
     components: [],
     current: {}
   },
 
   getters: {
-    headerColor: state => {
+    brandColor: state => {
       const project = state.project
 
       if (project.branding && project.branding.colorTheme) {
@@ -44,6 +45,9 @@ export default new Vuex.Store({
   mutations: {
     sidebar (state, data) {
       state.sidebar = data
+    },
+    dark (state, data) {
+      state.dark = data
     },
     project (state, data) {
       Vue.set(state, 'project', data)

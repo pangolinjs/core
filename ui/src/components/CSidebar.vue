@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="showSidebar"
+    v-model="sidebar"
     width="300"
     app
   >
@@ -19,6 +19,7 @@
     <v-list-item class="my-2">
       <v-text-field
         v-model="search"
+        :color="color"
         label="Search"
         hide-details
         clearable
@@ -29,6 +30,13 @@
     <c-sidebar-tree
       v-if="showTree"
       :search="search"
+    />
+
+    <v-switch
+      v-model="dark"
+      :color="color"
+      :prepend-icon="$icon.sun"
+      :append-icon="$icon.moon"
     />
   </v-navigation-drawer>
 </template>
@@ -53,15 +61,26 @@ export default {
     title () {
       return this.$store.state.project.name
     },
+    color () {
+      return this.$store.getters.brandColor
+    },
     showTree () {
       return !!this.$store.state.components.length
     },
-    showSidebar: {
+    sidebar: {
       get () {
         return this.$store.state.sidebar
       },
       set (value) {
         this.$store.commit('sidebar', value)
+      }
+    },
+    dark: {
+      get () {
+        return this.$store.state.dark
+      },
+      set (value) {
+        this.$store.commit('dark', value)
       }
     }
   }

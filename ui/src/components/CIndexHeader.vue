@@ -20,7 +20,7 @@ export default {
 
   computed: {
     color () {
-      return this.$store.getters.headerColor
+      return this.$store.getters.brandColor
     }
   },
 
