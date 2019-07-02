@@ -2,6 +2,7 @@ const Config = require('webpack-chain')
 const CSSExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const webpack = require('webpack')
 
 const config = new Config()
@@ -28,7 +29,7 @@ config.module
 
 config.module
   .rule('css')
-    .test(/\.(css|scss)$/)
+    .test(/\.(css|scss|sass)$/)
     .use('css-extract-loader')
       .loader(CSSExtractPlugin.loader)
       .end()
@@ -60,6 +61,10 @@ config.module
 config
   .plugin('vue')
   .use(VueLoaderPlugin)
+
+config
+  .plugin('vuetify')
+  .use(VuetifyLoaderPlugin)
 
 config
   .plugin('css-extract')

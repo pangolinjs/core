@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ title }}</title>
+    <title>%s | Pattern Library | {{ project }}</title>
 
     <script defer src="{{ base }}pangolin/scripts.js"></script>
     <link rel="stylesheet" href="{{ base }}pangolin/styles.css">
   </head>
   <body>
     <noscript>
-      <h1>Pattern Library | {{ title }}</h1>
-      <p>The pattern library for <em>{{ title }}</em> requires JavaScript.</p>
+      <h1>Pattern Library | {{ project }}</h1>
+      <p>The pattern library for <em>{{ project }}</em> requires JavaScript.</p>
       <p>Please enable JavaScript in your browser settings and refresh this page.</p>
     </noscript>
+
+    <script>
+      var pangolinBase = '{{ base }}'
+    </script>
+
     <div id="pangolin"></div>
   </body>
 </html>

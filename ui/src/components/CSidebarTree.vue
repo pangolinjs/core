@@ -1,0 +1,100 @@
+<template>
+  <v-treeview
+    :items="items"
+    :active.sync="active"
+    :open.sync="open"
+    :search="search"
+    activatable
+    open-on-click
+    dense
+    @update:open="handleOpen"
+    @update:active="handleActive"
+  >
+    <template #prepend="{ item }">
+      <v-icon v-if="$icon[item.type]">
+        {{ $icon[item.type] }}
+      </v-icon>
+    </template>
+  </v-treeview>
+</template>
+
+<script>
+export default {
+  name: 'CSidebarTree',
+
+  props: {
+    search: {
+      type: String,
+      default: ''
+    }
+  },
+
+  data () {
+    return {
+      active: [],
+      open: [],
+      initiallyOpen: []
+    }
+  },
+
+  computed: {
+    items () {
+      return this.$store.state.components
+    },
+    storageKey () {
+      return `${this.$store.state.project.id}-sidebar`
+    }
+  },
+
+  created () {
+    // This cannot be done in `mounted` hook, because then it's to late
+    // and Vuetify already started emitting events.
+    this.getInitialState()
+
+    // This can be done either in `created` or in `mounted` hook, but since
+    // `created` is already in use, we don't need to add another hook.
+    this.setInitialState()
+  },
+
+  methods: {
+    handleOpen (items) {
+      localStorage.setItem(this.storageKey, JSON.stringify(items))
+    },
+    handleActive ([path]) {
+      if (!path) {
+        return
+      }
+
+      this.$router.push(`/${path}`)
+    },
+    getInitialState () {
+      const state = JSON.parse(localStorage.getItem(this.storageKey))
+
+      if (Array.isArray(state)) {
+        this.initiallyOpen = state
+      }
+    },
+    setInitialState () {
+      this.open.push(...this.initiallyOpen)
+
+      const path = this.$store.state.current.path
+
+      if (!path) {
+        return
+      }
+
+      // Highlight path.
+      this.active.push(path)
+
+      // Open tree for highlighted path.
+      path.split('/').forEach((item, index, segments) => {
+        const currentPath = segments
+          .slice(0, index + 1)
+          .join('/')
+
+        this.open.push(currentPath)
+      })
+    }
+  }
+}
+</script>
