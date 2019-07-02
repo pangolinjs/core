@@ -1,39 +1,38 @@
 <template>
-  <component
-    :is="container"
+  <v-sheet
     v-if="item.type === 'folder'"
     :class="containerClass"
+    :elevation="elevation"
   >
-    <component :is="heading">
-      {{ item.name }}
-    </component>
-    <c-index-item
-      v-for="child in item.children"
-      :key="child.id"
-      :level="level + 1"
-      :item="child"
-    />
-  </component>
+    <div class="index-item__grid">
+      <component
+        :is="heading"
+        class="index-item__heading"
+      >
+        {{ item.name }}
+      </component>
+      <c-index-item
+        v-for="child in item.children"
+        :key="child.id"
+        :level="level + 1"
+        :item="child"
+      />
+    </div>
+  </v-sheet>
 
   <v-btn
     v-else
     :to="item.path"
     color="white"
-    class="mr-3 my-3"
+    class="mr-3 mt-2 mb-3"
   >
     {{ item.name }}
   </v-btn>
 </template>
 
 <script>
-import { VCard } from 'vuetify/lib'
-
 export default {
   name: 'CIndexItem',
-
-  components: {
-    VCard
-  },
 
   props: {
     level: {
@@ -47,10 +46,10 @@ export default {
   },
 
   computed: {
-    container () {
+    elevation () {
       return this.level === 1
-        ? 'v-card'
-        : 'div'
+        ? 2
+        : 0
     },
     containerClass () {
       return this.level === 1
@@ -63,3 +62,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.index-item__grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.index-item__heading {
+  width: 100%;
+  margin-bottom: 0.25em;
+}
+</style>
