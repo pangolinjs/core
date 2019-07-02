@@ -1,6 +1,6 @@
 workflow "Test on push" {
   on = "push"
-  resolves = ["Lint CSS", "Lint JavaScript", "Unit testing"], "Build UI"
+  resolves = ["Lint CSS", "Lint JavaScript", "Unit testing", "Build UI"]
 }
 
 action "Install" {
