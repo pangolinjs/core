@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import api from './api'
+
 import CSidebar from './components/CSidebar.vue'
 
 const TITLE_TEMPLATE = document.title
@@ -22,6 +24,13 @@ export default {
 
   components: {
     CSidebar
+  },
+
+  mounted () {
+    this.$communicator.$on('reload', async () => {
+      const components = await api.get('components.json').json()
+      this.$store.commit('components', components)
+    })
   }
 }
 </script>

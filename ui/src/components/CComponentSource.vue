@@ -19,6 +19,18 @@ export default {
     }
   },
 
+  watch: {
+    '$route' (newRoute, oldRoute) {
+      if (newRoute.path !== oldRoute.path) {
+        this.getSource()
+      }
+    }
+  },
+
+  mounted () {
+    this.$communicator.$on('reload', () => this.getSource())
+  },
+
   methods: {
     async getSource () {
       const url = `${this.$store.state.current.path}/source.html`

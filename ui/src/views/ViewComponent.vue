@@ -3,8 +3,8 @@
     <c-component-header />
 
     <v-sheet height="100%">
-      <c-component-render v-if="active === 'render'" />
-      <c-component-source v-else-if="active === 'source'" />
+      <c-component-render v-show="active === 'render'" />
+      <c-component-source v-show="active === 'source'" />
     </v-sheet>
   </v-content>
 </template>

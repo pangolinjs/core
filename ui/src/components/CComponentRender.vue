@@ -1,5 +1,6 @@
 <template>
   <iframe
+    ref="render"
     class="component-render"
     :src="render"
   />
@@ -13,6 +14,16 @@ export default {
     render () {
       return `/${this.$store.state.current.path}/render.html`
     }
+  },
+
+  mounted () {
+    this.$communicator.$on('reload', () => {
+      /**
+       * Reload iframe location
+       * @see {@link https://stackoverflow.com/a/86771/9208523}
+       */
+      this.$refs.render.contentWindow.location.reload()
+    })
   }
 }
 </script>

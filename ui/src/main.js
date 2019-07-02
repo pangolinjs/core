@@ -3,11 +3,13 @@ import VueMeta from 'vue-meta'
 
 import Pangolin from './Pangolin.vue'
 
+import Communicator from './plugins/communicator'
 import icon from './plugins/icon.js'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify.js'
 
+Vue.use(Communicator)
 Vue.use(VueMeta)
 
 Vue.config.productionTip = false
