@@ -15,7 +15,7 @@ export default {
 
   data () {
     return {
-      source: this.getSource()
+      source: ''
     }
   },
 
@@ -28,6 +28,7 @@ export default {
   },
 
   mounted () {
+    this.getSource()
     this.$communicator.$on('reload', () => this.getSource())
   },
 
