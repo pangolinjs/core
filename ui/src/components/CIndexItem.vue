@@ -8,6 +8,7 @@
       <component
         :is="heading"
         class="index-item__heading"
+        :class="headingClass"
       >
         {{ item.name }}
       </component>
@@ -57,6 +58,15 @@ export default {
     },
     heading () {
       return `h${this.level + 1}`
+    },
+    headingClass () {
+      const classes = {
+        h2: 'display-1',
+        h3: 'headline',
+        h4: 'title'
+      }
+
+      return classes[this.heading]
     }
   }
 }
