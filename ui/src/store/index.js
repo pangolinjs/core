@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     sidebar: undefined,
     dark: false,
+    search: '',
     project: {},
     components: [],
     current: {}
@@ -48,6 +49,9 @@ export default new Vuex.Store({
     },
     dark (state, data) {
       state.dark = data
+    },
+    search (state, data) {
+      state.search = data
     },
     project (state, data) {
       Vue.set(state, 'project', data)

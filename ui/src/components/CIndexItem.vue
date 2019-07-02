@@ -23,7 +23,6 @@
   <v-btn
     v-else
     :to="item.path"
-    color="white"
     class="mr-3 mt-2 mb-3"
   >
     {{ item.name }}

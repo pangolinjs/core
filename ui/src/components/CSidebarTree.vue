@@ -4,6 +4,7 @@
     :active.sync="active"
     :open.sync="open"
     :search="search"
+    :color="color"
     activatable
     open-on-click
     dense
@@ -22,13 +23,6 @@
 export default {
   name: 'CSidebarTree',
 
-  props: {
-    search: {
-      type: String,
-      default: ''
-    }
-  },
-
   data () {
     return {
       active: [],
@@ -38,11 +32,17 @@ export default {
   },
 
   computed: {
+    color () {
+      return this.$store.getters.brandColor
+    },
     items () {
       return this.$store.state.components
     },
     storageKey () {
       return `${this.$store.state.project.id}-sidebar`
+    },
+    search () {
+      return this.$store.state.search
     }
   },
 
@@ -68,10 +68,16 @@ export default {
       this.$router.push(`/${path}`)
     },
     getInitialState () {
-      const state = JSON.parse(localStorage.getItem(this.storageKey))
+      try {
+        const state = JSON.parse(localStorage.getItem(this.storageKey))
 
-      if (Array.isArray(state)) {
-        this.initiallyOpen = state
+        if (Array.isArray(state)) {
+          this.initiallyOpen = state
+        } else {
+          localStorage.removeItem(this.storageKey)
+        }
+      } catch (error) {
+        localStorage.removeItem(this.storageKey)
       }
     },
     setInitialState () {

@@ -1,5 +1,6 @@
 <template>
   <v-app
+    v-if="hasLoaded"
     id="pangolin"
     :dark="dark"
   >
@@ -30,6 +31,9 @@ export default {
   },
 
   computed: {
+    hasLoaded () {
+      return !!this.$store.state.components.length
+    },
     dark () {
       return this.$store.state.dark
     }

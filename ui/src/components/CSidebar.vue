@@ -16,56 +16,34 @@
       </v-list-item-content>
     </v-list-item>
 
-    <v-list-item class="my-2">
-      <v-text-field
-        v-model="search"
-        :color="color"
-        label="Search"
-        hide-details
-        clearable
-        solo
-      />
+    <v-list-item class="mt-2 mb-3">
+      <c-sidebar-search />
     </v-list-item>
 
-    <c-sidebar-tree
-      v-if="showTree"
-      :search="search"
-    />
+    <c-sidebar-tree />
 
-    <v-switch
-      v-model="dark"
-      :color="color"
-      :prepend-icon="$icon.sun"
-      :append-icon="$icon.moon"
-    />
+    <template #append>
+      <c-sidebar-dark-mode />
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script>
+import CSidebarDarkMode from './CSidebarDarkMode.vue'
+import CSidebarSearch from './CSidebarSearch.vue'
 import CSidebarTree from './CSidebarTree.vue'
 
 export default {
   name: 'CNavigation',
 
   components: {
+    CSidebarDarkMode,
+    CSidebarSearch,
     CSidebarTree
   },
-
-  data () {
-    return {
-      search: ''
-    }
-  },
-
   computed: {
     title () {
       return this.$store.state.project.name
-    },
-    color () {
-      return this.$store.getters.brandColor
-    },
-    showTree () {
-      return !!this.$store.state.components.length
     },
     sidebar: {
       get () {
@@ -73,14 +51,6 @@ export default {
       },
       set (value) {
         this.$store.commit('sidebar', value)
-      }
-    },
-    dark: {
-      get () {
-        return this.$store.state.dark
-      },
-      set (value) {
-        this.$store.commit('dark', value)
       }
     }
   }
