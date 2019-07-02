@@ -1,0 +1,29 @@
+<template>
+  <v-footer
+    app
+    inset
+    padless
+  >
+    <v-list-item two-line>
+      <v-list-item-content>
+        <v-list-item-title>
+          Powered by <a
+            class="orange--text orange--darken-3"
+            href="https://pangolinjs.org"
+            target="_blank"
+          >Pangolin Pattern Library</a>.
+        </v-list-item-title>
+
+        <v-list-item-subtitle>
+          Framework for componentized front end development with Nunjucks, Sass, and JavaScript.
+        </v-list-item-subtitle>
+      </v-list-item-content>
+    </v-list-item>
+  </v-footer>
+</template>
+
+<script>
+export default {
+  name: 'CIndexFooter'
+}
+</script>
