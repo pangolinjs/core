@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.20](https://github.com/pangolinjs/core/compare/v5.0.0-beta.19...v5.0.0-beta.20) (2019-07-03)
+
+
+### Bug Fixes
+
+* Disable UI socket if path isn't set (Fix [#44](https://github.com/pangolinjs/core/issues/44)) ([8e46d56](https://github.com/pangolinjs/core/commit/8e46d56))
+* Inspect command and assets in modern build (Fix [#43](https://github.com/pangolinjs/core/issues/43)) ([9b9e0c5](https://github.com/pangolinjs/core/commit/9b9e0c5))
+* Make returned paths from `require`d files usable (Fix [#42](https://github.com/pangolinjs/core/issues/42)) ([40434a8](https://github.com/pangolinjs/core/commit/40434a8))
+
+
+### Features
+
+* Remove Markdown docs ([6d76790](https://github.com/pangolinjs/core/commit/6d76790))
+* UI overhaul featuring Vuetify.js ([#48](https://github.com/pangolinjs/core/issues/48)) (Fix [#47](https://github.com/pangolinjs/core/issues/47)) ([a5ea3fc](https://github.com/pangolinjs/core/commit/a5ea3fc))
+
+
+### BREAKING CHANGES
+
+* Markdown files no longer generate a docs section. Projects continue to work without any necessary changes.
+
+
+
 ## [5.0.0-beta.19](https://github.com/pangolinjs/core/compare/v5.0.0-beta.18...v5.0.0-beta.19) (2019-06-15)
 
 
