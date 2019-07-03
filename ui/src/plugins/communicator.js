@@ -28,11 +28,13 @@ export default function (Vue) {
     }
   }
 
-  // eslint-disable-next-line no-new
-  new Sockette(`${protocol}//${host}${pangolinSocketPath}`, {
-    onopen,
-    onmessage
-  })
+  if (pangolinSocketPath) {
+    // eslint-disable-next-line no-new
+    new Sockette(`${protocol}//${host}${pangolinSocketPath}`, {
+      onopen,
+      onmessage
+    })
+  }
 
   Vue.prototype.$communicator = EventBus
 }
