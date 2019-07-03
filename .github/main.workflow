@@ -1,6 +1,6 @@
-workflow "Lint and test on push" {
+workflow "Test on push" {
   on = "push"
-  resolves = ["Lint CSS", "Lint JavaScript", "Unit testing"]
+  resolves = ["Lint CSS", "Lint JavaScript", "Unit testing", "Build UI"]
 }
 
 action "Install" {
@@ -24,4 +24,10 @@ action "Unit testing" {
   uses = "actions/npm@master"
   needs = ["Lint JavaScript", "Lint CSS"]
   args = "run test:unit"
+}
+
+action "Build UI" {
+  uses = "actions/npm@master"
+  needs = ["Unit testing"]
+  args = "run build:ui"
 }

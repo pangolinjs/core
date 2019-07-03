@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>%s | Pattern Library | {{ project }}</title>
+
+    <script defer src="{{ base }}pangolin/scripts.js"></script>
+    <link rel="stylesheet" href="{{ base }}pangolin/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap">
+  </head>
+  <body>
+    <noscript>
+      <h1>Pattern Library | {{ project }}</h1>
+      <p>The pattern library for <em>{{ project }}</em> requires JavaScript.</p>
+      <p>Please enable JavaScript in your browser settings and refresh this page.</p>
+    </noscript>
+
+    <script>
+      var pangolinBase = '{{ base }}'
+      var pangolinSocketPath = '{{ socketPath }}'
+    </script>
+
+    <div id="pangolin"></div>
+  </body>
+</html>

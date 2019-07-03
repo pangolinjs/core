@@ -1,5 +1,0 @@
-import './components/color-contrast'
-import './components/dark-mode'
-import './components/nav'
-import './components/sidebar'
-import './components/socket'
