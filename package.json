@@ -1,6 +1,6 @@
 {
   "name": "@pangolin/core",
-  "version": "5.0.0-beta.21",
+  "version": "5.0.0-beta.22",
   "description": "Framework for componentized front end development with Nunjucks, Sass, and JavaScript",
   "license": "MPL-2.0",
   "keywords": [
