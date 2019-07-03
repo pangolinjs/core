@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.21](https://github.com/pangolinjs/core/compare/v5.0.0-beta.20...v5.0.0-beta.21) (2019-07-03)
+
+
+### Bug Fixes
+
+* Load UI HTML file from correct location ([6d225c2](https://github.com/pangolinjs/core/commit/6d225c2))
+
+
+
 ## [5.0.0-beta.20](https://github.com/pangolinjs/core/compare/v5.0.0-beta.19...v5.0.0-beta.20) (2019-07-03)
 
 
