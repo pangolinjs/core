@@ -1,5 +1,6 @@
 <template>
   <v-treeview
+    ref="tree"
     :items="items"
     :active.sync="active"
     :open.sync="open"
@@ -43,6 +44,22 @@ export default {
     },
     search () {
       return this.$store.state.search
+    },
+    path () {
+      return this.$store.state.current.path
+    }
+  },
+
+  watch: {
+    search (value) {
+      // Collapse tree and re-open current path.
+      if (!value) {
+        this.$refs.tree.updateAll(false)
+        this.openActivated()
+        return
+      }
+
+      this.$refs.tree.updateAll(true)
     }
   },
 
@@ -81,19 +98,22 @@ export default {
       }
     },
     setInitialState () {
+      this.openSaved()
+      this.openActivated()
+    },
+    openSaved () {
       this.open.push(...this.initiallyOpen)
-
-      const path = this.$store.state.current.path
-
-      if (!path) {
+    },
+    openActivated () {
+      if (!this.path) {
         return
       }
 
-      // Highlight path.
-      this.active.push(path)
+      // Highlight current path.
+      this.active = [this.path]
 
-      // Open tree for highlighted path.
-      path.split('/').forEach((item, index, segments) => {
+      // Open tree for current path.
+      this.path.split('/').forEach((item, index, segments) => {
         const currentPath = segments
           .slice(0, index + 1)
           .join('/')
