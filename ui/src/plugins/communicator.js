@@ -12,6 +12,16 @@ export default function (Vue) {
 
   const EventBus = new Vue()
 
+  let isReconnect = false
+
+  function onopen () {
+    if (isReconnect) {
+      location.reload()
+    }
+
+    isReconnect = true
+  }
+
   function onmessage (message) {
     if (message.data === 'reload') {
       EventBus.$emit('reload')
@@ -20,6 +30,7 @@ export default function (Vue) {
 
   // eslint-disable-next-line no-new
   new Sockette(`${protocol}//${host}${pangolinSocketPath}`, {
+    onopen,
     onmessage
   })
 
