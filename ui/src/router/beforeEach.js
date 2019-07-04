@@ -1,5 +1,3 @@
-/* globals pangolinBase */
-
 import api from '../api'
 import store from '../store'
 
@@ -29,8 +27,8 @@ export default async function (to, from, next) {
     return
   }
 
-  // Remove base to get "pure" component path.
-  const path = to.path.replace(pangolinBase, '')
+  // Remove leading `/` to get "pure" component path.
+  const path = to.path.slice(1)
 
   // Get current page by path and save to store.
   store.commit('current', store.getters.componentByPath(path))
