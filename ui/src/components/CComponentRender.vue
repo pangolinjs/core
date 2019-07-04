@@ -7,12 +7,14 @@
 </template>
 
 <script>
+/* globals pangolinBase */
+
 export default {
   name: 'CComponentRender',
 
   computed: {
     render () {
-      return `/${this.$store.state.current.path}/render.html`
+      return `${pangolinBase}${this.$store.state.current.path}/render.html`
     }
   },
 
