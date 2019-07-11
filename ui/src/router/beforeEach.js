@@ -1,20 +1,6 @@
-import api from '../api'
 import store from '../store'
 
-let isFirstLoad = true
-
 export default async function (to, from, next) {
-  // Get project and components information on first load.
-  if (isFirstLoad) {
-    const project = await api.get('project.json').json()
-    store.commit('project', project)
-
-    const components = await api.get('components.json').json()
-    store.commit('components', components)
-
-    isFirstLoad = false
-  }
-
   // Remove trailing `/`.
   if (to.path.endsWith('/') && to.path !== '/') {
     next(to.path.slice(0, -1))

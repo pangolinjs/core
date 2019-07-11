@@ -1,9 +1,9 @@
 <template>
   <v-app-bar
-    :color="color"
+    color="primary"
     app
+    flat
     dense
-    dark
   >
     <v-app-bar-nav-icon @click="toggleSidebar" />
     <v-toolbar-title>Components</v-toolbar-title>
@@ -16,12 +16,6 @@ export default {
 
   metaInfo: {
     title: 'Components'
-  },
-
-  computed: {
-    color () {
-      return this.$store.getters.brandColor
-    }
   },
 
   methods: {

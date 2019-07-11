@@ -5,7 +5,6 @@
     :active.sync="active"
     :open.sync="open"
     :search="search"
-    :color="color"
     activatable
     open-on-click
     dense
@@ -33,9 +32,6 @@ export default {
   },
 
   computed: {
-    color () {
-      return this.$store.getters.brandColor
-    },
     items () {
       return this.$store.state.components
     },

@@ -6,7 +6,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     sidebar: undefined,
-    dark: false,
     search: '',
     project: {},
     components: [],
@@ -14,19 +13,9 @@ export default new Vuex.Store({
   },
 
   getters: {
-    brandColor: state => {
-      const project = state.project
-
-      if (project.branding && project.branding.colorTheme) {
-        return project.branding.colorTheme
-      }
-
-      return 'orange darken-3'
-    },
-
     componentByPath: state => path => {
       function find (list) {
-        for (let item of list) {
+        for (const item of list) {
           if (item.path === path) {
             return item
           }
@@ -46,9 +35,6 @@ export default new Vuex.Store({
   mutations: {
     sidebar (state, data) {
       state.sidebar = data
-    },
-    dark (state, data) {
-      state.dark = data
     },
     search (state, data) {
       state.search = data

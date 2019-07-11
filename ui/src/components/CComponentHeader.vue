@@ -1,9 +1,9 @@
 <template>
   <v-app-bar
-    :color="color"
+    color="primary"
     app
+    flat
     dense
-    dark
   >
     <v-app-bar-nav-icon @click="toggleSidebar" />
     <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -29,6 +29,8 @@
       <v-tabs
         v-model="tab"
         align-with-title
+        color="secondary"
+        background-color="primary"
       >
         <v-tab
           :to="{}"
@@ -58,9 +60,6 @@ export default {
   },
 
   computed: {
-    color () {
-      return this.$store.getters.brandColor
-    },
     title () {
       return this.$store.state.current.name
     },

@@ -1,11 +1,8 @@
 <template>
   <v-content>
     <c-component-header />
-
-    <v-sheet height="100%">
-      <c-component-render v-show="active === 'render'" />
-      <c-component-source v-show="active === 'source'" />
-    </v-sheet>
+    <c-component-render v-show="active === 'render'" />
+    <c-component-source v-show="active === 'source'" />
   </v-content>
 </template>
 

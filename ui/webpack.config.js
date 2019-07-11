@@ -15,7 +15,6 @@ config
 
 config.entry('main')
   .add('./src/main.js')
-  .add('./src/main.scss')
 
 config.output
   .filename('scripts.js')
