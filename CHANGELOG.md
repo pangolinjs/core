@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.25](https://github.com/pangolinjs/core/compare/v5.0.0-beta.24...v5.0.0-beta.25) (2019-07-16)
+
+
+### Bug Fixes
+
+* **UI:** Use correct URL for standalone render page link ([dae3aac](https://github.com/pangolinjs/core/commit/dae3aac))
+
+
+
 ## [5.0.0-beta.24](https://github.com/pangolinjs/core/compare/v5.0.0-beta.23...v5.0.0-beta.24) (2019-07-04)
 
 
