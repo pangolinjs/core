@@ -50,6 +50,8 @@
 </template>
 
 <script>
+/* globals pangolinBase */
+
 export default {
   name: 'CComponentHeader',
 
@@ -64,7 +66,7 @@ export default {
       return this.$store.state.current.name
     },
     render () {
-      return `/${this.$store.state.current.path}/render.html`
+      return `${pangolinBase}${this.$store.state.current.path}/render.html`
     }
   },
 
