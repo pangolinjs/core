@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueMeta from 'vue-meta'
+import Vuetify from 'vuetify/lib'
 
 import Pangolin from './Pangolin.vue'
 
@@ -8,10 +9,10 @@ import Communicator from './plugins/communicator'
 import icon from './plugins/icon.js'
 import router from './router'
 import store from './store'
-import vuetify from './plugins/vuetify.js'
 
 Vue.use(Communicator)
 Vue.use(VueMeta)
+Vue.use(Vuetify)
 
 Vue.config.productionTip = false
 Vue.prototype.$icon = icon
@@ -25,6 +26,26 @@ Promise.all(requests)
   .then(([project, components]) => {
     store.commit('project', project)
     store.commit('components', components)
+
+    const primary = (project.branding && project.branding.colorTheme) || '#ff721f'
+
+    const vuetify = new Vuetify({
+      theme: {
+        themes: {
+          light: {
+            primary,
+            secondary: '#282828'
+          },
+          dark: {
+            primary,
+            secondary: '#fff'
+          }
+        }
+      },
+      icons: {
+        iconfont: 'mdiSvg'
+      }
+    })
 
     // eslint-disable-next-line no-new
     new Vue({
