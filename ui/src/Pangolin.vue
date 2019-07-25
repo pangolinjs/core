@@ -34,10 +34,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-// FIX: icon color doesn't inherit currentColor
-.v-icon--svg {
-  fill: currentColor;
-}
-</style>
