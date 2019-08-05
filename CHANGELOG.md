@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.27](https://github.com/pangolinjs/core/compare/v5.0.0-beta.26...v5.0.0-beta.27) (2019-08-05)
+
+
+### Bug Fixes
+
+* **UI:** Add favicon path to head ([99fbab5](https://github.com/pangolinjs/core/commit/99fbab5))
+* **UI:** Automatic foreground color ([1984f6f](https://github.com/pangolinjs/core/commit/1984f6f))
+
 ## [5.0.0-beta.26](https://github.com/pangolinjs/core/compare/v5.0.0-beta.25...v5.0.0-beta.26) (2019-07-25)
 
 
