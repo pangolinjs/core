@@ -12,7 +12,7 @@
 //     name: 'Pangolin Test',
 //     base: '/base/',
 //     branding: {
-//       colorTheme: '#1e88e5',
+//       color: '#1e88e5',
 //       favicon: 'favicon.ico'
 //     }
 //   }

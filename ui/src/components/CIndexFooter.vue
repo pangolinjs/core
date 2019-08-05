@@ -8,7 +8,6 @@
       <v-list-item-content>
         <v-list-item-title>
           Powered by <a
-            class="orange--text orange--darken-3"
             href="https://pangolinjs.org"
             target="_blank"
           >Pangolin Pattern Library</a>.

@@ -1,6 +1,8 @@
 <template>
   <v-app-bar
     color="primary"
+    :light="light"
+    :dark="!light"
     app
     flat
     dense
@@ -29,8 +31,8 @@
       <v-tabs
         v-model="tab"
         align-with-title
-        color="secondary"
-        background-color="primary"
+        :color="color"
+        background-color="transparent"
       >
         <v-tab
           :to="{}"
@@ -67,6 +69,16 @@ export default {
     },
     render () {
       return `${pangolinBase}${this.$store.state.current.path}/render.html`
+    },
+    light () {
+      return this.$store.getters.isLightColor
+    },
+    color () {
+      if (this.$store.getters.isLightColor) {
+        return 'rgba(0, 0, 0, 0.87)'
+      }
+
+      return '#fff'
     }
   },
 

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import isLightColor from '../functions/isLightColor'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -29,6 +31,13 @@ export default new Vuex.Store({
       }
 
       return find(state.components) || {}
+    },
+    color (state) {
+      const branding = state.project.branding
+      return (branding && branding.color) || '#ff721f'
+    },
+    isLightColor (state, getters) {
+      return isLightColor(getters.color)
     }
   },
 

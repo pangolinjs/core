@@ -27,18 +27,14 @@ Promise.all(requests)
     store.commit('project', project)
     store.commit('components', components)
 
-    const primary = (project.branding && project.branding.colorTheme) || '#ff721f'
-
     const vuetify = new Vuetify({
       theme: {
         themes: {
           light: {
-            primary,
-            secondary: '#282828'
+            primary: store.getters.color
           },
           dark: {
-            primary,
-            secondary: '#fff'
+            primary: store.getters.color
           }
         }
       },

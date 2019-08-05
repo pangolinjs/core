@@ -5,6 +5,7 @@
     :active.sync="active"
     :open.sync="open"
     :search="search"
+    :color="color"
     activatable
     open-on-click
     dense
@@ -32,6 +33,13 @@ export default {
   },
 
   computed: {
+    color () {
+      if (this.$vuetify.theme.dark && !this.$store.getters.isLightColor) {
+        return '#fff'
+      }
+
+      return this.$store.getters.color
+    },
     items () {
       return this.$store.state.components
     },

@@ -2,7 +2,7 @@
   <v-switch
     v-model="dark"
     class="sidebar-dark-mode"
-    color="primary"
+    :color="color"
     :prepend-icon="$icon.sun"
     :append-icon="$icon.moon"
   />
@@ -24,6 +24,13 @@ export default {
         localStorage.setItem(this.storageKey, JSON.stringify(value))
         this.$vuetify.theme.dark = value
       }
+    },
+    color () {
+      if (this.$vuetify.theme.dark && !this.$store.getters.isLightColor) {
+        return '#fff'
+      }
+
+      return this.$store.getters.color
     }
   },
 
