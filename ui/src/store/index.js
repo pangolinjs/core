@@ -38,6 +38,10 @@ export default new Vuex.Store({
     },
     isLightColor (state, getters) {
       return isLightColor(getters.color)
+    },
+    favicon (state) {
+      const branding = state.project.branding
+      return (branding && branding.favicon) || ''
     }
   },
 
