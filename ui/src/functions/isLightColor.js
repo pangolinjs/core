@@ -25,8 +25,6 @@ export default function (hexcolor) {
   // Get YIQ ratio
   const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000
 
-  console.log(yiq)
-
   // Check contrast
   return yiq >= 128
 }
