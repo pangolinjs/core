@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-rc.0](https://github.com/pangolinjs/core/compare/v5.0.0-beta.27...v5.0.0-rc.0) (2019-09-20)
+
+
+### Bug Fixes
+
+* Remove unnecessary console.log statement ([6f4d378](https://github.com/pangolinjs/core/commit/6f4d378))
+
+
+### Features
+
+* Rename to `@pangolinjs/core` ([ccedca3](https://github.com/pangolinjs/core/commit/ccedca3))
+
 ## [5.0.0-beta.27](https://github.com/pangolinjs/core/compare/v5.0.0-beta.26...v5.0.0-beta.27) (2019-08-05)
 
 
