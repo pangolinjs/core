@@ -9,7 +9,7 @@
  */
 // module.exports = {
 //   project: {
-//     name: 'Pangolin Test',
+//     name: 'Pangolin.js Test',
 //     base: '/base/',
 //     branding: {
 //       color: '#1e88e5',

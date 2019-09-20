@@ -1,17 +1,15 @@
-# <img alt="" src="https://cdn.jsdelivr.net/gh/pangolinjs/brand@master/icon/icon.svg" width="24"> Pangolin
+# <img alt="" src="https://cdn.jsdelivr.net/gh/pangolinjs/brand/icon/icon.svg" width="24"> Pangolin.js
 
-[![GitHub Actions][actions-image]][actions-url]
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][dependencies-image]][dependencies-url]
 [![JavaScript Standard Style][standard-image]][standard-url]
 
 Framework for componentized front end development with Nunjucks, Sass, and JavaScript.
 
-
 ## Installation
 
 ```bash
-npm install -g @pangolin/cli
+npm install -g @pangolinjs/cli
 ```
 
 
@@ -22,7 +20,6 @@ mkdir new-project
 cd new-project
 pangolin init
 ```
-
 
 ## Usage
 
@@ -51,8 +48,7 @@ npm run lint:css
 npm run lint:js
 ```
 
-For more information take a look at the [Pangolin docs](https://pangolinjs.org).
-
+For more information take a look at the [Pangolin.js docs](https://pangolinjs.org).
 
 ## Contribute
 
@@ -82,12 +78,8 @@ docker run -it --entrypoint npm pangolin-dev run build
 docker run -it --entrypoint npm pangolin-dev run build:dev
 ```
 
-
-[actions-image]: https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/pangolinjs/core?style=flat-square
-[actions-url]: https://github.com/pangolinjs/core/actions
-
-[npm-image]: https://img.shields.io/npm/v/@pangolin/core.svg?style=flat-square&logo=npm
-[npm-url]: https://www.npmjs.com/package/@pangolin/core
+[npm-image]: https://img.shields.io/npm/v/@pangolinjs/core.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/@pangolinjs/core
 
 [dependencies-image]: https://img.shields.io/david/pangolinjs/core.svg?style=flat-square
 [dependencies-url]: https://www.npmjs.com/package/@pangolin/core?activeTab=dependencies

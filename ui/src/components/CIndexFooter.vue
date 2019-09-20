@@ -10,7 +10,7 @@
           Powered by <a
             href="https://pangolinjs.org"
             target="_blank"
-          >Pangolin Pattern Library</a>.
+          >Pangolin.js Pattern Library</a>.
         </v-list-item-title>
 
         <v-list-item-subtitle>
