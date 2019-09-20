@@ -52,9 +52,7 @@ config.module
     .use('sass-loader')
       .loader('sass-loader')
       .options({
-        implementation: require('sass'),
-        precision: 10,
-        sourceMap: true
+        implementation: require('sass')
       })
 
 config

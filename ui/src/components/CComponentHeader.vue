@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    color="primary"
+    :color="color"
     :light="light"
     :dark="!light"
     app
@@ -31,7 +31,7 @@
       <v-tabs
         v-model="tab"
         align-with-title
-        :color="color"
+        :color="tabColor"
         background-color="transparent"
       >
         <v-tab
@@ -74,6 +74,9 @@ export default {
       return this.$store.getters.isLightColor
     },
     color () {
+      return this.$store.getters.color
+    },
+    tabColor () {
       if (this.$store.getters.isLightColor) {
         return 'rgba(0, 0, 0, 0.87)'
       }

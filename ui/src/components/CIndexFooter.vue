@@ -26,3 +26,9 @@ export default {
   name: 'CIndexFooter'
 }
 </script>
+
+<style lang="scss" scoped>
+a {
+  color: inherit;
+}
+</style>

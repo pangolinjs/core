@@ -1,3 +1,3 @@
 module.exports = {
-  extends: '@pangolin/stylelint-config'
+  extends: '@pangolinjs/stylelint-config'
 }

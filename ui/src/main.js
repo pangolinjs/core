@@ -22,33 +22,22 @@ const requests = [
   api.get('components.json').json()
 ]
 
-Promise.all(requests)
-  .then(([project, components]) => {
-    store.commit('project', project)
-    store.commit('components', components)
+Promise.all(requests).then(([project, components]) => {
+  store.commit('project', project)
+  store.commit('components', components)
 
-    const vuetify = new Vuetify({
-      theme: {
-        themes: {
-          light: {
-            primary: store.getters.color
-          },
-          dark: {
-            primary: store.getters.color
-          }
-        }
-      },
-      icons: {
-        iconfont: 'mdiSvg'
-      }
-    })
-
-    // eslint-disable-next-line no-new
-    new Vue({
-      el: '#pangolin',
-      router,
-      store,
-      vuetify,
-      render: h => h(Pangolin)
-    })
+  const vuetify = new Vuetify({
+    icons: {
+      iconfont: 'mdiSvg'
+    }
   })
+
+  // eslint-disable-next-line no-new
+  new Vue({
+    el: '#pangolin',
+    router,
+    store,
+    vuetify,
+    render: h => h(Pangolin)
+  })
+})

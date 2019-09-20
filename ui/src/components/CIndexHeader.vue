@@ -1,8 +1,8 @@
 <template>
   <v-app-bar
-    color="primary"
-    :light="light"
-    :dark="!light"
+    :color="color"
+    :light="isLight"
+    :dark="!isLight"
     app
     flat
     dense
@@ -21,8 +21,11 @@ export default {
   },
 
   computed: {
-    light () {
+    isLight () {
       return this.$store.getters.isLightColor
+    },
+    color () {
+      return this.$store.getters.color
     }
   },
 
