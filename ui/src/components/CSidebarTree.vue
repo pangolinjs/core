@@ -6,16 +6,22 @@
     :open.sync="open"
     :search="search"
     :color="color"
-    activatable
     open-on-click
     dense
     @update:open="handleOpen"
-    @update:active="handleActive"
   >
-    <template #prepend="{ item }">
-      <v-icon v-if="$icon[item.type]">
-        {{ $icon[item.type] }}
-      </v-icon>
+    <template #label="{ item }">
+      <span v-if="item.type === 'folder'">
+        {{ item.name }}
+      </span>
+      <v-btn
+        v-else
+        :to="'/' + item.path"
+        text
+        block
+      >
+        {{ item.name }}
+      </v-btn>
     </template>
   </v-treeview>
 </template>
@@ -64,6 +70,11 @@ export default {
       }
 
       this.$refs.tree.updateAll(true)
+    },
+    path (value) {
+      if (value !== this.active[0]) {
+        this.active = [value]
+      }
     }
   },
 
@@ -80,13 +91,6 @@ export default {
   methods: {
     handleOpen (items) {
       localStorage.setItem(this.storageKey, JSON.stringify(items))
-    },
-    handleActive ([path]) {
-      if (!path) {
-        return
-      }
-
-      this.$router.push(`/${path}`)
     },
     getInitialState () {
       try {
@@ -128,3 +132,32 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.v-treeview-node__root {
+  .v-treeview-node--leaf > &,
+  .v-treeview > .v-treeview-node--leaf > & {
+    padding: 0;
+  }
+}
+
+.v-treeview-node__label {
+  .v-treeview-node--leaf & {
+    margin: 0;
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+.v-btn {
+  justify-content: flex-start;
+
+  &.v-size--default {
+    height: 40px;
+  }
+
+  &::before {
+    display: none;
+  }
+}
+</style>
