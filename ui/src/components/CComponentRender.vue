@@ -1,5 +1,6 @@
 <template>
   <iframe
+    :key="render"
     ref="render"
     class="component-render"
     :src="render"
