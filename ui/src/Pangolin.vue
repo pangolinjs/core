@@ -33,7 +33,7 @@ export default {
 
   mounted () {
     this.$communicator.$on('reload', async () => {
-      const components = await api.get('components.json').json()
+      const components = await api.get('pangolin/components.json').json()
       this.$store.commit('components', components)
     })
   }

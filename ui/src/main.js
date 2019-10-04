@@ -18,8 +18,8 @@ Vue.config.productionTip = false
 Vue.prototype.$icon = icon
 
 const requests = [
-  api.get('project.json').json(),
-  api.get('components.json').json()
+  api.get('pangolin/project.json').json(),
+  api.get('pangolin/components.json').json()
 ]
 
 Promise.all(requests).then(([project, components]) => {
