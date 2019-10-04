@@ -6,26 +6,12 @@
 </template>
 
 <script>
-/* globals pangolinBase */
-
 import api from './api'
 
 import CSidebar from './components/CSidebar.vue'
 
-const TITLE_TEMPLATE = document.title
-
 export default {
   name: 'Pangolin',
-
-  metaInfo () {
-    return {
-      title: this.$store.state.current.name,
-      titleTemplate: TITLE_TEMPLATE,
-      link: [
-        { rel: 'shortcut icon', href: `${pangolinBase}${this.$store.getters.favicon}` }
-      ]
-    }
-  },
 
   components: {
     CSidebar

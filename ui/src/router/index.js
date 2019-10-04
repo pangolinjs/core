@@ -4,6 +4,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import beforeEach from './beforeEach.js'
+import afterEach from './afterEach.js'
 import routes from './routes.js'
 
 Vue.use(VueRouter)
@@ -15,5 +16,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach(beforeEach)
+router.afterEach(afterEach)
 
 export default router

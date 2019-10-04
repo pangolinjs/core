@@ -1,5 +1,9 @@
 import store from '../store'
 
+/**
+ * Vue Router beforeEach hook
+ * @type {import("vue-router").NavigationGuard}
+ */
 export default async function (to, from, next) {
   // Remove trailing `/`.
   if (to.path.endsWith('/') && to.path !== '/') {
