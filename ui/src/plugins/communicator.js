@@ -25,6 +25,7 @@ export default function (Vue) {
   function onmessage (message) {
     if (message.data === 'reload') {
       EventBus.$emit('reload')
+      console.clear()
     }
   }
 
