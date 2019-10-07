@@ -41,8 +41,8 @@
     "prepack": "npm run build:ui",
     "dev:ui": "webpack --config ui/webpack.config.js --mode development --watch",
     "build:ui": "webpack --config ui/webpack.config.js --mode production",
-    "lint:js": "eslint --format codeframe \"**/*.js\"",
-    "lint:css": "stylelint \"**/*.vue\" --custom-formatter node_modules/stylelint-codeframe-formatter",
+    "lint:js": "eslint --format codeframe \"**/*.{js,vue}\"",
+    "lint:css": "stylelint \"**/*.{scss,vue}\" --custom-formatter node_modules/stylelint-codeframe-formatter",
     "test:unit": "nyc ava",
     "release": "standard-version"
   },
