@@ -27,6 +27,8 @@
 </template>
 
 <script>
+// TODO: Build custom tree component to simplify this… thing.
+
 export default {
   name: 'CSidebarTree',
 
@@ -134,16 +136,20 @@ export default {
 </script>
 
 <style lang="scss">
+// TODO: Build custom tree component so this monstrosity isn’t necessary.
+
 .v-treeview-node__root {
   .v-treeview-node--leaf > &,
   .v-treeview > .v-treeview-node--leaf > & {
-    padding: 0;
+    // stylelint-disable-next-line declaration-no-important
+    padding: 0 !important;
   }
 }
 
 .v-treeview-node__label {
   .v-treeview-node--leaf & {
-    margin: 0;
+    // stylelint-disable-next-line declaration-no-important
+    margin: 0 !important;
   }
 }
 </style>
@@ -152,7 +158,7 @@ export default {
 .v-btn {
   justify-content: flex-start;
 
-  &.v-size--default {
+  &:not(.v-btn--round).v-size--default {
     height: 40px;
   }
 
