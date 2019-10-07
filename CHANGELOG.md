@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-rc.1](https://github.com/pangolinjs/core/compare/v5.0.0-rc.0...v5.0.0-rc.1) (2019-10-07)
+
+
+### Bug Fixes
+
+* **ui:** Browser history works again (Fix [#57](https://github.com/pangolinjs/core/issues/57)) ([1ff4953](https://github.com/pangolinjs/core/commit/1ff4953))
+* **ui:** Fight with Vuetify ⚔️ ([512dd6e](https://github.com/pangolinjs/core/commit/512dd6e))
+* **ui:** Set title and favicon correctly ([b35ad48](https://github.com/pangolinjs/core/commit/b35ad48))
+* **ui:** Use real links for sidebar ([7d07852](https://github.com/pangolinjs/core/commit/7d07852))
+* Don't show webpack performance hint for Pangolin.js files ([fedffd2](https://github.com/pangolinjs/core/commit/fedffd2))
+
+
+### Features
+
+* **ui:** Clear console on component reload ([b64b442](https://github.com/pangolinjs/core/commit/b64b442))
+
 ## [5.0.0-rc.0](https://github.com/pangolinjs/core/compare/v5.0.0-beta.27...v5.0.0-rc.0) (2019-09-20)
 
 
