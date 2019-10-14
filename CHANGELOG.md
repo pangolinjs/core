@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-rc.3](https://github.com/pangolinjs/core/compare/v5.0.0-rc.2...v5.0.0-rc.3) (2019-10-14)
+
+
+### Bug Fixes
+
+* Let stylelint throw warnings so webpack can emit files ([f4be6cf](https://github.com/pangolinjs/core/commit/f4be6cf))
+
 ## [5.0.0-rc.2](https://github.com/pangolinjs/core/compare/v5.0.0-rc.1...v5.0.0-rc.2) (2019-10-14)
 
 
