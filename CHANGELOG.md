@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-rc.2](https://github.com/pangolinjs/core/compare/v5.0.0-rc.1...v5.0.0-rc.2) (2019-10-14)
+
+
+### Bug Fixes
+
+* **ui:** Clear console on navigation (Close [#60](https://github.com/pangolinjs/core/issues/60)) ([944e430](https://github.com/pangolinjs/core/commit/944e430))
+
 ## [5.0.0-rc.1](https://github.com/pangolinjs/core/compare/v5.0.0-rc.0...v5.0.0-rc.1) (2019-10-07)
 
 
