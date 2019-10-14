@@ -25,6 +25,9 @@ export default function (Vue) {
   function onmessage (message) {
     if (message.data === 'reload') {
       EventBus.$emit('reload')
+
+      // Only the render <iframe> will be reloaded
+      // so old logs "spam" the console.
       console.clear()
     }
   }
