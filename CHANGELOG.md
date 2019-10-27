@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-rc.4](https://github.com/pangolinjs/core/compare/v5.0.0-rc.3...v5.0.0-rc.4) (2019-10-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** Both `eslint` and `stylelint` must be re-installed with `npm install --save-dev eslint stylelint`.
+
+### Bug Fixes
+
+* **ui:** Use brand color as Vuetify primary color ([02fab51](https://github.com/pangolinjs/core/commit/02fab51))
+
+
+### Features
+
+* **ui:** Add template tab and link imports and includes (Close [#59](https://github.com/pangolinjs/core/issues/59)) ([3b660b1](https://github.com/pangolinjs/core/commit/3b660b1))
+* **ui:** Make the index page 100% friendlier ([eadfa91](https://github.com/pangolinjs/core/commit/eadfa91))
+* **ui:** Syntax highlighting for source (Close [#58](https://github.com/pangolinjs/core/issues/58)) ([8a5a972](https://github.com/pangolinjs/core/commit/8a5a972))
+
+
+* **deps:** Make `eslint` and `stylelint` peer dependencies (Close [#62](https://github.com/pangolinjs/core/issues/62)) ([4c53de2](https://github.com/pangolinjs/core/commit/4c53de2))
+
 ## [5.0.0-rc.3](https://github.com/pangolinjs/core/compare/v5.0.0-rc.2...v5.0.0-rc.3) (2019-10-14)
 
 
