@@ -8,7 +8,6 @@
     dense
   >
     <v-app-bar-nav-icon @click="toggleSidebar" />
-    <v-toolbar-title>Components</v-toolbar-title>
   </v-app-bar>
 </template>
 
