@@ -43,7 +43,6 @@ config.module
       .loader('postcss-loader')
       .options({
         plugins: [
-          require('postcss-custom-properties')(),
           require('cssnano')()
         ],
         sourceMap: true
