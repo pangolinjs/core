@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    :color="color"
+    color="primary"
     :light="isLight"
     :dark="!isLight"
     app
@@ -23,9 +23,6 @@ export default {
   computed: {
     isLight () {
       return this.$store.getters.isLightColor
-    },
-    color () {
-      return this.$store.getters.color
     }
   },
 

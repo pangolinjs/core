@@ -27,6 +27,16 @@ Promise.all(requests).then(([project, components]) => {
   const vuetify = new Vuetify({
     icons: {
       iconfont: 'mdiSvg'
+    },
+    theme: {
+      themes: {
+        light: {
+          primary: store.getters.color
+        },
+        dark: {
+          primary: store.getters.color
+        }
+      }
     }
   })
 
