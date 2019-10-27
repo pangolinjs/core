@@ -1,3 +1,11 @@
 {
-  "extends": "@pangolinjs/stylelint-config"
+  "extends": "@pangolinjs/stylelint-config",
+  "rules": {
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["v-deep"]
+      }
+    ]
+  }
 }

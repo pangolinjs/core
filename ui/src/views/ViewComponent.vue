@@ -3,6 +3,7 @@
     <c-component-header />
     <c-component-render v-show="active === 'render'" />
     <c-component-source v-show="active === 'source'" />
+    <c-component-template v-show="active === 'template'" />
   </v-content>
 </template>
 
@@ -10,6 +11,7 @@
 import CComponentHeader from '../components/CComponentHeader.vue'
 import CComponentRender from '../components/CComponentRender.vue'
 import CComponentSource from '../components/CComponentSource.vue'
+import CComponentTemplate from '../components/CComponentTemplate.vue'
 
 export default {
   name: 'ViewComponent',
@@ -17,7 +19,8 @@ export default {
   components: {
     CComponentHeader,
     CComponentRender,
-    CComponentSource
+    CComponentSource,
+    CComponentTemplate
   },
 
   computed: {

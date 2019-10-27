@@ -5,6 +5,7 @@ test('has pre-defined state structure', t => {
   const actual = store.state
   const expected = {
     components: null,
+    templates: null,
     config: null,
     cwd: null,
     modern: false

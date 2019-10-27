@@ -46,6 +46,12 @@
         >
           Source
         </v-tab>
+        <v-tab
+          :to="{ query: { show: 'template' } }"
+          exact
+        >
+          Template
+        </v-tab>
       </v-tabs>
     </template>
   </v-app-bar>

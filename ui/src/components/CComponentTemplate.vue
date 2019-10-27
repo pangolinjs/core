@@ -2,13 +2,13 @@
 import BComponentSource from './base/BComponentSource.vue'
 
 export default {
-  name: 'CComponentSource',
+  name: 'CComponentTemplate',
 
   extends: BComponentSource,
 
   computed: {
     file () {
-      return 'source'
+      return 'template'
     }
   }
 }
