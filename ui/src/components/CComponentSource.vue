@@ -41,6 +41,8 @@ export default {
 }
 </script>
 
+<style src="prismjs/themes/prism.css"></style>
+
 <style lang="scss" scoped>
 .component-source {
   white-space: pre-wrap;
