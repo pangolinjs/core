@@ -93,7 +93,6 @@
     "cssnano": "^4.1.10",
     "eslint-plugin-ava": "^9.0.0",
     "eslint-plugin-vue": "^5.2.3",
-    "focus-trap": "^5.1.0",
     "ky": "^0.15.0",
     "nyc": "^14.1.1",
     "postcss-custom-properties": "^9.0.2",
