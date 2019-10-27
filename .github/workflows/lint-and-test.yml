@@ -35,8 +35,13 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          cd ui
+          npm ci
       - name: Run unit tests
         run: npm run test:unit
       - name: Run build test
-        run: npm run build:ui
+        run: |
+          cd ui
+          npm run build
