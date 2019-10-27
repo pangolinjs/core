@@ -36,12 +36,18 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
         run: |
-          npm ci
-          cd ui
-          npm ci
+          for directory in . ui test/project
+          do
+            (cd "$directory" && npm ci)
+          done
       - name: Run unit tests
         run: npm run test:unit
-      - name: Run build test
+      - name: Run UI test
         run: |
           cd ui
           npm run build
+      - name: Run build test
+        run: |
+          cd test/project
+          npm run build
+          npm run build:dev
