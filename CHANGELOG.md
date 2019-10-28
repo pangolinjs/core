@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-rc.5](https://github.com/pangolinjs/core/compare/v5.0.0-rc.4...v5.0.0-rc.5) (2019-10-28)
+
+
+### Bug Fixes
+
+* **ui:** Add `index.html` to package ([e279ce1](https://github.com/pangolinjs/core/commit/e279ce1))
+
 ## [5.0.0-rc.4](https://github.com/pangolinjs/core/compare/v5.0.0-rc.3...v5.0.0-rc.4) (2019-10-27)
 
 
