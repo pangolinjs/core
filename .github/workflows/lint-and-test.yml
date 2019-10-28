@@ -5,14 +5,14 @@ jobs:
 
   lint:
     name: Lint
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v1
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 13
       - name: Install dependencies
         run: npm ci
       - name: Lint CSS
@@ -25,8 +25,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node: [10, 12]
-        os: [ubuntu-18.04, macOS-10.14]
+        node: [10, 12, 13]
+        os: [ubuntu-latest, macOS-latest]
     steps:
       - name: Check out repository
         uses: actions/checkout@v1
