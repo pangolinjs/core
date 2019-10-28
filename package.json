@@ -35,7 +35,8 @@
   "files": [
     "bin",
     "lib",
-    "ui/dist"
+    "ui/dist",
+    "ui/index.html"
   ],
   "scripts": {
     "prepack": "cd ui && npm run build",

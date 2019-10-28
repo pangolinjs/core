@@ -1,6 +1,5 @@
 {
-  "name": "pangolin-test",
-  "version": "0.0.0",
+  "name": "@pangolinjs/test",
   "private": true,
   "scripts": {
     "lint:js": "node ../../bin/pangolin-core lint js",
