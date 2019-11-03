@@ -71,7 +71,7 @@ program
   .arguments('*')
   .action(cmd => {
     program.outputHelp()
-    console.log(chalk`\n{red Unknown command {yellow <${cmd}>}.}`)
+    console.log(chalk`\n{red Unknown command {yellow <${cmd.args}>}.}`)
   })
 
 enhanceErrorMessages('missingArgument', argument => {
@@ -84,6 +84,6 @@ enhanceErrorMessages('unknownOption', option => {
 
 program.parse(process.argv)
 
-if (!program.args.length) {
+if (program.rawArgs.length < 3) {
   program.help()
 }
