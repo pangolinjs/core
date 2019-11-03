@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 const chalk = require('chalk')
-const enhanceErrorMessages = require('../lib/utils/enhance-error-messages')
 const program = require('commander')
-const version = require('../package.json').version
+
+const enhanceErrorMessages = require('../lib/utils/enhance-error-messages')
 
 program
-  .version(version)
+  .version(require('../package.json').version)
   .usage('<command> [options]')
 
 program
