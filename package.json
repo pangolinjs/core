@@ -81,7 +81,7 @@
     "ws": "^7.2.0"
   },
   "devDependencies": {
-    "@pangolinjs/eslint-config": "^3.1.0",
+    "@pangolinjs/eslint-config": "^3.1.1",
     "@pangolinjs/stylelint-config": "^1.7.0",
     "ava": "^2.4.0",
     "eslint": "^6.6.0",
