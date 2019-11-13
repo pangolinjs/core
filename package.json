@@ -72,7 +72,7 @@
     "style-loader": "^1.0.0",
     "stylelint-codeframe-formatter": "^1.0.4",
     "stylelint-webpack-plugin": "^1.0.3",
-    "webpack": "^5.0.0-beta.3",
+    "webpack": "^5.0.0-beta.4",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-chain": "^6.0.0",
     "webpack-dev-server": "^3.9.0",
