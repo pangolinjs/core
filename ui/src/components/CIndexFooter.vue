@@ -10,11 +10,11 @@
           Powered by <a
             href="https://pangolinjs.org"
             target="_blank"
-          >Pangolin.js Pattern Library</a>.
+          >Pangolin.js</a>.
         </v-list-item-title>
 
         <v-list-item-subtitle>
-          Framework for componentized front end development with Nunjucks, Sass, and JavaScript.
+          Framework for design system development with Nunjucks, Sass, and JavaScript.
         </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
