@@ -10,8 +10,8 @@
     "build:dev": "node ../../bin/pangolin-core build --dev"
   },
   "dependencies": {
-    "lodash.truncate": "^4.4.2",
-    "normalize.css": "^8.0.1"
+    "@csstools/normalize.css": "^10.1.0",
+    "lodash.truncate": "^4.4.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.7.1",

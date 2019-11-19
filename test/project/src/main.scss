@@ -1,13 +1,13 @@
 // Vendor
-@import "~normalize.css/normalize.css";
+@use "vendor";
 
 // Setup
-@import "setup/variables";
-@import "setup/scaffolding";
+@use "setup/variables";
+@use "setup/scaffolding";
 
 // Atoms
-@import "components/atoms/button/button";
-@import "components/atoms/teaser/teaser";
+@use "components/atoms/button/button";
+@use "components/atoms/teaser/teaser";
 
 // Molecules
-@import "components/molecules/article/article";
+@use "components/molecules/article/article";
