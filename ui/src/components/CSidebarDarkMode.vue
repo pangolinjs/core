@@ -14,7 +14,7 @@ export default {
 
   computed: {
     storageKey () {
-      return `${this.$store.state.project.id}-dark-mode`
+      return 'pangolin-dark-mode'
     },
     dark: {
       get () {
