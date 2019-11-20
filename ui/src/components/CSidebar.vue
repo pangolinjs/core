@@ -21,7 +21,7 @@
     </v-list-item>
 
     <v-subheader>Components</v-subheader>
-    <c-sidebar-tree />
+    <c-sidebar-components />
 
     <v-subheader>Templates</v-subheader>
     <c-sidebar-templates />
@@ -33,18 +33,18 @@
 </template>
 
 <script>
+import CSidebarComponents from './CSidebarComponents.vue'
 import CSidebarDarkMode from './CSidebarDarkMode.vue'
 import CSidebarSearch from './CSidebarSearch.vue'
-import CSidebarTree from './CSidebarTree.vue'
 import CSidebarTemplates from './CSidebarTemplates.vue'
 
 export default {
   name: 'CNavigation',
 
   components: {
+    CSidebarComponents,
     CSidebarDarkMode,
     CSidebarSearch,
-    CSidebarTree,
     CSidebarTemplates
   },
   computed: {

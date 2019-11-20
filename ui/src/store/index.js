@@ -1,3 +1,4 @@
+import filterDeep from 'deepdash-es/filterDeep'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -34,6 +35,26 @@ export default new Vuex.Store({
     favicon (state) {
       const branding = state.project.branding
       return (branding && branding.favicon) || ''
+    },
+    filteredTemplates (state) {
+      if (!state.search) {
+        return state.templates
+      }
+
+      return state.templates.filter(template => {
+        return template.name
+          .toLowerCase()
+          .includes(state.search.toLowerCase())
+      })
+    },
+    filteredComponents (state) {
+      if (!state.search) {
+        return state.components
+      }
+
+      return filterDeep(state.components, component => {
+        return component.name.toLowerCase().includes(state.search.toLowerCase())
+      }, { childrenPath: 'children' }) || []
     }
   },
 

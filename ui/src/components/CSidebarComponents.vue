@@ -1,19 +1,17 @@
 <template>
-  <v-list-item-group
+  <v-list
     v-if="items.length"
-    color="primary"
+    expand
+    dense
   >
-    <v-list-item
+    <c-sidebar-components-item
       v-for="item in items"
       :key="item.id"
-      :to="'/' + item.path"
-      dense
-    >
-      <v-list-item-content>
-        {{ item.name }}
-      </v-list-item-content>
-    </v-list-item>
-  </v-list-item-group>
+      :name="item.name"
+      :path="item.path"
+      :children="item.children"
+    />
+  </v-list>
 
   <v-list-item
     v-else
@@ -25,19 +23,25 @@
         <v-icon left>
           {{ $icon.fileSearch }}
         </v-icon>
-        No templates found
+        No components found
       </div>
     </v-list-item-content>
   </v-list-item>
 </template>
 
 <script>
+import CSidebarComponentsItem from './CSidebarComponentsItem.vue'
+
 export default {
-  name: 'CSidebarTemplates',
+  name: 'CSidebarComponents',
+
+  components: {
+    CSidebarComponentsItem
+  },
 
   computed: {
     items () {
-      return this.$store.getters.filteredTemplates
+      return this.$store.getters.filteredComponents
     }
   }
 }
