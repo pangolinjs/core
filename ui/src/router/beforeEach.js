@@ -7,21 +7,25 @@ import store from '../store'
 export default async function (to, from, next) {
   // Remove trailing `/`.
   if (to.path.endsWith('/') && to.path !== '/') {
-    next(to.path.slice(0, -1))
-    return
+    return next(to.path.slice(0, -1))
   }
 
   // Remove trailing `index.html`.
   if (to.path.endsWith('/index.html')) {
-    next(to.path.replace('/index.html', ''))
-    return
+    return next(to.path.replace('/index.html', ''))
   }
 
-  // Remove leading `/` to get "pure" component path.
+  // Remove leading `/` to get "pure" path.
   const path = to.path.slice(1)
 
-  // Get current page by path and save to store.
-  store.commit('current', store.getters.componentByPath(path))
+  if (to.name === 'component') {
+    // Get current page by path and save to store.
+    store.commit('current', store.getters.componentByPath(path))
+  }
+
+  if (to.name === 'template') {
+    store.commit('current', store.getters.templateByPath(path))
+  }
 
   next()
 }

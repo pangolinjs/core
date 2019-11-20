@@ -2,17 +2,24 @@
   <!-- eslint-disable vue/no-v-html -->
   <pre
     ref="source"
-    class="component-source pa-3"
+    class="source pa-3"
     v-html="source"
   />
   <!-- eslint-enable vue/no-v-html -->
 </template>
 
 <script>
-import api from '../../api'
+import api from '../api'
 
 export default {
-  name: 'BComponentSource',
+  name: 'CSource',
+
+  props: {
+    path: {
+      type: String,
+      required: true
+    }
+  },
 
   data () {
     return {
@@ -35,14 +42,13 @@ export default {
 
   methods: {
     async getSource () {
-      const url = `${this.$store.state.current.path}/${this.file}.html`
+      const url = `${this.path}.html`
       this.source = await api.get(url).text()
 
       await this.$nextTick()
 
-      const links = this.$refs.source.querySelectorAll('a')
-
-      for (const link of links) {
+      // Enhance simple `<a>`s to behave like `<router-link>`s.
+      for (const link of this.$refs.source.querySelectorAll('a')) {
         link.addEventListener('click', event => {
           event.preventDefault()
           this.$router.push(link.getAttribute('href'))
@@ -56,7 +62,7 @@ export default {
 <style src="prismjs/themes/prism.css"></style>
 
 <style lang="scss" scoped>
-.component-source {
+.source {
   white-space: pre-wrap;
   overflow-y: auto;
 

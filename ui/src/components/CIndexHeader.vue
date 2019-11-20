@@ -8,6 +8,10 @@
     dense
   >
     <v-app-bar-nav-icon @click="toggleSidebar" />
+    <v-toolbar-title
+      v-if="title"
+      v-text="title"
+    />
   </v-app-bar>
 </template>
 
@@ -15,8 +19,11 @@
 export default {
   name: 'CIndexHeader',
 
-  metaInfo: {
-    title: 'Components'
+  props: {
+    title: {
+      type: String,
+      default: undefined
+    }
   },
 
   computed: {

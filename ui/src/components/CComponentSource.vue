@@ -1,14 +1,20 @@
+<template>
+  <c-source :path="source" />
+</template>
+
 <script>
-import BComponentSource from './base/BComponentSource.vue'
+import CSource from './CSource.vue'
 
 export default {
   name: 'CComponentSource',
 
-  extends: BComponentSource,
+  components: {
+    CSource
+  },
 
   computed: {
-    file () {
-      return 'source'
+    source () {
+      return `${this.$store.state.current.path}/source`
     }
   }
 }

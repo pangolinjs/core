@@ -47,10 +47,10 @@
           Source
         </v-tab>
         <v-tab
-          :to="{ query: { show: 'template' } }"
+          :to="{ query: { show: 'details' } }"
           exact
         >
-          Template
+          Details
         </v-tab>
       </v-tabs>
     </template>

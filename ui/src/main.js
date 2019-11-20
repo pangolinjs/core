@@ -17,11 +17,13 @@ Vue.prototype.$icon = icon
 
 const requests = [
   api.get('pangolin/project.json').json(),
+  api.get('pangolin/templates.json').json(),
   api.get('pangolin/components.json').json()
 ]
 
-Promise.all(requests).then(([project, components]) => {
+Promise.all(requests).then(([project, templates, components]) => {
   store.commit('project', project)
+  store.commit('templates', templates)
   store.commit('components', components)
 
   const vuetify = new Vuetify({

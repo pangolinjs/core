@@ -20,7 +20,11 @@
       <c-sidebar-search />
     </v-list-item>
 
+    <v-subheader>Components</v-subheader>
     <c-sidebar-tree />
+
+    <v-subheader>Templates</v-subheader>
+    <c-sidebar-templates />
 
     <template #append>
       <c-sidebar-dark-mode />
@@ -32,6 +36,7 @@
 import CSidebarDarkMode from './CSidebarDarkMode.vue'
 import CSidebarSearch from './CSidebarSearch.vue'
 import CSidebarTree from './CSidebarTree.vue'
+import CSidebarTemplates from './CSidebarTemplates.vue'
 
 export default {
   name: 'CNavigation',
@@ -39,7 +44,8 @@ export default {
   components: {
     CSidebarDarkMode,
     CSidebarSearch,
-    CSidebarTree
+    CSidebarTree,
+    CSidebarTemplates
   },
   computed: {
     title () {
