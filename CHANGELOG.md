@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/pangolinjs/core/compare/v5.0.0-rc.5...v5.0.0) (2019-11-21)
+
+
+### Features
+
+* **ui:** Add dedicated template pages ([d750bc9](https://github.com/pangolinjs/core/commit/d750bc95e4a0d5db326e3df6e2690c4feadecf8f))
+* **ui:** Enhance components sidebar (Close [#67](https://github.com/pangolinjs/core/issues/67)) ([378a7e6](https://github.com/pangolinjs/core/commit/378a7e6d92221f9a4a7a13b985bbd9d7c8c1d122))
+* **ui:** Improve sidebar design ([7fa99b3](https://github.com/pangolinjs/core/commit/7fa99b33aef1f4b4df0bb7a14732b189bd7db548))
+* **ui:** Remove dark mode namespace ([7593163](https://github.com/pangolinjs/core/commit/75931630203feb69d4e1ca2455dd791a94516bf5))
+
+
+### Bug Fixes
+
+* Don't suppress error messages in dev mode (Fix [#25](https://github.com/pangolinjs/core/issues/25)) ([ecbbca0](https://github.com/pangolinjs/core/commit/ecbbca09cb04f9361e18508ceef3016e8aaad45b))
+* Only link components in source tab (Fix [#64](https://github.com/pangolinjs/core/issues/64)) ([6e30219](https://github.com/pangolinjs/core/commit/6e30219447f83a293c21ae64512d5b4e01f5a113))
+* Use new webpack API for modified files (Fix [#63](https://github.com/pangolinjs/core/issues/63)) ([ee05d26](https://github.com/pangolinjs/core/commit/ee05d26db718e1fbad75c4e329e26a5bc620a1b4))
+* **ui:** Remove forced global vertical scrollbar (Fix [#65](https://github.com/pangolinjs/core/issues/65)) ([3967a3a](https://github.com/pangolinjs/core/commit/3967a3a113c39f5d5be98d267872df0fe5c55f41))
+
 ## [5.0.0-rc.5](https://github.com/pangolinjs/core/compare/v5.0.0-rc.4...v5.0.0-rc.5) (2019-10-28)
 
 
