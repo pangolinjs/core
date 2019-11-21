@@ -1,6 +1,7 @@
 <template>
   <v-list
     v-if="items.length"
+    class="py-0"
     expand
     dense
   >
@@ -20,7 +21,10 @@
   >
     <v-list-item-content>
       <div class="d-flex align-center">
-        <v-icon left>
+        <v-icon
+          size="18"
+          left
+        >
           {{ $icon.fileSearch }}
         </v-icon>
         No components found

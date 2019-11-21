@@ -1,10 +1,12 @@
 <template>
   <v-switch
     v-model="dark"
-    class="justify-center"
+    aria-label="Dark mode"
+    class="justify-center my-4 py-0"
     :color="color"
     :prepend-icon="$icon.sun"
     :append-icon="$icon.moon"
+    hide-details
   />
 </template>
 

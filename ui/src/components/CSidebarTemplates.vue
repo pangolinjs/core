@@ -10,7 +10,7 @@
       dense
     >
       <v-list-item-content>
-        {{ item.name }}
+        <v-list-item-title v-text="item.name" />
       </v-list-item-content>
     </v-list-item>
   </v-list-item-group>
@@ -22,7 +22,10 @@
   >
     <v-list-item-content>
       <div class="d-flex align-center">
-        <v-icon left>
+        <v-icon
+          size="18"
+          left
+        >
           {{ $icon.fileSearch }}
         </v-icon>
         No templates found

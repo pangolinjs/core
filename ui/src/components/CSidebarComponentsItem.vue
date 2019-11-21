@@ -5,7 +5,9 @@
     :value="isExpanded"
   >
     <template #activator>
-      <v-list-item-content v-text="name" />
+      <v-list-item-content>
+        <v-list-item-title v-text="name" />
+      </v-list-item-content>
     </template>
 
     <v-list
@@ -19,6 +21,7 @@
         :name="child.name"
         :path="child.path"
         :children="child.children"
+        :level="level + 1"
       />
     </v-list>
   </v-list-group>
@@ -30,7 +33,7 @@
     dense
   >
     <v-list-item-content>
-      {{ name }}
+      <v-list-item-title v-text="name" />
     </v-list-item-content>
   </v-list-item>
 </template>
@@ -51,6 +54,10 @@ export default {
     children: {
       type: Array,
       default: undefined
+    },
+    level: {
+      type: Number,
+      default: 0
     }
   },
 

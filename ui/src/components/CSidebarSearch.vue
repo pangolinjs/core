@@ -1,7 +1,9 @@
 <template>
   <v-text-field
     v-model="search"
+    class="sidebar-search px-4"
     label="Search"
+    aria-label="Search"
     hide-details
     clearable
     solo
@@ -24,3 +26,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.sidebar-search {
+  position: sticky;
+  top: 16px;
+  z-index: 1;
+}
+</style>

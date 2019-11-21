@@ -4,29 +4,21 @@
     width="300"
     app
   >
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title class="title">
-          {{ title }}
-        </v-list-item-title>
+    <c-sidebar-header />
+    <c-sidebar-search />
 
-        <v-list-item-subtitle>
-          Design System
-        </v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
-
-    <v-list-item class="mt-2 mb-3">
-      <c-sidebar-search />
-    </v-list-item>
-
-    <v-subheader>Components</v-subheader>
+    <v-subheader class="mt-5">
+      Components
+    </v-subheader>
     <c-sidebar-components />
 
-    <v-subheader>Templates</v-subheader>
+    <v-subheader class="mt-3">
+      Templates
+    </v-subheader>
     <c-sidebar-templates />
 
     <template #append>
+      <v-divider />
       <c-sidebar-dark-mode />
     </template>
   </v-navigation-drawer>
@@ -35,6 +27,7 @@
 <script>
 import CSidebarComponents from './CSidebarComponents.vue'
 import CSidebarDarkMode from './CSidebarDarkMode.vue'
+import CSidebarHeader from './CSidebarHeader.vue'
 import CSidebarSearch from './CSidebarSearch.vue'
 import CSidebarTemplates from './CSidebarTemplates.vue'
 
@@ -44,14 +37,12 @@ export default {
   components: {
     CSidebarComponents,
     CSidebarDarkMode,
+    CSidebarHeader,
     CSidebarSearch,
     CSidebarTemplates
   },
 
   computed: {
-    title () {
-      return this.$store.state.project.name
-    },
     isExpanded: {
       get () {
         return this.$store.state.sidebar
