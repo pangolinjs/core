@@ -1,7 +1,7 @@
 <template>
   <v-switch
     v-model="dark"
-    class="sidebar-dark-mode"
+    class="justify-center"
     :color="color"
     :prepend-icon="$icon.sun"
     :append-icon="$icon.moon"
@@ -9,19 +9,18 @@
 </template>
 
 <script>
+const STORAGE_KEY = 'pangolin-dark-mode'
+
 export default {
   name: 'CSidebarDarkMode',
 
   computed: {
-    storageKey () {
-      return 'pangolin-dark-mode'
-    },
     dark: {
       get () {
         return this.$vuetify.theme.dark
       },
       set (value) {
-        localStorage.setItem(this.storageKey, JSON.stringify(value))
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(value))
         this.$vuetify.theme.dark = value
       }
     },
@@ -41,23 +40,17 @@ export default {
   methods: {
     setInitialState () {
       try {
-        const state = JSON.parse(localStorage.getItem(this.storageKey))
+        const state = JSON.parse(localStorage.getItem(STORAGE_KEY))
 
         if (typeof state === 'boolean') {
           this.$vuetify.theme.dark = state
         } else {
-          localStorage.removeItem(this.storageKey)
+          localStorage.removeItem(STORAGE_KEY)
         }
       } catch (error) {
-        localStorage.removeItem(this.storageKey)
+        localStorage.removeItem(STORAGE_KEY)
       }
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.sidebar-dark-mode {
-  justify-content: center;
-}
-</style>

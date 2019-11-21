@@ -333,7 +333,10 @@
       />
     </svg>
     <p class="caption grey--text mt-3 mb-0">
-      Illustration by <a href="https://undraw.co">unDraw</a>.
+      Illustration by <a
+        href="https://undraw.co"
+        target="_blank"
+      >unDraw</a>.
     </p>
   </div>
 </template>

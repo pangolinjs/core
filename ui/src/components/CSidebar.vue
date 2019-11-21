@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="sidebar"
+    v-model="isExpanded"
     width="300"
     app
   >
@@ -39,7 +39,7 @@ import CSidebarSearch from './CSidebarSearch.vue'
 import CSidebarTemplates from './CSidebarTemplates.vue'
 
 export default {
-  name: 'CNavigation',
+  name: 'CSidebar',
 
   components: {
     CSidebarComponents,
@@ -47,11 +47,12 @@ export default {
     CSidebarSearch,
     CSidebarTemplates
   },
+
   computed: {
     title () {
       return this.$store.state.project.name
     },
-    sidebar: {
+    isExpanded: {
       get () {
         return this.$store.state.sidebar
       },
