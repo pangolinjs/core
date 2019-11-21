@@ -42,8 +42,7 @@ export default {
 
   methods: {
     async getSource () {
-      const url = `${this.path}.html`
-      this.source = await api.get(url).text()
+      this.source = await api.getSource(`${this.path}.html`)
 
       await this.$nextTick()
 

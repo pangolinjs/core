@@ -19,7 +19,12 @@ export default {
 
   mounted () {
     this.$communicator.$on('reload', async () => {
-      const components = await api.get('pangolin/components.json').json()
+      const [templates, components] = await Promise.all([
+        await api.getTemplates(),
+        await api.getComponents()
+      ])
+
+      this.$store.commit('templates', templates)
       this.$store.commit('components', components)
     })
   }
