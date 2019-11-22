@@ -3,6 +3,7 @@
     v-if="children"
     :group="path"
     :value="isExpanded"
+    :color="color"
   >
     <template #activator>
       <v-list-item-content>
@@ -29,7 +30,7 @@
   <v-list-item
     v-else
     :to="'/' + path"
-    color="primary"
+    :color="color"
     dense
   >
     <v-list-item-content>
@@ -39,8 +40,12 @@
 </template>
 
 <script>
+import color from '../mixins/color'
+
 export default {
   name: 'CSidebarComponentsItem',
+
+  mixins: [color],
 
   props: {
     name: {

@@ -4,7 +4,9 @@ import Vuex from 'vuex'
 
 import findComponentByPath from '../functions/findComponentByPath'
 import findTemplateByPath from '../functions/findTemplateByPath'
-import isLightColor from '../functions/isLightColor'
+import getColorContrastRatio from '../functions/getColorContrastRatio'
+import getColorHex from '../functions/getColorHex'
+import getColorRGB from '../functions/getColorRGB'
 
 Vue.use(Vuex)
 
@@ -26,11 +28,16 @@ export default new Vuex.Store({
       return findComponentByPath(state.components, path)
     },
     color (state) {
-      const branding = state.project.branding
-      return (branding && branding.color) || '#ff721f'
+      const color = state.project.branding.color
+      return getColorHex(color)
     },
-    isLightColor (state, getters) {
-      return isLightColor(getters.color)
+    isContrastingColor (_, getters) {
+      const color = getColorRGB(getters.color)
+
+      return {
+        light: getColorContrastRatio(color, [255, 255, 255]) > 2.7,
+        dark: getColorContrastRatio(color, [66, 66, 66]) > 3.2
+      }
     },
     favicon (state) {
       const branding = state.project.branding

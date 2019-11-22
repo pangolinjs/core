@@ -1,7 +1,7 @@
 <template>
   <v-list-item-group
     v-if="items.length"
-    color="primary"
+    :color="color"
   >
     <v-list-item
       v-for="item in items"
@@ -17,7 +17,6 @@
 
   <v-list-item
     v-else
-    color="warning"
     dense
   >
     <v-list-item-content>
@@ -35,8 +34,12 @@
 </template>
 
 <script>
+import color from '../mixins/color'
+
 export default {
   name: 'CSidebarTemplates',
+
+  mixins: [color],
 
   computed: {
     items () {

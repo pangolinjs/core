@@ -1,8 +1,8 @@
 <template>
   <v-app-bar
     color="primary"
-    :light="light"
-    :dark="!light"
+    :light="isLightColor"
+    :dark="!isLightColor"
     app
     flat
     dense
@@ -76,12 +76,12 @@ export default {
     render () {
       return `${pangolinBase}${this.$store.state.current.path}/render.html`
     },
-    light () {
-      return this.$store.getters.isLightColor
+    isLightColor () {
+      return !this.$store.getters.isContrastingColor.light
     },
     tabColor () {
-      if (this.$store.getters.isLightColor) {
-        return 'rgba(0, 0, 0, 0.87)'
+      if (this.isLightColor) {
+        return '#000'
       }
 
       return '#fff'

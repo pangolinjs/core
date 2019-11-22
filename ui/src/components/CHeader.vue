@@ -1,8 +1,8 @@
 <template>
   <v-app-bar
     color="primary"
-    :light="isLight"
-    :dark="!isLight"
+    :light="isLightColor"
+    :dark="!isLightColor"
     app
     flat
     dense
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'CIndexHeader',
+  name: 'CHeader',
 
   props: {
     title: {
@@ -27,8 +27,8 @@ export default {
   },
 
   computed: {
-    isLight () {
-      return this.$store.getters.isLightColor
+    isLightColor () {
+      return !this.$store.getters.isContrastingColor.light
     }
   },
 

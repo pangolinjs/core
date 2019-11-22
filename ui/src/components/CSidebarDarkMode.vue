@@ -11,10 +11,14 @@
 </template>
 
 <script>
+import color from '../mixins/color'
+
 const STORAGE_KEY = 'pangolin-dark-mode'
 
 export default {
   name: 'CSidebarDarkMode',
+
+  mixins: [color],
 
   computed: {
     dark: {
@@ -25,13 +29,6 @@ export default {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(value))
         this.$vuetify.theme.dark = value
       }
-    },
-    color () {
-      if (this.$vuetify.theme.dark && !this.$store.getters.isLightColor) {
-        return '#fff'
-      }
-
-      return this.$store.getters.color
     }
   },
 

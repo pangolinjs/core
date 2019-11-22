@@ -1,19 +1,19 @@
 <template>
   <v-content>
-    <c-index-header :title="title" />
+    <c-header :title="title" />
     <c-source :path="source" />
   </v-content>
 </template>
 
 <script>
-import CIndexHeader from '../components/CIndexHeader.vue'
+import CHeader from '../components/CHeader.vue'
 import CSource from '../components/CSource.vue'
 
 export default {
   name: 'ViewTemplate',
 
   components: {
-    CIndexHeader,
+    CHeader,
     CSource
   },
 
