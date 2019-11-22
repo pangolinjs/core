@@ -17,12 +17,8 @@ test.serial('generates options', t => {
     project: { base: '/stuff/' }
   }
 
-  const actual = generateFileLoaderOptions('test')
-  const expected = {
-    name: 'assets/test/[name].[ext]'
-  }
-
-  t.deepEqual(actual, expected)
+  const expected = generateFileLoaderOptions('test')
+  t.snapshot(expected)
 })
 
 test.serial('generates production options', t => {
@@ -32,13 +28,8 @@ test.serial('generates production options', t => {
     project: { base: '/stuff/' }
   }
 
-  const actual = generateFileLoaderOptions('test')
-  const expected = {
-    name: 'assets/test/[name].[ext]',
-    publicPath: '/stuff/'
-  }
-
-  t.deepEqual(actual, expected)
+  const expected = generateFileLoaderOptions('test')
+  t.snapshot(expected)
 })
 
 test.serial('generate options with hash', t => {
@@ -49,12 +40,8 @@ test.serial('generate options with hash', t => {
     project: { base: '/stuff/' }
   }
 
-  const actual = generateFileLoaderOptions('test')
-  const expected = {
-    name: 'assets/test/[name].[hash:8].[ext]'
-  }
-
-  t.deepEqual(actual, expected)
+  const expected = generateFileLoaderOptions('test')
+  t.snapshot(expected)
 })
 
 test.serial('generate production options with hash', t => {
@@ -65,11 +52,6 @@ test.serial('generate production options with hash', t => {
     project: { base: '/stuff/' }
   }
 
-  const actual = generateFileLoaderOptions('test')
-  const expected = {
-    name: 'assets/test/[name].[hash:8].[ext]',
-    publicPath: '/stuff/'
-  }
-
-  t.deepEqual(actual, expected)
+  const expected = generateFileLoaderOptions('test')
+  t.snapshot(expected)
 })
