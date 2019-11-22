@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/pangolinjs/core/compare/v5.0.0...v5.1.0) (2019-11-22)
+
+
+### Features
+
+* Enable `esModules` option for `file-loader` ([4bb4f50](https://github.com/pangolinjs/core/commit/4bb4f50eb29cf05d074648f1659b5ce3031f57b8))
+
+
+### Bug Fixes
+
+* **ui:** Correctly calculate color contrast ([74148de](https://github.com/pangolinjs/core/commit/74148dea9032335fffb5a27b957edb29ce34eb50))
+
 ## [5.0.0](https://github.com/pangolinjs/core/compare/v5.0.0-rc.5...v5.0.0) (2019-11-21)
 
 
