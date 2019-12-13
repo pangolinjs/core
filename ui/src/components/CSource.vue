@@ -65,8 +65,14 @@ export default {
   white-space: pre-wrap;
   overflow-y: auto;
 
-  ::v-deep a {
-    color: inherit;
+  ::v-deep {
+    a {
+      color: inherit;
+    }
+
+    .token.operator {
+      background: none;
+    }
   }
 }
 </style>
