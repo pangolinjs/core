@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/pangolinjs/core/compare/v5.1.0...v5.2.0) (2019-12-13)
+
+
+### Features
+
+* Prettify rendered HTML (Close [#74](https://github.com/pangolinjs/core/issues/74)) ([1e59ed8](https://github.com/pangolinjs/core/commit/1e59ed8cef01181d5d178b65b4d27cd461cfc8d7))
+
+
+### Bug Fixes
+
+* **ui:** Don’t discard children in search (Fix [#70](https://github.com/pangolinjs/core/issues/70)) ([f7910b5](https://github.com/pangolinjs/core/commit/f7910b5ec8d2acab7d1cad9e6e395e4adb0c39a8))
+* **ui:** Increase syntax highlighting contrast in dark mode (Fix [#72](https://github.com/pangolinjs/core/issues/72)) ([0307d32](https://github.com/pangolinjs/core/commit/0307d320cffd7a06280a8b080d0c20bd1999e3f4))
+* **ui:** Keep query parameters on redirect (Fix [#73](https://github.com/pangolinjs/core/issues/73)) ([81be2ce](https://github.com/pangolinjs/core/commit/81be2ce0813ceac38a463444d8b0202b655eddf3))
+* **ui:** Remove background from operators (Fix [#71](https://github.com/pangolinjs/core/issues/71)) ([db9e800](https://github.com/pangolinjs/core/commit/db9e8006b8b7383218b8ab3b24657478d2778493))
+
 ## [5.1.0](https://github.com/pangolinjs/core/compare/v5.0.0...v5.1.0) (2019-11-22)
 
 
