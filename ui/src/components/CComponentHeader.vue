@@ -24,7 +24,7 @@
         </v-btn>
       </template>
 
-      <span>Open component without frame</span>
+      <span>Open component standalone</span>
     </v-tooltip>
 
     <template #extension>
