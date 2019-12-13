@@ -48,10 +48,12 @@ export default new Vuex.Store({
         return state.templates
       }
 
+      const search = state.search.toLowerCase()
+
       return state.templates.filter(template => {
         return template.name
           .toLowerCase()
-          .includes(state.search.toLowerCase())
+          .includes(search)
       })
     },
     filteredComponents (state) {
@@ -59,9 +61,23 @@ export default new Vuex.Store({
         return state.components
       }
 
-      return filterDeep(state.components, component => {
-        return component.name.toLowerCase().includes(state.search.toLowerCase())
-      }, { childrenPath: 'children' }) || []
+      const search = state.search.toLowerCase()
+      const options = {
+        childrenPath: 'children',
+        onTrue: {
+          skipChildren: true
+        }
+      }
+
+      const result = filterDeep(state.components, component => {
+        return component.name
+          .toLowerCase()
+          .includes(search)
+      }, options)
+
+      // `filterDeep` returns `null` if nothing has been found,
+      // but we need at least an empty array for consistency.
+      return result || []
     }
   },
 
