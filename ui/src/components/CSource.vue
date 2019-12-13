@@ -23,7 +23,8 @@ export default {
 
   data () {
     return {
-      source: ''
+      source: '',
+      stylesheet: document.querySelector('#prism-stylesheet')
     }
   },
 
@@ -32,6 +33,13 @@ export default {
       if (newValue !== oldValue) {
         this.getSource()
       }
+    },
+    '$vuetify.theme.dark': {
+      handler (isDark) {
+        const theme = isDark ? 'prism-okaidia.min.css' : 'prism.min.css'
+        this.stylesheet.href = `https://cdn.jsdelivr.net/npm/prismjs@1/themes/${theme}`
+      },
+      immediate: true
     }
   },
 
@@ -58,14 +66,16 @@ export default {
 }
 </script>
 
-<style src="prismjs/themes/prism.css"></style>
-
 <style lang="scss" scoped>
 .source {
   white-space: pre-wrap;
   overflow-y: auto;
 
   ::v-deep {
+    * {
+      transition: color 0.2s;
+    }
+
     a {
       color: inherit;
     }
