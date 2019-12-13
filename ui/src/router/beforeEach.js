@@ -5,26 +5,27 @@ import store from '../store'
  * @type {import("vue-router").NavigationGuard}
  */
 export default async function (to, from, next) {
+  const { name, path, query } = to
+
   // Remove trailing `/`.
-  if (to.path.endsWith('/') && to.path !== '/') {
-    return next(to.path.slice(0, -1))
+  if (path.endsWith('/') && path !== '/') {
+    return next({ path: path.slice(0, -1), query })
   }
 
-  // Remove trailing `index.html`.
-  if (to.path.endsWith('/index.html')) {
-    return next(to.path.replace('/index.html', ''))
+  // Remove trailing `/index.html`.
+  if (path.endsWith('/index.html')) {
+    return next({ path: path.slice(0, -11), query })
   }
 
-  // Remove leading `/` to get "pure" path.
-  const path = to.path.slice(1)
+  // Remove leading `/` to get "pure" component path.
+  const componentPath = path.slice(1)
 
-  if (to.name === 'component') {
-    // Get current page by path and save to store.
-    store.commit('current', store.getters.componentByPath(path))
+  if (name === 'component') {
+    store.commit('current', store.getters.componentByPath(componentPath))
   }
 
-  if (to.name === 'template') {
-    store.commit('current', store.getters.templateByPath(path))
+  if (name === 'template') {
+    store.commit('current', store.getters.templateByPath(componentPath))
   }
 
   next()
