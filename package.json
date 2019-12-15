@@ -80,7 +80,7 @@
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2",
     "webpackbar": "^4.0.0",
-    "ws": "^7.2.0"
+    "ws": "^7.2.1"
   },
   "devDependencies": {
     "@pangolinjs/eslint-config": "^3.1.1",
