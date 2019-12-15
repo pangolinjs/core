@@ -1,6 +1,6 @@
 <template>
   <v-list-group
-    v-if="children"
+    v-if="children && !isTransparentGroup"
     :group="path"
     :value="isExpanded"
     :color="color"
@@ -29,7 +29,7 @@
 
   <v-list-item
     v-else
-    :to="'/' + path"
+    :to="linkTo"
     :color="color"
     dense
   >
@@ -67,6 +67,20 @@ export default {
   },
 
   computed: {
+    isTransparentGroup () {
+      if (!this.children || this.children.length > 1) {
+        return false
+      }
+
+      if (this.children[0].name !== this.name) {
+        return false
+      }
+
+      return true
+    },
+    linkTo () {
+      return '/' + (this.isTransparentGroup ? this.children[0].path : this.path)
+    },
     isExpanded () {
       if (this.$store.state.search) {
         return true
