@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "templates/default.njk" %}
 
-    <title>{{ page.name }} | Render | {{ project.name }}</title>
-
-    {% block pangolin_head %}{% endblock %}
-  </head>
-  <body>
-    <p>The Blog template</p>
-    {% block pangolin_body %}{% endblock %}
-  </body>
-</html>
+{% block header %}
+  <p>The Blog template</p>
+{% endblock %}
