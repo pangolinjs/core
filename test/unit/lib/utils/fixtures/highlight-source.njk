@@ -1,0 +1,15 @@
+{% extends "templates/default.njk" %}
+
+{% macro button (text, size = "small") %}
+  <button type="button" class="button is-size-{{ size }}">
+    {{ text }}
+  </button>
+{% endmacro %}
+
+{% block header %}
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi, ducimus!</p>
+
+  {% include "components/hello/world.njk" %}
+  {% include "components/foo/bar.txt" %}
+  {% include "test/lorem.njk" %}
+{% endblock %}
