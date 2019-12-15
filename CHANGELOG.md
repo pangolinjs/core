@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.3.0](https://github.com/pangolinjs/core/compare/v5.2.0...v5.3.0) (2019-12-15)
+
+
+### Features
+
+* **ui:** Make sidebar groups transparent if the only child is named after the parent (Close [#68](https://github.com/pangolinjs/core/issues/68)) ([ac89ec2](https://github.com/pangolinjs/core/commit/ac89ec2ee27da252c2e1244c166f5dcb34d3e6d2))
+* Link `extends` in highlighted source (Close [#69](https://github.com/pangolinjs/core/issues/69)) ([3f6ec9d](https://github.com/pangolinjs/core/commit/3f6ec9dbb79514f4ad791d50ca611aac64d5f57d))
+
+
+### Bug Fixes
+
+* Only prettify HTML in production ([#74](https://github.com/pangolinjs/core/issues/74)) ([4e074f9](https://github.com/pangolinjs/core/commit/4e074f972b46e5bb187138c43f93cce010cc892a))
+
 ## [5.2.0](https://github.com/pangolinjs/core/compare/v5.1.0...v5.2.0) (2019-12-13)
 
 
