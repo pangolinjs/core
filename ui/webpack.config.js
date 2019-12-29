@@ -31,11 +31,15 @@ config.module
     .test(/\.(css|scss|sass)$/)
     .use('css-extract-loader')
       .loader(CSSExtractPlugin.loader)
+      .options({
+        esModule: true
+      })
       .end()
     .use('css-loader')
       .loader('css-loader')
       .options({
         importLoaders: 2,
+        esModule: true,
         sourceMap: true
       })
       .end()
