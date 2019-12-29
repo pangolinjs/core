@@ -12,7 +12,6 @@ Framework for componentized front end development with Nunjucks, Sass, and JavaS
 npm install -g @pangolinjs/cli
 ```
 
-
 ## Project Creation
 
 ```bash
@@ -82,7 +81,7 @@ docker run -it --entrypoint npm pangolin-dev run build:dev
 [npm-url]: https://www.npmjs.com/package/@pangolinjs/core
 
 [dependencies-image]: https://img.shields.io/david/pangolinjs/core.svg?style=flat-square
-[dependencies-url]: https://www.npmjs.com/package/@pangolin/core?activeTab=dependencies
+[dependencies-url]: https://www.npmjs.com/package/@pangolinjs/core?activeTab=dependencies
 
 [standard-image]: https://img.shields.io/badge/Code_Style-Standard-brightgreen.svg?style=flat-square&logo=javascript&logoColor=white
 [standard-url]: https://standardjs.com
