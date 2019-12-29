@@ -6,6 +6,8 @@
 
 Framework for componentized front end development with Nunjucks, Sass, and JavaScript.
 
+Requires [Node.js v12.10 or higher](https://nodejs.org).
+
 ## Installation
 
 ```bash
