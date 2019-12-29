@@ -1,19 +1,24 @@
-FROM node:11-alpine
+FROM node:13-alpine
 
-WORKDIR /pangolin
+WORKDIR /pangolinjs
 
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
-WORKDIR /pangolin/test/project
+WORKDIR /pangolinjs/ui
 
-COPY test/project/package.json .
-RUN npm install
+COPY ui/package*.json ./
+RUN npm ci
 
-WORKDIR /pangolin
+WORKDIR /pangolinjs/test/project
+
+COPY test/project/package*.json ./
+RUN npm ci
+
+WORKDIR /pangolinjs
 
 COPY . .
 
-RUN npm run prepare
+RUN npm run prepack
 
-WORKDIR /pangolin/test/project
+WORKDIR /pangolinjs/test/project

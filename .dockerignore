@@ -1,14 +1,15 @@
+# Directories
+**/.temp
+**/dev
+**/dist
+**/node_modules
+coverage
+
+# Files
 .editorconfig
 .github
 .gitignore
 .nyc_output
 CHANGELOG.md
-coverage
-jsconfig.json
-node_modules
-
-/ui/dist
-
-/test/project/.temp
-/test/project/dev
-/test/project/dist
+LICENSE
+README.md

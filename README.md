@@ -67,14 +67,14 @@ npm run lint:js
 
 ```bash
 # Build image
-docker build -t pangolin-dev .
+docker build -t pangolinjs:dev .
 
 # Start dev server
-docker run -it -p 8080:8080 --entrypoint npm pangolin-dev run dev
+docker run -it -p 8080:8080 --entrypoint npm pangolinjs:dev run dev
 
 # Build files
-docker run -it --entrypoint npm pangolin-dev run build
-docker run -it --entrypoint npm pangolin-dev run build:dev
+docker run -it --entrypoint npm pangolinjs:dev run build
+docker run -it --entrypoint npm pangolinjs:dev run build:dev
 ```
 
 [npm-image]: https://img.shields.io/npm/v/@pangolinjs/core.svg?style=flat-square
