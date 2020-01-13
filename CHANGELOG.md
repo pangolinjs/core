@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.4.0](https://github.com/pangolinjs/core/compare/v5.3.0...v5.4.0) (2020-01-13)
+
+
+### Features
+
+* Prettify attributes in render (Close [#78](https://github.com/pangolinjs/core/issues/78)) ([c0621f1](https://github.com/pangolinjs/core/commit/c0621f1403aed63d3c11138627e620471b681a78))
+
+
+### Bug Fixes
+
+* Add note for Node.js compatibility (Fix [#79](https://github.com/pangolinjs/core/issues/79)) ([73fc7eb](https://github.com/pangolinjs/core/commit/73fc7eb0f40068ac114911a7e6bcac7469938726))
+
 ## [5.3.0](https://github.com/pangolinjs/core/compare/v5.2.0...v5.3.0) (2019-12-15)
 
 
