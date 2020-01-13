@@ -41,8 +41,8 @@
   ],
   "scripts": {
     "prepack": "cd ui && npm run build",
-    "lint:js": "eslint --format codeframe \"**/*.{js,vue}\"",
-    "lint:css": "stylelint \"**/*.{scss,vue}\" --custom-formatter node_modules/stylelint-codeframe-formatter",
+    "lint:js": "eslint --format codeframe --cache \"**/*.{js,vue}\"",
+    "lint:css": "stylelint --custom-formatter node_modules/stylelint-codeframe-formatter --cache \"**/*.{scss,vue}\"",
     "test:unit": "nyc ava",
     "release": "standard-version"
   },
