@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.1](https://github.com/pangolinjs/core/compare/v5.4.0...v5.4.1) (2020-01-13)
+
+
+### Bug Fixes
+
+* Comply with Prettier parser specs ([34d8150](https://github.com/pangolinjs/core/commit/34d81504b3d372a90c0213995c7c4d1fe4543d3e))
+* Trim white space in HTML attributes ([1f74d40](https://github.com/pangolinjs/core/commit/1f74d40b9e58ac6e87517548bcba38d83e6a11da))
+
 ## [5.4.0](https://github.com/pangolinjs/core/compare/v5.3.0...v5.4.0) (2020-01-13)
 
 
