@@ -91,11 +91,11 @@
     "eslint-plugin-vue": "^6.1.2",
     "nyc": "^15.0.0",
     "standard-version": "^7.1.0",
-    "stylelint": "^12.0.1"
+    "stylelint": "^13.0.0"
   },
   "peerDependencies": {
     "eslint": "^6.8.0",
-    "stylelint": "^12.0.1"
+    "stylelint": "^13.0.0"
   },
   "engines": {
     "node": ">= 12.10.0"
