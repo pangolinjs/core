@@ -1,7 +1,7 @@
-import path from 'path'
-import test from 'ava'
+const path = require('path')
+const test = require('ava')
 
-import getTemplates from '../../../../lib/utils/get-templates'
+const getTemplates = require('../../../../lib/utils/get-templates')
 
 test('loads templates', t => {
   const context = path.join(__dirname, 'fixtures')

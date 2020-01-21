@@ -1,8 +1,8 @@
-import fs from 'fs'
-import path from 'path'
-import test from 'ava'
+const fs = require('fs')
+const path = require('path')
+const test = require('ava')
 
-import prettifyRender from '../../../../lib/utils/prettify-render'
+const prettifyRender = require('../../../../lib/utils/prettify-render')
 
 test('prettifies rendered HTML', t => {
   const inputPath = path.join(__dirname, 'fixtures', 'prettify-render.html')

@@ -1,7 +1,7 @@
-import test from 'ava'
+const test = require('ava')
 
-import generateHead from '../../../../lib/nunjucks/generate-head'
-import store from '../../../../lib/store'
+const generateHead = require('../../../../lib/nunjucks/generate-head')
+const store = require('../../../../lib/store')
 
 const stateBackup = Object.assign({}, store.state)
 

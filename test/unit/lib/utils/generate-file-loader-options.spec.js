@@ -1,6 +1,7 @@
-import generateFileLoaderOptions from '../../../../lib/utils/generate-file-loader-options'
-import store from '../../../../lib/store'
-import test from 'ava'
+const test = require('ava')
+
+const generateFileLoaderOptions = require('../../../../lib/utils/generate-file-loader-options')
+const store = require('../../../../lib/store')
 
 const nodeEnvBackup = process.env.NODE_ENV
 const stateBackup = Object.assign({}, store.state)

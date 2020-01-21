@@ -1,5 +1,6 @@
-import generateSource from '../../../../lib/nunjucks/generate-source'
-import test from 'ava'
+const test = require('ava')
+
+const generateSource = require('../../../../lib/nunjucks/generate-source')
 
 test('generates source', t => {
   const generatedSource = generateSource({

@@ -1,5 +1,6 @@
-import formatPath from '../../../../lib/utils/format-path'
-import test from 'ava'
+const test = require('ava')
+
+const formatPath = require('../../../../lib/utils/format-path')
 
 test('formats single segment', t => {
   const actual = formatPath('test')

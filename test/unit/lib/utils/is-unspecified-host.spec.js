@@ -1,5 +1,6 @@
-import isUnspecifiedHost from '../../../../lib/utils/is-unspecified-host'
-import test from 'ava'
+const test = require('ava')
+
+const isUnspecifiedHost = require('../../../../lib/utils/is-unspecified-host')
 
 test('is unspecified IPv4 host', t => {
   const actual = isUnspecifiedHost('0.0.0.0')

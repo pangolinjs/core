@@ -1,5 +1,6 @@
-import formatName from '../../../../lib/utils/format-name'
-import test from 'ava'
+const test = require('ava')
+
+const formatName = require('../../../../lib/utils/format-name')
 
 test('formats simple name', t => {
   const actual = formatName('test')

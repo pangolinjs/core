@@ -1,6 +1,7 @@
-import getPort from '../../../../lib/utils/get-port'
-import net from 'net'
-import test from 'ava'
+const net = require('net')
+const test = require('ava')
+
+const getPort = require('../../../../lib/utils/get-port')
 
 test.serial('returns default port', async t => {
   const actual = await getPort()

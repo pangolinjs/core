@@ -1,5 +1,6 @@
-import store from '../../../lib/store'
-import test from 'ava'
+const test = require('ava')
+
+const store = require('../../../lib/store')
 
 test('has pre-defined state structure', t => {
   const actual = store.state

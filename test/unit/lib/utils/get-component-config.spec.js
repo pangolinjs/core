@@ -1,7 +1,7 @@
-import test from 'ava'
-import path from 'path'
+const path = require('path')
+const test = require('ava')
 
-import getComponentConfig from '../../../../lib/utils/get-component-config'
+const getComponentConfig = require('../../../../lib/utils/get-component-config')
 
 test('returns default config', t => {
   const actual = getComponentConfig('./.temp/not-there.json')

@@ -1,6 +1,7 @@
-import resolveBin from '../../../../lib/utils/resolve-bin'
-import test from 'ava'
-import path from 'path'
+const path = require('path')
+const test = require('ava')
+
+const resolveBin = require('../../../../lib/utils/resolve-bin')
 
 test('resolves binary for module', t => {
   const actual = resolveBin('ava')

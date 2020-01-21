@@ -1,7 +1,7 @@
-import test from 'ava'
+const test = require('ava')
 
-import StaticExtension from '../../../../lib/nunjucks/static-extension'
-import store from '../../../../lib/store'
+const StaticExtension = require('../../../../lib/nunjucks/static-extension')
+const store = require('../../../../lib/store')
 
 const pangolinEnvBackup = process.env.PANGOLIN_ENV
 const stateBackup = Object.assign({}, store.state)

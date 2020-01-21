@@ -1,5 +1,6 @@
-import normalizePath from '../../../../lib/utils/normalize-path'
-import test from 'ava'
+const test = require('ava')
+
+const normalizePath = require('../../../../lib/utils/normalize-path')
 
 test('converts Windows path to Unix path', t => {
   const actual = normalizePath('hello\\world\\earth.txt')

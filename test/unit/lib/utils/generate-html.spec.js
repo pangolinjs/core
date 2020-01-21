@@ -1,6 +1,6 @@
-import test from 'ava'
+const test = require('ava')
 
-import store from '../../../../lib/store.js'
+const store = require('../../../../lib/store.js')
 
 const generateHTML = '../../../../lib/utils/generate-html.js'
 const pangolinEnvBackup = process.env.PANGOLIN_ENV

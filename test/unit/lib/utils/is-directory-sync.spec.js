@@ -1,6 +1,7 @@
-import isDirectorySync from '../../../../lib/utils/is-directory-sync'
-import test from 'ava'
-import path from 'path'
+const path = require('path')
+const test = require('ava')
+
+const isDirectorySync = require('../../../../lib/utils/is-directory-sync')
 
 test('is directory', t => {
   const actual = isDirectorySync(__dirname)
