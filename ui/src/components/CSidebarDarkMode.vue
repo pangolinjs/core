@@ -1,13 +1,15 @@
 <template>
-  <v-switch
-    v-model="dark"
-    aria-label="Dark mode"
-    class="justify-center my-4 py-0"
-    :color="color"
-    :prepend-icon="$icon.sun"
-    :append-icon="$icon.moon"
-    hide-details
-  />
+  <div class="d-flex justify-center">
+    <v-switch
+      v-model="dark"
+      aria-label="Dark mode"
+      class="my-4 py-0"
+      :color="color"
+      :prepend-icon="$icon.sun"
+      :append-icon="$icon.moon"
+      hide-details
+    />
+  </div>
 </template>
 
 <script>
