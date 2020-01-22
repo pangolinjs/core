@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.2](https://github.com/pangolinjs/core/compare/v5.4.1...v5.4.2) (2020-01-22)
+
+
+### Bug Fixes
+
+* **ui:** Center dark mode switcher (Fix [#81](https://github.com/pangolinjs/core/issues/81)) ([a963361](https://github.com/pangolinjs/core/commit/a96336121bf02f7f0e5b3275e6c9038c6d6ea341))
+
 ### [5.4.1](https://github.com/pangolinjs/core/compare/v5.4.0...v5.4.1) (2020-01-13)
 
 
