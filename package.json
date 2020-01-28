@@ -85,7 +85,7 @@
   "devDependencies": {
     "@pangolinjs/eslint-config": "^3.1.2",
     "@pangolinjs/stylelint-config": "^1.7.1",
-    "ava": "^3.0.0",
+    "ava": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-ava": "^10.0.0",
     "eslint-plugin-vue": "^6.1.2",
