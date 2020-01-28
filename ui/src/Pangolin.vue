@@ -33,6 +33,7 @@ export default {
 
 <style lang="scss">
 html {
-  overflow-y: auto;
+  // stylelint-disable-next-line declaration-no-important
+  overflow-y: auto !important;
 }
 </style>
