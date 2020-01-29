@@ -27,6 +27,17 @@
         <v-list-item-title>{{ templatePath }}</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
+
+    <template v-if="docs">
+      <v-divider />
+
+      <!-- eslint-disable vue/no-v-html -->
+      <div
+        class="docs px-4 py-3"
+        v-html="docs"
+      />
+      <!-- eslint-enable vue/no-v-html -->
+    </template>
   </v-list>
 </template>
 
@@ -52,7 +63,87 @@ export default {
     },
     templatePath () {
       return `src/templates/${this.current.config.template}`
+    },
+    docs () {
+      return this.current.docs
     }
   }
 }
 </script>
+
+<style lang="scss">
+// Battle with Vuetify's specificity.
+.docs.docs {
+  ul,
+  ol {
+    margin-bottom: 1em;
+  }
+
+  blockquote {
+    margin-bottom: 1em;
+    padding: 0.25em 0 0.25em 1em;
+
+    font-style: italic;
+
+    border-left: 0.25em solid hsl(0, 0%, 75%);
+
+    opacity: 0.6;
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+
+    .theme--dark & {
+      border-left-color: hsl(0, 0%, 35%);
+    }
+  }
+
+  pre,
+  code {
+    background: hsl(0, 0%, 96%);
+
+    .theme--dark & {
+      background: hsl(0, 0%, 7%);
+    }
+  }
+
+  code {
+    padding: 0 0.4em;
+  }
+
+  pre {
+    position: relative;
+    margin-bottom: 1em;
+    padding: 1em;
+
+    border-radius: 0.25em;
+
+    code::after {
+      position: absolute;
+      top: 0.4em;
+      right: 0.7em;
+
+      font-family: "Roboto", sans-serif;
+      font-size: 0.875em;
+
+      opacity: 0.5;
+    }
+
+    code {
+      padding: 0;
+    }
+
+    .language-css::after {
+      content: "CSS";
+    }
+
+    .language-js::after {
+      content: "JS";
+    }
+
+    .language-django::after {
+      content: "HTML";
+    }
+  }
+}
+</style>

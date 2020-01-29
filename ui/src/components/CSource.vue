@@ -3,8 +3,7 @@
   <pre
     ref="source"
     class="source pa-3"
-    v-html="source"
-  />
+  ><code v-html="source" /></pre>
   <!-- eslint-enable vue/no-v-html -->
 </template>
 
@@ -66,23 +65,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.source {
-  white-space: pre-wrap;
-  overflow-y: auto;
-
-  ::v-deep {
-    * {
-      transition: color 0.2s;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .token.operator {
-      background: none;
-    }
+<style lang="scss">
+// Battle with Vuetify's specificity.
+.source.source {
+  code {
+    background: none;
+    border-radius: 0;
   }
 }
 </style>
