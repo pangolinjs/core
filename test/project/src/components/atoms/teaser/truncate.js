@@ -1,4 +1,4 @@
-import truncate from 'lodash.truncate'
+import { truncate } from 'lodash-es'
 
 /**
  * Truncate text to 100 characters

@@ -47,6 +47,15 @@
 // }
 
 /**
+ * Transpile dependencies
+ */
+// module.exports = {
+//   transpileDependencies: [
+//     'lodash-es/truncate.js'
+//   ]
+// }
+
+/**
  * Tap into webpack-chain
  */
 // module.exports = {
