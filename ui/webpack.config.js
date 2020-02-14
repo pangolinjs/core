@@ -7,6 +7,8 @@ const webpack = require('webpack')
 
 const config = new Config()
 
+const IS_MODERN = process.env.WEBPACK_BUILD === 'modern'
+
 /* eslint-disable indent */
 
 config
@@ -17,8 +19,31 @@ config.entry('main')
   .add('./src/main.js')
 
 config.output
-  .filename('scripts.js')
+  .filename(IS_MODERN ? 'scripts.modern.js' : 'scripts.js')
   .path(path.resolve(__dirname, 'dist/pangolin'))
+
+config.module
+  .rule('js')
+    .test(/\.js$/)
+    .include
+      .add(path.resolve('src'))
+      .add(/node_modules\/deepdash-es/)
+      .add(/node_modules\/ky/)
+      .add(/node_modules\/vuetify/)
+      .end()
+    .use('babel-loader')
+      .loader('babel-loader')
+      .options({
+        presets: [
+          ['@babel/env', {
+            useBuiltIns: 'usage',
+            corejs: 3,
+            targets: IS_MODERN
+              ? { esmodules: true }
+              : ['last 2 versions and > 0.2%', 'not dead']
+          }]
+        ]
+      })
 
 config.module
   .rule('vue')

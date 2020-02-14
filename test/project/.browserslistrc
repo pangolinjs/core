@@ -1,8 +1,7 @@
 # Supported browsers
 # https://github.com/browserslist/browserslist
 
-> 0.2%
-last 2 versions
+last 2 versions and > 0.2%
 not dead
 
 [modern]

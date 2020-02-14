@@ -6,7 +6,7 @@
 export default function (color) {
   const div = document.createElement('div')
   div.style.color = color
-  document.body.append(div)
+  document.body.appendChild(div)
 
   const rgb = getComputedStyle(div).color
     .slice(4, -1)

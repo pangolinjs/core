@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Design System | {{ project }}</title>
-
-    <script defer src="{{ base }}pangolin/scripts.js"></script>
     <link rel="shortcut icon" href="{{ base }}{{ favicon }}">
+
+    <!-- https://gist.github.com/samthor/64b114e4a4f539915a95b91ffd340acc -->
+    <script>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()},!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=fetch"></script>
+    <script type="module" src="{{ base }}pangolin/scripts.modern.js"></script>
+    <script defer nomodule src="{{ base }}pangolin/scripts.js"></script>
+
     <link rel="stylesheet" href="{{ base }}pangolin/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,700i|Roboto+Mono&display=swap">
     <link rel="stylesheet" id="prism-stylesheet">

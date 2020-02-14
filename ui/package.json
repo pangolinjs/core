@@ -3,10 +3,13 @@
   "private": true,
   "scripts": {
     "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production"
+    "build": "npm run build:legacy && npm run build:modern",
+    "build:legacy": "WEBPACK_BUILD=legacy webpack --mode production",
+    "build:modern": "WEBPACK_BUILD=modern webpack --mode production"
   },
   "dependencies": {
     "@mdi/js": "^4.9.95",
+    "core-js": "^3.6.4",
     "deepdash-es": "^4.4.2",
     "ky": "^0.17.0",
     "sockette": "^2.0.6",
@@ -16,6 +19,8 @@
     "vuex": "^3.1.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.8.4",
+    "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
     "mini-css-extract-plugin": "^0.9.0",
