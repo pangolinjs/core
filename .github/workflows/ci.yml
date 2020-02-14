@@ -1,4 +1,4 @@
-name: Lint and test
+name: Continuous Integration
 on: [push]
 
 jobs:
@@ -8,32 +8,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@master
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@master
         with:
           node-version: 13
       - name: Install dependencies
         run: npm ci
       - name: Lint CSS
         run: npm run lint:css
-      - name: Lint JavaScript
+      - name: Lint JS
         run: npm run lint:js
 
   test:
-    name: Test (Node.js ${{ matrix.node }} on ${{ matrix.os }})
+    name: Test (Node.js ${{ matrix.node-version }} on ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node: [12, 13]
+        node-version: [12, 13]
         os: [ubuntu-latest, macOS-latest]
     steps:
       - name: Check out repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@master
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@master
         with:
-          node-version: ${{ matrix.node }}
+          node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: |
           for directory in . ui test/project
@@ -42,11 +42,11 @@ jobs:
           done
       - name: Run unit tests
         run: npm run test:unit
-      - name: Run UI test
+      - name: Run UI build test
         run: |
           cd ui
           npm run build
-      - name: Run build test
+      - name: Run project build test
         run: |
           cd test/project
           npm run build
