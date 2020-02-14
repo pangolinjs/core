@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.5.0](https://github.com/pangolinjs/core/compare/v5.4.2...v5.5.0) (2020-02-14)
+
+
+### Features
+
+* Make dependency transpilation possible ([#83](https://github.com/pangolinjs/core/issues/83)) ([56b516a](https://github.com/pangolinjs/core/commit/56b516a559f4f36e924558219f3981c4ab55e1ed))
+* Re-add component docs (Close [#80](https://github.com/pangolinjs/core/issues/80)) ([c0764c7](https://github.com/pangolinjs/core/commit/c0764c726e3e71e44cb87a416d37dddcdbd94103))
+
+
+### Bug Fixes
+
+* **ui:** Remove forced global vertical scrollbar … again ([#65](https://github.com/pangolinjs/core/issues/65)) ([2e32946](https://github.com/pangolinjs/core/commit/2e32946e11fc4af0ea88dc2c36f05e7df4aaece6))
+* **ui:** Transpile for older browsers ([#83](https://github.com/pangolinjs/core/issues/83)) ([5c4fd9c](https://github.com/pangolinjs/core/commit/5c4fd9cf2960c656de33cac30caf33a16cf3b06f))
+
 ### [5.4.2](https://github.com/pangolinjs/core/compare/v5.4.1...v5.4.2) (2020-01-22)
 
 
