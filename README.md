@@ -1,10 +1,10 @@
-# <img alt="" src="https://cdn.jsdelivr.net/gh/pangolinjs/brand/icon/icon.svg" width="24"> Pangolin.js
+# <img alt="" src="https://cdn.jsdelivr.net/gh/pangolinjs/brand/icon/icon.svg" width="24"> Pangolin.js Core
 
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][dependencies-image]][dependencies-url]
 [![JavaScript Standard Style][standard-image]][standard-url]
 
-Framework for componentized front end development with Nunjucks, Sass, and JavaScript.
+Framework for design system development with Nunjucks, Sass, and JavaScript.
 
 Requires [Node.js v12.10 or higher](https://nodejs.org).
 
