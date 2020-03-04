@@ -42,8 +42,16 @@
 </template>
 
 <script>
+import api from '../api'
+
 export default {
   name: 'CComponentDetails',
+
+  data () {
+    return {
+      docs: ''
+    }
+  },
 
   computed: {
     current () {
@@ -63,9 +71,30 @@ export default {
     },
     templatePath () {
       return `src/templates/${this.current.config.template}`
-    },
-    docs () {
-      return this.current.docs
+    }
+  },
+
+  watch: {
+    '$route.path' (newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.getDocs()
+      }
+    }
+  },
+
+  mounted () {
+    this.getDocs()
+    this.$communicator.$on('reload', () => this.getDocs())
+  },
+
+  methods: {
+    async getDocs () {
+      if (this.current.hasDocs) {
+        const path = `${this.$store.state.current.path}/docs`
+        this.docs = await api.getComponentFile(path)
+      } else {
+        this.docs = ''
+      }
     }
   }
 }
