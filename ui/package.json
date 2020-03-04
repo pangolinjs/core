@@ -2,7 +2,7 @@
   "name": "@pangolinjs/ui",
   "private": true,
   "scripts": {
-    "dev": "webpack --mode development --watch",
+    "dev": "WEBPACK_BUILD=modern webpack --mode development --watch",
     "build": "npm run build:legacy && npm run build:modern",
     "build:legacy": "WEBPACK_BUILD=legacy webpack --mode production",
     "build:modern": "WEBPACK_BUILD=modern webpack --mode production"
