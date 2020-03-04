@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.5.1](https://github.com/pangolinjs/core/compare/v5.5.0...v5.5.1) (2020-03-04)
+
+
+### Bug Fixes
+
+* Avoid large `components.json` ([7121c0b](https://github.com/pangolinjs/core/commit/7121c0b3999375db45ca903bd6a67b7e2f60c692))
+* Don't prettify modern build helper code (Fix [#84](https://github.com/pangolinjs/core/issues/84)) ([a0a2698](https://github.com/pangolinjs/core/commit/a0a26982ad1858c879da87fbb4fbc626788fe2e0))
+* Slightly increase HTML line length to 100 ([0c9f69f](https://github.com/pangolinjs/core/commit/0c9f69f0e5c397eb1e293b0b03302e3b0195c07e))
+
 ## [5.5.0](https://github.com/pangolinjs/core/compare/v5.4.2...v5.5.0) (2020-02-14)
 
 
