@@ -2,11 +2,11 @@ import filterDeep from 'deepdash-es/filterDeep'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import findComponentByPath from '../functions/findComponentByPath'
-import findTemplateByPath from '../functions/findTemplateByPath'
-import getColorContrastRatio from '../functions/getColorContrastRatio'
-import getColorHex from '../functions/getColorHex'
-import getColorRGB from '../functions/getColorRGB'
+import findComponentByPath from './functions/findComponentByPath.js'
+import findTemplateByPath from './functions/findTemplateByPath.js'
+import getColorContrastRatio from './functions/getColorContrastRatio.js'
+import getColorHex from './functions/getColorHex.js'
+import getColorRGB from './functions/getColorRGB.js'
 
 Vue.use(Vuex)
 

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import api from './api'
+import api from './api.js'
 
 import CSidebar from './components/CSidebar.vue'
 

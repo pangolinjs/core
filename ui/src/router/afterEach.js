@@ -1,4 +1,4 @@
-import store from '../store'
+import store from '../store.js'
 
 const TITLE_TEMPLATE = document.title
 const title = document.querySelector('title')

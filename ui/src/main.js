@@ -3,11 +3,11 @@ import Vuetify from 'vuetify/lib'
 
 import Pangolin from './Pangolin.vue'
 
-import api from './api'
-import Communicator from './plugins/communicator'
+import api from './api.js'
+import Communicator from './plugins/communicator.js'
 import icon from './plugins/icon.js'
 import router from './router'
-import store from './store'
+import store from './store.js'
 
 Vue.use(Communicator)
 Vue.use(Vuetify)

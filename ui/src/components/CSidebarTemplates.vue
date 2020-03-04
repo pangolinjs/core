@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import color from '../mixins/color'
+import color from '../mixins/color.js'
 
 export default {
   name: 'CSidebarTemplates',

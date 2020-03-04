@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import color from '../mixins/color'
+import color from '../mixins/color.js'
 
 const STORAGE_KEY = 'pangolin-dark-mode'
 
