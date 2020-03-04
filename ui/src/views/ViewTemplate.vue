@@ -1,7 +1,7 @@
 <template>
   <v-content>
-    <c-header :title="title" />
-    <c-source :path="source" />
+    <c-header />
+    <c-source />
   </v-content>
 </template>
 
@@ -15,15 +15,6 @@ export default {
   components: {
     CHeader,
     CSource
-  },
-
-  computed: {
-    title () {
-      return this.$store.state.current.name
-    },
-    source () {
-      return `${this.$store.state.current.path}/source`
-    }
   }
 }
 </script>

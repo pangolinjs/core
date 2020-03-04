@@ -13,13 +13,6 @@ import api from '../api'
 export default {
   name: 'CSource',
 
-  props: {
-    path: {
-      type: String,
-      required: true
-    }
-  },
-
   data () {
     return {
       source: '',
@@ -49,7 +42,8 @@ export default {
 
   methods: {
     async getSource () {
-      this.source = await api.getSource(`${this.path}.html`)
+      const path = `${this.$store.state.current.path}/source`
+      this.source = await api.getComponentFile(path)
 
       await this.$nextTick()
 

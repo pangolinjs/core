@@ -19,16 +19,12 @@
 export default {
   name: 'CHeader',
 
-  props: {
-    title: {
-      type: String,
-      default: undefined
-    }
-  },
-
   computed: {
     isLightColor () {
       return !this.$store.getters.isContrastingColor.light
+    },
+    title () {
+      return this.$store.state.current.name
     }
   },
 

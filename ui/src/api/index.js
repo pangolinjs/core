@@ -13,23 +13,26 @@ export default {
   getProject () {
     return connector.get('pangolin/project.json').json()
   },
+
   /**
    * Get template list
    */
   getTemplates () {
     return connector.get('pangolin/templates.json').json()
   },
+
   /**
    * Get component list
    */
   getComponents () {
     return connector.get('pangolin/components.json').json()
   },
+
   /**
-   * Get source
+   * Get additional component file
    * @param {string} path Source path
    */
-  getSource (path) {
-    return connector.get(path).text()
+  getComponentFile (path) {
+    return connector.get(`${path}.html`).text()
   }
 }

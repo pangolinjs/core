@@ -1,5 +1,5 @@
 <template>
-  <c-source :path="source" />
+  <c-source />
 </template>
 
 <script>
@@ -10,12 +10,6 @@ export default {
 
   components: {
     CSource
-  },
-
-  computed: {
-    source () {
-      return `${this.$store.state.current.path}/source`
-    }
   }
 }
 </script>
