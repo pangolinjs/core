@@ -82,7 +82,10 @@ export default {
       return '/' + (this.isTransparentGroup ? this.children[0].path : this.path)
     },
     isExpanded () {
-      if (this.$store.state.search) {
+      const hasSearch = this.$store.state.search
+      const isCurrentPage = this.$route.path.includes(this.path)
+
+      if (hasSearch || isCurrentPage) {
         return true
       }
 
