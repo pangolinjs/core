@@ -14,7 +14,7 @@
     "lodash-es": "^4.17.15"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.8.6",
+    "@babel/preset-env": "^7.9.0",
     "core-js": "^3.6.4",
     "cssnano": "^4.1.10"
   }
