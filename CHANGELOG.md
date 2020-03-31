@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.5.2](https://github.com/pangolinjs/core/compare/v5.5.1...v5.5.2) (2020-03-31)
+
+
+### Bug Fixes
+
+* **ui:** Keep tree expanded after search clearing ([fb06f61](https://github.com/pangolinjs/core/commit/fb06f615226ae7641fe45ad392ae231f3c0cb165))
+
 ### [5.5.1](https://github.com/pangolinjs/core/compare/v5.5.0...v5.5.1) (2020-03-04)
 
 
