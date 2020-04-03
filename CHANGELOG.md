@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.5.3](https://github.com/pangolinjs/core/compare/v5.5.2...v5.5.3) (2020-04-03)
+
+
+### Bug Fixes
+
+* Add crossorigin attribute to UI markup ([e522c69](https://github.com/pangolinjs/core/commit/e522c691fabf21a94ce9fb92fd9970cdcc5568f7))
+
 ### [5.5.2](https://github.com/pangolinjs/core/compare/v5.5.1...v5.5.2) (2020-03-31)
 
 
