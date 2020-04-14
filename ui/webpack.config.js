@@ -35,9 +35,10 @@ config.module
       .loader('babel-loader')
       .options({
         presets: [
-          ['@babel/env', {
+          ['@babel/preset-env', {
             useBuiltIns: 'usage',
             corejs: 3,
+            bugfixes: true,
             targets: IS_MODERN
               ? { esmodules: true }
               : ['last 2 versions and > 0.2%', 'not dead']
