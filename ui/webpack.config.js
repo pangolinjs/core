@@ -7,13 +7,15 @@ const webpack = require('webpack')
 
 const config = new Config()
 
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 const IS_MODERN = process.env.WEBPACK_BUILD === 'modern'
 
 /* eslint-disable indent */
 
 config
   .context(path.resolve(__dirname))
-  .devtool('source-map')
+  .devtool(IS_PRODUCTION ? false : 'eval-cheap-module-source-map')
+  .mode(IS_PRODUCTION ? 'production' : 'development')
 
 config.entry('main')
   .add('./src/main.js')

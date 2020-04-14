@@ -371,7 +371,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .index-intro {
   height: 100%;
 }

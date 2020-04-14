@@ -2,10 +2,11 @@
   "name": "@pangolinjs/ui",
   "private": true,
   "scripts": {
-    "dev": "WEBPACK_BUILD=modern webpack --mode development --watch",
-    "build": "npm run build:legacy && npm run build:modern",
-    "build:legacy": "WEBPACK_BUILD=legacy webpack --mode production",
-    "build:modern": "WEBPACK_BUILD=modern webpack --mode production"
+    "dev": "WEBPACK_BUILD=modern webpack --watch",
+    "build": "npm run build:legacy && npm run build:modern && npm run purgecss",
+    "build:legacy": "NODE_ENV=production WEBPACK_BUILD=legacy webpack",
+    "build:modern": "NODE_ENV=production WEBPACK_BUILD=modern webpack",
+    "purgecss": "purgecss --config purgecss.config.js --output dist/pangolin"
   },
   "dependencies": {
     "@mdi/js": "^5.0.45",
@@ -24,6 +25,7 @@
     "css-loader": "^3.5.2",
     "cssnano": "^4.1.10",
     "mini-css-extract-plugin": "^0.9.0",
+    "purgecss": "^2.1.2",
     "vue-loader": "^15.9.1",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.4.3",
