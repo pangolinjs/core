@@ -12,7 +12,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@master
         with:
-          node-version: 13
+          node-version: 14
       - name: Install dependencies
         run: npm ci
       - name: Lint CSS
@@ -25,7 +25,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [12, 13]
+        node-version: [12, 14]
         os: [ubuntu-latest, macOS-latest]
     steps:
       - name: Check out repository
