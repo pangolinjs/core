@@ -63,19 +63,19 @@
     "fast-glob": "^3.2.2",
     "file-loader": "^6.0.0",
     "lodash.merge": "^4.6.2",
-    "marked": "^0.8.2",
+    "marked": "^1.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "nunjucks": "^3.2.1",
     "open": "^7.0.3",
     "postcss-loader": "^3.0.0",
-    "prettier": "^2.0.4",
+    "prettier": "^2.0.5",
     "prismjs": "^1.20.0",
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",
-    "style-loader": "^1.1.3",
+    "style-loader": "^1.1.4",
     "stylelint-codeframe-formatter": "^1.0.4",
     "stylelint-webpack-plugin": "^1.2.3",
-    "webpack": "^5.0.0-beta.14",
+    "webpack": "^5.0.0-beta.15",
     "webpack-bundle-analyzer": "^3.7.0",
     "webpack-chain": "^6.4.0",
     "webpack-dev-server": "^3.10.3",
@@ -86,17 +86,17 @@
   "devDependencies": {
     "@pangolinjs/eslint-config": "^3.1.3",
     "@pangolinjs/stylelint-config": "^1.8.1",
-    "ava": "^3.7.0",
+    "ava": "^3.7.1",
     "eslint": "^6.8.0",
     "eslint-plugin-ava": "^10.2.0",
     "eslint-plugin-vue": "^6.2.2",
     "nyc": "^15.0.1",
     "standard-version": "^7.1.0",
-    "stylelint": "^13.3.2"
+    "stylelint": "^13.3.3"
   },
   "peerDependencies": {
     "eslint": "^6.8.0",
-    "stylelint": "^13.3.2"
+    "stylelint": "^13.3.3"
   },
   "engines": {
     "node": ">= 12.10.0"
