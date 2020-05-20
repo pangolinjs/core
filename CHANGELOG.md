@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.6.0](https://github.com/pangolinjs/core/compare/v5.5.3...v5.6.0) (2020-05-20)
+
+
+### Features
+
+* **ui:** Reduce CSS size with PurgeCSS ([c8dd7ea](https://github.com/pangolinjs/core/commit/c8dd7ea9b0779825f06f7c26e327d41c65f21d02))
+
 ### [5.5.3](https://github.com/pangolinjs/core/compare/v5.5.2...v5.5.3) (2020-04-03)
 
 
