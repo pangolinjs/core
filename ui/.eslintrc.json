@@ -1,5 +1,14 @@
 {
   "extends": [
     "plugin:vue/recommended"
-  ]
+  ],
+  "rules": {
+    "vue/component-tags-order": ["error", {
+      "order": ["template", "script", "style"]
+    }],
+    "vue/html-closing-bracket-newline": ["error", {
+      "singleline": "never",
+      "multiline": "always"
+    }]
+  }
 }

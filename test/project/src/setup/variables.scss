@@ -1,6 +1,7 @@
 $color-text: #333;
 
+// stylelint-disable-next-line selector-pseudo-class-no-unknown
 :export {
   // stylelint-disable-next-line property-no-unknown
-  colorText: $color-text;
+  colortext: $color-text;
 }

@@ -114,7 +114,7 @@ export default {
 
     font-style: italic;
 
-    border-left: 0.25em solid hsl(0, 0%, 75%);
+    border-left: 0.25em solid hsl(0deg 0% 75%);
 
     opacity: 0.6;
 
@@ -123,16 +123,16 @@ export default {
     }
 
     .theme--dark & {
-      border-left-color: hsl(0, 0%, 35%);
+      border-left-color: hsl(0deg 0% 35%);
     }
   }
 
   pre,
   code {
-    background: hsl(0, 0%, 96%);
+    background: hsl(0deg 0% 96%);
 
     .theme--dark & {
-      background: hsl(0, 0%, 7%);
+      background: hsl(0deg 0% 7%);
     }
   }
 
