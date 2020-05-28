@@ -19,6 +19,13 @@
 // }
 
 /**
+ * Generate manifest
+ */
+// module.exports = {
+//   manifest: true
+// }
+
+/**
  * Change dev server settings
  */
 // module.exports = {
