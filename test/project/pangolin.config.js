@@ -26,6 +26,14 @@
 // }
 
 /**
+ * Hash all files and generate manifest
+ */
+// module.exports = {
+//   fileNameHash: 'all',
+//   manifest: true
+// }
+
+/**
  * Change dev server settings
  */
 // module.exports = {
