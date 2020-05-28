@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.7.0](https://github.com/pangolinjs/core/compare/v5.6.0...v5.7.0) (2020-05-28)
+
+
+### Features
+
+* Add option to emit asset manifest ([#88](https://github.com/pangolinjs/core/issues/88)) ([30fa2ae](https://github.com/pangolinjs/core/commit/30fa2ae5f6c702c739699c935cb3ed4b78b8736d))
+* Add optional hashing for all files ([#88](https://github.com/pangolinjs/core/issues/88)) ([6d443a2](https://github.com/pangolinjs/core/commit/6d443a2d69d965f37896920fcc3e0ca950295708))
+
 ## [5.6.0](https://github.com/pangolinjs/core/compare/v5.5.3...v5.6.0) (2020-05-20)
 
 
