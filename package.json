@@ -50,7 +50,7 @@
     "pangolin-core": "bin/pangolin-core.js"
   },
   "dependencies": {
-    "@babel/core": "^7.10.1",
+    "@babel/core": "^7.10.2",
     "@nuxtjs/friendly-errors-webpack-plugin": "^2.1.0",
     "babel-loader": "^8.1.0",
     "chalk": "^4.0.0",
@@ -70,12 +70,12 @@
     "postcss-loader": "^3.0.0",
     "prettier": "^2.0.5",
     "prismjs": "^1.20.0",
-    "sass": "^1.26.5",
+    "sass": "^1.26.7",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
     "stylelint-codeframe-formatter": "^1.0.4",
     "stylelint-webpack-plugin": "^2.0.0",
-    "webpack": "^5.0.0-beta.16",
+    "webpack": "^5.0.0-beta.17",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-chain": "^6.4.0",
     "webpack-dev-server": "^3.11.0",
@@ -96,11 +96,11 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-vue": "^7.0.0-alpha.4",
-    "nyc": "^15.0.1",
+    "eslint-plugin-vue": "^7.0.0-alpha.5",
+    "nyc": "^15.1.0",
     "standard-version": "^8.0.0",
     "stylelint": "^13.5.0",
-    "stylelint-order": "^4.0.0",
+    "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.17.2"
   },
   "peerDependencies": {
