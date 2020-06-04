@@ -1,5 +1,3 @@
-@use "setup/variables" as *;
-
 *,
 *::before,
 *::after {
@@ -7,5 +5,5 @@
 }
 
 body {
-  color: $color-text;
+  color: var(--color-text);
 }

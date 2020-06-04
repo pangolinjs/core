@@ -59,6 +59,7 @@
     "commander": "^5.1.0",
     "copy-webpack-plugin": "^6.0.2",
     "css-loader": "^3.5.3",
+    "cssnano": "^4.1.10",
     "eslint-loader": "^4.0.2",
     "fast-glob": "^3.2.2",
     "file-loader": "^6.0.0",

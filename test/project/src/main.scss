@@ -11,3 +11,8 @@
 
 // Molecules
 @use "components/molecules/article/article";
+
+// Test postcss-preset-env
+:root {
+  --color-text: #{variables.$color-text};
+}
