@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.8.0](https://github.com/pangolinjs/core/compare/v5.7.0...v5.8.0) (2020-06-04)
+
+
+### Features
+
+* Add CSS minification ([f1735be](https://github.com/pangolinjs/core/commit/f1735be9c46cb0b61bfb3502ce140c827fb2fbe6))
+* Switch to Hippocratic License ([c869b35](https://github.com/pangolinjs/core/commit/c869b35059df65c01a2f4be801fff8cb77c6171d))
+
+
+### Bug Fixes
+
+* Don't minify Pangolin UI ([c3f5a10](https://github.com/pangolinjs/core/commit/c3f5a100dfe1612e1951452de11f5db1440e8be6))
+* Force hash for imported files only in dev environment ([5f06e55](https://github.com/pangolinjs/core/commit/5f06e556ea1ffcd9f7d6f5545f64876022d7ff4f))
+* Set default fileNameHash to imported ([e5f15e8](https://github.com/pangolinjs/core/commit/e5f15e88925948a62043d56dee9aa88de0ff4f60))
+
 ## [5.7.0](https://github.com/pangolinjs/core/compare/v5.6.0...v5.7.0) (2020-05-28)
 
 
