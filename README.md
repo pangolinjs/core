@@ -1,9 +1,5 @@
 # <img alt="" src="https://cdn.jsdelivr.net/gh/pangolinjs/brand/icon/icon.svg" width="24"> Pangolin.js Core
 
-[![NPM version][npm-image]][npm-url]
-[![Dependencies][dependencies-image]][dependencies-url]
-[![JavaScript Standard Style][standard-image]][standard-url]
-
 Framework for design system development with Nunjucks, Sass, and JavaScript.
 
 Requires [Node.js v12.10 or higher](https://nodejs.org).
@@ -79,11 +75,6 @@ docker run -it --entrypoint npm pangolinjs:dev run build
 docker run -it --entrypoint npm pangolinjs:dev run build:dev
 ```
 
-[npm-image]: https://img.shields.io/npm/v/@pangolinjs/core.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/@pangolinjs/core
+## License
 
-[dependencies-image]: https://img.shields.io/david/pangolinjs/core.svg?style=flat-square
-[dependencies-url]: https://www.npmjs.com/package/@pangolinjs/core?activeTab=dependencies
-
-[standard-image]: https://img.shields.io/badge/Code_Style-Standard-brightgreen.svg?style=flat-square&logo=javascript&logoColor=white
-[standard-url]: https://standardjs.com
+[Hippocratic License 2.1](https://firstdonoharm.dev)

@@ -11,5 +11,5 @@ coverage
 .gitignore
 .nyc_output
 CHANGELOG.md
-LICENSE
+LICENSE.md
 README.md
