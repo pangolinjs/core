@@ -1,4 +1,4 @@
-@pangolinjs/core Copyright 2020 Fynn Becker (“Licensor”)
+@pangolinjs/core Copyright 2020 (Fynn Becker)(“Licensor”)
 
 Hippocratic License Version Number: 2.1.
 
