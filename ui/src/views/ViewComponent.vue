@@ -1,10 +1,10 @@
 <template>
-  <v-content>
+  <v-main>
     <c-component-header />
     <c-component-render v-show="active === 'render'" />
     <c-component-source v-show="active === 'source'" />
     <c-component-details v-show="active === 'details'" />
-  </v-content>
+  </v-main>
 </template>
 
 <script>

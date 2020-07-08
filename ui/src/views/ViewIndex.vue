@@ -1,9 +1,9 @@
 <template>
-  <v-content>
+  <v-main>
     <c-header />
     <c-index-intro />
     <c-index-footer />
-  </v-content>
+  </v-main>
 </template>
 
 <script>

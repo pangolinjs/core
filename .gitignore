@@ -16,9 +16,7 @@ yarn-error.log*
 node_modules
 
 # Generated content
-.eslintcache
 .nyc_output
-.stylelintcache
 .temp
 coverage
 ui/dist
