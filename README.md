@@ -1,21 +1,13 @@
-# <img alt="" src="https://cdn.jsdelivr.net/gh/pangolinjs/brand/icon/icon.svg" width="24"> Pangolin.js Core
+# <img alt="" src="https://cdn.jsdelivr.net/gh/pangolinjs/brand@main/icon/icon.svg" width="24"> Pangolin.js Core
 
 Framework for design system development with Nunjucks, Sass, and JavaScript.
 
-Requires [Node.js v12.10 or higher](https://nodejs.org).
+Requires [Node.js v12.18 or higher](https://nodejs.org).
 
-## Installation
-
-```bash
-npm install -g @pangolinjs/cli
-```
-
-## Project Creation
+## Create a new project with `npx`
 
 ```bash
-mkdir new-project
-cd new-project
-pangolin init
+npx @pangolinjs/cli create project-name
 ```
 
 ## Usage
