@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
       - name: Set up Node.js
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v2-beta
         with:
           node-version: 14
       - name: Install dependencies
@@ -21,33 +21,19 @@ jobs:
         run: npm run lint:js
 
   test:
-    name: Test (Node.js ${{ matrix.node-version }} on ${{ matrix.os }})
+    name: Test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [12, 14]
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, macos-latest]
     steps:
       - name: Check out repository
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
       - name: Set up Node.js
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v2-beta
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14
       - name: Install dependencies
-        run: |
-          for directory in . ui test/project
-          do
-            (cd "$directory" && npm ci)
-          done
+        run: npm ci
       - name: Run unit tests
         run: npm run test:unit
-      - name: Run UI build test
-        run: |
-          cd ui
-          npm run build
-      - name: Run project build test
-        run: |
-          cd test/project
-          npm run build
-          npm run build:dev

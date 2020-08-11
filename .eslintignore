@@ -1,5 +1,3 @@
-/.nyc_output
-/coverage
-/test/project
-/ui/dist
-node_modules
+test/project/dist
+test/project/public/assets
+test/project/static

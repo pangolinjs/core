@@ -1,11 +1,2 @@
-# Supported browsers
-# https://github.com/browserslist/browserslist
-
-last 2 versions and > 0.2%
+last 2 versions
 not dead
-
-[modern]
-Chrome >= 58 and > 0.2%
-Edge >= 15 and > 0.2%
-Firefox >= 53 and > 0.2%
-iOS >= 10.1 and > 0.2%

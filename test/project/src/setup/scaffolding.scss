@@ -1,9 +1,3 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 body {
-  color: var(--color-text);
+  font-family: "JetBrains Mono", monospace;
 }

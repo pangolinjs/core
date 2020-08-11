@@ -2,7 +2,7 @@
 
 Framework for design system development with Nunjucks, Sass, and JavaScript.
 
-Requires [Node.js v12.18 or higher](https://nodejs.org).
+Requires [Node.js v14.7 or higher](https://nodejs.org).
 
 ## Create a new project with `npx`
 
@@ -22,12 +22,6 @@ npm run dev
 
 ```bash
 npm run build
-```
-
-### Build for static file servers
-
-```bash
-npm run build:dev
 ```
 
 ### Lint CSS and JavaScript
@@ -51,20 +45,6 @@ npm run test:unit
 # Linting
 npm run lint:css
 npm run lint:js
-```
-
-### Docker test
-
-```bash
-# Build image
-docker build -t pangolinjs:dev .
-
-# Start dev server
-docker run -it -p 8080:8080 --entrypoint npm pangolinjs:dev run dev
-
-# Build files
-docker run -it --entrypoint npm pangolinjs:dev run build
-docker run -it --entrypoint npm pangolinjs:dev run build:dev
 ```
 
 ## License

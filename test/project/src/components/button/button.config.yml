@@ -1,0 +1,13 @@
+context:
+  text: "Hello World"
+  size: "default"
+
+variants:
+  - name: "small"
+    status: "wip"
+    context:
+      size: "small"
+  - name: "large"
+    status: "prototype"
+    context:
+      size: "large"

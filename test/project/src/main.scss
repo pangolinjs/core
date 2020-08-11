@@ -1,18 +1,6 @@
-// Vendor
-@use "vendor";
+@use "setup/variables.scss";
+@use "setup/fonts.scss";
+@use "setup/scaffolding.scss";
 
-// Setup
-@use "setup/variables";
-@use "setup/scaffolding";
-
-// Atoms
-@use "components/atoms/button/button";
-@use "components/atoms/teaser/teaser";
-
-// Molecules
-@use "components/molecules/article/article";
-
-// Test postcss-preset-env
-:root {
-  --color-text: #{variables.$color-text};
-}
+@use "components/button/button.scss";
+@use "components/media/image.scss";

@@ -1,21 +1,12 @@
 {
-  "name": "@pangolinjs/test",
-  "private": true,
+  "version": "1.0.0",
+  "author": {
+    "name": "Fynn Becker"
+  },
   "scripts": {
-    "lint:js": "node ../../bin/pangolin-core lint js",
-    "lint:css": "node ../../bin/pangolin-core lint css",
-    "inspect": "node ../../bin/pangolin-core inspect",
-    "dev": "node ../../bin/pangolin-core dev",
-    "build": "node ../../bin/pangolin-core build",
-    "build:dev": "node ../../bin/pangolin-core build --dev"
-  },
-  "dependencies": {
-    "@csstools/normalize.css": "^10.1.0",
-    "lodash-es": "^4.17.15"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.11.0",
-    "core-js": "^3.6.5",
-    "postcss-preset-env": "^6.7.0"
+    "dev": "node ../../bin/pangolin-core.mjs dev",
+    "build": "node ../../bin/pangolin-core.mjs build",
+    "docs": "node ../../bin/pangolin-core.mjs docs",
+    "inspect": "node ../../bin/pangolin-core.mjs inspect"
   }
 }
