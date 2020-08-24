@@ -10,7 +10,7 @@
     "build:dev": "node ../../bin/pangolin-core build --dev"
   },
   "dependencies": {
-    "@csstools/normalize.css": "^10.1.0",
+    "@csstools/normalize.css": "^11.0.1",
     "lodash-es": "^4.17.15"
   },
   "devDependencies": {

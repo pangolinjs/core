@@ -9,14 +9,14 @@
     "purgecss": "purgecss --config purgecss.config.js --output dist/pangolin"
   },
   "dependencies": {
-    "@mdi/js": "^5.4.55",
+    "@mdi/js": "^5.5.55",
     "core-js": "^3.6.5",
-    "deepdash-es": "^5.2.1",
+    "deepdash-es": "^5.3.0",
     "ky": "^0.23.0",
     "sockette": "^2.0.6",
-    "vue": "^2.6.11",
-    "vue-router": "^3.4.2",
-    "vuetify": "^2.3.8",
+    "vue": "^2.6.12",
+    "vue-router": "^3.4.3",
+    "vuetify": "^2.3.9",
     "vuex": "^3.5.1"
   },
   "devDependencies": {
@@ -24,10 +24,10 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",
     "cssnano": "^4.1.10",
-    "mini-css-extract-plugin": "^0.9.0",
+    "mini-css-extract-plugin": "^0.10.0",
     "purgecss": "^2.3.0",
     "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.6.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
