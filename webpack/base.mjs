@@ -3,6 +3,7 @@ import sass from 'sass'
 import webpack from 'webpack'
 import WebpackBar from 'webpackbar'
 
+import getConfig from '../lib/get-config.mjs'
 import generateFileLoaderOptions from '../lib/generate-file-loader-options.mjs'
 
 /**
@@ -10,20 +11,21 @@ import generateFileLoaderOptions from '../lib/generate-file-loader-options.mjs'
  * @param {Object} options Options
  * @param {string} options.context Working directory
  */
-export default function ({ context }) {
-  const config = new Config()
+export default async function ({ context }) {
+  const projectConfig = await getConfig({ context })
+  const webpackConfig = new Config()
 
   /* eslint-disable indent */
 
-  config.context(context)
+  webpackConfig.context(context)
 
-  config.entry('main')
+  webpackConfig.entry('main')
     .add('./src/main.js')
     .add('./src/main.scss')
 
   // JS
 
-  config.module.rule('js')
+  webpackConfig.module.rule('js')
     .test(/\.m?js$/)
     .exclude
       .add(/node_modules/)
@@ -34,7 +36,7 @@ export default function ({ context }) {
 
   // CSS
 
-  config.module.rule('css')
+  webpackConfig.module.rule('css')
     .test(/\.s?css$/)
     .use('css-loader')
       .loader('css-loader')
@@ -57,42 +59,54 @@ export default function ({ context }) {
 
   // Static assets
 
-  config.module
+  webpackConfig.module
     .rule('img')
       .test(/\.(png|jpe?g|webp|svg)(\?.*)?$/)
       .use('file-loader')
         .loader('file-loader')
-        .options(generateFileLoaderOptions({ type: 'img' }))
+        .options(generateFileLoaderOptions({
+          type: 'img',
+          hash: projectConfig.hashFiles
+        }))
 
-  config.module
+  webpackConfig.module
     .rule('video')
       .test(/\.(mp4|webm)(\?.*)?$/)
       .use('file-loader')
         .loader('file-loader')
-        .options(generateFileLoaderOptions({ type: 'video' }))
+        .options(generateFileLoaderOptions({
+          type: 'video',
+          hash: projectConfig.hashFiles
+        }))
 
-  config.module
+  webpackConfig.module
     .rule('audio')
       .test(/\.(ogg|mp3|wav|flac|aac)(\?.*)?$/)
       .use('file-loader')
         .loader('file-loader')
-        .options(generateFileLoaderOptions({ type: 'audio' }))
+        .options(generateFileLoaderOptions({
+          type: 'audio',
+          hash: projectConfig.hashFiles
+        }))
 
-  config.module
+  webpackConfig.module
     .rule('font')
       .test(/\.(woff2?)(\?.*)?$/)
       .use('file-loader')
         .loader('file-loader')
-        .options(generateFileLoaderOptions({ type: 'font' }))
+        .options(generateFileLoaderOptions({
+          type: 'font',
+          hash: projectConfig.hashFiles
+        }))
 
   // Plugins
 
-  config.plugin('env')
+  webpackConfig.plugin('env')
     .use(webpack.EnvironmentPlugin, [
       'NODE_ENV'
     ])
 
-  config.plugin('progress')
+  webpackConfig.plugin('progress')
     .use(WebpackBar, [{
       color: '#ff721f',
       profile: true
@@ -100,5 +114,5 @@ export default function ({ context }) {
 
   /* eslint-enable indent */
 
-  return config
+  return webpackConfig
 }

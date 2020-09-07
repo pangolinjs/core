@@ -4,6 +4,7 @@ import webpack from 'webpack'
 import copyDirSync from '../lib/copy-dir-sync.mjs'
 import createFractalInstance from '../lib/create-fractal-instance.mjs'
 import createWebpackOptions from '../webpack/build.mjs'
+import getAssetFiles from '../lib/get-asset-files.mjs'
 import getPath from '../lib/get-path.mjs'
 
 /**
@@ -47,7 +48,8 @@ export default async function ({ context }) {
 
     const fractalInstance = await createFractalInstance({
       context,
-      assetsPath: webpackOptions.output.publicPath
+      assetsPath: webpackOptions.output.publicPath,
+      assetsFiles: getAssetFiles({ files: Object.keys(stats.compilation.assets) })
     })
 
     const fractalConsole = fractalInstance.cli.console

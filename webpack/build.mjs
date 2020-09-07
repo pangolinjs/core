@@ -1,6 +1,7 @@
 import BundleAnalyzer from 'webpack-bundle-analyzer'
 import CSSExtractPlugin from 'mini-css-extract-plugin'
 import cssnano from 'cssnano'
+import ManifestPlugin from 'webpack-manifest-plugin'
 
 import generateOutputFilename from '../lib/generate-output-filename.mjs'
 import getConfig from '../lib/get-config.mjs'
@@ -13,8 +14,8 @@ import webpackBaseConfig from './base.mjs'
  * @param {string} options.context Working directory
  */
 export default async function ({ context }) {
-  const config = await getConfig({ context })
-  const webpackConfig = webpackBaseConfig({ context })
+  const projectConfig = await getConfig({ context })
+  const webpackConfig = await webpackBaseConfig({ context })
 
   /* eslint-disable indent */
 
@@ -24,20 +25,11 @@ export default async function ({ context }) {
 
   webpackConfig.output
     .path(getPath({ context }).assets)
-    .filename(generateOutputFilename({ type: 'js' }))
-    .publicPath(config.base + 'assets/')
-
-  webpackConfig.optimization
-    .splitChunks({
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          enforce: true,
-          name: 'vendors',
-          chunks: 'all'
-        }
-      }
-    })
+    .filename(generateOutputFilename({
+      type: 'js',
+      hash: projectConfig.hashFiles
+    }))
+    .publicPath(projectConfig.base + 'assets/')
 
   // CSS
 
@@ -64,8 +56,14 @@ export default async function ({ context }) {
 
   webpackConfig.plugin('css-extract')
     .use(CSSExtractPlugin, [{
-      filename: generateOutputFilename({ type: 'css' })
+      filename: generateOutputFilename({
+        type: 'css',
+        hash: projectConfig.hashFiles
+      })
     }])
+
+  webpackConfig.plugin('manifest')
+    .use(ManifestPlugin)
 
   webpackConfig.plugin('bundle-analyzer')
     .use(BundleAnalyzer.BundleAnalyzerPlugin, [{

@@ -13,8 +13,8 @@ import webpackBaseConfig from './base.mjs'
  * @param {number} options.port Where webpack serves files
  * @param {number} options.uiPort Where fractal serves files
  */
-export default function ({ context, host, port, uiPort }) {
-  const webpackConfig = webpackBaseConfig({ context })
+export default async function ({ context, host, port, uiPort }) {
+  const webpackConfig = await webpackBaseConfig({ context })
   const networkIPs = getHostIPs()
 
   /* eslint-disable indent */

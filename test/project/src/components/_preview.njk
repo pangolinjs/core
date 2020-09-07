@@ -3,19 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{{ _target.title }} | {{ _config.project.title }}</title>
 
-    {% if _config.environment === 'production' %}
-      <!-- Remove vendor.js if no third-party JS is included. -->
-      <script src="{{ (_config.assets_path + 'js/vendors.js') | path }}" defer></script>
-      <script src="{{ (_config.assets_path + 'js/main.js') | path }}" defer></script>
-
-      <!-- Remove vendor.css if no third-party CSS is included. -->
-      <link rel="stylesheet" href="{{ (_config.assets_path + 'css/vendor.css') | path }}">
-      <link rel="stylesheet" href="{{ (_config.assets_path + 'css/main.css') | path }}">
-    {% else %}
-      <script src="{{ _config.assets_path }}main.js" defer></script>
-    {% endif %}
+    {% head %}
   </head>
   <body>
     {{ yield | safe }}
