@@ -23,12 +23,12 @@ export default async function ({ context }) {
 
   fs.rmdirSync(assetsPath, { recursive: true })
 
-  const webpackOptions = (await createWebpackOptions({
+  const webpackOptions = await createWebpackOptions({
     context,
     host,
     port: webpackPort,
     uiPort: fractalPort
-  })).toConfig()
+  })
 
   const webpackCompiler = webpack(webpackOptions)
   const webpackServer = new WebpackDevServer(webpackCompiler, {

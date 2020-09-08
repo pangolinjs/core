@@ -3,7 +3,6 @@ import util from 'util'
 
 import buildConfig from '../webpack/build.mjs'
 import devConfig from '../webpack/dev.mjs'
-import staticConfig from '../webpack/static.mjs'
 
 /**
  * Print webpack configuration
@@ -21,19 +20,15 @@ export default async function ({ context, command }) {
     case 'build':
       config = buildConfig
       break
-    case 'static':
-      config = staticConfig
-      break
     default:
       console.log(`Please specify one of the following arguments:`)
       console.log(`  - dev`)
       console.log(`  - build`)
-      console.log(`  - static`)
       console.log(`\nFor example: ${green('npm run inspect -- dev')}`)
       return
   }
 
-  config = (await config({ context })).toConfig()
+  config = await config({ context })
 
   config = util.inspect(config, {
     colors: true,

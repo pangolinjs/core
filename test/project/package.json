@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "node ../../bin/pangolin-core.mjs dev",
     "build": "node ../../bin/pangolin-core.mjs build",
-    "static": "node ../../bin/pangolin-core.mjs static",
     "inspect": "node ../../bin/pangolin-core.mjs inspect"
   }
 }

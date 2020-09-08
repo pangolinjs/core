@@ -50,5 +50,5 @@ export default async function ({ context, host, port, uiPort }) {
 
   /* eslint-enable indent */
 
-  return webpackConfig
+  return webpackConfig.toConfig()
 }
