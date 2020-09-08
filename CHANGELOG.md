@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-alpha.3](https://github.com/pangolinjs/core/compare/v6.0.0-alpha.2...v6.0.0-alpha.3) (2020-09-08)
+
+
+### Features
+
+* Generate relative assets paths ([3941979](https://github.com/pangolinjs/core/commit/394197936795a022c5f55d314c8886a630ea913d))
+* Introduce separate "static" command ([1e9ced4](https://github.com/pangolinjs/core/commit/1e9ced4b43476a3a126073cf1cbfc30c25213f6c))
+* Separate "static" command isn't necessary with relative URLs ([de7f405](https://github.com/pangolinjs/core/commit/de7f4052f250cea01018fc5554ce06e3bc95c88b))
+
 ## [6.0.0-alpha.2](https://github.com/pangolinjs/core/compare/v6.0.0-alpha.1...v6.0.0-alpha.2) (2020-09-07)
 
 ## [6.0.0-alpha.1](https://github.com/pangolinjs/core/compare/v6.0.0-alpha.0...v6.0.0-alpha.1) (2020-09-07)
