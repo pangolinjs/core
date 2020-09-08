@@ -29,7 +29,7 @@ export default async function ({ context }) {
       type: 'js',
       hash: projectConfig.hashFiles
     }))
-    .publicPath(projectConfig.base + 'assets/')
+    .publicPath('/assets/')
 
   // CSS
 
