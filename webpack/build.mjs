@@ -42,13 +42,14 @@ export default async function ({ context }) {
       .after('css-loader')
       .loader('postcss-loader')
       .options({
-        sourceMap: true,
-        plugins: [cssnano({
-          preset: ['default', {
-            mergeLonghand: false,
-            mergeRules: false
-          }]
-        })]
+        postcssOptions: {
+          plugins: [cssnano({
+            preset: ['default', {
+              mergeLonghand: false,
+              mergeRules: false
+            }]
+          })]
+        }
       })
       .end()
 
