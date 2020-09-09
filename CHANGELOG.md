@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-alpha.4](https://github.com/pangolinjs/core/compare/v6.0.0-alpha.3...v6.0.0-alpha.4) (2020-09-09)
+
+
+### Features
+
+* Resolve CSS URLs relative to file paths ([c1338cf](https://github.com/pangolinjs/core/commit/c1338cfbd49fd3a6c703aff0fccd85ae6677fdc6))
+
+
+### Bug Fixes
+
+* Scope Pangolin's Nunjucks head tag ([8d66559](https://github.com/pangolinjs/core/commit/8d665592b0dc7549489c6d8e2664380711fbbfb7))
+
 ## [6.0.0-alpha.3](https://github.com/pangolinjs/core/compare/v6.0.0-alpha.2...v6.0.0-alpha.3) (2020-09-08)
 
 
