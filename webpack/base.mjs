@@ -46,9 +46,9 @@ export default async function ({ context }) {
       .end()
     .use('postcss-loader')
       .loader('postcss-loader')
-      .options({
-        sourceMap: true
-      })
+      .end()
+    .use('resolve-url-loader')
+      .loader('resolve-url-loader')
       .end()
     .use('sass-loader')
       .loader('sass-loader')
