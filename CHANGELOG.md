@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-alpha.5](https://github.com/pangolinjs/core/compare/v6.0.0-alpha.4...v6.0.0-alpha.5) (2020-09-09)
+
+
+### Bug Fixes
+
+* Switch to new postcss-loader options format ([77df2a7](https://github.com/pangolinjs/core/commit/77df2a76361213ecdebd220c3d82687579af023c))
+
 ## [6.0.0-alpha.4](https://github.com/pangolinjs/core/compare/v6.0.0-alpha.3...v6.0.0-alpha.4) (2020-09-09)
 
 
