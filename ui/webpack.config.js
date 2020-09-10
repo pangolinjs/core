@@ -74,10 +74,11 @@ config.module
     .use('postcss-loader')
       .loader('postcss-loader')
       .options({
-        plugins: [
-          require('cssnano')()
-        ],
-        sourceMap: true
+        postcssOptions: {
+          plugins: [
+            require('cssnano')()
+          ]
+        }
       })
       .end()
     .use('sass-loader')

@@ -40,7 +40,7 @@ export default {
 <style lang="scss">
 html {
   // Battle with Vuetify's specificity.
-  // stylelint-disable-next-line declaration-no-important
+  /* stylelint-disable-next-line declaration-no-important */
   overflow-y: auto !important;
 }
 
