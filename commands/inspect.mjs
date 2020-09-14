@@ -21,9 +21,9 @@ export default async function ({ context, command }) {
       config = buildConfig
       break
     default:
-      console.log(`Please specify one of the following arguments:`)
-      console.log(`  - dev`)
-      console.log(`  - build`)
+      console.log('Please specify one of the following arguments:')
+      console.log('  - dev')
+      console.log('  - build')
       console.log(`\nFor example: ${green('npm run inspect -- dev')}`)
       return
   }

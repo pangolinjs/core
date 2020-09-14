@@ -20,9 +20,9 @@ switch (command) {
     inspect({ context, command: process.argv[3] })
     break
   default:
-    console.log(`Please use one of the following commands:`)
-    console.log(`  - dev`)
-    console.log(`  - build`)
-    console.log(`  - inspect (dev|build)`)
+    console.log('Please use one of the following commands:')
+    console.log('  - dev')
+    console.log('  - build')
+    console.log('  - inspect (dev|build)')
     console.log(`\nFor example: ${green('pangolin-core dev')}`)
 }
