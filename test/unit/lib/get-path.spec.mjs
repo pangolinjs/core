@@ -1,8 +1,8 @@
 import test from 'ava'
 
-import getPath from '../../../lib/get-path.mjs'
+import getPaths from '../../../lib/get-paths.mjs'
 
 test('gets paths', t => {
-  const result = getPath({ context: 'test' })
+  const result = getPaths({ context: 'test' })
   t.snapshot(result)
 })

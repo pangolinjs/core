@@ -5,7 +5,7 @@ import copyDirSync from '../lib/copy-dir-sync.mjs'
 import createFractalInstance from '../lib/create-fractal-instance.mjs'
 import getAssetFiles from '../lib/get-asset-files.mjs'
 import getConfig from '../lib/get-config.mjs'
-import getPath from '../lib/get-path.mjs'
+import getPaths from '../lib/get-paths.mjs'
 import getWebpackConfig from '../webpack/build.mjs'
 
 /**
@@ -17,23 +17,19 @@ export default async function ({ context }) {
   process.env.NODE_ENV = 'production'
 
   const config = await getConfig({ context })
-
-  const assetsPath = getPath({ context }).assets
-  const distPath = getPath({ context }).dist
-  const publicPath = getPath({ context }).public
-  const staticPath = getPath({ context }).static
-
-  fs.rmdirSync(assetsPath, { recursive: true })
-  fs.rmdirSync(distPath, { recursive: true })
-  fs.rmdirSync(staticPath, { recursive: true })
-
+  const paths = getPaths({ context })
   const webpackConfig = await getWebpackConfig({ context })
 
   if (typeof config.webpack === 'function') {
     config.webpack(webpackConfig)
   }
 
+  const publicPath = webpackConfig.output.get('publicPath')
   const webpackCompiler = webpack(webpackConfig.toConfig())
+
+  fs.rmdirSync(paths.outputAssets, { recursive: true })
+  fs.rmdirSync(paths.outputBuild, { recursive: true })
+  fs.rmdirSync(paths.outputStatic, { recursive: true })
 
   webpackCompiler.run(async (error, stats) => {
     if (error) {
@@ -52,14 +48,11 @@ export default async function ({ context }) {
       process.exit(1)
     }
 
-    copyDirSync(publicPath, distPath)
+    copyDirSync(paths.inputPublic, paths.outputBuild)
 
-    const fractalInstance = await createFractalInstance({
-      context,
-      assetsPath: webpackConfig.output.get('publicPath'),
-      assetsFiles: getAssetFiles({ files: Object.keys(stats.compilation.assets) })
-    })
+    const assets = getAssetFiles({ files: Object.keys(stats.compilation.assets) })
 
+    const fractalInstance = await createFractalInstance({ context, publicPath, assets })
     const fractalConsole = fractalInstance.cli.console
     const fractalBuilder = fractalInstance.web.builder()
 

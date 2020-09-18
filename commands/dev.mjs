@@ -4,7 +4,7 @@ import WebpackDevServer from 'webpack-dev-server'
 
 import createFractalInstance from '../lib/create-fractal-instance.mjs'
 import getConfig from '../lib/get-config.mjs'
-import getPath from '../lib/get-path.mjs'
+import getPaths from '../lib/get-paths.mjs'
 import getPort from '../lib/get-port.mjs'
 import getWebpackConfig from '../webpack/dev.mjs'
 
@@ -17,25 +17,17 @@ export default async function ({ context }) {
   process.env.NODE_ENV = 'development'
 
   const config = await getConfig({ context })
-
-  const assetsPath = getPath({ context }).assets
-
+  const paths = getPaths({ context })
   const host = '0.0.0.0'
-  const fractalPort = await getPort(8080)
-  const webpackPort = await getPort(8081)
-
-  fs.rmdirSync(assetsPath, { recursive: true })
-
-  const webpackConfig = await getWebpackConfig({
-    context,
-    host,
-    port: webpackPort,
-    uiPort: fractalPort
-  })
+  const webpackPort = await getPort(8080)
+  const fractalPort = await getPort(8081)
+  const webpackConfig = await getWebpackConfig({ context, host, port: webpackPort })
 
   if (typeof config.webpack === 'function') {
     config.webpack(webpackConfig)
   }
+
+  const publicPath = webpackConfig.output.get('publicPath')
 
   const webpackCompiler = webpack(webpackConfig.toConfig())
   const webpackServer = new WebpackDevServer(webpackCompiler, {
@@ -44,17 +36,16 @@ export default async function ({ context }) {
     sockPort: webpackPort,
     noInfo: true,
     clientLogLevel: 'error',
-    headers: {
-      'access-control-allow-origin': '*'
+    publicPath,
+    proxy: {
+      [`!${publicPath}**`]: `http://${host}:${fractalPort}`
     }
   })
 
-  webpackServer.listen(webpackPort, host, async () => {
-    const fractalInstance = await createFractalInstance({
-      context,
-      assetsPath: webpackConfig.output.get('publicPath')
-    })
+  fs.rmdirSync(paths.outputAssets, { recursive: true })
 
+  webpackServer.listen(webpackPort, host, async () => {
+    const fractalInstance = await createFractalInstance({ context, publicPath })
     const fractalServer = fractalInstance.web.server({
       sync: true,
       port: fractalPort,

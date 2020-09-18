@@ -11,9 +11,8 @@ import webpackBaseConfig from './base.mjs'
  * @param {string} options.context Working directory
  * @param {string} options.host Here it runs
  * @param {number} options.port Where webpack serves files
- * @param {number} options.uiPort Where fractal serves files
  */
-export default async function ({ context, host, port, uiPort }) {
+export default async function ({ context, host, port }) {
   const webpackConfig = await webpackBaseConfig({ context })
   const networkIPs = getHostIPs()
 
@@ -25,7 +24,6 @@ export default async function ({ context, host, port, uiPort }) {
 
   webpackConfig.output
     .filename('main.js')
-    .publicPath(`http://${host}:${port}/`)
 
   webpackConfig.module.rule('css')
     .use('style-loader')
@@ -38,8 +36,8 @@ export default async function ({ context, host, port, uiPort }) {
       compilationSuccessInfo: {
         messages: [
           'Pangolin.js dev server running at:',
-          '  - Local:   ' + blue(`http://${formatIP(host)}:${uiPort}`),
-          ...networkIPs.map(ip => '  - Network: ' + blue(`http://${ip}:${uiPort}`))
+          '  - Local:   ' + blue(`http://${formatIP(host)}:${port}`),
+          ...networkIPs.map(ip => '  - Network: ' + blue(`http://${ip}:${port}`))
         ],
         notes: [
           'Note that the development build is not optimized.',

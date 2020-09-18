@@ -23,6 +23,9 @@ export default async function ({ context }) {
     .add('./src/main.js')
     .add('./src/main.scss')
 
+  webpackConfig.output
+    .publicPath('/assets/')
+
   // JS
 
   webpackConfig.module.rule('js')

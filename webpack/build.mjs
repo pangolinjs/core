@@ -5,7 +5,7 @@ import ManifestPlugin from 'webpack-manifest-plugin'
 
 import generateOutputFilename from '../lib/generate-output-filename.mjs'
 import getConfig from '../lib/get-config.mjs'
-import getPath from '../lib/get-path.mjs'
+import getPaths from '../lib/get-paths.mjs'
 import webpackBaseConfig from './base.mjs'
 
 /**
@@ -16,6 +16,7 @@ import webpackBaseConfig from './base.mjs'
 export default async function ({ context }) {
   const projectConfig = await getConfig({ context })
   const webpackConfig = await webpackBaseConfig({ context })
+  const paths = getPaths({ context })
 
   /* eslint-disable indent */
 
@@ -24,12 +25,11 @@ export default async function ({ context }) {
     .devtool('source-map')
 
   webpackConfig.output
-    .path(getPath({ context }).assets)
+    .path(paths.outputAssets)
     .filename(generateOutputFilename({
       type: 'js',
       hash: projectConfig.hashFiles
     }))
-    .publicPath('/assets/')
 
   // CSS
 
