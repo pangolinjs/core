@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-beta.0](https://github.com/pangolinjs/core/compare/v6.0.0-alpha.5...v6.0.0-beta.0) (2020-09-18)
+
+
+### Features
+
+* Expose engine configuration ([1eaf009](https://github.com/pangolinjs/core/commit/1eaf009c027eb0fcf6d5bc9d0f06fdaf90ced60d))
+* Expose webpack configuration ([48872dd](https://github.com/pangolinjs/core/commit/48872dd90e2cfc987df256b933e1838a6d4c2486))
+* Serve UI and files from a single port ([dfd040e](https://github.com/pangolinjs/core/commit/dfd040e992dcee6b498e7e62fc0d0f324d6301a1))
+
 ## [6.0.0-alpha.5](https://github.com/pangolinjs/core/compare/v6.0.0-alpha.4...v6.0.0-alpha.5) (2020-09-09)
 
 
