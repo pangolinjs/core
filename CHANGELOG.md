@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-beta.1](https://github.com/pangolinjs/core/compare/v6.0.0-beta.0...v6.0.0-beta.1) (2020-09-18)
+
+
+### Bug Fixes
+
+* Set correct public asset path for Fractal ([ea990ae](https://github.com/pangolinjs/core/commit/ea990ae8d8a9dbf447b250a262356bf3e974b88f))
+
 ## [6.0.0-beta.0](https://github.com/pangolinjs/core/compare/v6.0.0-alpha.5...v6.0.0-beta.0) (2020-09-18)
 
 
