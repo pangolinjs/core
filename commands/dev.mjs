@@ -3,9 +3,10 @@ import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 
 import createFractalInstance from '../lib/create-fractal-instance.mjs'
-import createWebpackOptions from '../webpack/dev.mjs'
+import getConfig from '../lib/get-config.mjs'
 import getPath from '../lib/get-path.mjs'
 import getPort from '../lib/get-port.mjs'
+import getWebpackConfig from '../webpack/dev.mjs'
 
 /**
  * Run development server
@@ -15,6 +16,8 @@ import getPort from '../lib/get-port.mjs'
 export default async function ({ context }) {
   process.env.NODE_ENV = 'development'
 
+  const config = await getConfig({ context })
+
   const assetsPath = getPath({ context }).assets
 
   const host = '0.0.0.0'
@@ -23,14 +26,18 @@ export default async function ({ context }) {
 
   fs.rmdirSync(assetsPath, { recursive: true })
 
-  const webpackOptions = await createWebpackOptions({
+  const webpackConfig = await getWebpackConfig({
     context,
     host,
     port: webpackPort,
     uiPort: fractalPort
   })
 
-  const webpackCompiler = webpack(webpackOptions)
+  if (typeof config.webpack === 'function') {
+    config.webpack(webpackConfig)
+  }
+
+  const webpackCompiler = webpack(webpackConfig.toConfig())
   const webpackServer = new WebpackDevServer(webpackCompiler, {
     hot: true,
     contentBase: false,
@@ -45,7 +52,7 @@ export default async function ({ context }) {
   webpackServer.listen(webpackPort, host, async () => {
     const fractalInstance = await createFractalInstance({
       context,
-      assetsPath: webpackOptions.output.publicPath
+      assetsPath: webpackConfig.output.get('publicPath')
     })
 
     const fractalServer = fractalInstance.web.server({

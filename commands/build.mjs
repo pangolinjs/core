@@ -3,9 +3,10 @@ import webpack from 'webpack'
 
 import copyDirSync from '../lib/copy-dir-sync.mjs'
 import createFractalInstance from '../lib/create-fractal-instance.mjs'
-import createWebpackOptions from '../webpack/build.mjs'
 import getAssetFiles from '../lib/get-asset-files.mjs'
+import getConfig from '../lib/get-config.mjs'
 import getPath from '../lib/get-path.mjs'
+import getWebpackConfig from '../webpack/build.mjs'
 
 /**
  * Build production assets and static export
@@ -14,6 +15,8 @@ import getPath from '../lib/get-path.mjs'
  */
 export default async function ({ context }) {
   process.env.NODE_ENV = 'production'
+
+  const config = await getConfig({ context })
 
   const assetsPath = getPath({ context }).assets
   const distPath = getPath({ context }).dist
@@ -24,8 +27,13 @@ export default async function ({ context }) {
   fs.rmdirSync(distPath, { recursive: true })
   fs.rmdirSync(staticPath, { recursive: true })
 
-  const webpackOptions = await createWebpackOptions({ context })
-  const webpackCompiler = webpack(webpackOptions)
+  const webpackConfig = await getWebpackConfig({ context })
+
+  if (typeof config.webpack === 'function') {
+    config.webpack(webpackConfig)
+  }
+
+  const webpackCompiler = webpack(webpackConfig.toConfig())
 
   webpackCompiler.run(async (error, stats) => {
     if (error) {
@@ -48,7 +56,7 @@ export default async function ({ context }) {
 
     const fractalInstance = await createFractalInstance({
       context,
-      assetsPath: webpackOptions.output.publicPath,
+      assetsPath: webpackConfig.output.get('publicPath'),
       assetsFiles: getAssetFiles({ files: Object.keys(stats.compilation.assets) })
     })
 

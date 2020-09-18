@@ -1,8 +1,9 @@
 import { green } from 'kleur/colors'
 import util from 'util'
 
-import buildConfig from '../webpack/build.mjs'
-import devConfig from '../webpack/dev.mjs'
+import webpackBuild from '../webpack/build.mjs'
+import webpackDev from '../webpack/dev.mjs'
+import getConfig from '../lib/get-config.mjs'
 
 /**
  * Print webpack configuration
@@ -11,14 +12,18 @@ import devConfig from '../webpack/dev.mjs'
  * @param {'dev'|'build'} options.command Command to inspect
  */
 export default async function ({ context, command }) {
-  let config
+  const config = await getConfig({ context })
+
+  let webpackOptions
 
   switch (command) {
     case 'dev':
-      config = devConfig
+      process.env.NODE_ENV = 'development'
+      webpackOptions = webpackDev
       break
     case 'build':
-      config = buildConfig
+      process.env.NODE_ENV = 'production'
+      webpackOptions = webpackBuild
       break
     default:
       console.log('Please specify one of the following arguments:')
@@ -28,12 +33,16 @@ export default async function ({ context, command }) {
       return
   }
 
-  config = await config({ context })
+  webpackOptions = await webpackOptions({ context })
 
-  config = util.inspect(config, {
+  if (typeof config.webpack === 'function') {
+    config.webpack(webpackOptions)
+  }
+
+  webpackOptions = util.inspect(webpackOptions.toConfig(), {
     colors: true,
     depth: null
   })
 
-  console.log(config)
+  console.log(webpackOptions)
 }

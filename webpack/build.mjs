@@ -74,5 +74,5 @@ export default async function ({ context }) {
 
   /* eslint-enable indent */
 
-  return webpackConfig.toConfig()
+  return webpackConfig
 }
