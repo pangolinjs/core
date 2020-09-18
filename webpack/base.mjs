@@ -111,6 +111,7 @@ export default async function ({ context }) {
 
   webpackConfig.plugin('progress')
     .use(WebpackBar, [{
+      name: 'Pangolin.js',
       color: '#ff721f',
       profile: true
     }])
