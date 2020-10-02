@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.8.5](https://github.com/pangolinjs/core/compare/v5.8.4...v5.8.5) (2020-10-02)
+
+
+### Bug Fixes
+
+* webpack's ecmaVersion option has been replaced with browserslist ([1656cfc](https://github.com/pangolinjs/core/commit/1656cfc066c41d27c6e0a6c9a68d8db2897631e0))
+
 ### [5.8.4](https://github.com/pangolinjs/core/compare/v5.8.3...v5.8.4) (2020-09-10)
 
 ### [5.8.3](https://github.com/pangolinjs/core/compare/v5.8.2...v5.8.3) (2020-08-24)
