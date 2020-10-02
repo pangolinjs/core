@@ -1,9 +1,3 @@
 // Test CSS minifaction
 /* stylelint-disable-next-line color-hex-length */
 $color-text: #333333;
-
-// stylelint-disable-next-line selector-pseudo-class-no-unknown
-:export {
-  // stylelint-disable-next-line property-no-unknown
-  colortext: $color-text;
-}
