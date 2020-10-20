@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-beta.3](https://github.com/pangolinjs/core/compare/v6.0.0-beta.2...v6.0.0-beta.3) (2020-10-20)
+
 ## [6.0.0-beta.2](https://github.com/pangolinjs/core/compare/v6.0.0-beta.1...v6.0.0-beta.2) (2020-10-20)
 
 ## [6.0.0-beta.1](https://github.com/pangolinjs/core/compare/v6.0.0-beta.0...v6.0.0-beta.1) (2020-09-18)
