@@ -1,5 +1,5 @@
 ---
-title: Pangolin.js Next
+title: Pangolin.js
 ---
 
 Let's have a look at the Fractal design system framework.
