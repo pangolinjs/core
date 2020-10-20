@@ -35,6 +35,8 @@ For more information take a look at the [Pangolin.js docs](https://pangolinjs.or
 
 ## Contribute
 
+Requires [Node.js v15 or higher](https://nodejs.org).
+
 ```bash
 # Build UI
 npm run prepare
