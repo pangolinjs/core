@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-beta.4](https://github.com/pangolinjs/core/compare/v6.0.0-beta.3...v6.0.0-beta.4) (2020-10-21)
+
+
+### Bug Fixes
+
+* Apply correct number of loaders before css-loader ([adb453f](https://github.com/pangolinjs/core/commit/adb453fabfe554d243537d49007e07c0bace0343))
+* Temporary solution for broken HMR ([381419d](https://github.com/pangolinjs/core/commit/381419d99de1e0abf4679f9e97762f756de6fb0a))
+
 ## [6.0.0-beta.3](https://github.com/pangolinjs/core/compare/v6.0.0-beta.2...v6.0.0-beta.3) (2020-10-20)
 
 ## [6.0.0-beta.2](https://github.com/pangolinjs/core/compare/v6.0.0-beta.1...v6.0.0-beta.2) (2020-10-20)
