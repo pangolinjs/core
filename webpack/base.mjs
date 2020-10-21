@@ -44,7 +44,7 @@ export default async function ({ context }) {
     .use('css-loader')
       .loader('css-loader')
       .options({
-        importLoaders: 2
+        importLoaders: 3
       })
       .end()
     .use('postcss-loader')
