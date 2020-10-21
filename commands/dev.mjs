@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs/promises'
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 
@@ -41,7 +41,7 @@ export default async function ({ context }) {
     }
   })
 
-  fs.rmdirSync(paths.outputAssets, { recursive: true })
+  await fs.rm(paths.outputAssets, { recursive: true, force: true })
 
   webpackServer.listen(webpackPort, host, async () => {
     const fractalInstance = await createFractalInstance({ context, publicPath })

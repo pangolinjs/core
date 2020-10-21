@@ -2,7 +2,7 @@
 
 Framework for design system development with Nunjucks, Sass, and JavaScript.
 
-Requires [Node.js v14.7 or higher](https://nodejs.org).
+Requires [Node.js v15 or higher](https://nodejs.org).
 
 ## Create a new project with `npx`
 
@@ -34,8 +34,6 @@ npm run lint:js
 For more information take a look at the [Pangolin.js docs](https://pangolinjs.org).
 
 ## Contribute
-
-Requires [Node.js v15 or higher](https://nodejs.org).
 
 ```bash
 # Build UI

@@ -1,7 +1,7 @@
-import fs from 'fs'
+import fs from 'fs/promises'
 import webpack from 'webpack'
 
-import copyDirSync from '../lib/copy-dir-sync.mjs'
+import copyDir from '../lib/copy-dir.mjs'
 import createFractalInstance from '../lib/create-fractal-instance.mjs'
 import getAssetFiles from '../lib/get-asset-files.mjs'
 import getConfig from '../lib/get-config.mjs'
@@ -27,9 +27,9 @@ export default async function ({ context }) {
   const publicPath = webpackConfig.output.get('publicPath')
   const webpackCompiler = webpack(webpackConfig.toConfig())
 
-  fs.rmdirSync(paths.outputAssets, { recursive: true })
-  fs.rmdirSync(paths.outputBuild, { recursive: true })
-  fs.rmdirSync(paths.outputStatic, { recursive: true })
+  await fs.rm(paths.outputAssets, { recursive: true, force: true })
+  await fs.rm(paths.outputBuild, { recursive: true, force: true })
+  await fs.rm(paths.outputStatic, { recursive: true, force: true })
 
   webpackCompiler.run(async (error, stats) => {
     if (error) {
@@ -48,7 +48,7 @@ export default async function ({ context }) {
       process.exit(1)
     }
 
-    copyDirSync(paths.inputPublic, paths.outputBuild)
+    await copyDir(paths.inputPublic, paths.outputBuild)
 
     const assets = getAssetFiles({ files: Object.keys(stats.compilation.assets) })
 
