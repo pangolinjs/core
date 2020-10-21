@@ -33,7 +33,6 @@ export default async function ({ context }) {
   const webpackServer = new WebpackDevServer(webpackCompiler, {
     hot: true,
     contentBase: false,
-    sockPort: webpackPort,
     noInfo: true,
     clientLogLevel: 'error',
     publicPath,
