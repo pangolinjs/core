@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-rc.0](https://github.com/pangolinjs/core/compare/v6.0.0-beta.4...v6.0.0-rc.0) (2020-11-04)
+
+
+### Features
+
+* Use custom sidebar information config (Close [#97](https://github.com/pangolinjs/core/issues/97)) ([cd3bfb2](https://github.com/pangolinjs/core/commit/cd3bfb25a59206f759abe7b33b8e5e918650cbb4))
+
+
+### Bug Fixes
+
+* Gracefully shut down dev server ([62ee1ae](https://github.com/pangolinjs/core/commit/62ee1ae5ec98a15a3626239e2186c270cd611edb))
+
 ## [6.0.0-beta.4](https://github.com/pangolinjs/core/compare/v6.0.0-beta.3...v6.0.0-beta.4) (2020-10-21)
 
 
