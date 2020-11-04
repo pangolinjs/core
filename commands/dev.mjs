@@ -20,7 +20,7 @@ export default async function ({ context }) {
   const paths = getPaths({ context })
   const host = '0.0.0.0'
   const webpackPort = await getPort(8080)
-  const fractalPort = await getPort(8081)
+  const fractalPort = await getPort(webpackPort + 1)
   const webpackConfig = await getWebpackConfig({ context, host, port: webpackPort })
 
   if (typeof config.webpack === 'function') {
