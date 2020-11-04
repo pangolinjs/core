@@ -63,6 +63,17 @@ export default async function ({ context }) {
       fractalInstance.cli.console.error(error.message)
     })
 
+    fractalServer.on('stopped', () => {
+      // Exit the whole application after the webpack-dev-server has been closed.
+      webpackServer.close(() => process.exit())
+    })
+
+    process.on('SIGINT', () => {
+      // webpack-dev-server will be closed after the Fractal server has been stopped.
+      // See above listener for the Fractal 'stopped' event.
+      fractalServer.stop()
+    })
+
     fractalServer.start()
   })
 }
