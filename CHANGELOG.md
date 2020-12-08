@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.8.6](https://github.com/pangolinjs/core/compare/v5.8.5...v5.8.6) (2020-12-08)
+
 ### [5.8.5](https://github.com/pangolinjs/core/compare/v5.8.4...v5.8.5) (2020-10-02)
 
 
