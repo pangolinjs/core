@@ -1,7 +1,7 @@
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin'
 import BundleAnalyzer from 'webpack-bundle-analyzer'
 import CSSExtractPlugin from 'mini-css-extract-plugin'
 import cssnano from 'cssnano'
-import ManifestPlugin from 'webpack-manifest-plugin'
 
 import generateOutputFilename from '../lib/generate-output-filename.mjs'
 import getConfig from '../lib/get-config.mjs'
@@ -64,7 +64,7 @@ export default async function ({ context }) {
     }])
 
   webpackConfig.plugin('manifest')
-    .use(ManifestPlugin)
+    .use(WebpackManifestPlugin)
 
   webpackConfig.plugin('bundle-analyzer')
     .use(BundleAnalyzer.BundleAnalyzerPlugin, [{
