@@ -3,6 +3,9 @@ module.exports = {
   extends: [
     '@pangolinjs'
   ],
+  rules: {
+    'no-console': 'off'
+  },
   overrides: [
     {
       files: [

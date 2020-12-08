@@ -31,11 +31,15 @@ export default async function ({ context }) {
 
   const webpackCompiler = webpack(webpackConfig.toConfig())
   const webpackServer = new WebpackDevServer(webpackCompiler, {
-    hot: true,
-    contentBase: false,
-    noInfo: true,
-    clientLogLevel: 'error',
-    publicPath,
+    static: [
+      {
+        publicPath,
+        watch: false
+      }
+    ],
+    client: {
+      logging: 'none'
+    },
     proxy: {
       [`!${publicPath}**`]: `http://${host}:${fractalPort}`
     }

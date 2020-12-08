@@ -21,7 +21,7 @@ export default async function ({ context, host, port }) {
   webpackConfig
     .mode('development')
     .devtool('eval-cheap-module-source-map')
-    .target('web')
+    .set('infrastructureLogging', { level: 'error' })
 
   webpackConfig.output
     .filename('main.js')
