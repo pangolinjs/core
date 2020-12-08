@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-rc.1](https://github.com/pangolinjs/core/compare/v6.0.0-rc.0...v6.0.0-rc.1) (2020-12-08)
+
+
+### Features
+
+* Allow UI label customization ([d77f28b](https://github.com/pangolinjs/core/commit/d77f28bfd2517c98d0c8c51468c23801e4a73f98))
+
+
+### Bug Fixes
+
+* Increment port for Fractal ([d3506ab](https://github.com/pangolinjs/core/commit/d3506ab0c561749eb5416452189cd312a8c79641))
+
 ## [6.0.0-rc.0](https://github.com/pangolinjs/core/compare/v6.0.0-beta.4...v6.0.0-rc.0) (2020-11-04)
 
 
