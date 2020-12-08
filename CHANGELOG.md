@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.8.7](https://github.com/pangolinjs/core/compare/v5.8.6...v5.8.7) (2020-12-08)
+
+
+### Bug Fixes
+
+* Manifest plugin import ([e02e0d2](https://github.com/pangolinjs/core/commit/e02e0d2a00fa96d80012a0578e10c5383fe14aa4))
+
 ### [5.8.6](https://github.com/pangolinjs/core/compare/v5.8.5...v5.8.6) (2020-12-08)
 
 ### [5.8.5](https://github.com/pangolinjs/core/compare/v5.8.4...v5.8.5) (2020-10-02)
