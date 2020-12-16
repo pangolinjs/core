@@ -63,6 +63,7 @@
     "webpackbar": "^5.0.0-3"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@pangolinjs/eslint-config": "^5.1.0",
     "@pangolinjs/stylelint-config": "^2.0.4",
