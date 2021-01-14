@@ -2,18 +2,16 @@ import fs from 'fs/promises'
 import webpack from 'webpack'
 
 import copyDir from '../lib/copy-dir.mjs'
-import createFractalInstance from '../lib/create-fractal-instance.mjs'
-import getAssetFiles from '../lib/get-asset-files.mjs'
 import getConfig from '../lib/get-config.mjs'
 import getPaths from '../lib/get-paths.mjs'
 import getWebpackConfig from '../webpack/build.mjs'
 
 /**
- * Build production assets and static export
+ * Build production assets
  * @param {Object} options Options
  * @param {string} options.context Working directory
  */
-export default async function ({ context }) {
+export default async function ({ context }, callback) {
   process.env.NODE_ENV = 'production'
 
   const config = await getConfig({ context })
@@ -24,12 +22,10 @@ export default async function ({ context }) {
     config.webpack(webpackConfig)
   }
 
-  const publicPath = webpackConfig.output.get('publicPath')
   const webpackCompiler = webpack(webpackConfig.toConfig())
 
   await fs.rm(paths.outputAssets, { recursive: true, force: true })
   await fs.rm(paths.outputBuild, { recursive: true, force: true })
-  await fs.rm(paths.outputStatic, { recursive: true, force: true })
 
   webpackCompiler.run(async (error, stats) => {
     if (error) {
@@ -50,27 +46,6 @@ export default async function ({ context }) {
 
     await copyDir(paths.inputPublic, paths.outputBuild)
 
-    const assets = getAssetFiles({ files: Object.keys(stats.compilation.assets) })
-
-    const fractalInstance = await createFractalInstance({ context, publicPath, assets })
-    const fractalConsole = fractalInstance.cli.console
-    const fractalBuilder = fractalInstance.web.builder()
-
-    fractalBuilder.on('progress', (completed, total) => {
-      fractalConsole.update(`Fractal: Exported ${completed} of ${total} items.`, 'info')
-    })
-
-    fractalBuilder.on('error', error => {
-      fractalConsole.error(error.message)
-    })
-
-    fractalBuilder.build().then(stats => {
-      if (stats.errorCount) {
-        fractalConsole.error('Fractal build failed.')
-        process.exit(1)
-      }
-
-      fractalConsole.success('Fractal build completed.')
-    })
+    callback?.(error, { stats, webpackConfig })
   })
 }

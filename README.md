@@ -24,6 +24,12 @@ npm run dev
 npm run build
 ```
 
+### Export for static file hosting
+
+```bash
+npm run docs
+```
+
 ### Lint CSS and JavaScript
 
 ```bash
