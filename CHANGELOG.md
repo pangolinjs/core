@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-rc.5](https://github.com/pangolinjs/core/compare/v6.0.0-rc.4...v6.0.0-rc.5) (2021-01-14)
+
+
+### Bug Fixes
+
+* Generated paths in docs head ([eddace4](https://github.com/pangolinjs/core/commit/eddace40f201ddece79ad37d49390ebd04d61ebc))
+
 ## [6.0.0-rc.4](https://github.com/pangolinjs/core/compare/v6.0.0-rc.3...v6.0.0-rc.4) (2021-01-14)
 
 
