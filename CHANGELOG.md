@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-rc.4](https://github.com/pangolinjs/core/compare/v6.0.0-rc.3...v6.0.0-rc.4) (2021-01-14)
+
+
+### Features
+
+* Split build into separate build and docs commands ([25d3bd9](https://github.com/pangolinjs/core/commit/25d3bd98d73ba9920994525b4f0c7b138aea7755))
+* Use absolute URLs for assets linked from CSS or JS ([9bab164](https://github.com/pangolinjs/core/commit/9bab164f6ccd3aba46b3782d07aa7c8c52cf507e))
+
 ## [6.0.0-rc.3](https://github.com/pangolinjs/core/compare/v6.0.0-rc.2...v6.0.0-rc.3) (2021-01-04)
 
 ## [6.0.0-rc.2](https://github.com/pangolinjs/core/compare/v6.0.0-rc.1...v6.0.0-rc.2) (2020-12-08)
