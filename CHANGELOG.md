@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.9.0](https://github.com/pangolinjs/core/compare/v5.8.7...v5.9.0) (2021-01-18)
+
+
+### Features
+
+* Link source links directly to source pane (Close [#100](https://github.com/pangolinjs/core/issues/100)) ([537ecb6](https://github.com/pangolinjs/core/commit/537ecb6da4b493aad6346aee2921b3f7760ec6b0))
+
+
+### Bug Fixes
+
+* Move logging options to chained webpack config ([d0f8d96](https://github.com/pangolinjs/core/commit/d0f8d9694c7452f27fdd10f5444feea0caec6ee6))
+* Remove ESLint and stylelint from webpack config (Close [#101](https://github.com/pangolinjs/core/issues/101)) ([1c6388e](https://github.com/pangolinjs/core/commit/1c6388eacec664985b48bafda652e9c31d2fca2d))
+* Use "fs.rmSync" if available ([54c8d07](https://github.com/pangolinjs/core/commit/54c8d07ae6ca8828563610875850fe9c42293e81))
+
 ### [5.8.7](https://github.com/pangolinjs/core/compare/v5.8.6...v5.8.7) (2020-12-08)
 
 
