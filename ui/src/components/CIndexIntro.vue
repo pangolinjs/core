@@ -359,7 +359,7 @@ export default {
       }
 
       if (this.$vuetify.theme.dark) {
-        colors.border = '#000'
+        colors.border = '#333'
         colors.background = '#212121'
         colors.text = '#424242'
         colors.circle = '#e0e0e0'
