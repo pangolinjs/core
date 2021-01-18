@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 
+const { Command } = require('commander')
 const chalk = require('chalk')
-const program = require('commander')
 
+const program = new Command()
 const enhanceErrorMessages = require('../lib/utils/enhance-error-messages')
 
 program
   .version(require('../package.json').version)
   .usage('<command> [options]')
+  .enablePositionalOptions()
 
 program
   .command('dev')
@@ -38,18 +40,18 @@ program
   })
 
 program
-  .command('lint <language>')
-  .usage('css|js [options]')
+  .command('lint <language> [args...]')
   .description('Lint CSS or JavaScript files')
-  .allowUnknownOption()
-  .action((language, env) => {
+  .passThroughOptions()
+  .action((language, options, _, command) => {
     if (!['css', 'js'].includes(language)) {
-      return env.help()
+      command.help()
+      return
     }
 
     require('../lib/commands/lint')({
       language,
-      arguments: env.parent.rawArgs.slice(4)
+      arguments: options
     })
   })
 
