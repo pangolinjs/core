@@ -4,6 +4,6 @@ export default {
     'test/unit/**/*.spec.*'
   ],
   require: [
-    './test/unit/setup/date.mjs'
+    './test/unit/setup/date.js'
   ]
 }

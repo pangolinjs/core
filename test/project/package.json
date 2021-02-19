@@ -3,10 +3,11 @@
   "author": {
     "name": "Fynn Becker"
   },
+  "type": "module",
   "scripts": {
-    "dev": "node ../../bin/pangolin-core.mjs dev",
-    "build": "node ../../bin/pangolin-core.mjs build",
-    "docs": "node ../../bin/pangolin-core.mjs docs",
-    "inspect": "node ../../bin/pangolin-core.mjs inspect"
+    "dev": "node ../../bin/pangolin-core.js dev",
+    "build": "node ../../bin/pangolin-core.js build",
+    "docs": "node ../../bin/pangolin-core.js docs",
+    "inspect": "node ../../bin/pangolin-core.js inspect"
   }
 }

@@ -26,6 +26,7 @@
     "theme",
     "webpack"
   ],
+  "type": "module",
   "engines": {
     "node": ">= 15"
   },
