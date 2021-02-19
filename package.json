@@ -37,7 +37,7 @@
     "release": "standard-version"
   },
   "bin": {
-    "pangolin-core": "bin/pangolin-core.mjs"
+    "pangolin-core": "bin/pangolin-core.js"
   },
   "dependencies": {
     "@frctl/fractal": "^1.5.4",
