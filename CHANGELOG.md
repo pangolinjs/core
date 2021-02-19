@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-rc.8](https://github.com/pangolinjs/core/compare/v6.0.0-rc.7...v6.0.0-rc.8) (2021-02-19)
+
+
+### Bug Fixes
+
+* Specify correct bin file ([7686b10](https://github.com/pangolinjs/core/commit/7686b10f9ae60ba13c6207fd409ac7b677712d53))
+
 ## [6.0.0-rc.7](https://github.com/pangolinjs/core/compare/v6.0.0-rc.6...v6.0.0-rc.7) (2021-02-19)
 
 ## [6.0.0-rc.6](https://github.com/pangolinjs/core/compare/v6.0.0-rc.5...v6.0.0-rc.6) (2021-02-19)
