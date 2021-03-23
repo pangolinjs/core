@@ -30,9 +30,6 @@
     "url": "https://github.com/pangolinjs/core/issues",
     "email": "fynn@hey.com"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "bin",
     "lib",
