@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.9.1](https://github.com/pangolinjs/core/compare/v5.9.0...v5.9.1) (2021-03-23)
+
+
+### Bug Fixes
+
+* Async filters not working ([8b9ef04](https://github.com/pangolinjs/core/commit/8b9ef041f41e9ce58ffa34ae354ff22303194d08))
+
 ## [5.9.0](https://github.com/pangolinjs/core/compare/v5.8.7...v5.9.0) (2021-01-18)
 
 
