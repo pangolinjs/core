@@ -10,26 +10,28 @@
   },
   "dependencies": {
     "@mdi/js": "^5.9.55",
-    "core-js": "^3.8.2",
+    "core-js": "^3.9.1",
     "deepdash-es": "^5.3.5",
-    "ky": "^0.26.0",
+    "ky": "^0.27.0",
     "sockette": "^2.0.6",
     "vue": "^2.6.12",
-    "vue-router": "^3.4.9",
-    "vuetify": "^2.4.2",
-    "vuex": "^3.6.0"
+    "vue-router": "^3.5.1",
+    "vuetify": "^2.4.7",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-env": "^7.13.12",
     "babel-loader": "^8.2.2",
-    "css-loader": "^5.0.1",
+    "css-loader": "^5.1.3",
     "cssnano": "^4.1.10",
-    "mini-css-extract-plugin": "^1.3.4",
-    "purgecss": "^4.0.0",
+    "mini-css-extract-plugin": "^1.3.9",
+    "postcss-loader": "^4.2.0",
+    "purgecss": "^4.0.3",
+    "sass-loader": "^10.1.1",
     "vue-loader": "^15.9.6",
     "vue-template-compiler": "^2.6.12",
-    "vuetify-loader": "^1.6.0",
+    "vuetify-loader": "^1.7.2",
     "webpack": "^4.46.0",
-    "webpack-cli": "^4.3.1"
+    "webpack-cli": "^4.5.0"
   }
 }
