@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0-rc.9](https://github.com/pangolinjs/core/compare/v6.0.0-rc.8...v6.0.0-rc.9) (2021-04-07)
+
+
+### Features
+
+* Set more specific labels for component HTML tabs ([af50c6a](https://github.com/pangolinjs/core/commit/af50c6adc286ff96eb1996aceebcf0c9ab04eaba))
+
 ## [6.0.0-rc.8](https://github.com/pangolinjs/core/compare/v6.0.0-rc.7...v6.0.0-rc.8) (2021-02-19)
 
 
