@@ -1,6 +1,6 @@
 {
   "name": "@pangolinjs/core",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Framework for componentized front end development with Nunjucks, Sass, and JavaScript",
   "license": "Hippocratic-2.1",
   "author": {
