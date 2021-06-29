@@ -26,6 +26,13 @@ export default async function ({ context }) {
   webpackConfig.output
     .publicPath(projectConfig.project.base)
 
+  webpackConfig.resolve
+    .extensions
+      .add('.js')
+      .add('.mjs')
+      .add('.json')
+      .end()
+
   // JS
 
   webpackConfig.module.rule('js')
