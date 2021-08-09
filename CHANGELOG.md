@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://github.com/pangolinjs/core/compare/v6.0.1...v6.1.0) (2021-08-09)
+
+
+### Features
+
+* Migrate to webpack Asset Modules ([7f89a3b](https://github.com/pangolinjs/core/commit/7f89a3b1d7ffc07c331681be7ce96f55387dedcc))
+
 ### [6.0.1](https://github.com/pangolinjs/core/compare/v6.0.0...v6.0.1) (2021-06-29)
 
 
