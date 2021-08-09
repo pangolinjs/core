@@ -2,7 +2,7 @@
 
 Framework for design system development with Nunjucks, Sass, and JavaScript.
 
-Requires [Node.js 15](https://nodejs.org).
+Requires [Node.js 15 or higher](https://nodejs.org).
 
 ## Create a new project with `npx`
 

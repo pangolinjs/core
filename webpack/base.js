@@ -4,7 +4,7 @@ import webpack from 'webpack'
 import WebpackBar from 'webpackbar'
 
 import getConfig from '../lib/get-config.js'
-import generateFileLoaderOptions from '../lib/generate-file-loader-options.js'
+import generateAssetFilename from '../lib/generate-asset-filename.js'
 
 /**
  * Base webpack configuration
@@ -71,43 +71,35 @@ export default async function ({ context }) {
 
   webpackConfig.module
     .rule('img')
-      .test(/\.(png|jpe?g|webp|svg)(\?.*)?$/)
-      .use('file-loader')
-        .loader('file-loader')
-        .options(generateFileLoaderOptions({
-          type: 'img',
-          hash: projectConfig.hashFiles
-        }))
+      .test(/\.(png|jpe?g|webp|avif|svg)(\?.*)?$/)
+      .type('asset/resource')
+      .set('generator', {
+        filename: generateAssetFilename({ type: 'img', hash: projectConfig.hashFiles })
+      })
 
   webpackConfig.module
     .rule('video')
       .test(/\.(mp4|webm)(\?.*)?$/)
-      .use('file-loader')
-        .loader('file-loader')
-        .options(generateFileLoaderOptions({
-          type: 'video',
-          hash: projectConfig.hashFiles
-        }))
+      .type('asset/resource')
+      .set('generator', {
+        filename: generateAssetFilename({ type: 'video', hash: projectConfig.hashFiles })
+      })
 
   webpackConfig.module
     .rule('audio')
       .test(/\.(ogg|mp3|wav|flac|aac)(\?.*)?$/)
-      .use('file-loader')
-        .loader('file-loader')
-        .options(generateFileLoaderOptions({
-          type: 'audio',
-          hash: projectConfig.hashFiles
-        }))
+      .type('asset/resource')
+      .set('generator', {
+        filename: generateAssetFilename({ type: 'audio', hash: projectConfig.hashFiles })
+      })
 
   webpackConfig.module
     .rule('font')
       .test(/\.(woff2?)(\?.*)?$/)
-      .use('file-loader')
-        .loader('file-loader')
-        .options(generateFileLoaderOptions({
-          type: 'font',
-          hash: projectConfig.hashFiles
-        }))
+      .type('asset/resource')
+      .set('generator', {
+        filename: generateAssetFilename({ type: 'font', hash: projectConfig.hashFiles })
+      })
 
   // Plugins
 
