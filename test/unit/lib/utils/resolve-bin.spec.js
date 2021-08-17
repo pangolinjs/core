@@ -4,8 +4,8 @@ const test = require('ava')
 const resolveBin = require('../../../../lib/utils/resolve-bin')
 
 test('resolves binary for module', t => {
-  const actual = resolveBin('ava')
-  const expected = path.resolve('node_modules/ava/cli.js')
+  const actual = resolveBin('stylelint')
+  const expected = path.resolve('node_modules/stylelint/bin/stylelint.js')
 
   t.is(actual, expected)
 })

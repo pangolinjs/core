@@ -16,7 +16,6 @@ yarn-error.log*
 node_modules
 
 # Generated content
-.nyc_output
 .temp
 coverage
 ui/dist

@@ -9,7 +9,6 @@ coverage
 .editorconfig
 .github
 .gitignore
-.nyc_output
 CHANGELOG.md
 LICENSE.md
 README.md

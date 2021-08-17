@@ -1,7 +1,7 @@
 {
   "root": true,
   "extends": [
-    "@pangolinjs"
+    "@pangolinjs/eslint-config"
   ],
   "rules": {
     "no-console": "off"

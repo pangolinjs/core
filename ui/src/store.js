@@ -1,4 +1,4 @@
-import filterDeep from 'deepdash-es/filterDeep'
+import { filterDeep } from 'deepdash-es/standalone'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
