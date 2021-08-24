@@ -29,8 +29,7 @@ export default async function ({ context }) {
 
   const publicPath = webpackConfig.output.get('publicPath')
 
-  const webpackCompiler = webpack(webpackConfig.toConfig())
-  const webpackServer = new WebpackDevServer(webpackCompiler, {
+  const webpackServerOptions = {
     static: [
       {
         publicPath,
@@ -43,41 +42,47 @@ export default async function ({ context }) {
     proxy: {
       [`!${publicPath}**`]: `http://${host}:${fractalPort}`
     }
-  })
+  }
+
+  const webpackCompiler = webpack(webpackConfig.toConfig())
+  const webpackServer = new WebpackDevServer(webpackServerOptions, webpackCompiler)
 
   await fs.rm(paths.outputAssets, { recursive: true, force: true })
+  await webpackServer.start(webpackPort, host)
 
-  webpackServer.listen(webpackPort, host, async () => {
-    const fractalInstance = await createFractalInstance({ context, publicPath })
-    const fractalServer = fractalInstance.web.server({
-      sync: true,
-      port: fractalPort,
-      syncOptions: {
-        ui: false,
-        ghostMode: false,
-        watchOptions: {
-          // webpack-dev-server already includes reloading, so we ignore
-          // everything except Fractal-related files.
-          ignored: file => !/\.(njk|yml|json|md)$/.test(file)
-        }
+  const fractalServerOptions = {
+    sync: true,
+    port: fractalPort,
+    syncOptions: {
+      ui: false,
+      ghostMode: false,
+      watchOptions: {
+        // webpack-dev-server already includes reloading, so we ignore
+        // everything except Fractal-related files.
+        ignored: file => !/\.(njk|yml|json|md)$/.test(file)
       }
-    })
+    }
+  }
 
-    fractalServer.on('error', error => {
-      fractalInstance.cli.console.error(error.message)
-    })
+  const fractalInstance = await createFractalInstance({ context, publicPath })
+  const fractalServer = fractalInstance.web.server(fractalServerOptions)
 
-    fractalServer.on('stopped', () => {
-      // Exit the whole application after the webpack-dev-server has been closed.
-      webpackServer.close(() => process.exit())
-    })
-
-    process.on('SIGINT', () => {
-      // webpack-dev-server will be closed after the Fractal server has been stopped.
-      // See above listener for the Fractal 'stopped' event.
-      fractalServer.stop()
-    })
-
-    fractalServer.start()
+  fractalServer.on('error', error => {
+    fractalInstance.cli.console.error(error.message)
   })
+
+  fractalServer.on('stopped', async () => {
+    await webpackServer.stop()
+
+    // Exit the whole application after the webpack-dev-server has been closed.
+    process.exit()
+  })
+
+  process.on('SIGINT', () => {
+    // webpack-dev-server will be closed after the Fractal server has been stopped.
+    // See above listener for the Fractal 'stopped' event.
+    fractalServer.stop()
+  })
+
+  fractalServer.start()
 }
