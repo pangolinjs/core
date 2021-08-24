@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.1.1](https://github.com/pangolinjs/core/compare/v6.1.0...v6.1.1) (2021-08-24)
+
+
+### Bug Fixes
+
+* Create dist folder before copying files ([309c405](https://github.com/pangolinjs/core/commit/309c405eb6a69cf76ed80ceaa05a6497ef91ccfc))
+
 ## [6.1.0](https://github.com/pangolinjs/core/compare/v6.0.1...v6.1.0) (2021-08-09)
 
 
