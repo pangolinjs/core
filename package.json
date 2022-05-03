@@ -2,7 +2,7 @@
   "name": "@pangolinjs/core",
   "version": "6.1.1",
   "description": "Framework for componentized front end development with Nunjucks, Sass, and JavaScript",
-  "license": "Hippocratic-2.1",
+  "license": "Hippocratic-3.0",
   "author": {
     "name": "Fynn Becker",
     "email": "post@fynn.be"
