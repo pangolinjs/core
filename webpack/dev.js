@@ -1,5 +1,5 @@
 import { blue, green } from 'kleur/colors'
-import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
+import FriendlyErrorsPlugin from '@nuxt/friendly-errors-webpack-plugin'
 
 import formatIP from '../lib/format-ip.js'
 import getHostIPs from '../lib/get-host-ips.js'
