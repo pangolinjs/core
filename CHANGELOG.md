@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.1.2](https://github.com/pangolinjs/core/compare/v6.1.1...v6.1.2) (2022-05-04)
+
+
+### Bug Fixes
+
+* Add file protocol to dynamic import ([#109](https://github.com/pangolinjs/core/issues/109)) ([c5313ef](https://github.com/pangolinjs/core/commit/c5313ef7d5294d1a00def157b5943d622f1719c0))
+* Make host IP extractor Node 18 compatible ([db66632](https://github.com/pangolinjs/core/commit/db66632ce308a2333c556686ca30ce407ac98d13))
+
 ### [6.1.1](https://github.com/pangolinjs/core/compare/v6.1.0...v6.1.1) (2021-08-24)
 
 
