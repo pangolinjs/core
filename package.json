@@ -32,7 +32,7 @@
     "lint:js": "eslint \"**/*.js\"",
     "lint:css": "stylelint **/*.scss",
     "test:unit": "c8 --reporter text --reporter html --all ava",
-    "release": "standard-version"
+    "release": "standard-version --sign"
   },
   "bin": {
     "pangolin-core": "bin/pangolin-core.js"
